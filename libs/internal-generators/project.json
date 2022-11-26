@@ -1,35 +1,35 @@
 {
-  "name": "generators-react",
+  "name": "internal-generators",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/generators-react/src",
+  "sourceRoot": "libs/internal-generators/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/generators-react",
-        "main": "libs/generators-react/src/index.ts",
-        "tsConfig": "libs/generators-react/tsconfig.lib.json",
+        "outputPath": "dist/libs/internal-generators",
+        "main": "libs/internal-generators/src/index.ts",
+        "tsConfig": "libs/internal-generators/tsconfig.lib.json",
         "assets": [
-          "libs/generators-react/*.md",
+          "libs/internal-generators/*.md",
           {
-            "input": "./libs/generators-react/src",
+            "input": "./libs/internal-generators/src",
             "glob": "**/!(*.ts)",
             "output": "./src"
           },
           {
-            "input": "./libs/generators-react/src",
+            "input": "./libs/internal-generators/src",
             "glob": "**/*.d.ts",
             "output": "./src"
           },
           {
-            "input": "./libs/generators-react",
+            "input": "./libs/internal-generators",
             "glob": "generators.json",
             "output": "."
           },
           {
-            "input": "./libs/generators-react",
+            "input": "./libs/internal-generators",
             "glob": "executors.json",
             "output": "."
           }
@@ -41,10 +41,10 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/generators-react/**/*.ts",
-          "libs/generators-react/generators.json",
-          "libs/generators-react/executors.json",
-          "libs/generators-react/package.json"
+          "libs/internal-generators/**/*.ts",
+          "libs/internal-generators/generators.json",
+          "libs/internal-generators/executors.json",
+          "libs/internal-generators/package.json"
         ]
       }
     },
@@ -52,7 +52,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/generators-react/jest.config.ts",
+        "jestConfig": "libs/internal-generators/jest.config.ts",
         "passWithNoTests": true
       }
     }

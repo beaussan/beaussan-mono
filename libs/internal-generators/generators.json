@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "internal-generators",
+  "version": "0.0.1",
+  "generators": {
+    "react-library": {
+      "factory": "./src/generators/react-library/generator",
+      "schema": "./src/generators/react-library/schema.json",
+      "description": "A react library generator"
+    }
+  }
+}

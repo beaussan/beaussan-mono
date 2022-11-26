@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@beaussan/internal-generators": [
+        "libs/internal-generators/src/index.ts"
+      ],
       "@beaussan/nx-generators-react": ["libs/generators-react/src/index.ts"]
     }
   },
