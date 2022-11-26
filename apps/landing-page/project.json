@@ -1,7 +1,7 @@
 {
-  "name": "pomo-tasker",
+  "name": "landing-page",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/pomo-tasker",
+  "sourceRoot": "apps/landing-page",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,12 +9,12 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/pomo-tasker",
-        "outputPath": "dist/apps/pomo-tasker"
+        "root": "apps/landing-page",
+        "outputPath": "dist/apps/landing-page"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/pomo-tasker"
+          "outputPath": "apps/landing-page"
         },
         "production": {}
       }
@@ -23,16 +23,16 @@
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "pomo-tasker:build",
+        "buildTarget": "landing-page:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "pomo-tasker:build:development",
+          "buildTarget": "landing-page:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "pomo-tasker:build:production",
+          "buildTarget": "landing-page:build:production",
           "dev": false
         }
       }
@@ -40,14 +40,14 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "pomo-tasker:build:production"
+        "buildTarget": "landing-page:build:production"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/pomo-tasker/jest.config.ts",
+        "jestConfig": "apps/landing-page/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -55,7 +55,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/pomo-tasker/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/landing-page/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },

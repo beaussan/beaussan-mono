@@ -1,19 +1,19 @@
 {
-  "name": "pomo-tasker-e2e",
+  "name": "landing-page-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/pomo-tasker-e2e/src",
+  "sourceRoot": "apps/landing-page-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/pomo-tasker-e2e/cypress.config.ts",
-        "devServerTarget": "pomo-tasker:serve:development",
+        "cypressConfig": "apps/landing-page-e2e/cypress.config.ts",
+        "devServerTarget": "landing-page:serve:development",
         "testingType": "e2e"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "pomo-tasker:serve:production"
+          "devServerTarget": "landing-page:serve:production"
         }
       }
     },
@@ -21,10 +21,10 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/pomo-tasker-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/landing-page-e2e/**/*.{js,ts}"]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["pomo-tasker"]
+  "implicitDependencies": ["landing-page"]
 }

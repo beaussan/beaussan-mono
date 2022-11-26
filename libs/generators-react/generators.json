@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "generators-react",
+  "version": "0.0.1",
+  "generators": {
+    "next-library": {
+      "factory": "./src/generators/next-library/generator",
+      "schema": "./src/generators/next-library/schema.json",
+      "description": "next-library generator"
+    },
+    "react-library": {
+      "factory": "./src/generators/react-library/generator",
+      "schema": "./src/generators/react-library/schema.json",
+      "description": "react-library generator"
+    }
+  }
+}

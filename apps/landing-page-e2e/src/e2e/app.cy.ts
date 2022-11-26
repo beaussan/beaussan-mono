@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('pomo-tasker', () => {
+describe('landing-page', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
@@ -8,6 +8,6 @@ describe('pomo-tasker', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome pomo-tasker');
+    getGreeting().contains('Welcome landing-page');
   });
 });
