@@ -81,7 +81,7 @@ function modifyJestConfig(tree: Tree, options: NormalizedSchema) {
     ts.factory.createPropertyAssignment(
       ts.factory.createIdentifier('setupFilesAfterEnv'),
       ts.factory.createArrayLiteralExpression([
-        ts.factory.createStringLiteral('<rootDir>/src/setupTests.ts'),
+        ts.factory.createStringLiteral('<rootDir>/src/test-setup.ts'),
       ])
     )
   );
