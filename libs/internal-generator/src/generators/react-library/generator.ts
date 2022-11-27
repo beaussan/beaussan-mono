@@ -10,7 +10,6 @@ import * as path from 'path';
 import { ReactLibraryGeneratorSchema } from './schema';
 import { libraryGenerator } from '@nrwl/react/src/generators/library/library';
 import { Linter } from '@nrwl/linter';
-import { tsquery } from '@phenomnomnominal/tsquery';
 import * as ts from 'typescript';
 import { appendJestConfigOption } from '../../utils/ast';
 import {
