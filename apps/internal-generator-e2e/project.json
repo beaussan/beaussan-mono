@@ -6,6 +6,7 @@
   "targets": {
     "e2e": {
       "executor": "@nrwl/nx-plugin:e2e",
+      "inputs": ["^build"],
       "options": {
         "target": "internal-generator:build",
         "jestConfig": "apps/internal-generator-e2e/jest.config.ts"
