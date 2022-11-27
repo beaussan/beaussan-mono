@@ -12,6 +12,11 @@
       "factory": "./src/generators/update-generators-scope-and-types/generator",
       "schema": "./src/generators/update-generators-scope-and-types/schema.json",
       "description": "Update internal generators from the new scope and types"
+    },
+    "ts-library": {
+      "factory": "./src/generators/ts-library/generator",
+      "schema": "./src/generators/ts-library/schema.json",
+      "description": "Create a typescript library"
     }
   }
 }
