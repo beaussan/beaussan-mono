@@ -1,19 +1,19 @@
 {
-  "name": "landing-page-e2e",
+  "name": "new-tab-page-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/landing-page-e2e/src",
+  "sourceRoot": "apps/new-tab-page-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/landing-page-e2e/cypress.config.ts",
-        "devServerTarget": "landing-page:serve:development",
+        "cypressConfig": "apps/new-tab-page-e2e/cypress.config.ts",
+        "devServerTarget": "new-tab-page:serve:development",
         "testingType": "e2e"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "landing-page:serve:production"
+          "devServerTarget": "new-tab-page:serve:production"
         }
       }
     },
@@ -21,10 +21,10 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/landing-page-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/new-tab-page-e2e/**/*.{js,ts}"]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["landing-page"]
+  "implicitDependencies": ["new-tab-page"]
 }

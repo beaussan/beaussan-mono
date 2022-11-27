@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('landing-page', () => {
+describe('new-tab-page', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
@@ -8,6 +8,6 @@ describe('landing-page', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome landing-page');
+    getGreeting().contains('Welcome new-tab-page');
   });
 });

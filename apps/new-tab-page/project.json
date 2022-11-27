@@ -1,7 +1,7 @@
 {
-  "name": "landing-page",
+  "name": "new-tab-page",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/landing-page",
+  "sourceRoot": "apps/new-tab-page",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,12 +9,12 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/landing-page",
-        "outputPath": "dist/apps/landing-page"
+        "root": "apps/new-tab-page",
+        "outputPath": "dist/apps/new-tab-page"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/landing-page"
+          "outputPath": "apps/new-tab-page"
         },
         "production": {}
       }
@@ -23,16 +23,16 @@
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "landing-page:build",
+        "buildTarget": "new-tab-page:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "landing-page:build:development",
+          "buildTarget": "new-tab-page:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "landing-page:build:production",
+          "buildTarget": "new-tab-page:build:production",
           "dev": false
         }
       }
@@ -40,14 +40,14 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "landing-page:build:production"
+        "buildTarget": "new-tab-page:build:production"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/landing-page/jest.config.ts",
+        "jestConfig": "apps/new-tab-page/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -55,9 +55,9 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/landing-page/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/new-tab-page/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
-  "tags": []
+  "tags": ["scope:dash"]
 }
