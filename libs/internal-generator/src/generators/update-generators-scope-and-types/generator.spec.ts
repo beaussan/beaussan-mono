@@ -82,7 +82,7 @@ describe('update-generators-scope-and-types generator', () => {
       };
       writeJson<SimplifiedSchemaJson>(appTree, 'test.json', input);
 
-      updateSchemaFile(appTree, 'test.json', [], ['shared', 'landing-page']);
+      updateSchemaFile(appTree, 'test.json', [], ['shared']);
 
       const readFile = readJson(appTree, 'test.json');
 
@@ -90,7 +90,7 @@ describe('update-generators-scope-and-types generator', () => {
         properties: {
           scope: {
             'x-prompt': {
-              items: ['shared', 'landing-page'],
+              items: ['shared'],
             },
           },
         },

@@ -6,7 +6,11 @@ import { TsLibraryGeneratorSchema } from './schema';
 
 describe('ts-library generator', () => {
   let appTree: Tree;
-  const options: TsLibraryGeneratorSchema = { name: 'test' };
+  const options: TsLibraryGeneratorSchema = {
+    name: 'test',
+    type: 'util',
+    scope: 'shared',
+  };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
@@ -14,7 +18,7 @@ describe('ts-library generator', () => {
 
   it('should run successfully', async () => {
     await generator(appTree, options);
-    const config = readProjectConfiguration(appTree, 'test');
+    const config = readProjectConfiguration(appTree, 'shared-util-test');
     expect(config).toBeDefined();
   });
 });
