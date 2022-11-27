@@ -24,7 +24,7 @@
       "x-prompt": {
         "message": "What is the scope of the library ?",
         "type": "list",
-        "items": ["landing-page", "shared"]
+        "items": ["dash", "shared"]
       }
     },
     "type": {

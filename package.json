@@ -14,9 +14,12 @@
     "@swc/helpers": "~0.4.11",
     "core-js": "^3.6.5",
     "next": "13.0.0",
+    "nextjs-cors": "^2.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "regenerator-runtime": "0.13.7",
+    "supertokens-auth-react": "^0.27.3",
+    "supertokens-node": "^12.1.1",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
