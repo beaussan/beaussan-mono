@@ -15,10 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@beaussan/internal-generators": [
-        "libs/internal-generators/src/index.ts"
-      ],
-      "@beaussan/nx-generators-react": ["libs/generators-react/src/index.ts"]
+      "@beaussan/internal-generator": ["libs/internal-generator/src/index.ts"],
+      "@beaussan/nx-generator-react": ["libs/generator-react/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

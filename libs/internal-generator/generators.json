@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "name": "internal-generators",
+  "name": "internal-generator",
   "version": "0.0.1",
   "generators": {
     "react-library": {

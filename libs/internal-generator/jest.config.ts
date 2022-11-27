@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'internal-generators',
+  displayName: 'internal-generator',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/libs/internal-generators',
+  coverageDirectory: '../../coverage/libs/internal-generator',
 };
