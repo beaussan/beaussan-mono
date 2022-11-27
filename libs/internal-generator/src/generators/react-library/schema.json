@@ -24,10 +24,7 @@
       "x-prompt": {
         "message": "What is the scope of the library ?",
         "type": "list",
-        "items": [
-          "landing-page",
-          "shared"
-        ]
+        "items": ["landing-page", "shared"]
       }
     },
     "type": {
@@ -40,11 +37,7 @@
       "x-prompt": {
         "message": "What is the type of the library ?",
         "type": "list",
-        "items": [
-          "feature",
-          "ui",
-          "util"
-        ]
+        "items": ["feature", "ui", "util"]
       }
     }
   },
