@@ -14,8 +14,8 @@ describe('internal-generators e2e', () => {
   // are not dependant on one another.
   beforeAll(() => {
     ensureNxProject(
-      '@beaussan/internal-generators',
-      'dist/libs/internal-generators'
+      '@beaussan/internal-generator',
+      'dist/libs/internal-generator'
     );
   });
 
@@ -23,7 +23,7 @@ describe('internal-generators e2e', () => {
     it('should create a project in the right folder given a scope and type', async () => {
       const project = uniq('react-library');
       await runNxCommandAsync(
-        `generate @beaussan/internal-generators:react-library ${project} --scope=shared --type=util `
+        `generate @beaussan/internal-generator:react-library ${project} --scope=shared --type=util `
       );
       expect(() =>
         checkFilesExist(`libs/shared/util/${project}/src/index.ts`)
