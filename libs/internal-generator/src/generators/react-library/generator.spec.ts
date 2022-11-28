@@ -18,21 +18,21 @@ describe('react-library generator', () => {
 
   it('should run successfully', async () => {
     await generator(appTree, options);
-    const config = readProjectConfiguration(appTree, 'shared-util-test');
+    const config = readProjectConfiguration(appTree, 'shared-utils-test');
     expect(config).toBeDefined();
   });
 
   it('should generate a test-setup file', async () => {
     await generator(appTree, options);
     expect(appTree.listChanges().map((item) => item.path)).toContain(
-      'libs/shared/util/test/src/test-setup.ts'
+      'libs/shared/utils/test/src/test-setup.ts'
     );
   });
 
   it('should add the tsconfig changes required for setup files', async () => {
     await generator(appTree, options);
     const tsconfig = appTree
-      .read('libs/shared/util/test/jest.config.ts')
+      .read('libs/shared/utils/test/jest.config.ts')
       .toString();
 
     expect(tsconfig).toContain('setupFilesAfterEnv');

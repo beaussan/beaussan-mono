@@ -109,7 +109,7 @@ describe('update-generators-scope-and-types generator', () => {
       };
       writeJson<SimplifiedSchemaJson>(appTree, 'test.json', input);
 
-      updateSchemaFile(appTree, 'test.json', ['util'], []);
+      updateSchemaFile(appTree, 'test.json', ['utils'], []);
 
       const readFile = readJson(appTree, 'test.json');
 
@@ -117,7 +117,7 @@ describe('update-generators-scope-and-types generator', () => {
         properties: {
           type: {
             'x-prompt': {
-              items: ['util'],
+              items: ['utils'],
             },
           },
         },
@@ -141,7 +141,7 @@ describe('update-generators-scope-and-types generator', () => {
       };
       writeJson<SimplifiedSchemaJson>(appTree, 'test.json', input);
 
-      updateSchemaFile(appTree, 'test.json', ['util'], ['shared']);
+      updateSchemaFile(appTree, 'test.json', ['utils'], ['shared']);
 
       const readFile = readJson(appTree, 'test.json');
 
@@ -149,7 +149,7 @@ describe('update-generators-scope-and-types generator', () => {
         properties: {
           type: {
             'x-prompt': {
-              items: ['util'],
+              items: ['utils'],
             },
           },
           scope: {
