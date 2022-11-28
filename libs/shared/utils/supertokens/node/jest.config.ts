@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
-  displayName: 'shared-utils-supertoken-node',
-  preset: '../../../../jest.preset.js',
+  displayName: 'shared-utils-supertokens-node',
+  preset: '../../../../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../../coverage/libs/shared/utils/supertoken-node',
+  coverageDirectory:
+    '../../../../../coverage/libs/shared/utils/supertokens/node',
 };

@@ -1,15 +1,10 @@
 import ThirdPartyPasswordlessNode, {
-  init,
+  TypeProvider,
 } from 'supertokens-node/recipe/thirdpartypasswordless';
 import SessionNode from 'supertokens-node/recipe/session';
 import Dashboard from 'supertokens-node/recipe/dashboard';
 import UserRoles from 'supertokens-node/recipe/userroles';
 import { Client } from 'postmark';
-
-type InputTypeThirdParty = Omit<
-  Parameters<typeof ThirdPartyPasswordlessNode['init']>[0],
-  'override'
->;
 
 interface InputGetRecipes {
   providers: {
@@ -33,19 +28,23 @@ interface InputGetRecipes {
 
 export function getServerRecipes(input: InputGetRecipes) {
   const defaultRole = input.defaultRole ?? 'user';
+
+  const providers: TypeProvider[] = [];
+  if (
+    input?.providers?.github?.clientId &&
+    input?.providers?.github?.clientSecret
+  ) {
+    providers.push(
+      ThirdPartyPasswordlessNode.Github({
+        clientSecret: input.providers.github.clientSecret,
+        clientId: input.providers.github.clientId,
+      })
+    );
+  }
+
   return [
     ThirdPartyPasswordlessNode.init({
-      providers: [
-        ...[
-          input?.providers?.github?.clientId &&
-          input?.providers?.github?.clientSecret
-            ? ThirdPartyPasswordlessNode.Github({
-                clientSecret: input.providers.github.clientSecret,
-                clientId: input.providers.github.clientId,
-              })
-            : undefined,
-        ],
-      ],
+      providers,
       flowType: 'MAGIC_LINK',
       contactMethod: 'EMAIL',
 

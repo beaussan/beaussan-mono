@@ -1,4 +1,4 @@
-import { getServerRecipes } from '@beaussan/shared/utils/supertoken-node';
+import { getServerRecipes } from '@beaussan/shared/utils/supertokens/node';
 import { appInfo } from './appInfo';
 import { TypeInput } from 'supertokens-node/types';
 import { ServerClient } from 'postmark';

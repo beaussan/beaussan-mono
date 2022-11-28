@@ -13,6 +13,7 @@ import {
   getDirectoryFromScopeAndType,
   getTagStringFromScopeAndType,
 } from '../../utils/tags';
+import { Linter } from '@nrwl/linter';
 
 interface NormalizedSchema extends TsLibraryGeneratorSchema {
   projectName: string;
@@ -59,6 +60,17 @@ export default async function (tree: Tree, options: TsLibraryGeneratorSchema) {
     name: normalizedOptions.name,
     tags: normalizedOptions.tags,
     directory: normalizedOptions.directory,
+    testEnvironment: normalizedOptions.testEnvironment,
+    publishable: normalizedOptions.publishable,
+    linter: Linter.EsLint,
+    unitTestRunner: 'jest',
+    config: 'project',
+    compiler: 'tsc',
+    buildable: true,
+    skipFormat: false,
+    skipTsConfig: false,
+    strict: true,
+    pascalCaseFiles: true,
   });
   await formatFiles(tree);
 }

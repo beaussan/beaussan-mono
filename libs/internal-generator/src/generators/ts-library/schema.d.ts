@@ -6,4 +6,7 @@ export interface TsLibraryGeneratorSchema {
   directory?: string;
   type: TagType;
   scope: TagScope;
+
+  publishable?: boolean;
+  testEnvironment?: 'jsdom' | 'node';
 }
