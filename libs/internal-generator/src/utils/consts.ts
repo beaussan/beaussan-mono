@@ -1,4 +1,4 @@
-export const tagTypeList = ['feature', 'ui', 'util'] as const;
+export const tagTypeList = ['feature', 'ui', 'utils'] as const;
 export type TagType = typeof tagTypeList[number];
 
 export const tagScopeList = ['dash', 'shared'] as const;

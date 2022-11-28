@@ -8,7 +8,7 @@ describe('ts-library generator', () => {
   let appTree: Tree;
   const options: TsLibraryGeneratorSchema = {
     name: 'test',
-    type: 'util',
+    type: 'utils',
     scope: 'shared',
   };
 

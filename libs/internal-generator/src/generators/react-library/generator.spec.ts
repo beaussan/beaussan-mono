@@ -8,7 +8,7 @@ describe('react-library generator', () => {
   let appTree: Tree;
   const options: ReactLibraryGeneratorSchema = {
     name: 'test',
-    type: 'util',
+    type: 'utils',
     scope: 'shared',
   };
 
