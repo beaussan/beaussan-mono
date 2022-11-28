@@ -102,6 +102,9 @@ export default async function (
     linter: Linter.EsLint,
     tags: normalizedOptions.tags,
     directory: normalizedOptions.directory,
+    compiler: 'babel',
+    pascalCaseFiles: true,
+    strict: true,
   });
   addFiles(tree, normalizedOptions);
   modifyJestConfig(tree, normalizedOptions);
