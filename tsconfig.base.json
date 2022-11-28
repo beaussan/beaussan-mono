@@ -17,8 +17,8 @@
     "paths": {
       "@beaussan/internal-generator": ["libs/internal-generator/src/index.ts"],
       "@beaussan/nx-generator-react": ["libs/generator-react/src/index.ts"],
-      "@beaussan/shared/util/supertoken-node": [
-        "libs/shared/util/supertoken-node/src/index.ts"
+      "@beaussan/shared/utils/supertoken-node": [
+        "libs/shared/utils/supertoken-node/src/index.ts"
       ]
     }
   },
