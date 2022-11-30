@@ -122,6 +122,6 @@ export default async function (tree: Tree, options: AppGeneratorSchema) {
   await formatFiles(tree);
 
   return runTasksInSerial(
-    addDependenciesToPackageJson(tree, {}, { 'hasura-cli': '2.7.0' })
+    addDependenciesToPackageJson(tree, {}, { 'hasura-cli': '2.15.1' })
   );
 }
