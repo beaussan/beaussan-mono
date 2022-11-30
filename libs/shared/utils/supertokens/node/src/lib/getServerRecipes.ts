@@ -92,10 +92,6 @@ export function getServerRecipes(input: InputGetRecipes) {
             return data;
           },
         }),
-
-        apis: (originalImplementation) => ({
-          ...originalImplementation,
-        }),
       },
     }),
     UserRoles.init(),
