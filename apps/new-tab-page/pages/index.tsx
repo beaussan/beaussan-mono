@@ -4,9 +4,15 @@ import Head from 'next/head';
 import SessionReact from 'supertokens-auth-react/recipe/session';
 import SuperTokensReact from 'supertokens-auth-react';
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
+import {
+  useRoles,
+  useHasuraClaimsFromSession,
+} from '@beaussan/shared/utils/supertokens/react';
 
 function ProtectedPage() {
   const session = useSessionContext();
+  const roles = useRoles();
+  const hasuraSession = useHasuraClaimsFromSession();
 
   async function logoutClicked() {
     await SessionReact.signOut();
@@ -41,6 +47,12 @@ function ProtectedPage() {
         <p>
           Access token payload:{' '}
           <pre>{JSON.stringify(session.accessTokenPayload, null, 2)}</pre>
+        </p>
+        <p>
+          Roles: <pre>{JSON.stringify(roles, null, 2)}</pre>
+        </p>
+        <p>
+          Hasura claims: <pre>{JSON.stringify(hasuraSession, null, 2)}</pre>
         </p>
         <div
           style={{

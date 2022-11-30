@@ -21,6 +21,9 @@
       "@beaussan/nx-hasura": ["libs/nx-plugins/nx-hasura/src/index.ts"],
       "@beaussan/shared/utils/supertokens/node": [
         "libs/shared/utils/supertokens/node/src/index.ts"
+      ],
+      "@beaussan/shared/utils/supertokens/react": [
+        "libs/shared/utils/supertokens/react/src/index.ts"
       ]
     }
   },
