@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@beaussan/internal-generator": ["libs/internal-generator/src/index.ts"],
+      "@beaussan/internal-generator": [
+        "libs/nx-plugins/internal-generator/src/index.ts"
+      ],
       "@beaussan/nx-hasura": ["libs/nx-plugins/nx-hasura/src/index.ts"],
       "@beaussan/shared/utils/supertokens/node": [
         "libs/shared/utils/supertokens/node/src/index.ts"

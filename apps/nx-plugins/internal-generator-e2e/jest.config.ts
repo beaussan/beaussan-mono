@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
-  displayName: 'internal-generator-e2e',
-  preset: '../../jest.preset.js',
+  displayName: 'nx-plugins-internal-generator-e2e',
+  preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/apps/internal-generator-e2e',
+  coverageDirectory: '../../../coverage/apps/nx-plugins/internal-generator-e2e',
 };

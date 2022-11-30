@@ -15,7 +15,7 @@ describe('internal-generators e2e', () => {
   beforeAll(() => {
     ensureNxProject(
       '@beaussan/internal-generator',
-      'dist/libs/internal-generator'
+      'dist/libs/nx-plugins/internal-generator'
     );
   });
 
