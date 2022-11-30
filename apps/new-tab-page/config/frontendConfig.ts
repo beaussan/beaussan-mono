@@ -17,7 +17,7 @@ export const frontendConfig = () => {
       }),
       SessionReact.init(),
     ],
-    windowHandler: (oI) => {
+    windowHandler: (oI: any) => {
       return {
         ...oI,
         location: {

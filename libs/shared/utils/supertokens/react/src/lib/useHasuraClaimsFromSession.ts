@@ -25,7 +25,7 @@ export function useHasuraClaimsFromSession():
     } {
   const session = useSessionContext();
 
-  if (session.loading) {
+  if (session.loading || !session.accessTokenPayload) {
     return {
       loading: true,
     };

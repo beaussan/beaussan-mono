@@ -4,14 +4,14 @@ import { TypeInput } from 'supertokens-node/types';
 import { ServerClient } from 'postmark';
 
 // TODO make a proper postmark client
-const mailClient = new ServerClient(process.env.POSTMARK_API_TOKEN);
+const mailClient = new ServerClient(process.env.POSTMARK_API_TOKEN!);
 
 export const backendConfig = (): TypeInput => {
   return {
     framework: 'express',
     supertokens: {
       // https://try.supertokens.com is for demo purposes. Replace this with the address of your core instance (sign up on supertokens.com), or self host a core.
-      connectionURI: process.env.SUPERTOKEN_CONNEXION_URI,
+      connectionURI: process.env.SUPERTOKEN_CONNEXION_URI!,
       // apiKey: <API_KEY(if configured)>,
     },
     appInfo,

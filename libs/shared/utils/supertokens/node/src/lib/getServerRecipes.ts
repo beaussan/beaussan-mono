@@ -5,6 +5,7 @@ import SessionNode from 'supertokens-node/recipe/session';
 import Dashboard from 'supertokens-node/recipe/dashboard';
 import UserRoles from 'supertokens-node/recipe/userroles';
 import { Client } from 'postmark';
+import { RecipeListFunction } from 'supertokens-node/types';
 
 interface InputGetRecipes {
   providers: {
@@ -26,7 +27,7 @@ interface InputGetRecipes {
   };
 }
 
-export function getServerRecipes(input: InputGetRecipes) {
+export function getServerRecipes(input: InputGetRecipes): RecipeListFunction[] {
   const defaultRole = input.defaultRole ?? 'user';
 
   const providers: TypeProvider[] = [];
@@ -42,7 +43,7 @@ export function getServerRecipes(input: InputGetRecipes) {
     );
   }
 
-  return [
+  const recipies = [
     ThirdPartyPasswordlessNode.init({
       providers,
       flowType: 'MAGIC_LINK',
@@ -122,12 +123,15 @@ export function getServerRecipes(input: InputGetRecipes) {
         },
       },
     }),
-    ...[
-      input.dashboardAPiKey
-        ? Dashboard.init({
-            apiKey: input.dashboardAPiKey,
-          })
-        : undefined,
-    ],
   ];
+
+  if (input.dashboardAPiKey) {
+    recipies.push(
+      Dashboard.init({
+        apiKey: input.dashboardAPiKey,
+      })
+    );
+  }
+
+  return recipies;
 }
