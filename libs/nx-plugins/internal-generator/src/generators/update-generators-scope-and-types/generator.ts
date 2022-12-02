@@ -33,7 +33,7 @@ export interface SimplifiedSchemaJson {
 }
 
 export function getBasePathGenerators(tree: Tree) {
-  return getProjects(tree).get('internal-generator').root;
+  return getProjects(tree).get('nx-plugins-internal-generator').root;
 }
 
 export function getListOfSchemaFiles(tree: Tree, basePath: string) {

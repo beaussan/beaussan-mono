@@ -37,7 +37,7 @@
       "x-prompt": {
         "message": "What is the type of the library ?",
         "type": "list",
-        "items": ["feature", "ui", "utils"]
+        "items": ["feature", "ui", "utils", "types"]
       }
     }
   },
