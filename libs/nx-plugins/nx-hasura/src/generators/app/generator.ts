@@ -69,6 +69,8 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
 
 export default async function (tree: Tree, options: AppGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
+
+  const baseHasuraCliCommand = `hasura --skip-update-check --project ${normalizedOptions.projectRoot} `;
   addProjectConfiguration(tree, normalizedOptions.projectName, {
     root: normalizedOptions.projectRoot,
     projectType: 'application',
@@ -78,19 +80,19 @@ export default async function (tree: Tree, options: AppGeneratorSchema) {
         executor: 'nx:run-commands',
         options: {
           commands: [
-            'docker-compose up -d',
+            'docker compose up -d',
             'echo Waiting for Hasura to be up...',
             'sleep 5',
           ],
-          cwd: 'apps/pronostix-hasura',
+          cwd: normalizedOptions.projectRoot,
           parallel: false,
         },
       },
       'docker-compose:stop': {
         executor: 'nx:run-commands',
         options: {
-          commands: ['docker-compose stop'],
-          cwd: 'apps/pronostix-hasura',
+          commands: ['docker compose stop'],
+          cwd: normalizedOptions.projectRoot,
           parallel: false,
         },
       },
@@ -98,21 +100,22 @@ export default async function (tree: Tree, options: AppGeneratorSchema) {
         executor: 'nx:run-script',
         dependsOn: ['metadata-apply'],
         options: {
-          script: 'hasura-cli:pronostix console',
+          script: baseHasuraCliCommand + ' console',
         },
       },
       'migrate-db': {
         executor: 'nx:run-script',
         dependsOn: ['docker-compose:up'],
         options: {
-          script: 'hasura-cli:pronostix migrate apply',
+          script:
+            baseHasuraCliCommand + ' migrate apply --database-name default',
         },
       },
       'metadata-apply': {
         executor: 'nx:run-script',
         dependsOn: ['migrate-db'],
         options: {
-          script: 'hasura-cli:pronostix metadata apply',
+          script: baseHasuraCliCommand + ' metadata apply',
         },
       },
     },
