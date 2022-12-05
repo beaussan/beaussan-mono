@@ -1,0 +1,47 @@
+{
+  "name": "dash-types-hasura-codegen-types",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/dash/types/hasura-codegen-types/src",
+  "projectType": "library",
+  "implicitDependencies": ["new-tab-page-hasura"],
+  "targets": {
+    "codegen": {
+      "executor": "nx:run-commands",
+      "outputs": ["{sourceRoot}/graphql.schema.json", "{sourceRoot}/graphqlTypes.ts", "{sourceRoot}/graphql.schema.graphql"],
+      "options": {
+        "command": "yarn graphql-codegen --config libs/dash/types/hasura-codegen-types/gqlCodegen.ts"
+      },
+      "configurations": {
+        "watch": {
+          "command": "yarn graphql-codegen --config libs/dash/types/hasura-codegen-types/gqlCodegen.ts --watch"
+        }
+      }
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/dash/types/hasura-codegen-types",
+        "main": "libs/dash/types/hasura-codegen-types/src/index.ts",
+        "tsConfig": "libs/dash/types/hasura-codegen-types/tsconfig.lib.json",
+        "assets": ["libs/dash/types/hasura-codegen-types/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/dash/types/hasura-codegen-types/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/dash/types/hasura-codegen-types/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:dash", "type:types"]
+}

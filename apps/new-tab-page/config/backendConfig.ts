@@ -2,6 +2,12 @@ import { getServerRecipes } from '@beaussan/shared/utils/supertokens/node';
 import { appInfo } from './appInfo';
 import { TypeInput } from 'supertokens-node/types';
 import { ServerClient } from 'postmark';
+import { gqlClient } from '../lib/gqlClient';
+import {
+  CreateUserOnLoginMutation,
+  CreateUserOnLoginMutationVariables,
+  getSdk,
+} from '../lib/createUserOnLogin.generated';
 
 // TODO make a proper postmark client
 const mailClient = new ServerClient(process.env.POSTMARK_API_TOKEN!);
@@ -17,6 +23,14 @@ export const backendConfig = (): TypeInput => {
     appInfo,
     recipeList: getServerRecipes({
       defaultRole: 'user',
+      postSignUp: async (user) => {
+        const sdk = getSdk(gqlClient);
+
+        await sdk.createUserOnLogin({
+          email: user.email,
+          id: user.id,
+        });
+      },
       mail: {
         postmarkClient: mailClient,
         from: 'auth@nbe.io',

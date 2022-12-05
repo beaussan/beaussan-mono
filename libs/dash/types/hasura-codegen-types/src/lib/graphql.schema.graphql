@@ -1,0 +1,1097 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"""whether this query should be cached (Hasura Cloud only)"""
+directive @cached(
+  """refresh the cache entry"""
+  refresh: Boolean! = false
+
+  """measured in seconds"""
+  ttl: Int! = 60
+) on QUERY
+
+"""
+columns and relationships of "bookmarks"
+"""
+type Bookmarks {
+  displayName: String!
+  faviconUrl: String
+  id: uuid!
+  link: String!
+  position: Int!
+
+  """An object relationship"""
+  user: Users!
+  userId: uuid!
+}
+
+"""
+aggregated selection of "bookmarks"
+"""
+type BookmarksAggregate {
+  aggregate: BookmarksAggregateFields
+  nodes: [Bookmarks!]!
+}
+
+"""
+aggregate fields of "bookmarks"
+"""
+type BookmarksAggregateFields {
+  avg: BookmarksAvgFields
+  count(columns: [BookmarksSelectColumn!], distinct: Boolean): Int!
+  max: BookmarksMaxFields
+  min: BookmarksMinFields
+  stddev: BookmarksStddevFields
+  stddevPop: BookmarksStddev_popFields
+  stddevSamp: BookmarksStddev_sampFields
+  sum: BookmarksSumFields
+  varPop: BookmarksVar_popFields
+  varSamp: BookmarksVar_sampFields
+  variance: BookmarksVarianceFields
+}
+
+"""
+order by aggregate values of table "bookmarks"
+"""
+input BookmarksAggregateOrderBy {
+  avg: bookmarks_avg_order_by
+  count: OrderBy
+  max: bookmarks_max_order_by
+  min: bookmarks_min_order_by
+  stddev: bookmarks_stddev_order_by
+  stddev_pop: bookmarks_stddev_pop_order_by
+  stddev_samp: bookmarks_stddev_samp_order_by
+  sum: bookmarks_sum_order_by
+  var_pop: bookmarks_var_pop_order_by
+  var_samp: bookmarks_var_samp_order_by
+  variance: bookmarks_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "bookmarks"
+"""
+input BookmarksArrRelInsertInput {
+  data: [BookmarksInsertInput!]!
+
+  """upsert condition"""
+  onConflict: BookmarksOnConflict
+}
+
+"""aggregate avg on columns"""
+type BookmarksAvgFields {
+  position: Float
+}
+
+"""
+Boolean expression to filter rows from the table "bookmarks". All fields are combined with a logical 'AND'.
+"""
+input BookmarksBoolExp {
+  _and: [BookmarksBoolExp!]
+  _not: BookmarksBoolExp
+  _or: [BookmarksBoolExp!]
+  displayName: StringComparisonExp
+  faviconUrl: StringComparisonExp
+  id: UuidComparisonExp
+  link: StringComparisonExp
+  position: IntComparisonExp
+  user: UsersBoolExp
+  userId: UuidComparisonExp
+}
+
+"""
+unique or primary key constraints on table "bookmarks"
+"""
+enum BookmarksConstraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  bookmarks_pkey
+
+  """
+  unique or primary key constraint on columns "userId", "position"
+  """
+  bookmarks_userId_position_key
+}
+
+"""
+input type for incrementing numeric columns in table "bookmarks"
+"""
+input BookmarksIncInput {
+  position: Int
+}
+
+"""
+input type for inserting data into table "bookmarks"
+"""
+input BookmarksInsertInput {
+  displayName: String
+  faviconUrl: String
+  id: uuid
+  link: String
+  position: Int
+  user: UsersObjRelInsertInput
+  userId: uuid
+}
+
+"""aggregate max on columns"""
+type BookmarksMaxFields {
+  displayName: String
+  faviconUrl: String
+  id: uuid
+  link: String
+  position: Int
+  userId: uuid
+}
+
+"""aggregate min on columns"""
+type BookmarksMinFields {
+  displayName: String
+  faviconUrl: String
+  id: uuid
+  link: String
+  position: Int
+  userId: uuid
+}
+
+"""
+response of any mutation on the table "bookmarks"
+"""
+type BookmarksMutationResponse {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Bookmarks!]!
+}
+
+"""
+on_conflict condition type for table "bookmarks"
+"""
+input BookmarksOnConflict {
+  constraint: BookmarksConstraint!
+  update_columns: [BookmarksUpdateColumn!]! = []
+  where: BookmarksBoolExp
+}
+
+"""Ordering options when selecting data from "bookmarks"."""
+input BookmarksOrderBy {
+  displayName: OrderBy
+  faviconUrl: OrderBy
+  id: OrderBy
+  link: OrderBy
+  position: OrderBy
+  user: UsersOrderBy
+  userId: OrderBy
+}
+
+"""primary key columns input for table: bookmarks"""
+input BookmarksPkColumnsInput {
+  id: uuid!
+}
+
+"""
+select columns of table "bookmarks"
+"""
+enum BookmarksSelectColumn {
+  """column name"""
+  displayName
+
+  """column name"""
+  faviconUrl
+
+  """column name"""
+  id
+
+  """column name"""
+  link
+
+  """column name"""
+  position
+
+  """column name"""
+  userId
+}
+
+"""
+input type for updating data in table "bookmarks"
+"""
+input BookmarksSetInput {
+  displayName: String
+  faviconUrl: String
+  id: uuid
+  link: String
+  position: Int
+  userId: uuid
+}
+
+"""aggregate stddev on columns"""
+type BookmarksStddevFields {
+  position: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type BookmarksStddev_popFields {
+  position: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type BookmarksStddev_sampFields {
+  position: Float
+}
+
+"""aggregate sum on columns"""
+type BookmarksSumFields {
+  position: Int
+}
+
+"""
+update columns of table "bookmarks"
+"""
+enum BookmarksUpdateColumn {
+  """column name"""
+  displayName
+
+  """column name"""
+  faviconUrl
+
+  """column name"""
+  id
+
+  """column name"""
+  link
+
+  """column name"""
+  position
+
+  """column name"""
+  userId
+}
+
+input BookmarksUpdates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: BookmarksIncInput
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: BookmarksSetInput
+  where: BookmarksBoolExp!
+}
+
+"""aggregate var_pop on columns"""
+type BookmarksVar_popFields {
+  position: Float
+}
+
+"""aggregate var_samp on columns"""
+type BookmarksVar_sampFields {
+  position: Float
+}
+
+"""aggregate variance on columns"""
+type BookmarksVarianceFields {
+  position: Float
+}
+
+"""ordering argument of a cursor"""
+enum CursorOrdering {
+  """ascending ordering of the cursor"""
+  ASC
+
+  """descending ordering of the cursor"""
+  DESC
+}
+
+"""
+Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
+"""
+input IntComparisonExp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _isNull: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+"""column ordering options"""
+enum OrderBy {
+  """in ascending order, nulls last"""
+  ASC
+
+  """in ascending order, nulls first"""
+  ASC_NULLS_FIRST
+
+  """in ascending order, nulls last"""
+  ASC_NULLS_LAST
+
+  """in descending order, nulls first"""
+  DESC
+
+  """in descending order, nulls first"""
+  DESC_NULLS_FIRST
+
+  """in descending order, nulls last"""
+  DESC_NULLS_LAST
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input StringComparisonExp {
+  _eq: String
+  _gt: String
+  _gte: String
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: String
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+  _isNull: Boolean
+
+  """does the column match the given pattern"""
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """does the column NOT match the given pattern"""
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """does the column match the given SQL regular expression"""
+  _similar: String
+}
+
+"""
+Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'.
+"""
+input TimestamptzComparisonExp {
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _isNull: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
+}
+
+"""
+columns and relationships of "users"
+"""
+type Users {
+  """An array relationship"""
+  bookmarks(
+    """distinct select on columns"""
+    distinctOn: [BookmarksSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [BookmarksOrderBy!]
+
+    """filter the rows returned"""
+    where: BookmarksBoolExp
+  ): [Bookmarks!]!
+
+  """An aggregate relationship"""
+  bookmarksAggregate(
+    """distinct select on columns"""
+    distinctOn: [BookmarksSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [BookmarksOrderBy!]
+
+    """filter the rows returned"""
+    where: BookmarksBoolExp
+  ): BookmarksAggregate!
+  createdAt: timestamptz!
+  email: String
+  id: uuid!
+  updatedAt: timestamptz!
+}
+
+"""
+aggregated selection of "users"
+"""
+type UsersAggregate {
+  aggregate: UsersAggregateFields
+  nodes: [Users!]!
+}
+
+"""
+aggregate fields of "users"
+"""
+type UsersAggregateFields {
+  count(columns: [UsersSelectColumn!], distinct: Boolean): Int!
+  max: UsersMaxFields
+  min: UsersMinFields
+}
+
+"""
+Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'.
+"""
+input UsersBoolExp {
+  _and: [UsersBoolExp!]
+  _not: UsersBoolExp
+  _or: [UsersBoolExp!]
+  bookmarks: BookmarksBoolExp
+  bookmarks_aggregate: bookmarks_aggregate_bool_exp
+  createdAt: TimestamptzComparisonExp
+  email: StringComparisonExp
+  id: UuidComparisonExp
+  updatedAt: TimestamptzComparisonExp
+}
+
+"""
+unique or primary key constraints on table "users"
+"""
+enum UsersConstraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  users_pkey
+}
+
+"""
+input type for inserting data into table "users"
+"""
+input UsersInsertInput {
+  bookmarks: BookmarksArrRelInsertInput
+  createdAt: timestamptz
+  email: String
+  id: uuid
+  updatedAt: timestamptz
+}
+
+"""aggregate max on columns"""
+type UsersMaxFields {
+  createdAt: timestamptz
+  email: String
+  id: uuid
+  updatedAt: timestamptz
+}
+
+"""aggregate min on columns"""
+type UsersMinFields {
+  createdAt: timestamptz
+  email: String
+  id: uuid
+  updatedAt: timestamptz
+}
+
+"""
+response of any mutation on the table "users"
+"""
+type UsersMutationResponse {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Users!]!
+}
+
+"""
+input type for inserting object relation for remote table "users"
+"""
+input UsersObjRelInsertInput {
+  data: UsersInsertInput!
+
+  """upsert condition"""
+  onConflict: UsersOnConflict
+}
+
+"""
+on_conflict condition type for table "users"
+"""
+input UsersOnConflict {
+  constraint: UsersConstraint!
+  update_columns: [UsersUpdateColumn!]! = []
+  where: UsersBoolExp
+}
+
+"""Ordering options when selecting data from "users"."""
+input UsersOrderBy {
+  bookmarksAggregate: BookmarksAggregateOrderBy
+  createdAt: OrderBy
+  email: OrderBy
+  id: OrderBy
+  updatedAt: OrderBy
+}
+
+"""primary key columns input for table: users"""
+input UsersPkColumnsInput {
+  id: uuid!
+}
+
+"""
+select columns of table "users"
+"""
+enum UsersSelectColumn {
+  """column name"""
+  createdAt
+
+  """column name"""
+  email
+
+  """column name"""
+  id
+
+  """column name"""
+  updatedAt
+}
+
+"""
+input type for updating data in table "users"
+"""
+input UsersSetInput {
+  createdAt: timestamptz
+  email: String
+  id: uuid
+  updatedAt: timestamptz
+}
+
+"""
+update columns of table "users"
+"""
+enum UsersUpdateColumn {
+  """column name"""
+  createdAt
+
+  """column name"""
+  email
+
+  """column name"""
+  id
+
+  """column name"""
+  updatedAt
+}
+
+input UsersUpdates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: UsersSetInput
+  where: UsersBoolExp!
+}
+
+"""
+Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'.
+"""
+input UuidComparisonExp {
+  _eq: uuid
+  _gt: uuid
+  _gte: uuid
+  _in: [uuid!]
+  _isNull: Boolean
+  _lt: uuid
+  _lte: uuid
+  _neq: uuid
+  _nin: [uuid!]
+}
+
+input bookmarks_aggregate_bool_exp {
+  count: bookmarks_aggregate_bool_exp_count
+}
+
+input bookmarks_aggregate_bool_exp_count {
+  arguments: [BookmarksSelectColumn!]
+  distinct: Boolean
+  filter: BookmarksBoolExp
+  predicate: IntComparisonExp!
+}
+
+"""
+order by avg() on columns of table "bookmarks"
+"""
+input bookmarks_avg_order_by {
+  position: OrderBy
+}
+
+"""
+order by max() on columns of table "bookmarks"
+"""
+input bookmarks_max_order_by {
+  displayName: OrderBy
+  faviconUrl: OrderBy
+  id: OrderBy
+  link: OrderBy
+  position: OrderBy
+  userId: OrderBy
+}
+
+"""
+order by min() on columns of table "bookmarks"
+"""
+input bookmarks_min_order_by {
+  displayName: OrderBy
+  faviconUrl: OrderBy
+  id: OrderBy
+  link: OrderBy
+  position: OrderBy
+  userId: OrderBy
+}
+
+"""
+order by stddev() on columns of table "bookmarks"
+"""
+input bookmarks_stddev_order_by {
+  position: OrderBy
+}
+
+"""
+order by stddev_pop() on columns of table "bookmarks"
+"""
+input bookmarks_stddev_pop_order_by {
+  position: OrderBy
+}
+
+"""
+order by stddev_samp() on columns of table "bookmarks"
+"""
+input bookmarks_stddev_samp_order_by {
+  position: OrderBy
+}
+
+"""
+Streaming cursor of the table "bookmarks"
+"""
+input bookmarks_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: bookmarks_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input bookmarks_streamCursorValueInput {
+  displayName: String
+  faviconUrl: String
+  id: uuid
+  link: String
+  position: Int
+  userId: uuid
+}
+
+"""
+order by sum() on columns of table "bookmarks"
+"""
+input bookmarks_sum_order_by {
+  position: OrderBy
+}
+
+"""
+order by var_pop() on columns of table "bookmarks"
+"""
+input bookmarks_var_pop_order_by {
+  position: OrderBy
+}
+
+"""
+order by var_samp() on columns of table "bookmarks"
+"""
+input bookmarks_var_samp_order_by {
+  position: OrderBy
+}
+
+"""
+order by variance() on columns of table "bookmarks"
+"""
+input bookmarks_variance_order_by {
+  position: OrderBy
+}
+
+"""mutation root"""
+type mutation_root {
+  """
+  delete data from the table: "bookmarks"
+  """
+  deleteBookmarks(
+    """filter the rows which have to be deleted"""
+    where: BookmarksBoolExp!
+  ): BookmarksMutationResponse
+
+  """
+  delete single row from the table: "bookmarks"
+  """
+  deleteBookmarksByPk(id: uuid!): Bookmarks
+
+  """
+  delete data from the table: "users"
+  """
+  deleteUsers(
+    """filter the rows which have to be deleted"""
+    where: UsersBoolExp!
+  ): UsersMutationResponse
+
+  """
+  delete single row from the table: "users"
+  """
+  deleteUsersByPk(id: uuid!): Users
+
+  """
+  insert data into the table: "bookmarks"
+  """
+  insertBookmarks(
+    """the rows to be inserted"""
+    objects: [BookmarksInsertInput!]!
+
+    """upsert condition"""
+    onConflict: BookmarksOnConflict
+  ): BookmarksMutationResponse
+
+  """
+  insert a single row into the table: "bookmarks"
+  """
+  insertBookmarksOne(
+    """the row to be inserted"""
+    object: BookmarksInsertInput!
+
+    """upsert condition"""
+    onConflict: BookmarksOnConflict
+  ): Bookmarks
+
+  """
+  insert data into the table: "users"
+  """
+  insertUsers(
+    """the rows to be inserted"""
+    objects: [UsersInsertInput!]!
+
+    """upsert condition"""
+    onConflict: UsersOnConflict
+  ): UsersMutationResponse
+
+  """
+  insert a single row into the table: "users"
+  """
+  insertUsersOne(
+    """the row to be inserted"""
+    object: UsersInsertInput!
+
+    """upsert condition"""
+    onConflict: UsersOnConflict
+  ): Users
+
+  """
+  update data of the table: "bookmarks"
+  """
+  updateBookmarks(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: BookmarksIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: BookmarksSetInput
+
+    """filter the rows which have to be updated"""
+    where: BookmarksBoolExp!
+  ): BookmarksMutationResponse
+
+  """
+  update single row of the table: "bookmarks"
+  """
+  updateBookmarksByPk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: BookmarksIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: BookmarksSetInput
+    pk_columns: BookmarksPkColumnsInput!
+  ): Bookmarks
+
+  """
+  update multiples rows of table: "bookmarks"
+  """
+  updateBookmarksMany(
+    """updates to execute, in order"""
+    updates: [BookmarksUpdates!]!
+  ): [BookmarksMutationResponse]
+
+  """
+  update data of the table: "users"
+  """
+  updateUsers(
+    """sets the columns of the filtered rows to the given values"""
+    _set: UsersSetInput
+
+    """filter the rows which have to be updated"""
+    where: UsersBoolExp!
+  ): UsersMutationResponse
+
+  """
+  update single row of the table: "users"
+  """
+  updateUsersByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: UsersSetInput
+    pk_columns: UsersPkColumnsInput!
+  ): Users
+
+  """
+  update multiples rows of table: "users"
+  """
+  updateUsersMany(
+    """updates to execute, in order"""
+    updates: [UsersUpdates!]!
+  ): [UsersMutationResponse]
+}
+
+type query_root {
+  """An array relationship"""
+  bookmarks(
+    """distinct select on columns"""
+    distinctOn: [BookmarksSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [BookmarksOrderBy!]
+
+    """filter the rows returned"""
+    where: BookmarksBoolExp
+  ): [Bookmarks!]!
+
+  """An aggregate relationship"""
+  bookmarksAggregate(
+    """distinct select on columns"""
+    distinctOn: [BookmarksSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [BookmarksOrderBy!]
+
+    """filter the rows returned"""
+    where: BookmarksBoolExp
+  ): BookmarksAggregate!
+
+  """fetch data from the table: "bookmarks" using primary key columns"""
+  bookmarksByPk(id: uuid!): Bookmarks
+
+  """
+  fetch data from the table: "users"
+  """
+  users(
+    """distinct select on columns"""
+    distinctOn: [UsersSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [UsersOrderBy!]
+
+    """filter the rows returned"""
+    where: UsersBoolExp
+  ): [Users!]!
+
+  """
+  fetch aggregated fields from the table: "users"
+  """
+  usersAggregate(
+    """distinct select on columns"""
+    distinctOn: [UsersSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [UsersOrderBy!]
+
+    """filter the rows returned"""
+    where: UsersBoolExp
+  ): UsersAggregate!
+
+  """fetch data from the table: "users" using primary key columns"""
+  usersByPk(id: uuid!): Users
+}
+
+type subscription_root {
+  """An array relationship"""
+  bookmarks(
+    """distinct select on columns"""
+    distinctOn: [BookmarksSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [BookmarksOrderBy!]
+
+    """filter the rows returned"""
+    where: BookmarksBoolExp
+  ): [Bookmarks!]!
+
+  """An aggregate relationship"""
+  bookmarksAggregate(
+    """distinct select on columns"""
+    distinctOn: [BookmarksSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [BookmarksOrderBy!]
+
+    """filter the rows returned"""
+    where: BookmarksBoolExp
+  ): BookmarksAggregate!
+
+  """fetch data from the table: "bookmarks" using primary key columns"""
+  bookmarksByPk(id: uuid!): Bookmarks
+
+  """
+  fetch data from the table in a streaming manner: "bookmarks"
+  """
+  bookmarksStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [bookmarks_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: BookmarksBoolExp
+  ): [Bookmarks!]!
+
+  """
+  fetch data from the table: "users"
+  """
+  users(
+    """distinct select on columns"""
+    distinctOn: [UsersSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [UsersOrderBy!]
+
+    """filter the rows returned"""
+    where: UsersBoolExp
+  ): [Users!]!
+
+  """
+  fetch aggregated fields from the table: "users"
+  """
+  usersAggregate(
+    """distinct select on columns"""
+    distinctOn: [UsersSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [UsersOrderBy!]
+
+    """filter the rows returned"""
+    where: UsersBoolExp
+  ): UsersAggregate!
+
+  """fetch data from the table: "users" using primary key columns"""
+  usersByPk(id: uuid!): Users
+
+  """
+  fetch data from the table in a streaming manner: "users"
+  """
+  usersStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [users_streamCursorInput]!
+
+    """filter the rows returned"""
+    where: UsersBoolExp
+  ): [Users!]!
+}
+
+scalar timestamptz
+
+"""
+Streaming cursor of the table "users"
+"""
+input users_streamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: users_streamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input users_streamCursorValueInput {
+  createdAt: timestamptz
+  email: String
+  id: uuid
+  updatedAt: timestamptz
+}
+
+scalar uuid

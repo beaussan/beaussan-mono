@@ -1,0 +1,13 @@
+fragment BookmarkItem on Bookmarks {
+  id
+  link
+  faviconUrl
+  displayName
+  position
+}
+
+query getListOfBookmarks {
+  bookmarks(orderBy: { position: ASC_NULLS_LAST }) {
+    ...BookmarkItem
+  }
+}

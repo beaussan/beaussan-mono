@@ -9,3 +9,14 @@ array_relationships:
         table:
           name: bookmarks
           schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - created_at
+        - updated_at
+        - email
+      filter:
+        id:
+          _eq: X-Hasura-User-Id

@@ -8,6 +8,7 @@ import {
   useRoles,
   useHasuraClaimsFromSession,
 } from '@beaussan/shared/utils/supertokens/react';
+import { ListBookmarks } from '@beaussan/dash/feature/bookmark-list';
 
 function ProtectedPage() {
   const session = useSessionContext();
@@ -41,13 +42,11 @@ function ProtectedPage() {
         <h1>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        <ListBookmarks />
         <p>You are authenticated with SuperTokens!</p>
-
         <p>UserId: {session.userId}</p>
-        <p>
-          Access token payload:{' '}
-          <pre>{JSON.stringify(session.accessTokenPayload, null, 2)}</pre>
-        </p>
+        Access token payload:{' '}
+        <pre>{JSON.stringify(session.accessTokenPayload, null, 2)}</pre>
         <p>
           Roles: <pre>{JSON.stringify(roles, null, 2)}</pre>
         </p>

@@ -1,0 +1,916 @@
+export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+/** All built-in and custom scalars, mapped to their actual values */
+export type Scalars = {
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
+  timestamptz: string;
+  uuid: string;
+};
+
+/** columns and relationships of "bookmarks" */
+export type Bookmarks = {
+  __typename?: 'Bookmarks';
+  displayName: Scalars['String'];
+  faviconUrl?: Maybe<Scalars['String']>;
+  id: Scalars['uuid'];
+  link: Scalars['String'];
+  position: Scalars['Int'];
+  /** An object relationship */
+  user: Users;
+  userId: Scalars['uuid'];
+};
+
+/** aggregated selection of "bookmarks" */
+export type BookmarksAggregate = {
+  __typename?: 'BookmarksAggregate';
+  aggregate?: Maybe<BookmarksAggregateFields>;
+  nodes: Array<Bookmarks>;
+};
+
+/** aggregate fields of "bookmarks" */
+export type BookmarksAggregateFields = {
+  __typename?: 'BookmarksAggregateFields';
+  avg?: Maybe<BookmarksAvgFields>;
+  count: Scalars['Int'];
+  max?: Maybe<BookmarksMaxFields>;
+  min?: Maybe<BookmarksMinFields>;
+  stddev?: Maybe<BookmarksStddevFields>;
+  stddevPop?: Maybe<BookmarksStddev_PopFields>;
+  stddevSamp?: Maybe<BookmarksStddev_SampFields>;
+  sum?: Maybe<BookmarksSumFields>;
+  varPop?: Maybe<BookmarksVar_PopFields>;
+  varSamp?: Maybe<BookmarksVar_SampFields>;
+  variance?: Maybe<BookmarksVarianceFields>;
+};
+
+
+/** aggregate fields of "bookmarks" */
+export type BookmarksAggregateFieldsCountArgs = {
+  columns?: InputMaybe<Array<BookmarksSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "bookmarks" */
+export type BookmarksAggregateOrderBy = {
+  avg?: InputMaybe<Bookmarks_Avg_Order_By>;
+  count?: InputMaybe<OrderBy>;
+  max?: InputMaybe<Bookmarks_Max_Order_By>;
+  min?: InputMaybe<Bookmarks_Min_Order_By>;
+  stddev?: InputMaybe<Bookmarks_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Bookmarks_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Bookmarks_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Bookmarks_Sum_Order_By>;
+  var_pop?: InputMaybe<Bookmarks_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Bookmarks_Var_Samp_Order_By>;
+  variance?: InputMaybe<Bookmarks_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "bookmarks" */
+export type BookmarksArrRelInsertInput = {
+  data: Array<BookmarksInsertInput>;
+  /** upsert condition */
+  onConflict?: InputMaybe<BookmarksOnConflict>;
+};
+
+/** aggregate avg on columns */
+export type BookmarksAvgFields = {
+  __typename?: 'BookmarksAvgFields';
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "bookmarks". All fields are combined with a logical 'AND'. */
+export type BookmarksBoolExp = {
+  _and?: InputMaybe<Array<BookmarksBoolExp>>;
+  _not?: InputMaybe<BookmarksBoolExp>;
+  _or?: InputMaybe<Array<BookmarksBoolExp>>;
+  displayName?: InputMaybe<StringComparisonExp>;
+  faviconUrl?: InputMaybe<StringComparisonExp>;
+  id?: InputMaybe<UuidComparisonExp>;
+  link?: InputMaybe<StringComparisonExp>;
+  position?: InputMaybe<IntComparisonExp>;
+  user?: InputMaybe<UsersBoolExp>;
+  userId?: InputMaybe<UuidComparisonExp>;
+};
+
+/** unique or primary key constraints on table "bookmarks" */
+export enum BookmarksConstraint {
+  /** unique or primary key constraint on columns "id" */
+  BookmarksPkey = 'bookmarks_pkey',
+  /** unique or primary key constraint on columns "userId", "position" */
+  BookmarksUserIdPositionKey = 'bookmarks_userId_position_key'
+}
+
+/** input type for incrementing numeric columns in table "bookmarks" */
+export type BookmarksIncInput = {
+  position?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "bookmarks" */
+export type BookmarksInsertInput = {
+  displayName?: InputMaybe<Scalars['String']>;
+  faviconUrl?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  link?: InputMaybe<Scalars['String']>;
+  position?: InputMaybe<Scalars['Int']>;
+  user?: InputMaybe<UsersObjRelInsertInput>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type BookmarksMaxFields = {
+  __typename?: 'BookmarksMaxFields';
+  displayName?: Maybe<Scalars['String']>;
+  faviconUrl?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  link?: Maybe<Scalars['String']>;
+  position?: Maybe<Scalars['Int']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** aggregate min on columns */
+export type BookmarksMinFields = {
+  __typename?: 'BookmarksMinFields';
+  displayName?: Maybe<Scalars['String']>;
+  faviconUrl?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  link?: Maybe<Scalars['String']>;
+  position?: Maybe<Scalars['Int']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** response of any mutation on the table "bookmarks" */
+export type BookmarksMutationResponse = {
+  __typename?: 'BookmarksMutationResponse';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Bookmarks>;
+};
+
+/** on_conflict condition type for table "bookmarks" */
+export type BookmarksOnConflict = {
+  constraint: BookmarksConstraint;
+  update_columns?: Array<BookmarksUpdateColumn>;
+  where?: InputMaybe<BookmarksBoolExp>;
+};
+
+/** Ordering options when selecting data from "bookmarks". */
+export type BookmarksOrderBy = {
+  displayName?: InputMaybe<OrderBy>;
+  faviconUrl?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  link?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  user?: InputMaybe<UsersOrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
+/** primary key columns input for table: bookmarks */
+export type BookmarksPkColumnsInput = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "bookmarks" */
+export enum BookmarksSelectColumn {
+  /** column name */
+  DisplayName = 'displayName',
+  /** column name */
+  FaviconUrl = 'faviconUrl',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Link = 'link',
+  /** column name */
+  Position = 'position',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** input type for updating data in table "bookmarks" */
+export type BookmarksSetInput = {
+  displayName?: InputMaybe<Scalars['String']>;
+  faviconUrl?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  link?: InputMaybe<Scalars['String']>;
+  position?: InputMaybe<Scalars['Int']>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate stddev on columns */
+export type BookmarksStddevFields = {
+  __typename?: 'BookmarksStddevFields';
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type BookmarksStddev_PopFields = {
+  __typename?: 'BookmarksStddev_popFields';
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type BookmarksStddev_SampFields = {
+  __typename?: 'BookmarksStddev_sampFields';
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type BookmarksSumFields = {
+  __typename?: 'BookmarksSumFields';
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "bookmarks" */
+export enum BookmarksUpdateColumn {
+  /** column name */
+  DisplayName = 'displayName',
+  /** column name */
+  FaviconUrl = 'faviconUrl',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Link = 'link',
+  /** column name */
+  Position = 'position',
+  /** column name */
+  UserId = 'userId'
+}
+
+export type BookmarksUpdates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<BookmarksIncInput>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<BookmarksSetInput>;
+  where: BookmarksBoolExp;
+};
+
+/** aggregate var_pop on columns */
+export type BookmarksVar_PopFields = {
+  __typename?: 'BookmarksVar_popFields';
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type BookmarksVar_SampFields = {
+  __typename?: 'BookmarksVar_sampFields';
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type BookmarksVarianceFields = {
+  __typename?: 'BookmarksVarianceFields';
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** ordering argument of a cursor */
+export enum CursorOrdering {
+  /** ascending ordering of the cursor */
+  Asc = 'ASC',
+  /** descending ordering of the cursor */
+  Desc = 'DESC'
+}
+
+/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
+export type IntComparisonExp = {
+  _eq?: InputMaybe<Scalars['Int']>;
+  _gt?: InputMaybe<Scalars['Int']>;
+  _gte?: InputMaybe<Scalars['Int']>;
+  _in?: InputMaybe<Array<Scalars['Int']>>;
+  _isNull?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Int']>;
+  _lte?: InputMaybe<Scalars['Int']>;
+  _neq?: InputMaybe<Scalars['Int']>;
+  _nin?: InputMaybe<Array<Scalars['Int']>>;
+};
+
+/** column ordering options */
+export enum OrderBy {
+  /** in ascending order, nulls last */
+  Asc = 'ASC',
+  /** in ascending order, nulls first */
+  AscNullsFirst = 'ASC_NULLS_FIRST',
+  /** in ascending order, nulls last */
+  AscNullsLast = 'ASC_NULLS_LAST',
+  /** in descending order, nulls first */
+  Desc = 'DESC',
+  /** in descending order, nulls first */
+  DescNullsFirst = 'DESC_NULLS_FIRST',
+  /** in descending order, nulls last */
+  DescNullsLast = 'DESC_NULLS_LAST'
+}
+
+/** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
+export type StringComparisonExp = {
+  _eq?: InputMaybe<Scalars['String']>;
+  _gt?: InputMaybe<Scalars['String']>;
+  _gte?: InputMaybe<Scalars['String']>;
+  /** does the column match the given case-insensitive pattern */
+  _ilike?: InputMaybe<Scalars['String']>;
+  _in?: InputMaybe<Array<Scalars['String']>>;
+  /** does the column match the given POSIX regular expression, case insensitive */
+  _iregex?: InputMaybe<Scalars['String']>;
+  _isNull?: InputMaybe<Scalars['Boolean']>;
+  /** does the column match the given pattern */
+  _like?: InputMaybe<Scalars['String']>;
+  _lt?: InputMaybe<Scalars['String']>;
+  _lte?: InputMaybe<Scalars['String']>;
+  _neq?: InputMaybe<Scalars['String']>;
+  /** does the column NOT match the given case-insensitive pattern */
+  _nilike?: InputMaybe<Scalars['String']>;
+  _nin?: InputMaybe<Array<Scalars['String']>>;
+  /** does the column NOT match the given POSIX regular expression, case insensitive */
+  _niregex?: InputMaybe<Scalars['String']>;
+  /** does the column NOT match the given pattern */
+  _nlike?: InputMaybe<Scalars['String']>;
+  /** does the column NOT match the given POSIX regular expression, case sensitive */
+  _nregex?: InputMaybe<Scalars['String']>;
+  /** does the column NOT match the given SQL regular expression */
+  _nsimilar?: InputMaybe<Scalars['String']>;
+  /** does the column match the given POSIX regular expression, case sensitive */
+  _regex?: InputMaybe<Scalars['String']>;
+  /** does the column match the given SQL regular expression */
+  _similar?: InputMaybe<Scalars['String']>;
+};
+
+/** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
+export type TimestamptzComparisonExp = {
+  _eq?: InputMaybe<Scalars['timestamptz']>;
+  _gt?: InputMaybe<Scalars['timestamptz']>;
+  _gte?: InputMaybe<Scalars['timestamptz']>;
+  _in?: InputMaybe<Array<Scalars['timestamptz']>>;
+  _isNull?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['timestamptz']>;
+  _lte?: InputMaybe<Scalars['timestamptz']>;
+  _neq?: InputMaybe<Scalars['timestamptz']>;
+  _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
+};
+
+/** columns and relationships of "users" */
+export type Users = {
+  __typename?: 'Users';
+  /** An array relationship */
+  bookmarks: Array<Bookmarks>;
+  /** An aggregate relationship */
+  bookmarksAggregate: BookmarksAggregate;
+  createdAt: Scalars['timestamptz'];
+  email?: Maybe<Scalars['String']>;
+  id: Scalars['uuid'];
+  updatedAt: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "users" */
+export type UsersBookmarksArgs = {
+  distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<BookmarksOrderBy>>;
+  where?: InputMaybe<BookmarksBoolExp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersBookmarksAggregateArgs = {
+  distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<BookmarksOrderBy>>;
+  where?: InputMaybe<BookmarksBoolExp>;
+};
+
+/** aggregated selection of "users" */
+export type UsersAggregate = {
+  __typename?: 'UsersAggregate';
+  aggregate?: Maybe<UsersAggregateFields>;
+  nodes: Array<Users>;
+};
+
+/** aggregate fields of "users" */
+export type UsersAggregateFields = {
+  __typename?: 'UsersAggregateFields';
+  count: Scalars['Int'];
+  max?: Maybe<UsersMaxFields>;
+  min?: Maybe<UsersMinFields>;
+};
+
+
+/** aggregate fields of "users" */
+export type UsersAggregateFieldsCountArgs = {
+  columns?: InputMaybe<Array<UsersSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
+export type UsersBoolExp = {
+  _and?: InputMaybe<Array<UsersBoolExp>>;
+  _not?: InputMaybe<UsersBoolExp>;
+  _or?: InputMaybe<Array<UsersBoolExp>>;
+  bookmarks?: InputMaybe<BookmarksBoolExp>;
+  bookmarks_aggregate?: InputMaybe<Bookmarks_Aggregate_Bool_Exp>;
+  createdAt?: InputMaybe<TimestamptzComparisonExp>;
+  email?: InputMaybe<StringComparisonExp>;
+  id?: InputMaybe<UuidComparisonExp>;
+  updatedAt?: InputMaybe<TimestamptzComparisonExp>;
+};
+
+/** unique or primary key constraints on table "users" */
+export enum UsersConstraint {
+  /** unique or primary key constraint on columns "id" */
+  UsersPkey = 'users_pkey'
+}
+
+/** input type for inserting data into table "users" */
+export type UsersInsertInput = {
+  bookmarks?: InputMaybe<BookmarksArrRelInsertInput>;
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type UsersMaxFields = {
+  __typename?: 'UsersMaxFields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type UsersMinFields = {
+  __typename?: 'UsersMinFields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "users" */
+export type UsersMutationResponse = {
+  __typename?: 'UsersMutationResponse';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Users>;
+};
+
+/** input type for inserting object relation for remote table "users" */
+export type UsersObjRelInsertInput = {
+  data: UsersInsertInput;
+  /** upsert condition */
+  onConflict?: InputMaybe<UsersOnConflict>;
+};
+
+/** on_conflict condition type for table "users" */
+export type UsersOnConflict = {
+  constraint: UsersConstraint;
+  update_columns?: Array<UsersUpdateColumn>;
+  where?: InputMaybe<UsersBoolExp>;
+};
+
+/** Ordering options when selecting data from "users". */
+export type UsersOrderBy = {
+  bookmarksAggregate?: InputMaybe<BookmarksAggregateOrderBy>;
+  createdAt?: InputMaybe<OrderBy>;
+  email?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  updatedAt?: InputMaybe<OrderBy>;
+};
+
+/** primary key columns input for table: users */
+export type UsersPkColumnsInput = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "users" */
+export enum UsersSelectColumn {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updatedAt'
+}
+
+/** input type for updating data in table "users" */
+export type UsersSetInput = {
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** update columns of table "users" */
+export enum UsersUpdateColumn {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updatedAt'
+}
+
+export type UsersUpdates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<UsersSetInput>;
+  where: UsersBoolExp;
+};
+
+/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
+export type UuidComparisonExp = {
+  _eq?: InputMaybe<Scalars['uuid']>;
+  _gt?: InputMaybe<Scalars['uuid']>;
+  _gte?: InputMaybe<Scalars['uuid']>;
+  _in?: InputMaybe<Array<Scalars['uuid']>>;
+  _isNull?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['uuid']>;
+  _lte?: InputMaybe<Scalars['uuid']>;
+  _neq?: InputMaybe<Scalars['uuid']>;
+  _nin?: InputMaybe<Array<Scalars['uuid']>>;
+};
+
+export type Bookmarks_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Bookmarks_Aggregate_Bool_Exp_Count>;
+};
+
+export type Bookmarks_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<BookmarksSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<BookmarksBoolExp>;
+  predicate: IntComparisonExp;
+};
+
+/** order by avg() on columns of table "bookmarks" */
+export type Bookmarks_Avg_Order_By = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** order by max() on columns of table "bookmarks" */
+export type Bookmarks_Max_Order_By = {
+  displayName?: InputMaybe<OrderBy>;
+  faviconUrl?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  link?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
+/** order by min() on columns of table "bookmarks" */
+export type Bookmarks_Min_Order_By = {
+  displayName?: InputMaybe<OrderBy>;
+  faviconUrl?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  link?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev() on columns of table "bookmarks" */
+export type Bookmarks_Stddev_Order_By = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_pop() on columns of table "bookmarks" */
+export type Bookmarks_Stddev_Pop_Order_By = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** order by stddev_samp() on columns of table "bookmarks" */
+export type Bookmarks_Stddev_Samp_Order_By = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** Streaming cursor of the table "bookmarks" */
+export type Bookmarks_StreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: Bookmarks_StreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Bookmarks_StreamCursorValueInput = {
+  displayName?: InputMaybe<Scalars['String']>;
+  faviconUrl?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  link?: InputMaybe<Scalars['String']>;
+  position?: InputMaybe<Scalars['Int']>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** order by sum() on columns of table "bookmarks" */
+export type Bookmarks_Sum_Order_By = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** order by var_pop() on columns of table "bookmarks" */
+export type Bookmarks_Var_Pop_Order_By = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** order by var_samp() on columns of table "bookmarks" */
+export type Bookmarks_Var_Samp_Order_By = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** order by variance() on columns of table "bookmarks" */
+export type Bookmarks_Variance_Order_By = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** mutation root */
+export type Mutation_Root = {
+  __typename?: 'mutation_root';
+  /** delete data from the table: "bookmarks" */
+  deleteBookmarks?: Maybe<BookmarksMutationResponse>;
+  /** delete single row from the table: "bookmarks" */
+  deleteBookmarksByPk?: Maybe<Bookmarks>;
+  /** delete data from the table: "users" */
+  deleteUsers?: Maybe<UsersMutationResponse>;
+  /** delete single row from the table: "users" */
+  deleteUsersByPk?: Maybe<Users>;
+  /** insert data into the table: "bookmarks" */
+  insertBookmarks?: Maybe<BookmarksMutationResponse>;
+  /** insert a single row into the table: "bookmarks" */
+  insertBookmarksOne?: Maybe<Bookmarks>;
+  /** insert data into the table: "users" */
+  insertUsers?: Maybe<UsersMutationResponse>;
+  /** insert a single row into the table: "users" */
+  insertUsersOne?: Maybe<Users>;
+  /** update data of the table: "bookmarks" */
+  updateBookmarks?: Maybe<BookmarksMutationResponse>;
+  /** update single row of the table: "bookmarks" */
+  updateBookmarksByPk?: Maybe<Bookmarks>;
+  /** update multiples rows of table: "bookmarks" */
+  updateBookmarksMany?: Maybe<Array<Maybe<BookmarksMutationResponse>>>;
+  /** update data of the table: "users" */
+  updateUsers?: Maybe<UsersMutationResponse>;
+  /** update single row of the table: "users" */
+  updateUsersByPk?: Maybe<Users>;
+  /** update multiples rows of table: "users" */
+  updateUsersMany?: Maybe<Array<Maybe<UsersMutationResponse>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteBookmarksArgs = {
+  where: BookmarksBoolExp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteBookmarksByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteUsersArgs = {
+  where: UsersBoolExp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteUsersByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertBookmarksArgs = {
+  objects: Array<BookmarksInsertInput>;
+  onConflict?: InputMaybe<BookmarksOnConflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertBookmarksOneArgs = {
+  object: BookmarksInsertInput;
+  onConflict?: InputMaybe<BookmarksOnConflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertUsersArgs = {
+  objects: Array<UsersInsertInput>;
+  onConflict?: InputMaybe<UsersOnConflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertUsersOneArgs = {
+  object: UsersInsertInput;
+  onConflict?: InputMaybe<UsersOnConflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateBookmarksArgs = {
+  _inc?: InputMaybe<BookmarksIncInput>;
+  _set?: InputMaybe<BookmarksSetInput>;
+  where: BookmarksBoolExp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateBookmarksByPkArgs = {
+  _inc?: InputMaybe<BookmarksIncInput>;
+  _set?: InputMaybe<BookmarksSetInput>;
+  pk_columns: BookmarksPkColumnsInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateBookmarksManyArgs = {
+  updates: Array<BookmarksUpdates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateUsersArgs = {
+  _set?: InputMaybe<UsersSetInput>;
+  where: UsersBoolExp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateUsersByPkArgs = {
+  _set?: InputMaybe<UsersSetInput>;
+  pk_columns: UsersPkColumnsInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateUsersManyArgs = {
+  updates: Array<UsersUpdates>;
+};
+
+export type Query_Root = {
+  __typename?: 'query_root';
+  /** An array relationship */
+  bookmarks: Array<Bookmarks>;
+  /** An aggregate relationship */
+  bookmarksAggregate: BookmarksAggregate;
+  /** fetch data from the table: "bookmarks" using primary key columns */
+  bookmarksByPk?: Maybe<Bookmarks>;
+  /** fetch data from the table: "users" */
+  users: Array<Users>;
+  /** fetch aggregated fields from the table: "users" */
+  usersAggregate: UsersAggregate;
+  /** fetch data from the table: "users" using primary key columns */
+  usersByPk?: Maybe<Users>;
+};
+
+
+export type Query_RootBookmarksArgs = {
+  distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<BookmarksOrderBy>>;
+  where?: InputMaybe<BookmarksBoolExp>;
+};
+
+
+export type Query_RootBookmarksAggregateArgs = {
+  distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<BookmarksOrderBy>>;
+  where?: InputMaybe<BookmarksBoolExp>;
+};
+
+
+export type Query_RootBookmarksByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootUsersArgs = {
+  distinctOn?: InputMaybe<Array<UsersSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<UsersOrderBy>>;
+  where?: InputMaybe<UsersBoolExp>;
+};
+
+
+export type Query_RootUsersAggregateArgs = {
+  distinctOn?: InputMaybe<Array<UsersSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<UsersOrderBy>>;
+  where?: InputMaybe<UsersBoolExp>;
+};
+
+
+export type Query_RootUsersByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Subscription_Root = {
+  __typename?: 'subscription_root';
+  /** An array relationship */
+  bookmarks: Array<Bookmarks>;
+  /** An aggregate relationship */
+  bookmarksAggregate: BookmarksAggregate;
+  /** fetch data from the table: "bookmarks" using primary key columns */
+  bookmarksByPk?: Maybe<Bookmarks>;
+  /** fetch data from the table in a streaming manner: "bookmarks" */
+  bookmarksStream: Array<Bookmarks>;
+  /** fetch data from the table: "users" */
+  users: Array<Users>;
+  /** fetch aggregated fields from the table: "users" */
+  usersAggregate: UsersAggregate;
+  /** fetch data from the table: "users" using primary key columns */
+  usersByPk?: Maybe<Users>;
+  /** fetch data from the table in a streaming manner: "users" */
+  usersStream: Array<Users>;
+};
+
+
+export type Subscription_RootBookmarksArgs = {
+  distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<BookmarksOrderBy>>;
+  where?: InputMaybe<BookmarksBoolExp>;
+};
+
+
+export type Subscription_RootBookmarksAggregateArgs = {
+  distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<BookmarksOrderBy>>;
+  where?: InputMaybe<BookmarksBoolExp>;
+};
+
+
+export type Subscription_RootBookmarksByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootBookmarksStreamArgs = {
+  batchSize: Scalars['Int'];
+  cursor: Array<InputMaybe<Bookmarks_StreamCursorInput>>;
+  where?: InputMaybe<BookmarksBoolExp>;
+};
+
+
+export type Subscription_RootUsersArgs = {
+  distinctOn?: InputMaybe<Array<UsersSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<UsersOrderBy>>;
+  where?: InputMaybe<UsersBoolExp>;
+};
+
+
+export type Subscription_RootUsersAggregateArgs = {
+  distinctOn?: InputMaybe<Array<UsersSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<UsersOrderBy>>;
+  where?: InputMaybe<UsersBoolExp>;
+};
+
+
+export type Subscription_RootUsersByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootUsersStreamArgs = {
+  batchSize: Scalars['Int'];
+  cursor: Array<InputMaybe<Users_StreamCursorInput>>;
+  where?: InputMaybe<UsersBoolExp>;
+};
+
+/** Streaming cursor of the table "users" */
+export type Users_StreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: Users_StreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Users_StreamCursorValueInput = {
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+};

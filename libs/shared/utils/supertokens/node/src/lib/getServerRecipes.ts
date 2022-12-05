@@ -1,5 +1,6 @@
 import ThirdPartyPasswordlessNode, {
   TypeProvider,
+  User,
 } from 'supertokens-node/recipe/thirdpartypasswordless';
 import SessionNode from 'supertokens-node/recipe/session';
 import Dashboard from 'supertokens-node/recipe/dashboard';
@@ -16,6 +17,8 @@ interface InputGetRecipes {
   };
   defaultRole?: string;
   dashboardAPiKey?: string;
+
+  postSignUp?: (user: User) => Promise<void>;
 
   // Todo: make own wrapper around postmark to have the send email prefilled
   mail: {
@@ -77,20 +80,32 @@ export function getServerRecipes(input: InputGetRecipes): RecipeListFunction[] {
           async consumeCode(data) {
             const result = await originalImplementation.consumeCode(data);
 
-            if (result.status === 'OK' && result.user) {
-              await UserRoles.createNewRoleOrAddPermissions(defaultRole, []);
-              await UserRoles.addRoleToUser(result.user.id, defaultRole);
+            if (result.status !== 'OK' || !result.user) {
+              return result;
+            }
+
+            await UserRoles.createNewRoleOrAddPermissions(defaultRole, []);
+            await UserRoles.addRoleToUser(result.user.id, defaultRole);
+
+            if (input.postSignUp) {
+              await input.postSignUp(result.user);
             }
             return result;
           },
 
-          async thirdPartySignInUp(input) {
-            const data = await originalImplementation.thirdPartySignInUp(input);
+          async thirdPartySignInUp(data) {
+            const result = await originalImplementation.thirdPartySignInUp(
+              data
+            );
 
             await UserRoles.createNewRoleOrAddPermissions(defaultRole, []);
-            await UserRoles.addRoleToUser(data.user.id, defaultRole);
+            await UserRoles.addRoleToUser(result.user.id, defaultRole);
 
-            return data;
+            if (input.postSignUp) {
+              await input.postSignUp(result.user);
+            }
+
+            return result;
           },
         }),
       },
