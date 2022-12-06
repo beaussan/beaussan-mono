@@ -105,6 +105,8 @@ export default async function (
     compiler: 'babel',
     pascalCaseFiles: true,
     strict: true,
+    buildable: true,
+    bundler: 'vite',
   });
   addFiles(tree, normalizedOptions);
   modifyJestConfig(tree, normalizedOptions);
