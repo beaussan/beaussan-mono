@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@beaussan/dash/data-access/backend-admin-sdk": [
+        "libs/dash/data-access/backend-admin-sdk/src/index.ts"
+      ],
       "@beaussan/dash/feature/bookmark-list": [
         "libs/dash/feature/bookmark-list/src/index.ts"
       ],

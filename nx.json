@@ -19,9 +19,6 @@
       "dependsOn": ["^codegen"],
       "inputs": ["default"]
     },
-    "serve": {
-      "dependsOn": ["^codegen"]
-    },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },

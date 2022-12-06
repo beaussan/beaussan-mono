@@ -2,23 +2,18 @@ import { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
   schema: 'libs/dash/types/hasura-codegen-types/src/lib/graphql.schema.graphql',
-  documents: 'apps/new-tab-page/lib/**/*.graphql',
+  documents: 'libs/dash/data-access/backend-admin-sdk/src/lib/**/*.gql',
   generates: {
-    urql: {
+    'libs/dash/data-access/backend-admin-sdk/src/lib/sdk.ts': {
       preset: 'near-operation-file',
       presetConfig: {
-        extension: '.generated.ts',
         baseTypesPath: '~@beaussan/dash/types/hasura-codegen-types',
       },
-      plugins: ['typescript-operations', 'typescript-graphql-request'],
-    },
-    msw: {
-      preset: 'near-operation-file',
-      presetConfig: {
-        extension: '.msw.generated.ts',
-        baseTypesPath: '~@beaussan/dash/types/hasura-codegen-types',
-      },
-      plugins: ['typescript-operations', 'typescript-msw'],
+      plugins: [
+        'typescript-operations',
+        'typescript-graphql-request',
+        'typescript-msw',
+      ],
       config: {
         link: {
           name: 'hasura',

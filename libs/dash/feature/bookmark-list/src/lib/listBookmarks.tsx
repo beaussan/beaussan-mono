@@ -1,5 +1,5 @@
 import { useFuse } from '@beaussan/shared/utils/fuzy-search';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   BookmarkItemFragment,
   useGetListOfBookmarksQuery,
@@ -9,11 +9,11 @@ import { ReturnDataFromQuery } from '@beaussan/shared/utils/urql-utils';
 const Link = ({ item }: { item: BookmarkItemFragment }) => {
   const url = new URL(item.link).hostname;
   return (
-    <div className=" ">
+    <div className="focus:outline-zinc-700 ">
       <a
         href={item.link}
         rel="nofollow noopener"
-        className="flex bg-opacity-100 bg-opacity-90 bg-gray-700 text-white px-2 py-3 hover:bg-gray-600 rounded-lg  "
+        className="flex bg-opacity-90 bg-gray-700 text-white px-2 py-3 focus:bg-opacity-100  rounded-lg  "
       >
         <img
           className="w-6 h-6 mr-5"
@@ -35,7 +35,7 @@ function ListBookmarkWithData({
 }: {
   content: ReturnDataFromQuery<typeof useGetListOfBookmarksQuery>;
 }) {
-  const inputElement = useRef(null);
+  const inputElement = useRef<HTMLInputElement>(null);
   const { search, term, result } = useFuse(bookmarks, {
     keys: ['displayName'],
   });
@@ -49,13 +49,19 @@ function ListBookmarkWithData({
     { link: searchUrl, displayName: 'Google it !', id: '', position: 200 },
   ];
 
+  useEffect(() => {
+    if (inputElement.current) {
+      inputElement.current.focus();
+    }
+  }, []);
+
   return (
     <div>
       <div className="w-full px-4 py-2">
         <input
           onChange={(e) => search(e.target.value)}
           value={term}
-          placeholder="Search for a customer..."
+          placeholder="Search for a link..."
           type="text"
           ref={inputElement}
           onKeyDown={(e) => {
@@ -66,7 +72,7 @@ function ListBookmarkWithData({
           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
         />
       </div>
-      <main className="h-full overflow-y-auto px-4 py-2 space-y-1">
+      <main className="overflow-y-auto px-4 py-2 space-y-1">
         {dataWithSearch.map((link) => (
           <Link key={link.link} item={link} />
         ))}

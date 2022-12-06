@@ -1,0 +1,37 @@
+mutation createUserOnLogin($email: String, $id: uuid!) {
+  insertUsers(
+    objects: { id: $id, email: $email }
+    onConflict: { constraint: users_pkey, update_columns: createdAt }
+  ) {
+    affected_rows
+  }
+}
+
+mutation upsertTraefikRoutesIntoDb($insertData: [TraefikRoutesInsertInput!]!) {
+  insertTraefikRoutes(
+    onConflict: {
+      constraint: traefikRoutes_pkey
+      update_columns: [
+        isUp
+        calculatedUrl
+        lastSeenAlive
+        name
+        provider
+        rule
+        service
+      ]
+    }
+    objects: $insertData
+  ) {
+    affected_rows
+  }
+}
+
+mutation setAllDownNodesBasedOnLastUpdate($update: timestamptz) {
+  updateTraefikRoutes(
+    _set: { isUp: false }
+    where: { lastSeenAlive: { _neq: $update } }
+  ) {
+    affected_rows
+  }
+}

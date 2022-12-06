@@ -5,12 +5,6 @@
   "projectType": "application",
   "implicitDependencies": ["new-tab-page-hasura"],
   "targets": {
-    "codegen": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "yarn graphql-codegen --config apps/new-tab-page/gqlCodegen.ts"
-      }
-    },
     "build": {
       "executor": "@nrwl/next:build",
       "outputs": ["{options.outputPath}"],

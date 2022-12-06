@@ -21,7 +21,7 @@ export type Bookmarks = {
   faviconUrl?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   link: Scalars['String'];
-  position: Scalars['Int'];
+  position?: Maybe<Scalars['Int']>;
   /** An object relationship */
   user: Users;
   userId: Scalars['uuid'];
@@ -269,6 +269,19 @@ export type BookmarksVarianceFields = {
   position?: Maybe<Scalars['Float']>;
 };
 
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type BooleanComparisonExp = {
+  _eq?: InputMaybe<Scalars['Boolean']>;
+  _gt?: InputMaybe<Scalars['Boolean']>;
+  _gte?: InputMaybe<Scalars['Boolean']>;
+  _in?: InputMaybe<Array<Scalars['Boolean']>>;
+  _isNull?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Boolean']>;
+  _lte?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Scalars['Boolean']>;
+  _nin?: InputMaybe<Array<Scalars['Boolean']>>;
+};
+
 /** ordering argument of a cursor */
 export enum CursorOrdering {
   /** ascending ordering of the cursor */
@@ -350,6 +363,178 @@ export type TimestamptzComparisonExp = {
   _lte?: InputMaybe<Scalars['timestamptz']>;
   _neq?: InputMaybe<Scalars['timestamptz']>;
   _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
+};
+
+/** columns and relationships of "traefikRoutes" */
+export type TraefikRoutes = {
+  __typename?: 'TraefikRoutes';
+  calculatedUrl?: Maybe<Scalars['String']>;
+  isUp: Scalars['Boolean'];
+  lastSeenAlive: Scalars['timestamptz'];
+  name: Scalars['String'];
+  provider: Scalars['String'];
+  rule: Scalars['String'];
+  service: Scalars['String'];
+};
+
+/** aggregated selection of "traefikRoutes" */
+export type TraefikRoutesAggregate = {
+  __typename?: 'TraefikRoutesAggregate';
+  aggregate?: Maybe<TraefikRoutesAggregateFields>;
+  nodes: Array<TraefikRoutes>;
+};
+
+/** aggregate fields of "traefikRoutes" */
+export type TraefikRoutesAggregateFields = {
+  __typename?: 'TraefikRoutesAggregateFields';
+  count: Scalars['Int'];
+  max?: Maybe<TraefikRoutesMaxFields>;
+  min?: Maybe<TraefikRoutesMinFields>;
+};
+
+
+/** aggregate fields of "traefikRoutes" */
+export type TraefikRoutesAggregateFieldsCountArgs = {
+  columns?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "traefikRoutes". All fields are combined with a logical 'AND'. */
+export type TraefikRoutesBoolExp = {
+  _and?: InputMaybe<Array<TraefikRoutesBoolExp>>;
+  _not?: InputMaybe<TraefikRoutesBoolExp>;
+  _or?: InputMaybe<Array<TraefikRoutesBoolExp>>;
+  calculatedUrl?: InputMaybe<StringComparisonExp>;
+  isUp?: InputMaybe<BooleanComparisonExp>;
+  lastSeenAlive?: InputMaybe<TimestamptzComparisonExp>;
+  name?: InputMaybe<StringComparisonExp>;
+  provider?: InputMaybe<StringComparisonExp>;
+  rule?: InputMaybe<StringComparisonExp>;
+  service?: InputMaybe<StringComparisonExp>;
+};
+
+/** unique or primary key constraints on table "traefikRoutes" */
+export enum TraefikRoutesConstraint {
+  /** unique or primary key constraint on columns "name" */
+  TraefikRoutesPkey = 'traefikRoutes_pkey'
+}
+
+/** input type for inserting data into table "traefikRoutes" */
+export type TraefikRoutesInsertInput = {
+  calculatedUrl?: InputMaybe<Scalars['String']>;
+  isUp?: InputMaybe<Scalars['Boolean']>;
+  lastSeenAlive?: InputMaybe<Scalars['timestamptz']>;
+  name?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
+  rule?: InputMaybe<Scalars['String']>;
+  service?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type TraefikRoutesMaxFields = {
+  __typename?: 'TraefikRoutesMaxFields';
+  calculatedUrl?: Maybe<Scalars['String']>;
+  lastSeenAlive?: Maybe<Scalars['timestamptz']>;
+  name?: Maybe<Scalars['String']>;
+  provider?: Maybe<Scalars['String']>;
+  rule?: Maybe<Scalars['String']>;
+  service?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type TraefikRoutesMinFields = {
+  __typename?: 'TraefikRoutesMinFields';
+  calculatedUrl?: Maybe<Scalars['String']>;
+  lastSeenAlive?: Maybe<Scalars['timestamptz']>;
+  name?: Maybe<Scalars['String']>;
+  provider?: Maybe<Scalars['String']>;
+  rule?: Maybe<Scalars['String']>;
+  service?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "traefikRoutes" */
+export type TraefikRoutesMutationResponse = {
+  __typename?: 'TraefikRoutesMutationResponse';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<TraefikRoutes>;
+};
+
+/** on_conflict condition type for table "traefikRoutes" */
+export type TraefikRoutesOnConflict = {
+  constraint: TraefikRoutesConstraint;
+  update_columns?: Array<TraefikRoutesUpdateColumn>;
+  where?: InputMaybe<TraefikRoutesBoolExp>;
+};
+
+/** Ordering options when selecting data from "traefikRoutes". */
+export type TraefikRoutesOrderBy = {
+  calculatedUrl?: InputMaybe<OrderBy>;
+  isUp?: InputMaybe<OrderBy>;
+  lastSeenAlive?: InputMaybe<OrderBy>;
+  name?: InputMaybe<OrderBy>;
+  provider?: InputMaybe<OrderBy>;
+  rule?: InputMaybe<OrderBy>;
+  service?: InputMaybe<OrderBy>;
+};
+
+/** primary key columns input for table: traefikRoutes */
+export type TraefikRoutesPkColumnsInput = {
+  name: Scalars['String'];
+};
+
+/** select columns of table "traefikRoutes" */
+export enum TraefikRoutesSelectColumn {
+  /** column name */
+  CalculatedUrl = 'calculatedUrl',
+  /** column name */
+  IsUp = 'isUp',
+  /** column name */
+  LastSeenAlive = 'lastSeenAlive',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Provider = 'provider',
+  /** column name */
+  Rule = 'rule',
+  /** column name */
+  Service = 'service'
+}
+
+/** input type for updating data in table "traefikRoutes" */
+export type TraefikRoutesSetInput = {
+  calculatedUrl?: InputMaybe<Scalars['String']>;
+  isUp?: InputMaybe<Scalars['Boolean']>;
+  lastSeenAlive?: InputMaybe<Scalars['timestamptz']>;
+  name?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
+  rule?: InputMaybe<Scalars['String']>;
+  service?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "traefikRoutes" */
+export enum TraefikRoutesUpdateColumn {
+  /** column name */
+  CalculatedUrl = 'calculatedUrl',
+  /** column name */
+  IsUp = 'isUp',
+  /** column name */
+  LastSeenAlive = 'lastSeenAlive',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Provider = 'provider',
+  /** column name */
+  Rule = 'rule',
+  /** column name */
+  Service = 'service'
+}
+
+export type TraefikRoutesUpdates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<TraefikRoutesSetInput>;
+  where: TraefikRoutesBoolExp;
 };
 
 /** columns and relationships of "users" */
@@ -637,6 +822,10 @@ export type Mutation_Root = {
   deleteBookmarks?: Maybe<BookmarksMutationResponse>;
   /** delete single row from the table: "bookmarks" */
   deleteBookmarksByPk?: Maybe<Bookmarks>;
+  /** delete data from the table: "traefikRoutes" */
+  deleteTraefikRoutes?: Maybe<TraefikRoutesMutationResponse>;
+  /** delete single row from the table: "traefikRoutes" */
+  deleteTraefikRoutesByPk?: Maybe<TraefikRoutes>;
   /** delete data from the table: "users" */
   deleteUsers?: Maybe<UsersMutationResponse>;
   /** delete single row from the table: "users" */
@@ -645,6 +834,10 @@ export type Mutation_Root = {
   insertBookmarks?: Maybe<BookmarksMutationResponse>;
   /** insert a single row into the table: "bookmarks" */
   insertBookmarksOne?: Maybe<Bookmarks>;
+  /** insert data into the table: "traefikRoutes" */
+  insertTraefikRoutes?: Maybe<TraefikRoutesMutationResponse>;
+  /** insert a single row into the table: "traefikRoutes" */
+  insertTraefikRoutesOne?: Maybe<TraefikRoutes>;
   /** insert data into the table: "users" */
   insertUsers?: Maybe<UsersMutationResponse>;
   /** insert a single row into the table: "users" */
@@ -655,6 +848,12 @@ export type Mutation_Root = {
   updateBookmarksByPk?: Maybe<Bookmarks>;
   /** update multiples rows of table: "bookmarks" */
   updateBookmarksMany?: Maybe<Array<Maybe<BookmarksMutationResponse>>>;
+  /** update data of the table: "traefikRoutes" */
+  updateTraefikRoutes?: Maybe<TraefikRoutesMutationResponse>;
+  /** update single row of the table: "traefikRoutes" */
+  updateTraefikRoutesByPk?: Maybe<TraefikRoutes>;
+  /** update multiples rows of table: "traefikRoutes" */
+  updateTraefikRoutesMany?: Maybe<Array<Maybe<TraefikRoutesMutationResponse>>>;
   /** update data of the table: "users" */
   updateUsers?: Maybe<UsersMutationResponse>;
   /** update single row of the table: "users" */
@@ -673,6 +872,18 @@ export type Mutation_RootDeleteBookmarksArgs = {
 /** mutation root */
 export type Mutation_RootDeleteBookmarksByPkArgs = {
   id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteTraefikRoutesArgs = {
+  where: TraefikRoutesBoolExp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteTraefikRoutesByPkArgs = {
+  name: Scalars['String'];
 };
 
 
@@ -699,6 +910,20 @@ export type Mutation_RootInsertBookmarksArgs = {
 export type Mutation_RootInsertBookmarksOneArgs = {
   object: BookmarksInsertInput;
   onConflict?: InputMaybe<BookmarksOnConflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertTraefikRoutesArgs = {
+  objects: Array<TraefikRoutesInsertInput>;
+  onConflict?: InputMaybe<TraefikRoutesOnConflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertTraefikRoutesOneArgs = {
+  object: TraefikRoutesInsertInput;
+  onConflict?: InputMaybe<TraefikRoutesOnConflict>;
 };
 
 
@@ -739,6 +964,26 @@ export type Mutation_RootUpdateBookmarksManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdateTraefikRoutesArgs = {
+  _set?: InputMaybe<TraefikRoutesSetInput>;
+  where: TraefikRoutesBoolExp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateTraefikRoutesByPkArgs = {
+  _set?: InputMaybe<TraefikRoutesSetInput>;
+  pk_columns: TraefikRoutesPkColumnsInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateTraefikRoutesManyArgs = {
+  updates: Array<TraefikRoutesUpdates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdateUsersArgs = {
   _set?: InputMaybe<UsersSetInput>;
   where: UsersBoolExp;
@@ -765,6 +1010,12 @@ export type Query_Root = {
   bookmarksAggregate: BookmarksAggregate;
   /** fetch data from the table: "bookmarks" using primary key columns */
   bookmarksByPk?: Maybe<Bookmarks>;
+  /** fetch data from the table: "traefikRoutes" */
+  traefikRoutes: Array<TraefikRoutes>;
+  /** fetch aggregated fields from the table: "traefikRoutes" */
+  traefikRoutesAggregate: TraefikRoutesAggregate;
+  /** fetch data from the table: "traefikRoutes" using primary key columns */
+  traefikRoutesByPk?: Maybe<TraefikRoutes>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -794,6 +1045,29 @@ export type Query_RootBookmarksAggregateArgs = {
 
 export type Query_RootBookmarksByPkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Query_RootTraefikRoutesArgs = {
+  distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<TraefikRoutesOrderBy>>;
+  where?: InputMaybe<TraefikRoutesBoolExp>;
+};
+
+
+export type Query_RootTraefikRoutesAggregateArgs = {
+  distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<TraefikRoutesOrderBy>>;
+  where?: InputMaybe<TraefikRoutesBoolExp>;
+};
+
+
+export type Query_RootTraefikRoutesByPkArgs = {
+  name: Scalars['String'];
 };
 
 
@@ -829,6 +1103,14 @@ export type Subscription_Root = {
   bookmarksByPk?: Maybe<Bookmarks>;
   /** fetch data from the table in a streaming manner: "bookmarks" */
   bookmarksStream: Array<Bookmarks>;
+  /** fetch data from the table: "traefikRoutes" */
+  traefikRoutes: Array<TraefikRoutes>;
+  /** fetch aggregated fields from the table: "traefikRoutes" */
+  traefikRoutesAggregate: TraefikRoutesAggregate;
+  /** fetch data from the table: "traefikRoutes" using primary key columns */
+  traefikRoutesByPk?: Maybe<TraefikRoutes>;
+  /** fetch data from the table in a streaming manner: "traefikRoutes" */
+  traefikRoutesStream: Array<TraefikRoutes>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -870,6 +1152,36 @@ export type Subscription_RootBookmarksStreamArgs = {
 };
 
 
+export type Subscription_RootTraefikRoutesArgs = {
+  distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<TraefikRoutesOrderBy>>;
+  where?: InputMaybe<TraefikRoutesBoolExp>;
+};
+
+
+export type Subscription_RootTraefikRoutesAggregateArgs = {
+  distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<TraefikRoutesOrderBy>>;
+  where?: InputMaybe<TraefikRoutesBoolExp>;
+};
+
+
+export type Subscription_RootTraefikRoutesByPkArgs = {
+  name: Scalars['String'];
+};
+
+
+export type Subscription_RootTraefikRoutesStreamArgs = {
+  batchSize: Scalars['Int'];
+  cursor: Array<InputMaybe<TraefikRoutes_StreamCursorInput>>;
+  where?: InputMaybe<TraefikRoutesBoolExp>;
+};
+
+
 export type Subscription_RootUsersArgs = {
   distinctOn?: InputMaybe<Array<UsersSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -897,6 +1209,25 @@ export type Subscription_RootUsersStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<Users_StreamCursorInput>>;
   where?: InputMaybe<UsersBoolExp>;
+};
+
+/** Streaming cursor of the table "traefikRoutes" */
+export type TraefikRoutes_StreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: TraefikRoutes_StreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type TraefikRoutes_StreamCursorValueInput = {
+  calculatedUrl?: InputMaybe<Scalars['String']>;
+  isUp?: InputMaybe<Scalars['Boolean']>;
+  lastSeenAlive?: InputMaybe<Scalars['timestamptz']>;
+  name?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
+  rule?: InputMaybe<Scalars['String']>;
+  service?: InputMaybe<Scalars['String']>;
 };
 
 /** Streaming cursor of the table "users" */
