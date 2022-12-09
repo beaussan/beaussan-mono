@@ -6,10 +6,10 @@ import { AppGeneratorSchema } from './schema';
 
 describe('app generator', () => {
   let appTree: Tree;
-  const options: AppGeneratorSchema = { name: 'test' };
+  const options: AppGeneratorSchema = { name: 'test-app' };
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace();
+    appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   });
 
   it.todo('should generate the hasura config file');
@@ -24,7 +24,7 @@ describe('app generator', () => {
 
   it('should run successfully', async () => {
     await generator(appTree, options);
-    const config = readProjectConfiguration(appTree, 'test');
+    const config = readProjectConfiguration(appTree, 'test-app');
     expect(config).toBeDefined();
 
     expect(appTree.listChanges().map((it) => it.path)).toMatchInlineSnapshot(`
@@ -33,21 +33,24 @@ describe('app generator', () => {
         "package.json",
         "nx.json",
         "tsconfig.base.json",
-        "apps/test/project.json",
-        "apps/test/config.yaml",
-        "apps/test/metadata/actions.graphql",
-        "apps/test/metadata/actions.yaml",
-        "apps/test/metadata/allow_list.yaml",
-        "apps/test/metadata/cron_triggers.yaml",
-        "apps/test/metadata/databases/databases.yaml",
-        "apps/test/metadata/databases/default/tables/tables.yaml",
-        "apps/test/metadata/query_collections.yaml",
-        "apps/test/metadata/remote_schemas.yaml",
-        "apps/test/metadata/version.yaml",
-        "apps/test/.env.example",
-        "apps/test/.env",
-        "apps/test/Dockerfile",
-        "apps/test/docker-compose.yml",
+        "apps/.gitignore",
+        "libs/.gitignore",
+        "apps/test-app/project.json",
+        "apps/test-app/config.yaml",
+        "apps/test-app/metadata/actions.graphql",
+        "apps/test-app/metadata/actions.yaml",
+        "apps/test-app/metadata/allow_list.yaml",
+        "apps/test-app/metadata/cron_triggers.yaml",
+        "apps/test-app/metadata/databases/databases.yaml",
+        "apps/test-app/metadata/databases/default/tables/tables.yaml",
+        "apps/test-app/metadata/query_collections.yaml",
+        "apps/test-app/metadata/remote_schemas.yaml",
+        "apps/test-app/metadata/version.yaml",
+        "apps/test-app/migrations/default/.gitkeep",
+        "apps/test-app/.env.example",
+        "apps/test-app/.env",
+        "apps/test-app/Dockerfile",
+        "apps/test-app/docker-compose.yml",
       ]
     `);
   });
