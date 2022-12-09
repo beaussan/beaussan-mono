@@ -25,7 +25,6 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
-      "dependsOn": ["codegen"],
       "options": {
         "outputPath": "dist/libs/dash/types/hasura-codegen-types",
         "main": "libs/dash/types/hasura-codegen-types/src/index.ts",
