@@ -42,11 +42,22 @@
               },
               {
                 "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": ["type:ui", "type:data-access", "type:types", "type:utils"]
+                "onlyDependOnLibsWithTags": [
+                  "type:ui",
+                  "type:data-access",
+                  "type:types",
+                  "type:utils"
+                ]
               },
               {
                 "sourceTag": "type:app",
-                "onlyDependOnLibsWithTags": ["type:ui", "type:data-access", "type:types", "type:utils", "type:feature"]
+                "onlyDependOnLibsWithTags": [
+                  "type:ui",
+                  "type:data-access",
+                  "type:types",
+                  "type:utils",
+                  "type:feature"
+                ]
               }
             ]
           }
