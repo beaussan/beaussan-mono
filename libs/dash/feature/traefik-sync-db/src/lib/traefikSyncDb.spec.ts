@@ -3,9 +3,7 @@ import { setupServer } from 'msw/node';
 import {
   getTraefikRouterMswHandler,
   RouterApiDefinition,
-  routerApiDefinitionSchema,
-} from '@beaussan/dash/data-access/traefik-read-api';
-import { generateMock } from '@anatine/zod-mock';
+} from '@beaussan/shared/data-access/traefik-read-api';
 import {
   getSdk,
   mockSetAllDownNodesBasedOnLastUpdateMutationHasura,

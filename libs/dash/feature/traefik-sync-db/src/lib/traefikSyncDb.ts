@@ -1,7 +1,7 @@
 import {
   getTraefikRouters,
   RouterApiDefinition,
-} from '@beaussan/dash/data-access/traefik-read-api';
+} from '@beaussan/shared/data-access/traefik-read-api';
 import { Sdk } from '@beaussan/dash/data-access/backend-admin-sdk';
 import { TraefikRoutesInsertInput } from '@beaussan/dash/types/hasura-codegen-types';
 import { formatHasuraDate } from '@beaussan/shared/utils/hasura-ts';

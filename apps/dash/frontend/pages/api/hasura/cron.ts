@@ -7,7 +7,7 @@ import { fromZodError } from 'zod-validation-error';
 import {
   getTraefikRouterMswHandler,
   RouterApiDefinition,
-} from '@beaussan/dash/data-access/traefik-read-api';
+} from '@beaussan/shared/data-access/traefik-read-api';
 import { server } from '../../../lib/msw';
 
 const getTokenVerificationMiddleware = (

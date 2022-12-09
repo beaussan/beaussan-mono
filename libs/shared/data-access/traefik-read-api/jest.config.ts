@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'dash-data-access-traefik-read-api',
+  displayName: 'shared-data-access-traefik-read-api',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -12,5 +12,5 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory:
-    '../../../../coverage/libs/dash/data-access/traefik-read-api',
+    '../../../../coverage/libs/shared/data-access/traefik-read-api',
 };

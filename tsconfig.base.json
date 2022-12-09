@@ -18,9 +18,6 @@
       "@beaussan/dash/data-access/backend-admin-sdk": [
         "libs/dash/data-access/backend-admin-sdk/src/index.ts"
       ],
-      "@beaussan/dash/data-access/traefik-read-api": [
-        "libs/dash/data-access/traefik-read-api/src/index.ts"
-      ],
       "@beaussan/dash/feature/bookmark-list": [
         "libs/dash/feature/bookmark-list/src/index.ts"
       ],
@@ -34,6 +31,9 @@
         "libs/nx-plugins/internal-generator/src/index.ts"
       ],
       "@beaussan/nx-hasura": ["libs/nx-plugins/nx-hasura/src/index.ts"],
+      "@beaussan/shared/data-access/traefik-read-api": [
+        "libs/shared/data-access/traefik-read-api/src/index.ts"
+      ],
       "@beaussan/shared/utils/fuzy-search": [
         "libs/shared/utils/fuzy-search/src/index.ts"
       ],
