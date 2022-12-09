@@ -11,8 +11,7 @@
         "command": "yarn graphql-codegen --config libs/dash/feature/bookmark-list/gqlCodegen.ts"
       },
       "configurations": {
-        "default": {
-        },
+        "default": {},
         "watch": {
           "command": "yarn graphql-codegen --config libs/dash/feature/bookmark-list/gqlCodegen.ts --watch"
         }

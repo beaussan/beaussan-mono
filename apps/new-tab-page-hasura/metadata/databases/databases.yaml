@@ -13,4 +13,4 @@
       use_prepared_statements: true
   customization:
     naming_convention: graphql-default
-  tables: "!include default/tables/tables.yaml"
+  tables: '!include default/tables/tables.yaml'

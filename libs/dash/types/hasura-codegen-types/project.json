@@ -7,7 +7,11 @@
   "targets": {
     "codegen": {
       "executor": "nx:run-commands",
-      "outputs": ["{sourceRoot}/graphql.schema.json", "{sourceRoot}/graphqlTypes.ts", "{sourceRoot}/graphql.schema.graphql"],
+      "outputs": [
+        "{sourceRoot}/graphql.schema.json",
+        "{sourceRoot}/graphqlTypes.ts",
+        "{sourceRoot}/graphql.schema.graphql"
+      ],
       "options": {
         "command": "yarn graphql-codegen --config libs/dash/types/hasura-codegen-types/gqlCodegen.ts"
       },

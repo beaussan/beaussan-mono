@@ -4,7 +4,6 @@
   "$id": "UpdateGeneratorsScopeAndTypes",
   "title": "",
   "type": "object",
-  "properties": {
-  },
+  "properties": {},
   "required": []
 }
