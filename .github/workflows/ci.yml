@@ -15,7 +15,7 @@ jobs:
     name: Nx Cloud - Main Job
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
     with:
-      number-of-agents: 3
+      number-of-agents: 2
       install-commands: |
         sudo timedatectl set-timezone Europe/Paris
       init-commands: |
