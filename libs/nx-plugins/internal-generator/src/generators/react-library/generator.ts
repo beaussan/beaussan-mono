@@ -8,7 +8,7 @@ import {
 } from '@nrwl/devkit';
 import * as path from 'path';
 import { ReactLibraryGeneratorSchema } from './schema';
-import { libraryGenerator } from '@nrwl/react/src/generators/library/library';
+import { libraryGenerator } from '@nrwl/react';
 import { Linter } from '@nrwl/linter';
 import * as ts from 'typescript';
 import { appendJestConfigOption } from '../../utils/ast';
@@ -105,7 +105,6 @@ export default async function (
     compiler: 'babel',
     pascalCaseFiles: true,
     strict: true,
-    buildable: true,
     bundler: 'vite',
   });
   addFiles(tree, normalizedOptions);

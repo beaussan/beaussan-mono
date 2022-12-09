@@ -18,8 +18,14 @@
       "@beaussan/dash/data-access/backend-admin-sdk": [
         "libs/dash/data-access/backend-admin-sdk/src/index.ts"
       ],
+      "@beaussan/dash/data-access/traefik-read-api": [
+        "libs/dash/data-access/traefik-read-api/src/index.ts"
+      ],
       "@beaussan/dash/feature/bookmark-list": [
         "libs/dash/feature/bookmark-list/src/index.ts"
+      ],
+      "@beaussan/dash/feature/traefik-sync-db": [
+        "libs/dash/feature/traefik-sync-db/src/index.ts"
       ],
       "@beaussan/dash/types/hasura-codegen-types": [
         "libs/dash/types/hasura-codegen-types/src/index.ts"
@@ -30,6 +36,9 @@
       "@beaussan/nx-hasura": ["libs/nx-plugins/nx-hasura/src/index.ts"],
       "@beaussan/shared/utils/fuzy-search": [
         "libs/shared/utils/fuzy-search/src/index.ts"
+      ],
+      "@beaussan/shared/utils/hasura-ts": [
+        "libs/shared/utils/hasura-ts/src/index.ts"
       ],
       "@beaussan/shared/utils/supertokens/node": [
         "libs/shared/utils/supertokens/node/src/index.ts"
