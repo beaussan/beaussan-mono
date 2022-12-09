@@ -1,0 +1,28 @@
+table:
+  name: traefikRoutes
+  schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - isUp
+        - calculatedUrl
+        - faviconUrl
+        - friendlyName
+        - name
+        - provider
+        - rule
+        - service
+        - created_at
+        - lastSeenAlive
+      filter:
+        _exists:
+          _table:
+            name: users
+            schema: public
+          _where:
+            _and:
+              - id:
+                  _eq: X-Hasura-User-Id
+              - canSeeTraefikContent:
+                  _eq: true

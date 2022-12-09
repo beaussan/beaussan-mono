@@ -15,6 +15,10 @@
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
+    "codegen": {
+      "dependsOn": ["^codegen"],
+      "inputs": ["default"]
+    },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },
@@ -49,5 +53,5 @@
       }
     }
   },
-  "defaultProject": "landing-page"
+  "defaultProject": "dash-frontend"
 }

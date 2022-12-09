@@ -1,0 +1,38 @@
+{
+  "name": "dash-feature-bookmark-list",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/dash/feature/bookmark-list/src",
+  "projectType": "library",
+  "tags": ["scope:dash", "type:feature"],
+  "targets": {
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn graphql-codegen --config libs/dash/feature/bookmark-list/gqlCodegen.ts"
+      },
+      "configurations": {
+        "default": {},
+        "watch": {
+          "command": "yarn graphql-codegen --config libs/dash/feature/bookmark-list/gqlCodegen.ts --watch"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/dash/feature/bookmark-list/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/dash/feature/bookmark-list/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

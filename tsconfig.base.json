@@ -15,8 +15,40 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@beaussan/internal-generator": ["libs/internal-generator/src/index.ts"],
-      "@beaussan/nx-generator-react": ["libs/generator-react/src/index.ts"]
+      "@beaussan/dash/data-access/backend-admin-sdk": [
+        "libs/dash/data-access/backend-admin-sdk/src/index.ts"
+      ],
+      "@beaussan/dash/feature/bookmark-list": [
+        "libs/dash/feature/bookmark-list/src/index.ts"
+      ],
+      "@beaussan/dash/feature/traefik-sync-db": [
+        "libs/dash/feature/traefik-sync-db/src/index.ts"
+      ],
+      "@beaussan/dash/types/hasura-codegen-types": [
+        "libs/dash/types/hasura-codegen-types/src/index.ts"
+      ],
+      "@beaussan/internal-generator": [
+        "libs/nx-plugins/internal-generator/src/index.ts"
+      ],
+      "@beaussan/nx-hasura": ["libs/nx-plugins/nx-hasura/src/index.ts"],
+      "@beaussan/shared/data-access/traefik-read-api": [
+        "libs/shared/data-access/traefik-read-api/src/index.ts"
+      ],
+      "@beaussan/shared/utils/fuzy-search": [
+        "libs/shared/utils/fuzy-search/src/index.ts"
+      ],
+      "@beaussan/shared/utils/hasura-ts": [
+        "libs/shared/utils/hasura-ts/src/index.ts"
+      ],
+      "@beaussan/shared/utils/supertokens/node": [
+        "libs/shared/utils/supertokens/node/src/index.ts"
+      ],
+      "@beaussan/shared/utils/supertokens/react": [
+        "libs/shared/utils/supertokens/react/src/index.ts"
+      ],
+      "@beaussan/shared/utils/urql-utils": [
+        "libs/shared/utils/urql-utils/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

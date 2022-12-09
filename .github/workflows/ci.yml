@@ -6,14 +6,21 @@ on:
       - main
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   main:
     name: Nx Cloud - Main Job
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
     with:
-      number-of-agents: 3
+      number-of-agents: 2
+      install-commands: |
+        sudo timedatectl set-timezone Europe/Paris
+        yarn install --frozen-lockfile
       init-commands: |
-        yarn nx-cloud start-ci-run --stop-agents-after="build" --agent-count=3
+        yarn nx-cloud start-ci-run --stop-agents-after="build" --agent-count=2
       parallel-commands: |
         yarn nx-cloud record -- yarn nx workspace-lint
         yarn nx-cloud record -- yarn nx format:check
@@ -27,4 +34,7 @@ jobs:
     name: Nx Cloud - Agents
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
     with:
+      install-commands: |
+        sudo timedatectl set-timezone Europe/Paris
+        yarn install --frozen-lockfile
       number-of-agents: 2

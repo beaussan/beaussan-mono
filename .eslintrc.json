@@ -13,8 +13,51 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:dash",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:dash"]
+              },
+              {
+                "sourceTag": "scope:nx-plugins",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:nx-plugins"]
+              },
+              {
+                "sourceTag": "type:types",
+                "onlyDependOnLibsWithTags": ["type:types"]
+              },
+              {
+                "sourceTag": "type:utils",
+                "onlyDependOnLibsWithTags": ["type:types", "type:utils"]
+              },
+              {
+                "sourceTag": "type:data-access",
+                "onlyDependOnLibsWithTags": ["type:types", "type:utils"]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": ["type:types", "type:utils"]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": [
+                  "type:ui",
+                  "type:data-access",
+                  "type:types",
+                  "type:utils"
+                ]
+              },
+              {
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": [
+                  "type:ui",
+                  "type:data-access",
+                  "type:types",
+                  "type:utils",
+                  "type:feature"
+                ]
               }
             ]
           }
