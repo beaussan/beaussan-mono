@@ -16,6 +16,9 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.11
     with:
       number-of-agents: 2
+      install-commands: |
+        sudo timedatectl set-timezone Europe/Paris
+        yarn install --frozen-lockfile
       init-commands: |
         yarn nx-cloud start-ci-run --stop-agents-after="build" --agent-count=2
       parallel-commands: |
@@ -31,4 +34,7 @@ jobs:
     name: Nx Cloud - Agents
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.11
     with:
+      install-commands: |
+        sudo timedatectl set-timezone Europe/Paris
+        yarn install --frozen-lockfile
       number-of-agents: 2
