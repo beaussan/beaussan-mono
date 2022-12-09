@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
-import { useFuse } from '@beaussan/shared/utils/fuzy-search';
+import { useFuse } from './useFuse';
 
 const initialValues = [
   {
