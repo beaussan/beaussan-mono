@@ -13,7 +13,7 @@ export const backendConfig = (): TypeInput => {
     supertokens: {
       // https://try.supertokens.com is for demo purposes. Replace this with the address of your core instance (sign up on supertokens.com), or self host a core.
       connectionURI: process.env.SUPERTOKEN_CONNEXION_URI!,
-      // apiKey: <API_KEY(if configured)>,
+      apiKey: process.env.SUPERTOKEN_API_KEY,
     },
     appInfo,
     recipeList: getServerRecipes({
