@@ -105,7 +105,6 @@ export default async function (
     compiler: 'babel',
     pascalCaseFiles: true,
     strict: true,
-    bundler: 'rollup',
   });
   addFiles(tree, normalizedOptions);
   modifyJestConfig(tree, normalizedOptions);
