@@ -60,7 +60,9 @@ export async function traefikSyncDb(
   traefikBaseUrl: string
 ): Promise<TraefikSyncDbStatus> {
   try {
+    console.log('start get routeurs');
     const data = await getTraefikRouters(traefikBaseUrl);
+    console.log('done get routeurs');
 
     const currentDate = formatHasuraDate(new Date());
 

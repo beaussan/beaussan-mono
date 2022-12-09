@@ -2,7 +2,7 @@ import { getServerRecipes } from '@beaussan/shared/utils/supertokens/node';
 import { appInfo } from './appInfo';
 import { TypeInput } from 'supertokens-node/types';
 import { ServerClient } from 'postmark';
-import { gqlClient, gqlSdk } from '../lib/gqlClient';
+import { gqlSdk } from '../lib/gqlClient';
 
 // TODO make a proper postmark client
 const mailClient = new ServerClient(process.env.POSTMARK_API_TOKEN!);

@@ -1,1 +1,14 @@
-[]
+- name: traefikFetcher
+  webhook: '{{HASURA_BACKEND_BASE_URL}}/api/hasura/cron'
+  schedule: '*/1 * * * *'
+  include_in_metadata: true
+  payload:
+    target: traefikFetcher
+  retry_conf:
+    num_retries: 1
+    retry_interval_seconds: 10
+    timeout_seconds: 60
+    tolerance_seconds: 21600
+  headers:
+    - name: token
+      value_from_env: HASURA_AUTH_TOKEN_CRON

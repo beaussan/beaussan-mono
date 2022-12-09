@@ -4,7 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/new-tab-page-hasura/src",
   "targets": {
-    "docker-compose:up": {
+    "docker-compose-up": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
@@ -16,7 +16,7 @@
         "parallel": false
       }
     },
-    "docker-compose:stop": {
+    "docker-compose-stop": {
       "executor": "nx:run-commands",
       "options": {
         "commands": ["docker compose stop"],
@@ -33,7 +33,7 @@
     },
     "migrate-db": {
       "executor": "nx:run-script",
-      "dependsOn": ["docker-compose:up"],
+      "dependsOn": ["docker-compose-up"],
       "options": {
         "script": "hasura --skip-update-check --project apps/new-tab-page-hasura  migrate apply --database-name default"
       }
