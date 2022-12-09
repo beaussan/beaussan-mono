@@ -6,8 +6,22 @@ fragment BookmarkItem on Bookmarks {
   position
 }
 
+fragment TraefikRoutes on TraefikRoutes {
+  faviconUrl
+  lastSeenAlive
+  isUp
+  name
+  friendlyName
+  faviconUrl
+  link: calculatedUrl
+}
+
 query getListOfBookmarks {
   bookmarks(orderBy: { position: ASC_NULLS_LAST }) {
     ...BookmarkItem
+  }
+
+  traefikRoutes(orderBy: { createdAt: DESC }) {
+    ...TraefikRoutes
   }
 }

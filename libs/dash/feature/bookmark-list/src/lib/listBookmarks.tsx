@@ -2,11 +2,19 @@ import { useFuse } from '@beaussan/shared/utils/fuzy-search';
 import { useEffect, useRef } from 'react';
 import {
   BookmarkItemFragment,
+  TraefikRoutesFragment,
   useGetListOfBookmarksQuery,
 } from './requests.generated';
 import { ReturnDataFromQuery } from '@beaussan/shared/utils/urql-utils';
+import clsx from 'clsx';
+import {
+  BookmarkDisplay,
+  SearchDisplay,
+  TraefikDisplay,
+  UnifiedDisplay,
+} from './types';
 
-const Link = ({ item }: { item: BookmarkItemFragment }) => {
+const Link = ({ item }: { item: UnifiedDisplay }) => {
   const url = new URL(item.link).hostname;
   return (
     <div className="focus:outline-zinc-700 ">
@@ -24,19 +32,59 @@ const Link = ({ item }: { item: BookmarkItemFragment }) => {
           }
           alt={`favicon of ${item.displayName}`}
         />
-        {item.displayName}
+        <div className="flex align-middle justify-between items-center w-full">
+          {item.displayName}
+          {item.type === 'traefik' ? (
+            <div
+              className={clsx(
+                'w-4 h-4 rounded-full',
+                item.isUp ? 'bg-green-500' : 'bg-red-500'
+              )}
+            />
+          ) : null}
+        </div>
       </a>
     </div>
   );
 };
 
+const mapFromTraefikRoutesToInternalView = (
+  input: TraefikRoutesFragment
+): TraefikDisplay => {
+  const { __typename, name, friendlyName, ...rest } = input;
+  return {
+    type: 'traefik',
+    displayName: input.friendlyName ?? input.name,
+    ...rest,
+  };
+};
+const mapFromBookmarkToInternalView = (
+  input: BookmarkItemFragment
+): BookmarkDisplay => {
+  const { __typename, ...rest } = input;
+  return {
+    type: 'bookmark',
+    ...rest,
+  };
+};
+
+const getContentFromData = (
+  input: ReturnDataFromQuery<typeof useGetListOfBookmarksQuery>
+): UnifiedDisplay[] => {
+  return [
+    ...input.bookmarks.map(mapFromBookmarkToInternalView),
+    ...input.traefikRoutes.map(mapFromTraefikRoutesToInternalView),
+  ];
+};
+
 function ListBookmarkWithData({
-  content: { bookmarks },
+  content,
 }: {
   content: ReturnDataFromQuery<typeof useGetListOfBookmarksQuery>;
 }) {
+  const finalContent = getContentFromData(content);
   const inputElement = useRef<HTMLInputElement>(null);
-  const { search, term, result } = useFuse(bookmarks, {
+  const { search, term, result } = useFuse(finalContent, {
     keys: ['displayName'],
   });
 
@@ -44,10 +92,13 @@ function ListBookmarkWithData({
   queryParam.append('q', term);
   const searchUrl = `https://www.google.com/search?${queryParam.toString()}`;
 
-  const dataWithSearch: BookmarkItemFragment[] = [
-    ...result,
-    { link: searchUrl, displayName: 'Google it !', id: '', position: 200 },
-  ];
+  const googleSearch: SearchDisplay = {
+    link: searchUrl,
+    displayName: 'Google it !',
+    type: 'search',
+  };
+
+  const dataWithSearch: UnifiedDisplay[] = [...result, googleSearch];
 
   useEffect(() => {
     if (inputElement.current) {

@@ -4,9 +4,9 @@ services:
   postgres:
     image: postgres:12
     restart: on-failure
-    container_name: new-tab-page-hasura-graphql-engine-postgres
+    container_name: dash-hasura-graphql-engine-postgres
     volumes:
-      - db_new-tab-page-hasura:/var/lib/postgresql/data
+      - db_dash-hasura:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
@@ -16,7 +16,7 @@ services:
     depends_on:
       - 'postgres'
     restart: on-failure
-    container_name: new-tab-page-hasura-graphql-engine
+    container_name: dash-hasura-graphql-engine
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
       ## enable the console served by server
@@ -32,4 +32,4 @@ services:
       HASURA_AUTH_TOKEN_CRON: '${HASURA_AUTH_TOKEN_CRON}'
 
 volumes:
-  db_new-tab-page-hasura: {}
+  db_dash-hasura: {}

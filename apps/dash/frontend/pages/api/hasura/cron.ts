@@ -4,11 +4,6 @@ import { z, ZodError } from 'zod';
 import { traefikSyncDb } from '@beaussan/dash/feature/traefik-sync-db';
 import { gqlSdk } from '../../../lib/gqlClient';
 import { fromZodError } from 'zod-validation-error';
-import {
-  getTraefikRouterMswHandler,
-  RouterApiDefinition,
-} from '@beaussan/shared/data-access/traefik-read-api';
-import { server } from '../../../lib/msw';
 
 const getTokenVerificationMiddleware = (
   token: string
@@ -22,38 +17,6 @@ const getTokenVerificationMiddleware = (
     }
   };
 };
-
-const mockResult: RouterApiDefinition[] = [
-  {
-    name: 'AAA',
-    rule: 'Host(`AAA.dome.io`)',
-    service: 'AAA-service',
-    provider: 'AAA',
-    entryPoints: [],
-    status: 'up',
-    using: [],
-  },
-  {
-    name: 'BBB',
-    rule: 'Host(`BBB.dome.io`)',
-    service: 'BBB-service',
-    provider: 'BBB',
-    entryPoints: [],
-    status: 'up',
-    using: [],
-  },
-];
-console.log('TRAEFIK BASE URL', process.env.TRAEFIK_BASE_URL);
-
-server.use(
-  getTraefikRouterMswHandler(
-    process.env.TRAEFIK_BASE_URL!,
-    (req, res, context) => {
-      console.log('MOCKING TRAEFIK ENDPOINT');
-      return res(context.json(mockResult));
-    }
-  )
-);
 
 const cronToken = process.env.HASURA_AUTH_TOKEN_CRON;
 if (!cronToken) {
@@ -84,11 +47,8 @@ const cronHandler = nc<NextApiRequest, NextApiResponse>()
     }
   })
   .post(async (req, res) => {
-    console.log('INIT POST CALL');
     const body = payloadSchema.parse(req.body);
-    console.log('---');
     if (body.name === 'traefikFetcher') {
-      console.log('call traefiksync');
       const returnValue = await traefikSyncDb(
         gqlSdk,
         process.env.TRAEFIK_BASE_URL!
