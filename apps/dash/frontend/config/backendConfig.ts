@@ -3,10 +3,16 @@ import { appInfo } from './appInfo';
 import { TypeInput } from 'supertokens-node/types';
 import { ServerClient } from 'postmark';
 import { gqlSdk } from '../lib/gqlClient';
+import * as process from 'process';
 
 // TODO make a proper postmark client
 const mailClient = new ServerClient(process.env.POSTMARK_API_TOKEN!);
 
+console.log('Backend side');
+console.log(appInfo);
+console.log('(((((((((((((');
+console.log(process.env);
+console.log('-----------');
 export const backendConfig = (): TypeInput => {
   return {
     framework: 'express',
