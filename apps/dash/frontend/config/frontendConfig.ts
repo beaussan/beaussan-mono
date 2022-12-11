@@ -4,13 +4,6 @@ import { appInfo } from './appInfo';
 import Router from 'next/router';
 import process from 'process';
 
-console.log('Frontend side');
-console.log(appInfo);
-console.log(process.env.APP_URL);
-console.log(process.env.NEXT_PUBLIC_APP_URL);
-console.log(appInfo.websiteDomain);
-console.log('-----------');
-
 export const frontendConfig = () => {
   return {
     appInfo,

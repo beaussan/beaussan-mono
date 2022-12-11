@@ -5,16 +5,17 @@ select_permissions:
   - role: user
     permission:
       columns:
-        - isUp
-        - calculatedUrl
-        - faviconUrl
-        - friendlyName
         - name
         - provider
         - rule
+        - calculatedUrl
         - service
-        - created_at
         - lastSeenAlive
+        - isUp
+        - friendlyName
+        - faviconUrl
+        - created_at
+        - isSown
       filter:
         _exists:
           _table:

@@ -377,6 +377,7 @@ export type TraefikRoutes = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   faviconUrl?: Maybe<Scalars['String']>;
   friendlyName?: Maybe<Scalars['String']>;
+  isSown: Scalars['Boolean'];
   isUp: Scalars['Boolean'];
   lastSeenAlive: Scalars['timestamptz'];
   name: Scalars['String'];
@@ -415,6 +416,7 @@ export type TraefikRoutesBoolExp = {
   createdAt?: InputMaybe<TimestamptzComparisonExp>;
   faviconUrl?: InputMaybe<StringComparisonExp>;
   friendlyName?: InputMaybe<StringComparisonExp>;
+  isSown?: InputMaybe<BooleanComparisonExp>;
   isUp?: InputMaybe<BooleanComparisonExp>;
   lastSeenAlive?: InputMaybe<TimestamptzComparisonExp>;
   name?: InputMaybe<StringComparisonExp>;
@@ -435,6 +437,7 @@ export type TraefikRoutesInsertInput = {
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   faviconUrl?: InputMaybe<Scalars['String']>;
   friendlyName?: InputMaybe<Scalars['String']>;
+  isSown?: InputMaybe<Scalars['Boolean']>;
   isUp?: InputMaybe<Scalars['Boolean']>;
   lastSeenAlive?: InputMaybe<Scalars['timestamptz']>;
   name?: InputMaybe<Scalars['String']>;
@@ -493,6 +496,7 @@ export type TraefikRoutesOrderBy = {
   createdAt?: InputMaybe<OrderBy>;
   faviconUrl?: InputMaybe<OrderBy>;
   friendlyName?: InputMaybe<OrderBy>;
+  isSown?: InputMaybe<OrderBy>;
   isUp?: InputMaybe<OrderBy>;
   lastSeenAlive?: InputMaybe<OrderBy>;
   name?: InputMaybe<OrderBy>;
@@ -517,6 +521,8 @@ export enum TraefikRoutesSelectColumn {
   /** column name */
   FriendlyName = 'friendlyName',
   /** column name */
+  IsSown = 'isSown',
+  /** column name */
   IsUp = 'isUp',
   /** column name */
   LastSeenAlive = 'lastSeenAlive',
@@ -536,6 +542,7 @@ export type TraefikRoutesSetInput = {
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   faviconUrl?: InputMaybe<Scalars['String']>;
   friendlyName?: InputMaybe<Scalars['String']>;
+  isSown?: InputMaybe<Scalars['Boolean']>;
   isUp?: InputMaybe<Scalars['Boolean']>;
   lastSeenAlive?: InputMaybe<Scalars['timestamptz']>;
   name?: InputMaybe<Scalars['String']>;
@@ -554,6 +561,8 @@ export enum TraefikRoutesUpdateColumn {
   FaviconUrl = 'faviconUrl',
   /** column name */
   FriendlyName = 'friendlyName',
+  /** column name */
+  IsSown = 'isSown',
   /** column name */
   IsUp = 'isUp',
   /** column name */
@@ -1226,6 +1235,7 @@ export type TraefikRoutes_StreamCursorValueInput = {
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   faviconUrl?: InputMaybe<Scalars['String']>;
   friendlyName?: InputMaybe<Scalars['String']>;
+  isSown?: InputMaybe<Scalars['Boolean']>;
   isUp?: InputMaybe<Scalars['Boolean']>;
   lastSeenAlive?: InputMaybe<Scalars['timestamptz']>;
   name?: InputMaybe<Scalars['String']>;

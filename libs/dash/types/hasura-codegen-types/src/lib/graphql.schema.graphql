@@ -528,6 +528,7 @@ type TraefikRoutes {
   createdAt: timestamptz
   faviconUrl: String
   friendlyName: String
+  isSown: Boolean!
   isUp: Boolean!
   lastSeenAlive: timestamptz!
   name: String!
@@ -564,6 +565,7 @@ input TraefikRoutesBoolExp {
   createdAt: TimestamptzComparisonExp
   faviconUrl: StringComparisonExp
   friendlyName: StringComparisonExp
+  isSown: BooleanComparisonExp
   isUp: BooleanComparisonExp
   lastSeenAlive: TimestamptzComparisonExp
   name: StringComparisonExp
@@ -590,6 +592,7 @@ input TraefikRoutesInsertInput {
   createdAt: timestamptz
   faviconUrl: String
   friendlyName: String
+  isSown: Boolean
   isUp: Boolean
   lastSeenAlive: timestamptz
   name: String
@@ -660,6 +663,7 @@ input TraefikRoutesOrderBy {
   createdAt: OrderBy
   faviconUrl: OrderBy
   friendlyName: OrderBy
+  isSown: OrderBy
   isUp: OrderBy
   lastSeenAlive: OrderBy
   name: OrderBy
@@ -702,6 +706,11 @@ enum TraefikRoutesSelectColumn {
   """
   column name
   """
+  isSown
+
+  """
+  column name
+  """
   isUp
 
   """
@@ -738,6 +747,7 @@ input TraefikRoutesSetInput {
   createdAt: timestamptz
   faviconUrl: String
   friendlyName: String
+  isSown: Boolean
   isUp: Boolean
   lastSeenAlive: timestamptz
   name: String
@@ -769,6 +779,11 @@ enum TraefikRoutesUpdateColumn {
   column name
   """
   friendlyName
+
+  """
+  column name
+  """
+  isSown
 
   """
   column name
@@ -1958,6 +1973,7 @@ input traefikRoutes_streamCursorValueInput {
   createdAt: timestamptz
   faviconUrl: String
   friendlyName: String
+  isSown: Boolean
   isUp: Boolean
   lastSeenAlive: timestamptz
   name: String

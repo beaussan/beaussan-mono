@@ -73,7 +73,10 @@ export const GetListOfBookmarksDocument = gql`
     bookmarks(orderBy: { position: ASC_NULLS_LAST }) {
       ...BookmarkItem
     }
-    traefikRoutes(orderBy: { createdAt: DESC }) {
+    traefikRoutes(
+      orderBy: { createdAt: DESC }
+      where: { isSown: { _eq: true } }
+    ) {
       ...TraefikRoutes
     }
   }
