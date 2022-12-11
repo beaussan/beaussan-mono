@@ -21,7 +21,10 @@ query getListOfBookmarks {
     ...BookmarkItem
   }
 
-  traefikRoutes(orderBy: { createdAt: DESC }) {
+  traefikRoutes(
+    orderBy: { createdAt: DESC }
+    where: { isSown: { _eq: true } }
+  ) {
     ...TraefikRoutes
   }
 }
