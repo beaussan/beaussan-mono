@@ -1,9 +1,9 @@
 import { GraphQLClient } from 'graphql-request';
 import { getSdk } from '@beaussan/dash/data-access/backend-admin-sdk';
 
-const BASE_URL = process.env.NEXT_PUBLIC_HASURA_URL;
+const BASE_URL = process.env.NX_HASURA_URL;
 const BASE_HTTP_METHOD =
-  process.env.NEXT_PUBLIC_HASURA_IS_HTTPS === 'yes' ? 'https' : 'http';
+  process.env.NX_HASURA_IS_HTTPS === 'yes' ? 'https' : 'http';
 
 // const WS_BASE_URL = `wss://${BASE_URL}`;
 const HTTP_BASE_URL = `${BASE_HTTP_METHOD}://${BASE_URL}`;

@@ -5,13 +5,11 @@ const port = process.env.APP_PORT || 4238;
 const apiBasePath = '/api/auth/';
 
 export const websiteDomain =
-  process.env.APP_URL ||
-  process.env.NEXT_PUBLIC_APP_URL ||
-  `http://localhost:${port}`;
+  process.env.APP_URL || process.env.NX_APP_URL || `http://localhost:${port}`;
 
 console.log('APP INFO');
 console.log(process.env.APP_URL);
-console.log(process.env.NEXT_PUBLIC_APP_URL);
+console.log(process.env.NX_APP_URL);
 console.log(websiteDomain);
 console.log('------');
 
