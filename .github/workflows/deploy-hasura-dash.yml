@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  hasura:
 
     runs-on: ubuntu-latest
 
@@ -16,11 +16,11 @@ jobs:
         with:
           node-version: 16.x
       - run: yarn install --frozen-lockfile
-      - run: yarn hasura --skip-update-check --endpoint $HASURA_URL --admin_secret $ADMIN_SECRET --project apps/dash/hasura migrate apply --database-name default
+      - run: yarn hasura --skip-update-check --endpoint $HASURA_URL --admin-secret $ADMIN_SECRET --project apps/dash/hasura migrate apply --database-name default
         env:
           ADMIN_SECRET: ${{ secrets.DASH_HASURA_ADMIN_SECRET }}
           HASURA_URL: ${{ secrets.DASH_HASURA_URL }}
-      - run: yarn hasura --skip-update-check --endpoint $HASURA_URL --admin_secret $ADMIN_SECRET --project apps/dash/hasura metadata apply
+      - run: yarn hasura --skip-update-check --endpoint $HASURA_URL --admin-secret $ADMIN_SECRET --project apps/dash/hasura metadata apply
         env:
           ADMIN_SECRET: ${{ secrets.DASH_HASURA_ADMIN_SECRET }}
           HASURA_URL: ${{ secrets.DASH_HASURA_URL }}
