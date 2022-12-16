@@ -2,7 +2,6 @@ import ThirdPartyPasswordlessReact from 'supertokens-auth-react/recipe/thirdpart
 import SessionReact from 'supertokens-auth-react/recipe/session';
 import { appInfo } from './appInfo';
 import Router from 'next/router';
-import process from 'process';
 
 export const frontendConfig = () => {
   return {
