@@ -24,6 +24,9 @@
       "@beaussan/dash/feature/traefik-sync-db": [
         "libs/dash/feature/traefik-sync-db/src/index.ts"
       ],
+      "@beaussan/dash/storybook-host": [
+        "libs/dash/storybook-host/src/index.ts"
+      ],
       "@beaussan/dash/types/hasura-codegen-types": [
         "libs/dash/types/hasura-codegen-types/src/index.ts"
       ],

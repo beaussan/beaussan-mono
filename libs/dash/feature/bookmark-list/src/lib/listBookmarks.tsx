@@ -14,7 +14,7 @@ import {
   UnifiedDisplay,
 } from './types';
 
-const Link = ({ item }: { item: UnifiedDisplay }) => {
+export const Link = ({ item }: { item: UnifiedDisplay }) => {
   const url = new URL(item.link).hostname;
   return (
     <div className="focus:outline-zinc-700 ">
