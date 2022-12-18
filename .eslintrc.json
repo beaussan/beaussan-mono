@@ -4,8 +4,9 @@
   "plugins": ["@nrwl/nx"],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.json"],
       "rules": {
+
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {
@@ -77,7 +78,9 @@
     {
       "files": "*.json",
       "parser": "jsonc-eslint-parser",
-      "rules": {}
+      "rules": {
+        "@nrwl/nx/workspace/allowed-project-tags": "error"
+      }
     }
   ]
 }
