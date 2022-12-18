@@ -13,27 +13,23 @@ import { makeOperation } from '@urql/core';
 import { authExchange } from '@urql/exchange-auth';
 import Session from 'supertokens-auth-react/recipe/session';
 
-const BASE_URL = process.env.NEXT_PUBLIC_HASURA_URL;
-const BASE_HTTP_METHOD =
-  process.env.NEXT_PUBLIC_HASURA_IS_HTTPS === 'yes' ? 'https' : 'http';
+export type CreateClientOptions = {
+  graphqlEndpoint: string;
+};
 
-// const WS_BASE_URL = `wss://${BASE_URL}`;
-const HTTP_BASE_URL = `${BASE_HTTP_METHOD}://${BASE_URL}`;
-const ENDPOINT = '/v1/graphql';
-// const WS_URL = `${WS_BASE_URL}${ENDPOINT}`;
-export const HTTP_URL = `${HTTP_BASE_URL}${ENDPOINT}`;
-
-export const createAnonymousClient = () => {
+export const createAnonymousClient = ({
+  graphqlEndpoint,
+}: CreateClientOptions) => {
   return createClient({
-    url: HTTP_URL,
+    url: graphqlEndpoint,
     suspense: false,
     exchanges: [devtoolsExchange, dedupExchange, cacheExchange, fetchExchange],
   });
 };
 
-export const createAuthClient = () => {
+export const createAuthClient = ({ graphqlEndpoint }: CreateClientOptions) => {
   return createClient({
-    url: HTTP_URL,
+    url: graphqlEndpoint,
     suspense: false,
     exchanges: [
       devtoolsExchange,

@@ -12,7 +12,17 @@ import Session, {
 import {
   createAnonymousClient,
   createAuthClient,
-} from '../src/services/urqlClient';
+} from '@beaussan/dash/data-access/urql-client';
+
+const BASE_URL = process.env.NEXT_PUBLIC_HASURA_URL;
+const BASE_HTTP_METHOD =
+  process.env.NEXT_PUBLIC_HASURA_IS_HTTPS === 'yes' ? 'https' : 'http';
+
+// const WS_BASE_URL = `wss://${BASE_URL}`;
+const HTTP_BASE_URL = `${BASE_HTTP_METHOD}://${BASE_URL}`;
+const ENDPOINT = '/v1/graphql';
+// const WS_URL = `${WS_BASE_URL}${ENDPOINT}`;
+export const HTTP_URL = `${HTTP_BASE_URL}${ENDPOINT}`;
 
 if (typeof window !== 'undefined') {
   // we only want to call this init function on the frontend, so we check typeof window !== 'undefined'
@@ -22,7 +32,9 @@ if (typeof window !== 'undefined') {
 function ClientProvider(props: React.PropsWithChildren) {
   const session = useSessionContext();
 
-  const [urqlClient, setUrqlClient] = useState(createAnonymousClient());
+  const [urqlClient, setUrqlClient] = useState(
+    createAnonymousClient({ graphqlEndpoint: HTTP_URL })
+  );
   const [isAnonymousClient, setIsAnonymousClient] = useState(true);
 
   console.log('ClientProvider', { session });
@@ -31,12 +43,12 @@ function ClientProvider(props: React.PropsWithChildren) {
     const hasNoToken = session.loading || !session.doesSessionExist;
     if (!hasNoToken && isAnonymousClient) {
       console.log('Creating auth token');
-      setUrqlClient(createAuthClient());
+      setUrqlClient(createAuthClient({ graphqlEndpoint: HTTP_URL }));
       setIsAnonymousClient(false);
     }
     if (hasNoToken && !isAnonymousClient) {
       console.log('Creating anonymous token');
-      setUrqlClient(createAnonymousClient());
+      setUrqlClient(createAnonymousClient({ graphqlEndpoint: HTTP_URL }));
       setIsAnonymousClient(true);
     }
   }, [isAnonymousClient, session]);

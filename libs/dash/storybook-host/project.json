@@ -3,7 +3,8 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/dash/storybook-host/src",
   "projectType": "library",
-  "tags": [],
+  "tags": ["scope:dash"],
+  "implicitDependencies": ["dash-feature-bookmark-list"],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",

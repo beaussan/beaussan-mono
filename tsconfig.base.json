@@ -18,6 +18,9 @@
       "@beaussan/dash/data-access/backend-admin-sdk": [
         "libs/dash/data-access/backend-admin-sdk/src/index.ts"
       ],
+      "@beaussan/dash/data-access/urql-client": [
+        "libs/dash/data-access/urql-client/src/index.ts"
+      ],
       "@beaussan/dash/feature/bookmark-list": [
         "libs/dash/feature/bookmark-list/src/index.ts"
       ],

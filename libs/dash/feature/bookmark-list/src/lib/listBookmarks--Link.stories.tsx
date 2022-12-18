@@ -10,4 +10,10 @@ export default Story;
 const Template: ComponentStory<typeof Link> = (args) => <Link {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+  item: {
+    link: 'https://example.com',
+    type: 'search',
+    displayName: 'Google it!',
+  },
+};
