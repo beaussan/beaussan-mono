@@ -8,7 +8,9 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/nx-plugins/internal-generator-e2e/**/*.{ts,tsx,json}"]
+        "lintFilePatterns": [
+          "apps/nx-plugins/internal-generator-e2e/**/*.{ts,tsx,json}"
+        ]
       }
     },
     "e2e": {

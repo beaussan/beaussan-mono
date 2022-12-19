@@ -18,7 +18,9 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/data-access/traefik-read-api/**/*.{ts,json}"]
+        "lintFilePatterns": [
+          "libs/shared/data-access/traefik-read-api/**/*.{ts,json}"
+        ]
       }
     },
     "test": {

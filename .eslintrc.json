@@ -6,7 +6,6 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.json"],
       "rules": {
-
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {
@@ -102,10 +101,22 @@
       "files": "*.json",
       "parser": "jsonc-eslint-parser",
       "rules": {
-        "@nrwl/nx/workspace/allowed-project-tags": ["error", {
-          "scopeTags": ["dash", "nx-plugins", "shared"],
-          "typeTags": ["app", "storybook", "e2e" ,"feature", "ui", "data-access", "utils", "types"]
-        }]
+        "@nrwl/nx/workspace/allowed-project-tags": [
+          "error",
+          {
+            "scopeTags": ["dash", "nx-plugins", "shared"],
+            "typeTags": [
+              "app",
+              "storybook",
+              "e2e",
+              "feature",
+              "ui",
+              "data-access",
+              "utils",
+              "types"
+            ]
+          }
+        ]
       }
     }
   ]

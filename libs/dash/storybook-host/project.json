@@ -10,7 +10,9 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/dash/storybook-host/**/*.{ts,tsx,js,jsx,json}"]
+        "lintFilePatterns": [
+          "libs/dash/storybook-host/**/*.{ts,tsx,js,jsx,json}"
+        ]
       }
     },
     "test": {
