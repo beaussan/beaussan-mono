@@ -4,6 +4,13 @@
   "projectType": "application",
   "sourceRoot": "apps/nx-plugins/nx-hasura-e2e/src",
   "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/nx-plugins/nx-hasura-e2e/**/*.{ts,tsx,json}"]
+      }
+    },
     "e2e": {
       "executor": "@nrwl/nx-plugin:e2e",
       "options": {
@@ -12,6 +19,6 @@
       }
     }
   },
-  "tags": [],
+  "tags": ["scope:nx-plugins", "type:e2e"],
   "implicitDependencies": ["nx-plugins-nx-hasura"]
 }

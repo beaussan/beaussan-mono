@@ -24,7 +24,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/dash/data-access/backend-admin-sdk/**/*.ts"]
+        "lintFilePatterns": ["libs/dash/data-access/backend-admin-sdk/**/*.{ts,json}"]
       }
     },
     "test": {

@@ -36,7 +36,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/dash/types/hasura-codegen-types/**/*.ts"]
+        "lintFilePatterns": ["libs/dash/types/hasura-codegen-types/**/*.{ts,json}"]
       }
     },
     "test": {

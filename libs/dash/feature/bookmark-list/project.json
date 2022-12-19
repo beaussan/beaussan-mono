@@ -22,7 +22,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/dash/feature/bookmark-list/**/*.{ts,tsx,js,jsx}"
+          "libs/dash/feature/bookmark-list/**/*.{ts,tsx,js,jsx,json}"
         ]
       }
     },

@@ -10,7 +10,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/shared/utils/supertokens/react/**/*.{ts,tsx,js,jsx}"
+          "libs/shared/utils/supertokens/react/**/*.{ts,tsx,js,jsx,json}"
         ]
       }
     },

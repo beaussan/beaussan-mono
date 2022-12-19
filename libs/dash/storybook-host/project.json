@@ -3,14 +3,14 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/dash/storybook-host/src",
   "projectType": "library",
-  "tags": ["scope:dash"],
+  "tags": ["scope:dash", "type:storybook"],
   "implicitDependencies": ["dash-feature-bookmark-list"],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/dash/storybook-host/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/dash/storybook-host/**/*.{ts,tsx,js,jsx,json}"]
       }
     },
     "test": {

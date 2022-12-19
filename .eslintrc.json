@@ -59,6 +59,29 @@
                   "type:utils",
                   "type:feature"
                 ]
+              },
+              {
+                "sourceTag": "type:e2e",
+                "onlyDependOnLibsWithTags": [
+                  "type:app",
+                  "type:storybook",
+                  "type:feature",
+                  "type:ui",
+                  "type:utils",
+                  "type:types"
+                ]
+              },
+              {
+                "sourceTag": "type:storybook",
+                "onlyDependOnLibsWithTags": [
+                  "type:app",
+                  "type:storybook",
+                  "type:feature",
+                  "type:ui",
+                  "type:utils",
+                  "type:data-access",
+                  "type:types"
+                ]
               }
             ]
           }
@@ -79,7 +102,10 @@
       "files": "*.json",
       "parser": "jsonc-eslint-parser",
       "rules": {
-        "@nrwl/nx/workspace/allowed-project-tags": "error"
+        "@nrwl/nx/workspace/allowed-project-tags": ["error", {
+          "scopeTags": ["dash", "nx-plugins", "shared"],
+          "typeTags": ["app", "storybook", "e2e" ,"feature", "ui", "data-access", "utils", "types"]
+        }]
       }
     }
   ]
