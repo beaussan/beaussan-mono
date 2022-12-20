@@ -30,7 +30,7 @@ jobs:
         yarn nx affected --target=lint --parallel=2
         yarn nx affected --target=test --parallel=2 --ci --code-coverage
         yarn nx affected --target=e2e --parallel=2
-        yarn nx affected --target=test-storybook --parallel=2
+        yarn nx affected --target=test-storybook:ci --parallel=2
         yarn nx affected --target=build --parallel=2
 
   agents:
