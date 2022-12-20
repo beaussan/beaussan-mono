@@ -21,9 +21,6 @@
       "@beaussan/dash/data/hasura-codegen-types": [
         "libs/dash/data/hasura-codegen-types/src/index.ts"
       ],
-      "@beaussan/dash/data/urql-client": [
-        "libs/dash/data/urql-client/src/index.ts"
-      ],
       "@beaussan/dash/feature/bookmark-list": [
         "libs/dash/feature/bookmark-list/src/index.ts"
       ],
@@ -37,6 +34,9 @@
         "libs/nx-plugins/internal-generator/src/index.ts"
       ],
       "@beaussan/nx-hasura": ["libs/nx-plugins/nx-hasura/src/index.ts"],
+      "@beaussan/shared/data/supertokens-urql-client": [
+        "libs/shared/data/supertokens-urql-client/src/index.ts"
+      ],
       "@beaussan/shared/data/traefik-read-api": [
         "libs/shared/data/traefik-read-api/src/index.ts"
       ],
