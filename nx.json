@@ -10,7 +10,8 @@
           "lint",
           "test",
           "e2e",
-          "build-storybook"
+          "build-storybook",
+          "test-storybook"
         ],
         "accessToken": "ZDgyODlkYTItMjg4ZS00ZjI1LWE5NjEtYWUyNjI2YjNhMDE1fHJlYWQ="
       }
@@ -39,6 +40,9 @@
       ]
     },
     "build-storybook": {
+      "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
+    },
+    "test-storybook": {
       "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
     }
   },
