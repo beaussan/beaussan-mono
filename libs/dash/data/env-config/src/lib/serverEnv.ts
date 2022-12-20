@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { clientEnvSchema } from './clientEnv';
+import { getHasuraUrls } from './helpers';
 
 export const serverEnvSchema = z
   .object({
@@ -13,7 +14,16 @@ export const serverEnvSchema = z
     GITHUB_AUTH_CLIENT_ID: z.string(),
     GITHUB_AUTH_CLIENT_SECRET: z.string(),
   })
-  .merge(clientEnvSchema);
+  .merge(clientEnvSchema)
+  .transform((arg, ctx) => {
+    return {
+      ...arg,
+      ...getHasuraUrls(
+        arg.NEXT_PUBLIC_HASURA_URL,
+        arg.NEXT_PUBLIC_HASURA_IS_HTTPS
+      ),
+    };
+  });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
 

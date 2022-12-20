@@ -1,2 +1,2 @@
-export * from './lib/clientEnv';
-export * from './lib/serverEnv';
+export { clientEnvs, ClientEnv } from './lib/clientEnv';
+export { getServerEnvs, ServerEnv } from './lib/serverEnv';
