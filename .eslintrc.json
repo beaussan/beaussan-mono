@@ -33,7 +33,7 @@
                 "onlyDependOnLibsWithTags": ["type:types", "type:utils"]
               },
               {
-                "sourceTag": "type:data-access",
+                "sourceTag": "type:data",
                 "onlyDependOnLibsWithTags": ["type:types", "type:utils"]
               },
               {
@@ -44,7 +44,7 @@
                 "sourceTag": "type:feature",
                 "onlyDependOnLibsWithTags": [
                   "type:ui",
-                  "type:data-access",
+                  "type:data",
                   "type:types",
                   "type:utils"
                 ]
@@ -53,7 +53,7 @@
                 "sourceTag": "type:app",
                 "onlyDependOnLibsWithTags": [
                   "type:ui",
-                  "type:data-access",
+                  "type:data",
                   "type:types",
                   "type:utils",
                   "type:feature"
@@ -78,7 +78,7 @@
                   "type:feature",
                   "type:ui",
                   "type:utils",
-                  "type:data-access",
+                  "type:data",
                   "type:types"
                 ]
               }
@@ -111,7 +111,7 @@
               "e2e",
               "feature",
               "ui",
-              "data-access",
+              "data",
               "utils",
               "types"
             ]
