@@ -18,6 +18,9 @@
       "@beaussan/dash/data/backend-admin-sdk": [
         "libs/dash/data/backend-admin-sdk/src/index.ts"
       ],
+      "@beaussan/dash/data/env-config": [
+        "libs/dash/data/env-config/src/index.ts"
+      ],
       "@beaussan/dash/data/hasura-codegen-types": [
         "libs/dash/data/hasura-codegen-types/src/index.ts"
       ],

@@ -7,10 +7,12 @@ import { frontendConfig } from '../config/frontendConfig';
 import React, { useEffect } from 'react';
 import Session from 'supertokens-auth-react/recipe/session';
 import { UrqlSupertokensProvider } from '@beaussan/shared/data/supertokens-urql-client';
+import { clientEnvs } from '@beaussan/dash/data/env-config';
 
-const BASE_URL = process.env.NEXT_PUBLIC_HASURA_URL;
-const BASE_HTTP_METHOD =
-  process.env.NEXT_PUBLIC_HASURA_IS_HTTPS === 'yes' ? 'https' : 'http';
+const BASE_URL = clientEnvs.NEXT_PUBLIC_HASURA_URL;
+const BASE_HTTP_METHOD = clientEnvs.NEXT_PUBLIC_HASURA_IS_HTTPS
+  ? 'https'
+  : 'http';
 
 // const WS_BASE_URL = `wss://${BASE_URL}`;
 const HTTP_BASE_URL = `${BASE_HTTP_METHOD}://${BASE_URL}`;
