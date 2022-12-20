@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import { createAnonymousClient, createAuthClient } from './urqlClient';
-import { Provider as UrqlProvider } from 'urql/dist/types/context';
+import { Provider as UrqlProvider } from 'urql';
 
 export function UrqlSupertokensProvider({
   graphqlEndpoint,
