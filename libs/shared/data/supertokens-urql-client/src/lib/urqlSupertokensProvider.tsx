@@ -28,7 +28,7 @@ export function UrqlSupertokensProvider({
       setUrqlClient(createAnonymousClient({ graphqlEndpoint }));
       setIsAnonymousClient(true);
     }
-  }, [isAnonymousClient, session]);
+  }, [isAnonymousClient, session, graphqlEndpoint]);
 
   return <UrqlProvider value={urqlClient}>{children}</UrqlProvider>;
 }

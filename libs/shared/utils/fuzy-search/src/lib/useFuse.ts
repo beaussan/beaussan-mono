@@ -1,15 +1,6 @@
 import { useState } from 'react';
 import Fuse from 'fuse.js';
 
-type FuseResult<T> = {
-  item: T;
-  matches: {
-    indices: [number, number][];
-    key: string;
-    value: string;
-  }[];
-};
-
 /**
  *
  *

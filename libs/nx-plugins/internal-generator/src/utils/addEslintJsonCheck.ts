@@ -1,5 +1,4 @@
 import {
-  ProjectConfiguration,
   readProjectConfiguration,
   updateProjectConfiguration,
   Tree,
