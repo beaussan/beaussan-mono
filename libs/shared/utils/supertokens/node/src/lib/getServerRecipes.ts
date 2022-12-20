@@ -53,7 +53,7 @@ export function getServerRecipes(input: InputGetRecipes): RecipeListFunction[] {
       contactMethod: 'EMAIL',
 
       emailDelivery: {
-        override: (originalImplementation) => ({
+        override: () => ({
           sendEmail: async (mailInput) => {
             if (input.mail.doNotSendMail) {
               console.log('Sending login link', mailInput.urlWithLinkCode);

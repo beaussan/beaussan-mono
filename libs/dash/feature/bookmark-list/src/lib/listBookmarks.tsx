@@ -14,7 +14,7 @@ import {
   UnifiedDisplay,
 } from './types';
 
-const Link = ({ item }: { item: UnifiedDisplay }) => {
+export const Link = ({ item }: { item: UnifiedDisplay }) => {
   const url = new URL(item.link).hostname;
   return (
     <div className="focus:outline-zinc-700 ">
@@ -30,7 +30,7 @@ const Link = ({ item }: { item: UnifiedDisplay }) => {
               ? item.faviconUrl
               : `https://www.google.com/s2/favicons?domain=${url}`
           }
-          alt={`favicon of ${item.displayName}`}
+          alt={`favicon`}
         />
         <div className="flex align-middle justify-between items-center w-full">
           {item.displayName}
@@ -124,9 +124,13 @@ function ListBookmarkWithData({
         />
       </div>
       <main className="overflow-y-auto px-4 py-2 space-y-1">
-        {dataWithSearch.map((link) => (
-          <Link key={link.link} item={link} />
-        ))}
+        <ul className="space-y-1">
+          {dataWithSearch.map((link) => (
+            <li>
+              <Link key={link.link} item={link} />
+            </li>
+          ))}
+        </ul>
       </main>
     </div>
   );

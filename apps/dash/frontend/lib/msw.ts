@@ -2,7 +2,7 @@ import { setupServer } from 'msw/node';
 import {
   getTraefikRouterMswHandler,
   RouterApiDefinition,
-} from '@beaussan/shared/data-access/traefik-read-api';
+} from '@beaussan/shared/data/traefik-read-api';
 
 export const server = setupServer();
 

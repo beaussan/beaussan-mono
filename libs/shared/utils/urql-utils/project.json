@@ -18,7 +18,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/utils/urql-utils/**/*.ts"]
+        "lintFilePatterns": ["libs/shared/utils/urql-utils/**/*.{ts,json}"]
       }
     },
     "test": {

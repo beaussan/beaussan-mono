@@ -1,7 +1,6 @@
 import {
   formatFiles,
   generateFiles,
-  getWorkspaceLayout,
   names,
   offsetFromRoot,
   Tree,
@@ -12,52 +11,10 @@ import { libraryGenerator } from '@nrwl/react';
 import { Linter } from '@nrwl/linter';
 import * as ts from 'typescript';
 import { appendJestConfigOption } from '../../utils/ast';
-import {
-  getDirectoryFromScopeAndType,
-  getTagStringFromScopeAndType,
-} from '../../utils/tags';
+import { addEslintJsonCheck } from '../../utils/addEslintJsonCheck';
+import { FullOptions, normalizeOptions } from '../../utils/normalizedOptions';
 
-interface NormalizedSchema extends ReactLibraryGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[];
-}
-
-function populateOptions(
-  options: ReactLibraryGeneratorSchema
-): ReactLibraryGeneratorSchema {
-  return {
-    ...options,
-    tags: getTagStringFromScopeAndType(options.scope, options.type),
-    directory: getDirectoryFromScopeAndType(options.scope, options.type),
-  };
-}
-
-function normalizeOptions(
-  tree: Tree,
-  options: ReactLibraryGeneratorSchema
-): NormalizedSchema {
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
-
-  return {
-    ...options,
-    projectName,
-    projectRoot,
-    projectDirectory,
-    parsedTags,
-  };
-}
-
-function addFiles(tree: Tree, options: NormalizedSchema) {
+function addFiles(tree: Tree, options: FullOptions) {
   const templateOptions = {
     ...options,
     ...names(options.name),
@@ -72,7 +29,7 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
   );
 }
 
-function modifyJestConfig(tree: Tree, options: NormalizedSchema) {
+function modifyJestConfig(tree: Tree, options: FullOptions) {
   const jestPath = path.join(options.projectRoot, 'jest.config.ts');
 
   appendJestConfigOption(
@@ -91,7 +48,7 @@ export default async function (
   tree: Tree,
   options: ReactLibraryGeneratorSchema
 ) {
-  const normalizedOptions = normalizeOptions(tree, populateOptions(options));
+  const normalizedOptions = normalizeOptions(tree, options);
 
   await libraryGenerator(tree, {
     name: normalizedOptions.name,
@@ -108,5 +65,6 @@ export default async function (
   });
   addFiles(tree, normalizedOptions);
   modifyJestConfig(tree, normalizedOptions);
+  addEslintJsonCheck(tree, normalizedOptions);
   await formatFiles(tree);
 }

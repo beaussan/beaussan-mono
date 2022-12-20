@@ -4,6 +4,13 @@
   "projectType": "application",
   "sourceRoot": "apps/dash/hasura/src",
   "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/dash/hasura/**/*.json"]
+      }
+    },
     "docker-compose-up": {
       "executor": "nx:run-commands",
       "options": {

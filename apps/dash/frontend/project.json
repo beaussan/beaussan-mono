@@ -58,7 +58,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/dash/frontend/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/dash/frontend/**/*.{ts,tsx,js,jsx,json}"]
       }
     }
   },

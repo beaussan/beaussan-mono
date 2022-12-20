@@ -42,9 +42,7 @@
       "options": {
         "lintFilePatterns": [
           "libs/nx-plugins/nx-hasura/**/*.ts",
-          "libs/nx-plugins/nx-hasura/generators.json",
-          "libs/nx-plugins/nx-hasura/executors.json",
-          "libs/nx-plugins/nx-hasura/package.json"
+          "libs/nx-plugins/nx-hasura/*.json"
         ]
       }
     },
@@ -57,5 +55,5 @@
       }
     }
   },
-  "tags": ["scope:nx-plugins"]
+  "tags": ["scope:nx-plugins", "type:app"]
 }

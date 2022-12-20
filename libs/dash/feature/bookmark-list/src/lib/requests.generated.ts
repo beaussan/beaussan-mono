@@ -1,4 +1,4 @@
-import * as Types from '@beaussan/dash/types/hasura-codegen-types';
+import * as Types from '@beaussan/dash/data/hasura-codegen-types';
 
 import gql from 'graphql-tag';
 import * as Urql from 'urql';

@@ -1,8 +1,6 @@
 import { SessionAuth } from 'supertokens-auth-react/recipe/session';
 import React from 'react';
 import Head from 'next/head';
-import SessionReact from 'supertokens-auth-react/recipe/session';
-import SuperTokensReact from 'supertokens-auth-react';
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import { ListBookmarks } from '@beaussan/dash/feature/bookmark-list';
 import { useLogout } from '@beaussan/shared/utils/supertokens/react';

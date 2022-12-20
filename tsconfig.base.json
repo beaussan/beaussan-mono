@@ -15,8 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@beaussan/dash/data-access/backend-admin-sdk": [
-        "libs/dash/data-access/backend-admin-sdk/src/index.ts"
+      "@beaussan/dash/data/backend-admin-sdk": [
+        "libs/dash/data/backend-admin-sdk/src/index.ts"
+      ],
+      "@beaussan/dash/data/hasura-codegen-types": [
+        "libs/dash/data/hasura-codegen-types/src/index.ts"
       ],
       "@beaussan/dash/feature/bookmark-list": [
         "libs/dash/feature/bookmark-list/src/index.ts"
@@ -24,15 +27,18 @@
       "@beaussan/dash/feature/traefik-sync-db": [
         "libs/dash/feature/traefik-sync-db/src/index.ts"
       ],
-      "@beaussan/dash/types/hasura-codegen-types": [
-        "libs/dash/types/hasura-codegen-types/src/index.ts"
+      "@beaussan/dash/storybook-host": [
+        "libs/dash/storybook-host/src/index.ts"
       ],
       "@beaussan/internal-generator": [
         "libs/nx-plugins/internal-generator/src/index.ts"
       ],
       "@beaussan/nx-hasura": ["libs/nx-plugins/nx-hasura/src/index.ts"],
-      "@beaussan/shared/data-access/traefik-read-api": [
-        "libs/shared/data-access/traefik-read-api/src/index.ts"
+      "@beaussan/shared/data/supertokens-urql-client": [
+        "libs/shared/data/supertokens-urql-client/src/index.ts"
+      ],
+      "@beaussan/shared/data/traefik-read-api": [
+        "libs/shared/data/traefik-read-api/src/index.ts"
       ],
       "@beaussan/shared/utils/fuzy-search": [
         "libs/shared/utils/fuzy-search/src/index.ts"

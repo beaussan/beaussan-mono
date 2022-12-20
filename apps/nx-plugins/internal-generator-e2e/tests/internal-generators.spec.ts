@@ -23,10 +23,22 @@ describe('internal-generators e2e', () => {
     it('should create a project in the right folder given a scope and type', async () => {
       const project = uniq('react-library');
       await runNxCommandAsync(
-        `generate @beaussan/internal-generator:react-library ${project} --scope=shared --type=util `
+        `generate @beaussan/internal-generator:react-library ${project} --scope=shared --type=utils `
       );
       expect(() =>
-        checkFilesExist(`libs/shared/util/${project}/src/index.ts`)
+        checkFilesExist(`libs/shared/utils/${project}/src/index.ts`)
+      ).not.toThrow();
+    }, 120000);
+  });
+
+  describe('ts-library', () => {
+    it('should create a project in the right folder given a scope and type', async () => {
+      const project = uniq('ts-library');
+      await runNxCommandAsync(
+        `generate @beaussan/internal-generator:ts-library ${project} --scope=shared --type=utils `
+      );
+      expect(() =>
+        checkFilesExist(`libs/shared/utils/${project}/src/index.ts`)
       ).not.toThrow();
     }, 120000);
   });

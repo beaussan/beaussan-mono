@@ -10,7 +10,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/shared/utils/fuzy-search/**/*.{ts,tsx,js,jsx}"
+          "libs/shared/utils/fuzy-search/**/*.{ts,tsx,js,jsx,json}"
         ]
       }
     },

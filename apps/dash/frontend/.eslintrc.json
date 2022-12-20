@@ -12,7 +12,7 @@
       "rules": {
         "@next/next/no-html-link-for-pages": [
           "error",
-          "apps/new-tab-page/pages"
+          "apps/dash/frontend/pages"
         ]
       }
     },

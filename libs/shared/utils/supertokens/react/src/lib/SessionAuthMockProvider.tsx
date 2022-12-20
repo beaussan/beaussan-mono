@@ -1,6 +1,5 @@
 import { SessionContext } from 'supertokens-auth-react/recipe/session';
 import React from 'react';
-import { LoadedSessionContext } from 'supertokens-auth-react/lib/build/recipe/session/types';
 
 export interface SessionAuthMockProviderProps {
   userId?: string;
