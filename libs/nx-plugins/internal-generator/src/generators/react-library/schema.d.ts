@@ -1,9 +1,3 @@
-import { TagScope, TagType } from '../../utils/consts';
+import { StandardOptions } from '../../utils/normalizedOptions';
 
-export interface ReactLibraryGeneratorSchema {
-  name: string;
-  tags?: string;
-  directory?: string;
-  type: TagType;
-  scope: TagScope;
-}
+export type ReactLibraryGeneratorSchema = StandardOptions;

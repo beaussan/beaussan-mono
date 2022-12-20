@@ -4,33 +4,17 @@ import {
   updateProjectConfiguration,
   Tree,
 } from '@nrwl/devkit';
+import { FullOptions } from './normalizedOptions';
 
-export function addEslintJsonCheck(
-  tree: Tree,
-  projectName: string,
-  projectRoot: string
-) {
-  const projectDef = readProjectConfiguration(tree, projectName);
+export function addEslintJsonCheck(tree: Tree, options: FullOptions) {
+  const projectDef = readProjectConfiguration(tree, options.projectName);
   if (!projectDef.targets.lint) {
     throw new Error('No lint target found');
   }
 
-  const newDef: ProjectConfiguration = {
-    ...projectDef,
-    targets: {
-      ...projectDef.targets,
-      lint: {
-        ...projectDef.targets.lint,
-        options: {
-          ...projectDef.targets.lint.options,
-          lintFilePatterns: [
-            ...projectDef.targets.lint.options.lintFilePatterns,
-            `${projectRoot}/**/*.json`,
-          ],
-        },
-      },
-    },
-  };
+  projectDef.targets.lint.options.lintFilePatterns.push(
+    `${options.projectRoot}/**/*.json`
+  );
 
-  updateProjectConfiguration(tree, projectName, newDef);
+  updateProjectConfiguration(tree, options.projectName, projectDef);
 }

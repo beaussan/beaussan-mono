@@ -3,6 +3,7 @@ import { Tree, readProjectConfiguration } from '@nrwl/devkit';
 
 import generator from './generator';
 import { ReactLibraryGeneratorSchema } from './schema';
+import { ValidationError } from 'zod-validation-error';
 
 describe('react-library generator', () => {
   let appTree: Tree;
@@ -44,5 +45,29 @@ describe('react-library generator', () => {
       .toString();
 
     expect(tsconfig).toContain('setupFilesAfterEnv');
+  });
+
+  it('should run fail when there is an unknown type', async () => {
+    await expect(
+      generator(appTree, {
+        ...options,
+        type: 'Some tag that is not valid' as any,
+      })
+    ).rejects.toThrowError(ValidationError);
+    expect(() =>
+      readProjectConfiguration(appTree, 'shared-utils-test')
+    ).toThrowError();
+  });
+
+  it('should run fail when there is an unknown scope', async () => {
+    await expect(
+      generator(appTree, {
+        ...options,
+        scope: 'Some tag that is not valid' as any,
+      })
+    ).rejects.toThrowError(ValidationError);
+    expect(() =>
+      readProjectConfiguration(appTree, 'shared-utils-test')
+    ).toThrowError();
   });
 });

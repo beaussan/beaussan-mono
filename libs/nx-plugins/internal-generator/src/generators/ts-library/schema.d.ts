@@ -1,12 +1,6 @@
-import { TagScope, TagType } from '../../utils/consts';
+import { StandardOptions } from '../../utils/normalizedOptions';
 
-export interface TsLibraryGeneratorSchema {
-  name: string;
-  tags?: string;
-  directory?: string;
-  type: TagType;
-  scope: TagScope;
-
+export type TsLibraryGeneratorSchema = StandardOptions & {
   publishable?: boolean;
   testEnvironment?: 'jsdom' | 'node';
-}
+};
