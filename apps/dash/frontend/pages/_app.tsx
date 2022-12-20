@@ -12,7 +12,7 @@ import Session, {
 import {
   createAnonymousClient,
   createAuthClient,
-} from '@beaussan/dash/data-access/urql-client';
+} from '@beaussan/dash/data/urql-client';
 
 const BASE_URL = process.env.NEXT_PUBLIC_HASURA_URL;
 const BASE_HTTP_METHOD =

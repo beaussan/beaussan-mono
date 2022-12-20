@@ -3,12 +3,12 @@ import { setupServer } from 'msw/node';
 import {
   getTraefikRouterMswHandler,
   RouterApiDefinition,
-} from '@beaussan/shared/data-access/traefik-read-api';
+} from '@beaussan/shared/data/traefik-read-api';
 import {
   getSdk,
   mockSetAllDownNodesBasedOnLastUpdateMutationHasura,
   mockUpsertTraefikRoutesIntoDbMutationHasura,
-} from '@beaussan/dash/data-access/backend-admin-sdk';
+} from '@beaussan/dash/data/backend-admin-sdk';
 import { GraphQLClient } from 'graphql-request';
 
 describe('calculateUrl', () => {

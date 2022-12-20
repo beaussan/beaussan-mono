@@ -1,5 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
-import { getSdk } from '@beaussan/dash/data-access/backend-admin-sdk';
+import { getSdk } from '@beaussan/dash/data/backend-admin-sdk';
 
 const BASE_URL = process.env.NX_HASURA_URL;
 const BASE_HTTP_METHOD =

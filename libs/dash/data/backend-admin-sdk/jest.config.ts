@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'dash-data-access-backend-admin-sdk',
+  displayName: 'dash-data-backend-admin-sdk',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,6 +11,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory:
-    '../../../../coverage/libs/dash/data-access/backend-admin-sdk',
+  coverageDirectory: '../../../../coverage/libs/dash/data/backend-admin-sdk',
 };

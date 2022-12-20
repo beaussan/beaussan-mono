@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'dash-data-access-urql-client',
+  displayName: 'shared-data-traefik-read-api',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../../coverage/libs/dash/data-access/urql-client',
+  coverageDirectory: '../../../../coverage/libs/shared/data/traefik-read-api',
 };
