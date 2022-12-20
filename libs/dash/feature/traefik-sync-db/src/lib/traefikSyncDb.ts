@@ -3,7 +3,7 @@ import {
   RouterApiDefinition,
 } from '@beaussan/shared/data/traefik-read-api';
 import { Sdk } from '@beaussan/dash/data/backend-admin-sdk';
-import { TraefikRoutesInsertInput } from '@beaussan/dash/types/hasura-codegen-types';
+import { TraefikRoutesInsertInput } from '@beaussan/dash/data/hasura-codegen-types';
 import { formatHasuraDate } from '@beaussan/shared/utils/hasura-ts';
 import { AxiosError } from 'axios';
 import { ZodError } from 'zod';

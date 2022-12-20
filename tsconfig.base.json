@@ -18,6 +18,9 @@
       "@beaussan/dash/data/backend-admin-sdk": [
         "libs/dash/data/backend-admin-sdk/src/index.ts"
       ],
+      "@beaussan/dash/data/hasura-codegen-types": [
+        "libs/dash/data/hasura-codegen-types/src/index.ts"
+      ],
       "@beaussan/dash/data/urql-client": [
         "libs/dash/data/urql-client/src/index.ts"
       ],
@@ -29,9 +32,6 @@
       ],
       "@beaussan/dash/storybook-host": [
         "libs/dash/storybook-host/src/index.ts"
-      ],
-      "@beaussan/dash/types/hasura-codegen-types": [
-        "libs/dash/types/hasura-codegen-types/src/index.ts"
       ],
       "@beaussan/internal-generator": [
         "libs/nx-plugins/internal-generator/src/index.ts"

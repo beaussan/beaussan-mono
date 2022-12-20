@@ -25,27 +25,23 @@
                 "onlyDependOnLibsWithTags": ["scope:shared", "scope:nx-plugins"]
               },
               {
-                "sourceTag": "type:types",
-                "onlyDependOnLibsWithTags": ["type:types"]
-              },
-              {
                 "sourceTag": "type:utils",
-                "onlyDependOnLibsWithTags": ["type:types", "type:utils"]
+                "onlyDependOnLibsWithTags": ["type:utils"]
               },
               {
                 "sourceTag": "type:data",
-                "onlyDependOnLibsWithTags": ["type:types", "type:utils"]
+                "onlyDependOnLibsWithTags": ["type:data", "type:utils"]
               },
               {
                 "sourceTag": "type:ui",
-                "onlyDependOnLibsWithTags": ["type:types", "type:utils"]
+                "onlyDependOnLibsWithTags": ["type:utils", "type:ui"]
               },
               {
                 "sourceTag": "type:feature",
                 "onlyDependOnLibsWithTags": [
+                  "type:feature",
                   "type:ui",
                   "type:data",
-                  "type:types",
                   "type:utils"
                 ]
               },
@@ -54,7 +50,6 @@
                 "onlyDependOnLibsWithTags": [
                   "type:ui",
                   "type:data",
-                  "type:types",
                   "type:utils",
                   "type:feature"
                 ]
@@ -67,7 +62,7 @@
                   "type:feature",
                   "type:ui",
                   "type:utils",
-                  "type:types"
+                  "type:data"
                 ]
               },
               {
@@ -78,8 +73,7 @@
                   "type:feature",
                   "type:ui",
                   "type:utils",
-                  "type:data",
-                  "type:types"
+                  "type:data"
                 ]
               }
             ]
@@ -112,8 +106,7 @@
               "feature",
               "ui",
               "data",
-              "utils",
-              "types"
+              "utils"
             ]
           }
         ]

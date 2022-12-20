@@ -1,4 +1,4 @@
-import * as Types from '@beaussan/dash/types/hasura-codegen-types';
+import * as Types from '@beaussan/dash/data/hasura-codegen-types';
 
 import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';

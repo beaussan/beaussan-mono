@@ -1,7 +1,7 @@
 {
-  "name": "dash-types-hasura-codegen-types",
+  "name": "dash-data-hasura-codegen-types",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/dash/types/hasura-codegen-types/src",
+  "sourceRoot": "libs/dash/data/hasura-codegen-types/src",
   "projectType": "library",
   "implicitDependencies": ["dash-hasura"],
   "targets": {
@@ -14,11 +14,11 @@
         "{sourceRoot}/graphql.schema.graphql"
       ],
       "options": {
-        "command": "yarn graphql-codegen --config libs/dash/types/hasura-codegen-types/gqlCodegen.ts"
+        "command": "yarn graphql-codegen --config libs/dash/data/hasura-codegen-types/gqlCodegen.ts"
       },
       "configurations": {
         "watch": {
-          "command": "yarn graphql-codegen --config libs/dash/types/hasura-codegen-types/gqlCodegen.ts --watch"
+          "command": "yarn graphql-codegen --config libs/dash/data/hasura-codegen-types/gqlCodegen.ts --watch"
         }
       }
     },
@@ -26,10 +26,10 @@
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/dash/types/hasura-codegen-types",
-        "main": "libs/dash/types/hasura-codegen-types/src/index.ts",
-        "tsConfig": "libs/dash/types/hasura-codegen-types/tsconfig.lib.json",
-        "assets": ["libs/dash/types/hasura-codegen-types/*.md"]
+        "outputPath": "dist/libs/dash/data/hasura-codegen-types",
+        "main": "libs/dash/data/hasura-codegen-types/src/index.ts",
+        "tsConfig": "libs/dash/data/hasura-codegen-types/tsconfig.lib.json",
+        "assets": ["libs/dash/data/hasura-codegen-types/*.md"]
       }
     },
     "lint": {
@@ -37,7 +37,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/dash/types/hasura-codegen-types/**/*.{ts,json}"
+          "libs/dash/data/hasura-codegen-types/**/*.{ts,json}"
         ]
       }
     },
@@ -45,10 +45,10 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/dash/types/hasura-codegen-types/jest.config.ts",
+        "jestConfig": "libs/dash/data/hasura-codegen-types/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:dash", "type:types"]
+  "tags": ["scope:dash", "type:data"]
 }
