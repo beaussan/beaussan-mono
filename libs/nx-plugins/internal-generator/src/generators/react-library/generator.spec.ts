@@ -22,6 +22,14 @@ describe('react-library generator', () => {
     expect(config).toBeDefined();
   });
 
+  it('should add the json lint target successfully', async () => {
+    await generator(appTree, options);
+    const config = readProjectConfiguration(appTree, 'shared-utils-test');
+    expect(config.targets.lint.options.lintFilePatterns).toContainEqual(
+      expect.stringContaining('libs/shared/utils/test/**/*.json')
+    );
+  });
+
   it('should generate a test-setup file', async () => {
     await generator(appTree, options);
     expect(appTree.listChanges().map((item) => item.path)).toContain(

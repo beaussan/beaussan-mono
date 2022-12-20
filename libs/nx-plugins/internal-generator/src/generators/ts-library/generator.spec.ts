@@ -13,12 +13,20 @@ describe('ts-library generator', () => {
   };
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace();
+    appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   });
 
   it('should run successfully', async () => {
     await generator(appTree, options);
     const config = readProjectConfiguration(appTree, 'shared-utils-test');
     expect(config).toBeDefined();
+  });
+
+  it('should add the json lint target successfully', async () => {
+    await generator(appTree, options);
+    const config = readProjectConfiguration(appTree, 'shared-utils-test');
+    expect(config.targets.lint.options.lintFilePatterns).toContainEqual(
+      expect.stringContaining('libs/shared/utils/test/**/*.json')
+    );
   });
 });

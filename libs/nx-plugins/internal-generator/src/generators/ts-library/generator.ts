@@ -14,6 +14,7 @@ import {
   getTagStringFromScopeAndType,
 } from '../../utils/tags';
 import { Linter } from '@nrwl/linter';
+import { addEslintJsonCheck } from '../../utils/addEslintJsonCheck';
 
 interface NormalizedSchema extends TsLibraryGeneratorSchema {
   projectName: string;
@@ -72,5 +73,10 @@ export default async function (tree: Tree, options: TsLibraryGeneratorSchema) {
     strict: true,
     pascalCaseFiles: true,
   });
+  addEslintJsonCheck(
+    tree,
+    normalizedOptions.projectName,
+    normalizedOptions.projectRoot
+  );
   await formatFiles(tree);
 }

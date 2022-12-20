@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -106,6 +107,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "hasura-cli": "2.15.1",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.2",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "jsonc-eslint-parser": "2.1.0",
@@ -121,4 +123,3 @@
     "url-loader": "^3.0.0"
   }
 }
-

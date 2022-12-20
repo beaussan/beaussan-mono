@@ -16,6 +16,7 @@ import {
   getDirectoryFromScopeAndType,
   getTagStringFromScopeAndType,
 } from '../../utils/tags';
+import { addEslintJsonCheck } from '../../utils/addEslintJsonCheck';
 
 interface NormalizedSchema extends ReactLibraryGeneratorSchema {
   projectName: string;
@@ -108,5 +109,10 @@ export default async function (
   });
   addFiles(tree, normalizedOptions);
   modifyJestConfig(tree, normalizedOptions);
+  addEslintJsonCheck(
+    tree,
+    normalizedOptions.projectName,
+    normalizedOptions.projectRoot
+  );
   await formatFiles(tree);
 }
