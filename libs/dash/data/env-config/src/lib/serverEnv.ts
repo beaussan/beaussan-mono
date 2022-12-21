@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { clientEnvSchema } from './clientEnv';
+import { clientEnvSchema, nodeEnv, testClientEnv } from './clientEnv';
 import { getHasuraUrls } from './helpers';
 
 export const serverEnvSchema = z
@@ -27,4 +27,16 @@ export const serverEnvSchema = z
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
 
-export const getServerEnvs = () => serverEnvSchema.parse(process.env);
+const testServerEnv: ServerEnv = {
+  ...testClientEnv,
+  HASURA_ADMIN_SECRET: '',
+  HASURA_AUTH_TOKEN_CRON: '',
+  TRAEFIK_BASE_URL: '',
+  POSTMARK_API_TOKEN: '',
+  SUPERTOKEN_API_KEY: '',
+  SUPERTOKEN_CONNEXION_URI: '',
+  GITHUB_AUTH_CLIENT_SECRET: '',
+  GITHUB_AUTH_CLIENT_ID: '',
+}
+
+export const getServerEnvs = () => nodeEnv === 'test' ? testServerEnv : serverEnvSchema.parse(process.env);

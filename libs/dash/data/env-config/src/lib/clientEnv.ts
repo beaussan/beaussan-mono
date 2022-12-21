@@ -14,13 +14,18 @@ const booleanSchemaEnv = z
   .enum(['yes', 'no'])
   .transform((value) => value === 'yes');
 
+const nodeEnvSchema = z.enum(['production', 'development', 'test']);
+
+export const nodeEnv = nodeEnvSchema.parse(process.env.NODE_ENV);
+
+
 export const clientEnvSchema = z.object({
   APP_PORT: z.coerce.number().optional(),
   APP_URL: z.string().optional(),
   NX_APP_URL: z.string().optional(),
   NEXT_PUBLIC_HASURA_URL: z.string(),
   NEXT_PUBLIC_HASURA_IS_HTTPS: booleanSchemaEnv,
-  NODE_ENV: z.enum(['production', 'development']),
+  NODE_ENV: nodeEnvSchema,
 });
 
 const transformedSchema = clientEnvSchema.transform((arg, ctx) => {
@@ -33,25 +38,14 @@ const transformedSchema = clientEnvSchema.transform((arg, ctx) => {
   };
 });
 
-/*
-
-  .transform((arg, ctx) => {
-    const baseUrlHasura = `${arg.NEXT_PUBLIC_HASURA_URL}/v1/graphql`;
-
-    const httpHasuraUrl = `${
-      arg.NEXT_PUBLIC_HASURA_IS_HTTPS ? 'https' : 'http'
-    }://${baseUrlHasura}`;
-    const wsHasuraUrl = `${
-      arg.NEXT_PUBLIC_HASURA_IS_HTTPS ? 'wss' : 'ws'
-    }://${baseUrlHasura}`;
-
-    return {
-      ...arg,
-      NEXT_PUBLIC_HASURA_HTTP_URL: httpHasuraUrl,
-      NEXT_PUBLIC_HASURA_WS_URL: wsHasuraUrl,
-    };
-  })
- */
 export type ClientEnv = z.infer<typeof transformedSchema>;
 
-export const clientEnvs = transformedSchema.parse(clientEnvUnsafe);
+export const testClientEnv: ClientEnv = {
+  NODE_ENV: 'test',
+  NEXT_PUBLIC_HASURA_URL: '',
+  NEXT_PUBLIC_HASURA_IS_HTTPS: false,
+  NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL: '',
+  NEXT_PUBLIC_HASURA_GRAPHQL_WS_URL: '',
+}
+
+export const clientEnvs: ClientEnv = nodeEnv === 'test' ? testClientEnv : transformedSchema.parse(clientEnvUnsafe);
