@@ -18,7 +18,6 @@ const nodeEnvSchema = z.enum(['production', 'development', 'test']);
 
 export const nodeEnv = nodeEnvSchema.parse(process.env.NODE_ENV);
 
-
 export const clientEnvSchema = z.object({
   APP_PORT: z.coerce.number().optional(),
   APP_URL: z.string().optional(),
@@ -46,6 +45,7 @@ export const testClientEnv: ClientEnv = {
   NEXT_PUBLIC_HASURA_IS_HTTPS: false,
   NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL: '',
   NEXT_PUBLIC_HASURA_GRAPHQL_WS_URL: '',
-}
+};
 
-export const clientEnvs: ClientEnv = nodeEnv === 'test' ? testClientEnv : transformedSchema.parse(clientEnvUnsafe);
+export const clientEnvs: ClientEnv =
+  nodeEnv === 'test' ? testClientEnv : transformedSchema.parse(clientEnvUnsafe);

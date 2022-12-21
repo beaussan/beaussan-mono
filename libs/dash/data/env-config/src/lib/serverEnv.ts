@@ -37,6 +37,7 @@ const testServerEnv: ServerEnv = {
   SUPERTOKEN_CONNEXION_URI: '',
   GITHUB_AUTH_CLIENT_SECRET: '',
   GITHUB_AUTH_CLIENT_ID: '',
-}
+};
 
-export const getServerEnvs = () => nodeEnv === 'test' ? testServerEnv : serverEnvSchema.parse(process.env);
+export const getServerEnvs = () =>
+  nodeEnv === 'test' ? testServerEnv : serverEnvSchema.parse(process.env);
