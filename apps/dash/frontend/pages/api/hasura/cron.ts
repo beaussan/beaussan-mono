@@ -4,6 +4,11 @@ import { z, ZodError } from 'zod';
 import { traefikSyncDb } from '@beaussan/dash/feature/traefik-sync-db';
 import { gqlSdk } from '../../../lib/gqlClient';
 import { fromZodError } from 'zod-validation-error';
+import { env } from '../../../lib/env';
+
+if (env.NODE_ENV === 'development') {
+  import('../../../lib/msw');
+}
 
 const getTokenVerificationMiddleware = (
   token: string
@@ -18,10 +23,7 @@ const getTokenVerificationMiddleware = (
   };
 };
 
-const cronToken = process.env.HASURA_AUTH_TOKEN_CRON;
-if (!cronToken) {
-  throw new Error('HASURA_AUTH_TOKEN_CRON missing');
-}
+const cronToken = env.HASURA_AUTH_TOKEN_CRON;
 
 const payloadSchema = z.object({
   id: z.string().uuid(),
@@ -49,10 +51,7 @@ const cronHandler = nc<NextApiRequest, NextApiResponse>()
   .post(async (req, res) => {
     const body = payloadSchema.parse(req.body);
     if (body.name === 'traefikFetcher') {
-      const returnValue = await traefikSyncDb(
-        gqlSdk,
-        process.env.TRAEFIK_BASE_URL!
-      );
+      const returnValue = await traefikSyncDb(gqlSdk, env.TRAEFIK_BASE_URL);
 
       if (returnValue.status === 'ok') {
         res.status(200).json(returnValue);

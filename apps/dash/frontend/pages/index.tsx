@@ -4,6 +4,9 @@ import Head from 'next/head';
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import { ListBookmarks } from '@beaussan/dash/feature/bookmark-list';
 import { useLogout } from '@beaussan/shared/utils/supertokens/react';
+import { clientEnvs } from '@beaussan/dash/data/env-config';
+
+console.log(clientEnvs);
 
 function ProtectedPage() {
   const session = useSessionContext();
