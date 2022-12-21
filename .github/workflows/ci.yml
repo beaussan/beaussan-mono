@@ -43,6 +43,3 @@ jobs:
         sudo timedatectl set-timezone Europe/Paris
         yarn install --frozen-lockfile
       number-of-agents: 2
-      environment-variables: |
-        "NEXT_PUBLIC_HASURA_URL=test"
-        "NEXT_PUBLIC_HASURA_IS_HTTPS=no"
