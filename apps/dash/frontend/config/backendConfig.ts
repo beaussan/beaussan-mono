@@ -3,7 +3,6 @@ import { appInfo } from './appInfo';
 import { TypeInput } from 'supertokens-node/types';
 import { ServerClient } from 'postmark';
 import { gqlSdk } from '../lib/gqlClient';
-import * as process from 'process';
 import { env } from '../lib/env';
 
 // TODO make a proper postmark client

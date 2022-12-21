@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { getHasuraUrls } from './helpers';
+import { prettyParseZod } from '@beaussan/shared/utils/zod';
 
 const clientEnvUnsafe = {
   APP_PORT: process.env.APP_PORT,
@@ -48,4 +49,6 @@ export const testClientEnv: ClientEnv = {
 };
 
 export const clientEnvs: ClientEnv =
-  nodeEnv === 'test' ? testClientEnv : transformedSchema.parse(clientEnvUnsafe);
+  nodeEnv === 'test'
+    ? testClientEnv
+    : prettyParseZod(transformedSchema, clientEnvUnsafe);

@@ -57,7 +57,8 @@
       ],
       "@beaussan/shared/utils/urql-utils": [
         "libs/shared/utils/urql-utils/src/index.ts"
-      ]
+      ],
+      "@beaussan/shared/utils/zod": ["libs/shared/utils/zod/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

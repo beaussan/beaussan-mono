@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { clientEnvSchema, nodeEnv, testClientEnv } from './clientEnv';
 import { getHasuraUrls } from './helpers';
+import { prettyParseZod } from '@beaussan/shared/utils/zod';
 
 export const serverEnvSchema = z
   .object({
@@ -40,4 +41,6 @@ const testServerEnv: ServerEnv = {
 };
 
 export const getServerEnvs = () =>
-  nodeEnv === 'test' ? testServerEnv : serverEnvSchema.parse(process.env);
+  nodeEnv === 'test'
+    ? testServerEnv
+    : prettyParseZod(serverEnvSchema, process.env);
