@@ -16,7 +16,7 @@ export default async function (tree: Tree, options: TsLibraryGeneratorSchema) {
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
     config: 'project',
-    compiler: 'tsc',
+    compiler: 'swc',
     buildable: true,
     skipFormat: false,
     skipTsConfig: false,
