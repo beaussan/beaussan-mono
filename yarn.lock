@@ -6452,7 +6452,7 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axe-core@^4.2.0:
+axe-core@^4.0.1, axe-core@^4.2.0:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.6.1.tgz#79cccdee3e3ab61a8f42c458d4123a6768e6fbce"
   integrity sha512-lCZN5XRuOnpG4bpMq8v0khrWtUOn+i8lZSb6wHZH56ZfbIEv6XwJV84AAueh9/zi7qPVJ/E4yz6fmsiyOmXR4w==
@@ -6461,6 +6461,13 @@ axe-core@^4.4.3:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.5.2.tgz#823fdf491ff717ac3c58a52631d4206930c1d9f7"
   integrity sha512-u2MVsXfew5HBvjsczCv+xlwdNnB1oQR9HlAcsejZttNjKKSkeDNVwB1vMThIUIFI9GoT57Vtk8iQLwqOfAkboA==
+
+axe-playwright@^1.1.11:
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/axe-playwright/-/axe-playwright-1.1.11.tgz#e57638f08d29b58d157a2aeb34cf81730eab2cff"
+  integrity sha512-YHmUouvF/dFNxoFFwbCjPFmEPwoJSzPgZsD0KZs3xjsR03Rf2mAh771ugre950MaBYuiyxYDlurH5BOEJBK34Q==
+  dependencies:
+    axe-core "^4.0.1"
 
 axios@0.21.4, axios@^0.21.1, axios@^0.21.2:
   version "0.21.4"
