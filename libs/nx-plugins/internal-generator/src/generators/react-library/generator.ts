@@ -59,7 +59,7 @@ export default async function (
     linter: Linter.EsLint,
     tags: normalizedOptions.tags,
     directory: normalizedOptions.directory,
-    compiler: 'babel',
+    compiler: 'swc',
     pascalCaseFiles: true,
     strict: true,
   });
