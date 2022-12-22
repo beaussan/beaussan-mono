@@ -77,7 +77,7 @@ describe('traefikSyncDb', () => {
     });
     it('should fail gracefully when there is invalid data', async () => {
       server.use(
-        getTraefikRouterMswHandler(traefikBaseUrl, (req, res, context) =>
+        getTraefikRouterMswHandler(traefikBaseUrl, (_req, res, context) =>
           res(
             context.json([
               {
