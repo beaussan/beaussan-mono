@@ -75,7 +75,7 @@ export default async function (tree: Tree) {
     updateSchemaFile(
       tree,
       schemaPath,
-      tagTypeList as unknown as TagType[],
+      tagTypeList.filter((it) => it !== 'storybook') as unknown as TagType[],
       tagScopeList as unknown as TagScope[]
     );
   }
