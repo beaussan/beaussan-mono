@@ -19,6 +19,7 @@ import {
 } from '../../utils/normalizedOptions';
 import { addProjectToStorybookDeps } from '../../utils/addProjectToStorybookDeps';
 import { libraryGenerator } from '@nrwl/js';
+import { tsquery } from '@phenomnomnominal/tsquery';
 
 function addFiles(
   tree: Tree,
@@ -54,11 +55,45 @@ function modifyJestConfig(tree: Tree, options: FullOptions) {
   );
 }
 
-async function reactLib(tree: Tree, option: FullOptions) {
+function modifyVitestConfig(tree: Tree, options: FullOptions) {
+  const vitePath = path.join(options.projectRoot, 'vite.config.ts');
+  const source = tree.read(vitePath).toString();
+  let ast = tsquery.ast(source);
+  ast = tsquery.map(
+    ast,
+    'SourceFile > ExportAssignment > CallExpression  ObjectLiteralExpression > PropertyAssignment > ObjectLiteralExpression',
+    (node) => {
+      if (!ts.isObjectLiteralExpression(node)) {
+        return node;
+      }
+      const identifier = node.parent.getChildAt(0);
+      if (!ts.isIdentifier(identifier)) {
+        return node;
+      }
+
+      if (identifier.text !== 'test') {
+        return node;
+      }
+
+      return ts.factory.updateObjectLiteralExpression(node, [
+        ...node.properties,
+        ts.factory.createPropertyAssignment(
+          ts.factory.createIdentifier('setupFiles'),
+          ts.factory.createStringLiteral('./src/test-setup.ts.js', true)
+        ),
+      ]);
+    }
+  );
+  const result = ts.createPrinter().printFile(ast);
+
+  tree.write(vitePath, result);
+}
+
+export async function reactLib(tree: Tree, option: FullOptions) {
   await reactLibraryGenerator(tree, {
     name: option.name,
     style: 'css',
-    unitTestRunner: 'jest',
+    unitTestRunner: 'vitest',
     skipTsConfig: false,
     skipFormat: false,
     linter: Linter.EsLint,
@@ -68,24 +103,31 @@ async function reactLib(tree: Tree, option: FullOptions) {
     pascalCaseFiles: true,
     strict: true,
   });
-  addFiles(tree, option, { sourceSet: 'jest-test-setup' });
-  modifyJestConfig(tree, option);
+  addFiles(tree, option, { sourceSet: 'vitest-test-setup' });
+  modifyVitestConfig(tree, option);
+  // modifyJestConfig(tree, option);
 }
 
-async function tsLib(tree: Tree, options: FullOptions) {
+export async function tsLib(tree: Tree, options: FullOptions) {
   await libraryGenerator(tree, {
     name: options.name,
     tags: options.tags,
     directory: options.directory,
     bundler: 'vite',
     linter: Linter.EsLint,
-    unitTestRunner: 'jest',
+    unitTestRunner: 'vitest',
     config: 'project',
     skipFormat: false,
     skipTsConfig: false,
     strict: true,
     pascalCaseFiles: true,
   });
+}
+
+export async function sharedModifications(tree: Tree, options: FullOptions) {
+  addEslintJsonCheck(tree, options);
+  addProjectToStorybookDeps(tree, options);
+  await formatFiles(tree);
 }
 
 export default async function (tree: Tree, options: LibraryGeneratorSchema) {
@@ -103,8 +145,5 @@ export default async function (tree: Tree, options: LibraryGeneratorSchema) {
         `Generator ${normalizedOptions.libGenerator} not supported.`
       );
   }
-
-  addEslintJsonCheck(tree, normalizedOptions);
-  addProjectToStorybookDeps(tree, normalizedOptions);
-  await formatFiles(tree);
+  await sharedModifications(tree, normalizedOptions);
 }

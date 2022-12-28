@@ -167,7 +167,7 @@ export default async function (tree: Tree, options: StorybookGeneratorSchema) {
     directory: normalizedOptions.directory,
     style: 'css',
     linter: Linter.EsLint,
-    unitTestRunner: 'jest',
+    unitTestRunner: 'vitest',
   });
   await setupTailwindGenerator(tree, {
     project: normalizedOptions.projectName,

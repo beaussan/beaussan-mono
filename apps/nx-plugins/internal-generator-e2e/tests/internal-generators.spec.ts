@@ -19,11 +19,11 @@ describe('internal-generators e2e', () => {
     );
   });
 
-  describe('react-library', () => {
+  describe('library', () => {
     it('should create a project in the right folder given a scope and type', async () => {
-      const project = uniq('react-library');
+      const project = uniq('library');
       await runNxCommandAsync(
-        `generate @beaussan/internal-generator:react-library ${project} --scope=shared --type=utils `
+        `generate @beaussan/internal-generator:library ${project} --scope=shared --type=utils `
       );
       expect(() =>
         checkFilesExist(`libs/shared/utils/${project}/src/index.ts`)
@@ -31,21 +31,14 @@ describe('internal-generators e2e', () => {
     }, 120000);
   });
 
-  describe('ts-library', () => {
+  describe('storybook', () => {
     it('should create a project in the right folder given a scope and type', async () => {
-      const project = uniq('ts-library');
       await runNxCommandAsync(
-        `generate @beaussan/internal-generator:ts-library ${project} --scope=shared --type=utils `
+        `generate @beaussan/internal-generator:storybook --scope=shared `
       );
       expect(() =>
-        checkFilesExist(`libs/shared/utils/${project}/src/index.ts`)
+        checkFilesExist(`libs/shared/storybook-host/.storybook/main.ts`)
       ).not.toThrow();
     }, 120000);
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });

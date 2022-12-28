@@ -58,13 +58,29 @@ describe('library generator', () => {
     );
   });
 
+  it('should generate a test-setup file for vitest', async () => {
+    await generator(appTree, options);
+    const vitestTestSetup = appTree
+      .read('libs/shared/ui/test/src/test-setup.ts')
+      .toString();
+
+    expect(vitestTestSetup).toEqual(
+      expect.stringContaining('expect.extend(matchers);')
+    );
+    expect(vitestTestSetup).toEqual(expect.stringContaining('vitest'));
+    expect(vitestTestSetup).toEqual(
+      expect.stringContaining('@testing-library')
+    );
+  });
+
   it('should add the tsconfig changes required for setup files', async () => {
     await generator(appTree, options);
     const tsconfig = appTree
-      .read('libs/shared/ui/test/jest.config.ts')
+      .read('libs/shared/ui/test/vite.config.ts')
       .toString();
 
-    expect(tsconfig).toContain('setupFilesAfterEnv');
+    expect(tsconfig).toContain('setupFiles');
+    expect(tsconfig).toContain('src/test-setup.ts');
   });
 
   it('should run fail when there is an unknown type', async () => {
