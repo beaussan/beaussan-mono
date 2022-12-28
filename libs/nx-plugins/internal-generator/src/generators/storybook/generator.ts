@@ -10,10 +10,7 @@ import {
   generateFiles,
   getProjects,
 } from '@nrwl/devkit';
-import {
-  libraryGenerator as reactLibraryGenerator,
-  setupTailwindGenerator,
-} from '@nrwl/react';
+import { setupTailwindGenerator } from '@nrwl/react';
 import { configurationGenerator as storybookConfigurationGenerator } from '@nrwl/storybook';
 import { StorybookGeneratorSchema } from './schema';
 import {
@@ -29,6 +26,7 @@ import { Linter } from '@nrwl/linter';
 import * as path from 'path';
 import { tweakMainTsStorybookConfig } from './transforms/storybook';
 import { addEslintJsonCheck } from '../../utils/addEslintJsonCheck';
+import { reactLib, sharedModifications } from '../library/generator';
 
 export interface NormalizedSchema extends StorybookGeneratorSchema {
   tags: string;
@@ -142,6 +140,7 @@ async function setImplicitDependenciesFromExistingLibs(
   options: NormalizedSchema
 ) {
   const projects = [...getProjects(tree).values()]
+    .filter((project) => project.tags)
     .filter(
       (project) =>
         project.tags.includes(`scope:${options.scope}`) &&
@@ -161,13 +160,15 @@ async function setImplicitDependenciesFromExistingLibs(
 
 export default async function (tree: Tree, options: StorybookGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
-  await reactLibraryGenerator(tree, {
-    name: normalizedOptions.name,
-    tags: normalizedOptions.tags,
-    directory: normalizedOptions.directory,
-    style: 'css',
-    linter: Linter.EsLint,
-    unitTestRunner: 'vitest',
+  await reactLib(tree, {
+    ...normalizedOptions,
+    libGenerator: 'react',
+    type: 'storybook',
+  });
+  await sharedModifications(tree, {
+    ...normalizedOptions,
+    libGenerator: 'react',
+    type: 'storybook',
   });
   await setupTailwindGenerator(tree, {
     project: normalizedOptions.projectName,
@@ -185,11 +186,6 @@ export default async function (tree: Tree, options: StorybookGeneratorSchema) {
   await tweakStorybookTsconfig(tree, normalizedOptions);
   await addFiles(tree, normalizedOptions);
   await setImplicitDependenciesFromExistingLibs(tree, normalizedOptions);
-  addEslintJsonCheck(tree, {
-    ...normalizedOptions,
-    type: 'storybook',
-    libGenerator: 'react',
-  });
 
   await formatFiles(tree);
 }
