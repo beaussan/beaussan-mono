@@ -2,6 +2,7 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration } from '@nrwl/devkit';
 
 import generator from './generator';
+import storybookGenerator from '../storybook/generator';
 import { TsLibraryGeneratorSchema } from './schema';
 import { ValidationError } from 'zod-validation-error';
 
@@ -21,6 +22,25 @@ describe('ts-library generator', () => {
     await generator(appTree, options);
     const config = readProjectConfiguration(appTree, 'shared-utils-test');
     expect(config).toBeDefined();
+  });
+
+  it('should add itself to the dep array of storybook if present', async () => {
+    await storybookGenerator(appTree, { scope: 'shared' });
+    await generator(appTree, { scope: 'shared', type: 'ui', name: 'button' });
+    await generator(appTree, {
+      scope: 'shared',
+      type: 'feature',
+      name: 'button',
+    });
+    await generator(appTree, { scope: 'shared', type: 'data', name: 'button' });
+    await generator(appTree, {
+      scope: 'shared',
+      type: 'utils',
+      name: 'button',
+    });
+    const config = readProjectConfiguration(appTree, 'shared-storybook-host');
+    expect(config.implicitDependencies).toContain('shared-ui-button');
+    expect(config.implicitDependencies).toContain('shared-feature-button');
   });
 
   it('should run fail when there is an unknown type', async () => {

@@ -13,6 +13,7 @@ import * as ts from 'typescript';
 import { appendJestConfigOption } from '../../utils/ast';
 import { addEslintJsonCheck } from '../../utils/addEslintJsonCheck';
 import { FullOptions, normalizeOptions } from '../../utils/normalizedOptions';
+import { addProjectToStorybookDeps } from '../../utils/addProjectToStorybookDeps';
 
 function addFiles(tree: Tree, options: FullOptions) {
   const templateOptions = {
@@ -66,5 +67,6 @@ export default async function (
   addFiles(tree, normalizedOptions);
   modifyJestConfig(tree, normalizedOptions);
   addEslintJsonCheck(tree, normalizedOptions);
+  addProjectToStorybookDeps(tree, normalizedOptions);
   await formatFiles(tree);
 }

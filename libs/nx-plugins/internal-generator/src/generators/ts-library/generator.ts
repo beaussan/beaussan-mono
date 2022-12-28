@@ -4,6 +4,7 @@ import { TsLibraryGeneratorSchema } from './schema';
 import { Linter } from '@nrwl/linter';
 import { addEslintJsonCheck } from '../../utils/addEslintJsonCheck';
 import { normalizeOptions } from '../../utils/normalizedOptions';
+import { addProjectToStorybookDeps } from '../../utils/addProjectToStorybookDeps';
 
 export default async function (tree: Tree, options: TsLibraryGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
@@ -24,5 +25,6 @@ export default async function (tree: Tree, options: TsLibraryGeneratorSchema) {
     pascalCaseFiles: true,
   });
   addEslintJsonCheck(tree, normalizedOptions);
+  addProjectToStorybookDeps(tree, normalizedOptions);
   await formatFiles(tree);
 }

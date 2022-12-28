@@ -4,6 +4,7 @@ import { Tree, readProjectConfiguration } from '@nrwl/devkit';
 import generator from './generator';
 import { ReactLibraryGeneratorSchema } from './schema';
 import { ValidationError } from 'zod-validation-error';
+import storybookGenerator from '../storybook/generator';
 
 describe('react-library generator', () => {
   let appTree: Tree;
@@ -15,6 +16,25 @@ describe('react-library generator', () => {
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+  });
+
+  it('should add itself to the dep array of storybook if present', async () => {
+    await storybookGenerator(appTree, { scope: 'shared' });
+    await generator(appTree, { scope: 'shared', type: 'ui', name: 'button' });
+    await generator(appTree, {
+      scope: 'shared',
+      type: 'feature',
+      name: 'button',
+    });
+    await generator(appTree, { scope: 'shared', type: 'data', name: 'button' });
+    await generator(appTree, {
+      scope: 'shared',
+      type: 'utils',
+      name: 'button',
+    });
+    const config = readProjectConfiguration(appTree, 'shared-storybook-host');
+    expect(config.implicitDependencies).toContain('shared-ui-button');
+    expect(config.implicitDependencies).toContain('shared-feature-button');
   });
 
   it('should run successfully', async () => {

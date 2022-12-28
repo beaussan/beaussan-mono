@@ -1,7 +1,8 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration, readJson } from '@nrwl/devkit';
 
-import generator from './generator';
+import storybookGenerator from './generator';
+import reactLibGenerator from '../react-library/generator';
 import { StorybookGeneratorSchema } from './schema';
 
 const projectName = 'shared-storybook-host';
@@ -14,14 +15,56 @@ describe('storybook generator', () => {
     appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   });
 
+  it('should automaticaly add ui & features into storybook deps', async () => {
+    await reactLibGenerator(appTree, {
+      name: 'lib1',
+      scope: 'shared',
+      type: 'utils',
+    });
+    await reactLibGenerator(appTree, {
+      name: 'lib2',
+      scope: 'shared',
+      type: 'data',
+    });
+    await reactLibGenerator(appTree, {
+      name: 'lib3',
+      scope: 'shared',
+      type: 'ui',
+    });
+    await reactLibGenerator(appTree, {
+      name: 'lib5',
+      scope: 'shared',
+      type: 'ui',
+    });
+    await reactLibGenerator(appTree, {
+      name: 'lib9',
+      scope: 'dash',
+      type: 'ui',
+    });
+    await reactLibGenerator(appTree, {
+      name: 'lib4',
+      scope: 'shared',
+      type: 'feature',
+    });
+    await storybookGenerator(appTree, options);
+    const config = readProjectConfiguration(appTree, projectName);
+    expect(config.implicitDependencies).toEqual(
+      expect.arrayContaining([
+        'shared-feature-lib4',
+        'shared-ui-lib3',
+        'shared-ui-lib5',
+      ])
+    );
+  });
+
   it('should run successfully', async () => {
-    await generator(appTree, options);
+    await storybookGenerator(appTree, options);
     const config = readProjectConfiguration(appTree, projectName);
     expect(config).toBeDefined();
   });
 
   it('should contains storybook & build-storybook targets', async () => {
-    await generator(appTree, options);
+    await storybookGenerator(appTree, options);
     const config = readProjectConfiguration(appTree, projectName);
 
     expect(config.targets.storybook).toBeDefined();
@@ -36,7 +79,7 @@ describe('storybook generator', () => {
   });
 
   it('should contains custom test-storybook runner', async () => {
-    await generator(appTree, options);
+    await storybookGenerator(appTree, options);
     const config = readProjectConfiguration(appTree, projectName);
 
     expect(config.targets.storybook).toBeDefined();
@@ -57,7 +100,7 @@ describe('storybook generator', () => {
   });
 
   it('should generate a tailwind.css file', async () => {
-    await generator(appTree, options);
+    await storybookGenerator(appTree, options);
 
     console.log(appTree.listChanges().map((it) => it.path));
 
@@ -70,8 +113,20 @@ describe('storybook generator', () => {
     );
   });
 
+  it('should generate a postcss.config file', async () => {
+    await storybookGenerator(appTree, options);
+
+    console.log(appTree.listChanges().map((it) => it.path));
+
+    const postcssConfig = appTree
+      .read('libs/shared/storybook-host/postcss.config.js')
+      .toString();
+    expect(postcssConfig).toBeDefined();
+    expect(postcssConfig).toEqual(expect.stringContaining('tailwindcss'));
+  });
+
   it('should generate a preview.ts file', async () => {
-    await generator(appTree, options);
+    await storybookGenerator(appTree, options);
 
     const previewFile = appTree
       .read('libs/shared/storybook-host/.storybook/preview.ts')
@@ -85,7 +140,7 @@ describe('storybook generator', () => {
   });
 
   it('should generate a test-runner.ts file', async () => {
-    await generator(appTree, options);
+    await storybookGenerator(appTree, options);
 
     const testRunnerFile = appTree
       .read('libs/shared/storybook-host/.storybook/test-runner.ts')
@@ -97,7 +152,7 @@ describe('storybook generator', () => {
   describe('.storybook/main.ts file', () => {
     let storybookFile: string;
     beforeEach(async () => {
-      await generator(appTree, options);
+      await storybookGenerator(appTree, options);
 
       storybookFile = appTree
         .read('libs/shared/storybook-host/.storybook/main.ts')
@@ -138,7 +193,7 @@ describe('storybook generator', () => {
   describe('.storybook/tsconfig.json file', () => {
     let tsconfigStorybookFile: { include: string[] };
     beforeEach(async () => {
-      await generator(appTree, options);
+      await storybookGenerator(appTree, options);
 
       tsconfigStorybookFile = readJson(
         appTree,

@@ -1,5 +1,4 @@
 import {
-  addProjectConfiguration,
   formatFiles,
   readProjectConfiguration,
   Tree,
@@ -9,8 +8,12 @@ import {
   offsetFromRoot,
   names,
   generateFiles,
+  getProjects,
 } from '@nrwl/devkit';
-import { libraryGenerator as reactLibraryGenerator } from '@nrwl/react';
+import {
+  libraryGenerator as reactLibraryGenerator,
+  setupTailwindGenerator,
+} from '@nrwl/react';
 import { configurationGenerator as storybookConfigurationGenerator } from '@nrwl/storybook';
 import { StorybookGeneratorSchema } from './schema';
 import {
@@ -25,6 +28,7 @@ import {
 import { Linter } from '@nrwl/linter';
 import * as path from 'path';
 import { tweakMainTsStorybookConfig } from './transforms/storybook';
+import { addEslintJsonCheck } from '../../utils/addEslintJsonCheck';
 
 export interface NormalizedSchema extends StorybookGeneratorSchema {
   tags: string;
@@ -133,6 +137,28 @@ async function tweakStorybookTsconfig(tree: Tree, options: NormalizedSchema) {
   writeJson(tree, pathOfTsconfig, currentFile);
 }
 
+async function setImplicitDependenciesFromExistingLibs(
+  tree: Tree,
+  options: NormalizedSchema
+) {
+  const projects = [...getProjects(tree).values()]
+    .filter(
+      (project) =>
+        project.tags.includes(`scope:${options.scope}`) &&
+        ['type:ui', 'type:feature'].includes(
+          project.tags.find((tag) => tag.startsWith('type:'))
+        )
+    )
+    .map((project) => project.name);
+
+  const oldProjectConfig = readProjectConfiguration(tree, options.projectName);
+
+  updateProjectConfiguration(tree, options.projectName, {
+    ...oldProjectConfig,
+    implicitDependencies: projects,
+  });
+}
+
 export default async function (tree: Tree, options: StorybookGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
   await reactLibraryGenerator(tree, {
@@ -141,8 +167,11 @@ export default async function (tree: Tree, options: StorybookGeneratorSchema) {
     directory: normalizedOptions.directory,
     style: 'css',
     linter: Linter.EsLint,
+    unitTestRunner: 'jest',
   });
-  // TODO generate with tailwind
+  await setupTailwindGenerator(tree, {
+    project: normalizedOptions.projectName,
+  });
   await storybookConfigurationGenerator(tree, {
     name: normalizedOptions.projectName,
     uiFramework: '@storybook/react',
@@ -155,6 +184,8 @@ export default async function (tree: Tree, options: StorybookGeneratorSchema) {
   await tweakMainTsStorybookConfig(tree, normalizedOptions);
   await tweakStorybookTsconfig(tree, normalizedOptions);
   await addFiles(tree, normalizedOptions);
+  await setImplicitDependenciesFromExistingLibs(tree, normalizedOptions);
+  addEslintJsonCheck(tree, { ...normalizedOptions, type: 'storybook' });
 
   await formatFiles(tree);
 }
