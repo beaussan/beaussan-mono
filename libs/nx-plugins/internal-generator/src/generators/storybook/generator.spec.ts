@@ -2,7 +2,7 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration, readJson } from '@nrwl/devkit';
 
 import storybookGenerator from './generator';
-import reactLibGenerator from '../react-library/generator';
+import reactLibGenerator from '../library/generator';
 import { StorybookGeneratorSchema } from './schema';
 
 const projectName = 'shared-storybook-host';
@@ -102,8 +102,6 @@ describe('storybook generator', () => {
   it('should generate a tailwind.css file', async () => {
     await storybookGenerator(appTree, options);
 
-    console.log(appTree.listChanges().map((it) => it.path));
-
     const tailwindCss = appTree
       .read('libs/shared/storybook-host/.storybook/tailwind.css')
       .toString();
@@ -115,8 +113,6 @@ describe('storybook generator', () => {
 
   it('should generate a postcss.config file', async () => {
     await storybookGenerator(appTree, options);
-
-    console.log(appTree.listChanges().map((it) => it.path));
 
     const postcssConfig = appTree
       .read('libs/shared/storybook-host/postcss.config.js')
@@ -199,7 +195,6 @@ describe('storybook generator', () => {
         appTree,
         'libs/shared/storybook-host/.storybook/tsconfig.json'
       );
-      console.log(tsconfigStorybookFile);
     });
 
     it('should includes tsx in the files to compile', async () => {

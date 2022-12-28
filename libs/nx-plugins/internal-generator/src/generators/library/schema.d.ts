@@ -1,3 +1,3 @@
 import { StandardOptions } from '../../utils/normalizedOptions';
 
-export type ReactLibraryGeneratorSchema = StandardOptions;
+export type LibraryGeneratorSchema = StandardOptions;

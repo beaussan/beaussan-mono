@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
-  "$id": "TsLibrary",
+  "$id": "Library",
   "title": "",
   "type": "object",
   "properties": {
@@ -39,17 +39,6 @@
         "type": "list",
         "items": ["feature", "ui", "data", "utils"]
       }
-    },
-    "publishable": {
-      "type": "boolean",
-      "default": false,
-      "description": "Generate a publishable library."
-    },
-    "testEnvironment": {
-      "type": "string",
-      "enum": ["jsdom", "node"],
-      "description": "The test environment to use if unitTestRunner is set to jest.",
-      "default": "jsdom"
     }
   },
   "required": ["name", "scope", "type"]

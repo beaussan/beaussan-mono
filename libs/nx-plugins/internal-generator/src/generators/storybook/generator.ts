@@ -185,7 +185,11 @@ export default async function (tree: Tree, options: StorybookGeneratorSchema) {
   await tweakStorybookTsconfig(tree, normalizedOptions);
   await addFiles(tree, normalizedOptions);
   await setImplicitDependenciesFromExistingLibs(tree, normalizedOptions);
-  addEslintJsonCheck(tree, { ...normalizedOptions, type: 'storybook' });
+  addEslintJsonCheck(tree, {
+    ...normalizedOptions,
+    type: 'storybook',
+    libGenerator: 'react',
+  });
 
   await formatFiles(tree);
 }

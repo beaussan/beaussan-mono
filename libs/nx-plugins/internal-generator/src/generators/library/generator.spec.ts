@@ -2,15 +2,15 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration } from '@nrwl/devkit';
 
 import generator from './generator';
-import { ReactLibraryGeneratorSchema } from './schema';
+import { LibraryGeneratorSchema } from './schema';
 import { ValidationError } from 'zod-validation-error';
 import storybookGenerator from '../storybook/generator';
 
-describe('react-library generator', () => {
+describe('library generator', () => {
   let appTree: Tree;
-  const options: ReactLibraryGeneratorSchema = {
+  const options: LibraryGeneratorSchema = {
     name: 'test',
-    type: 'utils',
+    type: 'ui',
     scope: 'shared',
   };
 
@@ -39,29 +39,29 @@ describe('react-library generator', () => {
 
   it('should run successfully', async () => {
     await generator(appTree, options);
-    const config = readProjectConfiguration(appTree, 'shared-utils-test');
+    const config = readProjectConfiguration(appTree, 'shared-ui-test');
     expect(config).toBeDefined();
   });
 
   it('should add the json lint target successfully', async () => {
     await generator(appTree, options);
-    const config = readProjectConfiguration(appTree, 'shared-utils-test');
+    const config = readProjectConfiguration(appTree, 'shared-ui-test');
     expect(config.targets.lint.options.lintFilePatterns).toContainEqual(
-      expect.stringContaining('libs/shared/utils/test/**/*.json')
+      expect.stringContaining('libs/shared/ui/test/**/*.json')
     );
   });
 
   it('should generate a test-setup file', async () => {
     await generator(appTree, options);
     expect(appTree.listChanges().map((item) => item.path)).toContain(
-      'libs/shared/utils/test/src/test-setup.ts'
+      'libs/shared/ui/test/src/test-setup.ts'
     );
   });
 
   it('should add the tsconfig changes required for setup files', async () => {
     await generator(appTree, options);
     const tsconfig = appTree
-      .read('libs/shared/utils/test/jest.config.ts')
+      .read('libs/shared/ui/test/jest.config.ts')
       .toString();
 
     expect(tsconfig).toContain('setupFilesAfterEnv');
@@ -75,7 +75,7 @@ describe('react-library generator', () => {
       })
     ).rejects.toThrowError(ValidationError);
     expect(() =>
-      readProjectConfiguration(appTree, 'shared-utils-test')
+      readProjectConfiguration(appTree, 'shared-ui-test')
     ).toThrowError();
   });
 
@@ -87,7 +87,7 @@ describe('react-library generator', () => {
       })
     ).rejects.toThrowError(ValidationError);
     expect(() =>
-      readProjectConfiguration(appTree, 'shared-utils-test')
+      readProjectConfiguration(appTree, 'shared-ui-test')
     ).toThrowError();
   });
 });

@@ -1,4 +1,11 @@
-import { TagScope, tagScopeList, TagType, tagTypeList } from './consts';
+import {
+  SupportedLibGenerators,
+  TagScope,
+  tagScopeList,
+  tagToGenerator,
+  TagType,
+  tagTypeList,
+} from './consts';
 import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit';
 import {
   getDirectoryFromScopeAndType,
@@ -12,6 +19,7 @@ export type NormalizedOptions = {
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
+  libGenerator: SupportedLibGenerators;
 };
 
 export type StandardOptions = {
@@ -92,6 +100,7 @@ export function normalizeOptions<T extends StandardOptions>(
 
   return {
     ...options,
+    libGenerator: tagToGenerator[scope][type],
     tags,
     directory,
     ...folders,
