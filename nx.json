@@ -77,6 +77,14 @@
         "style": "css",
         "linter": "eslint"
       }
+    },
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      },
+      "library": {
+        "unitTestRunner": "vitest"
+      }
     }
   },
   "defaultProject": "dash-frontend"
