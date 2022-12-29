@@ -154,7 +154,7 @@
     json5 "^2.2.1"
     semver "^6.3.0"
 
-"@babel/core@^7.18.9", "@babel/core@^7.20.5":
+"@babel/core@^7.20.5":
   version "7.20.7"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.20.7.tgz#37072f951bd4d28315445f66e0ec9f6ae0c8c35f"
   integrity sha512-t1ZjCluspe5DW24bn2Rr1CDb2v9rn/hROtg9a2tmd0+QYf4bsloYfLQzjG4qHPNMhWtKdGC33R5AxGR2Af2cBw==
@@ -1443,7 +1443,7 @@
     debug "^4.1.0"
     globals "^11.1.0"
 
-"@babel/traverse@^7.18.9", "@babel/traverse@^7.20.10", "@babel/traverse@^7.20.7":
+"@babel/traverse@^7.20.10", "@babel/traverse@^7.20.7":
   version "7.20.10"
   resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.20.10.tgz#2bf98239597fcec12f842756f186a9dde6d09230"
   integrity sha512-oSf1juCgymrSez8NI4A2sr4+uB/mFd9MXplYGPEBnfAuWmmyeVcHa6xLPiaRBcXkcb/28bgxmQLTVwFKE1yfsg==
@@ -3928,10 +3928,10 @@
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
-"@storybook/builder-vite@0.2.5":
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/@storybook/builder-vite/-/builder-vite-0.2.5.tgz#b3996a5f28ffd1ce2ca18aff98cf3ed9d4551927"
-  integrity sha512-0PktEaYsbR6gGE/YDkW/tI1VxVnaPNZpHGpiWfDU7c5hjCajWYzdFTgHOwcXT8tiTs+WN/rvoCPT2iAhSCcHIw==
+"@storybook/builder-vite@0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@storybook/builder-vite/-/builder-vite-0.2.6.tgz#d2ad32b979015fc6f033511309ed7e466de542c8"
+  integrity sha512-TwlqJykq5KfM8SmDXWQtUHrYg4XySxwOe3RKud4iGZDYmqPc/ayB9XSF6DR50WgC7gKK7WIVIN+ZcGPphy5zWg==
   dependencies:
     "@joshwooding/vite-plugin-react-docgen-typescript" "0.0.5"
     "@storybook/core-common" "^6.4.3"
@@ -3945,7 +3945,7 @@
     glob "^7.2.0"
     glob-promise "^4.2.0"
     magic-string "^0.26.1"
-    react-docgen "^6.0.0-alpha.0"
+    react-docgen "6.0.0-alpha.3"
     slash "^3.0.0"
     sveltedoc-parser "^4.2.1"
 
@@ -5305,13 +5305,6 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/babel__traverse@^7.18.0":
-  version "7.18.3"
-  resolved "https://registry.yarnpkg.com/@types/babel__traverse/-/babel__traverse-7.18.3.tgz#dfc508a85781e5698d5b33443416b6268c4b3e8d"
-  integrity sha512-1kbcJ40lLB7MHsj39U4Sh1uTd2E7rLEa79kmDpI6cy+XiXsteB3POdQomoq4FxszMrO3ZYchkhYJw7A2862b3w==
-  dependencies:
-    "@babel/types" "^7.3.0"
-
 "@types/body-parser@*":
   version "1.19.2"
   resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.19.2.tgz#aea2059e28b7658639081347ac4fab3de166e6f0"
@@ -5365,11 +5358,6 @@
   integrity sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==
   dependencies:
     "@types/ms" "*"
-
-"@types/doctrine@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@types/doctrine/-/doctrine-0.0.5.tgz#9768264221e8fd422e4989c8cfdab2ff781f4eb6"
-  integrity sha512-JJwEeFy8Sl9ctiugU4h4DGN9hCB47oyhUkM2H8g8xZr4tHTEXtmV4U6krKrU8Ng0S7RlG/J7fkta1rGu3pq+YQ==
 
 "@types/eslint-scope@^3.7.3":
   version "3.7.4"
@@ -5708,11 +5696,6 @@
   integrity sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==
   dependencies:
     "@types/node" "*"
-
-"@types/resolve@^1.20.2":
-  version "1.20.2"
-  resolved "https://registry.yarnpkg.com/@types/resolve/-/resolve-1.20.2.tgz#97d26e00cd4a0423b4af620abecf3e6f442b7975"
-  integrity sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==
 
 "@types/retry@0.12.0":
   version "0.12.0"
@@ -16722,6 +16705,22 @@ react-docgen-typescript@^2.1.1:
   resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-2.2.2.tgz#4611055e569edc071204aadb20e1c93e1ab1659c"
   integrity sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==
 
+react-docgen@6.0.0-alpha.3:
+  version "6.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/react-docgen/-/react-docgen-6.0.0-alpha.3.tgz#4d8a4916b45de4aadb90eb5f3a6f923edf447928"
+  integrity sha512-DDLvB5EV9As1/zoUsct6Iz2Cupw9FObEGD3DMcIs3EDFIoSKyz8FZtoWj3Wj+oodrU4/NfidN0BL5yrapIcTSA==
+  dependencies:
+    "@babel/core" "^7.7.5"
+    "@babel/generator" "^7.12.11"
+    ast-types "^0.14.2"
+    commander "^2.19.0"
+    doctrine "^3.0.0"
+    estree-to-babel "^3.1.0"
+    neo-async "^2.6.1"
+    node-dir "^0.1.10"
+    resolve "^1.17.0"
+    strip-indent "^3.0.0"
+
 react-docgen@^5.0.0:
   version "5.4.3"
   resolved "https://registry.yarnpkg.com/react-docgen/-/react-docgen-5.4.3.tgz#7d297f73b977d0c7611402e5fc2a168acf332b26"
@@ -16736,21 +16735,6 @@ react-docgen@^5.0.0:
     estree-to-babel "^3.1.0"
     neo-async "^2.6.1"
     node-dir "^0.1.10"
-    strip-indent "^3.0.0"
-
-react-docgen@^6.0.0-alpha.0:
-  version "6.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/react-docgen/-/react-docgen-6.0.0-alpha.4.tgz#c580b602f3ad940528a43ae695a53f88351c698a"
-  integrity sha512-g8yrAq64R9zAwRmn2jqGOkBAUcZifCIGgrVaicpDieVAOz2Z/Nj2dbgv71FOBr4DsucrSlWes7/lBAXJeQUn5Q==
-  dependencies:
-    "@babel/core" "^7.18.9"
-    "@babel/traverse" "^7.18.9"
-    "@babel/types" "^7.18.9"
-    "@types/babel__traverse" "^7.18.0"
-    "@types/doctrine" "^0.0.5"
-    "@types/resolve" "^1.20.2"
-    doctrine "^3.0.0"
-    resolve "^1.22.1"
     strip-indent "^3.0.0"
 
 react-dom@18.2.0:
@@ -16769,6 +16753,11 @@ react-element-to-jsx-string@^14.3.4:
     "@base2/pretty-print-object" "1.0.1"
     is-plain-object "5.0.0"
     react-is "17.0.2"
+
+react-icons@^4.7.1:
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.7.1.tgz#0f4b25a5694e6972677cb189d2a72eabea7a8345"
+  integrity sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw==
 
 react-inspector@^5.1.0:
   version "5.1.1"

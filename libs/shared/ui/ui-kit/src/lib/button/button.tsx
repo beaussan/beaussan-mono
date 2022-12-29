@@ -1,14 +1,137 @@
-import { cva } from 'cva';
-import React from 'react';
+import { cva, VariantProps } from 'cva';
+import React, { ReactElement } from 'react';
+import clsx from 'clsx';
+import { CgSpinner } from 'react-icons/all';
 
-export type ButtonProps = React.PropsWithChildren<{ varient: string }>;
+const play = <div className="rounded"></div>;
 
-export function Button(props: ButtonProps) {
+const buttonStyles = cva(
+  'whitespace-nowrap inline-flex items-center border border-transparent rounded-lg focus:outline-none px-4 py-2 max-h-10 min-h-10 text-base font-medium font-sans cursor-pointer leading-normal align-middle justify-center items-center min-h-10 transition transition-all ease-in-out duration-400',
+  {
+    variants: {
+      intent: {
+        primary:
+          'text-white bg-violet-600 hover:bg-violet-500 focus:outline-none focus:border-violet-700 focus:ring-violet active:bg-violet-700',
+        secondary:
+          'text-violet-700 bg-violet-100 hover:bg-violet-200 focus:outline-none focus:border-violet-300 focus:ring-violet active:bg-violet-200',
+        ghost:
+          'text-black bg-white hover:bg-gray-100 focus:outline-none focus:border-indigo-300 focus:ring-indigo active:bg-gray-100 border border-1 border-gray-200',
+        warn: 'text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-red active:bg-red-700',
+      },
+      disabled: {
+        true: 'opacity-50 pointer-events-none cursor-not-allowed',
+      },
+      fullWidth: {
+        true: 'w-full',
+      },
+    },
+    defaultVariants: {
+      intent: 'primary',
+    },
+  }
+);
+
+type NoUndefinedField<T> = { [P in keyof T]-?: NonNullable<T[P]> };
+type MarkSomeRequired<T, K extends keyof T> = Omit<T, K> &
+  Required<NoUndefinedField<Pick<T, K>>>;
+
+type ButtonVariantProps = MarkSomeRequired<
+  VariantProps<typeof buttonStyles>,
+  'intent'
+>;
+
+export type ButtonProps = React.PropsWithChildren<
+  ButtonVariantProps & {
+    /**
+     * The button type
+     */
+    type?: 'submit' | 'reset' | 'button';
+    /**
+     * The button icon
+     */
+    icon?: ReactElement;
+    /**
+     * The button icon position
+     */
+    iconPosition?: 'start' | 'end';
+
+    /**
+     * The button label when in loading state
+     */
+    loadingText?: string;
+    /**
+     * Flag indicating whether the button is in loading state
+     */
+    isLoading?: boolean;
+  }
+>;
+
+export function Button({
+  children,
+  icon,
+  iconPosition = 'start',
+  isLoading,
+  loadingText,
+  type,
+  ...variants
+}: ButtonProps) {
+  if (isLoading) {
+    return (
+      <button type={type} className={buttonStyles(variants)} disabled>
+        {!!loadingText && (
+          <span className="whitespace-nowrap mr-2">{loadingText}</span>
+        )}
+        <CgSpinner className={`animate-spin w-5 h-5`} />
+      </button>
+    );
+  }
+
   return (
-    <div>
-      <h1>Welcome to Button!</h1>
-    </div>
+    <button
+      type={type}
+      className={buttonStyles(variants)}
+      disabled={!!variants.disabled}
+    >
+      <>
+        {iconPosition === 'start' && icon && (
+          <ButtonIcon
+            icon={icon}
+            iconPosition={iconPosition}
+            buttonHasChildren={!!children}
+          />
+        )}
+
+        <span className="whitespace-nowrap max-w-full">{children}</span>
+
+        {iconPosition === 'end' && icon && (
+          <ButtonIcon
+            icon={icon}
+            iconPosition={iconPosition}
+            buttonHasChildren={!!children}
+          />
+        )}
+      </>
+    </button>
   );
+}
+
+function ButtonIcon(props: {
+  icon: ReactElement;
+  buttonHasChildren: boolean;
+  iconPosition?: 'start' | 'end';
+}) {
+  const { icon, iconPosition, buttonHasChildren } = props;
+
+  const className = clsx(
+    'inline-flex',
+    {
+      'mr-2': buttonHasChildren && iconPosition === 'start',
+      'ml-2': buttonHasChildren && iconPosition === 'end',
+    },
+    icon.props.className
+  );
+
+  return React.cloneElement(icon, { className });
 }
 
 export default Button;
