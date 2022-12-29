@@ -3,8 +3,6 @@ import React, { ReactElement } from 'react';
 import clsx from 'clsx';
 import { CgSpinner } from 'react-icons/all';
 
-const play = <div className="rounded"></div>;
-
 const buttonStyles = cva(
   'whitespace-nowrap inline-flex items-center border border-transparent rounded-lg focus:outline-none px-4 py-2 max-h-10 min-h-10 text-base font-medium font-sans cursor-pointer leading-normal align-middle justify-center items-center min-h-10 transition transition-all ease-in-out duration-400',
   {
@@ -78,10 +76,12 @@ export function Button({
   if (isLoading) {
     return (
       <button type={type} className={buttonStyles(variants)} disabled>
-        {!!loadingText && (
-          <span className="whitespace-nowrap mr-2">{loadingText}</span>
-        )}
         <CgSpinner className={`animate-spin w-5 h-5`} />
+        {loadingText ? (
+          <span className="whitespace-nowrap mr-2">{loadingText}</span>
+        ) : (
+          <span className="sr-only">Loading...</span>
+        )}
       </button>
     );
   }
