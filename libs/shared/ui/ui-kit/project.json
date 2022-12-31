@@ -1,6 +1,5 @@
 {
   "name": "shared-ui-ui-kit",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/ui/ui-kit/src",
   "projectType": "library",
   "tags": ["scope:shared", "type:ui"],
@@ -16,27 +15,31 @@
       }
     },
     "build": {
-      "executor": "@nrwl/vite:build",
+      "executor": "@nrwl/rollup:rollup",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/shared/ui/ui-kit"
-      },
-      "configurations": {
-        "development": {
-          "mode": "development"
-        },
-        "production": {
-          "mode": "production"
-        }
+        "outputPath": "dist/libs/shared/ui/ui-kit",
+        "tsConfig": "libs/shared/ui/ui-kit/tsconfig.lib.json",
+        "project": "libs/shared/ui/ui-kit/package.json",
+        "entryFile": "libs/shared/ui/ui-kit/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/shared/ui/ui-kit/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
       }
     },
     "test": {
-      "executor": "@nrwl/vite:test",
-      "outputs": ["{projectRoot}/coverage"],
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "passWithNoTests": true,
-        "reportsDirectory": "{workspaceRoot}/coverage/{projectRoot}"
+        "jestConfig": "libs/shared/ui/ui-kit/jest.config.ts",
+        "passWithNoTests": true
       }
     }
   }

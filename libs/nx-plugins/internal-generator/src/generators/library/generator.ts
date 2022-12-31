@@ -89,33 +89,45 @@ function modifyVitestConfig(tree: Tree, options: FullOptions) {
   tree.write(vitePath, result);
 }
 
-export async function reactLib(tree: Tree, option: FullOptions) {
+export async function reactLib(
+  tree: Tree,
+  option: FullOptions,
+  { bundler = 'vite' }: { bundler: 'vite' | 'rollup' }
+) {
   await reactLibraryGenerator(tree, {
     name: option.name,
     style: 'css',
-    unitTestRunner: 'vitest',
+    unitTestRunner: bundler === 'vite' ? 'vitest' : 'jest',
     skipTsConfig: false,
     skipFormat: false,
     linter: Linter.EsLint,
     tags: option.tags,
     directory: option.directory,
-    bundler: 'vite',
+    bundler,
     pascalCaseFiles: true,
     strict: true,
   });
-  addFiles(tree, option, { sourceSet: 'vitest-test-setup' });
-  modifyVitestConfig(tree, option);
-  // modifyJestConfig(tree, option);
+  if (bundler === 'vite') {
+    addFiles(tree, option, { sourceSet: 'vitest-test-setup' });
+    modifyVitestConfig(tree, option);
+  } else if (bundler === 'rollup') {
+    addFiles(tree, option, { sourceSet: 'jest-test-setup' });
+    modifyJestConfig(tree, option);
+  }
 }
 
-export async function tsLib(tree: Tree, options: FullOptions) {
+export async function tsLib(
+  tree: Tree,
+  options: FullOptions,
+  { bundler = 'rollup' }: { bundler: 'vite' | 'rollup' }
+) {
   await libraryGenerator(tree, {
     name: options.name,
     tags: options.tags,
     directory: options.directory,
-    bundler: 'vite',
+    bundler,
     linter: Linter.EsLint,
-    unitTestRunner: 'vitest',
+    unitTestRunner: bundler === 'vite' ? 'vitest' : 'jest',
     config: 'project',
     skipFormat: false,
     skipTsConfig: false,
@@ -135,10 +147,10 @@ export default async function (tree: Tree, options: LibraryGeneratorSchema) {
 
   switch (normalizedOptions.libGenerator) {
     case 'react':
-      await reactLib(tree, normalizedOptions);
+      await reactLib(tree, normalizedOptions, { bundler: 'rollup' });
       break;
     case 'ts':
-      await tsLib(tree, normalizedOptions);
+      await tsLib(tree, normalizedOptions, { bundler: 'rollup' });
       break;
     default:
       throw new Error(

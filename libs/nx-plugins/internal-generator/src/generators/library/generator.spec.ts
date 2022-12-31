@@ -58,7 +58,7 @@ describe('library generator', () => {
     );
   });
 
-  it('should generate a test-setup file for vitest', async () => {
+  it.skip('should generate a test-setup file for vitest', async () => {
     await generator(appTree, options);
     const vitestTestSetup = appTree
       .read('libs/shared/ui/test/src/test-setup.ts')
@@ -73,7 +73,7 @@ describe('library generator', () => {
     );
   });
 
-  it('should add the tsconfig changes required for setup files', async () => {
+  it.skip('should add the tsconfig changes required for setup files', async () => {
     await generator(appTree, options);
     const tsconfig = appTree
       .read('libs/shared/ui/test/vite.config.ts')

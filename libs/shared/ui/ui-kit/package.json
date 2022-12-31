@@ -2,7 +2,7 @@
   "name": "@beaussan/shared/ui/ui-kit",
   "version": "0.0.1",
   "main": "./index.js",
-  "types": "./index.d.ts",
+  "module": "./index.mjs",
   "exports": {
     ".": {
       "import": "./index.mjs",

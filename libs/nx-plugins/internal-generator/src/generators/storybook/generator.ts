@@ -160,11 +160,15 @@ async function setImplicitDependenciesFromExistingLibs(
 
 export default async function (tree: Tree, options: StorybookGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
-  await reactLib(tree, {
-    ...normalizedOptions,
-    libGenerator: 'react',
-    type: 'storybook',
-  });
+  await reactLib(
+    tree,
+    {
+      ...normalizedOptions,
+      libGenerator: 'react',
+      type: 'storybook',
+    },
+    { bundler: 'webpack' }
+  );
   await sharedModifications(tree, {
     ...normalizedOptions,
     libGenerator: 'react',
@@ -180,6 +184,7 @@ export default async function (tree: Tree, options: StorybookGeneratorSchema) {
     linter: Linter.EsLint,
     configureTestRunner: true,
     tsConfiguration: true,
+    bundler: 'webpack',
   });
   await addStorybookCiTestRunner(tree, normalizedOptions);
   await tweakMainTsStorybookConfig(tree, normalizedOptions);

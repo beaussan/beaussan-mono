@@ -1,5 +1,5 @@
 import { cva, VariantProps } from 'cva';
-import React, { ReactElement } from 'react';
+import React, { ButtonHTMLAttributes, ReactElement } from 'react';
 import clsx from 'clsx';
 import { CgSpinner } from 'react-icons/all';
 
@@ -61,7 +61,7 @@ export type ButtonProps = React.PropsWithChildren<
      * Flag indicating whether the button is in loading state
      */
     isLoading?: boolean;
-  }
+  } & Pick<React.HtmlHTMLAttributes<HTMLButtonElement>, 'onClick'>
 >;
 
 export function Button({
@@ -71,11 +71,18 @@ export function Button({
   isLoading,
   loadingText,
   type,
+  onClick,
   ...variants
 }: ButtonProps) {
   if (isLoading) {
     return (
-      <button type={type} className={buttonStyles(variants)} disabled>
+      <button
+        type={type}
+        className={buttonStyles(variants)}
+        disabled
+        aria-busy={true}
+        onClick={onClick}
+      >
         <CgSpinner className={`animate-spin w-5 h-5`} />
         {loadingText ? (
           <span className="whitespace-nowrap mr-2">{loadingText}</span>
