@@ -1,7 +1,7 @@
 import { cva, VariantProps } from 'cva';
-import React, { ButtonHTMLAttributes, ReactElement } from 'react';
+import React, { forwardRef, ReactElement } from 'react';
 import clsx from 'clsx';
-import { CgSpinner } from 'react-icons/all';
+import { CgSpinner } from 'react-icons/cg';
 
 const buttonStyles = cva(
   'whitespace-nowrap inline-flex items-center border border-transparent rounded-lg focus:outline-none px-4 py-2 max-h-10 min-h-10 text-base font-medium font-sans cursor-pointer leading-normal align-middle justify-center items-center min-h-10 transition transition-all ease-in-out duration-400',
@@ -29,14 +29,7 @@ const buttonStyles = cva(
   }
 );
 
-type NoUndefinedField<T> = { [P in keyof T]-?: NonNullable<T[P]> };
-type MarkSomeRequired<T, K extends keyof T> = Omit<T, K> &
-  Required<NoUndefinedField<Pick<T, K>>>;
-
-type ButtonVariantProps = MarkSomeRequired<
-  VariantProps<typeof buttonStyles>,
-  'intent'
->;
+type ButtonVariantProps = VariantProps<typeof buttonStyles>;
 
 export type ButtonProps = React.PropsWithChildren<
   ButtonVariantProps & {
@@ -64,63 +57,66 @@ export type ButtonProps = React.PropsWithChildren<
   } & Pick<React.HtmlHTMLAttributes<HTMLButtonElement>, 'onClick'>
 >;
 
-export function Button({
-  children,
-  icon,
-  iconPosition = 'start',
-  isLoading,
-  loadingText,
-  type,
-  onClick,
-  ...variants
-}: ButtonProps) {
-  if (isLoading) {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      icon,
+      iconPosition = 'start',
+      isLoading,
+      loadingText,
+      type,
+      disabled,
+      fullWidth,
+      intent,
+      ...rest
+    },
+    forwardedRef
+  ) => {
+    console.log('REST:', rest);
     return (
       <button
         type={type}
-        className={buttonStyles(variants)}
-        disabled
-        aria-busy={true}
-        onClick={onClick}
+        className={buttonStyles({ disabled, fullWidth, intent })}
+        disabled={!!disabled || isLoading}
+        ref={forwardedRef}
+        aria-busy={isLoading}
+        {...rest}
       >
-        <CgSpinner className={`animate-spin w-5 h-5`} />
-        {loadingText ? (
-          <span className="whitespace-nowrap mr-2">{loadingText}</span>
+        {isLoading ? (
+          <>
+            <CgSpinner className={`animate-spin w-5 h-5`} />
+            {loadingText ? (
+              <span className="whitespace-nowrap mr-2">{loadingText}</span>
+            ) : (
+              <span className="sr-only">Loading...</span>
+            )}
+          </>
         ) : (
-          <span className="sr-only">Loading...</span>
+          <>
+            {iconPosition === 'start' && icon && (
+              <ButtonIcon
+                icon={icon}
+                iconPosition={iconPosition}
+                buttonHasChildren={!!children}
+              />
+            )}
+
+            <span className="whitespace-nowrap max-w-full">{children}</span>
+
+            {iconPosition === 'end' && icon && (
+              <ButtonIcon
+                icon={icon}
+                iconPosition={iconPosition}
+                buttonHasChildren={!!children}
+              />
+            )}
+          </>
         )}
       </button>
     );
   }
-
-  return (
-    <button
-      type={type}
-      className={buttonStyles(variants)}
-      disabled={!!variants.disabled}
-    >
-      <>
-        {iconPosition === 'start' && icon && (
-          <ButtonIcon
-            icon={icon}
-            iconPosition={iconPosition}
-            buttonHasChildren={!!children}
-          />
-        )}
-
-        <span className="whitespace-nowrap max-w-full">{children}</span>
-
-        {iconPosition === 'end' && icon && (
-          <ButtonIcon
-            icon={icon}
-            iconPosition={iconPosition}
-            buttonHasChildren={!!children}
-          />
-        )}
-      </>
-    </button>
-  );
-}
+);
 
 function ButtonIcon(props: {
   icon: ReactElement;

@@ -1,0 +1,46 @@
+{
+  "name": "shared-utils-utility-types",
+  "sourceRoot": "libs/shared/utils/utility-types/src",
+  "projectType": "library",
+  "tags": ["scope:shared", "type:utils"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/utils/utility-types/**/*.{ts,tsx,js,jsx}",
+          "libs/shared/utils/utility-types/**/*.json"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nrwl/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/utils/utility-types",
+        "tsConfig": "libs/shared/utils/utility-types/tsconfig.lib.json",
+        "project": "libs/shared/utils/utility-types/package.json",
+        "entryFile": "libs/shared/utils/utility-types/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/shared/utils/utility-types/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/shared/utils/utility-types/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

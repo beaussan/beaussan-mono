@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Button, ButtonProps } from './button';
-import { FaBeer } from 'react-icons/all';
+import { FaBeer } from 'react-icons/fa';
 
 const Story: ComponentMeta<typeof Button> = {
   component: Button,

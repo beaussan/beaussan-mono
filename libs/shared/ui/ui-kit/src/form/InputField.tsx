@@ -9,7 +9,11 @@ import {
 } from 'react-hook-form';
 import { BsXCircleFill } from 'react-icons/bs';
 import { z, ZodType, ZodTypeDef } from 'zod';
-import { FieldWrapper, FieldWrapperPassThroughProps } from './FieldWrapper';
+import {
+  FieldWrapper,
+  FieldWrapperPassThroughProps,
+  useFormField,
+} from './FieldWrapper';
 import { cva } from 'cva';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 
@@ -106,17 +110,19 @@ const inputClasses = cva(
   }
 );
 
-export const InputField = ({
-  type = 'text',
-  name,
-  icon,
-  iconPosition = 'start',
-  placeholder,
-  disabled,
-  dataTest,
-  clearButton,
-  ...wrapperProps
-}: InputFieldProps) => {
+export const InputField = (props: InputFieldProps) => {
+  const {
+    formFieldProps,
+    childProps: {
+      name,
+      iconPosition = 'start',
+      icon,
+      type = 'text',
+      disabled,
+      placeholder,
+      clearButton,
+    },
+  } = useFormField(props);
   const { register, getFieldState } = useFormContext();
 
   const { error } = getFieldState(name);
@@ -125,7 +131,7 @@ export const InputField = ({
   const showInputEndContainer = clearButton || (iconPosition === 'end' && icon);
 
   return (
-    <FieldWrapper id={name} {...wrapperProps} error={error}>
+    <FieldWrapper {...formFieldProps}>
       <div className="flex">
         <div className="flex relative w-full">
           {iconPosition === 'start' && icon ? (
@@ -136,11 +142,11 @@ export const InputField = ({
             </div>
           ) : null}
           <input
+            {...regReturn}
             id={name}
             type={type}
             aria-invalid={error ? 'true' : 'false'}
-            aria-label={wrapperProps.label}
-            data-test={dataTest}
+            aria-label={formFieldProps.label}
             className={inputClasses({
               disabled: disabled,
               iconPosition: icon ? iconPosition : null,
@@ -148,7 +154,6 @@ export const InputField = ({
               inputType: type,
             })}
             placeholder={placeholder}
-            {...regReturn}
             onChange={onChange}
             disabled={disabled}
             data-testid={name}

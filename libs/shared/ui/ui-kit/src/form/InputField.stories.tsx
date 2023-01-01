@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import { InputField } from './InputField';
-import { SimpleForm, useZodForm } from './useZodForm';
+import { useZodForm } from './useZodForm';
 import { FiSearch } from 'react-icons/fi';
 import { z } from 'zod';
 
@@ -15,36 +15,27 @@ export default {
       description: {
         component: `A component wrapping native \`<input>\` element ([see MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)),
 its description, hint and error message.<br>
-Default CSS display is \`block\`, provided without padding and margin (displayed here with the \`<SimpleForm>\` padding).`,
+Default CSS display is \`block\`, provided without padding and margin (displayed here with the \`<Form>\` padding).`,
       },
       source: { type: 'code' },
     },
   },
 } as ComponentMeta<typeof InputField>;
 
-export const ApiPlayground: ComponentStory<typeof InputField> = (args) => {
-  const validationSchema = z.object({});
-
-  return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
-      <InputField {...args} />
-    </SimpleForm>
-  );
-};
-ApiPlayground.storyName = '⚙️ API';
-ApiPlayground.args = {
-  name: 'inputFieldName',
-  label: 'Play with me!',
-  placeholder: 'Play with me!',
-};
+const zodSchema = z.object({
+  inputFieldName: z.string(),
+});
 
 export const Basic: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
 
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
-      <InputField name="inputFieldName" label="The inputField label" />
-    </SimpleForm>
+    <Form onSubmit={action('onSubmit')}>
+      <InputField {...name('inputFieldName')} label="The inputField label" />
+    </Form>
   );
 };
 Basic.storyName = '🧰 Basic';
@@ -55,17 +46,19 @@ Basic.parameters = {
 };
 
 export const VariantClearButton: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
-
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
+    <Form onSubmit={action('onSubmit')}>
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         placeholder="The inputField placeholder"
         clearButton
       />
-    </SimpleForm>
+    </Form>
   );
 };
 VariantClearButton.storyName = '🎭 Variant - Clear button';
@@ -76,17 +69,19 @@ VariantClearButton.parameters = {
 };
 
 export const VariantEmailType: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
-
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
+    <Form onSubmit={action('onSubmit')}>
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         placeholder="The inputField placeholder"
         type="email"
       />
-    </SimpleForm>
+    </Form>
   );
 };
 VariantEmailType.storyName = '🎭 Variant - Type email';
@@ -97,17 +92,19 @@ VariantEmailType.parameters = {
 };
 
 export const VariantPasswordType: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
-
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
+    <Form onSubmit={action('onSubmit')}>
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         placeholder="The inputField placeholder"
         type="password"
       />
-    </SimpleForm>
+    </Form>
   );
 };
 VariantPasswordType.storyName = '🎭 Variant - Type password';
@@ -118,17 +115,19 @@ VariantPasswordType.parameters = {
 };
 
 export const VariantFileType: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
-
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
+    <Form onSubmit={action('onSubmit')}>
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         placeholder="The inputField placeholder"
         type="file"
       />
-    </SimpleForm>
+    </Form>
   );
 };
 VariantFileType.storyName = '🎭 Variant - Type file';
@@ -139,17 +138,19 @@ VariantFileType.parameters = {
 };
 
 export const VariantWithDescription: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
-
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
+    <Form onSubmit={action('onSubmit')}>
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         placeholder="The inputField placeholder"
         description="InputField description"
       />
-    </SimpleForm>
+    </Form>
   );
 };
 VariantWithDescription.storyName = '🎭 Variant - With description';
@@ -160,17 +161,19 @@ Basic.parameters = {
 };
 
 export const VariantSizeFull: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
-
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
+    <Form onSubmit={action('onSubmit')}>
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         placeholder="The inputField placeholder"
         size="full"
       />
-    </SimpleForm>
+    </Form>
   );
 };
 VariantSizeFull.storyName = '🎭 Variant - Size full';
@@ -181,17 +184,19 @@ VariantSizeFull.parameters = {
 };
 
 export const VariantSizeMedium: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
-
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
+    <Form onSubmit={action('onSubmit')}>
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         placeholder="The inputField placeholder"
         size="medium"
       />
-    </SimpleForm>
+    </Form>
   );
 };
 VariantSizeMedium.storyName = '🎭 Variant - Size medium';
@@ -202,16 +207,18 @@ VariantSizeMedium.parameters = {
 };
 
 export const VariantIconStart: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
-
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
+    <Form onSubmit={action('onSubmit')}>
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         icon={<FiSearch />}
       />
-    </SimpleForm>
+    </Form>
   );
 };
 VariantIconStart.storyName = '🎭 Variant - Icon start';
@@ -222,18 +229,20 @@ VariantIconStart.parameters = {
 };
 
 export const VariantIconEnd: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
-
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
+    <Form onSubmit={action('onSubmit')}>
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         placeholder="The inputField placeholder"
         icon={<FiSearch />}
         iconPosition="end"
       />
-    </SimpleForm>
+    </Form>
   );
 };
 VariantIconEnd.storyName = '🎭 Variant - Icon end';
@@ -244,48 +253,52 @@ VariantIconEnd.parameters = {
 };
 
 export const StateWithDefaultValue: ComponentStory<typeof InputField> = () => {
-  const defaultValues = { inputFieldName: 'value2' };
-
-  const validationSchema = z.object({ inputFieldName: z.string() });
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({
+    schema: zodSchema,
+    options: { defaultValues: { inputFieldName: 'some value' } },
+  });
 
   return (
-    <SimpleForm
-      schema={validationSchema}
-      options={{ defaultValues }}
+    <Form
       onSubmit={(data) => {
         action('submit')(data);
       }}
     >
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         placeholder="The inputField placeholder"
       />
-    </SimpleForm>
+    </Form>
   );
 };
 StateWithDefaultValue.storyName = '🔁 State - With default value';
 StateWithDefaultValue.parameters = {
   docs: {
     description: {
-      story: `Use \`<SimpleForm>\` options to set default value.`,
+      story: `Use \`<Form>\` options to set default value.`,
     },
     source: { state: 'open' },
   },
 };
 
 export const StateDisabled: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
-
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
+    <Form onSubmit={action('onSubmit')}>
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         placeholder="The inputField placeholder"
         disabled
       />
-    </SimpleForm>
+    </Form>
   );
 };
 StateDisabled.storyName = '🔁 State - Disabled';
@@ -301,7 +314,7 @@ export const StateWithErrorMessage: ComponentStory<typeof InputField> = () => {
   });
 
   const {
-    methods: { trigger },
+    methods: { trigger, name },
     Form,
   } = useZodForm({
     schema,
@@ -319,7 +332,7 @@ export const StateWithErrorMessage: ComponentStory<typeof InputField> = () => {
       }}
     >
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="The inputField label"
         placeholder="The inputField placeholder"
       />
@@ -330,24 +343,26 @@ StateWithErrorMessage.storyName = '🔁 State - With error message';
 StateWithErrorMessage.parameters = {
   docs: {
     description: {
-      story: `Incorrect value is set then \`<SimpleForm>\` validation is automatically triggered.`,
+      story: `Incorrect value is set then \`<Form>\` validation is automatically triggered.`,
     },
     source: { state: 'open' },
   },
 };
 
 export const TestingScalability: ComponentStory<typeof InputField> = () => {
-  const validationSchema = z.object({});
-
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({ schema: zodSchema });
   return (
-    <SimpleForm schema={validationSchema} onSubmit={action('onSubmit')}>
+    <Form onSubmit={action('onSubmit')}>
       <InputField
-        name="inputFieldName"
+        {...name('inputFieldName')}
         label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         placeholder="--Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.--"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       />
-    </SimpleForm>
+    </Form>
   );
 };
 TestingScalability.storyName = '🧪 Testing - Scalability';

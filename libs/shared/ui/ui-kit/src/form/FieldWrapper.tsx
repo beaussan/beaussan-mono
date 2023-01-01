@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { FieldError } from 'react-hook-form';
+import { FieldError, useFormContext } from 'react-hook-form';
 import clsx from 'clsx';
 import { HiExclamationCircle } from 'react-icons/hi';
 
 type FieldWrapperProps = {
+  id: string;
   /**
-   * The field ID
+   * The field name
    */
-  id?: string;
+  name: string;
   /**
    * The field label icon
    */
@@ -30,10 +31,6 @@ type FieldWrapperProps = {
    */
   children: React.ReactNode;
   /**
-   * The field error
-   */
-  error?: FieldError | undefined;
-  /**
    * The field description
    */
   description?: React.ReactNode;
@@ -41,10 +38,43 @@ type FieldWrapperProps = {
 
 export type FieldWrapperPassThroughProps = Omit<
   FieldWrapperProps,
-  'className' | 'children' | 'error'
+  'className' | 'children' | 'id'
 >;
 
-export const ErrorComponentTemplate = ({ label }: { label?: string }) => {
+export const useFormField = <P extends FieldWrapperPassThroughProps>(
+  props: P
+): {
+  formFieldProps: Omit<FieldWrapperProps, 'children' | 'className'>;
+  childProps: Omit<
+    P,
+    'name' | 'labelIcon' | 'label' | 'size' | 'description'
+  > & {
+    id: string;
+    name: string;
+    size?: 'full' | 'medium';
+  };
+} => {
+  const { label, name, size, labelIcon, description, ...otherProps } = props;
+  const id = name;
+
+  return {
+    formFieldProps: {
+      id,
+      name,
+      label,
+      size,
+      labelIcon,
+      description,
+    },
+    childProps: { ...otherProps, id, name, size },
+  };
+};
+
+export const ErrorComponentTemplate = ({ name }: { name: string }) => {
+  const ctx = useFormContext();
+  const state = ctx.getFieldState(name);
+  const label = state.error?.message;
+  console.log({ state, label });
   if (!label) {
     /* A &nbsp; character is displayed even if there is no error to
             book some space for the error message. It prevents other fields to
@@ -68,18 +98,46 @@ export const ErrorComponentTemplate = ({ label }: { label?: string }) => {
   );
 };
 
-export const FieldWrapper = (props: FieldWrapperProps) => {
-  const {
-    id,
-    labelIcon,
-    label,
-    className,
-    size = 'full',
-    error,
-    children,
-    description,
-  } = props;
+const Label = ({
+  label,
+  labelIcon,
+  description,
+  id,
+}: Pick<FieldWrapperProps, 'label' | 'id' | 'labelIcon' | 'description'>) => {
+  if (!label) {
+    return null;
+  }
+  return (
+    <label htmlFor={id} className={clsx('block pt-1 text-gray-600 mb-xs')}>
+      <span className={clsx('flex items-center font-semibold')}>
+        <span>
+          {labelIcon
+            ? React.cloneElement(labelIcon, {
+                className: 'h-4 w-4 mr-xs',
+              })
+            : null}
+          {label}
+        </span>
+      </span>
+      {description ? (
+        <span className={clsx('text-gray-600 mb-xs font-normal text-sm ')}>
+          <span>{description}</span>
+        </span>
+      ) : null}
+    </label>
+  );
+};
 
+export const FieldWrapper = ({
+  id,
+  labelIcon,
+  label,
+  className,
+  size = 'full',
+  children,
+  description,
+  name,
+}: FieldWrapperProps) => {
   return (
     <div
       className={clsx(
@@ -88,28 +146,15 @@ export const FieldWrapper = (props: FieldWrapperProps) => {
         size === 'full' ? '' : 'max-w-xl'
       )}
     >
-      {label ? (
-        <label htmlFor={id} className={clsx('block pt-1 text-gray-600 mb-xs')}>
-          <span className={clsx('flex items-center font-semibold')}>
-            <span>
-              {labelIcon
-                ? React.cloneElement(labelIcon, {
-                    className: 'h-4 w-4 mr-xs',
-                  })
-                : null}
-              {label}
-            </span>
-          </span>
-          {description ? (
-            <span className={clsx('text-gray-600 mb-xs font-normal text-sm ')}>
-              <span>{description}</span>
-            </span>
-          ) : null}
-        </label>
-      ) : null}
+      <Label
+        label={label}
+        id={id}
+        labelIcon={labelIcon}
+        description={description}
+      />
       <div>
         <div>{children}</div>
-        <ErrorComponentTemplate label={error?.message} />
+        <ErrorComponentTemplate name={name} />
       </div>
     </div>
   );

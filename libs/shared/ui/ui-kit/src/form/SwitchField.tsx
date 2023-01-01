@@ -1,4 +1,8 @@
-import { FieldWrapper, FieldWrapperPassThroughProps } from './FieldWrapper';
+import {
+  FieldWrapper,
+  FieldWrapperPassThroughProps,
+  useFormField,
+} from './FieldWrapper';
 import {
   FieldPath,
   useFormContext,
@@ -10,26 +14,24 @@ import clsx from 'clsx';
 
 export type SwitchFieldProps = FieldWrapperPassThroughProps & {
   /**
-   * The input field name
-   */
-  name: FieldPath<FieldValues>;
-  /**
    * Flag to indicate if the field is disabled
    */
   disabled?: boolean;
 };
 
-export const SwitchField = ({ name, disabled, ...rest }: SwitchFieldProps) => {
-  const { getFieldState, control } = useFormContext();
-
-  const { error } = getFieldState(name);
+export const SwitchField = (props: SwitchFieldProps) => {
+  const {
+    formFieldProps,
+    childProps: { name, disabled },
+  } = useFormField(props);
+  const { control } = useFormContext();
 
   return (
     <Controller
       control={control}
       render={({ field }) => {
         return (
-          <FieldWrapper id={name} {...rest} error={error}>
+          <FieldWrapper {...formFieldProps}>
             <Switch.Root
               className={clsx(
                 field.value ? 'bg-violet-600' : 'bg-gray-200',
@@ -42,6 +44,7 @@ export const SwitchField = ({ name, disabled, ...rest }: SwitchFieldProps) => {
                 field.onChange(event);
                 field.onBlur();
               }}
+              disabled={disabled}
             >
               <Switch.Thumb
                 className={clsx(

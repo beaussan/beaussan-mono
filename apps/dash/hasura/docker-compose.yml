@@ -15,7 +15,6 @@ services:
       - '${HASURA_PORT}:8080'
     depends_on:
       - 'postgres'
-    restart: on-failure
     container_name: dash-hasura-graphql-engine
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
