@@ -167,7 +167,7 @@ export default async function (tree: Tree, options: StorybookGeneratorSchema) {
       libGenerator: 'react',
       type: 'storybook',
     },
-    { bundler: 'webpack' }
+    { bundler: 'rollup' }
   );
   await sharedModifications(tree, {
     ...normalizedOptions,
