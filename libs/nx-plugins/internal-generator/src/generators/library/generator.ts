@@ -119,7 +119,7 @@ export async function reactLib(
 export async function tsLib(
   tree: Tree,
   options: FullOptions,
-  { bundler = 'rollup' }: { bundler: 'vite' | 'rollup' }
+  { bundler = 'vite' }: { bundler: 'vite' | 'rollup' }
 ) {
   await libraryGenerator(tree, {
     name: options.name,
@@ -147,10 +147,10 @@ export default async function (tree: Tree, options: LibraryGeneratorSchema) {
 
   switch (normalizedOptions.libGenerator) {
     case 'react':
-      await reactLib(tree, normalizedOptions, { bundler: 'rollup' });
+      await reactLib(tree, normalizedOptions, { bundler: 'vite' });
       break;
     case 'ts':
-      await tsLib(tree, normalizedOptions, { bundler: 'rollup' });
+      await tsLib(tree, normalizedOptions, { bundler: 'vite' });
       break;
     default:
       throw new Error(
