@@ -1,9 +1,10 @@
 import { rootMain } from '../../../../.storybook/main';
-import type { StorybookConfig, Options } from '@storybook/core-common';
+import type { StorybookConfig } from '@storybook/react-vite';
 const config: StorybookConfig = {
   staticDirs: ['../../../../tools/msw'],
   ...rootMain,
-  core: { ...rootMain.core, builder: '@storybook/builder-vite' },
+  core: { ...rootMain.core },
+  framework: '@storybook/react-vite',
   stories: [
     ...rootMain.stories,
     '../../**/*.stories.mdx',
