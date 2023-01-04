@@ -22,6 +22,13 @@
                 "onlyDependOnLibsWithTags": ["scope:shared", "scope:dash"]
               },
               {
+                "sourceTag": "scope:demo-storybook",
+                "onlyDependOnLibsWithTags": [
+                  "scope:shared",
+                  "scope:demo-storybook"
+                ]
+              },
+              {
                 "sourceTag": "scope:nx-plugins",
                 "onlyDependOnLibsWithTags": ["scope:shared", "scope:nx-plugins"]
               },
@@ -99,7 +106,7 @@
         "@nrwl/nx/workspace/allowed-project-tags": [
           "error",
           {
-            "scopeTags": ["dash", "nx-plugins", "shared"],
+            "scopeTags": ["dash", "nx-plugins", "shared", "demo-storybook"],
             "typeTags": [
               "app",
               "storybook",

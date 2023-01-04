@@ -1,14 +1,14 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { Button, ButtonProps } from './button';
 import { FaBeer } from 'react-icons/fa';
 
-const Story: ComponentMeta<typeof Button> = {
+const Story: Meta<typeof Button> = {
   component: Button,
   title: 'Button',
 };
 export default Story;
 
-const Template: ComponentStory<typeof Button> = (args) => (
+const Template: StoryFn<typeof Button> = (args) => (
   <Button {...args}>Hello world</Button>
 );
 

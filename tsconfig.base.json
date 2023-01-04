@@ -33,6 +33,12 @@
       "@beaussan/dash/storybook-host": [
         "libs/dash/storybook-host/src/index.ts"
       ],
+      "@beaussan/demo-storybook/storybook-host": [
+        "libs/demo-storybook/storybook-host/src/index.ts"
+      ],
+      "@beaussan/demo-storybook/ui/buttons": [
+        "libs/demo-storybook/ui/buttons/src/index.ts"
+      ],
       "@beaussan/internal-generator": [
         "libs/nx-plugins/internal-generator/src/index.ts"
       ],

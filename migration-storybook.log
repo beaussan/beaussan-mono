@@ -1,0 +1,89 @@
+🔎 checking possible migrations..
+
+🔎 found a 'mainjsFramework' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   We've detected that your main.js configuration file does not specify the                            │
+│   'framework' field, which is a requirement in SB7.0 and above. We can add one                        │
+│   for you automatically:                                                                              │
+│                                                                                                       │
+│   framework: '@storybook/react'                                                                       │
+│                                                                                                       │
+│   More info: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#mainjs-framework-field   │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[?25l? Do you want to run the 'mainjsFramework' migration on your project? › (Y/n)[2K[G✔ Do you want to run the 'mainjsFramework' migration on your project? … yes
+[?25h✅ Setting 'framework' to '@storybook/react' in main.js
+✅ ran mainjsFramework migration
+
+🔎 found a 'storybook-binary' migration:
+╭ Automigration detected ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                    │
+│   We've detected you are using Storybook ~7.0.0-beta.19 without Storybook's storybook binary. Starting in Storybook 7.0, it has to be installed.   │
+│                                                                                                                                                    │
+│                                                                                                                                                    │
+│   More info: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#start-storybook--build-storybook-binaries-removed                     │
+│                                                                                                                                                    │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[?25l? Do you want to run the 'storybook-binary' migration on your project? › (Y/n)[2K[G✔ Do you want to run the 'storybook-binary' migration on your project? … yes
+[?25h
+✅ Adding 'storybook' as dev dependency
+
+✅ ran storybook-binary migration
+
+🔎 found a 'newFrameworks' migration:
+╭ Automigration detected ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                     │
+│   We've detected you are using an older format of Storybook frameworks and builders.                                                                │
+│                                                                                                                                                     │
+│   In Storybook 7, frameworks also specify the builder to be used.                                                                                   │
+│                                                                                                                                                     │
+│   We can remove the dependencies that are no longer needed: @storybook/builder-webpack5, @storybook/manager-webpack5, @storybook/builder-vite       │
+│                                                                                                                                                     │
+│   And set up the @storybook/react-webpack5 framework that already includes the builder.                                                             │
+│                                                                                                                                                     │
+│   To learn more about the framework field, see: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#framework-field-mandatory           │
+│                                                                                                                                                     │
+│   Webpack4 users                                                                                                                                    │
+│                                                                                                                                                     │
+│   Unless you're using Storybook's Vite builder, this automigration will install a Webpack5-based framework.                                         │
+│                                                                                                                                                     │
+│   If you were using Storybook's Webpack4 builder (default in 6.x, discontinued in 7.0), this could be a breaking                                    │
+│   change -- especially if your project has a custom webpack configuration.                                                                          │
+│                                                                                                                                                     │
+│   To learn more about migrating from Webpack4, see: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#webpack4-support-discontinued   │
+│                                                                                                                                                     │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[?25l? Do you want to run the 'newFrameworks' migration on your project? › (Y/n)[2K[G✔ Do you want to run the 'newFrameworks' migration on your project? … yes
+[?25h✅ Removing legacy dependencies: @storybook/builder-webpack5, @storybook/manager-webpack5, @storybook/builder-vite
+✅ Installing new dependencies: @storybook/react-webpack5
+✅ Updating framework field in main.js
+✅ ran newFrameworks migration
+
+⚠️  failed to check fix nextjsFramework
+
+SyntaxError: Identifier 'framework' has already been declared. (14:13)
+    at instantiate (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:15:2249)
+    at constructor (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:17:11555)
+    at Object.raise (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:19:23819)
+    at TypeScriptScopeHandler.checkRedeclarationInScope (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:17:47203)
+    at TypeScriptScopeHandler.declareName (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:17:46436)
+    at TypeScriptScopeHandler.declareName (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:21:8994)
+    at Object.declareNameFromIdentifier (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:21:97010)
+    at Object.checkIdentifier (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:21:96910)
+    at Object.checkLVal (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:21:95244)
+    at Object.parseVarId (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:22:38600)
+
+⚠️  failed to check fix autodocsTrue
+
+SyntaxError: Identifier 'framework' has already been declared. (14:13)
+    at instantiate (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:15:2249)
+    at constructor (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:17:11555)
+    at Object.raise (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:19:23819)
+    at TypeScriptScopeHandler.checkRedeclarationInScope (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:17:47203)
+    at TypeScriptScopeHandler.declareName (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:17:46436)
+    at TypeScriptScopeHandler.declareName (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:21:8994)
+    at Object.declareNameFromIdentifier (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:21:97010)
+    at Object.checkIdentifier (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:21:96910)
+    at Object.checkLVal (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:21:95244)
+    at Object.parseVarId (/home/beaussan/.npm/_npx/eebb2d3a7d26a7f1/node_modules/@storybook/csf-tools/dist/index.js:22:38600)
