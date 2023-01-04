@@ -1,0 +1,86 @@
+{
+  "name": "demo-storybook-storybook-host",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/demo-storybook/storybook-host/src",
+  "projectType": "library",
+  "tags": ["scope:demo-storybook", "type:storybook"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/demo-storybook/storybook-host/**/*.{ts,tsx,js,jsx}",
+          "libs/demo-storybook/storybook-host/**/*.json"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nrwl/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/demo-storybook/storybook-host"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": ["{projectRoot}/coverage"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "{workspaceRoot}/coverage/{projectRoot}"
+      }
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "uiFramework": "@storybook/react",
+        "port": 4400,
+        "config": {
+          "configFolder": "libs/demo-storybook/storybook-host/.storybook"
+        }
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "uiFramework": "@storybook/react",
+        "outputPath": "dist/storybook/demo-storybook-storybook-host",
+        "config": {
+          "configFolder": "libs/demo-storybook/storybook-host/.storybook"
+        }
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c libs/demo-storybook/storybook-host/.storybook --url=http://localhost:4400"
+      },
+      "configurations": {
+        "ci": {
+          "command": "start-server-and-test 'nx run demo-storybook-storybook-host:storybook' 4400 'test-storybook -c libs/demo-storybook/storybook-host/.storybook --url=http://localhost:4400'"
+        }
+      }
+    }
+  },
+  "implicitDependencies": ["demo-storybook-ui-buttons"]
+}

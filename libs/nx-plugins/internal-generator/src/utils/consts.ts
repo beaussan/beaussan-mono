@@ -9,7 +9,7 @@ export type TagType = typeof tagTypeList[number];
 
 export const tagThatShouldGoIntoStorybook: TagType[] = ['feature', 'ui'];
 
-export const tagScopeList = ['dash', 'shared'] as const;
+export const tagScopeList = ['dash', 'shared', 'demo-storybook'] as const;
 export type TagScope = typeof tagScopeList[number];
 
 export const supportedLibGenerators = ['react', 'ts'] as const;
@@ -22,6 +22,12 @@ type TagToKindOfGeneratorMap = Record<
 
 export const tagToGenerator: TagToKindOfGeneratorMap = {
   dash: {
+    feature: 'react',
+    ui: 'react',
+    data: 'react',
+    utils: 'react',
+  },
+  'demo-storybook': {
     feature: 'react',
     ui: 'react',
     data: 'react',
