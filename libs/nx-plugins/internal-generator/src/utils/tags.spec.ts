@@ -23,13 +23,19 @@ describe('getTagStringFromScopeAndType', () => {
 });
 
 describe('getDirectoryFromScopeAndType', () => {
-  for (const tagType of tagTypeList) {
-    for (const tagScope of tagScopeList) {
+  for (const tagScope of tagScopeList) {
+    for (const tagType of tagTypeList.filter((it) => it !== 'storybook')) {
       it(`should given a ${tagType} type and a ${tagScope} output the correct directory structure`, () => {
         const result = getDirectoryFromScopeAndType(tagScope, tagType);
 
         expect(result).toEqual(`${tagScope}/${tagType}`);
       });
     }
+
+    it(`should given a storybook type and a ${tagScope} output the correct directory structure`, () => {
+      const result = getDirectoryFromScopeAndType(tagScope, 'storybook');
+
+      expect(result).toEqual(`${tagScope}`);
+    });
   }
 });

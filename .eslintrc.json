@@ -5,6 +5,7 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.json"],
+      "extends": ["plugin:storybook/recommended"],
       "rules": {
         "@nrwl/nx/enforce-module-boundaries": [
           "error",

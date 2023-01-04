@@ -3,20 +3,21 @@
   "name": "internal-generator",
   "version": "0.0.1",
   "generators": {
-    "react-library": {
-      "factory": "./src/generators/react-library/generator",
-      "schema": "./src/generators/react-library/schema.json",
-      "description": "A react library generator"
-    },
     "update-generators-scope-and-types": {
       "factory": "./src/generators/update-generators-scope-and-types/generator",
       "schema": "./src/generators/update-generators-scope-and-types/schema.json",
       "description": "Update internal generators from the new scope and types"
     },
-    "ts-library": {
-      "factory": "./src/generators/ts-library/generator",
-      "schema": "./src/generators/ts-library/schema.json",
-      "description": "Create a typescript library"
+    "storybook": {
+      "factory": "./src/generators/storybook/generator",
+      "schema": "./src/generators/storybook/schema.json",
+      "description": "Generate a storybook setup with the correct glob setup for a given scope"
+    },
+    "library": {
+      "factory": "./src/generators/library/generator",
+      "schema": "./src/generators/library/schema.json",
+      "description": "Create a library",
+      "aliases": ["lib"]
     }
   }
 }

@@ -1,4 +1,11 @@
-import { TagScope, tagScopeList, TagType, tagTypeList } from './consts';
+import {
+  SupportedLibGenerators,
+  TagScope,
+  tagScopeList,
+  tagToGenerator,
+  TagType,
+  tagTypeList,
+} from './consts';
 import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit';
 import {
   getDirectoryFromScopeAndType,
@@ -12,6 +19,7 @@ export type NormalizedOptions = {
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
+  libGenerator: SupportedLibGenerators;
 };
 
 export type StandardOptions = {
@@ -28,41 +36,74 @@ export type FullOptions<T = Record<string, unknown>> = StandardOptions &
 
 const scopeSchema = z.enum(tagScopeList);
 const typeSchema = z.enum(tagTypeList);
-export function normalizeOptions<T extends StandardOptions>(
+
+export function getFoldersFromDirectoryAndName(
   tree: Tree,
-  options: T
-): FullOptions<T> {
+  { directory, name }: { directory: string; name: string }
+) {
+  const fileName = names(name).fileName;
+
+  const projectDirectory = directory
+    ? `${names(directory).fileName}/${fileName}`
+    : name;
+  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
+  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
+
+  return {
+    projectName,
+    projectRoot,
+    projectDirectory,
+  };
+}
+
+export function parseTags(tags?: string): string[] {
+  return tags ? tags.split(',').map((s) => s.trim()) : [];
+}
+
+export function safeGetScope(scope: unknown): TagScope {
   try {
-    const scope = scopeSchema.parse(options.scope);
-    const type = typeSchema.parse(options.type);
-
-    const tags = getTagStringFromScopeAndType(scope, type);
-    const directory = getDirectoryFromScopeAndType(scope, type);
-
-    const name = names(options.name).fileName;
-
-    const projectDirectory = directory
-      ? `${names(directory).fileName}/${name}`
-      : name;
-    const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-    const projectRoot = `${
-      getWorkspaceLayout(tree).libsDir
-    }/${projectDirectory}`;
-    const parsedTags = tags ? tags.split(',').map((s) => s.trim()) : [];
-
-    return {
-      ...options,
-      tags,
-      directory,
-      projectName,
-      projectRoot,
-      projectDirectory,
-      parsedTags,
-    };
+    return scopeSchema.parse(scope);
   } catch (e) {
     if (e instanceof ZodError) {
       throw fromZodError(e);
     }
     throw e;
   }
+}
+export function safeGetType(type: unknown): TagType {
+  try {
+    return typeSchema.parse(type);
+  } catch (e) {
+    if (e instanceof ZodError) {
+      throw fromZodError(e);
+    }
+    throw e;
+  }
+}
+
+export function normalizeOptions<T extends StandardOptions>(
+  tree: Tree,
+  options: T
+): FullOptions<T> {
+  const scope = safeGetScope(options.scope);
+  const type = safeGetType(options.type);
+
+  const tags = getTagStringFromScopeAndType(scope, type);
+  const directory = getDirectoryFromScopeAndType(scope, type);
+
+  const folders = getFoldersFromDirectoryAndName(tree, {
+    name: options.name,
+    directory,
+  });
+
+  const parsedTags = parseTags(tags);
+
+  return {
+    ...options,
+    libGenerator: tagToGenerator[scope][type],
+    tags,
+    directory,
+    ...folders,
+    parsedTags,
+  };
 }

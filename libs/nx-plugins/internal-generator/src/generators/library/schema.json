@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "Library",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the library",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "scope": {
+      "type": "string",
+      "description": "Scope tag for the library",
+      "$default": {
+        "$source": "args",
+        "index": 1
+      },
+      "x-prompt": {
+        "message": "What is the scope of the library ?",
+        "type": "list",
+        "items": ["dash", "shared"]
+      }
+    },
+    "type": {
+      "type": "string",
+      "description": "Type tag for the library",
+      "$default": {
+        "$source": "args",
+        "index": 1
+      },
+      "x-prompt": {
+        "message": "What is the type of the library ?",
+        "type": "list",
+        "items": ["feature", "ui", "data", "utils"]
+      }
+    }
+  },
+  "required": ["name", "scope", "type"]
+}
