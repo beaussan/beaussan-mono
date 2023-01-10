@@ -20,7 +20,7 @@ function ProtectedPage() {
     <div>
       <Head>
         <title>Dashy dash</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="grid grid-rows-[1fr_auto] h-screen">
         <main className=" flex flex-col bg-gradient-to-bl overflow-y-auto from-orange-300 via-cyan-400 to-yellow-400 overflow-hidden">

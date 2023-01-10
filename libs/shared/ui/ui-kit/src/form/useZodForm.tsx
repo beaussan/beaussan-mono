@@ -7,7 +7,6 @@ import { DevTool } from '@hookform/devtools';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { UseFormReturn } from 'react-hook-form/dist/types/form';
 import { FieldPath } from 'react-hook-form/dist/types/path';
-import { register } from '@swc-node/register/register';
 
 type ExtendedUseFormReturn<
   TFieldValues extends FieldValues = FieldValues,
