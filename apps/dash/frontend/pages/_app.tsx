@@ -38,7 +38,8 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <SuperTokensWrapper>
         <UrqlSupertokensProvider graphqlEndpoint={HTTP_URL}>
           <Head>
-            <title>Welcome to new-tab-page!</title>
+            <title>Dashy dash</title>
+            <link rel="icon" href="/favicon.png" />
           </Head>
           <main className="app">
             <Component {...pageProps} />
