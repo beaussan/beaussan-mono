@@ -1,8 +1,5 @@
 import { BookmarksInsertInput } from '@beaussan/dash/data/hasura-codegen-types';
-import {
-  MarkSomeRequired,
-  RequiredNotNullObject,
-} from '@beaussan/shared/utils/utility-types';
+import { MarkSomeRequired } from '@beaussan/shared/utils/utility-types';
 import { z } from 'zod';
 import {
   Button,
