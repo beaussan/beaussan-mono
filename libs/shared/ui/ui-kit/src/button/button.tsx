@@ -65,7 +65,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       iconPosition = 'start',
       isLoading,
       loadingText,
-      type,
+      type = 'button',
       disabled,
       fullWidth,
       intent,
@@ -73,7 +73,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     forwardedRef
   ) => {
-    console.log('REST:', rest);
     return (
       <button
         type={type}

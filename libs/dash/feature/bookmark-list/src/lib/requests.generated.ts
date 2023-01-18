@@ -6,7 +6,7 @@ import { graphql, ResponseResolver, GraphQLRequest, GraphQLContext } from 'msw';
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type BookmarkItemFragment = {
   __typename?: 'Bookmarks';
-  id: any;
+  id: string;
   link: string;
   faviconUrl?: string | null;
   displayName: string;
@@ -16,7 +16,7 @@ export type BookmarkItemFragment = {
 export type TraefikRoutesFragment = {
   __typename?: 'TraefikRoutes';
   faviconUrl?: string | null;
-  lastSeenAlive: any;
+  lastSeenAlive: string;
   isUp: boolean;
   name: string;
   friendlyName?: string | null;
@@ -31,7 +31,7 @@ export type GetListOfBookmarksQuery = {
   __typename?: 'query_root';
   bookmarks: Array<{
     __typename?: 'Bookmarks';
-    id: any;
+    id: string;
     link: string;
     faviconUrl?: string | null;
     displayName: string;
@@ -40,12 +40,29 @@ export type GetListOfBookmarksQuery = {
   traefikRoutes: Array<{
     __typename?: 'TraefikRoutes';
     faviconUrl?: string | null;
-    lastSeenAlive: any;
+    lastSeenAlive: string;
     isUp: boolean;
     name: string;
     friendlyName?: string | null;
     link: string;
   }>;
+};
+
+export type InsertBookmarkMutationVariables = Types.Exact<{
+  object: Types.BookmarksInsertInput;
+}>;
+
+export type InsertBookmarkMutation = {
+  __typename?: 'mutation_root';
+  insertBookmarksOne?: {
+    __typename?: 'Bookmarks';
+    position?: number | null;
+    link: string;
+    id: string;
+    faviconUrl?: string | null;
+    displayName: string;
+    userId: string;
+  } | null;
 };
 
 export const BookmarkItemFragmentDoc = gql`
@@ -92,6 +109,28 @@ export function useGetListOfBookmarksQuery(
     GetListOfBookmarksQueryVariables
   >({ query: GetListOfBookmarksDocument, ...options });
 }
+export const InsertBookmarkDocument = gql`
+  mutation InsertBookmark($object: BookmarksInsertInput!) {
+    insertBookmarksOne(
+      object: $object
+      onConflict: { constraint: bookmarks_pkey, update_columns: displayName }
+    ) {
+      position
+      link
+      id
+      faviconUrl
+      displayName
+      userId
+    }
+  }
+`;
+
+export function useInsertBookmarkMutation() {
+  return Urql.useMutation<
+    InsertBookmarkMutation,
+    InsertBookmarkMutationVariables
+  >(InsertBookmarkDocument);
+}
 
 /**
  * @param resolver a function that accepts a captured request and may return a mocked response.
@@ -112,5 +151,28 @@ export const mockGetListOfBookmarksQuery = (
 ) =>
   graphql.query<GetListOfBookmarksQuery, GetListOfBookmarksQueryVariables>(
     'getListOfBookmarks',
+    resolver
+  );
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockInsertBookmarkMutation((req, res, ctx) => {
+ *   const { object } = req.variables;
+ *   return res(
+ *     ctx.data({ insertBookmarksOne })
+ *   )
+ * })
+ */
+export const mockInsertBookmarkMutation = (
+  resolver: ResponseResolver<
+    GraphQLRequest<InsertBookmarkMutationVariables>,
+    GraphQLContext<InsertBookmarkMutation>,
+    any
+  >
+) =>
+  graphql.mutation<InsertBookmarkMutation, InsertBookmarkMutationVariables>(
+    'InsertBookmark',
     resolver
   );

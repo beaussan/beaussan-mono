@@ -5,6 +5,17 @@ object_relationships:
   - name: user
     using:
       foreign_key_constraint_on: userId
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        userId: x-hasura-user-id
+      columns:
+        - displayName
+        - faviconUrl
+        - link
+        - position
 select_permissions:
   - role: user
     permission:
@@ -19,3 +30,17 @@ select_permissions:
         userId:
           _eq: X-Hasura-User-Id
       allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - displayName
+        - faviconUrl
+        - link
+        - position
+      filter:
+        userId:
+          _eq: X-Hasura-User-Id
+      check:
+        userId:
+          _eq: X-Hasura-User-Id

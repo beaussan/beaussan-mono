@@ -11,7 +11,7 @@ const config: CodegenConfig = {
     },
   ],
   generates: {
-    'libs/dash/types/hasura-codegen-types/src/lib/graphqlTypes.ts': {
+    'libs/dash/data/hasura-codegen-types/src/lib/graphqlTypes.ts': {
       plugins: ['typescript'],
       config: {
         // See `scalars` option on https://www.the-guild.dev/graphql/codegen/plugins/typescript/typescript
@@ -21,10 +21,10 @@ const config: CodegenConfig = {
         },
       },
     },
-    'libs/dash/types/hasura-codegen-types/src/lib/graphql.schema.json': {
+    'libs/dash/data/hasura-codegen-types/src/lib/graphql.schema.json': {
       plugins: ['introspection'],
     },
-    'libs/dash/types/hasura-codegen-types/src/lib/graphql.schema.graphql': {
+    'libs/dash/data/hasura-codegen-types/src/lib/graphql.schema.graphql': {
       plugins: ['schema-ast'],
     },
   },

@@ -13,6 +13,7 @@ import {
   TraefikDisplay,
   UnifiedDisplay,
 } from './types';
+import { AddBookmark } from './addBookmark';
 
 export const Link = ({ item }: { item: UnifiedDisplay }) => {
   const url = new URL(item.link).hostname;
@@ -108,7 +109,7 @@ function ListBookmarkWithData({
 
   return (
     <div>
-      <div className="w-full px-4 py-2">
+      <div className="w-full flex px-4 py-2">
         <input
           onChange={(e) => search(e.target.value)}
           value={term}
@@ -122,6 +123,9 @@ function ListBookmarkWithData({
           }}
           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
         />
+        <div className="ml-4">
+          <AddBookmark />
+        </div>
       </div>
       <main className="overflow-y-auto px-4 py-2 space-y-1">
         <ul className="space-y-1">
