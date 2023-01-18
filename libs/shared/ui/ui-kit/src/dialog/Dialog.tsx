@@ -1,13 +1,10 @@
 import { Transition } from '@headlessui/react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import React, { Fragment, PropsWithChildren, useState } from 'react';
+import React, { Fragment, PropsWithChildren } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import clsx from 'clsx';
 import Button, { ButtonProps } from '../button/button';
 import { DialogContextProvider, useDialogContext } from './DialogContext';
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Props {}
 
 const CloseIcon = () => {
   return (
@@ -22,57 +19,56 @@ const CloseIcon = () => {
   );
 };
 
-export const DialogContent = React.forwardRef<
-  HTMLDivElement,
-  PropsWithChildren
->(({ children }, ref) => {
-  const { isOpen } = useDialogContext();
-  return (
-    <DialogPrimitive.Portal forceMount>
-      <Transition.Root show={isOpen}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <DialogPrimitive.Overlay
-            forceMount
-            className="fixed inset-0 z-20 bg-black/50"
-          />
-        </Transition.Child>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <DialogPrimitive.Content
-            forceMount
-            ref={ref}
-            className={clsx(
-              'fixed z-50',
-              'w-[95vw] max-w-md rounded-lg p-4 md:w-full',
-              'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
-              'bg-white dark:bg-gray-800',
-              'focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
-            )}
+const DialogContent = React.forwardRef<HTMLDivElement, PropsWithChildren>(
+  ({ children }, ref) => {
+    const { isOpen } = useDialogContext();
+    return (
+      <DialogPrimitive.Portal forceMount>
+        <Transition.Root show={isOpen}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            {children}
+            <DialogPrimitive.Overlay
+              forceMount
+              className="fixed inset-0 z-20 bg-black/50"
+            />
+          </Transition.Child>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
+          >
+            <DialogPrimitive.Content
+              forceMount
+              ref={ref}
+              className={clsx(
+                'fixed z-50',
+                'w-[95vw] max-w-md rounded-lg p-4 md:w-full',
+                'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
+                'bg-white dark:bg-gray-800',
+                'focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
+              )}
+            >
+              {children}
 
-            <CloseIcon />
-          </DialogPrimitive.Content>
-        </Transition.Child>
-      </Transition.Root>
-    </DialogPrimitive.Portal>
-  );
-});
+              <CloseIcon />
+            </DialogPrimitive.Content>
+          </Transition.Child>
+        </Transition.Root>
+      </DialogPrimitive.Portal>
+    );
+  }
+);
 
 const ProvidedRoot = ({ children }: PropsWithChildren) => {
   const { setIsOpen, isOpen } = useDialogContext();
@@ -127,27 +123,3 @@ export const Dialog = {
   ActionGroup,
   CloseButton,
 };
-
-const Dialog2 = (props: Props) => {
-  return (
-    <DialogRoot>
-      <Trigger>
-        <Button>Click</Button>
-      </Trigger>
-      <DialogContent>
-        <Title>Edit profileEE</Title>
-        <Description>
-          Make changes to your profile here. Click save when you&apos;re done.zz
-        </Description>
-        MY CONTENT !
-        <ActionGroup>
-          <CloseButton intent="primary">Do stuff</CloseButton>
-          <CloseButton intent="warn">Save</CloseButton>
-        </ActionGroup>
-        <CloseIcon />
-      </DialogContent>
-    </DialogRoot>
-  );
-};
-
-export default Dialog2;

@@ -28,3 +28,17 @@ query getListOfBookmarks {
     ...TraefikRoutes
   }
 }
+
+mutation InsertBookmark($object: BookmarksInsertInput!) {
+  insertBookmarksOne(
+    object: $object
+    onConflict: { constraint: bookmarks_pkey, update_columns: displayName }
+  ) {
+    position
+    link
+    id
+    faviconUrl
+    displayName
+    userId
+  }
+}
