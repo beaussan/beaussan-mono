@@ -1,4 +1,4 @@
-import nc, { RequestHandler } from 'next-connect';
+import nc, { ErrorHandler, RequestHandler } from 'next-connect';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { z, ZodError } from 'zod';
 import { traefikSyncDb } from '@beaussan/dash/feature/traefik-sync-db';
@@ -32,7 +32,32 @@ const payloadSchema = z.object({
   scheduled_time: z.string(),
 });
 
-const cronHandler = nc<NextApiRequest, NextApiResponse>()
+const getOnError =
+  (): ErrorHandler<NextApiRequest, NextApiResponse> =>
+  (err, req, res, next) => {
+    console.log('Error handler triggered', err);
+    if (err instanceof ZodError) {
+      console.log('Error ZodError found', err);
+      res.status(400).json({
+        message: fromZodError(err).message,
+        code: JSON.stringify(err.errors),
+      });
+    } else {
+      console.error(
+        'Error while executing function, returning 400 with hasura codes',
+        err
+      );
+      console.error(err);
+      res.status(400).json({
+        message: err.message,
+        code: '500',
+      });
+    }
+  };
+
+const cronHandler = nc<NextApiRequest, NextApiResponse>({
+  onError: getOnError(),
+})
   .use(getTokenVerificationMiddleware(cronToken))
   .use((req, res, next) => {
     console.log(req.body);
