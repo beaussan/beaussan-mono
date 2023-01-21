@@ -27,7 +27,7 @@
       "executor": "@nrwl/storybook:storybook",
       "options": {
         "uiFramework": "@storybook/react",
-        "port": 4400,
+        "port": 4401,
         "configDir": "libs/dash/storybook-host/.storybook"
       },
       "configurations": {
@@ -53,11 +53,11 @@
     "test-storybook": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "test-storybook -c libs/dash/storybook-host/.storybook --url=http://localhost:4400"
+        "command": "test-storybook -c libs/dash/storybook-host/.storybook --url=http://localhost:4401"
       },
       "configurations": {
         "ci": {
-          "command": "start-server-and-test 'nx run dash-storybook-host:storybook' 4400 'test-storybook -c libs/dash/storybook-host/.storybook --url=http://localhost:4400'"
+          "command": "start-server-and-test 'nx run dash-storybook-host:storybook' 4401 'test-storybook -c libs/dash/storybook-host/.storybook --url=http://localhost:4401'"
         }
       }
     }
