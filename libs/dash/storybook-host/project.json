@@ -28,9 +28,7 @@
       "options": {
         "uiFramework": "@storybook/react",
         "port": 4400,
-        "config": {
-          "configFolder": "libs/dash/storybook-host/.storybook"
-        }
+        "configDir": "libs/dash/storybook-host/.storybook"
       },
       "configurations": {
         "ci": {
@@ -40,13 +38,11 @@
     },
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": ["{options.outputDir}"],
       "options": {
         "uiFramework": "@storybook/react",
-        "outputPath": "dist/storybook/dash-storybook-host",
-        "config": {
-          "configFolder": "libs/dash/storybook-host/.storybook"
-        }
+        "configDir": "libs/dash/storybook-host/.storybook",
+        "outputDir": "dist/storybook/dash-storybook-host"
       },
       "configurations": {
         "ci": {

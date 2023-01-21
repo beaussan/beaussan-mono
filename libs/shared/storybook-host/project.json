@@ -28,9 +28,7 @@
       "options": {
         "uiFramework": "@storybook/react",
         "port": 4400,
-        "config": {
-          "configFolder": "libs/shared/storybook-host/.storybook"
-        }
+        "configDir": "libs/shared/storybook-host/.storybook"
       },
       "configurations": {
         "ci": {
@@ -40,13 +38,11 @@
     },
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": ["{options.outputDir}"],
       "options": {
         "uiFramework": "@storybook/react",
-        "outputPath": "dist/storybook/shared-storybook-host",
-        "config": {
-          "configFolder": "libs/shared/storybook-host/.storybook"
-        }
+        "configDir": "libs/shared/storybook-host/.storybook",
+        "outputDir": "dist/storybook/shared-storybook-host"
       },
       "configurations": {
         "ci": {
