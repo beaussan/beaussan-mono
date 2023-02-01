@@ -1,4 +1,4 @@
-import { cva, VariantProps } from 'cva';
+import { cva, VariantProps } from 'class-variance-authority';
 import React, { forwardRef, ReactElement } from 'react';
 import clsx from 'clsx';
 import { CgSpinner } from 'react-icons/cg';

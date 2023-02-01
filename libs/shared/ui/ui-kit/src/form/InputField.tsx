@@ -14,7 +14,7 @@ import {
   FieldWrapperPassThroughProps,
   useFormField,
 } from './FieldWrapper';
-import { cva } from 'cva';
+import { cva } from 'class-variance-authority';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 
 // putting this into a standalone component so `useWatch` won't have to run even if ClearButton is not enabled.
