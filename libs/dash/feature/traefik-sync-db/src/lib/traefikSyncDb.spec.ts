@@ -95,7 +95,7 @@ describe('traefikSyncDb', () => {
 
       await expect(traefikSyncDb(sdk, traefikBaseUrl)).resolves
         .toMatchInlineSnapshot(`
-        Object {
+        {
           "error": "Validation error: Required at \\"[0].name\\"",
           "status": "error",
         }
@@ -122,7 +122,7 @@ describe('traefikSyncDb', () => {
 
         await expect(traefikSyncDb(sdk, traefikBaseUrl)).resolves
           .toMatchInlineSnapshot(`
-          Object {
+          {
             "error": "Something is wrong",
             "status": "error",
           }
@@ -133,17 +133,17 @@ describe('traefikSyncDb', () => {
     describe('when the graphql api is working', () => {
       const fakeTimerDate = new Date(2022, 3, 2, 12, 30, 20, 26);
       beforeEach(() => {
-        jest.useFakeTimers();
-        jest.setSystemTime(fakeTimerDate);
+        vi.useFakeTimers();
+        vi.setSystemTime(fakeTimerDate);
       });
 
       afterEach(() => {
-        jest.useRealTimers();
+        vi.useRealTimers();
       });
 
       it('should cal the two api with the correct data', async () => {
-        const upsertMock = jest.fn();
-        const allNodeUpdateMock = jest.fn();
+        const upsertMock = vi.fn();
+        const allNodeUpdateMock = vi.fn();
         server.use(
           mockUpsertTraefikRoutesIntoDbMutationHasura((req, res, context) => {
             upsertMock(req.variables);

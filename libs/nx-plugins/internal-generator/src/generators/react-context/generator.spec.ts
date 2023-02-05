@@ -34,12 +34,12 @@ describe('react-context generator', () => {
         return { data: 1 };
       };
 
-      export type UseUserDataContextType = ReturnType<
+      export type UserDataContextType = ReturnType<
         typeof useUserDataValue
       >;
 
       const UseUserData = createContext<
-        UseUserDataContextType | undefined
+        UserDataContextType | undefined
       >(undefined);
 
       export const UserDataProvider = ({
@@ -55,6 +55,15 @@ describe('react-context generator', () => {
           </UseUserData.Provider>
         );
       };
+
+      export const MockUserDataContextProvider = (
+        props: React.PropsWithChildren<{
+          params: UserDataContextType;
+        }>
+      ) => {
+        return <UseUserData.Provider value={props.params} {...props} />;
+      };
+
 
       export const useUserData = () => {
         const context = React.useContext(UseUserData);
