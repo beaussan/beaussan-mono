@@ -1,0 +1,23 @@
+mutation EditUserSettings($userId: uuid!, $todoistApiToken: String!) {
+  updateUsersByPk(
+    pk_columns: { id: $userId }
+    _set: { todoistApiToken: $todoistApiToken }
+  ) {
+    id
+    todoistApiToken
+    updatedAt
+    email
+    createdAt
+  }
+}
+
+query UserInfo($id: uuid = "") {
+  usersByPk(id: $id) {
+    updatedAt
+    todoistApiToken
+    id
+    email
+    createdAt
+    canSeeTraefikContent
+  }
+}

@@ -8,6 +8,7 @@ import React, { useEffect } from 'react';
 import Session from 'supertokens-auth-react/recipe/session';
 import { UrqlSupertokensProvider } from '@beaussan/shared/data/supertokens-urql-client';
 import { clientEnvs } from '@beaussan/dash/data/env-config';
+import { UserDataProvider } from '@beaussan/dash/data/user';
 
 export const HTTP_URL = clientEnvs.NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL;
 
@@ -37,13 +38,15 @@ function CustomApp({ Component, pageProps }: AppProps) {
     <>
       <SuperTokensWrapper>
         <UrqlSupertokensProvider graphqlEndpoint={HTTP_URL}>
-          <Head>
-            <title>Dashy dash</title>
-            <link rel="icon" href="/favicon.png" />
-          </Head>
-          <main className="app">
-            <Component {...pageProps} />
-          </main>
+          <UserDataProvider>
+            <Head>
+              <title>Dashy dash</title>
+              <link rel="icon" href="/favicon.png" />
+            </Head>
+            <main className="app">
+              <Component {...pageProps} />
+            </main>
+          </UserDataProvider>
         </UrqlSupertokensProvider>
       </SuperTokensWrapper>
     </>

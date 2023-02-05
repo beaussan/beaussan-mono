@@ -89,7 +89,7 @@ const DialogRoot = ({ children }: PropsWithChildren) => {
 };
 
 const Title = ({ children }: PropsWithChildren) => (
-  <DialogPrimitive.Title className="text-sm font-medium text-gray-900 dark:text-gray-100">
+  <DialogPrimitive.Title className="text-xl font-medium text-gray-900 dark:text-gray-100">
     {children}
   </DialogPrimitive.Title>
 );

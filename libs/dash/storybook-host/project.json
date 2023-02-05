@@ -4,7 +4,10 @@
   "sourceRoot": "libs/dash/storybook-host/src",
   "projectType": "library",
   "tags": ["scope:dash", "type:storybook"],
-  "implicitDependencies": ["dash-feature-bookmark-list"],
+  "implicitDependencies": [
+    "dash-feature-bookmark-list",
+    "dash-feature-user-settings"
+  ],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",

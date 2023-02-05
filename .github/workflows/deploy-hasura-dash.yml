@@ -19,11 +19,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-      - run: npx hasura-cli --skip-update-check --endpoint $HASURA_URL --admin-secret $ADMIN_SECRET --project apps/dash/hasura migrate apply --database-name default
+      - run: npx hasura-cli@2.15.2 --skip-update-check --endpoint $HASURA_URL --admin-secret $ADMIN_SECRET --project apps/dash/hasura migrate apply --database-name default
         env:
           ADMIN_SECRET: ${{ secrets.DASH_HASURA_ADMIN_SECRET }}
           HASURA_URL: ${{ secrets.DASH_HASURA_URL }}
-      - run: npx hasura-cli --skip-update-check --endpoint $HASURA_URL --admin-secret $ADMIN_SECRET --project apps/dash/hasura metadata apply
+      - run: npx hasura-cli@2.15.2 --skip-update-check --endpoint $HASURA_URL --admin-secret $ADMIN_SECRET --project apps/dash/hasura metadata apply
         env:
           ADMIN_SECRET: ${{ secrets.DASH_HASURA_ADMIN_SECRET }}
           HASURA_URL: ${{ secrets.DASH_HASURA_URL }}
