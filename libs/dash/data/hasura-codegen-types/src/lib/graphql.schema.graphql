@@ -891,6 +891,7 @@ type Users {
   createdAt: timestamptz!
   email: String
   id: uuid!
+  todoistApiToken: String
   updatedAt: timestamptz!
 }
 
@@ -924,6 +925,7 @@ input UsersBoolExp {
   createdAt: TimestamptzComparisonExp
   email: StringComparisonExp
   id: UuidComparisonExp
+  todoistApiToken: StringComparisonExp
   updatedAt: TimestamptzComparisonExp
 }
 
@@ -946,6 +948,7 @@ input UsersInsertInput {
   createdAt: timestamptz
   email: String
   id: uuid
+  todoistApiToken: String
   updatedAt: timestamptz
 }
 
@@ -956,6 +959,7 @@ type UsersMaxFields {
   createdAt: timestamptz
   email: String
   id: uuid
+  todoistApiToken: String
   updatedAt: timestamptz
 }
 
@@ -966,6 +970,7 @@ type UsersMinFields {
   createdAt: timestamptz
   email: String
   id: uuid
+  todoistApiToken: String
   updatedAt: timestamptz
 }
 
@@ -1014,6 +1019,7 @@ input UsersOrderBy {
   createdAt: OrderBy
   email: OrderBy
   id: OrderBy
+  todoistApiToken: OrderBy
   updatedAt: OrderBy
 }
 
@@ -1051,6 +1057,11 @@ enum UsersSelectColumn {
   """
   column name
   """
+  todoistApiToken
+
+  """
+  column name
+  """
   updatedAt
 }
 
@@ -1062,6 +1073,7 @@ input UsersSetInput {
   createdAt: timestamptz
   email: String
   id: uuid
+  todoistApiToken: String
   updatedAt: timestamptz
 }
 
@@ -1088,6 +1100,11 @@ enum UsersUpdateColumn {
   column name
   """
   id
+
+  """
+  column name
+  """
+  todoistApiToken
 
   """
   column name
@@ -2005,6 +2022,7 @@ input users_streamCursorValueInput {
   createdAt: timestamptz
   email: String
   id: uuid
+  todoistApiToken: String
   updatedAt: timestamptz
 }
 

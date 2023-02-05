@@ -594,6 +594,7 @@ export type Users = {
   createdAt: Scalars['timestamptz'];
   email?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
+  todoistApiToken?: Maybe<Scalars['String']>;
   updatedAt: Scalars['timestamptz'];
 };
 
@@ -647,6 +648,7 @@ export type UsersBoolExp = {
   createdAt?: InputMaybe<TimestamptzComparisonExp>;
   email?: InputMaybe<StringComparisonExp>;
   id?: InputMaybe<UuidComparisonExp>;
+  todoistApiToken?: InputMaybe<StringComparisonExp>;
   updatedAt?: InputMaybe<TimestamptzComparisonExp>;
 };
 
@@ -663,6 +665,7 @@ export type UsersInsertInput = {
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   email?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
+  todoistApiToken?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -672,6 +675,7 @@ export type UsersMaxFields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
+  todoistApiToken?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -681,6 +685,7 @@ export type UsersMinFields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
+  todoistApiToken?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -714,6 +719,7 @@ export type UsersOrderBy = {
   createdAt?: InputMaybe<OrderBy>;
   email?: InputMaybe<OrderBy>;
   id?: InputMaybe<OrderBy>;
+  todoistApiToken?: InputMaybe<OrderBy>;
   updatedAt?: InputMaybe<OrderBy>;
 };
 
@@ -733,6 +739,8 @@ export enum UsersSelectColumn {
   /** column name */
   Id = 'id',
   /** column name */
+  TodoistApiToken = 'todoistApiToken',
+  /** column name */
   UpdatedAt = 'updatedAt',
 }
 
@@ -742,6 +750,7 @@ export type UsersSetInput = {
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   email?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
+  todoistApiToken?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -755,6 +764,8 @@ export enum UsersUpdateColumn {
   Email = 'email',
   /** column name */
   Id = 'id',
+  /** column name */
+  TodoistApiToken = 'todoistApiToken',
   /** column name */
   UpdatedAt = 'updatedAt',
 }
@@ -1258,5 +1269,6 @@ export type Users_StreamCursorValueInput = {
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   email?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
+  todoistApiToken?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
 };

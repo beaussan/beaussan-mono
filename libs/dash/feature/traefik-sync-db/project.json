@@ -5,13 +5,10 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/js:swc",
+      "executor": "@nrwl/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/dash/feature/traefik-sync-db",
-        "main": "libs/dash/feature/traefik-sync-db/src/index.ts",
-        "tsConfig": "libs/dash/feature/traefik-sync-db/tsconfig.lib.json",
-        "assets": ["libs/dash/feature/traefik-sync-db/*.md"]
+        "outputPath": "dist/libs/dash/feature/traefik-sync-db"
       }
     },
     "lint": {
@@ -22,10 +19,9 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nrwl/vite:test",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/dash/feature/traefik-sync-db/jest.config.ts",
         "passWithNoTests": true
       }
     }

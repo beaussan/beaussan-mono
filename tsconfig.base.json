@@ -24,11 +24,19 @@
       "@beaussan/dash/data/hasura-codegen-types": [
         "libs/dash/data/hasura-codegen-types/src/index.ts"
       ],
+      "@beaussan/dash/data/todoist": ["libs/dash/data/todoist/src/index.ts"],
+      "@beaussan/dash/data/user": ["libs/dash/data/user/src/index.ts"],
       "@beaussan/dash/feature/bookmark-list": [
         "libs/dash/feature/bookmark-list/src/index.ts"
       ],
+      "@beaussan/dash/feature/tasks-panel": [
+        "libs/dash/feature/tasks-panel/src/index.ts"
+      ],
       "@beaussan/dash/feature/traefik-sync-db": [
         "libs/dash/feature/traefik-sync-db/src/index.ts"
+      ],
+      "@beaussan/dash/feature/user-settings": [
+        "libs/dash/feature/user-settings/src/index.ts"
       ],
       "@beaussan/dash/storybook-host": [
         "libs/dash/storybook-host/src/index.ts"

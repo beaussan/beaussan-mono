@@ -1,0 +1,45 @@
+import React, { createContext } from 'react';
+
+
+const use<%= className %>Value = () => {
+  return { data: 1 };
+};
+
+export type <%= className %>ContextType = ReturnType<
+  typeof use<%= className %>Value
+>;
+
+const Use<%= className %> = createContext<
+  <%= className %>ContextType | undefined
+>(undefined);
+
+export const <%= className %>Provider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const value = use<%= className %>Value();
+
+  return (
+    <Use<%= className %>.Provider value={value}>
+      {children}
+    </Use<%= className %>.Provider>
+  );
+};
+
+export const Mock<%= className %>ContextProvider = (
+  props: React.PropsWithChildren<{
+    params: <%= className %>ContextType;
+  }>
+) => {
+  return <Use<%= className %>.Provider value={props.params} {...props} />;
+};
+
+
+export const use<%= className %> = () => {
+  const context = React.useContext(Use<%= className %>);
+  if (context === undefined) {
+    throw new Error('useCount must be used within a <%= className %>Provider');
+  }
+  return context;
+};

@@ -1,0 +1,43 @@
+{
+  "name": "dash-feature-tasks-panel",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/dash/feature/tasks-panel/src",
+  "projectType": "library",
+  "tags": ["scope:dash", "type:feature"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/dash/feature/tasks-panel/**/*.{ts,tsx,js,jsx}",
+          "libs/dash/feature/tasks-panel/**/*.json"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nrwl/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/dash/feature/tasks-panel"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": ["coverage/libs/dash/feature/tasks-panel"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../../coverage/libs/dash/feature/tasks-panel"
+      }
+    }
+  }
+}

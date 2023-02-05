@@ -18,6 +18,16 @@
       "schema": "./src/generators/library/schema.json",
       "description": "Create a library",
       "aliases": ["lib"]
+    },
+    "react-context": {
+      "factory": "./src/generators/react-context/generator",
+      "schema": "./src/generators/react-context/schema.json",
+      "description": "Generate a react context using the standards in the repo"
+    },
+    "setup-graphql-codegen": {
+      "factory": "./src/generators/setup-graphql-codegen/generator",
+      "schema": "./src/generators/setup-graphql-codegen/schema.json",
+      "description": "Generate graphql codegen config"
     }
   }
 }

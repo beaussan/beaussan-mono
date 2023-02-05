@@ -1,4 +1,8 @@
-import type { StorybookConfig } from '@storybook/core-common';
+import { StorybookConfig as WebpackStorybookConfig } from '@storybook/react-webpack5';
+import { StorybookConfig as ViteStorybookConfig } from '@storybook/react-vite';
+
+type StorybookConfig = Omit<WebpackStorybookConfig, 'framework' | 'core'> &
+  Pick<ViteStorybookConfig, 'viteFinal'>;
 
 export const rootMain: StorybookConfig = {
   stories: [],

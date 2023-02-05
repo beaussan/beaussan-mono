@@ -1,0 +1,55 @@
+{
+  "name": "dash-feature-user-settings",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/dash/feature/user-settings/src",
+  "projectType": "library",
+  "tags": ["scope:dash", "type:feature"],
+  "targets": {
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn graphql-codegen --config libs/dash/feature/user-settings/gqlCodegen.ts"
+      },
+      "configurations": {
+        "default": {},
+        "watch": {
+          "command": "yarn graphql-codegen --config libs/dash/feature/user-settings/gqlCodegen.ts --watch"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/dash/feature/user-settings/**/*.{ts,tsx,js,jsx}",
+          "libs/dash/feature/user-settings/**/*.json"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nrwl/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/dash/feature/user-settings"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": ["coverage/libs/dash/feature/user-settings"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../../coverage/libs/dash/feature/user-settings"
+      }
+    }
+  }
+}
