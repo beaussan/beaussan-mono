@@ -9,6 +9,8 @@ import Session from 'supertokens-auth-react/recipe/session';
 import { UrqlSupertokensProvider } from '@beaussan/shared/data/supertokens-urql-client';
 import { clientEnvs } from '@beaussan/dash/data/env-config';
 import { UserDataProvider } from '@beaussan/dash/data/user';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const HTTP_URL = clientEnvs.NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL;
 
@@ -16,6 +18,7 @@ if (typeof window !== 'undefined') {
   // we only want to call this init function on the frontend, so we check typeof window !== 'undefined'
   SuperTokensReact.init(frontendConfig());
 }
+const queryClient = new QueryClient();
 
 function CustomApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -36,19 +39,22 @@ function CustomApp({ Component, pageProps }: AppProps) {
   }
   return (
     <>
-      <SuperTokensWrapper>
-        <UrqlSupertokensProvider graphqlEndpoint={HTTP_URL}>
-          <UserDataProvider>
-            <Head>
-              <title>Dashy dash</title>
-              <link rel="icon" href="/favicon.png" />
-            </Head>
-            <main className="app">
-              <Component {...pageProps} />
-            </main>
-          </UserDataProvider>
-        </UrqlSupertokensProvider>
-      </SuperTokensWrapper>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <SuperTokensWrapper>
+          <UrqlSupertokensProvider graphqlEndpoint={HTTP_URL}>
+            <UserDataProvider>
+              <Head>
+                <title>Dashy dash</title>
+                <link rel="icon" href="/favicon.png" />
+              </Head>
+              <main className="app">
+                <Component {...pageProps} />
+              </main>
+            </UserDataProvider>
+          </UrqlSupertokensProvider>
+        </SuperTokensWrapper>
+      </QueryClientProvider>
     </>
   );
 }

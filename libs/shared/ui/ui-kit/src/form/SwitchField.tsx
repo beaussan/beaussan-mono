@@ -3,12 +3,7 @@ import {
   FieldWrapperPassThroughProps,
   useFormField,
 } from './FieldWrapper';
-import {
-  FieldPath,
-  useFormContext,
-  FieldValues,
-  Controller,
-} from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 import * as Switch from '@radix-ui/react-switch';
 import clsx from 'clsx';
 

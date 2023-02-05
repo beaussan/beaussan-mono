@@ -16,10 +16,9 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nrwl/vite:test",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/shared/storybook-host/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -58,6 +57,22 @@
       "configurations": {
         "ci": {
           "command": "start-server-and-test 'nx run shared-storybook-host:storybook' 4400 'test-storybook -c libs/shared/storybook-host/.storybook --url=http://localhost:4400'"
+        }
+      }
+    },
+    "build": {
+      "executor": "@nrwl/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/shared/storybook-host"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
         }
       }
     }

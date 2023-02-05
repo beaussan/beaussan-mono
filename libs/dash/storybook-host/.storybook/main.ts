@@ -1,10 +1,10 @@
 import { rootMain } from '../../../../.storybook/main';
-
-import type { StorybookConfig, Options } from '@storybook/core-common';
+import type { StorybookConfig } from '@storybook/react-vite';
+import { mergeConfig } from 'vite';
+import viteTsConfigPaths from 'vite-tsconfig-paths';
 
 const config: StorybookConfig = {
   ...rootMain,
-  core: { ...rootMain.core, builder: 'webpack5' },
   stories: [
     ...rootMain.stories,
     '../../**/*.stories.mdx',
@@ -13,16 +13,19 @@ const config: StorybookConfig = {
 
   staticDirs: ['../../../../tools/msw'],
   addons: [...(rootMain.addons || []), '@nrwl/react/plugins/storybook'],
-  webpackFinal: async (config, { configType }: Options) => {
-    // apply any global webpack configs that might have been specified in .storybook/main.ts
-    if (rootMain.webpackFinal) {
-      config = await rootMain.webpackFinal(config, { configType } as Options);
-    }
-
-    // add your own webpack tweaks if needed
-
-    return config;
+  framework: {
+    name: '@storybook/react-vite',
+    options: {},
+  },
+  viteFinal: (viteConfig, options) => {
+    return mergeConfig(viteConfig, {
+      plugins: [
+        viteTsConfigPaths({
+          root: '../../../../',
+        }),
+      ],
+    });
   },
 };
 
-module.exports = config;
+export default config;

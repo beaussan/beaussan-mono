@@ -1,0 +1,43 @@
+{
+  "name": "dash-data-todoist",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/dash/data/todoist/src",
+  "projectType": "library",
+  "tags": ["scope:dash", "type:data"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/dash/data/todoist/**/*.{ts,tsx,js,jsx}",
+          "libs/dash/data/todoist/**/*.json"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nrwl/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/dash/data/todoist"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": ["coverage/libs/dash/data/todoist"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../../coverage/libs/dash/data/todoist"
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-mutation EditUserSettings($userId: uuid!, $todoistApiToken: String!) {
+mutation EditUserSettings($userId: uuid!, $todoistApiToken: String) {
   updateUsersByPk(
     pk_columns: { id: $userId }
     _set: { todoistApiToken: $todoistApiToken }
