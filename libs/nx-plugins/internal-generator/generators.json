@@ -17,9 +17,7 @@
       "factory": "./src/generators/library/generator",
       "schema": "./src/generators/library/schema.json",
       "description": "Create a library",
-      "aliases": [
-        "lib"
-      ]
+      "aliases": ["lib"]
     },
     "react-context": {
       "factory": "./src/generators/react-context/generator",
