@@ -37,6 +37,7 @@ if (typeof window !== 'undefined') {
     persister: localStoragePersister,
   });
 }
+const queryClient = new QueryClient();
 
 function CustomApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
