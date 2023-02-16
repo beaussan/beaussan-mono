@@ -44,8 +44,8 @@ export const TaskPanel = () => {
   }
 
   return (
-    <div className="flex flex-col space-y-2 px-4 mb-8">
-      <h2 className="text-xl font-bold mt-2">Tasks</h2>
+    <div className="flex flex-col space-y-2">
+      <h2 className="text-xl font-bold">Tasks</h2>
       {tasks.data.map((item) => (
         <TaskDisplay task={item} key={item.id} />
       ))}

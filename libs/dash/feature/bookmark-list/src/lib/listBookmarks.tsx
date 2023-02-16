@@ -108,8 +108,9 @@ function ListBookmarkWithData({
   }, []);
 
   return (
-    <div>
-      <div className="w-full flex px-4 py-2">
+    <div className="">
+      <h2 className="text-xl font-bold">Bookmarks</h2>
+      <div className="w-full flex py-2">
         <input
           onChange={(e) => search(e.target.value)}
           value={term}
@@ -127,7 +128,7 @@ function ListBookmarkWithData({
           <AddBookmark />
         </div>
       </div>
-      <main className="overflow-y-auto px-4 py-2 space-y-1">
+      <main className="overflow-y-auto py-2 space-y-1">
         <ul className="space-y-1">
           {dataWithSearch.map((link) => (
             <li>

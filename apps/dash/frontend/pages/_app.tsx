@@ -11,14 +11,32 @@ import { clientEnvs } from '@beaussan/dash/data/env-config';
 import { UserDataProvider } from '@beaussan/dash/data/user';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { persistQueryClient } from '@tanstack/react-query-persist-client';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 
 export const HTTP_URL = clientEnvs.NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL;
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+    },
+  },
+});
 if (typeof window !== 'undefined') {
   // we only want to call this init function on the frontend, so we check typeof window !== 'undefined'
   SuperTokensReact.init(frontendConfig());
+
+  const localStoragePersister = createSyncStoragePersister({
+    storage: window.localStorage,
+  });
+  // const sessionStoragePersister = createSyncStoragePersister({ storage: window.sessionStorage })
+
+  persistQueryClient({
+    queryClient,
+    persister: localStoragePersister,
+  });
 }
-const queryClient = new QueryClient();
 
 function CustomApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
