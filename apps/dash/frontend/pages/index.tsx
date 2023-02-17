@@ -4,11 +4,8 @@ import Head from 'next/head';
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import { ListBookmarks } from '@beaussan/dash/feature/bookmark-list';
 import { useLogout } from '@beaussan/shared/utils/supertokens/react';
-import { clientEnvs } from '@beaussan/dash/data/env-config';
 import { UserSettingDialog } from '@beaussan/dash/feature/user-settings';
 import { TaskPanel } from '@beaussan/dash/feature/tasks-panel';
-
-console.log(clientEnvs);
 
 function ProtectedPage() {
   const session = useSessionContext();
@@ -25,9 +22,13 @@ function ProtectedPage() {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="grid grid-rows-[1fr_auto] h-screen">
-        <main className=" flex flex-col bg-gradient-to-bl overflow-y-auto from-orange-300 via-cyan-400 to-yellow-400 overflow-hidden">
-          <TaskPanel />
-          <ListBookmarks />
+        <main className="grid gap-4 py-2 px-4 grid-cols-2 bg-gradient-to-bl overflow-y-auto from-orange-300 via-cyan-400 to-yellow-400 overflow-hidden">
+          <div>
+            <ListBookmarks />
+          </div>
+          <div>
+            <TaskPanel />
+          </div>
         </main>
         <footer className="flex justify-between py-2 px-8 h-12 items-center bg-gradient-to-r from-cyan-300 to-blue-500">
           <div>
