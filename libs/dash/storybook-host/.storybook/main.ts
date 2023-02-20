@@ -12,7 +12,11 @@ const config: StorybookConfig = {
   ],
 
   staticDirs: ['../../../../tools/msw'],
-  addons: [...(rootMain.addons || []), '@nrwl/react/plugins/storybook'],
+  addons: [
+    '@storybook/addon-essentials',
+    ...(rootMain.addons || []),
+    '@nrwl/react/plugins/storybook',
+  ],
   framework: {
     name: '@storybook/react-vite',
     options: {},
