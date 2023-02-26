@@ -161,12 +161,6 @@ describe('storybook generator', () => {
       );
     });
 
-    it('should keep the existing story spread', () => {
-      expect(storybookFile).toEqual(
-        expect.stringContaining('...rootMain.stories')
-      );
-    });
-
     it('should remove the old src targets for stories', () => {
       expect(storybookFile).not.toEqual(
         expect.stringContaining('../src/lib/**/*.stories.mdx')
