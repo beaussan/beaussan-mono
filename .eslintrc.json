@@ -19,7 +19,7 @@
               },
               {
                 "sourceTag": "scope:dash",
-                "onlyDependOnLibsWithTags": ["scope:shared", "scope:dash"]
+                "onlyDependOnLibsWithTags": ["scope:dash", "scope:shared"]
               },
               {
                 "sourceTag": "scope:nx-plugins",
@@ -35,46 +35,45 @@
               },
               {
                 "sourceTag": "type:ui",
-                "onlyDependOnLibsWithTags": ["type:utils", "type:ui"]
+                "onlyDependOnLibsWithTags": ["type:ui", "type:utils"]
               },
               {
                 "sourceTag": "type:feature",
                 "onlyDependOnLibsWithTags": [
+                  "type:data",
                   "type:feature",
                   "type:ui",
-                  "type:data",
                   "type:utils"
                 ]
               },
               {
                 "sourceTag": "type:app",
                 "onlyDependOnLibsWithTags": [
-                  "type:ui",
                   "type:data",
                   "type:utils",
+                  "type:ui",
                   "type:feature"
                 ]
               },
               {
                 "sourceTag": "type:e2e",
                 "onlyDependOnLibsWithTags": [
+                  "type:data",
+                  "type:e2e",
                   "type:app",
+                  "type:ui",
                   "type:storybook",
                   "type:feature",
-                  "type:ui",
-                  "type:utils",
-                  "type:data"
+                  "type:utils"
                 ]
               },
               {
                 "sourceTag": "type:storybook",
                 "onlyDependOnLibsWithTags": [
-                  "type:app",
+                  "type:data",
                   "type:storybook",
                   "type:feature",
-                  "type:ui",
-                  "type:utils",
-                  "type:data"
+                  "type:ui"
                 ]
               }
             ]
@@ -99,16 +98,28 @@
         "@nrwl/nx/workspace/allowed-project-tags": [
           "error",
           {
-            "scopeTags": ["dash", "nx-plugins", "shared"],
-            "typeTags": [
-              "app",
-              "storybook",
-              "e2e",
-              "feature",
-              "ui",
-              "data",
-              "utils"
-            ]
+            "tags": {
+              "scope": {
+                "prefix": "scope:",
+                "allowMultiplePerProject": false,
+                "enforceAtLeastOne": true,
+                "allowedTags": ["dash", "nx-plugins", "shared"]
+              },
+              "type": {
+                "prefix": "type:",
+                "allowMultiplePerProject": false,
+                "enforceAtLeastOne": true,
+                "allowedTags": [
+                  "app",
+                  "storybook",
+                  "e2e",
+                  "feature",
+                  "ui",
+                  "data",
+                  "utils"
+                ]
+              }
+            }
           }
         ]
       }

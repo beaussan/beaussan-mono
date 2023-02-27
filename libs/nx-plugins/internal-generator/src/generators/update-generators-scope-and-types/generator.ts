@@ -12,6 +12,7 @@ import {
   TagType,
   tagTypeList,
 } from '../../utils/consts';
+import { eslintScopeUpdater } from './eslintScopeUpdater';
 
 interface SimplifiedGeneratorJson {
   generators: Record<string, { schema: string }>;
@@ -79,5 +80,6 @@ export default async function (tree: Tree) {
       tagScopeList as unknown as TagScope[]
     );
   }
+  await eslintScopeUpdater(tree);
   await formatFiles(tree);
 }
