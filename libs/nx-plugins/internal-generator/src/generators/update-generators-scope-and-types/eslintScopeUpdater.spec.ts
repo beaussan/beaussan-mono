@@ -44,11 +44,15 @@ describe('generateFullDepConstraint', () => {
         prefix: 'my-prefix:',
         description: '',
         tags: ['test1', 'test2'] as const,
+        shouldAlwaysBePresent: true,
+        allowMultiplePerProject: false,
       },
       demo: {
         prefix: 'my-demo:',
         tags: ['demo1', 'demo2'] as const,
         description: '',
+        shouldAlwaysBePresent: true,
+        allowMultiplePerProject: false,
       },
     } satisfies TagGroupMap;
     const tagDefs = {
@@ -89,29 +93,29 @@ describe('generateFullDepConstraint', () => {
     const result = generateFullDepConstraint(groupMap, tagDefs);
 
     expect(result).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "onlyDependOnLibsWithTags": Array [
+      [
+        {
+          "onlyDependOnLibsWithTags": [
             "my-demo:demo1",
             "my-demo:demo2",
           ],
           "sourceTag": "my-demo:demo1",
         },
-        Object {
-          "onlyDependOnLibsWithTags": Array [
+        {
+          "onlyDependOnLibsWithTags": [
             "my-demo:demo2",
           ],
           "sourceTag": "my-demo:demo2",
         },
-        Object {
-          "onlyDependOnLibsWithTags": Array [
+        {
+          "onlyDependOnLibsWithTags": [
             "my-prefix:test1",
             "my-prefix:test2",
           ],
           "sourceTag": "my-prefix:test1",
         },
-        Object {
-          "onlyDependOnLibsWithTags": Array [
+        {
+          "onlyDependOnLibsWithTags": [
             "my-prefix:test2",
             "my-prefix:test1",
           ],

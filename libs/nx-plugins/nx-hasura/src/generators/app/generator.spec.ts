@@ -28,7 +28,7 @@ describe('app generator', () => {
     expect(config).toBeDefined();
 
     expect(appTree.listChanges().map((it) => it.path)).toMatchInlineSnapshot(`
-      Array [
+      [
         ".prettierrc",
         "package.json",
         "nx.json",
