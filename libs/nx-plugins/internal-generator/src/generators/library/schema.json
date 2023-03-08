@@ -21,10 +21,22 @@
         "$source": "args",
         "index": 1
       },
+      "x-mono-internal-source": "scope",
       "x-prompt": {
         "message": "What is the scope of the library ?",
         "type": "list",
-        "items": ["dash", "shared"]
+        "items": [
+          [
+            {
+              "value": "shared",
+              "label": "shared - Shared libraries, used across all other libraries"
+            },
+            {
+              "value": "dash",
+              "label": "dash - Dash application related libraries"
+            }
+          ]
+        ]
       }
     },
     "type": {
@@ -34,11 +46,51 @@
         "$source": "args",
         "index": 1
       },
+      "x-mono-internal-source": "type",
       "x-prompt": {
         "message": "What is the type of the library ?",
         "type": "list",
-        "items": ["feature", "ui", "data", "utils"]
-      }
+        "items": [
+          [
+            {
+              "value": "utils",
+              "label": "utils - Utilities library, ex : date-utils, zod-utils"
+            },
+            {
+              "value": "data",
+              "label": "data - Data library, with state management and network"
+            },
+            {
+              "value": "ui",
+              "label": "ui - Ui library, with only component getting data via props"
+            },
+            {
+              "value": "feature",
+              "label": "feature - Feature library, with connected ui & data to make a feature"
+            }
+          ]
+        ]
+      },
+      "items": [
+        [
+          {
+            "value": "utils",
+            "label": "utils - Utilities library, ex : date-utils, zod-utils"
+          },
+          {
+            "value": "data",
+            "label": "data - Data library, with state management and network"
+          },
+          {
+            "value": "ui",
+            "label": "ui - Ui library, with only component getting data via props"
+          },
+          {
+            "value": "feature",
+            "label": "feature - Feature library, with connected ui & data to make a feature"
+          }
+        ]
+      ]
     }
   },
   "required": ["name", "scope", "type"]

@@ -11,7 +11,7 @@ import { libraryGenerator as reactLibraryGenerator } from '@nrwl/react';
 import { Linter } from '@nrwl/linter';
 import * as ts from 'typescript';
 import { appendJestConfigOption } from '../../utils/ast';
-import { addEslintJsonCheck } from '../../utils/addEslintJsonCheck';
+import { addEslintJsonCheck } from '../../utils/eslintUtils';
 import {
   FullOptions,
   NormalizedOptions,

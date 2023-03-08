@@ -3,6 +3,7 @@ import {
   generateFullDepConstraint,
 } from './eslintScopeUpdater';
 import { TagDefNew, TagGroupMap } from '../../TagConsts';
+import { z } from 'zod';
 
 describe('generateDepConstraint', () => {
   it('should show all entries when provided for', () => {
@@ -46,6 +47,7 @@ describe('generateFullDepConstraint', () => {
         tags: ['test1', 'test2'] as const,
         shouldAlwaysBePresent: true,
         allowMultiplePerProject: false,
+        tagsMeta: z.any(),
       },
       demo: {
         prefix: 'my-demo:',
@@ -53,6 +55,7 @@ describe('generateFullDepConstraint', () => {
         description: '',
         shouldAlwaysBePresent: true,
         allowMultiplePerProject: false,
+        tagsMeta: z.any(),
       },
     } satisfies TagGroupMap;
     const tagDefs = {
@@ -63,6 +66,7 @@ describe('generateFullDepConstraint', () => {
             demo1: true,
             demo2: true,
           },
+          meta: true,
         },
         demo2: {
           description: '',
@@ -70,6 +74,7 @@ describe('generateFullDepConstraint', () => {
             demo2: true,
             demo1: false,
           },
+          meta: true,
         },
       },
       test: {
@@ -79,6 +84,7 @@ describe('generateFullDepConstraint', () => {
             test2: true,
           },
           description: '',
+          meta: true,
         },
         test2: {
           canImport: {
@@ -86,6 +92,7 @@ describe('generateFullDepConstraint', () => {
             test1: true,
           },
           description: '',
+          meta: true,
         },
       },
     } as const satisfies TagDefNew<typeof groupMap>;

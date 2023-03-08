@@ -6,31 +6,32 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import {
-  TagScope,
-  tagScopeList,
-  TagType,
-  tagTypeList,
-} from '../../utils/consts';
 import { eslintScopeUpdater } from './eslintScopeUpdater';
+import { markdownGenerator } from './markdownGenerator';
+import {
+  libGeneratorScopeThatCanBeGenerated,
+  libGeneratorTypeThatCanBeGenerated,
+  ScopeTagsList,
+  TagDefNew,
+  tagDefs,
+  TypeTagsList,
+} from '../../TagConsts';
 
 interface SimplifiedGeneratorJson {
   generators: Record<string, { schema: string }>;
 }
 
 export interface SimplifiedSchemaJson {
-  properties?: {
-    scope?: {
-      'x-prompt': {
-        items: TagScope[];
-      };
-    };
-    type?: {
-      'x-prompt': {
-        items: TagType[];
-      };
-    };
-  };
+  properties?: Record<
+    string,
+    | {
+        'x-mono-internal-source': 'scope' | 'type';
+        'x-prompt': {
+          items: { value: string; label: string }[];
+        };
+      }
+    | { 'x-mono-internal-source': never }
+  >;
 }
 
 export function getBasePathGenerators(tree: Tree) {
@@ -50,19 +51,62 @@ export function getListOfSchemaFiles(tree: Tree, basePath: string) {
 export function updateSchemaFile(
   tree: Tree,
   filePath: string,
-  tags: TagType[],
-  scope: TagScope[]
+  tags: TypeTagsList[],
+  scope: ScopeTagsList[],
+  tagDefs: TagDefNew<any>
 ) {
   const schemaFile = readJson<SimplifiedSchemaJson>(tree, filePath);
   let isEdited = false;
-  if (schemaFile?.properties?.type?.['x-prompt']?.items) {
-    isEdited = true;
-    schemaFile.properties.type['x-prompt'].items = tags;
+
+  if (!schemaFile?.properties) {
+    return;
   }
-  if (schemaFile?.properties?.scope?.['x-prompt']?.items) {
-    isEdited = true;
-    schemaFile.properties.scope['x-prompt'].items = scope;
-  }
+  schemaFile.properties = Object.fromEntries(
+    Object.entries(schemaFile.properties).map(([key, value]) => {
+      if (!value['x-mono-internal-source']) {
+        return [key, value];
+      }
+      const internalSource = value['x-mono-internal-source'];
+      if (internalSource === 'scope') {
+        isEdited = true;
+        return [
+          key,
+          {
+            ...value,
+            'x-prompt': {
+              ...value['x-prompt'],
+              items: [
+                scope.map((scop) => ({
+                  value: scop,
+                  label: `${scop} - ${tagDefs.scope[scop].description}`,
+                })),
+              ],
+            },
+          },
+        ];
+      }
+      if (internalSource === 'type') {
+        isEdited = true;
+        return [
+          key,
+          {
+            ...value,
+            'x-prompt': {
+              ...value['x-prompt'],
+
+              items: [
+                tags.map((tag) => ({
+                  value: tag,
+                  label: `${tag} - ${tagDefs.type[tag].description}`,
+                })),
+              ],
+            },
+          },
+        ];
+      }
+      return [key, value];
+    })
+  );
 
   if (isEdited) {
     writeJson(tree, filePath, schemaFile);
@@ -76,10 +120,12 @@ export default async function (tree: Tree) {
     updateSchemaFile(
       tree,
       schemaPath,
-      tagTypeList.filter((it) => it !== 'storybook') as unknown as TagType[],
-      tagScopeList as unknown as TagScope[]
+      libGeneratorTypeThatCanBeGenerated,
+      libGeneratorScopeThatCanBeGenerated,
+      tagDefs
     );
   }
   await eslintScopeUpdater(tree);
+  await markdownGenerator(tree);
   await formatFiles(tree);
 }

@@ -8,6 +8,7 @@ import {
 } from '../../TagConsts';
 import { Entries } from 'type-fest';
 import { Linter } from 'eslint';
+import { modifyEslintRuleOptions } from '../../utils/eslintUtils';
 export function generateDepConstraint(
   typeDef: ImportMap<any>,
   prefix: string,
@@ -41,30 +42,6 @@ export function generateFullDepConstraint<T extends TagGroupMap>(
     })
     .flat();
 }
-
-function modifyEslintRuleOptions(
-  eslintRc: Linter.BaseConfig,
-  ruleName: string,
-  newOptions: (oldValue: Record<string, any>) => Record<string, any>
-): Linter.BaseConfig {
-  return {
-    ...eslintRc,
-    overrides: eslintRc.overrides.map((overide) => {
-      return {
-        ...overide,
-        rules: Object.fromEntries(
-          Object.entries(overide.rules).map(([rule, data]) => {
-            if (rule !== ruleName) {
-              return [rule, data];
-            }
-            return [rule, [data[0], newOptions(data[1])]];
-          })
-        ),
-      };
-    }),
-  };
-}
-
 export function getNewTagLinterConfig(tagGroupMap: TagGroupMap) {
   return Object.fromEntries(
     Object.entries(tagGroupMap).map(([key, value]) => {
@@ -86,23 +63,22 @@ export async function eslintScopeUpdater(tree: Tree) {
     tree,
     '.eslintrc.json'
   );
-  const newBoundaryMap = generateFullDepConstraint(tagGropus, tagDefs);
+
   existingEslintConfig = modifyEslintRuleOptions(
     existingEslintConfig,
     '@nrwl/nx/enforce-module-boundaries',
     (options) => ({
       ...options,
-      depConstraints: newBoundaryMap,
+      depConstraints: generateFullDepConstraint(tagGropus, tagDefs),
     })
   );
-  const newTagLinterConfig = getNewTagLinterConfig(tagGropus);
 
   existingEslintConfig = modifyEslintRuleOptions(
     existingEslintConfig,
     '@nrwl/nx/workspace/allowed-project-tags',
     (options) => ({
       ...options,
-      tags: newTagLinterConfig,
+      tags: getNewTagLinterConfig(tagGropus),
     })
   );
   writeJson(tree, '.eslintrc.json', existingEslintConfig);

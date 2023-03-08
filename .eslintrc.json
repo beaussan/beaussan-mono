@@ -56,6 +56,16 @@
                 ]
               },
               {
+                "sourceTag": "type:storybook",
+                "onlyDependOnLibsWithTags": [
+                  "type:data",
+                  "type:storybook",
+                  "type:utils",
+                  "type:feature",
+                  "type:ui"
+                ]
+              },
+              {
                 "sourceTag": "type:e2e",
                 "onlyDependOnLibsWithTags": [
                   "type:data",
@@ -65,15 +75,6 @@
                   "type:storybook",
                   "type:feature",
                   "type:utils"
-                ]
-              },
-              {
-                "sourceTag": "type:storybook",
-                "onlyDependOnLibsWithTags": [
-                  "type:data",
-                  "type:storybook",
-                  "type:feature",
-                  "type:ui"
                 ]
               }
             ]
@@ -110,13 +111,13 @@
                 "allowMultiplePerProject": false,
                 "enforceAtLeastOne": true,
                 "allowedTags": [
+                  "utils",
+                  "data",
+                  "ui",
+                  "feature",
                   "app",
                   "storybook",
-                  "e2e",
-                  "feature",
-                  "ui",
-                  "data",
-                  "utils"
+                  "e2e"
                 ]
               }
             }

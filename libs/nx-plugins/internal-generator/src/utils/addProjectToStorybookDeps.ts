@@ -4,12 +4,16 @@ import {
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 import { FullOptions } from './normalizedOptions';
-import { tagThatShouldGoIntoStorybook } from './consts';
+import { tagDefs } from '../TagConsts';
 
 export function addProjectToStorybookDeps(tree: Tree, options: FullOptions) {
-  if (!tagThatShouldGoIntoStorybook.includes(options.type)) {
+  if (
+    tagDefs.type[options.type].meta.libraryGenerator.shouldGenerateStorybook &&
+    options.type === 'storybook'
+  ) {
     return;
   }
+
   const storybookName = `${options.scope}-storybook-host`;
 
   try {

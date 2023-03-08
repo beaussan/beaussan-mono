@@ -1,11 +1,3 @@
-import {
-  SupportedLibGenerators,
-  TagScope,
-  tagScopeList,
-  tagToGenerator,
-  TagType,
-  tagTypeList,
-} from './consts';
 import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit';
 import {
   getDirectoryFromScopeAndType,
@@ -13,29 +5,30 @@ import {
 } from './tags';
 import { z, ZodError } from 'zod';
 import { fromZodError } from 'zod-validation-error';
+import { ScopeTagsList, tagGropus, TypeTagsList } from '../TagConsts';
 
 export type NormalizedOptions = {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
-  libGenerator: SupportedLibGenerators;
+  libGenerator: 'react' | 'ts';
 };
 
 export type StandardOptions = {
   name: string;
   tags?: string;
   directory?: string;
-  type: TagType;
-  scope: TagScope;
+  type: TypeTagsList;
+  scope: ScopeTagsList;
 };
 
 export type FullOptions<T = Record<string, unknown>> = StandardOptions &
   NormalizedOptions &
   T;
 
-const scopeSchema = z.enum(tagScopeList);
-const typeSchema = z.enum(tagTypeList);
+const scopeSchema = z.enum(tagGropus.scope.tags);
+const typeSchema = z.enum(tagGropus.type.tags);
 
 export function getFoldersFromDirectoryAndName(
   tree: Tree,
@@ -60,7 +53,7 @@ export function parseTags(tags?: string): string[] {
   return tags ? tags.split(',').map((s) => s.trim()) : [];
 }
 
-export function safeGetScope(scope: unknown): TagScope {
+export function safeGetScope(scope: unknown): ScopeTagsList {
   try {
     return scopeSchema.parse(scope);
   } catch (e) {
@@ -70,7 +63,7 @@ export function safeGetScope(scope: unknown): TagScope {
     throw e;
   }
 }
-export function safeGetType(type: unknown): TagType {
+export function safeGetType(type: unknown): TypeTagsList {
   try {
     return typeSchema.parse(type);
   } catch (e) {
@@ -100,7 +93,7 @@ export function normalizeOptions<T extends StandardOptions>(
 
   return {
     ...options,
-    libGenerator: tagToGenerator[scope][type],
+    libGenerator: 'react',
     tags,
     directory,
     ...folders,
