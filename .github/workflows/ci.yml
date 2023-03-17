@@ -29,8 +29,8 @@ jobs:
       parallel-commands-on-agents: |
         yarn nx affected --target=lint --parallel=3
         yarn nx affected --target=test --parallel=3 --ci --code-coverage
-        yarn nx affected --target=e2e --parallel=3
-        yarn nx affected --target=test-storybook:ci --parallel=1
+        yarn nx affected --target=e2e --parallel=1
+        yarn nx affected -target=test-storybook --configuration ci --parallel=1
         yarn nx affected --target=build --parallel=3
 
   agents:

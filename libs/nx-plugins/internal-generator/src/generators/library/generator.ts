@@ -11,7 +11,7 @@ import { libraryGenerator as reactLibraryGenerator } from '@nrwl/react';
 import { Linter } from '@nrwl/linter';
 import * as ts from 'typescript';
 import { appendJestConfigOption } from '../../utils/ast';
-import { addEslintJsonCheck } from '../../utils/addEslintJsonCheck';
+import { addEslintJsonCheck } from '../../utils/eslintUtils';
 import {
   FullOptions,
   NormalizedOptions,
@@ -79,7 +79,7 @@ function modifyVitestConfig(tree: Tree, options: FullOptions) {
         ...node.properties,
         ts.factory.createPropertyAssignment(
           ts.factory.createIdentifier('setupFiles'),
-          ts.factory.createStringLiteral('./src/test-setup.ts.js', true)
+          ts.factory.createStringLiteral('./src/test-setup.ts', true)
         ),
       ]);
     }

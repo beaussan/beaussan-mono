@@ -19,22 +19,25 @@ import { ESLintUtils } from '@typescript-eslint/utils';
 
 // NOTE: The rule will be available in ESLint configs as "@nrwl/nx/workspace/allowed-project-tags"
 export const RULE_NAME = 'allowed-project-tags';
-type MessageIds =
-  | 'disallow'
-  | 'scopeRequired'
-  | 'typeRequired'
-  | 'onlyOneScope'
-  | 'onlyOneType'
-  | 'typeUnknown'
-  | 'scopeUnknown';
+type MessageIds = 'tagRequired' | 'onlyOne' | 'unknownTag';
 
+type TagData = {
+  prefix: string;
+  allowedTags: string[];
+  allowMultiplePerProject: boolean;
+  enforceAtLeastOne: boolean;
+};
 type Options = [
   {
-    scopeTags: string[];
-    typeTags: string[];
-    allowMultipleScope: boolean;
+    tags: Record<string, TagData>;
   }
 ];
+
+type MessageArgs = {
+  tag: string;
+  possibilities?: string;
+  found?: string;
+};
 
 export const rule = ESLintUtils.RuleCreator(() => __filename)<
   Options,
@@ -52,43 +55,48 @@ export const rule = ESLintUtils.RuleCreator(() => __filename)<
         type: 'object',
         additionalProperties: false,
         properties: {
-          scopeTags: {
-            type: 'array',
-            items: {
-              type: 'string',
+          tags: {
+            type: 'object',
+            patternProperties: {
+              '.*': {
+                type: 'object',
+                required: ['prefix', 'allowedTags'],
+                properties: {
+                  prefix: {
+                    type: 'string',
+                  },
+                  allowMultiplePerProject: {
+                    type: 'boolean',
+                    default: false,
+                  },
+                  enforceAtLeastOne: {
+                    type: 'boolean',
+                    default: false,
+                  },
+                  allowedTags: {
+                    type: 'array',
+                    items: {
+                      type: 'string',
+                    },
+                  },
+                },
+              },
             },
-          },
-          typeTags: {
-            type: 'array',
-            items: {
-              type: 'string',
-            },
-          },
-          allowMultipleScope: {
-            type: 'boolean',
           },
         },
       },
     ],
     messages: {
-      disallow: 'Not good value',
-      scopeRequired:
-        'A scope tag is required. It must be one of {{possibilities}}.',
-      typeRequired:
-        'A type tag is required. It must be one of {{possibilities}}.',
-      onlyOneScope: 'Only one scope tag should be applied',
-      onlyOneType: 'Only one type tag should be applied',
-      typeUnknown:
-        'Type "{{found}}" is not in the list of possible types. Possible types are {{possibilities}}',
-      scopeUnknown:
-        'Scope "{{found}}" is not in the list of possible scopes. Possible types are {{possibilities}}',
+      tagRequired:
+        'A {{tag}} tag is required. It must be one of {{possibilities}}.',
+      onlyOne: 'Only one {{tag}} tag should be applied',
+      unknownTag:
+        'Type "{{found}}" is not in the list of possible {{tag}}. Possible types are {{possibilities}}',
     },
   },
   defaultOptions: [
     {
-      scopeTags: ['shared'],
-      typeTags: ['ui', 'utils', 'data-access', 'feature', 'app'],
-      allowMultipleScope: false,
+      tags: {},
     },
   ],
   create(context, options) {
@@ -124,10 +132,7 @@ export const rule = ESLintUtils.RuleCreator(() => __filename)<
   },
 });
 
-type ReportError = (
-  message: MessageIds,
-  data?: Record<string, unknown>
-) => void;
+type ReportError = (message: MessageIds, data?: MessageArgs) => void;
 
 function formatPrettyList(items: string[]): string {
   return items.map((tag) => `"${tag}"`).join(', ');
@@ -138,47 +143,54 @@ function validateTags(
   options: Options[0],
   reporter: ReportError
 ) {
-  const scopeTags = tags
-    .filter((it) => it.startsWith('scope:'))
-    .map((scope) => scope.substring(6));
-  const typeTags = tags
-    .filter((it) => it.startsWith('type:'))
-    .map((scope) => scope.substring(5));
+  Object.entries(options.tags).forEach(([tagGroupName, tagConfig]) =>
+    validateTagsForGroup(tagGroupName, tagConfig, tags, reporter)
+  );
+}
 
-  if (scopeTags.length === 0) {
-    reporter('scopeRequired', {
-      possibilities: formatPrettyList(options.scopeTags),
-    });
-  }
+function validateTagsForGroup(
+  tagGroupName: string,
+  tagConfig: TagData,
+  tags: string[],
+  reporter: ReportError
+) {
+  const tagFound = tags
+    .filter((it) => it.startsWith(tagConfig.prefix))
+    .map((scope) => scope.substring(tagConfig.prefix.length));
 
-  if (typeTags.length === 0) {
-    reporter('typeRequired', {
-      possibilities: formatPrettyList(options.typeTags),
-    });
-  }
-
-  if (!options.allowMultipleScope) {
-    if (scopeTags.length > 1) {
-      reporter('onlyOneScope');
-    }
-
-    if (typeTags.length > 1) {
-      reporter('onlyOneType');
+  if (tagConfig.enforceAtLeastOne) {
+    if (tagFound.length === 0) {
+      reporter('tagRequired', {
+        tag: tagGroupName,
+        possibilities: formatPrettyList(tagConfig.allowedTags),
+      });
     }
   }
 
-  checkIfAllTagsExists(scopeTags, options.scopeTags, reporter, 'scopeUnknown');
-  checkIfAllTagsExists(typeTags, options.typeTags, reporter, 'typeUnknown');
+  if (tagConfig.allowMultiplePerProject) {
+    if (tagFound.length > 1) {
+      reporter('onlyOne', {
+        tag: tagGroupName,
+        possibilities: formatPrettyList(tagConfig.allowedTags),
+      });
+    }
+  }
 
-  // console.log(tags);
-  // reporter('disallow');
+  checkIfAllTagsExists(
+    tagFound,
+    tagConfig.allowedTags,
+    reporter,
+    'unknownTag',
+    tagGroupName
+  );
 }
 
 function checkIfAllTagsExists(
   tags: string[],
   allowedTags: string[],
   reporter: ReportError,
-  messageId: MessageIds
+  messageId: MessageIds,
+  tagGroupName: string
 ) {
   if (!tags.every((tag) => allowedTags.includes(tag))) {
     const unknownTags = tags.filter((tag) => !allowedTags.includes(tag));
@@ -187,6 +199,7 @@ function checkIfAllTagsExists(
       reporter(messageId, {
         found: tag,
         possibilities: formatPrettyList(allowedTags),
+        tag: tagGroupName,
       });
     }
   }

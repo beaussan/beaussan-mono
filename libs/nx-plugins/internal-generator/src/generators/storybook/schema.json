@@ -12,10 +12,22 @@
         "$source": "args",
         "index": 1
       },
+      "x-mono-internal-source": "scope",
       "x-prompt": {
         "message": "What is the scope of the library ?",
         "type": "list",
-        "items": ["dash", "shared"]
+        "items": [
+          [
+            {
+              "value": "shared",
+              "label": "shared - Shared libraries, used across all other libraries"
+            },
+            {
+              "value": "dash",
+              "label": "dash - Dash application related libraries"
+            }
+          ]
+        ]
       }
     }
   },

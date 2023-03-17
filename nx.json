@@ -43,7 +43,6 @@
       "inputs": [
         "default",
         "^default",
-        "^production",
         "{workspaceRoot}/.storybook/**/*",
         "{projectRoot}/.storybook/**/*"
       ]
@@ -52,7 +51,6 @@
       "inputs": [
         "default",
         "^default",
-        "^production",
         "{workspaceRoot}/.storybook/**/*",
         "{projectRoot}/.storybook/**/*"
       ]

@@ -25,7 +25,7 @@ import {
 import { Linter } from '@nrwl/linter';
 import * as path from 'path';
 import { tweakMainTsStorybookConfig } from './transforms/storybook';
-import { addEslintJsonCheck } from '../../utils/addEslintJsonCheck';
+import { addEslintJsonCheck } from '../../utils/eslintUtils';
 import { reactLib, sharedModifications } from '../library/generator';
 
 export interface NormalizedSchema extends StorybookGeneratorSchema {

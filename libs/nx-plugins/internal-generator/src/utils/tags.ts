@@ -1,9 +1,15 @@
-import { TagScope, TagType } from './consts';
+import { ScopeTagsList, tagGropus, TypeTagsList } from '../TagConsts';
 
-export function getTagStringFromScopeAndType(scope: TagScope, type: TagType) {
-  return `scope:${scope},type:${type}`;
+export function getTagStringFromScopeAndType(
+  scope: ScopeTagsList,
+  type: TypeTagsList
+) {
+  return `${tagGropus.scope.prefix}${scope},${tagGropus.type.prefix}${type}`;
 }
-export function getDirectoryFromScopeAndType(scope: TagScope, type: TagType) {
+export function getDirectoryFromScopeAndType(
+  scope: ScopeTagsList,
+  type: TypeTagsList
+) {
   if (type === 'storybook') {
     return scope;
   }

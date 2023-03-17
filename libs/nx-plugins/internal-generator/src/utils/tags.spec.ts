@@ -1,12 +1,12 @@
-import { tagScopeList, tagTypeList } from './consts';
 import {
   getDirectoryFromScopeAndType,
   getTagStringFromScopeAndType,
 } from './tags';
+import { tagGropus } from '../TagConsts';
 
 describe('getTagStringFromScopeAndType', () => {
-  for (const tagType of tagTypeList) {
-    for (const tagScope of tagScopeList) {
+  for (const tagType of tagGropus.type.tags) {
+    for (const tagScope of tagGropus.scope.tags) {
       it(`should given a ${tagType} type and a ${tagScope} output the correct tags`, () => {
         const result = getTagStringFromScopeAndType(tagScope, tagType);
 
@@ -23,8 +23,10 @@ describe('getTagStringFromScopeAndType', () => {
 });
 
 describe('getDirectoryFromScopeAndType', () => {
-  for (const tagScope of tagScopeList) {
-    for (const tagType of tagTypeList.filter((it) => it !== 'storybook')) {
+  for (const tagScope of tagGropus.scope.tags) {
+    for (const tagType of tagGropus.type.tags.filter(
+      (it) => it !== 'storybook'
+    )) {
       it(`should given a ${tagType} type and a ${tagScope} output the correct directory structure`, () => {
         const result = getDirectoryFromScopeAndType(tagScope, tagType);
 

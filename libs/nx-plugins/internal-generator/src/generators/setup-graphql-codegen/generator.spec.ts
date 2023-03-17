@@ -71,15 +71,15 @@ describe('setup-graphql-codegen generator', () => {
     expect(projectConfig.targets['codegen']).toBeDefined();
 
     expect(projectConfig.targets['codegen']).toMatchInlineSnapshot(`
-      Object {
-        "configurations": Object {
-          "default": Object {},
-          "watch": Object {
+      {
+        "configurations": {
+          "default": {},
+          "watch": {
             "command": "yarn graphql-codegen --config libs/shared/data/test/gqlCodegen.ts --watch",
           },
         },
         "executor": "nx:run-commands",
-        "options": Object {
+        "options": {
           "command": "yarn graphql-codegen --config libs/shared/data/test/gqlCodegen.ts",
         },
       }
