@@ -54,14 +54,6 @@
         "{workspaceRoot}/.storybook/**/*",
         "{projectRoot}/.storybook/**/*"
       ]
-    },
-    "test-storybook": {
-      "inputs": [
-        "default",
-        "^default",
-        "{workspaceRoot}/.storybook/**/*",
-        "{projectRoot}/.storybook/**/*"
-      ]
     }
   },
   "namedInputs": {

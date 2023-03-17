@@ -79,7 +79,7 @@ function modifyVitestConfig(tree: Tree, options: FullOptions) {
         ...node.properties,
         ts.factory.createPropertyAssignment(
           ts.factory.createIdentifier('setupFiles'),
-          ts.factory.createStringLiteral('./src/test-setup.ts.js', true)
+          ts.factory.createStringLiteral('./src/test-setup.ts', true)
         ),
       ]);
     }

@@ -34,8 +34,12 @@ export interface SimplifiedSchemaJson {
   >;
 }
 
-export function getBasePathGenerators(tree: Tree) {
-  return getProjects(tree).get('nx-plugins-internal-generator').root;
+export function getBasePathGenerators(tree: Tree): string | undefined {
+  try {
+    getProjects(tree).get('nx-plugins-internal-generator').root;
+  } catch (e) {
+    return undefined;
+  }
 }
 
 export function getListOfSchemaFiles(tree: Tree, basePath: string) {
@@ -115,15 +119,17 @@ export function updateSchemaFile(
 
 export default async function (tree: Tree) {
   const basePath = getBasePathGenerators(tree);
-  const listOfSchemas = getListOfSchemaFiles(tree, basePath);
-  for (const schemaPath of listOfSchemas) {
-    updateSchemaFile(
-      tree,
-      schemaPath,
-      libGeneratorTypeThatCanBeGenerated,
-      libGeneratorScopeThatCanBeGenerated,
-      tagDefs
-    );
+  if (basePath) {
+    const listOfSchemas = getListOfSchemaFiles(tree, basePath);
+    for (const schemaPath of listOfSchemas) {
+      updateSchemaFile(
+        tree,
+        schemaPath,
+        libGeneratorTypeThatCanBeGenerated,
+        libGeneratorScopeThatCanBeGenerated,
+        tagDefs
+      );
+    }
   }
   await eslintScopeUpdater(tree);
   await markdownGenerator(tree);
