@@ -8,9 +8,11 @@ import { tagDefs } from '../TagConsts';
 
 export function addProjectToStorybookDeps(tree: Tree, options: FullOptions) {
   if (
-    tagDefs.type[options.type].meta.libraryGenerator.shouldGenerateStorybook &&
-    options.type === 'storybook'
+    !tagDefs.type[options.type].meta.libraryGenerator.shouldGenerateStorybook
   ) {
+    return;
+  }
+  if (options.type === 'storybook') {
     return;
   }
 
