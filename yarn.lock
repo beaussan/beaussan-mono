@@ -18655,10 +18655,10 @@ z-schema@~5.0.2:
   optionalDependencies:
     commander "^9.4.1"
 
-zod-validation-error@^0.2.1:
-  version "0.2.2"
-  resolved "https://registry.npmjs.org/zod-validation-error/-/zod-validation-error-0.2.2.tgz"
-  integrity sha512-CD7i+LIxdskkgxhVOsCr5F1Q4kbnbpgQGBQXdNdFxKCecS4OFseekJ5gOkNu/Y6rapQ4Rj7XBYMckBhyOZm+lQ==
+zod-validation-error@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/zod-validation-error/-/zod-validation-error-1.1.0.tgz#d6dff11b596feb05f24a0ef22adc194ca6817edf"
+  integrity sha512-CI0zGWQjyDN0sLcmFiD+wnvkkJaLo6hNB4JBUDltkl6+CeHfnnQKU4Ff6ktMc+VmO/j2+vtLlx4S5xaw8YQN6A==
 
 zod@^3.20.2:
   version "3.20.6"
