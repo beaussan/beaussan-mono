@@ -4659,7 +4659,7 @@
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
-"@storybook/preview-api@7.0.0-rc.8":
+"@storybook/preview-api@7.0.0-rc.8", "@storybook/preview-api@next":
   version "7.0.0-rc.8"
   resolved "https://registry.yarnpkg.com/@storybook/preview-api/-/preview-api-7.0.0-rc.8.tgz#c0b96464ec36987a2db3120bcd8f9200d0213564"
   integrity sha512-K45I81s2ZOoeAmKC8DP0HPhR67tr94pkgKddaoWLQJHBgVq9GKuy7QCcnn2zYKOFd1d/uqcnrQyg4AkmcjkVCg==
@@ -4791,14 +4791,6 @@
     "@storybook/client-logger" "7.0.0-rc.8"
     "@storybook/preview-api" "7.0.0-rc.8"
 
-"@storybook/store@next":
-  version "7.0.0-rc.3"
-  resolved "https://registry.npmjs.org/@storybook/store/-/store-7.0.0-rc.3.tgz"
-  integrity sha512-cdG8LcZid7RKmECO+Yzp0MZVStNWJiD642Lq4rQJccwuZytck5ZGPAuxSRkXYVADd9O4DKxM27fJRQv+ePh08Q==
-  dependencies:
-    "@storybook/client-logger" "7.0.0-rc.3"
-    "@storybook/preview-api" "7.0.0-rc.3"
-
 "@storybook/telemetry@7.0.0-rc.8":
   version "7.0.0-rc.8"
   resolved "https://registry.yarnpkg.com/@storybook/telemetry/-/telemetry-7.0.0-rc.8.tgz#a17bb533551dbd42d8d03ea124ca0f95776c39c7"
@@ -4814,10 +4806,10 @@
     nanoid "^3.3.1"
     read-pkg-up "^7.0.1"
 
-"@storybook/test-runner@0.10.0-next.8":
-  version "0.10.0-next.8"
-  resolved "https://registry.npmjs.org/@storybook/test-runner/-/test-runner-0.10.0-next.8.tgz"
-  integrity sha512-sPKTOw3997pMGY6I24PqVCI4WzC9P+sITTRyilNfmAaPVmEw/ONeN/TkONJ3DnCfAY2zVF2tguY6jRHpq3f9RQ==
+"@storybook/test-runner@0.10.0-next.11":
+  version "0.10.0-next.11"
+  resolved "https://registry.yarnpkg.com/@storybook/test-runner/-/test-runner-0.10.0-next.11.tgz#07b582370a36da0cf3d521282b3a0a0abf062bf3"
+  integrity sha512-5HiN5z/p9QFWGfs9B7Sq+9sDvhRJMeK1rdFj2OhvPrGMDrYqXKJiMvAYpbfDe3MrQv811DZWicpx0TLdwrA4Mw==
   dependencies:
     "@babel/core" "^7.20.7"
     "@babel/generator" "^7.20.7"
@@ -4829,7 +4821,7 @@
     "@storybook/core-common" next
     "@storybook/csf" next
     "@storybook/csf-tools" next
-    "@storybook/store" next
+    "@storybook/preview-api" next
     can-bind-to-host "^1.1.1"
     commander "^9.0.0"
     expect-playwright "^0.8.0"
