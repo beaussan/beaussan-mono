@@ -3,9 +3,5 @@
   "extends": [
     "config:base"
   ],
-  "packageRules": [
-    {
-      "excludeDepPatterns": ["/.*nx.*/", "/.*nrwl.*/"]
-    }
-  ]
+  "ignoreDeps": ["nrwl", "babel", "jest"]
 }
