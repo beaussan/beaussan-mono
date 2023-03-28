@@ -346,7 +346,7 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.1.0", "@babel/parser@^7.14.0", "@babel/parser@^7.20.7", "@babel/parser@^7.21.0", "@babel/parser@^7.21.2", "@babel/parser@^7.21.3":
+"@babel/parser@^7.1.0", "@babel/parser@^7.14.0", "@babel/parser@^7.20.15", "@babel/parser@^7.20.7", "@babel/parser@^7.21.0", "@babel/parser@^7.21.2", "@babel/parser@^7.21.3":
   version "7.21.3"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.21.3.tgz#1d285d67a19162ff9daa358d4cb41d50c06220b3"
   integrity sha512-lobG0d7aOfQRXh8AyklEAgZGvA4FShxo6xQbUrrT/cNBPUdIDojlokwJsQyCC/eKia7ifqM0yP+2DRZ4WKw2RQ==
@@ -13059,6 +13059,13 @@ magic-string@^0.27.0:
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.13"
 
+magic-string@^0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.29.0.tgz#f034f79f8c43dba4ae1730ffb5e8c4e084b16cf3"
+  integrity sha512-WcfidHrDjMY+eLjlU+8OvwREqHwpgCeKVBUpQ3OhYYuvfaYCUgcbuBzappNzZvg/v8onU3oQj+BYpkOJe9Iw4Q==
+  dependencies:
+    "@jridgewell/sourcemap-codec" "^1.4.13"
+
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/make-dir/-/make-dir-2.1.0.tgz"
@@ -17413,11 +17420,12 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite-plugin-dts@1.7.3:
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/vite-plugin-dts/-/vite-plugin-dts-1.7.3.tgz#cf0c243fff9ae3fc1f103987b97439b3bf813f15"
-  integrity sha512-u3t45p6fTbzUPMkwYe0ESwuUeiRMlwdPfD3dRyDKUwLe2WmEYcFyVp2o9/ke2EMrM51lQcmNWdV9eLcgjD1/ng==
+vite-plugin-dts@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/vite-plugin-dts/-/vite-plugin-dts-2.1.0.tgz#40784ddad7a7be13176ed1da2c11352181f4891b"
+  integrity sha512-Vw0FdCuM3VLR4hTFHh0yMEzfwI7NyFvPIMFwvE+Q0t4qtoHIfYOP/JXs7nTnHuQk87FSjlhGeIJ1fLBcktgPgA==
   dependencies:
+    "@babel/parser" "^7.20.15"
     "@microsoft/api-extractor" "^7.33.5"
     "@rollup/pluginutils" "^5.0.2"
     "@rushstack/node-core-library" "^3.53.2"
@@ -17425,6 +17433,7 @@ vite-plugin-dts@1.7.3:
     fast-glob "^3.2.12"
     fs-extra "^10.1.0"
     kolorist "^1.6.0"
+    magic-string "^0.29.0"
     ts-morph "17.0.1"
 
 vite-plugin-eslint@^1.8.1:
