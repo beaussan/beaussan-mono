@@ -16,9 +16,9 @@
     "@jridgewell/trace-mapping" "^0.3.9"
 
 "@anatine/zod-mock@^3.6.0":
-  version "3.8.4"
-  resolved "https://registry.npmjs.org/@anatine/zod-mock/-/zod-mock-3.8.4.tgz"
-  integrity sha512-vOh/TOXt4BujjTBxNgX1MBEwV2mW+tRQipE07vCFeP9C2JpG++usBrCI6UEDHgS2lzIqjm28VYcUVTqNI1E5dw==
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/@anatine/zod-mock/-/zod-mock-3.10.0.tgz#65d2b62a9a97145a77e1d66bb3b597ccd9e0dbd0"
+  integrity sha512-E9zdP5fSHhpbXpRxz+9y3UvZIAhHGP5q4CVhXN32bMFHkSeqnWdxiQ83LaD5prNCeYMAXGkRvIkJtQbtfbyEZw==
   dependencies:
     randexp "^0.5.3"
 
@@ -8640,7 +8640,7 @@ dotenv@~10.0.0:
 
 drange@^1.0.2:
   version "1.1.1"
-  resolved "https://registry.npmjs.org/drange/-/drange-1.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/drange/-/drange-1.1.1.tgz#b2aecec2aab82fcef11dbbd7b9e32b83f8f6c0b8"
   integrity sha512-pYxfDYpued//QpnLIm4Avk7rsNtAtQkUES2cwAYSvD/wd2pKD71gN2Ebj3e7klzXwjocvE8c5vx/1fxwpqmSxA==
 
 dset@^3.1.2:
@@ -14803,7 +14803,7 @@ ramda@^0.28.0:
 
 randexp@^0.5.3:
   version "0.5.3"
-  resolved "https://registry.npmjs.org/randexp/-/randexp-0.5.3.tgz"
+  resolved "https://registry.yarnpkg.com/randexp/-/randexp-0.5.3.tgz#f31c2de3148b30bdeb84b7c3f59b0ebb9fec3738"
   integrity sha512-U+5l2KrcMNOUPYvazA3h5ekF80FHTUG+87SEAmHZmolh1M+i/WyTCxVzmi+tidIa1tM4BSe8g2Y/D3loWDjj+w==
   dependencies:
     drange "^1.0.2"
@@ -15433,7 +15433,7 @@ restore-cursor@^3.1.0:
 
 ret@^0.2.0:
   version "0.2.2"
-  resolved "https://registry.npmjs.org/ret/-/ret-0.2.2.tgz"
+  resolved "https://registry.yarnpkg.com/ret/-/ret-0.2.2.tgz#b6861782a1f4762dce43402a71eb7a283f44573c"
   integrity sha512-M0b3YWQs7R3Z917WRQy1HHA7Ba7D8hvZg6UE5mLykJxQVE2ju0IXbGlaHPPlkY+WN7wFP+wUMXmBFA0aV6vYGQ==
 
 reusify@^1.0.4:
