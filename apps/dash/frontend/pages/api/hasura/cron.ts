@@ -57,6 +57,7 @@ const getOnError =
 
 const cronHandler = nc<NextApiRequest, NextApiResponse>({
   onError: getOnError(),
+  disableResponseWait: true,
 })
   .use(getTokenVerificationMiddleware(cronToken))
   .use((req, res, next) => {

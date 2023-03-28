@@ -6,6 +6,7 @@ export const gqlClient = new GraphQLClient(
   env.NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL,
   {
     headers: { 'x-hasura-admin-secret': env.HASURA_ADMIN_SECRET },
+    timeout: 2 * 1000, // 2 seconds
   }
 );
 
