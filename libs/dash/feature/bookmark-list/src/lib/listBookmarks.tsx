@@ -131,7 +131,7 @@ function ListBookmarkWithData({
       <main className="overflow-y-auto py-2 space-y-1">
         <ul className="space-y-1">
           {dataWithSearch.map((link) => (
-            <li>
+            <li key={link.link}>
               <Link key={link.link} item={link} />
             </li>
           ))}

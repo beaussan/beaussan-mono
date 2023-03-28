@@ -64,7 +64,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
             <UserDataProvider>
               <Head>
                 <title>Dashy dash</title>
-                <link rel="icon" href="/favicon.png" />
+                <link rel="icon" href="/favicon_3.png" />
               </Head>
               <main className="app">
                 <Component {...pageProps} />

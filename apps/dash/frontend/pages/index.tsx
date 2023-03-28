@@ -19,7 +19,7 @@ function ProtectedPage() {
     <div>
       <Head>
         <title>Dashy dash</title>
-        <link rel="icon" href="/favicon.png" />
+        <link rel="icon" href="/favicon_3.png" />
       </Head>
       <div className="grid grid-rows-[1fr_auto] h-screen">
         <main className="grid gap-4 py-2 px-4 grid-cols-2 bg-gradient-to-bl overflow-y-auto from-orange-300 via-cyan-400 to-yellow-400 overflow-hidden">
