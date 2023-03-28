@@ -10453,10 +10453,10 @@ hasha@^5.0.0:
     is-stream "^2.0.0"
     type-fest "^0.8.0"
 
-hasura-cli@2.15.1:
-  version "2.15.1"
-  resolved "https://registry.npmjs.org/hasura-cli/-/hasura-cli-2.15.1.tgz"
-  integrity sha512-uFyo0yaxvhRj3s9u3ScBhRRtr4muwQhfCUpQ4TchbAYxYcZ8Oly75dCuaakB1Abt4GbpJMCNKR4pPyIAUzUkgw==
+hasura-cli@2.20.1:
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/hasura-cli/-/hasura-cli-2.20.1.tgz#9b8a6dd00cac792a05c89a1dc93d97e42b68a7c2"
+  integrity sha512-lBwHs9r4N9NLozT057/TYFGZUmDRbkJKBkkSEbq0l0FAH65bts+WDzRC00opgEahp/txwRWdMStTlmcpmJX/PA==
   dependencies:
     axios "^0.21.1"
     chalk "^2.4.2"
