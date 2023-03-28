@@ -141,7 +141,7 @@
     "jsonc-eslint-parser": "2.1.0",
     "msw-storybook-addon": "^1.6.3",
     "nx": "15.8.3",
-    "postcss": "8.4.19",
+    "postcss": "8.4.21",
     "prettier": "^2.6.2",
     "react-test-renderer": "18.2.0",
     "start-server-and-test": "^1.15.2",
