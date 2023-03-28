@@ -48,7 +48,7 @@
     "react-icons": "^4.7.1",
     "regenerator-runtime": "0.13.11",
     "supertokens-auth-react": "^0.27.3",
-    "supertokens-node": "^12.1.1",
+    "supertokens-node": "^13.0.0",
     "tslib": "^2.3.0",
     "type-fest": "^3.6.1",
     "urql": "^3.0.3",
