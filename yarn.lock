@@ -5912,12 +5912,12 @@
   dependencies:
     wonka ">= 4.0.9"
 
-"@urql/exchange-auth@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@urql/exchange-auth/-/exchange-auth-1.0.0.tgz"
-  integrity sha512-79hqPQab+ifeINOxvQykvqub4ixWHBEIagN4U67ijcHGMfp3c4yEWRk4IJMPwF+OMT7LrRFuv+jRIZTQn/9VwQ==
+"@urql/exchange-auth@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@urql/exchange-auth/-/exchange-auth-2.0.0.tgz#92d268fb033c1bb9fe49e3475c5d15447b1c4661"
+  integrity sha512-IDwpdozfzx2hAlvBVM9ITe0lzTxVflodEXqiC/4jllpLVsvAPYpG0AU3nMMNoX75278IDHpVCfmnaU0dIHWwOQ==
   dependencies:
-    "@urql/core" ">=3.0.0"
+    "@urql/core" ">=3.2.0"
     wonka "^6.0.0"
 
 "@urql/exchange-graphcache@^5.0.5":
