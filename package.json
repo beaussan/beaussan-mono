@@ -14,7 +14,7 @@
     "@doist/todoist-api-typescript": "^2.1.2",
     "@faker-js/faker": "^7.6.0",
     "@headlessui/react": "^1.7.7",
-    "@hookform/resolvers": "^2.9.10",
+    "@hookform/resolvers": "^3.0.0",
     "@nrwl/next": "15.8.9",
     "@nrwl/nx-plugin": "15.8.9",
     "@radix-ui/react-dialog": "^1.0.2",
