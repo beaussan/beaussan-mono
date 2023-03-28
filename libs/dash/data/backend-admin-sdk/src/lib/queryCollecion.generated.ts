@@ -1,7 +1,6 @@
 import * as Types from '@beaussan/dash/data/hasura-codegen-types';
 
-import { GraphQLClient } from 'graphql-request';
-import * as Dom from 'graphql-request/dist/types.dom';
+import { GraphQLClient, RequestOptions } from 'graphql-request';
 import gql from 'graphql-tag';
 import { graphql, ResponseResolver, GraphQLRequest, GraphQLContext } from 'msw';
 export type CreateUserOnLoginMutationVariables = Types.Exact<{
@@ -106,7 +105,7 @@ export function getSdk(
   return {
     createUserOnLogin(
       variables: CreateUserOnLoginMutationVariables,
-      requestHeaders?: Dom.RequestInit['headers']
+      requestHeaders?: RequestOptions['requestHeaders']
     ): Promise<CreateUserOnLoginMutation> {
       return withWrapper(
         (wrappedRequestHeaders) =>
@@ -121,7 +120,7 @@ export function getSdk(
     },
     upsertTraefikRoutesIntoDb(
       variables: UpsertTraefikRoutesIntoDbMutationVariables,
-      requestHeaders?: Dom.RequestInit['headers']
+      requestHeaders?: RequestOptions['requestHeaders']
     ): Promise<UpsertTraefikRoutesIntoDbMutation> {
       return withWrapper(
         (wrappedRequestHeaders) =>
@@ -136,7 +135,7 @@ export function getSdk(
     },
     setAllDownNodesBasedOnLastUpdate(
       variables?: SetAllDownNodesBasedOnLastUpdateMutationVariables,
-      requestHeaders?: Dom.RequestInit['headers']
+      requestHeaders?: RequestOptions['requestHeaders']
     ): Promise<SetAllDownNodesBasedOnLastUpdateMutation> {
       return withWrapper(
         (wrappedRequestHeaders) =>
