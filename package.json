@@ -46,7 +46,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "7.43.8",
     "react-icons": "^4.7.1",
-    "regenerator-runtime": "0.13.7",
+    "regenerator-runtime": "0.13.11",
     "supertokens-auth-react": "^0.27.3",
     "supertokens-node": "^12.1.1",
     "tslib": "^2.3.0",
