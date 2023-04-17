@@ -32,7 +32,7 @@ query getListOfBookmarks {
 mutation InsertBookmark($object: BookmarksInsertInput!) {
   insertBookmarksOne(
     object: $object
-    onConflict: { constraint: bookmarks_pkey, update_columns: displayName }
+    onConflict: { constraint: bookmarks_pkey, updateColumns: displayName }
   ) {
     position
     link

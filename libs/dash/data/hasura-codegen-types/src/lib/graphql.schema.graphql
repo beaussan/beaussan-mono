@@ -4,18 +4,12 @@ schema {
   subscription: subscription_root
 }
 
-"""
-whether this query should be cached (Hasura Cloud only)
-"""
+"""whether this query should be cached (Hasura Cloud only)"""
 directive @cached(
-  """
-  refresh the cache entry
-  """
+  """refresh the cache entry"""
   refresh: Boolean! = false
 
-  """
-  measured in seconds
-  """
+  """measured in seconds"""
   ttl: Int! = 60
 ) on QUERY
 
@@ -29,9 +23,7 @@ type Bookmarks {
   link: String!
   position: Int
 
-  """
-  An object relationship
-  """
+  """An object relationship"""
   user: Users!
   userId: uuid!
 }
@@ -44,6 +36,10 @@ type BookmarksAggregate {
   nodes: [Bookmarks!]!
 }
 
+input BookmarksAggregateBoolExp {
+  count: bookmarksAggregateBoolExpCount
+}
+
 """
 aggregate fields of "bookmarks"
 """
@@ -53,11 +49,11 @@ type BookmarksAggregateFields {
   max: BookmarksMaxFields
   min: BookmarksMinFields
   stddev: BookmarksStddevFields
-  stddevPop: BookmarksStddev_popFields
-  stddevSamp: BookmarksStddev_sampFields
+  stddevPop: BookmarksStddevPopFields
+  stddevSamp: BookmarksStddevSampFields
   sum: BookmarksSumFields
-  varPop: BookmarksVar_popFields
-  varSamp: BookmarksVar_sampFields
+  varPop: BookmarksVarPopFields
+  varSamp: BookmarksVarSampFields
   variance: BookmarksVarianceFields
 }
 
@@ -65,17 +61,17 @@ type BookmarksAggregateFields {
 order by aggregate values of table "bookmarks"
 """
 input BookmarksAggregateOrderBy {
-  avg: bookmarks_avg_order_by
+  avg: BookmarksAvgOrderBy
   count: OrderBy
-  max: bookmarks_max_order_by
-  min: bookmarks_min_order_by
-  stddev: bookmarks_stddev_order_by
-  stddev_pop: bookmarks_stddev_pop_order_by
-  stddev_samp: bookmarks_stddev_samp_order_by
-  sum: bookmarks_sum_order_by
-  var_pop: bookmarks_var_pop_order_by
-  var_samp: bookmarks_var_samp_order_by
-  variance: bookmarks_variance_order_by
+  max: BookmarksMaxOrderBy
+  min: BookmarksMinOrderBy
+  stddev: BookmarksStddevOrderBy
+  stddevPop: BookmarksStddevPopOrderBy
+  stddevSamp: BookmarksStddevSampOrderBy
+  sum: BookmarksSumOrderBy
+  varPop: BookmarksVarPopOrderBy
+  varSamp: BookmarksVarSampOrderBy
+  variance: BookmarksVarianceOrderBy
 }
 
 """
@@ -84,17 +80,20 @@ input type for inserting array relation for remote table "bookmarks"
 input BookmarksArrRelInsertInput {
   data: [BookmarksInsertInput!]!
 
-  """
-  upsert condition
-  """
+  """upsert condition"""
   onConflict: BookmarksOnConflict
 }
 
-"""
-aggregate avg on columns
-"""
+"""aggregate avg on columns"""
 type BookmarksAvgFields {
   position: Float
+}
+
+"""
+order by avg() on columns of table "bookmarks"
+"""
+input BookmarksAvgOrderBy {
+  position: OrderBy
 }
 
 """
@@ -148,9 +147,7 @@ input BookmarksInsertInput {
   userId: uuid
 }
 
-"""
-aggregate max on columns
-"""
+"""aggregate max on columns"""
 type BookmarksMaxFields {
   displayName: String
   faviconUrl: String
@@ -161,8 +158,18 @@ type BookmarksMaxFields {
 }
 
 """
-aggregate min on columns
+order by max() on columns of table "bookmarks"
 """
+input BookmarksMaxOrderBy {
+  displayName: OrderBy
+  faviconUrl: OrderBy
+  id: OrderBy
+  link: OrderBy
+  position: OrderBy
+  userId: OrderBy
+}
+
+"""aggregate min on columns"""
 type BookmarksMinFields {
   displayName: String
   faviconUrl: String
@@ -173,17 +180,25 @@ type BookmarksMinFields {
 }
 
 """
+order by min() on columns of table "bookmarks"
+"""
+input BookmarksMinOrderBy {
+  displayName: OrderBy
+  faviconUrl: OrderBy
+  id: OrderBy
+  link: OrderBy
+  position: OrderBy
+  userId: OrderBy
+}
+
+"""
 response of any mutation on the table "bookmarks"
 """
 type BookmarksMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
-  affected_rows: Int!
+  """number of rows affected by the mutation"""
+  affectedRows: Int!
 
-  """
-  data from the rows affected by the mutation
-  """
+  """data from the rows affected by the mutation"""
   returning: [Bookmarks!]!
 }
 
@@ -192,13 +207,11 @@ on_conflict condition type for table "bookmarks"
 """
 input BookmarksOnConflict {
   constraint: BookmarksConstraint!
-  update_columns: [BookmarksUpdateColumn!]! = []
+  updateColumns: [BookmarksUpdateColumn!]! = []
   where: BookmarksBoolExp
 }
 
-"""
-Ordering options when selecting data from "bookmarks".
-"""
+"""Ordering options when selecting data from "bookmarks"."""
 input BookmarksOrderBy {
   displayName: OrderBy
   faviconUrl: OrderBy
@@ -209,9 +222,7 @@ input BookmarksOrderBy {
   userId: OrderBy
 }
 
-"""
-primary key columns input for table: bookmarks
-"""
+"""primary key columns input for table: bookmarks"""
 input BookmarksPkColumnsInput {
   id: uuid!
 }
@@ -220,34 +231,22 @@ input BookmarksPkColumnsInput {
 select columns of table "bookmarks"
 """
 enum BookmarksSelectColumn {
-  """
-  column name
-  """
+  """column name"""
   displayName
 
-  """
-  column name
-  """
+  """column name"""
   faviconUrl
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   link
 
-  """
-  column name
-  """
+  """column name"""
   position
 
-  """
-  column name
-  """
+  """column name"""
   userId
 }
 
@@ -263,101 +262,143 @@ input BookmarksSetInput {
   userId: uuid
 }
 
-"""
-aggregate stddev on columns
-"""
+"""aggregate stddev on columns"""
 type BookmarksStddevFields {
   position: Float
 }
 
 """
-aggregate stddev_pop on columns
+order by stddev() on columns of table "bookmarks"
 """
-type BookmarksStddev_popFields {
+input BookmarksStddevOrderBy {
+  position: OrderBy
+}
+
+"""aggregate stddevPop on columns"""
+type BookmarksStddevPopFields {
   position: Float
 }
 
 """
-aggregate stddev_samp on columns
+order by stddevPop() on columns of table "bookmarks"
 """
-type BookmarksStddev_sampFields {
+input BookmarksStddevPopOrderBy {
+  position: OrderBy
+}
+
+"""aggregate stddevSamp on columns"""
+type BookmarksStddevSampFields {
   position: Float
 }
 
 """
-aggregate sum on columns
+order by stddevSamp() on columns of table "bookmarks"
 """
+input BookmarksStddevSampOrderBy {
+  position: OrderBy
+}
+
+"""
+Streaming cursor of the table "bookmarks"
+"""
+input BookmarksStreamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: BookmarksStreamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input BookmarksStreamCursorValueInput {
+  displayName: String
+  faviconUrl: String
+  id: uuid
+  link: String
+  position: Int
+  userId: uuid
+}
+
+"""aggregate sum on columns"""
 type BookmarksSumFields {
   position: Int
+}
+
+"""
+order by sum() on columns of table "bookmarks"
+"""
+input BookmarksSumOrderBy {
+  position: OrderBy
 }
 
 """
 update columns of table "bookmarks"
 """
 enum BookmarksUpdateColumn {
-  """
-  column name
-  """
+  """column name"""
   displayName
 
-  """
-  column name
-  """
+  """column name"""
   faviconUrl
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   link
 
-  """
-  column name
-  """
+  """column name"""
   position
 
-  """
-  column name
-  """
+  """column name"""
   userId
 }
 
 input BookmarksUpdates {
-  """
-  increments the numeric columns with given value of the filtered values
-  """
+  """increments the numeric columns with given value of the filtered values"""
   _inc: BookmarksIncInput
 
-  """
-  sets the columns of the filtered rows to the given values
-  """
+  """sets the columns of the filtered rows to the given values"""
   _set: BookmarksSetInput
+
+  """filter the rows which have to be updated"""
   where: BookmarksBoolExp!
 }
 
-"""
-aggregate var_pop on columns
-"""
-type BookmarksVar_popFields {
+"""aggregate varPop on columns"""
+type BookmarksVarPopFields {
   position: Float
 }
 
 """
-aggregate var_samp on columns
+order by varPop() on columns of table "bookmarks"
 """
-type BookmarksVar_sampFields {
+input BookmarksVarPopOrderBy {
+  position: OrderBy
+}
+
+"""aggregate varSamp on columns"""
+type BookmarksVarSampFields {
   position: Float
 }
 
 """
-aggregate variance on columns
+order by varSamp() on columns of table "bookmarks"
 """
+input BookmarksVarSampOrderBy {
+  position: OrderBy
+}
+
+"""aggregate variance on columns"""
 type BookmarksVarianceFields {
   position: Float
+}
+
+"""
+order by variance() on columns of table "bookmarks"
+"""
+input BookmarksVarianceOrderBy {
+  position: OrderBy
 }
 
 """
@@ -375,18 +416,12 @@ input BooleanComparisonExp {
   _nin: [Boolean!]
 }
 
-"""
-ordering argument of a cursor
-"""
+"""ordering argument of a cursor"""
 enum CursorOrdering {
-  """
-  ascending ordering of the cursor
-  """
+  """ascending ordering of the cursor"""
   ASC
 
-  """
-  descending ordering of the cursor
-  """
+  """descending ordering of the cursor"""
   DESC
 }
 
@@ -405,38 +440,24 @@ input IntComparisonExp {
   _nin: [Int!]
 }
 
-"""
-column ordering options
-"""
+"""column ordering options"""
 enum OrderBy {
-  """
-  in ascending order, nulls last
-  """
+  """in ascending order, nulls last"""
   ASC
 
-  """
-  in ascending order, nulls first
-  """
+  """in ascending order, nulls first"""
   ASC_NULLS_FIRST
 
-  """
-  in ascending order, nulls last
-  """
+  """in ascending order, nulls last"""
   ASC_NULLS_LAST
 
-  """
-  in descending order, nulls first
-  """
+  """in descending order, nulls first"""
   DESC
 
-  """
-  in descending order, nulls first
-  """
+  """in descending order, nulls first"""
   DESC_NULLS_FIRST
 
-  """
-  in descending order, nulls last
-  """
+  """in descending order, nulls last"""
   DESC_NULLS_LAST
 }
 
@@ -448,9 +469,7 @@ input StringComparisonExp {
   _gt: String
   _gte: String
 
-  """
-  does the column match the given case-insensitive pattern
-  """
+  """does the column match the given case-insensitive pattern"""
   _ilike: String
   _in: [String!]
 
@@ -460,17 +479,13 @@ input StringComparisonExp {
   _iregex: String
   _isNull: Boolean
 
-  """
-  does the column match the given pattern
-  """
+  """does the column match the given pattern"""
   _like: String
   _lt: String
   _lte: String
   _neq: String
 
-  """
-  does the column NOT match the given case-insensitive pattern
-  """
+  """does the column NOT match the given case-insensitive pattern"""
   _nilike: String
   _nin: [String!]
 
@@ -479,9 +494,7 @@ input StringComparisonExp {
   """
   _niregex: String
 
-  """
-  does the column NOT match the given pattern
-  """
+  """does the column NOT match the given pattern"""
   _nlike: String
 
   """
@@ -489,9 +502,7 @@ input StringComparisonExp {
   """
   _nregex: String
 
-  """
-  does the column NOT match the given SQL regular expression
-  """
+  """does the column NOT match the given SQL regular expression"""
   _nsimilar: String
 
   """
@@ -499,9 +510,7 @@ input StringComparisonExp {
   """
   _regex: String
 
-  """
-  does the column match the given SQL regular expression
-  """
+  """does the column match the given SQL regular expression"""
   _similar: String
 }
 
@@ -601,9 +610,7 @@ input TraefikRoutesInsertInput {
   service: String
 }
 
-"""
-aggregate max on columns
-"""
+"""aggregate max on columns"""
 type TraefikRoutesMaxFields {
   calculatedUrl: String
   createdAt: timestamptz
@@ -616,9 +623,7 @@ type TraefikRoutesMaxFields {
   service: String
 }
 
-"""
-aggregate min on columns
-"""
+"""aggregate min on columns"""
 type TraefikRoutesMinFields {
   calculatedUrl: String
   createdAt: timestamptz
@@ -635,14 +640,10 @@ type TraefikRoutesMinFields {
 response of any mutation on the table "traefikRoutes"
 """
 type TraefikRoutesMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
-  affected_rows: Int!
+  """number of rows affected by the mutation"""
+  affectedRows: Int!
 
-  """
-  data from the rows affected by the mutation
-  """
+  """data from the rows affected by the mutation"""
   returning: [TraefikRoutes!]!
 }
 
@@ -651,13 +652,11 @@ on_conflict condition type for table "traefikRoutes"
 """
 input TraefikRoutesOnConflict {
   constraint: TraefikRoutesConstraint!
-  update_columns: [TraefikRoutesUpdateColumn!]! = []
+  updateColumns: [TraefikRoutesUpdateColumn!]! = []
   where: TraefikRoutesBoolExp
 }
 
-"""
-Ordering options when selecting data from "traefikRoutes".
-"""
+"""Ordering options when selecting data from "traefikRoutes"."""
 input TraefikRoutesOrderBy {
   calculatedUrl: OrderBy
   createdAt: OrderBy
@@ -672,9 +671,7 @@ input TraefikRoutesOrderBy {
   service: OrderBy
 }
 
-"""
-primary key columns input for table: traefikRoutes
-"""
+"""primary key columns input for table: traefikRoutes"""
 input TraefikRoutesPkColumnsInput {
   name: String!
 }
@@ -683,59 +680,37 @@ input TraefikRoutesPkColumnsInput {
 select columns of table "traefikRoutes"
 """
 enum TraefikRoutesSelectColumn {
-  """
-  column name
-  """
+  """column name"""
   calculatedUrl
 
-  """
-  column name
-  """
+  """column name"""
   createdAt
 
-  """
-  column name
-  """
+  """column name"""
   faviconUrl
 
-  """
-  column name
-  """
+  """column name"""
   friendlyName
 
-  """
-  column name
-  """
+  """column name"""
   isSown
 
-  """
-  column name
-  """
+  """column name"""
   isUp
 
-  """
-  column name
-  """
+  """column name"""
   lastSeenAlive
 
-  """
-  column name
-  """
+  """column name"""
   name
 
-  """
-  column name
-  """
+  """column name"""
   provider
 
-  """
-  column name
-  """
+  """column name"""
   rule
 
-  """
-  column name
-  """
+  """column name"""
   service
 }
 
@@ -757,70 +732,74 @@ input TraefikRoutesSetInput {
 }
 
 """
+Streaming cursor of the table "traefikRoutes"
+"""
+input TraefikRoutesStreamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: TraefikRoutesStreamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input TraefikRoutesStreamCursorValueInput {
+  calculatedUrl: String
+  createdAt: timestamptz
+  faviconUrl: String
+  friendlyName: String
+  isSown: Boolean
+  isUp: Boolean
+  lastSeenAlive: timestamptz
+  name: String
+  provider: String
+  rule: String
+  service: String
+}
+
+"""
 update columns of table "traefikRoutes"
 """
 enum TraefikRoutesUpdateColumn {
-  """
-  column name
-  """
+  """column name"""
   calculatedUrl
 
-  """
-  column name
-  """
+  """column name"""
   createdAt
 
-  """
-  column name
-  """
+  """column name"""
   faviconUrl
 
-  """
-  column name
-  """
+  """column name"""
   friendlyName
 
-  """
-  column name
-  """
+  """column name"""
   isSown
 
-  """
-  column name
-  """
+  """column name"""
   isUp
 
-  """
-  column name
-  """
+  """column name"""
   lastSeenAlive
 
-  """
-  column name
-  """
+  """column name"""
   name
 
-  """
-  column name
-  """
+  """column name"""
   provider
 
-  """
-  column name
-  """
+  """column name"""
   rule
 
-  """
-  column name
-  """
+  """column name"""
   service
 }
 
 input TraefikRoutesUpdates {
-  """
-  sets the columns of the filtered rows to the given values
-  """
+  """sets the columns of the filtered rows to the given values"""
   _set: TraefikRoutesSetInput
+
+  """filter the rows which have to be updated"""
   where: TraefikRoutesBoolExp!
 }
 
@@ -828,63 +807,39 @@ input TraefikRoutesUpdates {
 columns and relationships of "users"
 """
 type Users {
-  """
-  An array relationship
-  """
+  """An array relationship"""
   bookmarks(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): [Bookmarks!]!
 
-  """
-  An aggregate relationship
-  """
+  """An aggregate relationship"""
   bookmarksAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): BookmarksAggregate!
   canSeeTraefikContent: Boolean!
@@ -920,7 +875,7 @@ input UsersBoolExp {
   _not: UsersBoolExp
   _or: [UsersBoolExp!]
   bookmarks: BookmarksBoolExp
-  bookmarks_aggregate: bookmarks_aggregate_bool_exp
+  bookmarksAggregate: BookmarksAggregateBoolExp
   canSeeTraefikContent: BooleanComparisonExp
   createdAt: TimestamptzComparisonExp
   email: StringComparisonExp
@@ -952,9 +907,7 @@ input UsersInsertInput {
   updatedAt: timestamptz
 }
 
-"""
-aggregate max on columns
-"""
+"""aggregate max on columns"""
 type UsersMaxFields {
   createdAt: timestamptz
   email: String
@@ -963,9 +916,7 @@ type UsersMaxFields {
   updatedAt: timestamptz
 }
 
-"""
-aggregate min on columns
-"""
+"""aggregate min on columns"""
 type UsersMinFields {
   createdAt: timestamptz
   email: String
@@ -978,14 +929,10 @@ type UsersMinFields {
 response of any mutation on the table "users"
 """
 type UsersMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
-  affected_rows: Int!
+  """number of rows affected by the mutation"""
+  affectedRows: Int!
 
-  """
-  data from the rows affected by the mutation
-  """
+  """data from the rows affected by the mutation"""
   returning: [Users!]!
 }
 
@@ -995,9 +942,7 @@ input type for inserting object relation for remote table "users"
 input UsersObjRelInsertInput {
   data: UsersInsertInput!
 
-  """
-  upsert condition
-  """
+  """upsert condition"""
   onConflict: UsersOnConflict
 }
 
@@ -1006,13 +951,11 @@ on_conflict condition type for table "users"
 """
 input UsersOnConflict {
   constraint: UsersConstraint!
-  update_columns: [UsersUpdateColumn!]! = []
+  updateColumns: [UsersUpdateColumn!]! = []
   where: UsersBoolExp
 }
 
-"""
-Ordering options when selecting data from "users".
-"""
+"""Ordering options when selecting data from "users"."""
 input UsersOrderBy {
   bookmarksAggregate: BookmarksAggregateOrderBy
   canSeeTraefikContent: OrderBy
@@ -1023,9 +966,7 @@ input UsersOrderBy {
   updatedAt: OrderBy
 }
 
-"""
-primary key columns input for table: users
-"""
+"""primary key columns input for table: users"""
 input UsersPkColumnsInput {
   id: uuid!
 }
@@ -1034,34 +975,22 @@ input UsersPkColumnsInput {
 select columns of table "users"
 """
 enum UsersSelectColumn {
-  """
-  column name
-  """
+  """column name"""
   canSeeTraefikContent
 
-  """
-  column name
-  """
+  """column name"""
   createdAt
 
-  """
-  column name
-  """
+  """column name"""
   email
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   todoistApiToken
 
-  """
-  column name
-  """
+  """column name"""
   updatedAt
 }
 
@@ -1078,45 +1007,54 @@ input UsersSetInput {
 }
 
 """
+Streaming cursor of the table "users"
+"""
+input UsersStreamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: UsersStreamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input UsersStreamCursorValueInput {
+  canSeeTraefikContent: Boolean
+  createdAt: timestamptz
+  email: String
+  id: uuid
+  todoistApiToken: String
+  updatedAt: timestamptz
+}
+
+"""
 update columns of table "users"
 """
 enum UsersUpdateColumn {
-  """
-  column name
-  """
+  """column name"""
   canSeeTraefikContent
 
-  """
-  column name
-  """
+  """column name"""
   createdAt
 
-  """
-  column name
-  """
+  """column name"""
   email
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   todoistApiToken
 
-  """
-  column name
-  """
+  """column name"""
   updatedAt
 }
 
 input UsersUpdates {
-  """
-  sets the columns of the filtered rows to the given values
-  """
+  """sets the columns of the filtered rows to the given values"""
   _set: UsersSetInput
+
+  """filter the rows which have to be updated"""
   where: UsersBoolExp!
 }
 
@@ -1135,135 +1073,20 @@ input UuidComparisonExp {
   _nin: [uuid!]
 }
 
-input bookmarks_aggregate_bool_exp {
-  count: bookmarks_aggregate_bool_exp_count
-}
-
-input bookmarks_aggregate_bool_exp_count {
+input bookmarksAggregateBoolExpCount {
   arguments: [BookmarksSelectColumn!]
   distinct: Boolean
   filter: BookmarksBoolExp
   predicate: IntComparisonExp!
 }
 
-"""
-order by avg() on columns of table "bookmarks"
-"""
-input bookmarks_avg_order_by {
-  position: OrderBy
-}
-
-"""
-order by max() on columns of table "bookmarks"
-"""
-input bookmarks_max_order_by {
-  displayName: OrderBy
-  faviconUrl: OrderBy
-  id: OrderBy
-  link: OrderBy
-  position: OrderBy
-  userId: OrderBy
-}
-
-"""
-order by min() on columns of table "bookmarks"
-"""
-input bookmarks_min_order_by {
-  displayName: OrderBy
-  faviconUrl: OrderBy
-  id: OrderBy
-  link: OrderBy
-  position: OrderBy
-  userId: OrderBy
-}
-
-"""
-order by stddev() on columns of table "bookmarks"
-"""
-input bookmarks_stddev_order_by {
-  position: OrderBy
-}
-
-"""
-order by stddev_pop() on columns of table "bookmarks"
-"""
-input bookmarks_stddev_pop_order_by {
-  position: OrderBy
-}
-
-"""
-order by stddev_samp() on columns of table "bookmarks"
-"""
-input bookmarks_stddev_samp_order_by {
-  position: OrderBy
-}
-
-"""
-Streaming cursor of the table "bookmarks"
-"""
-input bookmarks_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: bookmarks_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input bookmarks_streamCursorValueInput {
-  displayName: String
-  faviconUrl: String
-  id: uuid
-  link: String
-  position: Int
-  userId: uuid
-}
-
-"""
-order by sum() on columns of table "bookmarks"
-"""
-input bookmarks_sum_order_by {
-  position: OrderBy
-}
-
-"""
-order by var_pop() on columns of table "bookmarks"
-"""
-input bookmarks_var_pop_order_by {
-  position: OrderBy
-}
-
-"""
-order by var_samp() on columns of table "bookmarks"
-"""
-input bookmarks_var_samp_order_by {
-  position: OrderBy
-}
-
-"""
-order by variance() on columns of table "bookmarks"
-"""
-input bookmarks_variance_order_by {
-  position: OrderBy
-}
-
-"""
-mutation root
-"""
+"""mutation root"""
 type mutation_root {
   """
   delete data from the table: "bookmarks"
   """
   deleteBookmarks(
-    """
-    filter the rows which have to be deleted
-    """
+    """filter the rows which have to be deleted"""
     where: BookmarksBoolExp!
   ): BookmarksMutationResponse
 
@@ -1276,9 +1099,7 @@ type mutation_root {
   delete data from the table: "traefikRoutes"
   """
   deleteTraefikRoutes(
-    """
-    filter the rows which have to be deleted
-    """
+    """filter the rows which have to be deleted"""
     where: TraefikRoutesBoolExp!
   ): TraefikRoutesMutationResponse
 
@@ -1291,9 +1112,7 @@ type mutation_root {
   delete data from the table: "users"
   """
   deleteUsers(
-    """
-    filter the rows which have to be deleted
-    """
+    """filter the rows which have to be deleted"""
     where: UsersBoolExp!
   ): UsersMutationResponse
 
@@ -1306,14 +1125,10 @@ type mutation_root {
   insert data into the table: "bookmarks"
   """
   insertBookmarks(
-    """
-    the rows to be inserted
-    """
+    """the rows to be inserted"""
     objects: [BookmarksInsertInput!]!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: BookmarksOnConflict
   ): BookmarksMutationResponse
 
@@ -1321,14 +1136,10 @@ type mutation_root {
   insert a single row into the table: "bookmarks"
   """
   insertBookmarksOne(
-    """
-    the row to be inserted
-    """
+    """the row to be inserted"""
     object: BookmarksInsertInput!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: BookmarksOnConflict
   ): Bookmarks
 
@@ -1336,14 +1147,10 @@ type mutation_root {
   insert data into the table: "traefikRoutes"
   """
   insertTraefikRoutes(
-    """
-    the rows to be inserted
-    """
+    """the rows to be inserted"""
     objects: [TraefikRoutesInsertInput!]!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: TraefikRoutesOnConflict
   ): TraefikRoutesMutationResponse
 
@@ -1351,14 +1158,10 @@ type mutation_root {
   insert a single row into the table: "traefikRoutes"
   """
   insertTraefikRoutesOne(
-    """
-    the row to be inserted
-    """
+    """the row to be inserted"""
     object: TraefikRoutesInsertInput!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: TraefikRoutesOnConflict
   ): TraefikRoutes
 
@@ -1366,14 +1169,10 @@ type mutation_root {
   insert data into the table: "users"
   """
   insertUsers(
-    """
-    the rows to be inserted
-    """
+    """the rows to be inserted"""
     objects: [UsersInsertInput!]!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: UsersOnConflict
   ): UsersMutationResponse
 
@@ -1381,14 +1180,10 @@ type mutation_root {
   insert a single row into the table: "users"
   """
   insertUsersOne(
-    """
-    the row to be inserted
-    """
+    """the row to be inserted"""
     object: UsersInsertInput!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: UsersOnConflict
   ): Users
 
@@ -1396,19 +1191,13 @@ type mutation_root {
   update data of the table: "bookmarks"
   """
   updateBookmarks(
-    """
-    increments the numeric columns with given value of the filtered values
-    """
+    """increments the numeric columns with given value of the filtered values"""
     _inc: BookmarksIncInput
 
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: BookmarksSetInput
 
-    """
-    filter the rows which have to be updated
-    """
+    """filter the rows which have to be updated"""
     where: BookmarksBoolExp!
   ): BookmarksMutationResponse
 
@@ -1416,25 +1205,19 @@ type mutation_root {
   update single row of the table: "bookmarks"
   """
   updateBookmarksByPk(
-    """
-    increments the numeric columns with given value of the filtered values
-    """
+    """increments the numeric columns with given value of the filtered values"""
     _inc: BookmarksIncInput
 
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: BookmarksSetInput
-    pk_columns: BookmarksPkColumnsInput!
+    pkColumns: BookmarksPkColumnsInput!
   ): Bookmarks
 
   """
   update multiples rows of table: "bookmarks"
   """
   updateBookmarksMany(
-    """
-    updates to execute, in order
-    """
+    """updates to execute, in order"""
     updates: [BookmarksUpdates!]!
   ): [BookmarksMutationResponse]
 
@@ -1442,14 +1225,10 @@ type mutation_root {
   update data of the table: "traefikRoutes"
   """
   updateTraefikRoutes(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: TraefikRoutesSetInput
 
-    """
-    filter the rows which have to be updated
-    """
+    """filter the rows which have to be updated"""
     where: TraefikRoutesBoolExp!
   ): TraefikRoutesMutationResponse
 
@@ -1457,20 +1236,16 @@ type mutation_root {
   update single row of the table: "traefikRoutes"
   """
   updateTraefikRoutesByPk(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: TraefikRoutesSetInput
-    pk_columns: TraefikRoutesPkColumnsInput!
+    pkColumns: TraefikRoutesPkColumnsInput!
   ): TraefikRoutes
 
   """
   update multiples rows of table: "traefikRoutes"
   """
   updateTraefikRoutesMany(
-    """
-    updates to execute, in order
-    """
+    """updates to execute, in order"""
     updates: [TraefikRoutesUpdates!]!
   ): [TraefikRoutesMutationResponse]
 
@@ -1478,14 +1253,10 @@ type mutation_root {
   update data of the table: "users"
   """
   updateUsers(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: UsersSetInput
 
-    """
-    filter the rows which have to be updated
-    """
+    """filter the rows which have to be updated"""
     where: UsersBoolExp!
   ): UsersMutationResponse
 
@@ -1493,117 +1264,77 @@ type mutation_root {
   update single row of the table: "users"
   """
   updateUsersByPk(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: UsersSetInput
-    pk_columns: UsersPkColumnsInput!
+    pkColumns: UsersPkColumnsInput!
   ): Users
 
   """
   update multiples rows of table: "users"
   """
   updateUsersMany(
-    """
-    updates to execute, in order
-    """
+    """updates to execute, in order"""
     updates: [UsersUpdates!]!
   ): [UsersMutationResponse]
 }
 
 type query_root {
-  """
-  An array relationship
-  """
+  """An array relationship"""
   bookmarks(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): [Bookmarks!]!
 
-  """
-  An aggregate relationship
-  """
+  """An aggregate relationship"""
   bookmarksAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): BookmarksAggregate!
 
-  """
-  fetch data from the table: "bookmarks" using primary key columns
-  """
+  """fetch data from the table: "bookmarks" using primary key columns"""
   bookmarksByPk(id: uuid!): Bookmarks
 
   """
   fetch data from the table: "traefikRoutes"
   """
   traefikRoutes(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [TraefikRoutesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [TraefikRoutesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: TraefikRoutesBoolExp
   ): [TraefikRoutes!]!
 
@@ -1611,64 +1342,42 @@ type query_root {
   fetch aggregated fields from the table: "traefikRoutes"
   """
   traefikRoutesAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [TraefikRoutesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [TraefikRoutesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: TraefikRoutesBoolExp
   ): TraefikRoutesAggregate!
 
-  """
-  fetch data from the table: "traefikRoutes" using primary key columns
-  """
+  """fetch data from the table: "traefikRoutes" using primary key columns"""
   traefikRoutesByPk(name: String!): TraefikRoutes
 
   """
   fetch data from the table: "users"
   """
   users(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [UsersSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [UsersOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UsersBoolExp
   ): [Users!]!
 
@@ -1676,121 +1385,77 @@ type query_root {
   fetch aggregated fields from the table: "users"
   """
   usersAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [UsersSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [UsersOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UsersBoolExp
   ): UsersAggregate!
 
-  """
-  fetch data from the table: "users" using primary key columns
-  """
+  """fetch data from the table: "users" using primary key columns"""
   usersByPk(id: uuid!): Users
 }
 
 type subscription_root {
-  """
-  An array relationship
-  """
+  """An array relationship"""
   bookmarks(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): [Bookmarks!]!
 
-  """
-  An aggregate relationship
-  """
+  """An aggregate relationship"""
   bookmarksAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): BookmarksAggregate!
 
-  """
-  fetch data from the table: "bookmarks" using primary key columns
-  """
+  """fetch data from the table: "bookmarks" using primary key columns"""
   bookmarksByPk(id: uuid!): Bookmarks
 
   """
   fetch data from the table in a streaming manner: "bookmarks"
   """
   bookmarksStream(
-    """
-    maximum number of rows returned in a single batch
-    """
+    """maximum number of rows returned in a single batch"""
     batchSize: Int!
 
-    """
-    cursor to stream the results returned by the query
-    """
-    cursor: [bookmarks_streamCursorInput]!
+    """cursor to stream the results returned by the query"""
+    cursor: [BookmarksStreamCursorInput]!
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): [Bookmarks!]!
 
@@ -1798,29 +1463,19 @@ type subscription_root {
   fetch data from the table: "traefikRoutes"
   """
   traefikRoutes(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [TraefikRoutesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [TraefikRoutesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: TraefikRoutesBoolExp
   ): [TraefikRoutes!]!
 
@@ -1828,54 +1483,36 @@ type subscription_root {
   fetch aggregated fields from the table: "traefikRoutes"
   """
   traefikRoutesAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [TraefikRoutesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [TraefikRoutesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: TraefikRoutesBoolExp
   ): TraefikRoutesAggregate!
 
-  """
-  fetch data from the table: "traefikRoutes" using primary key columns
-  """
+  """fetch data from the table: "traefikRoutes" using primary key columns"""
   traefikRoutesByPk(name: String!): TraefikRoutes
 
   """
   fetch data from the table in a streaming manner: "traefikRoutes"
   """
   traefikRoutesStream(
-    """
-    maximum number of rows returned in a single batch
-    """
+    """maximum number of rows returned in a single batch"""
     batchSize: Int!
 
-    """
-    cursor to stream the results returned by the query
-    """
-    cursor: [traefikRoutes_streamCursorInput]!
+    """cursor to stream the results returned by the query"""
+    cursor: [TraefikRoutesStreamCursorInput]!
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: TraefikRoutesBoolExp
   ): [TraefikRoutes!]!
 
@@ -1883,29 +1520,19 @@ type subscription_root {
   fetch data from the table: "users"
   """
   users(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [UsersSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [UsersOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UsersBoolExp
   ): [Users!]!
 
@@ -1913,117 +1540,40 @@ type subscription_root {
   fetch aggregated fields from the table: "users"
   """
   usersAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [UsersSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [UsersOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UsersBoolExp
   ): UsersAggregate!
 
-  """
-  fetch data from the table: "users" using primary key columns
-  """
+  """fetch data from the table: "users" using primary key columns"""
   usersByPk(id: uuid!): Users
 
   """
   fetch data from the table in a streaming manner: "users"
   """
   usersStream(
-    """
-    maximum number of rows returned in a single batch
-    """
+    """maximum number of rows returned in a single batch"""
     batchSize: Int!
 
-    """
-    cursor to stream the results returned by the query
-    """
-    cursor: [users_streamCursorInput]!
+    """cursor to stream the results returned by the query"""
+    cursor: [UsersStreamCursorInput]!
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UsersBoolExp
   ): [Users!]!
 }
 
 scalar timestamptz
-
-"""
-Streaming cursor of the table "traefikRoutes"
-"""
-input traefikRoutes_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: traefikRoutes_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input traefikRoutes_streamCursorValueInput {
-  calculatedUrl: String
-  createdAt: timestamptz
-  faviconUrl: String
-  friendlyName: String
-  isSown: Boolean
-  isUp: Boolean
-  lastSeenAlive: timestamptz
-  name: String
-  provider: String
-  rule: String
-  service: String
-}
-
-"""
-Streaming cursor of the table "users"
-"""
-input users_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: users_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input users_streamCursorValueInput {
-  canSeeTraefikContent: Boolean
-  createdAt: timestamptz
-  email: String
-  id: uuid
-  todoistApiToken: String
-  updatedAt: timestamptz
-}
 
 scalar uuid
