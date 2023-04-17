@@ -5,11 +5,7 @@ const config: StorybookConfig = {
   staticDirs: ['../../../../tools/msw'],
   ...rootMain,
   stories: ['../../**/*.stories.mdx', '../../**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: [
-    '@storybook/addon-essentials',
-    ...(rootMain.addons || []),
-    '@nrwl/react/plugins/storybook',
-  ],
+  addons: ['@storybook/addon-essentials', ...(rootMain.addons || [])],
   framework: {
     name: '@storybook/react-vite',
     options: {

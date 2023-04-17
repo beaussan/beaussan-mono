@@ -44,3 +44,9 @@ update_permissions:
       check:
         userId:
           _eq: X-Hasura-User-Id
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        userId:
+          _eq: X-Hasura-User-Id

@@ -1,6 +1,6 @@
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 import './tailwind.css';
-import type { DecoratorFunction } from '@storybook/addons';
+import type { DecoratorFunction } from '@storybook/types';
 import { urqlDecorator } from './urqlDecorator';
 import * as jest from '@storybook/jest';
 

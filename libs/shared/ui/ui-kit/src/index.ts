@@ -1,3 +1,4 @@
+export * from './ContextMenu/ContextMenu';
 export { Button } from './button/button';
 export type { ButtonProps } from './button/button';
 export { InputField } from './form/InputField';

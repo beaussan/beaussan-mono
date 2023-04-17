@@ -1,8 +1,14 @@
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -53,7 +59,6 @@ export type BookmarksAggregateFields = {
   varSamp?: Maybe<BookmarksVarSampFields>;
   variance?: Maybe<BookmarksVarianceFields>;
 };
-
 
 /** aggregate fields of "bookmarks" */
 export type BookmarksAggregateFieldsCountArgs = {
@@ -113,7 +118,7 @@ export enum BookmarksConstraint {
   /** unique or primary key constraint on columns "id" */
   BookmarksPkey = 'bookmarks_pkey',
   /** unique or primary key constraint on columns "userId", "position" */
-  BookmarksUserIdPositionKey = 'bookmarks_userId_position_key'
+  BookmarksUserIdPositionKey = 'bookmarks_userId_position_key',
 }
 
 /** input type for incrementing numeric columns in table "bookmarks" */
@@ -219,7 +224,7 @@ export enum BookmarksSelectColumn {
   /** column name */
   Position = 'position',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 /** input type for updating data in table "bookmarks" */
@@ -307,7 +312,7 @@ export enum BookmarksUpdateColumn {
   /** column name */
   Position = 'position',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 export type BookmarksUpdates = {
@@ -370,7 +375,7 @@ export enum CursorOrdering {
   /** ascending ordering of the cursor */
   Asc = 'ASC',
   /** descending ordering of the cursor */
-  Desc = 'DESC'
+  Desc = 'DESC',
 }
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -399,7 +404,7 @@ export enum OrderBy {
   /** in descending order, nulls first */
   DescNullsFirst = 'DESC_NULLS_FIRST',
   /** in descending order, nulls last */
-  DescNullsLast = 'DESC_NULLS_LAST'
+  DescNullsLast = 'DESC_NULLS_LAST',
 }
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -479,7 +484,6 @@ export type TraefikRoutesAggregateFields = {
   min?: Maybe<TraefikRoutesMinFields>;
 };
 
-
 /** aggregate fields of "traefikRoutes" */
 export type TraefikRoutesAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
@@ -507,7 +511,7 @@ export type TraefikRoutesBoolExp = {
 /** unique or primary key constraints on table "traefikRoutes" */
 export enum TraefikRoutesConstraint {
   /** unique or primary key constraint on columns "name" */
-  TraefikRoutesPkey = 'traefikRoutes_pkey'
+  TraefikRoutesPkey = 'traefikRoutes_pkey',
 }
 
 /** input type for inserting data into table "traefikRoutes" */
@@ -612,7 +616,7 @@ export enum TraefikRoutesSelectColumn {
   /** column name */
   Rule = 'rule',
   /** column name */
-  Service = 'service'
+  Service = 'service',
 }
 
 /** input type for updating data in table "traefikRoutes" */
@@ -676,7 +680,7 @@ export enum TraefikRoutesUpdateColumn {
   /** column name */
   Rule = 'rule',
   /** column name */
-  Service = 'service'
+  Service = 'service',
 }
 
 export type TraefikRoutesUpdates = {
@@ -701,7 +705,6 @@ export type Users = {
   updatedAt: Scalars['timestamptz'];
 };
 
-
 /** columns and relationships of "users" */
 export type UsersBookmarksArgs = {
   distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
@@ -710,7 +713,6 @@ export type UsersBookmarksArgs = {
   orderBy?: InputMaybe<Array<BookmarksOrderBy>>;
   where?: InputMaybe<BookmarksBoolExp>;
 };
-
 
 /** columns and relationships of "users" */
 export type UsersBookmarksAggregateArgs = {
@@ -736,7 +738,6 @@ export type UsersAggregateFields = {
   min?: Maybe<UsersMinFields>;
 };
 
-
 /** aggregate fields of "users" */
 export type UsersAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<UsersSelectColumn>>;
@@ -761,7 +762,7 @@ export type UsersBoolExp = {
 /** unique or primary key constraints on table "users" */
 export enum UsersConstraint {
   /** unique or primary key constraint on columns "id" */
-  UsersPkey = 'users_pkey'
+  UsersPkey = 'users_pkey',
 }
 
 /** input type for inserting data into table "users" */
@@ -847,7 +848,7 @@ export enum UsersSelectColumn {
   /** column name */
   TodoistApiToken = 'todoistApiToken',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** input type for updating data in table "users" */
@@ -891,7 +892,7 @@ export enum UsersUpdateColumn {
   /** column name */
   TodoistApiToken = 'todoistApiToken',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 export type UsersUpdates = {
@@ -968,42 +969,35 @@ export type Mutation_Root = {
   updateUsersMany?: Maybe<Array<Maybe<UsersMutationResponse>>>;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteBookmarksArgs = {
   where: BookmarksBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteBookmarksByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteTraefikRoutesArgs = {
   where: TraefikRoutesBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteTraefikRoutesByPkArgs = {
   name: Scalars['String'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteUsersArgs = {
   where: UsersBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteUsersByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertBookmarksArgs = {
@@ -1011,13 +1005,11 @@ export type Mutation_RootInsertBookmarksArgs = {
   onConflict?: InputMaybe<BookmarksOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertBookmarksOneArgs = {
   object: BookmarksInsertInput;
   onConflict?: InputMaybe<BookmarksOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertTraefikRoutesArgs = {
@@ -1025,13 +1017,11 @@ export type Mutation_RootInsertTraefikRoutesArgs = {
   onConflict?: InputMaybe<TraefikRoutesOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertTraefikRoutesOneArgs = {
   object: TraefikRoutesInsertInput;
   onConflict?: InputMaybe<TraefikRoutesOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertUsersArgs = {
@@ -1039,13 +1029,11 @@ export type Mutation_RootInsertUsersArgs = {
   onConflict?: InputMaybe<UsersOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertUsersOneArgs = {
   object: UsersInsertInput;
   onConflict?: InputMaybe<UsersOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateBookmarksArgs = {
@@ -1054,7 +1042,6 @@ export type Mutation_RootUpdateBookmarksArgs = {
   where: BookmarksBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateBookmarksByPkArgs = {
   _inc?: InputMaybe<BookmarksIncInput>;
@@ -1062,12 +1049,10 @@ export type Mutation_RootUpdateBookmarksByPkArgs = {
   pkColumns: BookmarksPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateBookmarksManyArgs = {
   updates: Array<BookmarksUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateTraefikRoutesArgs = {
@@ -1075,19 +1060,16 @@ export type Mutation_RootUpdateTraefikRoutesArgs = {
   where: TraefikRoutesBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateTraefikRoutesByPkArgs = {
   _set?: InputMaybe<TraefikRoutesSetInput>;
   pkColumns: TraefikRoutesPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateTraefikRoutesManyArgs = {
   updates: Array<TraefikRoutesUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateUsersArgs = {
@@ -1095,13 +1077,11 @@ export type Mutation_RootUpdateUsersArgs = {
   where: UsersBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateUsersByPkArgs = {
   _set?: InputMaybe<UsersSetInput>;
   pkColumns: UsersPkColumnsInput;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateUsersManyArgs = {
@@ -1130,7 +1110,6 @@ export type Query_Root = {
   usersByPk?: Maybe<Users>;
 };
 
-
 export type Query_RootBookmarksArgs = {
   distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1138,7 +1117,6 @@ export type Query_RootBookmarksArgs = {
   orderBy?: InputMaybe<Array<BookmarksOrderBy>>;
   where?: InputMaybe<BookmarksBoolExp>;
 };
-
 
 export type Query_RootBookmarksAggregateArgs = {
   distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
@@ -1148,11 +1126,9 @@ export type Query_RootBookmarksAggregateArgs = {
   where?: InputMaybe<BookmarksBoolExp>;
 };
 
-
 export type Query_RootBookmarksByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootTraefikRoutesArgs = {
   distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
@@ -1162,7 +1138,6 @@ export type Query_RootTraefikRoutesArgs = {
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
 
-
 export type Query_RootTraefikRoutesAggregateArgs = {
   distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1171,11 +1146,9 @@ export type Query_RootTraefikRoutesAggregateArgs = {
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
 
-
 export type Query_RootTraefikRoutesByPkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Query_RootUsersArgs = {
   distinctOn?: InputMaybe<Array<UsersSelectColumn>>;
@@ -1185,7 +1158,6 @@ export type Query_RootUsersArgs = {
   where?: InputMaybe<UsersBoolExp>;
 };
 
-
 export type Query_RootUsersAggregateArgs = {
   distinctOn?: InputMaybe<Array<UsersSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1193,7 +1165,6 @@ export type Query_RootUsersAggregateArgs = {
   orderBy?: InputMaybe<Array<UsersOrderBy>>;
   where?: InputMaybe<UsersBoolExp>;
 };
-
 
 export type Query_RootUsersByPkArgs = {
   id: Scalars['uuid'];
@@ -1227,7 +1198,6 @@ export type Subscription_Root = {
   usersStream: Array<Users>;
 };
 
-
 export type Subscription_RootBookmarksArgs = {
   distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1235,7 +1205,6 @@ export type Subscription_RootBookmarksArgs = {
   orderBy?: InputMaybe<Array<BookmarksOrderBy>>;
   where?: InputMaybe<BookmarksBoolExp>;
 };
-
 
 export type Subscription_RootBookmarksAggregateArgs = {
   distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
@@ -1245,18 +1214,15 @@ export type Subscription_RootBookmarksAggregateArgs = {
   where?: InputMaybe<BookmarksBoolExp>;
 };
 
-
 export type Subscription_RootBookmarksByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootBookmarksStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<BookmarksStreamCursorInput>>;
   where?: InputMaybe<BookmarksBoolExp>;
 };
-
 
 export type Subscription_RootTraefikRoutesArgs = {
   distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
@@ -1266,7 +1232,6 @@ export type Subscription_RootTraefikRoutesArgs = {
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
 
-
 export type Subscription_RootTraefikRoutesAggregateArgs = {
   distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1275,18 +1240,15 @@ export type Subscription_RootTraefikRoutesAggregateArgs = {
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
 
-
 export type Subscription_RootTraefikRoutesByPkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Subscription_RootTraefikRoutesStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<TraefikRoutesStreamCursorInput>>;
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
-
 
 export type Subscription_RootUsersArgs = {
   distinctOn?: InputMaybe<Array<UsersSelectColumn>>;
@@ -1296,7 +1258,6 @@ export type Subscription_RootUsersArgs = {
   where?: InputMaybe<UsersBoolExp>;
 };
 
-
 export type Subscription_RootUsersAggregateArgs = {
   distinctOn?: InputMaybe<Array<UsersSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1305,11 +1266,9 @@ export type Subscription_RootUsersAggregateArgs = {
   where?: InputMaybe<UsersBoolExp>;
 };
 
-
 export type Subscription_RootUsersByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootUsersStreamArgs = {
   batchSize: Scalars['Int'];
