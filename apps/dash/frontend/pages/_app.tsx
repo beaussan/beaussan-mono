@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { persistQueryClient } from '@tanstack/react-query-persist-client';
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+import { Toaster } from 'react-hot-toast';
 
 export const HTTP_URL = clientEnvs.NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL;
 
@@ -69,6 +70,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
               <main className="app">
                 <Component {...pageProps} />
               </main>
+              <Toaster position="top-right" />
             </UserDataProvider>
           </UrqlSupertokensProvider>
         </SuperTokensWrapper>

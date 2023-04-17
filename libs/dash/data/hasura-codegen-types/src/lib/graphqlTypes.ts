@@ -40,6 +40,10 @@ export type BookmarksAggregate = {
   nodes: Array<Bookmarks>;
 };
 
+export type BookmarksAggregateBoolExp = {
+  count?: InputMaybe<BookmarksAggregateBoolExpCount>;
+};
+
 /** aggregate fields of "bookmarks" */
 export type BookmarksAggregateFields = {
   __typename?: 'BookmarksAggregateFields';
@@ -48,11 +52,11 @@ export type BookmarksAggregateFields = {
   max?: Maybe<BookmarksMaxFields>;
   min?: Maybe<BookmarksMinFields>;
   stddev?: Maybe<BookmarksStddevFields>;
-  stddevPop?: Maybe<BookmarksStddev_PopFields>;
-  stddevSamp?: Maybe<BookmarksStddev_SampFields>;
+  stddevPop?: Maybe<BookmarksStddevPopFields>;
+  stddevSamp?: Maybe<BookmarksStddevSampFields>;
   sum?: Maybe<BookmarksSumFields>;
-  varPop?: Maybe<BookmarksVar_PopFields>;
-  varSamp?: Maybe<BookmarksVar_SampFields>;
+  varPop?: Maybe<BookmarksVarPopFields>;
+  varSamp?: Maybe<BookmarksVarSampFields>;
   variance?: Maybe<BookmarksVarianceFields>;
 };
 
@@ -64,17 +68,17 @@ export type BookmarksAggregateFieldsCountArgs = {
 
 /** order by aggregate values of table "bookmarks" */
 export type BookmarksAggregateOrderBy = {
-  avg?: InputMaybe<Bookmarks_Avg_Order_By>;
+  avg?: InputMaybe<BookmarksAvgOrderBy>;
   count?: InputMaybe<OrderBy>;
-  max?: InputMaybe<Bookmarks_Max_Order_By>;
-  min?: InputMaybe<Bookmarks_Min_Order_By>;
-  stddev?: InputMaybe<Bookmarks_Stddev_Order_By>;
-  stddev_pop?: InputMaybe<Bookmarks_Stddev_Pop_Order_By>;
-  stddev_samp?: InputMaybe<Bookmarks_Stddev_Samp_Order_By>;
-  sum?: InputMaybe<Bookmarks_Sum_Order_By>;
-  var_pop?: InputMaybe<Bookmarks_Var_Pop_Order_By>;
-  var_samp?: InputMaybe<Bookmarks_Var_Samp_Order_By>;
-  variance?: InputMaybe<Bookmarks_Variance_Order_By>;
+  max?: InputMaybe<BookmarksMaxOrderBy>;
+  min?: InputMaybe<BookmarksMinOrderBy>;
+  stddev?: InputMaybe<BookmarksStddevOrderBy>;
+  stddevPop?: InputMaybe<BookmarksStddevPopOrderBy>;
+  stddevSamp?: InputMaybe<BookmarksStddevSampOrderBy>;
+  sum?: InputMaybe<BookmarksSumOrderBy>;
+  varPop?: InputMaybe<BookmarksVarPopOrderBy>;
+  varSamp?: InputMaybe<BookmarksVarSampOrderBy>;
+  variance?: InputMaybe<BookmarksVarianceOrderBy>;
 };
 
 /** input type for inserting array relation for remote table "bookmarks" */
@@ -88,6 +92,11 @@ export type BookmarksArrRelInsertInput = {
 export type BookmarksAvgFields = {
   __typename?: 'BookmarksAvgFields';
   position?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "bookmarks" */
+export type BookmarksAvgOrderBy = {
+  position?: InputMaybe<OrderBy>;
 };
 
 /** Boolean expression to filter rows from the table "bookmarks". All fields are combined with a logical 'AND'. */
@@ -139,6 +148,16 @@ export type BookmarksMaxFields = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
+/** order by max() on columns of table "bookmarks" */
+export type BookmarksMaxOrderBy = {
+  displayName?: InputMaybe<OrderBy>;
+  faviconUrl?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  link?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
 /** aggregate min on columns */
 export type BookmarksMinFields = {
   __typename?: 'BookmarksMinFields';
@@ -150,11 +169,21 @@ export type BookmarksMinFields = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
+/** order by min() on columns of table "bookmarks" */
+export type BookmarksMinOrderBy = {
+  displayName?: InputMaybe<OrderBy>;
+  faviconUrl?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  link?: InputMaybe<OrderBy>;
+  position?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
 /** response of any mutation on the table "bookmarks" */
 export type BookmarksMutationResponse = {
   __typename?: 'BookmarksMutationResponse';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
+  affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Bookmarks>;
 };
@@ -162,7 +191,7 @@ export type BookmarksMutationResponse = {
 /** on_conflict condition type for table "bookmarks" */
 export type BookmarksOnConflict = {
   constraint: BookmarksConstraint;
-  update_columns?: Array<BookmarksUpdateColumn>;
+  updateColumns?: Array<BookmarksUpdateColumn>;
   where?: InputMaybe<BookmarksBoolExp>;
 };
 
@@ -214,22 +243,60 @@ export type BookmarksStddevFields = {
   position?: Maybe<Scalars['Float']>;
 };
 
-/** aggregate stddev_pop on columns */
-export type BookmarksStddev_PopFields = {
-  __typename?: 'BookmarksStddev_popFields';
+/** order by stddev() on columns of table "bookmarks" */
+export type BookmarksStddevOrderBy = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** aggregate stddevPop on columns */
+export type BookmarksStddevPopFields = {
+  __typename?: 'BookmarksStddevPopFields';
   position?: Maybe<Scalars['Float']>;
 };
 
-/** aggregate stddev_samp on columns */
-export type BookmarksStddev_SampFields = {
-  __typename?: 'BookmarksStddev_sampFields';
+/** order by stddevPop() on columns of table "bookmarks" */
+export type BookmarksStddevPopOrderBy = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** aggregate stddevSamp on columns */
+export type BookmarksStddevSampFields = {
+  __typename?: 'BookmarksStddevSampFields';
   position?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddevSamp() on columns of table "bookmarks" */
+export type BookmarksStddevSampOrderBy = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** Streaming cursor of the table "bookmarks" */
+export type BookmarksStreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: BookmarksStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type BookmarksStreamCursorValueInput = {
+  displayName?: InputMaybe<Scalars['String']>;
+  faviconUrl?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  link?: InputMaybe<Scalars['String']>;
+  position?: InputMaybe<Scalars['Int']>;
+  userId?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate sum on columns */
 export type BookmarksSumFields = {
   __typename?: 'BookmarksSumFields';
   position?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "bookmarks" */
+export type BookmarksSumOrderBy = {
+  position?: InputMaybe<OrderBy>;
 };
 
 /** update columns of table "bookmarks" */
@@ -253,25 +320,41 @@ export type BookmarksUpdates = {
   _inc?: InputMaybe<BookmarksIncInput>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<BookmarksSetInput>;
+  /** filter the rows which have to be updated */
   where: BookmarksBoolExp;
 };
 
-/** aggregate var_pop on columns */
-export type BookmarksVar_PopFields = {
-  __typename?: 'BookmarksVar_popFields';
+/** aggregate varPop on columns */
+export type BookmarksVarPopFields = {
+  __typename?: 'BookmarksVarPopFields';
   position?: Maybe<Scalars['Float']>;
 };
 
-/** aggregate var_samp on columns */
-export type BookmarksVar_SampFields = {
-  __typename?: 'BookmarksVar_sampFields';
+/** order by varPop() on columns of table "bookmarks" */
+export type BookmarksVarPopOrderBy = {
+  position?: InputMaybe<OrderBy>;
+};
+
+/** aggregate varSamp on columns */
+export type BookmarksVarSampFields = {
+  __typename?: 'BookmarksVarSampFields';
   position?: Maybe<Scalars['Float']>;
+};
+
+/** order by varSamp() on columns of table "bookmarks" */
+export type BookmarksVarSampOrderBy = {
+  position?: InputMaybe<OrderBy>;
 };
 
 /** aggregate variance on columns */
 export type BookmarksVarianceFields = {
   __typename?: 'BookmarksVarianceFields';
   position?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "bookmarks" */
+export type BookmarksVarianceOrderBy = {
+  position?: InputMaybe<OrderBy>;
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -478,7 +561,7 @@ export type TraefikRoutesMinFields = {
 export type TraefikRoutesMutationResponse = {
   __typename?: 'TraefikRoutesMutationResponse';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
+  affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<TraefikRoutes>;
 };
@@ -486,7 +569,7 @@ export type TraefikRoutesMutationResponse = {
 /** on_conflict condition type for table "traefikRoutes" */
 export type TraefikRoutesOnConflict = {
   constraint: TraefikRoutesConstraint;
-  update_columns?: Array<TraefikRoutesUpdateColumn>;
+  updateColumns?: Array<TraefikRoutesUpdateColumn>;
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
 
@@ -551,6 +634,29 @@ export type TraefikRoutesSetInput = {
   service?: InputMaybe<Scalars['String']>;
 };
 
+/** Streaming cursor of the table "traefikRoutes" */
+export type TraefikRoutesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: TraefikRoutesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type TraefikRoutesStreamCursorValueInput = {
+  calculatedUrl?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  faviconUrl?: InputMaybe<Scalars['String']>;
+  friendlyName?: InputMaybe<Scalars['String']>;
+  isSown?: InputMaybe<Scalars['Boolean']>;
+  isUp?: InputMaybe<Scalars['Boolean']>;
+  lastSeenAlive?: InputMaybe<Scalars['timestamptz']>;
+  name?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
+  rule?: InputMaybe<Scalars['String']>;
+  service?: InputMaybe<Scalars['String']>;
+};
+
 /** update columns of table "traefikRoutes" */
 export enum TraefikRoutesUpdateColumn {
   /** column name */
@@ -580,6 +686,7 @@ export enum TraefikRoutesUpdateColumn {
 export type TraefikRoutesUpdates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<TraefikRoutesSetInput>;
+  /** filter the rows which have to be updated */
   where: TraefikRoutesBoolExp;
 };
 
@@ -643,7 +750,7 @@ export type UsersBoolExp = {
   _not?: InputMaybe<UsersBoolExp>;
   _or?: InputMaybe<Array<UsersBoolExp>>;
   bookmarks?: InputMaybe<BookmarksBoolExp>;
-  bookmarks_aggregate?: InputMaybe<Bookmarks_Aggregate_Bool_Exp>;
+  bookmarksAggregate?: InputMaybe<BookmarksAggregateBoolExp>;
   canSeeTraefikContent?: InputMaybe<BooleanComparisonExp>;
   createdAt?: InputMaybe<TimestamptzComparisonExp>;
   email?: InputMaybe<StringComparisonExp>;
@@ -693,7 +800,7 @@ export type UsersMinFields = {
 export type UsersMutationResponse = {
   __typename?: 'UsersMutationResponse';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
+  affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Users>;
 };
@@ -708,7 +815,7 @@ export type UsersObjRelInsertInput = {
 /** on_conflict condition type for table "users" */
 export type UsersOnConflict = {
   constraint: UsersConstraint;
-  update_columns?: Array<UsersUpdateColumn>;
+  updateColumns?: Array<UsersUpdateColumn>;
   where?: InputMaybe<UsersBoolExp>;
 };
 
@@ -754,6 +861,24 @@ export type UsersSetInput = {
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
 };
 
+/** Streaming cursor of the table "users" */
+export type UsersStreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: UsersStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type UsersStreamCursorValueInput = {
+  canSeeTraefikContent?: InputMaybe<Scalars['Boolean']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  todoistApiToken?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+};
+
 /** update columns of table "users" */
 export enum UsersUpdateColumn {
   /** column name */
@@ -773,6 +898,7 @@ export enum UsersUpdateColumn {
 export type UsersUpdates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<UsersSetInput>;
+  /** filter the rows which have to be updated */
   where: UsersBoolExp;
 };
 
@@ -789,93 +915,11 @@ export type UuidComparisonExp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type Bookmarks_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Bookmarks_Aggregate_Bool_Exp_Count>;
-};
-
-export type Bookmarks_Aggregate_Bool_Exp_Count = {
+export type BookmarksAggregateBoolExpCount = {
   arguments?: InputMaybe<Array<BookmarksSelectColumn>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
   filter?: InputMaybe<BookmarksBoolExp>;
   predicate: IntComparisonExp;
-};
-
-/** order by avg() on columns of table "bookmarks" */
-export type Bookmarks_Avg_Order_By = {
-  position?: InputMaybe<OrderBy>;
-};
-
-/** order by max() on columns of table "bookmarks" */
-export type Bookmarks_Max_Order_By = {
-  displayName?: InputMaybe<OrderBy>;
-  faviconUrl?: InputMaybe<OrderBy>;
-  id?: InputMaybe<OrderBy>;
-  link?: InputMaybe<OrderBy>;
-  position?: InputMaybe<OrderBy>;
-  userId?: InputMaybe<OrderBy>;
-};
-
-/** order by min() on columns of table "bookmarks" */
-export type Bookmarks_Min_Order_By = {
-  displayName?: InputMaybe<OrderBy>;
-  faviconUrl?: InputMaybe<OrderBy>;
-  id?: InputMaybe<OrderBy>;
-  link?: InputMaybe<OrderBy>;
-  position?: InputMaybe<OrderBy>;
-  userId?: InputMaybe<OrderBy>;
-};
-
-/** order by stddev() on columns of table "bookmarks" */
-export type Bookmarks_Stddev_Order_By = {
-  position?: InputMaybe<OrderBy>;
-};
-
-/** order by stddev_pop() on columns of table "bookmarks" */
-export type Bookmarks_Stddev_Pop_Order_By = {
-  position?: InputMaybe<OrderBy>;
-};
-
-/** order by stddev_samp() on columns of table "bookmarks" */
-export type Bookmarks_Stddev_Samp_Order_By = {
-  position?: InputMaybe<OrderBy>;
-};
-
-/** Streaming cursor of the table "bookmarks" */
-export type Bookmarks_StreamCursorInput = {
-  /** Stream column input with initial value */
-  initialValue: Bookmarks_StreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Bookmarks_StreamCursorValueInput = {
-  displayName?: InputMaybe<Scalars['String']>;
-  faviconUrl?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  link?: InputMaybe<Scalars['String']>;
-  position?: InputMaybe<Scalars['Int']>;
-  userId?: InputMaybe<Scalars['uuid']>;
-};
-
-/** order by sum() on columns of table "bookmarks" */
-export type Bookmarks_Sum_Order_By = {
-  position?: InputMaybe<OrderBy>;
-};
-
-/** order by var_pop() on columns of table "bookmarks" */
-export type Bookmarks_Var_Pop_Order_By = {
-  position?: InputMaybe<OrderBy>;
-};
-
-/** order by var_samp() on columns of table "bookmarks" */
-export type Bookmarks_Var_Samp_Order_By = {
-  position?: InputMaybe<OrderBy>;
-};
-
-/** order by variance() on columns of table "bookmarks" */
-export type Bookmarks_Variance_Order_By = {
-  position?: InputMaybe<OrderBy>;
 };
 
 /** mutation root */
@@ -1002,7 +1046,7 @@ export type Mutation_RootUpdateBookmarksArgs = {
 export type Mutation_RootUpdateBookmarksByPkArgs = {
   _inc?: InputMaybe<BookmarksIncInput>;
   _set?: InputMaybe<BookmarksSetInput>;
-  pk_columns: BookmarksPkColumnsInput;
+  pkColumns: BookmarksPkColumnsInput;
 };
 
 /** mutation root */
@@ -1019,7 +1063,7 @@ export type Mutation_RootUpdateTraefikRoutesArgs = {
 /** mutation root */
 export type Mutation_RootUpdateTraefikRoutesByPkArgs = {
   _set?: InputMaybe<TraefikRoutesSetInput>;
-  pk_columns: TraefikRoutesPkColumnsInput;
+  pkColumns: TraefikRoutesPkColumnsInput;
 };
 
 /** mutation root */
@@ -1036,7 +1080,7 @@ export type Mutation_RootUpdateUsersArgs = {
 /** mutation root */
 export type Mutation_RootUpdateUsersByPkArgs = {
   _set?: InputMaybe<UsersSetInput>;
-  pk_columns: UsersPkColumnsInput;
+  pkColumns: UsersPkColumnsInput;
 };
 
 /** mutation root */
@@ -1176,7 +1220,7 @@ export type Subscription_RootBookmarksByPkArgs = {
 
 export type Subscription_RootBookmarksStreamArgs = {
   batchSize: Scalars['Int'];
-  cursor: Array<InputMaybe<Bookmarks_StreamCursorInput>>;
+  cursor: Array<InputMaybe<BookmarksStreamCursorInput>>;
   where?: InputMaybe<BookmarksBoolExp>;
 };
 
@@ -1202,7 +1246,7 @@ export type Subscription_RootTraefikRoutesByPkArgs = {
 
 export type Subscription_RootTraefikRoutesStreamArgs = {
   batchSize: Scalars['Int'];
-  cursor: Array<InputMaybe<TraefikRoutes_StreamCursorInput>>;
+  cursor: Array<InputMaybe<TraefikRoutesStreamCursorInput>>;
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
 
@@ -1228,47 +1272,6 @@ export type Subscription_RootUsersByPkArgs = {
 
 export type Subscription_RootUsersStreamArgs = {
   batchSize: Scalars['Int'];
-  cursor: Array<InputMaybe<Users_StreamCursorInput>>;
+  cursor: Array<InputMaybe<UsersStreamCursorInput>>;
   where?: InputMaybe<UsersBoolExp>;
-};
-
-/** Streaming cursor of the table "traefikRoutes" */
-export type TraefikRoutes_StreamCursorInput = {
-  /** Stream column input with initial value */
-  initialValue: TraefikRoutes_StreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type TraefikRoutes_StreamCursorValueInput = {
-  calculatedUrl?: InputMaybe<Scalars['String']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  faviconUrl?: InputMaybe<Scalars['String']>;
-  friendlyName?: InputMaybe<Scalars['String']>;
-  isSown?: InputMaybe<Scalars['Boolean']>;
-  isUp?: InputMaybe<Scalars['Boolean']>;
-  lastSeenAlive?: InputMaybe<Scalars['timestamptz']>;
-  name?: InputMaybe<Scalars['String']>;
-  provider?: InputMaybe<Scalars['String']>;
-  rule?: InputMaybe<Scalars['String']>;
-  service?: InputMaybe<Scalars['String']>;
-};
-
-/** Streaming cursor of the table "users" */
-export type Users_StreamCursorInput = {
-  /** Stream column input with initial value */
-  initialValue: Users_StreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Users_StreamCursorValueInput = {
-  canSeeTraefikContent?: InputMaybe<Scalars['Boolean']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  email?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  todoistApiToken?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
 };

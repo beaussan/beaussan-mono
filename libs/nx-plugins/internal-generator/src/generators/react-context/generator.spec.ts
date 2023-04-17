@@ -29,18 +29,13 @@ describe('react-context generator', () => {
     expect(result).toMatchInlineSnapshot(`
       "import React, { createContext } from 'react';
 
-
       const useUserDataValue = () => {
         return { data: 1 };
       };
 
-      export type UserDataContextType = ReturnType<
-        typeof useUserDataValue
-      >;
+      export type UserDataContextType = ReturnType<typeof useUserDataValue>;
 
-      const UseUserData = createContext<
-        UserDataContextType | undefined
-      >(undefined);
+      const UseUserData = createContext<UserDataContextType | undefined>(undefined);
 
       export const UserDataProvider = ({
         children,
@@ -49,11 +44,7 @@ describe('react-context generator', () => {
       }) => {
         const value = useUserDataValue();
 
-        return (
-          <UseUserData.Provider value={value}>
-            {children}
-          </UseUserData.Provider>
-        );
+        return <UseUserData.Provider value={value}>{children}</UseUserData.Provider>;
       };
 
       export const MockUserDataContextProvider = (
@@ -63,7 +54,6 @@ describe('react-context generator', () => {
       ) => {
         return <UseUserData.Provider value={props.params} {...props} />;
       };
-
 
       export const useUserData = () => {
         const context = React.useContext(UseUserData);

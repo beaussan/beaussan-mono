@@ -65,6 +65,15 @@ export type InsertBookmarkMutation = {
   } | null;
 };
 
+export type DeleteBookmarkByIdMutationVariables = Types.Exact<{
+  id: Types.Scalars['uuid'];
+}>;
+
+export type DeleteBookmarkByIdMutation = {
+  __typename?: 'mutation_root';
+  deleteBookmarksByPk?: { __typename?: 'Bookmarks'; id: string } | null;
+};
+
 export const BookmarkItemFragmentDoc = gql`
   fragment BookmarkItem on Bookmarks {
     id
@@ -113,7 +122,7 @@ export const InsertBookmarkDocument = gql`
   mutation InsertBookmark($object: BookmarksInsertInput!) {
     insertBookmarksOne(
       object: $object
-      onConflict: { constraint: bookmarks_pkey, update_columns: displayName }
+      onConflict: { constraint: bookmarks_pkey, updateColumns: displayName }
     ) {
       position
       link
@@ -130,6 +139,20 @@ export function useInsertBookmarkMutation() {
     InsertBookmarkMutation,
     InsertBookmarkMutationVariables
   >(InsertBookmarkDocument);
+}
+export const DeleteBookmarkByIdDocument = gql`
+  mutation DeleteBookmarkById($id: uuid!) {
+    deleteBookmarksByPk(id: $id) {
+      id
+    }
+  }
+`;
+
+export function useDeleteBookmarkByIdMutation() {
+  return Urql.useMutation<
+    DeleteBookmarkByIdMutation,
+    DeleteBookmarkByIdMutationVariables
+  >(DeleteBookmarkByIdDocument);
 }
 
 /**
@@ -176,3 +199,26 @@ export const mockInsertBookmarkMutation = (
     'InsertBookmark',
     resolver
   );
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockDeleteBookmarkByIdMutation((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ deleteBookmarksByPk })
+ *   )
+ * })
+ */
+export const mockDeleteBookmarkByIdMutation = (
+  resolver: ResponseResolver<
+    GraphQLRequest<DeleteBookmarkByIdMutationVariables>,
+    GraphQLContext<DeleteBookmarkByIdMutation>,
+    any
+  >
+) =>
+  graphql.mutation<
+    DeleteBookmarkByIdMutation,
+    DeleteBookmarkByIdMutationVariables
+  >('DeleteBookmarkById', resolver);

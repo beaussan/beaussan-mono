@@ -44,6 +44,10 @@ type BookmarksAggregate {
   nodes: [Bookmarks!]!
 }
 
+input BookmarksAggregateBoolExp {
+  count: bookmarksAggregateBoolExpCount
+}
+
 """
 aggregate fields of "bookmarks"
 """
@@ -53,11 +57,11 @@ type BookmarksAggregateFields {
   max: BookmarksMaxFields
   min: BookmarksMinFields
   stddev: BookmarksStddevFields
-  stddevPop: BookmarksStddev_popFields
-  stddevSamp: BookmarksStddev_sampFields
+  stddevPop: BookmarksStddevPopFields
+  stddevSamp: BookmarksStddevSampFields
   sum: BookmarksSumFields
-  varPop: BookmarksVar_popFields
-  varSamp: BookmarksVar_sampFields
+  varPop: BookmarksVarPopFields
+  varSamp: BookmarksVarSampFields
   variance: BookmarksVarianceFields
 }
 
@@ -65,17 +69,17 @@ type BookmarksAggregateFields {
 order by aggregate values of table "bookmarks"
 """
 input BookmarksAggregateOrderBy {
-  avg: bookmarks_avg_order_by
+  avg: BookmarksAvgOrderBy
   count: OrderBy
-  max: bookmarks_max_order_by
-  min: bookmarks_min_order_by
-  stddev: bookmarks_stddev_order_by
-  stddev_pop: bookmarks_stddev_pop_order_by
-  stddev_samp: bookmarks_stddev_samp_order_by
-  sum: bookmarks_sum_order_by
-  var_pop: bookmarks_var_pop_order_by
-  var_samp: bookmarks_var_samp_order_by
-  variance: bookmarks_variance_order_by
+  max: BookmarksMaxOrderBy
+  min: BookmarksMinOrderBy
+  stddev: BookmarksStddevOrderBy
+  stddevPop: BookmarksStddevPopOrderBy
+  stddevSamp: BookmarksStddevSampOrderBy
+  sum: BookmarksSumOrderBy
+  varPop: BookmarksVarPopOrderBy
+  varSamp: BookmarksVarSampOrderBy
+  variance: BookmarksVarianceOrderBy
 }
 
 """
@@ -95,6 +99,13 @@ aggregate avg on columns
 """
 type BookmarksAvgFields {
   position: Float
+}
+
+"""
+order by avg() on columns of table "bookmarks"
+"""
+input BookmarksAvgOrderBy {
+  position: OrderBy
 }
 
 """
@@ -161,6 +172,18 @@ type BookmarksMaxFields {
 }
 
 """
+order by max() on columns of table "bookmarks"
+"""
+input BookmarksMaxOrderBy {
+  displayName: OrderBy
+  faviconUrl: OrderBy
+  id: OrderBy
+  link: OrderBy
+  position: OrderBy
+  userId: OrderBy
+}
+
+"""
 aggregate min on columns
 """
 type BookmarksMinFields {
@@ -173,13 +196,25 @@ type BookmarksMinFields {
 }
 
 """
+order by min() on columns of table "bookmarks"
+"""
+input BookmarksMinOrderBy {
+  displayName: OrderBy
+  faviconUrl: OrderBy
+  id: OrderBy
+  link: OrderBy
+  position: OrderBy
+  userId: OrderBy
+}
+
+"""
 response of any mutation on the table "bookmarks"
 """
 type BookmarksMutationResponse {
   """
   number of rows affected by the mutation
   """
-  affected_rows: Int!
+  affectedRows: Int!
 
   """
   data from the rows affected by the mutation
@@ -192,7 +227,7 @@ on_conflict condition type for table "bookmarks"
 """
 input BookmarksOnConflict {
   constraint: BookmarksConstraint!
-  update_columns: [BookmarksUpdateColumn!]! = []
+  updateColumns: [BookmarksUpdateColumn!]! = []
   where: BookmarksBoolExp
 }
 
@@ -271,17 +306,65 @@ type BookmarksStddevFields {
 }
 
 """
-aggregate stddev_pop on columns
+order by stddev() on columns of table "bookmarks"
 """
-type BookmarksStddev_popFields {
+input BookmarksStddevOrderBy {
+  position: OrderBy
+}
+
+"""
+aggregate stddevPop on columns
+"""
+type BookmarksStddevPopFields {
   position: Float
 }
 
 """
-aggregate stddev_samp on columns
+order by stddevPop() on columns of table "bookmarks"
 """
-type BookmarksStddev_sampFields {
+input BookmarksStddevPopOrderBy {
+  position: OrderBy
+}
+
+"""
+aggregate stddevSamp on columns
+"""
+type BookmarksStddevSampFields {
   position: Float
+}
+
+"""
+order by stddevSamp() on columns of table "bookmarks"
+"""
+input BookmarksStddevSampOrderBy {
+  position: OrderBy
+}
+
+"""
+Streaming cursor of the table "bookmarks"
+"""
+input BookmarksStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: BookmarksStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input BookmarksStreamCursorValueInput {
+  displayName: String
+  faviconUrl: String
+  id: uuid
+  link: String
+  position: Int
+  userId: uuid
 }
 
 """
@@ -289,6 +372,13 @@ aggregate sum on columns
 """
 type BookmarksSumFields {
   position: Int
+}
+
+"""
+order by sum() on columns of table "bookmarks"
+"""
+input BookmarksSumOrderBy {
+  position: OrderBy
 }
 
 """
@@ -336,21 +426,39 @@ input BookmarksUpdates {
   sets the columns of the filtered rows to the given values
   """
   _set: BookmarksSetInput
+
+  """
+  filter the rows which have to be updated
+  """
   where: BookmarksBoolExp!
 }
 
 """
-aggregate var_pop on columns
+aggregate varPop on columns
 """
-type BookmarksVar_popFields {
+type BookmarksVarPopFields {
   position: Float
 }
 
 """
-aggregate var_samp on columns
+order by varPop() on columns of table "bookmarks"
 """
-type BookmarksVar_sampFields {
+input BookmarksVarPopOrderBy {
+  position: OrderBy
+}
+
+"""
+aggregate varSamp on columns
+"""
+type BookmarksVarSampFields {
   position: Float
+}
+
+"""
+order by varSamp() on columns of table "bookmarks"
+"""
+input BookmarksVarSampOrderBy {
+  position: OrderBy
 }
 
 """
@@ -358,6 +466,13 @@ aggregate variance on columns
 """
 type BookmarksVarianceFields {
   position: Float
+}
+
+"""
+order by variance() on columns of table "bookmarks"
+"""
+input BookmarksVarianceOrderBy {
+  position: OrderBy
 }
 
 """
@@ -638,7 +753,7 @@ type TraefikRoutesMutationResponse {
   """
   number of rows affected by the mutation
   """
-  affected_rows: Int!
+  affectedRows: Int!
 
   """
   data from the rows affected by the mutation
@@ -651,7 +766,7 @@ on_conflict condition type for table "traefikRoutes"
 """
 input TraefikRoutesOnConflict {
   constraint: TraefikRoutesConstraint!
-  update_columns: [TraefikRoutesUpdateColumn!]! = []
+  updateColumns: [TraefikRoutesUpdateColumn!]! = []
   where: TraefikRoutesBoolExp
 }
 
@@ -757,6 +872,38 @@ input TraefikRoutesSetInput {
 }
 
 """
+Streaming cursor of the table "traefikRoutes"
+"""
+input TraefikRoutesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: TraefikRoutesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input TraefikRoutesStreamCursorValueInput {
+  calculatedUrl: String
+  createdAt: timestamptz
+  faviconUrl: String
+  friendlyName: String
+  isSown: Boolean
+  isUp: Boolean
+  lastSeenAlive: timestamptz
+  name: String
+  provider: String
+  rule: String
+  service: String
+}
+
+"""
 update columns of table "traefikRoutes"
 """
 enum TraefikRoutesUpdateColumn {
@@ -821,6 +968,10 @@ input TraefikRoutesUpdates {
   sets the columns of the filtered rows to the given values
   """
   _set: TraefikRoutesSetInput
+
+  """
+  filter the rows which have to be updated
+  """
   where: TraefikRoutesBoolExp!
 }
 
@@ -920,7 +1071,7 @@ input UsersBoolExp {
   _not: UsersBoolExp
   _or: [UsersBoolExp!]
   bookmarks: BookmarksBoolExp
-  bookmarks_aggregate: bookmarks_aggregate_bool_exp
+  bookmarksAggregate: BookmarksAggregateBoolExp
   canSeeTraefikContent: BooleanComparisonExp
   createdAt: TimestamptzComparisonExp
   email: StringComparisonExp
@@ -981,7 +1132,7 @@ type UsersMutationResponse {
   """
   number of rows affected by the mutation
   """
-  affected_rows: Int!
+  affectedRows: Int!
 
   """
   data from the rows affected by the mutation
@@ -1006,7 +1157,7 @@ on_conflict condition type for table "users"
 """
 input UsersOnConflict {
   constraint: UsersConstraint!
-  update_columns: [UsersUpdateColumn!]! = []
+  updateColumns: [UsersUpdateColumn!]! = []
   where: UsersBoolExp
 }
 
@@ -1078,6 +1229,33 @@ input UsersSetInput {
 }
 
 """
+Streaming cursor of the table "users"
+"""
+input UsersStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: UsersStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input UsersStreamCursorValueInput {
+  canSeeTraefikContent: Boolean
+  createdAt: timestamptz
+  email: String
+  id: uuid
+  todoistApiToken: String
+  updatedAt: timestamptz
+}
+
+"""
 update columns of table "users"
 """
 enum UsersUpdateColumn {
@@ -1117,6 +1295,10 @@ input UsersUpdates {
   sets the columns of the filtered rows to the given values
   """
   _set: UsersSetInput
+
+  """
+  filter the rows which have to be updated
+  """
   where: UsersBoolExp!
 }
 
@@ -1135,122 +1317,11 @@ input UuidComparisonExp {
   _nin: [uuid!]
 }
 
-input bookmarks_aggregate_bool_exp {
-  count: bookmarks_aggregate_bool_exp_count
-}
-
-input bookmarks_aggregate_bool_exp_count {
+input bookmarksAggregateBoolExpCount {
   arguments: [BookmarksSelectColumn!]
   distinct: Boolean
   filter: BookmarksBoolExp
   predicate: IntComparisonExp!
-}
-
-"""
-order by avg() on columns of table "bookmarks"
-"""
-input bookmarks_avg_order_by {
-  position: OrderBy
-}
-
-"""
-order by max() on columns of table "bookmarks"
-"""
-input bookmarks_max_order_by {
-  displayName: OrderBy
-  faviconUrl: OrderBy
-  id: OrderBy
-  link: OrderBy
-  position: OrderBy
-  userId: OrderBy
-}
-
-"""
-order by min() on columns of table "bookmarks"
-"""
-input bookmarks_min_order_by {
-  displayName: OrderBy
-  faviconUrl: OrderBy
-  id: OrderBy
-  link: OrderBy
-  position: OrderBy
-  userId: OrderBy
-}
-
-"""
-order by stddev() on columns of table "bookmarks"
-"""
-input bookmarks_stddev_order_by {
-  position: OrderBy
-}
-
-"""
-order by stddev_pop() on columns of table "bookmarks"
-"""
-input bookmarks_stddev_pop_order_by {
-  position: OrderBy
-}
-
-"""
-order by stddev_samp() on columns of table "bookmarks"
-"""
-input bookmarks_stddev_samp_order_by {
-  position: OrderBy
-}
-
-"""
-Streaming cursor of the table "bookmarks"
-"""
-input bookmarks_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: bookmarks_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input bookmarks_streamCursorValueInput {
-  displayName: String
-  faviconUrl: String
-  id: uuid
-  link: String
-  position: Int
-  userId: uuid
-}
-
-"""
-order by sum() on columns of table "bookmarks"
-"""
-input bookmarks_sum_order_by {
-  position: OrderBy
-}
-
-"""
-order by var_pop() on columns of table "bookmarks"
-"""
-input bookmarks_var_pop_order_by {
-  position: OrderBy
-}
-
-"""
-order by var_samp() on columns of table "bookmarks"
-"""
-input bookmarks_var_samp_order_by {
-  position: OrderBy
-}
-
-"""
-order by variance() on columns of table "bookmarks"
-"""
-input bookmarks_variance_order_by {
-  position: OrderBy
 }
 
 """
@@ -1425,7 +1496,7 @@ type mutation_root {
     sets the columns of the filtered rows to the given values
     """
     _set: BookmarksSetInput
-    pk_columns: BookmarksPkColumnsInput!
+    pkColumns: BookmarksPkColumnsInput!
   ): Bookmarks
 
   """
@@ -1461,7 +1532,7 @@ type mutation_root {
     sets the columns of the filtered rows to the given values
     """
     _set: TraefikRoutesSetInput
-    pk_columns: TraefikRoutesPkColumnsInput!
+    pkColumns: TraefikRoutesPkColumnsInput!
   ): TraefikRoutes
 
   """
@@ -1497,7 +1568,7 @@ type mutation_root {
     sets the columns of the filtered rows to the given values
     """
     _set: UsersSetInput
-    pk_columns: UsersPkColumnsInput!
+    pkColumns: UsersPkColumnsInput!
   ): Users
 
   """
@@ -1786,7 +1857,7 @@ type subscription_root {
     """
     cursor to stream the results returned by the query
     """
-    cursor: [bookmarks_streamCursorInput]!
+    cursor: [BookmarksStreamCursorInput]!
 
     """
     filter the rows returned
@@ -1871,7 +1942,7 @@ type subscription_root {
     """
     cursor to stream the results returned by the query
     """
-    cursor: [traefikRoutes_streamCursorInput]!
+    cursor: [TraefikRoutesStreamCursorInput]!
 
     """
     filter the rows returned
@@ -1956,7 +2027,7 @@ type subscription_root {
     """
     cursor to stream the results returned by the query
     """
-    cursor: [users_streamCursorInput]!
+    cursor: [UsersStreamCursorInput]!
 
     """
     filter the rows returned
@@ -1966,64 +2037,5 @@ type subscription_root {
 }
 
 scalar timestamptz
-
-"""
-Streaming cursor of the table "traefikRoutes"
-"""
-input traefikRoutes_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: traefikRoutes_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input traefikRoutes_streamCursorValueInput {
-  calculatedUrl: String
-  createdAt: timestamptz
-  faviconUrl: String
-  friendlyName: String
-  isSown: Boolean
-  isUp: Boolean
-  lastSeenAlive: timestamptz
-  name: String
-  provider: String
-  rule: String
-  service: String
-}
-
-"""
-Streaming cursor of the table "users"
-"""
-input users_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: users_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input users_streamCursorValueInput {
-  canSeeTraefikContent: Boolean
-  createdAt: timestamptz
-  email: String
-  id: uuid
-  todoistApiToken: String
-  updatedAt: timestamptz
-}
 
 scalar uuid
