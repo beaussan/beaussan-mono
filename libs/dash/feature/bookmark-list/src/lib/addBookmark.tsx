@@ -50,13 +50,24 @@ const AddBookmarkForm = () => {
     return <div>Loading...</div>;
   }
 
+  const nextIndex =
+    (listOfBookmarks.bookmarks
+      .map((it) => it.position)
+      .filter((it) => typeof it === 'number')
+      .sort((a, b) => {
+        if (!a || !b) {
+          return 0;
+        }
+        return a + b;
+      })
+      .pop() ?? 0) + 1;
   return (
     <Form
       onSubmit={async (input) => {
         const { data } = await insertBookmark({
           object: {
             ...fromFormDataToApi(input),
-            position: listOfBookmarks?.bookmarks?.length + 1,
+            position: nextIndex,
           },
         });
         if (!data) {
