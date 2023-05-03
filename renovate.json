@@ -25,6 +25,42 @@
       ],
       "commitMessagePrefix": "⬇️",
       "commitMessageAction": "Downgrade"
+    },
+    {
+      "matchPackageNames": [
+        "react-hook-form"
+      ],
+      "matchPackagePatterns": [
+        "^@hookform/"
+      ],
+      "groupName": "React hook form monorepo"
+    },
+    {
+      "matchPackageNames": [
+        "urql"
+      ],
+      "matchPackagePatterns": [
+        "^@urql/"
+      ],
+      "groupName": "Urql monorepo"
+    },
+    {
+      "matchPackagePatterns": [
+        "^supertokens.*"
+      ],
+      "groupName": "supertokens monorepo"
+    },
+    {
+      "matchPackageNames": ["postcss"],
+      "matchPackagePatterns": [
+        "@nrwl/.*",
+        "@nx/.*",
+        ".*babel.*",
+        "@rollup/.*",
+        "@svgr/.*",
+        "@swc/.*"
+      ],
+      "enabled": false
     }
   ]
 }
