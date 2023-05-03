@@ -1,5 +1,5 @@
 import { TagDefNew, tagDefs, tagGropus, TagGroupMap } from '../../TagConsts';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 
 const wrapWithPipes = (str: string) => `|${str}|`;
 export function generateDepConstrainMdTable(

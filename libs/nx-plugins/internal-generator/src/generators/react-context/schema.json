@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "ReactContext",
   "title": "",
   "type": "object",
@@ -26,5 +25,8 @@
       "x-priority": "important"
     }
   },
-  "required": ["name", "project"]
+  "required": [
+    "name",
+    "project"
+  ]
 }

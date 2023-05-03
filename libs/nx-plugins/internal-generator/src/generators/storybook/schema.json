@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "Storybook",
   "title": "",
   "type": "object",
@@ -31,5 +30,7 @@
       }
     }
   },
-  "required": ["scope"]
+  "required": [
+    "scope"
+  ]
 }

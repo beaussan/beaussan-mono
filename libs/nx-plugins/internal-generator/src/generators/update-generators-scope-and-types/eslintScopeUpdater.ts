@@ -1,4 +1,4 @@
-import { readJson, Tree, writeJson } from '@nrwl/devkit';
+import { readJson, Tree, writeJson } from '@nx/devkit';
 import {
   ImportMap,
   TagDefNew,
@@ -66,7 +66,7 @@ export async function eslintScopeUpdater(tree: Tree) {
 
   existingEslintConfig = modifyEslintRuleOptions(
     existingEslintConfig,
-    '@nrwl/nx/enforce-module-boundaries',
+    '@nx/enforce-module-boundaries',
     (options) => ({
       ...options,
       depConstraints: generateFullDepConstraint(tagGropus, tagDefs),
@@ -75,7 +75,7 @@ export async function eslintScopeUpdater(tree: Tree) {
 
   existingEslintConfig = modifyEslintRuleOptions(
     existingEslintConfig,
-    '@nrwl/nx/workspace/allowed-project-tags',
+    '@nx/workspace/allowed-project-tags',
     (options) => ({
       ...options,
       tags: getNewTagLinterConfig(tagGropus),

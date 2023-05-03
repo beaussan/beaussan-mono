@@ -2,7 +2,7 @@ import {
   Tree,
   readProjectConfiguration,
   updateProjectConfiguration,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { FullOptions } from './normalizedOptions';
 import { tagDefs } from '../TagConsts';
 

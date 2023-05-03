@@ -2,7 +2,7 @@ import {
   readProjectConfiguration,
   updateProjectConfiguration,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { FullOptions } from './normalizedOptions';
 import { Linter } from 'eslint';
 

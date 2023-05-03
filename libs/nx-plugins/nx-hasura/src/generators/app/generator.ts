@@ -7,11 +7,11 @@ import {
   names,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import * as path from 'path';
 import { v4 as uuid } from 'uuid';
 import { AppGeneratorSchema } from './schema';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 
 interface NormalizedSchema extends AppGeneratorSchema {
   projectName: string;

@@ -4,11 +4,11 @@ import {
   names,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import * as path from 'path';
 import { LibraryGeneratorSchema } from './schema';
-import { libraryGenerator as reactLibraryGenerator } from '@nrwl/react';
-import { Linter } from '@nrwl/linter';
+import { libraryGenerator as reactLibraryGenerator } from '@nx/react';
+import { Linter } from '@nx/linter';
 import * as ts from 'typescript';
 import { appendJestConfigOption } from '../../utils/ast';
 import { addEslintJsonCheck } from '../../utils/eslintUtils';
@@ -18,7 +18,7 @@ import {
   normalizeOptions,
 } from '../../utils/normalizedOptions';
 import { addProjectToStorybookDeps } from '../../utils/addProjectToStorybookDeps';
-import { libraryGenerator } from '@nrwl/js';
+import { libraryGenerator } from '@nx/js';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
 function addFiles(

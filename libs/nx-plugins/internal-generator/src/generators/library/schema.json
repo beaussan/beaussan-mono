@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "Library",
   "title": "",
   "type": "object",
@@ -93,5 +92,9 @@
       ]
     }
   },
-  "required": ["name", "scope", "type"]
+  "required": [
+    "name",
+    "scope",
+    "type"
+  ]
 }

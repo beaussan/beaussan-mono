@@ -4,7 +4,7 @@ import {
   ensureNxProject,
   runNxCommandAsync,
   uniq,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 import { createUtilsForLibTesting } from './utils';
 
 describe('internal-generators e2e', () => {

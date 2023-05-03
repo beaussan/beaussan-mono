@@ -1,5 +1,5 @@
 import * as ts from 'typescript';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import * as path from 'path';
 import { tsquery } from '@phenomnomnominal/tsquery';
 import { NormalizedSchema } from '../generator';

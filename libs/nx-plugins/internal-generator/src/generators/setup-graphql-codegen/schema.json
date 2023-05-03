@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "SetupGraphqlCodegen",
   "title": "",
   "type": "object",
@@ -25,9 +24,15 @@
       "x-prompt": {
         "message": "What is the type of generation ?",
         "type": "list",
-        "items": ["server", "client"]
+        "items": [
+          "server",
+          "client"
+        ]
       }
     }
   },
-  "required": ["project", "generationType"]
+  "required": [
+    "project",
+    "generationType"
+  ]
 }
