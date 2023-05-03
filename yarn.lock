@@ -5192,17 +5192,17 @@
     "@svgr/plugin-jsx" "^6.5.1"
     "@svgr/plugin-svgo" "^6.5.1"
 
-"@swc-node/core@^1.10.1":
-  version "1.10.1"
-  resolved "https://registry.npmjs.org/@swc-node/core/-/core-1.10.1.tgz"
-  integrity sha512-4aiqLb5Uz+zDt7oIMAtH69+l1BvKV3k7fMYNNLjgdSM7qmFwrpHwu+Ss9nOYPTCFlbKCUMP/70aD5Gt2skmJaw==
+"@swc-node/core@^1.10.3":
+  version "1.10.3"
+  resolved "https://registry.yarnpkg.com/@swc-node/core/-/core-1.10.3.tgz#dbc37c6d8d28ce59bd1bc55b300fb92bd3876152"
+  integrity sha512-8rpv1DXzsQjN/C8ZXuaTSmJ4M/lRr6geUlbOQ861DLC+sKWcEEvxRjK9cXQ28GserHuEcFDA3wlF9rD1YD0x+Q==
 
 "@swc-node/register@^1.4.2":
-  version "1.6.2"
-  resolved "https://registry.npmjs.org/@swc-node/register/-/register-1.6.2.tgz"
-  integrity sha512-7kzUOrw5RhSW23VU9RtEOlH71MQZ4cfUPgu245f3tKjYIu1CkxNJVX48FAiGJ6+3QgJMXLr1anT9FeeCmX12xw==
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/@swc-node/register/-/register-1.6.5.tgz#6ff5f98605c143e161a6712b2046ce1e6216409a"
+  integrity sha512-yMxXlzthI0aMadYYKDhx7xvtjljB1qoD8Tv0djqSJ1ttTkoDxg6MhG5A5pIahiUT2neVrkWb9lCavoUwXAe/zQ==
   dependencies:
-    "@swc-node/core" "^1.10.1"
+    "@swc-node/core" "^1.10.3"
     "@swc-node/sourcemap-support" "^0.3.0"
     colorette "^2.0.19"
     debug "^4.3.4"
@@ -5211,7 +5211,7 @@
 
 "@swc-node/sourcemap-support@^0.3.0":
   version "0.3.0"
-  resolved "https://registry.npmjs.org/@swc-node/sourcemap-support/-/sourcemap-support-0.3.0.tgz"
+  resolved "https://registry.yarnpkg.com/@swc-node/sourcemap-support/-/sourcemap-support-0.3.0.tgz#e8a0d139bd3e8db39635f63fde43dbe6c39237cc"
   integrity sha512-gqBJSmJMWomZFxlppaKea7NeAqFrDrrS0RMt24No92M3nJWcyI9YKGEQKl+EyJqZ5gh6w1s0cTklMHMzRwA1NA==
   dependencies:
     source-map-support "^0.5.21"
@@ -8017,10 +8017,15 @@ colorette@^1.1.0:
   resolved "https://registry.npmjs.org/colorette/-/colorette-1.4.0.tgz"
   integrity sha512-Y2oEozpomLn7Q3HFP7dpww7AtMJplbM9lGZP6RDfHqmbeRjiwRg4n6VM6j4KLmRke85uWEI7JqF17f3pqdRA0g==
 
-colorette@^2.0.10, colorette@^2.0.16, colorette@^2.0.19:
+colorette@^2.0.10, colorette@^2.0.16:
   version "2.0.19"
   resolved "https://registry.yarnpkg.com/colorette/-/colorette-2.0.19.tgz#cdf044f47ad41a0f4b56b3a0d5b4e6e1a2d5a798"
   integrity sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==
+
+colorette@^2.0.19:
+  version "2.0.20"
+  resolved "https://registry.yarnpkg.com/colorette/-/colorette-2.0.20.tgz#9eb793e6833067f7235902fcd3b09917a000a95a"
+  integrity sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==
 
 colors@~1.2.1:
   version "1.2.5"
