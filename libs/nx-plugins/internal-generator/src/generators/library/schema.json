@@ -92,9 +92,5 @@
       ]
     }
   },
-  "required": [
-    "name",
-    "scope",
-    "type"
-  ]
+  "required": ["name", "scope", "type"]
 }

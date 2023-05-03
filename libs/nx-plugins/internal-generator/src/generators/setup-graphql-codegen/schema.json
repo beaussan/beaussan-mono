@@ -24,15 +24,9 @@
       "x-prompt": {
         "message": "What is the type of generation ?",
         "type": "list",
-        "items": [
-          "server",
-          "client"
-        ]
+        "items": ["server", "client"]
       }
     }
   },
-  "required": [
-    "project",
-    "generationType"
-  ]
+  "required": ["project", "generationType"]
 }

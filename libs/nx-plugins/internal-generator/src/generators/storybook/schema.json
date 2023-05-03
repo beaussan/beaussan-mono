@@ -30,7 +30,5 @@
       }
     }
   },
-  "required": [
-    "scope"
-  ]
+  "required": ["scope"]
 }
