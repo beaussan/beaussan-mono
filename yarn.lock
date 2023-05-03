@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@0no-co/graphql.web@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@0no-co/graphql.web/-/graphql.web-1.0.1.tgz#db3da0d2cd41548b50f0583c0d2f4743c767e56b"
+  integrity sha512-6Yaxyv6rOwRkLIvFaL0NrLDgfNqC/Ng9QOPmTmlqW4mORXMEKmh5NYGkIvvt5Yw8fZesnMAqkj8cIqTj8f40cQ==
+
 "@adobe/css-tools@^4.0.1":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@adobe/css-tools/-/css-tools-4.2.0.tgz#e1a84fca468f4b337816fcb7f0964beb620ba855"
@@ -6171,19 +6176,20 @@
     "@typescript-eslint/types" "5.57.0"
     eslint-visitor-keys "^3.3.0"
 
-"@urql/core@>=3.0.0", "@urql/core@^3.0.3":
+"@urql/core@>=3.0.0":
   version "3.1.1"
   resolved "https://registry.npmjs.org/@urql/core/-/core-3.1.1.tgz"
   integrity sha512-Mnxtq4I4QeFJsgs7Iytw+HyhiGxISR6qtyk66c9tipozLZ6QVxrCiUPF2HY4BxNIabaxcp+rivadvm8NAnXj4Q==
   dependencies:
     wonka "^6.1.2"
 
-"@urql/core@>=3.2.0":
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/@urql/core/-/core-3.2.2.tgz#2a44015b536d72981822f715c96393d8e0ddc576"
-  integrity sha512-i046Cz8cZ4xIzGMTyHZrbdgzcFMcKD7+yhCAH5FwWBRjcKrc+RjEOuR9X5AMuBvr8c6IAaE92xAqa4wmlGfWTQ==
+"@urql/core@>=4.0.0", "@urql/core@^4.0.0":
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@urql/core/-/core-4.0.7.tgz#8918a956f8e2ffbaeb3aae58190d728813de5841"
+  integrity sha512-UtZ9oSbSFODXzFydgLCXpAQz26KGT1d6uEfcylKphiRWNXSWZi8k7vhJXNceNm/Dn0MiZ+kaaJHKcnGY1jvHRQ==
   dependencies:
-    wonka "^6.1.2"
+    "@0no-co/graphql.web" "^1.0.1"
+    wonka "^6.3.2"
 
 "@urql/devtools@^2.0.3":
   version "2.0.3"
@@ -6192,21 +6198,22 @@
   dependencies:
     wonka ">= 4.0.9"
 
-"@urql/exchange-auth@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@urql/exchange-auth/-/exchange-auth-1.0.0.tgz"
-  integrity sha512-79hqPQab+ifeINOxvQykvqub4ixWHBEIagN4U67ijcHGMfp3c4yEWRk4IJMPwF+OMT7LrRFuv+jRIZTQn/9VwQ==
+"@urql/exchange-auth@^2.0.0":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@urql/exchange-auth/-/exchange-auth-2.1.2.tgz#ea4aab54ed226f114a6d6a536c8e740a622adefa"
+  integrity sha512-YoQgCXW3JlC5HimRXWuqKqcMwrop8SqXXbSlycyg7rG4BXGkZ1tFgZzrdasjhh2U+u3TWad0gTjF8oE2fjULpw==
   dependencies:
-    "@urql/core" ">=3.0.0"
-    wonka "^6.0.0"
+    "@urql/core" ">=4.0.0"
+    wonka "^6.3.2"
 
-"@urql/exchange-graphcache@^5.0.5":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@urql/exchange-graphcache/-/exchange-graphcache-5.2.0.tgz#d8af2ac73e3644e1947a82f0da1bdb912c9f9ccd"
-  integrity sha512-wHSTkp6TAhioauK/85DyiiQP5vz4EAJx7JQ+39OaHZ9TSdDqWkg4zs9VAhV3OzSopA9DNbihZVZ32w7q8BSUEA==
+"@urql/exchange-graphcache@^6.0.0":
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/@urql/exchange-graphcache/-/exchange-graphcache-6.0.4.tgz#55b9dab64369f4a887f10a1a5e5f855ba68283ae"
+  integrity sha512-fzfCUrHzhLycPRa6kYrQYryk0pwmUfeHY9Xqh11A6wtp4/diV7FASlffB5k2j3AWRBxBnqThXDssRXI/G8cACQ==
   dependencies:
-    "@urql/core" ">=3.2.0"
-    wonka "^6.0.0"
+    "@0no-co/graphql.web" "^1.0.1"
+    "@urql/core" ">=4.0.0"
+    wonka "^6.3.2"
 
 "@urql/exchange-retry@^1.0.0":
   version "1.0.0"
@@ -17715,13 +17722,13 @@ urlpattern-polyfill@^6.0.2:
   dependencies:
     braces "^3.0.2"
 
-urql@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.npmjs.org/urql/-/urql-3.0.3.tgz"
-  integrity sha512-aVUAMRLdc5AOk239DxgXt6ZxTl/fEmjr7oyU5OGo8uvpqu42FkeJErzd2qBzhAQ3DyusoZIbqbBLPlnKo/yy2A==
+urql@^4.0.0:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/urql/-/urql-4.0.2.tgz#c67a64fe80a5a66f2916a24e31493e0c91ab2f56"
+  integrity sha512-jMb71UGtoAHI4A0TO15ZUSG8qvUxC5fBTXmUq/DyE3WWcnJkZbnMCBlcZIzMrXK4txAMIHE718jsaUujRkdlkg==
   dependencies:
-    "@urql/core" "^3.0.3"
-    wonka "^6.0.0"
+    "@urql/core" "^4.0.0"
+    wonka "^6.3.2"
 
 use-callback-ref@^1.3.0:
   version "1.3.0"
@@ -18238,6 +18245,11 @@ wonka@^6.0.0, wonka@^6.1.2:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/wonka/-/wonka-6.3.0.tgz#dd508dc9ef8588e5bbb10b96f2388bd9d4a1f17b"
   integrity sha512-7np+Kj4OnDQeEN0kafYLkPFKj1Qo+k7mNgyMHSgOeg+9AEvJbL8ipTBgSCTQfGcgVo6TPNU4T5+AZ2rAOyVrAw==
+
+wonka@^6.3.2:
+  version "6.3.2"
+  resolved "https://registry.yarnpkg.com/wonka/-/wonka-6.3.2.tgz#6f32992b332251d7b696b038990f4dc284b3b33d"
+  integrity sha512-2xXbQ1LnwNS7egVm1HPhW2FyKrekolzhpM3mCwXdQr55gO+tAiY76rhb32OL9kKsW8taj++iP7C6hxlVzbnvrw==
 
 word-wrap@^1.2.3, word-wrap@~1.2.3:
   version "1.2.3"
