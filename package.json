@@ -30,7 +30,7 @@
     "@urql/exchange-graphcache": "^5.0.5",
     "@urql/exchange-retry": "^1.0.0",
     "axios": "^1.2.1",
-    "class-variance-authority": "^0.5.2",
+    "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "core-js": "^3.6.5",
     "date-fns": "^2.29.3",
