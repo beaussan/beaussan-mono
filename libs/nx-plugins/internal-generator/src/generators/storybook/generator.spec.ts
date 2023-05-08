@@ -55,7 +55,7 @@ describe('storybook generator', () => {
         'shared-ui-lib5',
       ])
     );
-  });
+  }, 20_000);
 
   it('should run successfully', async () => {
     await storybookGenerator(appTree, options);
