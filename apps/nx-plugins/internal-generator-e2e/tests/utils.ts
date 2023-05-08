@@ -39,7 +39,7 @@ export const createUtilsForLibTesting = (project: string) => {
     const lintOutput = await runLintOnProject(scope, type);
     return lintOutput
       .split('\n')
-      .filter((val) => val.includes('@nrwl/nx/enforce-module-boundaries'))
+      .filter((val) => val.includes('@nx/enforce-module-boundaries'))
       .map((it) => it.trim());
   };
   const getModuleBoundariesErrorsWithNames = async (
