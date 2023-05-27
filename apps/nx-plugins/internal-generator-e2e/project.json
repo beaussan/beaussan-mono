@@ -14,11 +14,12 @@
       }
     },
     "e2e": {
-      "executor": "@nx/plugin:e2e",
+      "executor": "@nx/jest:jest",
       "options": {
-        "target": "nx-plugins-internal-generator:build",
-        "jestConfig": "apps/nx-plugins/internal-generator-e2e/jest.config.ts"
-      }
+        "jestConfig": "apps/nx-plugins/internal-generator-e2e/jest.config.ts",
+        "runInBand": true
+      },
+      "dependsOn": ["nx-plugins-internal-generator:build"]
     }
   },
   "tags": ["scope:nx-plugins", "type:e2e"],

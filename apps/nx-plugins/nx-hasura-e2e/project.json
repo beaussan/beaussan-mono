@@ -12,11 +12,12 @@
       }
     },
     "e2e": {
-      "executor": "@nx/plugin:e2e",
+      "executor": "@nx/jest:jest",
       "options": {
-        "target": "nx-plugins-nx-hasura:build",
-        "jestConfig": "apps/nx-plugins/nx-hasura-e2e/jest.config.ts"
-      }
+        "jestConfig": "apps/nx-plugins/nx-hasura-e2e/jest.config.ts",
+        "runInBand": true
+      },
+      "dependsOn": ["nx-plugins-nx-hasura:build"]
     }
   },
   "tags": ["scope:nx-plugins", "type:e2e"],

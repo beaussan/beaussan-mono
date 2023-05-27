@@ -179,12 +179,11 @@ export default async function (tree: Tree, options: StorybookGeneratorSchema) {
   });
   await storybookConfigurationGenerator(tree, {
     name: normalizedOptions.projectName,
-    uiFramework: '@storybook/react',
     configureCypress: false,
     linter: Linter.EsLint,
     configureTestRunner: true,
     tsConfiguration: true,
-    bundler: 'webpack',
+    uiFramework: '@storybook/react-vite',
   });
   await addStorybookCiTestRunner(tree, normalizedOptions);
   await tweakMainTsStorybookConfig(tree, normalizedOptions);
