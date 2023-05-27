@@ -33,6 +33,10 @@
             {
               "value": "dash",
               "label": "dash - Dash application related libraries"
+            },
+            {
+              "value": "baby-watch",
+              "label": "baby-watch - app"
             }
           ]
         ]

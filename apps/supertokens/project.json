@@ -1,0 +1,21 @@
+{
+  "name": "supertokens",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/supertokens",
+  "tags": [],
+  "targets": {
+    "docker-compose-up": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "docker compose up -d",
+          "echo Waiting for Supertokens to be up...",
+          "sleep 5"
+        ],
+        "cwd": "apps/supertokens",
+        "parallel": false
+      }
+    }
+  }
+}

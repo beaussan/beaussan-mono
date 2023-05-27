@@ -26,6 +26,10 @@
                 "onlyDependOnLibsWithTags": ["scope:shared", "scope:nx-plugins"]
               },
               {
+                "sourceTag": "scope:baby-watch",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:baby-watch"]
+              },
+              {
                 "sourceTag": "type:utils",
                 "onlyDependOnLibsWithTags": ["type:utils"]
               },
@@ -104,7 +108,7 @@
                 "prefix": "scope:",
                 "allowMultiplePerProject": false,
                 "enforceAtLeastOne": true,
-                "allowedTags": ["dash", "nx-plugins", "shared"]
+                "allowedTags": ["dash", "baby-watch", "nx-plugins", "shared"]
               },
               "type": {
                 "prefix": "type:",
