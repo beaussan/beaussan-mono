@@ -5,7 +5,7 @@
   "sourceRoot": "apps/supertokens",
   "tags": [],
   "targets": {
-    "docker-compose-up": {
+    "serve": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [

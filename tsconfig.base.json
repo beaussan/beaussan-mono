@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@beaussan/baby-watch/data/env-config": [
+        "libs/baby-watch/data/env-config/src/index.ts"
+      ],
       "@beaussan/dash/data/backend-admin-sdk": [
         "libs/dash/data/backend-admin-sdk/src/index.ts"
       ],

@@ -121,8 +121,10 @@ export function getServerRecipes(input: InputGetRecipes): RecipeListFunction[] {
             ...originalImplementation,
 
             createNewSession: async function (input) {
+              console.log('step 1', input);
               const { roles } = await UserRoles.getRolesForUser(input.userId);
 
+              console.log('step 2', roles);
               input.accessTokenPayload = {
                 ...input.accessTokenPayload,
                 'https://hasura.io/jwt/claims': {
@@ -131,8 +133,19 @@ export function getServerRecipes(input: InputGetRecipes): RecipeListFunction[] {
                   'x-hasura-allowed-roles': roles,
                 },
               };
+              console.log('step 3');
 
-              return originalImplementation.createNewSession(input);
+              try {
+                const result = await originalImplementation.createNewSession(
+                  input
+                );
+
+                console.log('step 4', result);
+                return result;
+              } catch (e) {
+                console.error(e);
+                throw e;
+              }
             },
           };
         },

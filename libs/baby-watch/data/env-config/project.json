@@ -1,0 +1,43 @@
+{
+  "name": "baby-watch-data-env-config",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/baby-watch/data/env-config/src",
+  "projectType": "library",
+  "tags": ["scope:baby-watch", "type:data"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/baby-watch/data/env-config/**/*.{ts,tsx,js,jsx}",
+          "libs/baby-watch/data/env-config/**/*.json"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/baby-watch/data/env-config"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["coverage/libs/baby-watch/data/env-config"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../../coverage/libs/baby-watch/data/env-config"
+      }
+    }
+  }
+}

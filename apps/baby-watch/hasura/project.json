@@ -1,0 +1,50 @@
+{
+  "name": "baby-watch-hasura",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/baby-watch/hasura/src",
+  "targets": {
+    "docker-compose:up": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "docker compose up -d",
+          "echo Waiting for Hasura to be up...",
+          "sleep 5"
+        ],
+        "cwd": "apps/baby-watch/hasura",
+        "parallel": false
+      }
+    },
+    "docker-compose:stop": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["docker compose stop"],
+        "cwd": "apps/baby-watch/hasura",
+        "parallel": false
+      }
+    },
+    "serve": {
+      "executor": "nx:run-script",
+      "dependsOn": ["metadata-apply"],
+      "options": {
+        "script": "hasura --skip-update-check --project apps/baby-watch/hasura  console"
+      }
+    },
+    "migrate-db": {
+      "executor": "nx:run-script",
+      "dependsOn": ["docker-compose:up"],
+      "options": {
+        "script": "hasura --skip-update-check --project apps/baby-watch/hasura  migrate apply --database-name default"
+      }
+    },
+    "metadata-apply": {
+      "executor": "nx:run-script",
+      "dependsOn": ["migrate-db"],
+      "options": {
+        "script": "hasura --skip-update-check --project apps/baby-watch/hasura  metadata apply"
+      }
+    }
+  },
+  "tags": ["scope:baby-watch", "type:app"]
+}
