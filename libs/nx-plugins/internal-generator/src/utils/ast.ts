@@ -1,6 +1,6 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 import * as ts from 'typescript';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 
 export const appendJestConfigOption = (
   tree: Tree,

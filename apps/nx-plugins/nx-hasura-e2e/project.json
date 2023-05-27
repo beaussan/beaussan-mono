@@ -5,18 +5,19 @@
   "sourceRoot": "apps/nx-plugins/nx-hasura-e2e/src",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/nx-plugins/nx-hasura-e2e/**/*.{ts,tsx,json}"]
       }
     },
     "e2e": {
-      "executor": "@nrwl/nx-plugin:e2e",
+      "executor": "@nx/jest:jest",
       "options": {
-        "target": "nx-plugins-nx-hasura:build",
-        "jestConfig": "apps/nx-plugins/nx-hasura-e2e/jest.config.ts"
-      }
+        "jestConfig": "apps/nx-plugins/nx-hasura-e2e/jest.config.ts",
+        "runInBand": true
+      },
+      "dependsOn": ["nx-plugins-nx-hasura:build"]
     }
   },
   "tags": ["scope:nx-plugins", "type:e2e"],

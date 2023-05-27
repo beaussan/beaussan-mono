@@ -11,7 +11,7 @@
   ],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
@@ -20,16 +20,15 @@
       }
     },
     "test": {
-      "executor": "@nrwl/vite:test",
+      "executor": "@nx/vite:test",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "passWithNoTests": true
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@nx/storybook:storybook",
       "options": {
-        "uiFramework": "@storybook/react",
         "port": 4401,
         "configDir": "libs/dash/storybook-host/.storybook"
       },
@@ -40,10 +39,9 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/storybook:build",
+      "executor": "@nx/storybook:build",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "uiFramework": "@storybook/react",
         "configDir": "libs/dash/storybook-host/.storybook",
         "outputDir": "dist/storybook/dash-storybook-host"
       },
@@ -65,7 +63,7 @@
       }
     },
     "build": {
-      "executor": "@nrwl/vite:build",
+      "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {

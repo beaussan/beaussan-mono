@@ -5,7 +5,7 @@ import {
   offsetFromRoot,
   Tree,
   updateProjectConfiguration,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import * as path from 'path';
 import { SetupGraphqlCodegenGeneratorSchema } from './schema';
 

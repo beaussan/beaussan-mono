@@ -1,8 +1,4 @@
-import {
-  runNxCommandAsync,
-  updateFile,
-  readFile,
-} from '@nrwl/nx-plugin/testing';
+import { runNxCommandAsync, updateFile, readFile } from '@nx/plugin/testing';
 
 export const createUtilsForLibTesting = (project: string) => {
   const generateImportLine = (scope: string, type: string, salt?: string) =>
@@ -15,7 +11,7 @@ export const createUtilsForLibTesting = (project: string) => {
     const libName = `${scope}-${type}`;
     const importPath = `${project}-${scope}-${type}` + (salt ? salt : '');
     return await runNxCommandAsync(
-      `generate @nrwl/react:library --name=${libName} --importPath=${importPath} --directory=${
+      `generate @nx/react:library --name=${libName} --importPath=${importPath} --directory=${
         project + (salt ? salt : '')
       } --tags=scope:${scope},type:${type} --no-interactive`
     );
@@ -43,7 +39,7 @@ export const createUtilsForLibTesting = (project: string) => {
     const lintOutput = await runLintOnProject(scope, type);
     return lintOutput
       .split('\n')
-      .filter((val) => val.includes('@nrwl/nx/enforce-module-boundaries'))
+      .filter((val) => val.includes('@nx/enforce-module-boundaries'))
       .map((it) => it.trim());
   };
   const getModuleBoundariesErrorsWithNames = async (

@@ -6,7 +6,7 @@
   "implicitDependencies": ["dash-hasura"],
   "targets": {
     "build": {
-      "executor": "@nrwl/next:build",
+      "executor": "@nx/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -21,7 +21,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/next:server",
+      "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "dash-frontend:build",
@@ -41,13 +41,13 @@
       }
     },
     "export": {
-      "executor": "@nrwl/next:export",
+      "executor": "@nx/next:export",
       "options": {
         "buildTarget": "dash-frontend:build:production"
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/dash/frontend/jest.config.ts",
@@ -55,7 +55,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/dash/frontend/**/*.{ts,tsx,js,jsx,json}"]

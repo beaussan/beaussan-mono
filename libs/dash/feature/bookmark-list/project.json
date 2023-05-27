@@ -18,7 +18,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
@@ -27,14 +27,14 @@
       }
     },
     "test": {
-      "executor": "@nrwl/vite:test",
+      "executor": "@nx/vite:test",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "passWithNoTests": true
       }
     },
     "build": {
-      "executor": "@nrwl/vite:build",
+      "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {

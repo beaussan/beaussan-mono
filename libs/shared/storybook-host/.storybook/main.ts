@@ -1,6 +1,5 @@
 import { rootMain } from '../../../../.storybook/main';
 import type { StorybookConfig } from '@storybook/react-vite';
-
 const config: StorybookConfig = {
   staticDirs: ['../../../../tools/msw'],
   ...rootMain,
@@ -13,6 +12,9 @@ const config: StorybookConfig = {
         viteConfigPath: 'libs/shared/storybook-host/vite.config.ts',
       },
     },
+  },
+  docs: {
+    autodocs: true,
   },
 };
 export default config;

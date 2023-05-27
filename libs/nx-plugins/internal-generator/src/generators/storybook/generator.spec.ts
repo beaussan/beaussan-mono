@@ -1,5 +1,5 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, readProjectConfiguration, readJson } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree, readProjectConfiguration, readJson } from '@nx/devkit';
 
 import storybookGenerator from './generator';
 import reactLibGenerator from '../library/generator';
@@ -55,7 +55,7 @@ describe('storybook generator', () => {
         'shared-ui-lib5',
       ])
     );
-  });
+  }, 20_000);
 
   it('should run successfully', async () => {
     await storybookGenerator(appTree, options);
@@ -69,12 +69,12 @@ describe('storybook generator', () => {
 
     expect(config.targets.storybook).toBeDefined();
     expect(config.targets.storybook.executor).toEqual(
-      '@nrwl/storybook:storybook'
+      '@nx/storybook:storybook'
     );
 
     expect(config.targets['build-storybook']).toBeDefined();
     expect(config.targets['build-storybook'].executor).toEqual(
-      '@nrwl/storybook:build'
+      '@nx/storybook:build'
     );
   });
 
@@ -84,7 +84,7 @@ describe('storybook generator', () => {
 
     expect(config.targets.storybook).toBeDefined();
     expect(config.targets.storybook.executor).toEqual(
-      '@nrwl/storybook:storybook'
+      '@nx/storybook:storybook'
     );
 
     expect(config.targets['test-storybook']).toBeDefined();

@@ -80,9 +80,7 @@ export const ErrorComponentTemplate = ({ name }: { name: string }) => {
             book some space for the error message. It prevents other fields to
             be pushed down when an error is displayed. */
     return (
-      <div className="text-red-600 flex items-center text-sm mt-1">
-        <>&nbsp;</>
-      </div>
+      <div className="text-red-600 flex items-center text-sm mt-1">&nbsp;</div>
     );
   }
 

@@ -4,7 +4,7 @@ import {
   readJson,
   writeJson,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import * as path from 'path';
 import { eslintScopeUpdater } from './eslintScopeUpdater';
 import { markdownGenerator } from './markdownGenerator';

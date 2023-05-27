@@ -9,9 +9,9 @@ import {
   names,
   generateFiles,
   getProjects,
-} from '@nrwl/devkit';
-import { setupTailwindGenerator } from '@nrwl/react';
-import { configurationGenerator as storybookConfigurationGenerator } from '@nrwl/storybook';
+} from '@nx/devkit';
+import { setupTailwindGenerator } from '@nx/react';
+import { configurationGenerator as storybookConfigurationGenerator } from '@nx/storybook';
 import { StorybookGeneratorSchema } from './schema';
 import {
   getFoldersFromDirectoryAndName,
@@ -22,7 +22,7 @@ import {
   getDirectoryFromScopeAndType,
   getTagStringFromScopeAndType,
 } from '../../utils/tags';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 import * as path from 'path';
 import { tweakMainTsStorybookConfig } from './transforms/storybook';
 import { addEslintJsonCheck } from '../../utils/eslintUtils';
@@ -179,12 +179,11 @@ export default async function (tree: Tree, options: StorybookGeneratorSchema) {
   });
   await storybookConfigurationGenerator(tree, {
     name: normalizedOptions.projectName,
-    uiFramework: '@storybook/react',
     configureCypress: false,
     linter: Linter.EsLint,
     configureTestRunner: true,
     tsConfiguration: true,
-    bundler: 'webpack',
+    uiFramework: '@storybook/react-vite',
   });
   await addStorybookCiTestRunner(tree, normalizedOptions);
   await tweakMainTsStorybookConfig(tree, normalizedOptions);
