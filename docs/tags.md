@@ -18,10 +18,6 @@ A scope tag is used to add boundaries between modules of the monorepo.
 
 Dash application related libraries
 
-#### `scope:baby-watch`
-
-Baby watch application
-
 #### `scope:nx-plugins`
 
 Nx plugins, internal or external
@@ -38,12 +34,11 @@ Shared libraries, used across all other libraries
 
 Here is the import rule matrix :
 
-| ![Can row import colum](./can-import-icon.png) | `scope:shared` | `scope:dash` | `scope:nx-plugins` | `scope:baby-watch` |
-| ---------------------------------------------- | :------------: | :----------: | :----------------: | :----------------: |
-| `scope:shared`                                 |       ✅       |      ⛔      |         ⛔         |         ⛔         |
-| `scope:dash`                                   |       ✅       |      ✅      |         ⛔         |         ⛔         |
-| `scope:nx-plugins`                             |       ✅       |      ⛔      |         ✅         |         ⛔         |
-| `scope:baby-watch`                             |       ✅       |      ⛔      |         ⛔         |         ✅         |
+| ![Can row import colum](./can-import-icon.png) | `scope:shared` | `scope:dash` | `scope:nx-plugins` |
+| ---------------------------------------------- | :------------: | :----------: | :----------------: |
+| `scope:shared`                                 |       ✅       |      ⛔      |         ⛔         |
+| `scope:dash`                                   |       ✅       |      ✅      |         ⛔         |
+| `scope:nx-plugins`                             |       ✅       |      ⛔      |         ✅         |
 
 ## `type` tag group
 

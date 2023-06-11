@@ -30,7 +30,7 @@ export const tagGropus = {
     description:
       'A scope tag is used to add boundaries between modules of the monorepo.',
     prefix: 'scope:',
-    tags: ['dash', 'baby-watch', 'nx-plugins', 'shared'] as const,
+    tags: ['dash', 'nx-plugins', 'shared'] as const,
     allowMultiplePerProject: false,
     shouldAlwaysBePresent: true,
     tagsMeta: z.object({
@@ -69,7 +69,6 @@ export const tagDefs = {
       canImport: {
         shared: true,
         dash: false,
-        'baby-watch': false,
         'nx-plugins': false,
       },
       meta: {
@@ -82,7 +81,6 @@ export const tagDefs = {
       description: 'Dash application related libraries',
       canImport: {
         dash: true,
-        'baby-watch': false,
         'nx-plugins': false,
         shared: true,
       },
@@ -96,27 +94,12 @@ export const tagDefs = {
       description: 'Nx plugins, internal or external',
       canImport: {
         shared: true,
-        'baby-watch': false,
         'nx-plugins': true,
         dash: false,
       },
       meta: {
         libraryGenerator: {
           canBeGenerated: false,
-        },
-      },
-    },
-    'baby-watch': {
-      description: 'Baby watch application',
-      canImport: {
-        shared: true,
-        'baby-watch': true,
-        dash: false,
-        'nx-plugins': false,
-      },
-      meta: {
-        libraryGenerator: {
-          canBeGenerated: true,
         },
       },
     },
