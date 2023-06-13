@@ -45,6 +45,9 @@
         "libs/nx-plugins/internal-generator/src/index.ts"
       ],
       "@beaussan/nx-hasura": ["libs/nx-plugins/nx-hasura/src/index.ts"],
+      "@beaussan/shared/data/next-auth-urql-hasura": [
+        "libs/shared/data/next-auth-urql-hasura/src/index.ts"
+      ],
       "@beaussan/shared/data/supertokens/urql-client": [
         "libs/shared/data/supertokens/urql-client/src/index.ts"
       ],

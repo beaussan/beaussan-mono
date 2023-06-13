@@ -2,7 +2,9 @@ import {
   cacheExchange,
   createClient,
   dedupExchange,
+  errorExchange,
   fetchExchange,
+  //  subscriptionExchange,
 } from 'urql';
 import { devtoolsExchange } from '@urql/devtools';
 import { makeOperation } from '@urql/core';
@@ -10,30 +12,37 @@ import { makeOperation } from '@urql/core';
 import { authExchange } from '@urql/exchange-auth';
 import { getSession } from 'next-auth/react';
 
-const BASE_URL = process.env.NEXT_PUBLIC_HASURA_URL!;
+export type CreateClientOptions = {
+  graphqlEndpoint: string;
+};
 
-export const HTTP_URL = BASE_URL;
-
-export const createAnonymousClient = () => {
+export const createAnonymousClient = ({
+  graphqlEndpoint,
+}: CreateClientOptions) => {
   return createClient({
-    url: HTTP_URL,
+    url: graphqlEndpoint,
     suspense: false,
     exchanges: [devtoolsExchange, dedupExchange, cacheExchange, fetchExchange],
   });
 };
 
-export const createAuthClient = () => {
+export const createAuthClient = ({ graphqlEndpoint }: CreateClientOptions) => {
   return createClient({
-    url: HTTP_URL,
+    url: graphqlEndpoint,
     suspense: false,
     exchanges: [
       devtoolsExchange,
+      errorExchange({
+        onError: (error) => {
+          console.error(error, 'URQL ERROR');
+        },
+      }),
       dedupExchange,
       cacheExchange,
       authExchange<{ token: string }>({
         getAuth: async (params) => {
           const session = await getSession();
-          const maybeToken = session?.token;
+          const maybeToken = (session as any)?.token;
           console.log('[getAuth] new token : ', { session, maybeToken });
           if (!maybeToken) {
             return null;
