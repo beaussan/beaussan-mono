@@ -3,40 +3,36 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
 import dts from 'vite-plugin-dts';
-import { join } from 'path';
-
+import { joinPathFragments } from '@nx/devkit';
 export default defineConfig({
   cacheDir:
-    '../../../../node_modules/.vite/shared-data-supertokens-urql-client',
-
+    '../../../../../node_modules/.vite/shared-utils-next-auth-hasura-adaptor',
   plugins: [
     dts({
-      tsConfigFilePath: join(__dirname, 'tsconfig.lib.json'),
-      // Faster builds by skipping tests. Set this to false to enable type checking.
+      entryRoot: 'src',
+      tsConfigFilePath: joinPathFragments(__dirname, 'tsconfig.lib.json'),
       skipDiagnostics: true,
     }),
     react(),
     viteTsConfigPaths({
-      root: '../../../../',
+      root: '../../../../../',
     }),
   ],
-
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [
   //    viteTsConfigPaths({
-  //      root: '../../../../',
+  //      root: '../../../../../',
   //    }),
   //  ],
   // },
-
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: 'src/index.ts',
-      name: 'shared-data-supertokens-urql-client',
+      name: 'shared-utils-next-auth-hasura-adaptor',
       fileName: 'index',
       // Change this to the formats you want to support.
       // Don't forgot to update your package.json as well.
@@ -47,13 +43,13 @@ export default defineConfig({
       external: ['react', 'react-dom', 'react/jsx-runtime'],
     },
   },
-
   test: {
     globals: true,
     cache: {
-      dir: '../../../../node_modules/.vitest',
+      dir: '../../../../../node_modules/.vitest',
     },
     environment: 'jsdom',
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    setupFiles: './src/test-setup.ts',
   },
 });

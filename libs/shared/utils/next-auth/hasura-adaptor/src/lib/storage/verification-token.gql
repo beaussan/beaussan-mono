@@ -1,0 +1,15 @@
+mutation CreateVerificationToken($data: VerificationTokenInsertInput!) {
+  insertVerificationTokenOne(object: $data) {
+    ...VerificationToken
+  }
+}
+
+mutation DeleteVerificationToken($identifier: String!, $token: String!) {
+  deleteVerificationToken(
+    where: { token: { _eq: $token }, identifier: { _eq: $identifier } }
+  ) {
+    returning {
+      ...VerificationToken
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "next-auth-hasura-playground",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/next-auth/hasura-playground/src",
+  "targets": {
+    "docker-compose:up": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "docker compose up -d",
+          "echo Waiting for Hasura to be up...",
+          "sleep 5"
+        ],
+        "cwd": "apps/next-auth/hasura-playground",
+        "parallel": false
+      }
+    },
+    "docker-compose:stop": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["docker compose stop"],
+        "cwd": "apps/next-auth/hasura-playground",
+        "parallel": false
+      }
+    },
+    "serve": {
+      "executor": "nx:run-script",
+      "dependsOn": ["metadata-apply"],
+      "options": {
+        "script": "hasura --skip-update-check --project apps/next-auth/hasura-playground  console"
+      }
+    },
+    "migrate-db": {
+      "executor": "nx:run-script",
+      "dependsOn": ["docker-compose:up"],
+      "options": {
+        "script": "hasura --skip-update-check --project apps/next-auth/hasura-playground  migrate apply --database-name default"
+      }
+    },
+    "metadata-apply": {
+      "executor": "nx:run-script",
+      "dependsOn": ["migrate-db"],
+      "options": {
+        "script": "hasura --skip-update-check --project apps/next-auth/hasura-playground  metadata apply"
+      }
+    }
+  },
+  "tags": []
+}

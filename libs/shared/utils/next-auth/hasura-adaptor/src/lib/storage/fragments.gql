@@ -1,0 +1,45 @@
+fragment User on User {
+  __typename
+  id
+  name
+  email
+  image
+  emailVerified
+  allowedRoles {
+    role
+  }
+  defaultRole
+}
+
+fragment Session on Session {
+  __typename
+  id
+  userId
+  expires
+  sessionToken
+}
+
+fragment Account on Account {
+  __typename
+  id
+  type
+  scope
+  userId
+  idToken
+  provider
+  expiresAt
+  tokenType
+  oauthToken
+  accessToken
+  refreshToken
+  sessionState
+  providerAccountId
+  oauthTokenSecret
+}
+
+fragment VerificationToken on VerificationToken {
+  __typename
+  token
+  expires
+  identifier
+}

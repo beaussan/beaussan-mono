@@ -1,7 +1,7 @@
 {
   "name": "shared-data-supertokens-urql-client",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/data/supertokens-urql-client/src",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/data/supertokens/urql-client/src",
   "projectType": "library",
   "tags": ["scope:shared", "type:data"],
   "targets": {
@@ -10,8 +10,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/shared/data/supertokens-urql-client/**/*.{ts,tsx,js,jsx}",
-          "libs/shared/data/supertokens-urql-client/**/*.json"
+          "libs/shared/data/supertokens/urql-client/**/*.{ts,tsx,js,jsx}",
+          "libs/shared/data/supertokens/urql-client/**/*.json"
         ]
       }
     },
@@ -27,7 +27,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/shared/data/supertokens-urql-client"
+        "outputPath": "dist/libs/shared/data/supertokens/urql-client"
       },
       "configurations": {
         "development": {

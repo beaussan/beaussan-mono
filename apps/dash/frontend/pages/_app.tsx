@@ -6,7 +6,7 @@ import SuperTokensReact, { SuperTokensWrapper } from 'supertokens-auth-react';
 import { frontendConfig } from '../config/frontendConfig';
 import React, { useEffect } from 'react';
 import Session from 'supertokens-auth-react/recipe/session';
-import { UrqlSupertokensProvider } from '@beaussan/shared/data/supertokens-urql-client';
+import { UrqlSupertokensProvider } from '@beaussan/shared/data/supertokens/urql-client';
 import { clientEnvs } from '@beaussan/dash/data/env-config';
 import { UserDataProvider } from '@beaussan/dash/data/user';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

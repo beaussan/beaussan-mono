@@ -1,0 +1,30 @@
+query GetSession($sessionToken: String) {
+  session(where: { sessionToken: { _eq: $sessionToken } }) {
+    ...Session
+    user {
+      ...User
+    }
+  }
+}
+
+mutation CreateSession($data: SessionInsertInput!) {
+  insertSessionOne(object: $data) {
+    ...Session
+  }
+}
+
+mutation UpdateSession($sessionToken: String, $data: SessionSetInput!) {
+  updateSession(where: { sessionToken: { _eq: $sessionToken } }, _set: $data) {
+    returning {
+      ...Session
+    }
+  }
+}
+
+mutation DeleteSession($sessionToken: String) {
+  deleteSession(where: { sessionToken: { _eq: $sessionToken } }) {
+    returning {
+      ...Session
+    }
+  }
+}
