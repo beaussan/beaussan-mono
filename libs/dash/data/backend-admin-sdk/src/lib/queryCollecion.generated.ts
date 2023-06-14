@@ -1,6 +1,7 @@
 import * as Types from '@beaussan/dash/data/hasura-codegen-types';
 
-import { GraphQLClient, RequestOptions } from 'graphql-request';
+import { GraphQLClient } from 'graphql-request';
+import * as Dom from 'graphql-request/dist/types.dom';
 import gql from 'graphql-tag';
 import { graphql, ResponseResolver, GraphQLRequest, GraphQLContext } from 'msw';
 export type CreateUserOnLoginMutationVariables = Types.Exact<{
@@ -10,9 +11,9 @@ export type CreateUserOnLoginMutationVariables = Types.Exact<{
 
 export type CreateUserOnLoginMutation = {
   __typename?: 'mutation_root';
-  insertUsers?: {
-    __typename?: 'UsersMutationResponse';
-    affected_rows: number;
+  insertUser?: {
+    __typename?: 'UserMutationResponse';
+    affectedRows: number;
   } | null;
 };
 
@@ -26,7 +27,7 @@ export type UpsertTraefikRoutesIntoDbMutation = {
   __typename?: 'mutation_root';
   insertTraefikRoutes?: {
     __typename?: 'TraefikRoutesMutationResponse';
-    affected_rows: number;
+    affectedRows: number;
   } | null;
 };
 
@@ -38,17 +39,17 @@ export type SetAllDownNodesBasedOnLastUpdateMutation = {
   __typename?: 'mutation_root';
   updateTraefikRoutes?: {
     __typename?: 'TraefikRoutesMutationResponse';
-    affected_rows: number;
+    affectedRows: number;
   } | null;
 };
 
 export const CreateUserOnLoginDocument = gql`
   mutation createUserOnLogin($email: String, $id: uuid!) {
-    insertUsers(
+    insertUser(
       objects: { id: $id, email: $email }
-      onConflict: { constraint: users_pkey, update_columns: createdAt }
+      onConflict: { constraint: users_pkey, updateColumns: createdAt }
     ) {
-      affected_rows
+      affectedRows
     }
   }
 `;
@@ -59,7 +60,7 @@ export const UpsertTraefikRoutesIntoDbDocument = gql`
     insertTraefikRoutes(
       onConflict: {
         constraint: traefikRoutes_pkey
-        update_columns: [
+        updateColumns: [
           isUp
           calculatedUrl
           lastSeenAlive
@@ -71,7 +72,7 @@ export const UpsertTraefikRoutesIntoDbDocument = gql`
       }
       objects: $insertData
     ) {
-      affected_rows
+      affectedRows
     }
   }
 `;
@@ -81,7 +82,7 @@ export const SetAllDownNodesBasedOnLastUpdateDocument = gql`
       _set: { isUp: false }
       where: { lastSeenAlive: { _neq: $update } }
     ) {
-      affected_rows
+      affectedRows
     }
   }
 `;
@@ -105,7 +106,7 @@ export function getSdk(
   return {
     createUserOnLogin(
       variables: CreateUserOnLoginMutationVariables,
-      requestHeaders?: RequestOptions['requestHeaders']
+      requestHeaders?: Dom.RequestInit['headers']
     ): Promise<CreateUserOnLoginMutation> {
       return withWrapper(
         (wrappedRequestHeaders) =>
@@ -120,7 +121,7 @@ export function getSdk(
     },
     upsertTraefikRoutesIntoDb(
       variables: UpsertTraefikRoutesIntoDbMutationVariables,
-      requestHeaders?: RequestOptions['requestHeaders']
+      requestHeaders?: Dom.RequestInit['headers']
     ): Promise<UpsertTraefikRoutesIntoDbMutation> {
       return withWrapper(
         (wrappedRequestHeaders) =>
@@ -135,7 +136,7 @@ export function getSdk(
     },
     setAllDownNodesBasedOnLastUpdate(
       variables?: SetAllDownNodesBasedOnLastUpdateMutationVariables,
-      requestHeaders?: RequestOptions['requestHeaders']
+      requestHeaders?: Dom.RequestInit['headers']
     ): Promise<SetAllDownNodesBasedOnLastUpdateMutation> {
       return withWrapper(
         (wrappedRequestHeaders) =>
@@ -160,7 +161,7 @@ const hasura = graphql.link('http://localhost:8090/v1/graphql');
  * mockCreateUserOnLoginMutationHasura((req, res, ctx) => {
  *   const { email, id } = req.variables;
  *   return res(
- *     ctx.data({ insertUsers })
+ *     ctx.data({ insertUser })
  *   )
  * })
  */

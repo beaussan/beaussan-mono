@@ -1,0 +1,29 @@
+query GetUser($id: uuid!) {
+  userByPk(id: $id) {
+    ...User
+  }
+}
+
+query GetUsers($where: UserBoolExp!) {
+  user(where: $where) {
+    ...User
+  }
+}
+
+mutation CreateUser($data: UserInsertInput!) {
+  insertUserOne(object: $data) {
+    ...User
+  }
+}
+
+mutation UpdateUser($id: uuid!, $data: UserSetInput!) {
+  updateUserByPk(pkColumns: { id: $id }, _set: $data) {
+    ...User
+  }
+}
+
+mutation DeleteUser($id: uuid!) {
+  deleteUserByPk(id: $id) {
+    ...User
+  }
+}

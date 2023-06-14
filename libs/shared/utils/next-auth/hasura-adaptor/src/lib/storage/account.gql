@@ -1,0 +1,18 @@
+mutation CreateAccount($data: AccountInsertInput!) {
+  insertAccountOne(object: $data) {
+    ...Account
+  }
+}
+
+mutation DeleteAccount($provider: String!, $providerAccountId: String!) {
+  deleteAccount(
+    where: {
+      provider: { _eq: $provider }
+      providerAccountId: { _eq: $providerAccountId }
+    }
+  ) {
+    returning {
+      ...Account
+    }
+  }
+}

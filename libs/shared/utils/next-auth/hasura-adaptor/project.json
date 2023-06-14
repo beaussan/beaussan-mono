@@ -1,0 +1,55 @@
+{
+  "name": "shared-utils-next-auth-hasura-adaptor",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/utils/next-auth/hasura-adaptor/src",
+  "projectType": "library",
+  "tags": ["scope:shared", "type:utils"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/utils/next-auth/hasura-adaptor/**/*.{ts,tsx,js,jsx}",
+          "libs/shared/utils/next-auth/hasura-adaptor/**/*.json"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/shared/utils/next-auth/hasura-adaptor"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["coverage/libs/shared/utils/next-auth/hasura-adaptor"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../../../coverage/libs/shared/utils/next-auth/hasura-adaptor"
+      }
+    },
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn graphql-codegen --config libs/shared/utils/next-auth/hasura-adaptor/gqlCodegen.ts"
+      },
+      "configurations": {
+        "default": {},
+        "watch": {
+          "command": "yarn graphql-codegen --config libs/shared/utils/next-auth/hasura-adaptor/gqlCodegen.ts --watch"
+        }
+      }
+    }
+  }
+}

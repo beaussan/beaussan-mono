@@ -1,0 +1,73 @@
+{
+  "name": "next-auth-next-playground",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/next-auth/next-playground",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/next-auth/next-playground",
+        "outputPath": "dist/apps/next-auth/next-playground"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/next-auth/next-playground"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "next-auth-next-playground:build",
+        "dev": true,
+        "port": 4238
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "next-auth-next-playground:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "next-auth-next-playground:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "next-auth-next-playground:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/next-auth/next-playground/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/next-auth/next-playground/**/*.{ts,tsx,js,jsx,json}"
+        ]
+      }
+    }
+  },
+  "implicitDependencies": ["next-auth-hasura-playground"],
+  "tags": ["scope:shared", "type:app"]
+}

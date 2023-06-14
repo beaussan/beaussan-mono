@@ -42,5 +42,6 @@ Thumbs.db
 .next
 
 .env.local
+.env.*
 .local.env
 .env.prod

@@ -1,24 +1,26 @@
 import React, { createContext } from 'react';
-import { useUserId } from '@beaussan/shared/utils/supertokens/react';
 import { useUserInfoQuery } from './requests.generated';
+import { useSession } from 'next-auth/react';
+// import patched types
+import '@beaussan/shared/utils/next-auth/hasura-adaptor';
 
 const useUserDataValue = () => {
-  const { loading, userId } = useUserId();
+  const { data: session, status } = useSession();
   const [{ data, error, fetching }] = useUserInfoQuery({
     variables: {
-      id: userId,
+      id: session?.user?.id,
     },
-    pause: loading,
+    pause: status !== 'authenticated',
     requestPolicy: 'cache-and-network',
   });
 
-  const user = data?.usersByPk;
+  const user = data?.userByPk;
 
   return {
     error,
     fetching,
     user,
-    userId,
+    userId: session?.user?.id,
   };
 };
 

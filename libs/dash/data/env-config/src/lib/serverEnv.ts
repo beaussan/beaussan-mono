@@ -9,9 +9,8 @@ export const serverEnvSchema = z
     HASURA_ADMIN_SECRET: z.string(),
     TRAEFIK_BASE_URL: z.string(),
     POSTMARK_API_TOKEN: z.string(),
-    SUPERTOKEN_CONNEXION_URI: z.string(),
-    SUPERTOKEN_API_KEY: z.string().optional(),
-    SUPERTOKEN_DASHBOARD_API_KEY: z.string().optional(),
+    NEXTAUTH_URL: z.string(),
+    NEXT_AUTH_SECRET: z.string(),
     GITHUB_AUTH_CLIENT_ID: z.string(),
     GITHUB_AUTH_CLIENT_SECRET: z.string(),
   })
@@ -34,8 +33,8 @@ const testServerEnv: ServerEnv = {
   HASURA_AUTH_TOKEN_CRON: '',
   TRAEFIK_BASE_URL: '',
   POSTMARK_API_TOKEN: '',
-  SUPERTOKEN_API_KEY: '',
-  SUPERTOKEN_CONNEXION_URI: '',
+  NEXTAUTH_URL: '',
+  NEXT_AUTH_SECRET: '',
   GITHUB_AUTH_CLIENT_SECRET: '',
   GITHUB_AUTH_CLIENT_ID: '',
 };

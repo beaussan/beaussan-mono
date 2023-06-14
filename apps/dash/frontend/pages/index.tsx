@@ -1,20 +1,11 @@
-import { SessionAuth } from 'supertokens-auth-react/recipe/session';
 import React from 'react';
 import Head from 'next/head';
-import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import { ListBookmarks } from '@beaussan/dash/feature/bookmark-list';
-import { useLogout } from '@beaussan/shared/utils/supertokens/react';
 import { UserSettingDialog } from '@beaussan/dash/feature/user-settings';
 import { TaskPanel } from '@beaussan/dash/feature/tasks-panel';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 function ProtectedPage() {
-  const session = useSessionContext();
-  const logout = useLogout();
-
-  if (session.loading === true) {
-    return null;
-  }
-
   return (
     <div>
       <Head>
@@ -43,7 +34,7 @@ function ProtectedPage() {
           <div>
             <button
               className="bg-blue-800 hover:bg-black text-white px-2 py-1 rounded-md text-s"
-              onClick={logout}
+              onClick={() => signOut()}
             >
               Sign out
             </button>
@@ -54,11 +45,26 @@ function ProtectedPage() {
   );
 }
 export function Index() {
-  return (
-    <SessionAuth>
-      <ProtectedPage></ProtectedPage>
-    </SessionAuth>
-  );
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') {
+    return <p>Loading...</p>;
+  }
+
+  if (status === 'unauthenticated') {
+    return (
+      <p>
+        Access Denied
+        <button
+          className="bg-blue-800 hover:bg-black text-white px-2 py-1 rounded-md text-s"
+          onClick={() => signIn()}
+        >
+          Sign In
+        </button>
+      </p>
+    );
+  }
+  return <ProtectedPage></ProtectedPage>;
 }
 
 export default Index;
