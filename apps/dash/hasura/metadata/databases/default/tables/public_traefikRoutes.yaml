@@ -19,7 +19,7 @@ select_permissions:
       filter:
         _exists:
           _table:
-            name: users
+            name: user
             schema: public
           _where:
             _and:

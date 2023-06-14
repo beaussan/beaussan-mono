@@ -11,12 +11,12 @@ export type EditUserSettingsMutationVariables = Types.Exact<{
 
 export type EditUserSettingsMutation = {
   __typename?: 'mutation_root';
-  updateUsersByPk?: {
-    __typename?: 'Users';
+  updateUserByPk?: {
+    __typename?: 'User';
     id: string;
     todoistApiToken?: string | null;
     updatedAt: string;
-    email?: string | null;
+    email: string;
     createdAt: string;
   } | null;
 };
@@ -27,12 +27,12 @@ export type UserInfoQueryVariables = Types.Exact<{
 
 export type UserInfoQuery = {
   __typename?: 'query_root';
-  usersByPk?: {
-    __typename?: 'Users';
+  userByPk?: {
+    __typename?: 'User';
     updatedAt: string;
     todoistApiToken?: string | null;
     id: string;
-    email?: string | null;
+    email: string;
     createdAt: string;
     canSeeTraefikContent: boolean;
   } | null;
@@ -40,8 +40,8 @@ export type UserInfoQuery = {
 
 export const EditUserSettingsDocument = gql`
   mutation EditUserSettings($userId: uuid!, $todoistApiToken: String) {
-    updateUsersByPk(
-      pk_columns: { id: $userId }
+    updateUserByPk(
+      pkColumns: { id: $userId }
       _set: { todoistApiToken: $todoistApiToken }
     ) {
       id
@@ -61,7 +61,7 @@ export function useEditUserSettingsMutation() {
 }
 export const UserInfoDocument = gql`
   query UserInfo($id: uuid = "") {
-    usersByPk(id: $id) {
+    userByPk(id: $id) {
       updatedAt
       todoistApiToken
       id
@@ -88,7 +88,7 @@ export function useUserInfoQuery(
  * mockEditUserSettingsMutation((req, res, ctx) => {
  *   const { userId, todoistApiToken } = req.variables;
  *   return res(
- *     ctx.data({ updateUsersByPk })
+ *     ctx.data({ updateUserByPk })
  *   )
  * })
  */
@@ -111,7 +111,7 @@ export const mockEditUserSettingsMutation = (
  * mockUserInfoQuery((req, res, ctx) => {
  *   const { id } = req.variables;
  *   return res(
- *     ctx.data({ usersByPk })
+ *     ctx.data({ userByPk })
  *   )
  * })
  */

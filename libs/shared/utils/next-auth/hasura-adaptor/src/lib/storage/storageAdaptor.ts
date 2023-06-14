@@ -8,6 +8,7 @@ import {
   transformSessionToNextAuthSession,
   transformValidationTokenToNextAuth,
   transformAccountToNextAuthAccount,
+  transformAdapterAccountToAccountInsertInput,
 } from './utils/hasuraTransforms';
 
 type HasuraAdapterArgs = {
@@ -168,7 +169,9 @@ export const HasuraAdapter = ({
     },
     // Account
     linkAccount: async (data) => {
-      const res = await sdk.CreateAccount({ data });
+      const res = await sdk.CreateAccount({
+        data: transformAdapterAccountToAccountInsertInput(data),
+      });
       const account = res?.insertAccountOne;
 
       if (!account) {

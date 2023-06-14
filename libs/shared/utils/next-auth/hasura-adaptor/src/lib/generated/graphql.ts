@@ -53,6 +53,10 @@ export type AccountAggregate = {
   nodes: Array<Account>;
 };
 
+export type AccountAggregateBoolExp = {
+  count?: InputMaybe<AccountAggregateBoolExpCount>;
+};
+
 /** aggregate fields of "account" */
 export type AccountAggregateFields = {
   __typename?: 'AccountAggregateFields';
@@ -61,11 +65,11 @@ export type AccountAggregateFields = {
   max?: Maybe<AccountMaxFields>;
   min?: Maybe<AccountMinFields>;
   stddev?: Maybe<AccountStddevFields>;
-  stddevPop?: Maybe<AccountStddev_PopFields>;
-  stddevSamp?: Maybe<AccountStddev_SampFields>;
+  stddevPop?: Maybe<AccountStddevPopFields>;
+  stddevSamp?: Maybe<AccountStddevSampFields>;
   sum?: Maybe<AccountSumFields>;
-  varPop?: Maybe<AccountVar_PopFields>;
-  varSamp?: Maybe<AccountVar_SampFields>;
+  varPop?: Maybe<AccountVarPopFields>;
+  varSamp?: Maybe<AccountVarSampFields>;
   variance?: Maybe<AccountVarianceFields>;
 };
 
@@ -77,17 +81,17 @@ export type AccountAggregateFieldsCountArgs = {
 
 /** order by aggregate values of table "account" */
 export type AccountAggregateOrderBy = {
-  avg?: InputMaybe<Account_Avg_Order_By>;
+  avg?: InputMaybe<AccountAvgOrderBy>;
   count?: InputMaybe<OrderBy>;
-  max?: InputMaybe<Account_Max_Order_By>;
-  min?: InputMaybe<Account_Min_Order_By>;
-  stddev?: InputMaybe<Account_Stddev_Order_By>;
-  stddev_pop?: InputMaybe<Account_Stddev_Pop_Order_By>;
-  stddev_samp?: InputMaybe<Account_Stddev_Samp_Order_By>;
-  sum?: InputMaybe<Account_Sum_Order_By>;
-  var_pop?: InputMaybe<Account_Var_Pop_Order_By>;
-  var_samp?: InputMaybe<Account_Var_Samp_Order_By>;
-  variance?: InputMaybe<Account_Variance_Order_By>;
+  max?: InputMaybe<AccountMaxOrderBy>;
+  min?: InputMaybe<AccountMinOrderBy>;
+  stddev?: InputMaybe<AccountStddevOrderBy>;
+  stddevPop?: InputMaybe<AccountStddevPopOrderBy>;
+  stddevSamp?: InputMaybe<AccountStddevSampOrderBy>;
+  sum?: InputMaybe<AccountSumOrderBy>;
+  varPop?: InputMaybe<AccountVarPopOrderBy>;
+  varSamp?: InputMaybe<AccountVarSampOrderBy>;
+  variance?: InputMaybe<AccountVarianceOrderBy>;
 };
 
 /** input type for inserting array relation for remote table "account" */
@@ -102,6 +106,12 @@ export type AccountAvgFields = {
   __typename?: 'AccountAvgFields';
   expiresAt?: Maybe<Scalars['Float']>;
   refreshTokenExpiresIn?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "account" */
+export type AccountAvgOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
 };
 
 /** Boolean expression to filter rows from the table "account". All fields are combined with a logical 'AND'. */
@@ -178,6 +188,25 @@ export type AccountMaxFields = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
+/** order by max() on columns of table "account" */
+export type AccountMaxOrderBy = {
+  accessToken?: InputMaybe<OrderBy>;
+  expiresAt?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  idToken?: InputMaybe<OrderBy>;
+  oauthToken?: InputMaybe<OrderBy>;
+  oauthTokenSecret?: InputMaybe<OrderBy>;
+  provider?: InputMaybe<OrderBy>;
+  providerAccountId?: InputMaybe<OrderBy>;
+  refreshToken?: InputMaybe<OrderBy>;
+  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
+  scope?: InputMaybe<OrderBy>;
+  sessionState?: InputMaybe<OrderBy>;
+  tokenType?: InputMaybe<OrderBy>;
+  type?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
 /** aggregate min on columns */
 export type AccountMinFields = {
   __typename?: 'AccountMinFields';
@@ -198,11 +227,30 @@ export type AccountMinFields = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
+/** order by min() on columns of table "account" */
+export type AccountMinOrderBy = {
+  accessToken?: InputMaybe<OrderBy>;
+  expiresAt?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  idToken?: InputMaybe<OrderBy>;
+  oauthToken?: InputMaybe<OrderBy>;
+  oauthTokenSecret?: InputMaybe<OrderBy>;
+  provider?: InputMaybe<OrderBy>;
+  providerAccountId?: InputMaybe<OrderBy>;
+  refreshToken?: InputMaybe<OrderBy>;
+  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
+  scope?: InputMaybe<OrderBy>;
+  sessionState?: InputMaybe<OrderBy>;
+  tokenType?: InputMaybe<OrderBy>;
+  type?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
 /** response of any mutation on the table "account" */
 export type AccountMutationResponse = {
   __typename?: 'AccountMutationResponse';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
+  affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Account>;
 };
@@ -210,7 +258,7 @@ export type AccountMutationResponse = {
 /** on_conflict condition type for table "account" */
 export type AccountOnConflict = {
   constraint: AccountConstraint;
-  update_columns?: Array<AccountUpdateColumn>;
+  updateColumns?: Array<AccountUpdateColumn>;
   where?: InputMaybe<AccountBoolExp>;
 };
 
@@ -298,18 +346,63 @@ export type AccountStddevFields = {
   refreshTokenExpiresIn?: Maybe<Scalars['Float']>;
 };
 
-/** aggregate stddev_pop on columns */
-export type AccountStddev_PopFields = {
-  __typename?: 'AccountStddev_popFields';
+/** order by stddev() on columns of table "account" */
+export type AccountStddevOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
+};
+
+/** aggregate stddevPop on columns */
+export type AccountStddevPopFields = {
+  __typename?: 'AccountStddevPopFields';
   expiresAt?: Maybe<Scalars['Float']>;
   refreshTokenExpiresIn?: Maybe<Scalars['Float']>;
 };
 
-/** aggregate stddev_samp on columns */
-export type AccountStddev_SampFields = {
-  __typename?: 'AccountStddev_sampFields';
+/** order by stddevPop() on columns of table "account" */
+export type AccountStddevPopOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
+};
+
+/** aggregate stddevSamp on columns */
+export type AccountStddevSampFields = {
+  __typename?: 'AccountStddevSampFields';
   expiresAt?: Maybe<Scalars['Float']>;
   refreshTokenExpiresIn?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddevSamp() on columns of table "account" */
+export type AccountStddevSampOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
+};
+
+/** Streaming cursor of the table "account" */
+export type AccountStreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: AccountStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type AccountStreamCursorValueInput = {
+  accessToken?: InputMaybe<Scalars['String']>;
+  expiresAt?: InputMaybe<Scalars['bigint']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  idToken?: InputMaybe<Scalars['String']>;
+  oauthToken?: InputMaybe<Scalars['String']>;
+  oauthTokenSecret?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
+  providerAccountId?: InputMaybe<Scalars['String']>;
+  refreshToken?: InputMaybe<Scalars['String']>;
+  refreshTokenExpiresIn?: InputMaybe<Scalars['bigint']>;
+  scope?: InputMaybe<Scalars['String']>;
+  sessionState?: InputMaybe<Scalars['String']>;
+  tokenType?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate sum on columns */
@@ -317,6 +410,12 @@ export type AccountSumFields = {
   __typename?: 'AccountSumFields';
   expiresAt?: Maybe<Scalars['bigint']>;
   refreshTokenExpiresIn?: Maybe<Scalars['bigint']>;
+};
+
+/** order by sum() on columns of table "account" */
+export type AccountSumOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
 };
 
 /** update columns of table "account" */
@@ -357,21 +456,34 @@ export type AccountUpdates = {
   _inc?: InputMaybe<AccountIncInput>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<AccountSetInput>;
+  /** filter the rows which have to be updated */
   where: AccountBoolExp;
 };
 
-/** aggregate var_pop on columns */
-export type AccountVar_PopFields = {
-  __typename?: 'AccountVar_popFields';
+/** aggregate varPop on columns */
+export type AccountVarPopFields = {
+  __typename?: 'AccountVarPopFields';
   expiresAt?: Maybe<Scalars['Float']>;
   refreshTokenExpiresIn?: Maybe<Scalars['Float']>;
 };
 
-/** aggregate var_samp on columns */
-export type AccountVar_SampFields = {
-  __typename?: 'AccountVar_sampFields';
+/** order by varPop() on columns of table "account" */
+export type AccountVarPopOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
+};
+
+/** aggregate varSamp on columns */
+export type AccountVarSampFields = {
+  __typename?: 'AccountVarSampFields';
   expiresAt?: Maybe<Scalars['Float']>;
   refreshTokenExpiresIn?: Maybe<Scalars['Float']>;
+};
+
+/** order by varSamp() on columns of table "account" */
+export type AccountVarSampOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
 };
 
 /** aggregate variance on columns */
@@ -379,6 +491,12 @@ export type AccountVarianceFields = {
   __typename?: 'AccountVarianceFields';
   expiresAt?: Maybe<Scalars['Float']>;
   refreshTokenExpiresIn?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "account" */
+export type AccountVarianceOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
 };
 
 /** columns and relationships of "allowed_role" */
@@ -395,6 +513,10 @@ export type AllowedRoleAggregate = {
   __typename?: 'AllowedRoleAggregate';
   aggregate?: Maybe<AllowedRoleAggregateFields>;
   nodes: Array<AllowedRole>;
+};
+
+export type AllowedRoleAggregateBoolExp = {
+  count?: InputMaybe<AllowedRoleAggregateBoolExpCount>;
 };
 
 /** aggregate fields of "allowed_role" */
@@ -414,8 +536,8 @@ export type AllowedRoleAggregateFieldsCountArgs = {
 /** order by aggregate values of table "allowed_role" */
 export type AllowedRoleAggregateOrderBy = {
   count?: InputMaybe<OrderBy>;
-  max?: InputMaybe<Allowed_Role_Max_Order_By>;
-  min?: InputMaybe<Allowed_Role_Min_Order_By>;
+  max?: InputMaybe<AllowedRoleMaxOrderBy>;
+  min?: InputMaybe<AllowedRoleMinOrderBy>;
 };
 
 /** input type for inserting array relation for remote table "allowed_role" */
@@ -453,17 +575,27 @@ export type AllowedRoleMaxFields = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
+/** order by max() on columns of table "allowed_role" */
+export type AllowedRoleMaxOrderBy = {
+  userId?: InputMaybe<OrderBy>;
+};
+
 /** aggregate min on columns */
 export type AllowedRoleMinFields = {
   __typename?: 'AllowedRoleMinFields';
   userId?: Maybe<Scalars['uuid']>;
 };
 
+/** order by min() on columns of table "allowed_role" */
+export type AllowedRoleMinOrderBy = {
+  userId?: InputMaybe<OrderBy>;
+};
+
 /** response of any mutation on the table "allowed_role" */
 export type AllowedRoleMutationResponse = {
   __typename?: 'AllowedRoleMutationResponse';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
+  affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<AllowedRole>;
 };
@@ -471,7 +603,7 @@ export type AllowedRoleMutationResponse = {
 /** on_conflict condition type for table "allowed_role" */
 export type AllowedRoleOnConflict = {
   constraint: AllowedRoleConstraint;
-  update_columns?: Array<AllowedRoleUpdateColumn>;
+  updateColumns?: Array<AllowedRoleUpdateColumn>;
   where?: InputMaybe<AllowedRoleBoolExp>;
 };
 
@@ -501,6 +633,20 @@ export type AllowedRoleSetInput = {
   userId?: InputMaybe<Scalars['uuid']>;
 };
 
+/** Streaming cursor of the table "allowed_role" */
+export type AllowedRoleStreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: AllowedRoleStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type AllowedRoleStreamCursorValueInput = {
+  role?: InputMaybe<RolesEnum>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
 /** update columns of table "allowed_role" */
 export type AllowedRoleUpdateColumn =
   /** column name */
@@ -511,6 +657,7 @@ export type AllowedRoleUpdateColumn =
 export type AllowedRoleUpdates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<AllowedRoleSetInput>;
+  /** filter the rows which have to be updated */
   where: AllowedRoleBoolExp;
 };
 
@@ -640,10 +787,10 @@ export type RolesBoolExp = {
   _not?: InputMaybe<RolesBoolExp>;
   _or?: InputMaybe<Array<RolesBoolExp>>;
   allowedRoles?: InputMaybe<AllowedRoleBoolExp>;
-  allowedRoles_aggregate?: InputMaybe<Allowed_Role_Aggregate_Bool_Exp>;
+  allowedRolesAggregate?: InputMaybe<AllowedRoleAggregateBoolExp>;
   description?: InputMaybe<StringComparisonExp>;
   users?: InputMaybe<UserBoolExp>;
-  users_aggregate?: InputMaybe<User_Aggregate_Bool_Exp>;
+  usersAggregate?: InputMaybe<UserAggregateBoolExp>;
   value?: InputMaybe<StringComparisonExp>;
 };
 
@@ -689,7 +836,7 @@ export type RolesMinFields = {
 export type RolesMutationResponse = {
   __typename?: 'RolesMutationResponse';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
+  affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Roles>;
 };
@@ -704,7 +851,7 @@ export type RolesObjRelInsertInput = {
 /** on_conflict condition type for table "roles" */
 export type RolesOnConflict = {
   constraint: RolesConstraint;
-  update_columns?: Array<RolesUpdateColumn>;
+  updateColumns?: Array<RolesUpdateColumn>;
   where?: InputMaybe<RolesBoolExp>;
 };
 
@@ -734,6 +881,20 @@ export type RolesSetInput = {
   value?: InputMaybe<Scalars['String']>;
 };
 
+/** Streaming cursor of the table "roles" */
+export type RolesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: RolesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type RolesStreamCursorValueInput = {
+  description?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
 /** update columns of table "roles" */
 export type RolesUpdateColumn =
   /** column name */
@@ -744,6 +905,7 @@ export type RolesUpdateColumn =
 export type RolesUpdates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<RolesSetInput>;
+  /** filter the rows which have to be updated */
   where: RolesBoolExp;
 };
 
@@ -765,6 +927,10 @@ export type SessionAggregate = {
   nodes: Array<Session>;
 };
 
+export type SessionAggregateBoolExp = {
+  count?: InputMaybe<SessionAggregateBoolExpCount>;
+};
+
 /** aggregate fields of "session" */
 export type SessionAggregateFields = {
   __typename?: 'SessionAggregateFields';
@@ -782,8 +948,8 @@ export type SessionAggregateFieldsCountArgs = {
 /** order by aggregate values of table "session" */
 export type SessionAggregateOrderBy = {
   count?: InputMaybe<OrderBy>;
-  max?: InputMaybe<Session_Max_Order_By>;
-  min?: InputMaybe<Session_Min_Order_By>;
+  max?: InputMaybe<SessionMaxOrderBy>;
+  min?: InputMaybe<SessionMinOrderBy>;
 };
 
 /** input type for inserting array relation for remote table "session" */
@@ -828,6 +994,14 @@ export type SessionMaxFields = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
+/** order by max() on columns of table "session" */
+export type SessionMaxOrderBy = {
+  expires?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  sessionToken?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
 /** aggregate min on columns */
 export type SessionMinFields = {
   __typename?: 'SessionMinFields';
@@ -837,11 +1011,19 @@ export type SessionMinFields = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
+/** order by min() on columns of table "session" */
+export type SessionMinOrderBy = {
+  expires?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  sessionToken?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
 /** response of any mutation on the table "session" */
 export type SessionMutationResponse = {
   __typename?: 'SessionMutationResponse';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
+  affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Session>;
 };
@@ -849,7 +1031,7 @@ export type SessionMutationResponse = {
 /** on_conflict condition type for table "session" */
 export type SessionOnConflict = {
   constraint: SessionConstraint;
-  update_columns?: Array<SessionUpdateColumn>;
+  updateColumns?: Array<SessionUpdateColumn>;
   where?: InputMaybe<SessionBoolExp>;
 };
 
@@ -886,6 +1068,22 @@ export type SessionSetInput = {
   userId?: InputMaybe<Scalars['uuid']>;
 };
 
+/** Streaming cursor of the table "session" */
+export type SessionStreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: SessionStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type SessionStreamCursorValueInput = {
+  expires?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  sessionToken?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
 /** update columns of table "session" */
 export type SessionUpdateColumn =
   /** column name */
@@ -900,6 +1098,7 @@ export type SessionUpdateColumn =
 export type SessionUpdates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<SessionSetInput>;
+  /** filter the rows which have to be updated */
   where: SessionBoolExp;
 };
 
@@ -1035,6 +1234,10 @@ export type UserAggregate = {
   nodes: Array<User>;
 };
 
+export type UserAggregateBoolExp = {
+  count?: InputMaybe<UserAggregateBoolExpCount>;
+};
+
 /** aggregate fields of "user" */
 export type UserAggregateFields = {
   __typename?: 'UserAggregateFields';
@@ -1052,8 +1255,8 @@ export type UserAggregateFieldsCountArgs = {
 /** order by aggregate values of table "user" */
 export type UserAggregateOrderBy = {
   count?: InputMaybe<OrderBy>;
-  max?: InputMaybe<User_Max_Order_By>;
-  min?: InputMaybe<User_Min_Order_By>;
+  max?: InputMaybe<UserMaxOrderBy>;
+  min?: InputMaybe<UserMinOrderBy>;
 };
 
 /** input type for inserting array relation for remote table "user" */
@@ -1069,9 +1272,9 @@ export type UserBoolExp = {
   _not?: InputMaybe<UserBoolExp>;
   _or?: InputMaybe<Array<UserBoolExp>>;
   accounts?: InputMaybe<AccountBoolExp>;
-  accounts_aggregate?: InputMaybe<Account_Aggregate_Bool_Exp>;
+  accountsAggregate?: InputMaybe<AccountAggregateBoolExp>;
   allowedRoles?: InputMaybe<AllowedRoleBoolExp>;
-  allowedRoles_aggregate?: InputMaybe<Allowed_Role_Aggregate_Bool_Exp>;
+  allowedRolesAggregate?: InputMaybe<AllowedRoleAggregateBoolExp>;
   defaultRole?: InputMaybe<RolesEnumComparisonExp>;
   email?: InputMaybe<StringComparisonExp>;
   emailVerified?: InputMaybe<TimestamptzComparisonExp>;
@@ -1080,7 +1283,7 @@ export type UserBoolExp = {
   name?: InputMaybe<StringComparisonExp>;
   role?: InputMaybe<RolesBoolExp>;
   sessions?: InputMaybe<SessionBoolExp>;
-  sessions_aggregate?: InputMaybe<Session_Aggregate_Bool_Exp>;
+  sessionsAggregate?: InputMaybe<SessionAggregateBoolExp>;
 };
 
 /** unique or primary key constraints on table "user" */
@@ -1114,6 +1317,15 @@ export type UserMaxFields = {
   name?: Maybe<Scalars['String']>;
 };
 
+/** order by max() on columns of table "user" */
+export type UserMaxOrderBy = {
+  email?: InputMaybe<OrderBy>;
+  emailVerified?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  image?: InputMaybe<OrderBy>;
+  name?: InputMaybe<OrderBy>;
+};
+
 /** aggregate min on columns */
 export type UserMinFields = {
   __typename?: 'UserMinFields';
@@ -1124,11 +1336,20 @@ export type UserMinFields = {
   name?: Maybe<Scalars['String']>;
 };
 
+/** order by min() on columns of table "user" */
+export type UserMinOrderBy = {
+  email?: InputMaybe<OrderBy>;
+  emailVerified?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  image?: InputMaybe<OrderBy>;
+  name?: InputMaybe<OrderBy>;
+};
+
 /** response of any mutation on the table "user" */
 export type UserMutationResponse = {
   __typename?: 'UserMutationResponse';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
+  affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<User>;
 };
@@ -1143,7 +1364,7 @@ export type UserObjRelInsertInput = {
 /** on_conflict condition type for table "user" */
 export type UserOnConflict = {
   constraint: UserConstraint;
-  update_columns?: Array<UserUpdateColumn>;
+  updateColumns?: Array<UserUpdateColumn>;
   where?: InputMaybe<UserBoolExp>;
 };
 
@@ -1191,6 +1412,24 @@ export type UserSetInput = {
   name?: InputMaybe<Scalars['String']>;
 };
 
+/** Streaming cursor of the table "user" */
+export type UserStreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: UserStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type UserStreamCursorValueInput = {
+  defaultRole?: InputMaybe<RolesEnum>;
+  email?: InputMaybe<Scalars['String']>;
+  emailVerified?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  image?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
 /** update columns of table "user" */
 export type UserUpdateColumn =
   /** column name */
@@ -1209,6 +1448,7 @@ export type UserUpdateColumn =
 export type UserUpdates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<UserSetInput>;
+  /** filter the rows which have to be updated */
   where: UserBoolExp;
 };
 
@@ -1296,7 +1536,7 @@ export type VerificationTokenMinFields = {
 export type VerificationTokenMutationResponse = {
   __typename?: 'VerificationTokenMutationResponse';
   /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
+  affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<VerificationToken>;
 };
@@ -1304,7 +1544,7 @@ export type VerificationTokenMutationResponse = {
 /** on_conflict condition type for table "verification_token" */
 export type VerificationTokenOnConflict = {
   constraint: VerificationTokenConstraint;
-  update_columns?: Array<VerificationTokenUpdateColumn>;
+  updateColumns?: Array<VerificationTokenUpdateColumn>;
   where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
@@ -1336,6 +1576,21 @@ export type VerificationTokenSetInput = {
   token?: InputMaybe<Scalars['String']>;
 };
 
+/** Streaming cursor of the table "verification_token" */
+export type VerificationTokenStreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: VerificationTokenStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type VerificationTokenStreamCursorValueInput = {
+  expires?: InputMaybe<Scalars['timestamptz']>;
+  identifier?: InputMaybe<Scalars['String']>;
+  token?: InputMaybe<Scalars['String']>;
+};
+
 /** update columns of table "verification_token" */
 export type VerificationTokenUpdateColumn =
   /** column name */
@@ -1348,166 +1603,22 @@ export type VerificationTokenUpdateColumn =
 export type VerificationTokenUpdates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<VerificationTokenSetInput>;
+  /** filter the rows which have to be updated */
   where: VerificationTokenBoolExp;
 };
 
-export type Account_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Account_Aggregate_Bool_Exp_Count>;
-};
-
-export type Account_Aggregate_Bool_Exp_Count = {
+export type AccountAggregateBoolExpCount = {
   arguments?: InputMaybe<Array<AccountSelectColumn>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
   filter?: InputMaybe<AccountBoolExp>;
   predicate: IntComparisonExp;
 };
 
-/** order by avg() on columns of table "account" */
-export type Account_Avg_Order_By = {
-  expiresAt?: InputMaybe<OrderBy>;
-  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
-};
-
-/** order by max() on columns of table "account" */
-export type Account_Max_Order_By = {
-  accessToken?: InputMaybe<OrderBy>;
-  expiresAt?: InputMaybe<OrderBy>;
-  id?: InputMaybe<OrderBy>;
-  idToken?: InputMaybe<OrderBy>;
-  oauthToken?: InputMaybe<OrderBy>;
-  oauthTokenSecret?: InputMaybe<OrderBy>;
-  provider?: InputMaybe<OrderBy>;
-  providerAccountId?: InputMaybe<OrderBy>;
-  refreshToken?: InputMaybe<OrderBy>;
-  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
-  scope?: InputMaybe<OrderBy>;
-  sessionState?: InputMaybe<OrderBy>;
-  tokenType?: InputMaybe<OrderBy>;
-  type?: InputMaybe<OrderBy>;
-  userId?: InputMaybe<OrderBy>;
-};
-
-/** order by min() on columns of table "account" */
-export type Account_Min_Order_By = {
-  accessToken?: InputMaybe<OrderBy>;
-  expiresAt?: InputMaybe<OrderBy>;
-  id?: InputMaybe<OrderBy>;
-  idToken?: InputMaybe<OrderBy>;
-  oauthToken?: InputMaybe<OrderBy>;
-  oauthTokenSecret?: InputMaybe<OrderBy>;
-  provider?: InputMaybe<OrderBy>;
-  providerAccountId?: InputMaybe<OrderBy>;
-  refreshToken?: InputMaybe<OrderBy>;
-  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
-  scope?: InputMaybe<OrderBy>;
-  sessionState?: InputMaybe<OrderBy>;
-  tokenType?: InputMaybe<OrderBy>;
-  type?: InputMaybe<OrderBy>;
-  userId?: InputMaybe<OrderBy>;
-};
-
-/** order by stddev() on columns of table "account" */
-export type Account_Stddev_Order_By = {
-  expiresAt?: InputMaybe<OrderBy>;
-  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
-};
-
-/** order by stddev_pop() on columns of table "account" */
-export type Account_Stddev_Pop_Order_By = {
-  expiresAt?: InputMaybe<OrderBy>;
-  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
-};
-
-/** order by stddev_samp() on columns of table "account" */
-export type Account_Stddev_Samp_Order_By = {
-  expiresAt?: InputMaybe<OrderBy>;
-  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
-};
-
-/** Streaming cursor of the table "account" */
-export type Account_StreamCursorInput = {
-  /** Stream column input with initial value */
-  initialValue: Account_StreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Account_StreamCursorValueInput = {
-  accessToken?: InputMaybe<Scalars['String']>;
-  expiresAt?: InputMaybe<Scalars['bigint']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  idToken?: InputMaybe<Scalars['String']>;
-  oauthToken?: InputMaybe<Scalars['String']>;
-  oauthTokenSecret?: InputMaybe<Scalars['String']>;
-  provider?: InputMaybe<Scalars['String']>;
-  providerAccountId?: InputMaybe<Scalars['String']>;
-  refreshToken?: InputMaybe<Scalars['String']>;
-  refreshTokenExpiresIn?: InputMaybe<Scalars['bigint']>;
-  scope?: InputMaybe<Scalars['String']>;
-  sessionState?: InputMaybe<Scalars['String']>;
-  tokenType?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<Scalars['String']>;
-  userId?: InputMaybe<Scalars['uuid']>;
-};
-
-/** order by sum() on columns of table "account" */
-export type Account_Sum_Order_By = {
-  expiresAt?: InputMaybe<OrderBy>;
-  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
-};
-
-/** order by var_pop() on columns of table "account" */
-export type Account_Var_Pop_Order_By = {
-  expiresAt?: InputMaybe<OrderBy>;
-  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
-};
-
-/** order by var_samp() on columns of table "account" */
-export type Account_Var_Samp_Order_By = {
-  expiresAt?: InputMaybe<OrderBy>;
-  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
-};
-
-/** order by variance() on columns of table "account" */
-export type Account_Variance_Order_By = {
-  expiresAt?: InputMaybe<OrderBy>;
-  refreshTokenExpiresIn?: InputMaybe<OrderBy>;
-};
-
-export type Allowed_Role_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Allowed_Role_Aggregate_Bool_Exp_Count>;
-};
-
-export type Allowed_Role_Aggregate_Bool_Exp_Count = {
+export type AllowedRoleAggregateBoolExpCount = {
   arguments?: InputMaybe<Array<AllowedRoleSelectColumn>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
   filter?: InputMaybe<AllowedRoleBoolExp>;
   predicate: IntComparisonExp;
-};
-
-/** order by max() on columns of table "allowed_role" */
-export type Allowed_Role_Max_Order_By = {
-  userId?: InputMaybe<OrderBy>;
-};
-
-/** order by min() on columns of table "allowed_role" */
-export type Allowed_Role_Min_Order_By = {
-  userId?: InputMaybe<OrderBy>;
-};
-
-/** Streaming cursor of the table "allowed_role" */
-export type Allowed_Role_StreamCursorInput = {
-  /** Stream column input with initial value */
-  initialValue: Allowed_Role_StreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Allowed_Role_StreamCursorValueInput = {
-  role?: InputMaybe<RolesEnum>;
-  userId?: InputMaybe<Scalars['uuid']>;
 };
 
 /** mutation root */
@@ -1745,7 +1856,7 @@ export type Mutation_RootUpdateAccountArgs = {
 export type Mutation_RootUpdateAccountByPkArgs = {
   _inc?: InputMaybe<AccountIncInput>;
   _set?: InputMaybe<AccountSetInput>;
-  pk_columns: AccountPkColumnsInput;
+  pkColumns: AccountPkColumnsInput;
 };
 
 /** mutation root */
@@ -1762,7 +1873,7 @@ export type Mutation_RootUpdateAllowedRoleArgs = {
 /** mutation root */
 export type Mutation_RootUpdateAllowedRoleByPkArgs = {
   _set?: InputMaybe<AllowedRoleSetInput>;
-  pk_columns: AllowedRolePkColumnsInput;
+  pkColumns: AllowedRolePkColumnsInput;
 };
 
 /** mutation root */
@@ -1779,7 +1890,7 @@ export type Mutation_RootUpdateRolesArgs = {
 /** mutation root */
 export type Mutation_RootUpdateRolesByPkArgs = {
   _set?: InputMaybe<RolesSetInput>;
-  pk_columns: RolesPkColumnsInput;
+  pkColumns: RolesPkColumnsInput;
 };
 
 /** mutation root */
@@ -1796,7 +1907,7 @@ export type Mutation_RootUpdateSessionArgs = {
 /** mutation root */
 export type Mutation_RootUpdateSessionByPkArgs = {
   _set?: InputMaybe<SessionSetInput>;
-  pk_columns: SessionPkColumnsInput;
+  pkColumns: SessionPkColumnsInput;
 };
 
 /** mutation root */
@@ -1813,7 +1924,7 @@ export type Mutation_RootUpdateUserArgs = {
 /** mutation root */
 export type Mutation_RootUpdateUserByPkArgs = {
   _set?: InputMaybe<UserSetInput>;
-  pk_columns: UserPkColumnsInput;
+  pkColumns: UserPkColumnsInput;
 };
 
 /** mutation root */
@@ -1830,7 +1941,7 @@ export type Mutation_RootUpdateVerificationTokenArgs = {
 /** mutation root */
 export type Mutation_RootUpdateVerificationTokenByPkArgs = {
   _set?: InputMaybe<VerificationTokenSetInput>;
-  pk_columns: VerificationTokenPkColumnsInput;
+  pkColumns: VerificationTokenPkColumnsInput;
 };
 
 /** mutation root */
@@ -1999,61 +2110,11 @@ export type Query_RootVerificationTokenByPkArgs = {
   token: Scalars['String'];
 };
 
-/** Streaming cursor of the table "roles" */
-export type Roles_StreamCursorInput = {
-  /** Stream column input with initial value */
-  initialValue: Roles_StreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Roles_StreamCursorValueInput = {
-  description?: InputMaybe<Scalars['String']>;
-  value?: InputMaybe<Scalars['String']>;
-};
-
-export type Session_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Session_Aggregate_Bool_Exp_Count>;
-};
-
-export type Session_Aggregate_Bool_Exp_Count = {
+export type SessionAggregateBoolExpCount = {
   arguments?: InputMaybe<Array<SessionSelectColumn>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
   filter?: InputMaybe<SessionBoolExp>;
   predicate: IntComparisonExp;
-};
-
-/** order by max() on columns of table "session" */
-export type Session_Max_Order_By = {
-  expires?: InputMaybe<OrderBy>;
-  id?: InputMaybe<OrderBy>;
-  sessionToken?: InputMaybe<OrderBy>;
-  userId?: InputMaybe<OrderBy>;
-};
-
-/** order by min() on columns of table "session" */
-export type Session_Min_Order_By = {
-  expires?: InputMaybe<OrderBy>;
-  id?: InputMaybe<OrderBy>;
-  sessionToken?: InputMaybe<OrderBy>;
-  userId?: InputMaybe<OrderBy>;
-};
-
-/** Streaming cursor of the table "session" */
-export type Session_StreamCursorInput = {
-  /** Stream column input with initial value */
-  initialValue: Session_StreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Session_StreamCursorValueInput = {
-  expires?: InputMaybe<Scalars['timestamptz']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  sessionToken?: InputMaybe<Scalars['String']>;
-  userId?: InputMaybe<Scalars['uuid']>;
 };
 
 export type Subscription_Root = {
@@ -2130,7 +2191,7 @@ export type Subscription_RootAccountByPkArgs = {
 
 export type Subscription_RootAccountStreamArgs = {
   batchSize: Scalars['Int'];
-  cursor: Array<InputMaybe<Account_StreamCursorInput>>;
+  cursor: Array<InputMaybe<AccountStreamCursorInput>>;
   where?: InputMaybe<AccountBoolExp>;
 };
 
@@ -2157,7 +2218,7 @@ export type Subscription_RootAllowedRoleByPkArgs = {
 
 export type Subscription_RootAllowedRoleStreamArgs = {
   batchSize: Scalars['Int'];
-  cursor: Array<InputMaybe<Allowed_Role_StreamCursorInput>>;
+  cursor: Array<InputMaybe<AllowedRoleStreamCursorInput>>;
   where?: InputMaybe<AllowedRoleBoolExp>;
 };
 
@@ -2183,7 +2244,7 @@ export type Subscription_RootRolesByPkArgs = {
 
 export type Subscription_RootRolesStreamArgs = {
   batchSize: Scalars['Int'];
-  cursor: Array<InputMaybe<Roles_StreamCursorInput>>;
+  cursor: Array<InputMaybe<RolesStreamCursorInput>>;
   where?: InputMaybe<RolesBoolExp>;
 };
 
@@ -2209,7 +2270,7 @@ export type Subscription_RootSessionByPkArgs = {
 
 export type Subscription_RootSessionStreamArgs = {
   batchSize: Scalars['Int'];
-  cursor: Array<InputMaybe<Session_StreamCursorInput>>;
+  cursor: Array<InputMaybe<SessionStreamCursorInput>>;
   where?: InputMaybe<SessionBoolExp>;
 };
 
@@ -2235,7 +2296,7 @@ export type Subscription_RootUserByPkArgs = {
 
 export type Subscription_RootUserStreamArgs = {
   batchSize: Scalars['Int'];
-  cursor: Array<InputMaybe<User_StreamCursorInput>>;
+  cursor: Array<InputMaybe<UserStreamCursorInput>>;
   where?: InputMaybe<UserBoolExp>;
 };
 
@@ -2261,70 +2322,15 @@ export type Subscription_RootVerificationTokenByPkArgs = {
 
 export type Subscription_RootVerificationTokenStreamArgs = {
   batchSize: Scalars['Int'];
-  cursor: Array<InputMaybe<Verification_Token_StreamCursorInput>>;
+  cursor: Array<InputMaybe<VerificationTokenStreamCursorInput>>;
   where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
-export type User_Aggregate_Bool_Exp = {
-  count?: InputMaybe<User_Aggregate_Bool_Exp_Count>;
-};
-
-export type User_Aggregate_Bool_Exp_Count = {
+export type UserAggregateBoolExpCount = {
   arguments?: InputMaybe<Array<UserSelectColumn>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
   filter?: InputMaybe<UserBoolExp>;
   predicate: IntComparisonExp;
-};
-
-/** order by max() on columns of table "user" */
-export type User_Max_Order_By = {
-  email?: InputMaybe<OrderBy>;
-  emailVerified?: InputMaybe<OrderBy>;
-  id?: InputMaybe<OrderBy>;
-  image?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-};
-
-/** order by min() on columns of table "user" */
-export type User_Min_Order_By = {
-  email?: InputMaybe<OrderBy>;
-  emailVerified?: InputMaybe<OrderBy>;
-  id?: InputMaybe<OrderBy>;
-  image?: InputMaybe<OrderBy>;
-  name?: InputMaybe<OrderBy>;
-};
-
-/** Streaming cursor of the table "user" */
-export type User_StreamCursorInput = {
-  /** Stream column input with initial value */
-  initialValue: User_StreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type User_StreamCursorValueInput = {
-  defaultRole?: InputMaybe<RolesEnum>;
-  email?: InputMaybe<Scalars['String']>;
-  emailVerified?: InputMaybe<Scalars['timestamptz']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  image?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-};
-
-/** Streaming cursor of the table "verification_token" */
-export type Verification_Token_StreamCursorInput = {
-  /** Stream column input with initial value */
-  initialValue: Verification_Token_StreamCursorValueInput;
-  /** cursor ordering */
-  ordering?: InputMaybe<CursorOrdering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Verification_Token_StreamCursorValueInput = {
-  expires?: InputMaybe<Scalars['timestamptz']>;
-  identifier?: InputMaybe<Scalars['String']>;
-  token?: InputMaybe<Scalars['String']>;
 };
 
 export type CreateAccountMutationVariables = Exact<{
@@ -2767,7 +2773,7 @@ export const CreateUserDocument = gql`
 `;
 export const UpdateUserDocument = gql`
   mutation UpdateUser($id: uuid!, $data: UserSetInput!) {
-    updateUserByPk(pk_columns: { id: $id }, _set: $data) {
+    updateUserByPk(pkColumns: { id: $id }, _set: $data) {
       ...User
     }
   }

@@ -17,7 +17,7 @@ mutation CreateUser($data: UserInsertInput!) {
 }
 
 mutation UpdateUser($id: uuid!, $data: UserSetInput!) {
-  updateUserByPk(pk_columns: { id: $id }, _set: $data) {
+  updateUserByPk(pkColumns: { id: $id }, _set: $data) {
     ...User
   }
 }

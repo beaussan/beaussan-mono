@@ -53,6 +53,10 @@ type AccountAggregate {
   nodes: [Account!]!
 }
 
+input AccountAggregateBoolExp {
+  count: accountAggregateBoolExpCount
+}
+
 """
 aggregate fields of "account"
 """
@@ -62,11 +66,11 @@ type AccountAggregateFields {
   max: AccountMaxFields
   min: AccountMinFields
   stddev: AccountStddevFields
-  stddevPop: AccountStddev_popFields
-  stddevSamp: AccountStddev_sampFields
+  stddevPop: AccountStddevPopFields
+  stddevSamp: AccountStddevSampFields
   sum: AccountSumFields
-  varPop: AccountVar_popFields
-  varSamp: AccountVar_sampFields
+  varPop: AccountVarPopFields
+  varSamp: AccountVarSampFields
   variance: AccountVarianceFields
 }
 
@@ -74,17 +78,17 @@ type AccountAggregateFields {
 order by aggregate values of table "account"
 """
 input AccountAggregateOrderBy {
-  avg: account_avg_order_by
+  avg: AccountAvgOrderBy
   count: OrderBy
-  max: account_max_order_by
-  min: account_min_order_by
-  stddev: account_stddev_order_by
-  stddev_pop: account_stddev_pop_order_by
-  stddev_samp: account_stddev_samp_order_by
-  sum: account_sum_order_by
-  var_pop: account_var_pop_order_by
-  var_samp: account_var_samp_order_by
-  variance: account_variance_order_by
+  max: AccountMaxOrderBy
+  min: AccountMinOrderBy
+  stddev: AccountStddevOrderBy
+  stddevPop: AccountStddevPopOrderBy
+  stddevSamp: AccountStddevSampOrderBy
+  sum: AccountSumOrderBy
+  varPop: AccountVarPopOrderBy
+  varSamp: AccountVarSampOrderBy
+  variance: AccountVarianceOrderBy
 }
 
 """
@@ -105,6 +109,14 @@ aggregate avg on columns
 type AccountAvgFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
+}
+
+"""
+order by avg() on columns of table "account"
+"""
+input AccountAvgOrderBy {
+  expiresAt: OrderBy
+  refreshTokenExpiresIn: OrderBy
 }
 
 """
@@ -194,6 +206,27 @@ type AccountMaxFields {
 }
 
 """
+order by max() on columns of table "account"
+"""
+input AccountMaxOrderBy {
+  accessToken: OrderBy
+  expiresAt: OrderBy
+  id: OrderBy
+  idToken: OrderBy
+  oauthToken: OrderBy
+  oauthTokenSecret: OrderBy
+  provider: OrderBy
+  providerAccountId: OrderBy
+  refreshToken: OrderBy
+  refreshTokenExpiresIn: OrderBy
+  scope: OrderBy
+  sessionState: OrderBy
+  tokenType: OrderBy
+  type: OrderBy
+  userId: OrderBy
+}
+
+"""
 aggregate min on columns
 """
 type AccountMinFields {
@@ -215,13 +248,34 @@ type AccountMinFields {
 }
 
 """
+order by min() on columns of table "account"
+"""
+input AccountMinOrderBy {
+  accessToken: OrderBy
+  expiresAt: OrderBy
+  id: OrderBy
+  idToken: OrderBy
+  oauthToken: OrderBy
+  oauthTokenSecret: OrderBy
+  provider: OrderBy
+  providerAccountId: OrderBy
+  refreshToken: OrderBy
+  refreshTokenExpiresIn: OrderBy
+  scope: OrderBy
+  sessionState: OrderBy
+  tokenType: OrderBy
+  type: OrderBy
+  userId: OrderBy
+}
+
+"""
 response of any mutation on the table "account"
 """
 type AccountMutationResponse {
   """
   number of rows affected by the mutation
   """
-  affected_rows: Int!
+  affectedRows: Int!
 
   """
   data from the rows affected by the mutation
@@ -234,7 +288,7 @@ on_conflict condition type for table "account"
 """
 input AccountOnConflict {
   constraint: AccountConstraint!
-  update_columns: [AccountUpdateColumn!]! = []
+  updateColumns: [AccountUpdateColumn!]! = []
   where: AccountBoolExp
 }
 
@@ -377,19 +431,79 @@ type AccountStddevFields {
 }
 
 """
-aggregate stddev_pop on columns
+order by stddev() on columns of table "account"
 """
-type AccountStddev_popFields {
+input AccountStddevOrderBy {
+  expiresAt: OrderBy
+  refreshTokenExpiresIn: OrderBy
+}
+
+"""
+aggregate stddevPop on columns
+"""
+type AccountStddevPopFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
 }
 
 """
-aggregate stddev_samp on columns
+order by stddevPop() on columns of table "account"
 """
-type AccountStddev_sampFields {
+input AccountStddevPopOrderBy {
+  expiresAt: OrderBy
+  refreshTokenExpiresIn: OrderBy
+}
+
+"""
+aggregate stddevSamp on columns
+"""
+type AccountStddevSampFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
+}
+
+"""
+order by stddevSamp() on columns of table "account"
+"""
+input AccountStddevSampOrderBy {
+  expiresAt: OrderBy
+  refreshTokenExpiresIn: OrderBy
+}
+
+"""
+Streaming cursor of the table "account"
+"""
+input AccountStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: AccountStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input AccountStreamCursorValueInput {
+  accessToken: String
+  expiresAt: bigint
+  id: uuid
+  idToken: String
+  oauthToken: String
+  oauthTokenSecret: String
+  provider: String
+  providerAccountId: String
+  refreshToken: String
+  refreshTokenExpiresIn: bigint
+  scope: String
+  sessionState: String
+  tokenType: String
+  type: String
+  userId: uuid
 }
 
 """
@@ -398,6 +512,14 @@ aggregate sum on columns
 type AccountSumFields {
   expiresAt: bigint
   refreshTokenExpiresIn: bigint
+}
+
+"""
+order by sum() on columns of table "account"
+"""
+input AccountSumOrderBy {
+  expiresAt: OrderBy
+  refreshTokenExpiresIn: OrderBy
 }
 
 """
@@ -490,23 +612,43 @@ input AccountUpdates {
   sets the columns of the filtered rows to the given values
   """
   _set: AccountSetInput
+
+  """
+  filter the rows which have to be updated
+  """
   where: AccountBoolExp!
 }
 
 """
-aggregate var_pop on columns
+aggregate varPop on columns
 """
-type AccountVar_popFields {
+type AccountVarPopFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
 }
 
 """
-aggregate var_samp on columns
+order by varPop() on columns of table "account"
 """
-type AccountVar_sampFields {
+input AccountVarPopOrderBy {
+  expiresAt: OrderBy
+  refreshTokenExpiresIn: OrderBy
+}
+
+"""
+aggregate varSamp on columns
+"""
+type AccountVarSampFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
+}
+
+"""
+order by varSamp() on columns of table "account"
+"""
+input AccountVarSampOrderBy {
+  expiresAt: OrderBy
+  refreshTokenExpiresIn: OrderBy
 }
 
 """
@@ -515,6 +657,14 @@ aggregate variance on columns
 type AccountVarianceFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
+}
+
+"""
+order by variance() on columns of table "account"
+"""
+input AccountVarianceOrderBy {
+  expiresAt: OrderBy
+  refreshTokenExpiresIn: OrderBy
 }
 
 """
@@ -538,6 +688,10 @@ type AllowedRoleAggregate {
   nodes: [AllowedRole!]!
 }
 
+input AllowedRoleAggregateBoolExp {
+  count: allowedRoleAggregateBoolExpCount
+}
+
 """
 aggregate fields of "allowed_role"
 """
@@ -552,8 +706,8 @@ order by aggregate values of table "allowed_role"
 """
 input AllowedRoleAggregateOrderBy {
   count: OrderBy
-  max: allowed_role_max_order_by
-  min: allowed_role_min_order_by
+  max: AllowedRoleMaxOrderBy
+  min: AllowedRoleMinOrderBy
 }
 
 """
@@ -607,10 +761,24 @@ type AllowedRoleMaxFields {
 }
 
 """
+order by max() on columns of table "allowed_role"
+"""
+input AllowedRoleMaxOrderBy {
+  userId: OrderBy
+}
+
+"""
 aggregate min on columns
 """
 type AllowedRoleMinFields {
   userId: uuid
+}
+
+"""
+order by min() on columns of table "allowed_role"
+"""
+input AllowedRoleMinOrderBy {
+  userId: OrderBy
 }
 
 """
@@ -620,7 +788,7 @@ type AllowedRoleMutationResponse {
   """
   number of rows affected by the mutation
   """
-  affected_rows: Int!
+  affectedRows: Int!
 
   """
   data from the rows affected by the mutation
@@ -633,7 +801,7 @@ on_conflict condition type for table "allowed_role"
 """
 input AllowedRoleOnConflict {
   constraint: AllowedRoleConstraint!
-  update_columns: [AllowedRoleUpdateColumn!]! = []
+  updateColumns: [AllowedRoleUpdateColumn!]! = []
   where: AllowedRoleBoolExp
 }
 
@@ -678,6 +846,29 @@ input AllowedRoleSetInput {
 }
 
 """
+Streaming cursor of the table "allowed_role"
+"""
+input AllowedRoleStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: AllowedRoleStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input AllowedRoleStreamCursorValueInput {
+  role: RolesEnum
+  userId: uuid
+}
+
+"""
 update columns of table "allowed_role"
 """
 enum AllowedRoleUpdateColumn {
@@ -697,6 +888,10 @@ input AllowedRoleUpdates {
   sets the columns of the filtered rows to the given values
   """
   _set: AllowedRoleSetInput
+
+  """
+  filter the rows which have to be updated
+  """
   where: AllowedRoleBoolExp!
 }
 
@@ -932,10 +1127,10 @@ input RolesBoolExp {
   _not: RolesBoolExp
   _or: [RolesBoolExp!]
   allowedRoles: AllowedRoleBoolExp
-  allowedRoles_aggregate: allowed_role_aggregate_bool_exp
+  allowedRolesAggregate: AllowedRoleAggregateBoolExp
   description: StringComparisonExp
   users: UserBoolExp
-  users_aggregate: user_aggregate_bool_exp
+  usersAggregate: UserAggregateBoolExp
   value: StringComparisonExp
 }
 
@@ -997,7 +1192,7 @@ type RolesMutationResponse {
   """
   number of rows affected by the mutation
   """
-  affected_rows: Int!
+  affectedRows: Int!
 
   """
   data from the rows affected by the mutation
@@ -1022,7 +1217,7 @@ on_conflict condition type for table "roles"
 """
 input RolesOnConflict {
   constraint: RolesConstraint!
-  update_columns: [RolesUpdateColumn!]! = []
+  updateColumns: [RolesUpdateColumn!]! = []
   where: RolesBoolExp
 }
 
@@ -1067,6 +1262,29 @@ input RolesSetInput {
 }
 
 """
+Streaming cursor of the table "roles"
+"""
+input RolesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: RolesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input RolesStreamCursorValueInput {
+  description: String
+  value: String
+}
+
+"""
 update columns of table "roles"
 """
 enum RolesUpdateColumn {
@@ -1086,6 +1304,10 @@ input RolesUpdates {
   sets the columns of the filtered rows to the given values
   """
   _set: RolesSetInput
+
+  """
+  filter the rows which have to be updated
+  """
   where: RolesBoolExp!
 }
 
@@ -1112,6 +1334,10 @@ type SessionAggregate {
   nodes: [Session!]!
 }
 
+input SessionAggregateBoolExp {
+  count: sessionAggregateBoolExpCount
+}
+
 """
 aggregate fields of "session"
 """
@@ -1126,8 +1352,8 @@ order by aggregate values of table "session"
 """
 input SessionAggregateOrderBy {
   count: OrderBy
-  max: session_max_order_by
-  min: session_min_order_by
+  max: SessionMaxOrderBy
+  min: SessionMinOrderBy
 }
 
 """
@@ -1188,6 +1414,16 @@ type SessionMaxFields {
 }
 
 """
+order by max() on columns of table "session"
+"""
+input SessionMaxOrderBy {
+  expires: OrderBy
+  id: OrderBy
+  sessionToken: OrderBy
+  userId: OrderBy
+}
+
+"""
 aggregate min on columns
 """
 type SessionMinFields {
@@ -1198,13 +1434,23 @@ type SessionMinFields {
 }
 
 """
+order by min() on columns of table "session"
+"""
+input SessionMinOrderBy {
+  expires: OrderBy
+  id: OrderBy
+  sessionToken: OrderBy
+  userId: OrderBy
+}
+
+"""
 response of any mutation on the table "session"
 """
 type SessionMutationResponse {
   """
   number of rows affected by the mutation
   """
-  affected_rows: Int!
+  affectedRows: Int!
 
   """
   data from the rows affected by the mutation
@@ -1217,7 +1463,7 @@ on_conflict condition type for table "session"
 """
 input SessionOnConflict {
   constraint: SessionConstraint!
-  update_columns: [SessionUpdateColumn!]! = []
+  updateColumns: [SessionUpdateColumn!]! = []
   where: SessionBoolExp
 }
 
@@ -1275,6 +1521,31 @@ input SessionSetInput {
 }
 
 """
+Streaming cursor of the table "session"
+"""
+input SessionStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: SessionStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input SessionStreamCursorValueInput {
+  expires: timestamptz
+  id: uuid
+  sessionToken: String
+  userId: uuid
+}
+
+"""
 update columns of table "session"
 """
 enum SessionUpdateColumn {
@@ -1304,6 +1575,10 @@ input SessionUpdates {
   sets the columns of the filtered rows to the given values
   """
   _set: SessionSetInput
+
+  """
+  filter the rows which have to be updated
+  """
   where: SessionBoolExp!
 }
 
@@ -1591,6 +1866,10 @@ type UserAggregate {
   nodes: [User!]!
 }
 
+input UserAggregateBoolExp {
+  count: userAggregateBoolExpCount
+}
+
 """
 aggregate fields of "user"
 """
@@ -1605,8 +1884,8 @@ order by aggregate values of table "user"
 """
 input UserAggregateOrderBy {
   count: OrderBy
-  max: user_max_order_by
-  min: user_min_order_by
+  max: UserMaxOrderBy
+  min: UserMinOrderBy
 }
 
 """
@@ -1629,9 +1908,9 @@ input UserBoolExp {
   _not: UserBoolExp
   _or: [UserBoolExp!]
   accounts: AccountBoolExp
-  accounts_aggregate: account_aggregate_bool_exp
+  accountsAggregate: AccountAggregateBoolExp
   allowedRoles: AllowedRoleBoolExp
-  allowedRoles_aggregate: allowed_role_aggregate_bool_exp
+  allowedRolesAggregate: AllowedRoleAggregateBoolExp
   defaultRole: RolesEnumComparisonExp
   email: StringComparisonExp
   emailVerified: TimestamptzComparisonExp
@@ -1640,7 +1919,7 @@ input UserBoolExp {
   name: StringComparisonExp
   role: RolesBoolExp
   sessions: SessionBoolExp
-  sessions_aggregate: session_aggregate_bool_exp
+  sessionsAggregate: SessionAggregateBoolExp
 }
 
 """
@@ -1686,6 +1965,17 @@ type UserMaxFields {
 }
 
 """
+order by max() on columns of table "user"
+"""
+input UserMaxOrderBy {
+  email: OrderBy
+  emailVerified: OrderBy
+  id: OrderBy
+  image: OrderBy
+  name: OrderBy
+}
+
+"""
 aggregate min on columns
 """
 type UserMinFields {
@@ -1697,13 +1987,24 @@ type UserMinFields {
 }
 
 """
+order by min() on columns of table "user"
+"""
+input UserMinOrderBy {
+  email: OrderBy
+  emailVerified: OrderBy
+  id: OrderBy
+  image: OrderBy
+  name: OrderBy
+}
+
+"""
 response of any mutation on the table "user"
 """
 type UserMutationResponse {
   """
   number of rows affected by the mutation
   """
-  affected_rows: Int!
+  affectedRows: Int!
 
   """
   data from the rows affected by the mutation
@@ -1728,7 +2029,7 @@ on_conflict condition type for table "user"
 """
 input UserOnConflict {
   constraint: UserConstraint!
-  update_columns: [UserUpdateColumn!]! = []
+  updateColumns: [UserUpdateColumn!]! = []
   where: UserBoolExp
 }
 
@@ -1803,6 +2104,33 @@ input UserSetInput {
 }
 
 """
+Streaming cursor of the table "user"
+"""
+input UserStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: UserStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input UserStreamCursorValueInput {
+  defaultRole: RolesEnum
+  email: String
+  emailVerified: timestamptz
+  id: uuid
+  image: String
+  name: String
+}
+
+"""
 update columns of table "user"
 """
 enum UserUpdateColumn {
@@ -1842,6 +2170,10 @@ input UserUpdates {
   sets the columns of the filtered rows to the given values
   """
   _set: UserSetInput
+
+  """
+  filter the rows which have to be updated
+  """
   where: UserBoolExp!
 }
 
@@ -1942,7 +2274,7 @@ type VerificationTokenMutationResponse {
   """
   number of rows affected by the mutation
   """
-  affected_rows: Int!
+  affectedRows: Int!
 
   """
   data from the rows affected by the mutation
@@ -1955,7 +2287,7 @@ on_conflict condition type for table "verification_token"
 """
 input VerificationTokenOnConflict {
   constraint: VerificationTokenConstraint!
-  update_columns: [VerificationTokenUpdateColumn!]! = []
+  updateColumns: [VerificationTokenUpdateColumn!]! = []
   where: VerificationTokenBoolExp
 }
 
@@ -2005,6 +2337,30 @@ input VerificationTokenSetInput {
 }
 
 """
+Streaming cursor of the table "verification_token"
+"""
+input VerificationTokenStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: VerificationTokenStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input VerificationTokenStreamCursorValueInput {
+  expires: timestamptz
+  identifier: String
+  token: String
+}
+
+"""
 update columns of table "verification_token"
 """
 enum VerificationTokenUpdateColumn {
@@ -2029,208 +2385,25 @@ input VerificationTokenUpdates {
   sets the columns of the filtered rows to the given values
   """
   _set: VerificationTokenSetInput
+
+  """
+  filter the rows which have to be updated
+  """
   where: VerificationTokenBoolExp!
 }
 
-input account_aggregate_bool_exp {
-  count: account_aggregate_bool_exp_count
-}
-
-input account_aggregate_bool_exp_count {
+input accountAggregateBoolExpCount {
   arguments: [AccountSelectColumn!]
   distinct: Boolean
   filter: AccountBoolExp
   predicate: IntComparisonExp!
 }
 
-"""
-order by avg() on columns of table "account"
-"""
-input account_avg_order_by {
-  expiresAt: OrderBy
-  refreshTokenExpiresIn: OrderBy
-}
-
-"""
-order by max() on columns of table "account"
-"""
-input account_max_order_by {
-  accessToken: OrderBy
-  expiresAt: OrderBy
-  id: OrderBy
-  idToken: OrderBy
-  oauthToken: OrderBy
-  oauthTokenSecret: OrderBy
-  provider: OrderBy
-  providerAccountId: OrderBy
-  refreshToken: OrderBy
-  refreshTokenExpiresIn: OrderBy
-  scope: OrderBy
-  sessionState: OrderBy
-  tokenType: OrderBy
-  type: OrderBy
-  userId: OrderBy
-}
-
-"""
-order by min() on columns of table "account"
-"""
-input account_min_order_by {
-  accessToken: OrderBy
-  expiresAt: OrderBy
-  id: OrderBy
-  idToken: OrderBy
-  oauthToken: OrderBy
-  oauthTokenSecret: OrderBy
-  provider: OrderBy
-  providerAccountId: OrderBy
-  refreshToken: OrderBy
-  refreshTokenExpiresIn: OrderBy
-  scope: OrderBy
-  sessionState: OrderBy
-  tokenType: OrderBy
-  type: OrderBy
-  userId: OrderBy
-}
-
-"""
-order by stddev() on columns of table "account"
-"""
-input account_stddev_order_by {
-  expiresAt: OrderBy
-  refreshTokenExpiresIn: OrderBy
-}
-
-"""
-order by stddev_pop() on columns of table "account"
-"""
-input account_stddev_pop_order_by {
-  expiresAt: OrderBy
-  refreshTokenExpiresIn: OrderBy
-}
-
-"""
-order by stddev_samp() on columns of table "account"
-"""
-input account_stddev_samp_order_by {
-  expiresAt: OrderBy
-  refreshTokenExpiresIn: OrderBy
-}
-
-"""
-Streaming cursor of the table "account"
-"""
-input account_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: account_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input account_streamCursorValueInput {
-  accessToken: String
-  expiresAt: bigint
-  id: uuid
-  idToken: String
-  oauthToken: String
-  oauthTokenSecret: String
-  provider: String
-  providerAccountId: String
-  refreshToken: String
-  refreshTokenExpiresIn: bigint
-  scope: String
-  sessionState: String
-  tokenType: String
-  type: String
-  userId: uuid
-}
-
-"""
-order by sum() on columns of table "account"
-"""
-input account_sum_order_by {
-  expiresAt: OrderBy
-  refreshTokenExpiresIn: OrderBy
-}
-
-"""
-order by var_pop() on columns of table "account"
-"""
-input account_var_pop_order_by {
-  expiresAt: OrderBy
-  refreshTokenExpiresIn: OrderBy
-}
-
-"""
-order by var_samp() on columns of table "account"
-"""
-input account_var_samp_order_by {
-  expiresAt: OrderBy
-  refreshTokenExpiresIn: OrderBy
-}
-
-"""
-order by variance() on columns of table "account"
-"""
-input account_variance_order_by {
-  expiresAt: OrderBy
-  refreshTokenExpiresIn: OrderBy
-}
-
-input allowed_role_aggregate_bool_exp {
-  count: allowed_role_aggregate_bool_exp_count
-}
-
-input allowed_role_aggregate_bool_exp_count {
+input allowedRoleAggregateBoolExpCount {
   arguments: [AllowedRoleSelectColumn!]
   distinct: Boolean
   filter: AllowedRoleBoolExp
   predicate: IntComparisonExp!
-}
-
-"""
-order by max() on columns of table "allowed_role"
-"""
-input allowed_role_max_order_by {
-  userId: OrderBy
-}
-
-"""
-order by min() on columns of table "allowed_role"
-"""
-input allowed_role_min_order_by {
-  userId: OrderBy
-}
-
-"""
-Streaming cursor of the table "allowed_role"
-"""
-input allowed_role_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: allowed_role_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input allowed_role_streamCursorValueInput {
-  role: RolesEnum
-  userId: uuid
 }
 
 scalar bigint
@@ -2542,7 +2715,7 @@ type mutation_root {
     sets the columns of the filtered rows to the given values
     """
     _set: AccountSetInput
-    pk_columns: AccountPkColumnsInput!
+    pkColumns: AccountPkColumnsInput!
   ): Account
 
   """
@@ -2578,7 +2751,7 @@ type mutation_root {
     sets the columns of the filtered rows to the given values
     """
     _set: AllowedRoleSetInput
-    pk_columns: AllowedRolePkColumnsInput!
+    pkColumns: AllowedRolePkColumnsInput!
   ): AllowedRole
 
   """
@@ -2614,7 +2787,7 @@ type mutation_root {
     sets the columns of the filtered rows to the given values
     """
     _set: RolesSetInput
-    pk_columns: RolesPkColumnsInput!
+    pkColumns: RolesPkColumnsInput!
   ): Roles
 
   """
@@ -2650,7 +2823,7 @@ type mutation_root {
     sets the columns of the filtered rows to the given values
     """
     _set: SessionSetInput
-    pk_columns: SessionPkColumnsInput!
+    pkColumns: SessionPkColumnsInput!
   ): Session
 
   """
@@ -2686,7 +2859,7 @@ type mutation_root {
     sets the columns of the filtered rows to the given values
     """
     _set: UserSetInput
-    pk_columns: UserPkColumnsInput!
+    pkColumns: UserPkColumnsInput!
   ): User
 
   """
@@ -2722,7 +2895,7 @@ type mutation_root {
     sets the columns of the filtered rows to the given values
     """
     _set: VerificationTokenSetInput
-    pk_columns: VerificationTokenPkColumnsInput!
+    pkColumns: VerificationTokenPkColumnsInput!
   ): VerificationToken
 
   """
@@ -3128,83 +3301,11 @@ type query_root {
   verificationTokenByPk(token: String!): VerificationToken
 }
 
-"""
-Streaming cursor of the table "roles"
-"""
-input roles_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: roles_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input roles_streamCursorValueInput {
-  description: String
-  value: String
-}
-
-input session_aggregate_bool_exp {
-  count: session_aggregate_bool_exp_count
-}
-
-input session_aggregate_bool_exp_count {
+input sessionAggregateBoolExpCount {
   arguments: [SessionSelectColumn!]
   distinct: Boolean
   filter: SessionBoolExp
   predicate: IntComparisonExp!
-}
-
-"""
-order by max() on columns of table "session"
-"""
-input session_max_order_by {
-  expires: OrderBy
-  id: OrderBy
-  sessionToken: OrderBy
-  userId: OrderBy
-}
-
-"""
-order by min() on columns of table "session"
-"""
-input session_min_order_by {
-  expires: OrderBy
-  id: OrderBy
-  sessionToken: OrderBy
-  userId: OrderBy
-}
-
-"""
-Streaming cursor of the table "session"
-"""
-input session_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: session_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input session_streamCursorValueInput {
-  expires: timestamptz
-  id: uuid
-  sessionToken: String
-  userId: uuid
 }
 
 type subscription_root {
@@ -3285,7 +3386,7 @@ type subscription_root {
     """
     cursor to stream the results returned by the query
     """
-    cursor: [account_streamCursorInput]!
+    cursor: [AccountStreamCursorInput]!
 
     """
     filter the rows returned
@@ -3370,7 +3471,7 @@ type subscription_root {
     """
     cursor to stream the results returned by the query
     """
-    cursor: [allowed_role_streamCursorInput]!
+    cursor: [AllowedRoleStreamCursorInput]!
 
     """
     filter the rows returned
@@ -3455,7 +3556,7 @@ type subscription_root {
     """
     cursor to stream the results returned by the query
     """
-    cursor: [roles_streamCursorInput]!
+    cursor: [RolesStreamCursorInput]!
 
     """
     filter the rows returned
@@ -3540,7 +3641,7 @@ type subscription_root {
     """
     cursor to stream the results returned by the query
     """
-    cursor: [session_streamCursorInput]!
+    cursor: [SessionStreamCursorInput]!
 
     """
     filter the rows returned
@@ -3625,7 +3726,7 @@ type subscription_root {
     """
     cursor to stream the results returned by the query
     """
-    cursor: [user_streamCursorInput]!
+    cursor: [UserStreamCursorInput]!
 
     """
     filter the rows returned
@@ -3710,7 +3811,7 @@ type subscription_root {
     """
     cursor to stream the results returned by the query
     """
-    cursor: [verification_token_streamCursorInput]!
+    cursor: [VerificationTokenStreamCursorInput]!
 
     """
     filter the rows returned
@@ -3721,88 +3822,11 @@ type subscription_root {
 
 scalar timestamptz
 
-input user_aggregate_bool_exp {
-  count: user_aggregate_bool_exp_count
-}
-
-input user_aggregate_bool_exp_count {
+input userAggregateBoolExpCount {
   arguments: [UserSelectColumn!]
   distinct: Boolean
   filter: UserBoolExp
   predicate: IntComparisonExp!
 }
 
-"""
-order by max() on columns of table "user"
-"""
-input user_max_order_by {
-  email: OrderBy
-  emailVerified: OrderBy
-  id: OrderBy
-  image: OrderBy
-  name: OrderBy
-}
-
-"""
-order by min() on columns of table "user"
-"""
-input user_min_order_by {
-  email: OrderBy
-  emailVerified: OrderBy
-  id: OrderBy
-  image: OrderBy
-  name: OrderBy
-}
-
-"""
-Streaming cursor of the table "user"
-"""
-input user_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: user_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input user_streamCursorValueInput {
-  defaultRole: RolesEnum
-  email: String
-  emailVerified: timestamptz
-  id: uuid
-  image: String
-  name: String
-}
-
 scalar uuid
-
-"""
-Streaming cursor of the table "verification_token"
-"""
-input verification_token_streamCursorInput {
-  """
-  Stream column input with initial value
-  """
-  initialValue: verification_token_streamCursorValueInput!
-
-  """
-  cursor ordering
-  """
-  ordering: CursorOrdering
-}
-
-"""
-Initial value of the column from where the streaming should start
-"""
-input verification_token_streamCursorValueInput {
-  expires: timestamptz
-  identifier: String
-  token: String
-}

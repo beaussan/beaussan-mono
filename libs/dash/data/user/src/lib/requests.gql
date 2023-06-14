@@ -1,6 +1,6 @@
 mutation EditUserSettings($userId: uuid!, $todoistApiToken: String) {
-  updateUsersByPk(
-    pk_columns: { id: $userId }
+  updateUserByPk(
+    pkColumns: { id: $userId }
     _set: { todoistApiToken: $todoistApiToken }
   ) {
     id
@@ -12,7 +12,7 @@ mutation EditUserSettings($userId: uuid!, $todoistApiToken: String) {
 }
 
 query UserInfo($id: uuid = "") {
-  usersByPk(id: $id) {
+  userByPk(id: $id) {
     updatedAt
     todoistApiToken
     id

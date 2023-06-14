@@ -58,7 +58,7 @@ describe('library generator', () => {
     );
   });
 
-  it.skip('should generate a test-setup file for vitest', async () => {
+  it('should generate a test-setup file for vitest', async () => {
     await generator(appTree, options);
     const vitestTestSetup = appTree
       .read('libs/shared/ui/test/src/test-setup.ts')

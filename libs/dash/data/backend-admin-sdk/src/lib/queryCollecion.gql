@@ -1,9 +1,9 @@
 mutation createUserOnLogin($email: String, $id: uuid!) {
-  insertUsers(
+  insertUser(
     objects: { id: $id, email: $email }
-    onConflict: { constraint: users_pkey, update_columns: createdAt }
+    onConflict: { constraint: users_pkey, updateColumns: createdAt }
   ) {
-    affected_rows
+    affectedRows
   }
 }
 
@@ -11,7 +11,7 @@ mutation upsertTraefikRoutesIntoDb($insertData: [TraefikRoutesInsertInput!]!) {
   insertTraefikRoutes(
     onConflict: {
       constraint: traefikRoutes_pkey
-      update_columns: [
+      updateColumns: [
         isUp
         calculatedUrl
         lastSeenAlive
@@ -23,7 +23,7 @@ mutation upsertTraefikRoutesIntoDb($insertData: [TraefikRoutesInsertInput!]!) {
     }
     objects: $insertData
   ) {
-    affected_rows
+    affectedRows
   }
 }
 
@@ -32,6 +32,6 @@ mutation setAllDownNodesBasedOnLastUpdate($update: timestamptz) {
     _set: { isUp: false }
     where: { lastSeenAlive: { _neq: $update } }
   ) {
-    affected_rows
+    affectedRows
   }
 }

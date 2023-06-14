@@ -1,5 +1,6 @@
 import {
   AccountFragment,
+  AccountInsertInput,
   SessionFragment,
   UserFragment,
   VerificationTokenFragment,
@@ -51,5 +52,33 @@ export function transformValidationTokenToNextAuth(
   return {
     ...validationToken,
     expires: parseHasuraDate(validationToken.expires),
+  };
+}
+
+export function transformAdapterAccountToAccountInsertInput({
+  providerAccountId,
+  type,
+  userId,
+  scope,
+  provider,
+  expires_at,
+  id_token,
+  refresh_token,
+  token_type,
+  session_state,
+  access_token,
+}: AdapterAccount): AccountInsertInput {
+  return {
+    providerAccountId,
+    type,
+    userId,
+    scope,
+    provider,
+    expiresAt: expires_at,
+    idToken: id_token,
+    refreshToken: refresh_token,
+    tokenType: token_type,
+    sessionState: session_state,
+    accessToken: access_token,
   };
 }

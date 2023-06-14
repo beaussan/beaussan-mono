@@ -14,7 +14,7 @@ const config: CodegenConfig = {
       },
     },
   },
-  documents: `${__dirname}/src/lib/*.gql`,
+  documents: `${__dirname}/src/lib/**/*.gql`,
   generates: {
     [`${__dirname}/schema.graphql`]: {
       plugins: ['schema-ast'],

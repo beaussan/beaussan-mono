@@ -8,7 +8,9 @@
     "types": ["vite/client", "vitest"]
   },
   "files": [],
-  "include": [],
+  "include": [
+    "../../../../libs/shared/utils/next-auth/hasura-adaptor/src/lib/next-auth.d.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.lib.json"

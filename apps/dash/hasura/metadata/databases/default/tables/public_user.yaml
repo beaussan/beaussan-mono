@@ -1,0 +1,58 @@
+table:
+  name: user
+  schema: public
+object_relationships:
+  - name: role
+    using:
+      foreign_key_constraint_on: default_role
+array_relationships:
+  - name: accounts
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: account
+          schema: public
+  - name: allowedRoles
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: allowed_role
+          schema: public
+  - name: bookmarks
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          name: bookmarks
+          schema: public
+  - name: sessions
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: session
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - canSeeTraefikContent
+        - created_at
+        - email
+        - id
+        - todoist_api_token
+        - updated_at
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - todoist_api_token
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check: null
