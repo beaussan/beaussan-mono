@@ -148,14 +148,14 @@ describe('traefikSyncDb', () => {
           mockUpsertTraefikRoutesIntoDbMutationHasura((req, res, context) => {
             upsertMock(req.variables);
             return res(
-              context.data({ insertTraefikRoutes: { affected_rows: 2 } })
+              context.data({ insertTraefikRoutes: { affectedRows: 2 } })
             );
           }),
           mockSetAllDownNodesBasedOnLastUpdateMutationHasura(
             (req, res, context) => {
               allNodeUpdateMock(req.variables);
               return res(
-                context.data({ updateTraefikRoutes: { affected_rows: 1 } })
+                context.data({ updateTraefikRoutes: { affectedRows: 1 } })
               );
             }
           )

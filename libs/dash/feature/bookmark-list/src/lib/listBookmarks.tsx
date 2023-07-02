@@ -84,13 +84,27 @@ export const Link = ({ item }: { item: UnifiedDisplay }) => {
   );
 };
 
+const getDisplayNameFromTraefik = (input: TraefikRoutesFragment): string => {
+  console.log('input : ', input);
+  if (input.friendlyName) {
+    return input.friendlyName;
+  }
+
+  if (/cl\w+-\d+-\/-secure@http/.test(input.name)) {
+    return 'CL - ' + input.link;
+  }
+
+  return input.name;
+};
+
 const mapFromTraefikRoutesToInternalView = (
   input: TraefikRoutesFragment
 ): TraefikDisplay => {
   const { __typename, name, friendlyName, ...rest } = input;
+
   return {
     type: 'traefik',
-    displayName: input.friendlyName ?? input.name,
+    displayName: getDisplayNameFromTraefik(input),
     ...rest,
   };
 };
