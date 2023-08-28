@@ -75,9 +75,9 @@ function updateHasuraEngineVersionFile(
         services[service].image &&
         services[service].image.startsWith('hasura/graphql-engine')
       ) {
-        services[service].image = `hasura/graphql-engine:${version}`;
+        services[service].image = `hasura/graphql-engine:v${version}`;
         console.log(
-          `Hasura service ${service} image version updated to ${version}.`
+          `Hasura service ${service} image version updated to v${version}.`
         );
       }
     }

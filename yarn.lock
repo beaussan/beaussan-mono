@@ -6027,14 +6027,9 @@
   resolved "https://registry.npmjs.org/@types/js-levenshtein/-/js-levenshtein-1.1.1.tgz"
   integrity sha512-qC4bCqYGy1y/NP7dDVr7KJarn+PbX1nSpwA7JXdu0HxT3QYjO8MJ+cntENtHFVy2dRAyBV23OZ6MxsW1AM1L8g==
 
-"@types/js-yaml@^4.0.0":
+"@types/js-yaml@^4.0.0", "@types/js-yaml@^4.0.5":
   version "4.0.5"
   resolved "https://registry.npmjs.org/@types/js-yaml/-/js-yaml-4.0.5.tgz"
-  integrity sha512-FhpRzf927MNQdRZP0J5DLIdTXhjLYzeUTmLAu69mnVksLH9CJY3IuSeEgbKUki7GQZm0WqDkGzyxju2EZGD2wA==
-
-"@types/js-yaml@^4.0.5":
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-4.0.5.tgz#738dd390a6ecc5442f35e7f03fa1431353f7e138"
   integrity sha512-FhpRzf927MNQdRZP0J5DLIdTXhjLYzeUTmLAu69mnVksLH9CJY3IuSeEgbKUki7GQZm0WqDkGzyxju2EZGD2wA==
 
 "@types/jsdom@^20.0.0":
@@ -11322,10 +11317,10 @@ hasha@^5.0.0:
     is-stream "^2.0.0"
     type-fest "^0.8.0"
 
-hasura-cli@2.20.1:
-  version "2.20.1"
-  resolved "https://registry.yarnpkg.com/hasura-cli/-/hasura-cli-2.20.1.tgz#9b8a6dd00cac792a05c89a1dc93d97e42b68a7c2"
-  integrity sha512-lBwHs9r4N9NLozT057/TYFGZUmDRbkJKBkkSEbq0l0FAH65bts+WDzRC00opgEahp/txwRWdMStTlmcpmJX/PA==
+hasura-cli@2.32.1:
+  version "2.32.1"
+  resolved "https://registry.yarnpkg.com/hasura-cli/-/hasura-cli-2.32.1.tgz#81503c9b4bf42256af26e87dfbf16f1202d24122"
+  integrity sha512-7TA7x2KBGEQDB73D9Wuf1kHU3Bdka8qZRFFx8poMI9LvOQQVPpCcR/Td4/Y8wDC76fO8DBtKHfcTqFReMLM8mg==
   dependencies:
     axios "^0.21.1"
     chalk "^2.4.2"
