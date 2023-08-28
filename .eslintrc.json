@@ -96,6 +96,7 @@
       "files": "*.json",
       "parser": "jsonc-eslint-parser",
       "rules": {
+        "@nx/dependency-checks": "error",
         "@nx/workspace/allowed-project-tags": [
           "error",
           {
