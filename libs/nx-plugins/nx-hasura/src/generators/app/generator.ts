@@ -11,7 +11,7 @@ import {
 import * as path from 'path';
 import { v4 as uuid } from 'uuid';
 import { AppGeneratorSchema } from './schema';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
+import { runTasksInSerial } from '@nx/devkit';
 import { HASURA_VERSION } from './versions';
 
 interface NormalizedSchema extends AppGeneratorSchema {
