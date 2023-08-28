@@ -33,7 +33,9 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/libs/shared/data/next-auth-urql-hasura"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/shared/data/next-auth-urql-hasura"
+      ],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../../coverage/libs/shared/data/next-auth-urql-hasura"

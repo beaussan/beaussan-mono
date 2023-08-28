@@ -10,7 +10,6 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/dash/frontend",
         "outputPath": "dist/apps/dash/frontend"
       },
       "configurations": {

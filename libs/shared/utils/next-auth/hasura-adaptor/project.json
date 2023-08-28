@@ -33,7 +33,9 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/libs/shared/utils/next-auth/hasura-adaptor"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/shared/utils/next-auth/hasura-adaptor"
+      ],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../../../coverage/libs/shared/utils/next-auth/hasura-adaptor"

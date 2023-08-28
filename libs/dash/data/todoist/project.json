@@ -33,7 +33,7 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/libs/dash/data/todoist"],
+      "outputs": ["{workspaceRoot}/coverage/libs/dash/data/todoist"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../../coverage/libs/dash/data/todoist"
