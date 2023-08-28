@@ -26,6 +26,10 @@
                 "onlyDependOnLibsWithTags": ["scope:shared", "scope:nx-plugins"]
               },
               {
+                "sourceTag": "scope:courso",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:courso"]
+              },
+              {
                 "sourceTag": "type:utils",
                 "onlyDependOnLibsWithTags": ["type:utils"]
               },
@@ -104,7 +108,7 @@
                 "prefix": "scope:",
                 "allowMultiplePerProject": false,
                 "enforceAtLeastOne": true,
-                "allowedTags": ["dash", "nx-plugins", "shared"]
+                "allowedTags": ["dash", "nx-plugins", "courso", "shared"]
               },
               "type": {
                 "prefix": "type:",
