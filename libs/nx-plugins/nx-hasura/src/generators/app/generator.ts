@@ -12,6 +12,7 @@ import * as path from 'path';
 import { v4 as uuid } from 'uuid';
 import { AppGeneratorSchema } from './schema';
 import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
+import { HASURA_VERSION } from './versions';
 
 interface NormalizedSchema extends AppGeneratorSchema {
   projectName: string;
@@ -52,6 +53,7 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
     webhookToken: uuid(),
     actionToken: uuid(),
     adminSecret: uuid(),
+    hasuraVersion: HASURA_VERSION,
   };
   generateFiles(
     tree,
@@ -125,6 +127,6 @@ export default async function (tree: Tree, options: AppGeneratorSchema) {
   await formatFiles(tree);
 
   return runTasksInSerial(
-    addDependenciesToPackageJson(tree, {}, { 'hasura-cli': '2.15.1' })
+    addDependenciesToPackageJson(tree, {}, { 'hasura-cli': HASURA_VERSION })
   );
 }
