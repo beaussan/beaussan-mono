@@ -1,0 +1,77 @@
+table:
+  name: practice_to_student_yield
+  schema: public
+object_relationships:
+  - name: practiceToStudent
+    using:
+      foreign_key_constraint_on: practice_to_student_id
+  - name: practiceYield
+    using:
+      foreign_key_constraint_on: practice_yield_id
+array_relationships:
+  - name: practiceToStudentGradeMetrics
+    using:
+      foreign_key_constraint_on:
+        column: practice_to_student_yield_id
+        table:
+          name: practice_to_student_grade_metric
+          schema: public
+
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - created_at
+        - id
+        - practice_to_student_id
+        - practice_yield_id
+        - updated_at
+        - value
+      filter:
+        practice_to_student:
+          student:
+            user_id:
+              _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: teacher
+    permission:
+      columns:
+        - created_at
+        - gitea_org_and_repo
+        - id
+        - practice_to_student_id
+        - practice_yield_id
+        - submited
+        - updated_at
+        - value
+      filter: {}
+event_triggers:
+  - name: onStudentYieldCreated
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+      update:
+        columns:
+          - value
+    retry_conf:
+      num_retries: 3
+      interval_sec: 20
+      timeout_sec: 60
+    webhook_from_env: WEBHOOK_MASTER_URL
+    headers:
+      - name: token
+        value_from_env: WEBHOOK_MASTER_TOKEN
+  - name: onStudentYieldDeleted
+    definition:
+      enable_manual: false
+      delete:
+        columns: '*'
+    retry_conf:
+      num_retries: 3
+      interval_sec: 10
+      timeout_sec: 60
+    webhook_from_env: WEBHOOK_MASTER_URL
+    headers:
+      - name: token
+        value_from_env: WEBHOOK_MASTER_TOKEN

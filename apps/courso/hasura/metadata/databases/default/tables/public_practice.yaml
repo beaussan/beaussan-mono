@@ -1,0 +1,70 @@
+table:
+  name: practice
+  schema: public
+array_relationships:
+  - name: practiceToCourses
+    using:
+      foreign_key_constraint_on:
+        column: practice_id
+        table:
+          name: practice_to_course
+          schema: public
+  - name: practiceYields
+    using:
+      foreign_key_constraint_on:
+        column: practice_id
+        table:
+          name: practice_yield
+          schema: public
+insert_permissions:
+  - role: teacher
+    permission:
+      check: {}
+      columns:
+        - created_at
+        - description
+        - id
+        - title
+        - updated_at
+      backend_only: false
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - created_at
+        - description
+        - id
+        - title
+        - updated_at
+      filter:
+        studentToCourses:
+          course:
+            studentToCourses:
+              student:
+                user_id:
+                  _eq: X-Hasura-User-Id
+  - role: teacher
+    permission:
+      columns:
+        - created_at
+        - description
+        - id
+        - title
+        - updated_at
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - created_at
+        - description
+        - id
+        - title
+        - updated_at
+      filter: {}
+      check: {}
+delete_permissions:
+  - role: teacher
+    permission:
+      filter: {}

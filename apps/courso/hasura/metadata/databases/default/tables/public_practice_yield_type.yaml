@@ -1,0 +1,23 @@
+table:
+  name: practice_yield_type
+  schema: public
+array_relationships:
+  - name: practiceYields
+    using:
+      foreign_key_constraint_on:
+        column: method
+        table:
+          name: practice_yield
+          schema: public
+
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - name
+      filter: {}
+  - role: teacher
+    permission:
+      columns:
+        - name
+      filter: {}

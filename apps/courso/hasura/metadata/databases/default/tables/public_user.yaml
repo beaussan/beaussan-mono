@@ -1,0 +1,67 @@
+table:
+  name: user
+  schema: public
+object_relationships:
+  - name: role
+    using:
+      foreign_key_constraint_on: default_role
+  - name: student
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: student
+          schema: public
+array_relationships:
+  - name: accounts
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: accounts
+          schema: public
+  - name: allowedRoles
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: allowed_roles
+          schema: public
+
+insert_permissions:
+  - role: teacher
+    permission:
+      check: {}
+      columns:
+        - default_role
+        - email
+      backend_only: false
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - id
+        - created_at
+        - updated_at
+        - email
+        - image
+        - email_verified
+        - name
+        - default_role
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+  - role: teacher
+    permission:
+      columns:
+        - id
+        - created_at
+        - updated_at
+        - email
+        - image
+        - email_verified
+        - name
+        - default_role
+      filter:
+        id:
+          _eq: X-Hasura-User-Id

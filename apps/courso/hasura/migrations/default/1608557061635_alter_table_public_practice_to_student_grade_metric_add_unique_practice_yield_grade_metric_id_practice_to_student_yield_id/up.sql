@@ -1,0 +1,2 @@
+alter table "public"."practice_to_student_grade_metric" drop constraint "practice_to_student_grade_metric_practice_to_student_id_practic";
+alter table "public"."practice_to_student_grade_metric" add constraint "practice_to_student_grade_metric_practice_yield_grade_metric_id_practice_to_student_yield_id_key" unique ("practice_yield_grade_metric_id", "practice_to_student_yield_id");

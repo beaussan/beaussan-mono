@@ -1,0 +1,47 @@
+table:
+  name: practice_yield_expected_output
+  schema: public
+object_relationships:
+  - name: practiceYield
+    using:
+      foreign_key_constraint_on: practice_yield_id
+  - name: practiceYieldExpectedOutputType
+    using:
+      foreign_key_constraint_on: method
+array_relationships:
+  - name: practiceYieldGradeMetrics
+    using:
+      foreign_key_constraint_on:
+        column: expected_yield_id
+        table:
+          name: practice_yield_grade_metric
+          schema: public
+
+insert_permissions:
+  - role: teacher
+    permission:
+      check: {}
+      columns:
+        - id
+        - created_at
+        - updated_at
+        - practice_yield_id
+        - git_path
+        - code_lang
+        - method
+        - expected
+      backend_only: false
+select_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - code_lang
+        - expected
+        - git_path
+        - method
+        - created_at
+        - updated_at
+        - id
+        - practice_yield_id
+      filter: {}
+      allow_aggregations: true
