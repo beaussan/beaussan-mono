@@ -8,5 +8,18 @@
       "import": "./index.mjs",
       "require": "./index.js"
     }
+  },
+  "dependencies": {
+    "jsonwebtoken": "9.0.0",
+    "graphql-tag": "2.12.6",
+    "@beaussan/shared/utils/hasura-ts": "*",
+    "@graphql-codegen/cli": "^3.0.0",
+    "next-auth": "^4.22.1",
+    "graphql-request": "^5.0.0",
+    "vite": "4.1.4",
+    "@vitejs/plugin-react": "4.0.4",
+    "@nx/vite": "16.7.4",
+    "vite-plugin-dts": "2.3.0",
+    "@nx/devkit": "16.7.4"
   }
 }

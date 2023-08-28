@@ -5,6 +5,9 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "dependencies": {
-    "uuid": "^9.0.0"
+    "uuid": "8.3.2",
+    "@nx/devkit": "16.7.4",
+    "js-yaml": "^4.1.0",
+    "tslib": "^2.3.0"
   }
 }

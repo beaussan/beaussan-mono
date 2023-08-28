@@ -9,7 +9,6 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/next-auth/next-playground",
         "outputPath": "dist/apps/next-auth/next-playground"
       },
       "configurations": {

@@ -45,7 +45,7 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/libs/dash/feature/user-settings"],
+      "outputs": ["{workspaceRoot}/coverage/libs/dash/feature/user-settings"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../../coverage/libs/dash/feature/user-settings"

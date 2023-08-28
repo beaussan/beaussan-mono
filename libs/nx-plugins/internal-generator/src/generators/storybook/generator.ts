@@ -116,18 +116,17 @@ interface TsConfigLike {
 async function tweakStorybookTsconfig(tree: Tree, options: NormalizedSchema) {
   const pathOfTsconfig = path.join(
     options.projectRoot,
-    '.storybook',
-    'tsconfig.json'
+    'tsconfig.storybook.json'
   );
 
   const currentFile = readJson<TsConfigLike>(tree, pathOfTsconfig);
 
   currentFile.include = [
     ...currentFile.include.map((it) => {
-      if (!it.startsWith('../src/**/*.stories.')) {
+      if (!it.startsWith('src/**/*.stories.')) {
         return it;
       }
-      return it.replace('../src/**/*.stories.', '../../**/*.stories.');
+      return it.replace('src/**/*.stories.', '../**/*.stories.');
     }),
     '*.tsx',
   ];
@@ -181,7 +180,7 @@ export default async function (tree: Tree, options: StorybookGeneratorSchema) {
     name: normalizedOptions.projectName,
     configureCypress: false,
     linter: Linter.EsLint,
-    configureTestRunner: true,
+    interactionTests: true,
     tsConfiguration: true,
     uiFramework: '@storybook/react-vite',
   });

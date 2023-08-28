@@ -33,7 +33,7 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/libs/dash/feature/tasks-panel"],
+      "outputs": ["{workspaceRoot}/coverage/libs/dash/feature/tasks-panel"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../../coverage/libs/dash/feature/tasks-panel"
