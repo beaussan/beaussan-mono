@@ -8,5 +8,11 @@
       "import": "./index.mjs",
       "require": "./index.js"
     }
+  },
+  "dependencies": {
+    "vite": "4.1.4",
+    "@vitejs/plugin-react": "4.0.4",
+    "@nx/vite": "16.7.4",
+    "vite-plugin-dts": "2.3.0"
   }
 }

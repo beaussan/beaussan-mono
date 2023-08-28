@@ -180,14 +180,14 @@ describe('storybook generator', () => {
     });
   });
 
-  describe('.storybook/tsconfig.json file', () => {
+  describe('tsconfig.storybook.json file', () => {
     let tsconfigStorybookFile: { include: string[] };
     beforeEach(async () => {
       await storybookGenerator(appTree, options);
 
       tsconfigStorybookFile = readJson(
         appTree,
-        'libs/shared/storybook-host/.storybook/tsconfig.json'
+        'libs/shared/storybook-host/tsconfig.storybook.json'
       );
     });
 
@@ -198,12 +198,12 @@ describe('storybook generator', () => {
     for (const ext of ['ts', 'js', 'jsx', 'tsx', 'mdx']) {
       it(`should not have the old ${ext} target in includes`, () => {
         expect(tsconfigStorybookFile.include).not.toContain(
-          `../src/**/*.stories.${ext}`
+          `src/**/*.stories.${ext}`
         );
       });
       it(`should include the new ${ext} target in includes`, () => {
         expect(tsconfigStorybookFile.include).toContain(
-          `../../**/*.stories.${ext}`
+          `../**/*.stories.${ext}`
         );
       });
     }

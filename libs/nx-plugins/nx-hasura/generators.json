@@ -7,6 +7,11 @@
       "factory": "./src/generators/app/generator",
       "schema": "./src/generators/app/schema.json",
       "description": "Generate a hasura project & metadata"
+    },
+    "update-composes": {
+      "factory": "./src/generators/update-composes/generator",
+      "schema": "./src/generators/update-composes/schema.json",
+      "description": "update-composes generator"
     }
   }
 }

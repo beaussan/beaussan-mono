@@ -33,7 +33,7 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/libs/dash/data/user"],
+      "outputs": ["{workspaceRoot}/coverage/libs/dash/data/user"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../../coverage/libs/dash/data/user"

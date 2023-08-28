@@ -1,7 +1,5 @@
 version: '3.6'
-
 name: dash-hasura
-
 services:
   postgres:
     image: postgres:15
@@ -12,26 +10,21 @@ services:
     environment:
       POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
-    image: hasura/graphql-engine:v2.21.0
+    image: hasura/graphql-engine:v2.32.1
     ports:
-      - '${HASURA_PORT}:8080'
+      - ${HASURA_PORT}:8080
     depends_on:
-      - 'postgres'
+      - postgres
     container_name: dash-hasura-graphql-engine
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
-      ## enable the console served by server
-      HASURA_GRAPHQL_ENABLE_CONSOLE: 'false' # set to "false" to disable console
-      ## enable debugging mode. It is recommended to disable this in production
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
       HASURA_GRAPHQL_DEV_MODE: 'true'
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
-      ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${JWT_SECRET}" }'
-      # HASURA_GRAPHQL_JWT_SECRET: '{ "jwk_url": "${HASURA_BACKEND_BASE_URL}/api/auth/jwt/jwks.json" }'
-      HASURA_GRAPHQL_ADMIN_SECRET: '${HASURA_GRAPHQL_ADMIN_SECRET}'
-      HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: 'naming_convention'
-      HASURA_BACKEND_BASE_URL: '${HASURA_BACKEND_BASE_URL}'
-      HASURA_AUTH_TOKEN_CRON: '${HASURA_AUTH_TOKEN_CRON}'
-
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
+      HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: naming_convention
+      HASURA_BACKEND_BASE_URL: ${HASURA_BACKEND_BASE_URL}
+      HASURA_AUTH_TOKEN_CRON: ${HASURA_AUTH_TOKEN_CRON}
 volumes:
   db_dash-hasura: {}
