@@ -24,7 +24,7 @@ export const YieldInput: React.FC<{
   baseName: string;
   index: number;
   yieldTypes: string[];
-  remove?: Function;
+  remove?: () => void;
 }> = ({ yieldTypes, baseName, remove, index }) => {
   const { getFieldProps } = useFormikContext<any>();
   const { value } = getFieldProps(`${baseName}.method`);

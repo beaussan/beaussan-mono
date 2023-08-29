@@ -3,7 +3,7 @@ import { PageHead } from '../../../components/PageHead';
 import { BackButton } from '../../../components/BackButton';
 import gql from 'graphql-tag';
 import {
-  Practice_Yield_Insert_Input,
+  PracticeYieldInsertInput,
   useCreateNewPracticeMutation,
 } from '../../../generated/graphql';
 import { Loader } from '../../../components/Loader';
@@ -25,19 +25,19 @@ gql`
   mutation createNewPractice(
     $title: String!
     $description: String!
-    $data: [practice_yield_insert_input!]!
+    $data: [PracticeYieldInsertInput!]!
   ) {
-    insert_practice_one(
+    insertPracticeOne(
       object: {
         title: $title
         description: $description
-        practice_yields: { data: $data }
+        practiceYields: { data: $data }
       }
     ) {
-      created_at
+      createdAt
       id
       title
-      updated_at
+      updatedAt
     }
   }
 `;
@@ -61,7 +61,7 @@ export const TpNew = () => {
     mutation: createTp,
     successMessage: 'TP added successfully',
     mapFormData: (values: NewTp) => ({
-      data: values.yields as Practice_Yield_Insert_Input[],
+      data: values.yields as PracticeYieldInsertInput[],
       title: values.title,
       description: values.description,
     }),

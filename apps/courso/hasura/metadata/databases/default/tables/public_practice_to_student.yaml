@@ -8,6 +8,24 @@ object_relationships:
   - name: student
     using:
       foreign_key_constraint_on: student_id
+  - name: studentFeedback
+    using:
+      manual_configuration:
+        column_mapping:
+          id: practice_to_student_id
+        insertion_order: null
+        remote_table:
+          name: practice_to_student_feedback
+          schema: public
+  - name: studentGrade
+    using:
+      manual_configuration:
+        column_mapping:
+          id: practice_to_student_id
+        insertion_order: null
+        remote_table:
+          name: practice_to_student_grade
+          schema: public
 array_relationships:
   - name: practiceToStudentYields
     using:

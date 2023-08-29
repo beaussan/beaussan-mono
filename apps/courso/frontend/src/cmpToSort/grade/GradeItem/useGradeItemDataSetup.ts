@@ -1,7 +1,7 @@
 import { useArrayNavigator } from '../../../hooks/useArrayNavigator';
 import { useCallback, useMemo } from 'react';
 import {
-  Practice_To_Student_Grade_Metric_Insert_Input,
+  PracticeToStudentGradeMetricInsertInput,
   PracticeToStudentGradeMetricForGradingFragment,
   PracticeToStudentYieldForGradingFragment,
   useInsertPracticeToStudentGradeMetricMutation,
@@ -104,9 +104,9 @@ export const useGradeItemDataSetup: useGradeItemDataType = ({
   }>(() => {
     return data.gradeMetrics
       .map((tm) => ({
-        [tm.id]: item?.practice_to_student_grade_metrics.find(
-          ({ practice_yield_grade_metric_id }) =>
-            practice_yield_grade_metric_id === tm.id
+        [tm.id]: item?.practiceToStudentGradeMetrics.find(
+          ({ practiceYieldGradeMetricId }) =>
+            practiceYieldGradeMetricId === tm.id
         ),
       }))
       .reduce((prev, curr) => ({ ...prev, ...curr }), {});
@@ -124,11 +124,11 @@ export const useGradeItemDataSetup: useGradeItemDataType = ({
     },
     mapFormData: (values: GradeItemFormType) => ({
       objects: Object.entries(values).map(
-        ([key, toSave]): Practice_To_Student_Grade_Metric_Insert_Input => ({
-          practice_yield_grade_metric_id: key,
+        ([key, toSave]): PracticeToStudentGradeMetricInsertInput => ({
+          practiceYieldGradeMetricId: key,
           feedback: toSave.feedbacks,
-          percent_grade: parseInt(toSave.grade),
-          practice_to_student_yield_id: item?.practiceToStudentYieldId,
+          percentGrade: parseInt(toSave.grade),
+          practiceToStudentYieldId: item?.practiceToStudentYieldId,
         })
       ),
     }),
@@ -140,7 +140,7 @@ export const useGradeItemDataSetup: useGradeItemDataType = ({
         .map(({ id }) => ({
           [id]: {
             feedbacks: maybeGradeForStudents?.[id]?.feedback ?? [],
-            grade: `${maybeGradeForStudents?.[id]?.percent_grade ?? 1}`,
+            grade: `${maybeGradeForStudents?.[id]?.percentGrade ?? 1}`,
           },
         }))
         .reduce((prev, curr) => ({ ...prev, ...curr }), {}),

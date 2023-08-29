@@ -3,7 +3,7 @@ import { PageHead } from '../../../components/PageHead';
 import { BackButton } from '../../../components/BackButton';
 import {
   HandOffByIdQuery,
-  Practice_Yield_Type_Enum,
+  PracticeYieldTypeEnum,
   useHandOffByIdQuery,
   useSubmitHandoffMutation,
   YieldPracticeInputFragment,
@@ -92,14 +92,14 @@ const CodeYieldInput: FormInputElem = ({ data }) => {
   );
 };
 
-const FormElementsByMethod: Record<Practice_Yield_Type_Enum, FormInputElem> = {
+const FormElementsByMethod: Record<PracticeYieldTypeEnum, FormInputElem> = {
   GIT_REPO: GitField,
   BLOB: BlobField,
   CODE: CodeYieldInput,
   URL: UrlInput,
 };
 
-const Validation: Record<Practice_Yield_Type_Enum, ObjectSchema> = {
+const Validation: Record<PracticeYieldTypeEnum, ObjectSchema> = {
   GIT_REPO: yup.object({
     value: yup.string().url('Git url is not a valid url'),
   }),
@@ -124,14 +124,14 @@ const HandOffBody: React.FC<{ data: HandOffByIdQuery }> = ({ data }) => {
   useTimeInterval(1);
   const [{ fetching }, submitHandoff] = useSubmitHandoffMutation();
   const currDate = new Date();
-  const close = new Date(data.practice_to_course_by_pk?.close_date);
-  const open = new Date(data.practice_to_course_by_pk?.open_date);
+  const close = new Date(data.practiceToCourseByPk?.closeDate);
+  const open = new Date(data.practiceToCourseByPk?.openDate);
   const isOpen = isAfter(currDate, open) && isBefore(currDate, close);
   const onSubmit = useFormikMutationSubmitWithNavigate({
     mutation: submitHandoff,
     successMessage: 'Succesfully submit handoff',
     mapFormData: (values: HandoffForm) => ({
-      practiceToPromotionId: data?.practice_to_course_by_pk?.id,
+      practiceToPromotionId: data?.practiceToCourseByPk?.id,
       yields: Object.entries(values).map(([yieldId, { value }]) => ({
         value,
         yieldId,
@@ -144,8 +144,7 @@ const HandOffBody: React.FC<{ data: HandOffByIdQuery }> = ({ data }) => {
       <div className="mt-4 font-semibold text-xl">This handoff is over.</div>
     );
   }
-  const yeilds =
-    data?.practice_to_course_by_pk?.practice?.practice_yields ?? [];
+  const yeilds = data?.practiceToCourseByPk?.practice?.practiceYields ?? [];
   const initialValues: HandoffForm = yeilds
     .map(({ id }) => ({ [id]: { value: '' } }))
     .reduce((prev, curr) => ({ ...prev, ...curr }), {});
@@ -208,11 +207,11 @@ export const HandOffId = () => {
   if (fetching && !data) {
     return <Loader />;
   }
-  if (!data?.practice_to_course_by_pk || error) {
+  if (!data?.practiceToCourseByPk || error) {
     router.push(routes.handoff());
   }
 
-  if ((data?.practice_to_course_by_pk?.practice_to_students?.length ?? 0) > 0) {
+  if ((data?.practiceToCourseByPk?.practiceToStudents?.length ?? 0) > 0) {
     router.push(routes.handoff());
   }
   let body = <div />;
@@ -224,7 +223,7 @@ export const HandOffId = () => {
       <PageHead className="">
         <div className="flex items-center">
           <BackButton className="mr-2" />
-          {'Handoff for '} {data?.practice_to_course_by_pk?.practice.title}
+          {'Handoff for '} {data?.practiceToCourseByPk?.practice.title}
         </div>
       </PageHead>
       {body}

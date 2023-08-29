@@ -20,16 +20,16 @@ gql`
   mutation CreateCourse(
     $name: String!
     $years: String!
-    $students: [student_to_course_insert_input!]!
+    $students: [StudentToCourseInsertInput!]!
   ) {
-    insert_course_one(
+    insertCourseOne(
       object: {
         name: $name
         years: $years
-        student_to_courses: { data: $students }
+        studentToCourses: { data: $students }
       }
     ) {
-      created_at
+      createdAt
       id
     }
   }

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { LoadingFullScreen } from '../layouts/LoadingFullScreen';
 import { routes } from '../routGetters';
 
-export const WithUserLogged = ({ children }: PropsWithChildren<{}>) => {
+export const WithUserLogged = ({ children }: PropsWithChildren) => {
   const { authStatus } = useAuthContext();
   const { user, loading: userLoading } = useCurrentUser();
   const router = useRouter();

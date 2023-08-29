@@ -35,7 +35,7 @@ const links = [
   },
 ];
 
-export const NavBar = ({ children }: PropsWithChildren<{}>) => {
+export const NavBar = ({ children }: PropsWithChildren) => {
   const { userRole } = useAuthContext();
 
   const finalRoles =

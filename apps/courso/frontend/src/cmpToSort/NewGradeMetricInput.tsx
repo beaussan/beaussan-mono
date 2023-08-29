@@ -5,9 +5,9 @@ import {
   yupGradeMetricDefSchema,
 } from './GradeMetricDefinitionInput';
 import {
-  Practice_Yield_Expected_Output_Insert_Input,
-  Practice_Yield_Expected_Output_Types_Enum,
-  Practice_Yield_Grade_Metric_Insert_Input,
+  PracticeYieldExpectedOutputInsertInput,
+  PracticeYieldExpectedOutputTypesEnum,
+  PracticeYieldGradeMetricInsertInput,
   useGetYieldsForNewGradeTpQuery,
   useInsertYieldGradeMetricNewDataMutation,
 } from '../generated/graphql';
@@ -22,20 +22,20 @@ import { useFormikMutationSubmitWithNavigate } from '../hooks/useFormikMutationS
 
 gql`
   query getYieldsForNewGradeTp($tpId: uuid!) {
-    practice_by_pk(id: $tpId) {
+    practiceByPk(id: $tpId) {
       id
       title
-      practice_yields(order_by: { method: asc }) {
+      practiceYields(orderBy: { method: ASC }) {
         ...GradeMetricInputYield
       }
     }
   }
 
   mutation insertYieldGradeMetricNewData(
-    $data: [practice_yield_expected_output_insert_input!]!
+    $data: [PracticeYieldExpectedOutputInsertInput!]!
   ) {
-    insert_practice_yield_expected_output(objects: $data) {
-      affected_rows
+    insertPracticeYieldExpectedOutput(objects: $data) {
+      affectedRows
       returning {
         id
       }
@@ -69,7 +69,7 @@ interface NewGradeMetricInputProps {
 interface NewGradeMetricInputForm {
   [key: string]: [
     {
-      method?: Practice_Yield_Expected_Output_Types_Enum;
+      method?: PracticeYieldExpectedOutputTypesEnum;
       lang?: string;
       gitPath?: string;
       expected?: string;
@@ -87,10 +87,10 @@ interface NewGradeMetricInputForm {
 const mapToSave = (
   data: NewGradeMetricInputForm,
   practiceId: string
-): Array<Practice_Yield_Expected_Output_Insert_Input> => {
+): Array<PracticeYieldExpectedOutputInsertInput> => {
   return Object.entries(data)
     .map(
-      ([key, val]): Array<Practice_Yield_Expected_Output_Insert_Input> =>
+      ([key, val]): Array<PracticeYieldExpectedOutputInsertInput> =>
         val.map((data) => ({
           practice_yield_id: key,
           method: data.method,
@@ -99,7 +99,7 @@ const mapToSave = (
           expected: data.expected,
           practice_yield_grade_metrics: {
             data: data.metrics.map(
-              (metricData): Practice_Yield_Grade_Metric_Insert_Input => ({
+              (metricData): PracticeYieldGradeMetricInsertInput => ({
                 name: metricData.name,
                 feedbacks: metricData.feedbacks,
                 points: metricData.points,
@@ -139,13 +139,13 @@ export const NewGradeMetricInput: React.FC<NewGradeMetricInputProps> = ({
   if (
     error ||
     !data ||
-    !data.practice_by_pk ||
-    !data.practice_by_pk.practice_yields
+    !data.practiceByPk ||
+    !data.practiceByPk.practiceYields
   ) {
     onTpNotFound();
     return <div>Error</div>;
   }
-  const yields = data.practice_by_pk.practice_yields;
+  const yields = data.practiceByPk.practiceYields;
 
   const yupSchema = yup
     .object()

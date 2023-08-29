@@ -33,7 +33,7 @@ const ExampleCustomInput: React.FC<{
             {
               'group-hover:border-red-500  border-red-500': error,
               'group-hover:border-blue-500 border-gray-300': !error,
-            },
+            }
           )}
           onClick={onClick}
           type="button"
@@ -122,13 +122,9 @@ export interface DateTimeInputRangeFieldProps {
   minDate?: Date;
 }
 
-export const DateTimeInputRangeField: React.FC<DateTimeInputRangeFieldProps> = ({
-  nameStart,
-  labelStart,
-  nameEnd,
-  labelEnd,
-  minDate,
-}) => {
+export const DateTimeInputRangeField: React.FC<
+  DateTimeInputRangeFieldProps
+> = ({ nameStart, labelStart, nameEnd, labelEnd, minDate }) => {
   const { setFieldValue, getFieldProps } = useFormikContext<any>();
   const { value: startDate } = getFieldProps(nameStart);
   const { value: endDate } = getFieldProps(nameEnd);

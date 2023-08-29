@@ -19,13 +19,13 @@ import { useRouter } from 'next/router';
 import { routes } from '../../../routGetters';
 
 gql`
-  fragment PracticeListItem on practice {
+  fragment PracticeListItem on Practice {
     id
     title
-    practice_to_courses {
+    practiceToCourses {
       id
-      close_date
-      open_date
+      closeDate
+      openDate
       course {
         name
         years
@@ -34,7 +34,7 @@ gql`
   }
 
   query ListPractice {
-    practice(order_by: { created_at: desc }) {
+    practice(orderBy: { createdAt: DESC }) {
       ...PracticeListItem
     }
   }
@@ -65,14 +65,14 @@ const TpCard: React.FC<{ data: PracticeListItemFragment }> = ({ data }) => {
       onClick={() => router.push(routes.practiceId({ practiceId: data.id }))}
     >
       <div className="font-bold text-lg">{data.title}</div>
-      {data.practice_to_courses && (
+      {data.practiceToCourses && (
         <div className="pt-4">
           <Table>
             <Table.TableHead
               items={['Course', 'Open date', 'Close date', 'State']}
             />
-            <Table.TBody items={data.practice_to_courses}>
-              {({ open_date, close_date, course }) => {
+            <Table.TBody items={data.practiceToCourses}>
+              {({ openDate: open_date, closeDate: close_date, course }) => {
                 const openDate = new Date(open_date);
                 const closeDate = new Date(close_date);
 

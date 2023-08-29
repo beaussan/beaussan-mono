@@ -1,5 +1,5 @@
 import {
-  Practice_Yield_Expected_Output_Types_Enum,
+  PracticeYieldExpectedOutputTypesEnum,
   useGetFileDataFromServerQuery,
   useGetLogDataFromServerQuery,
 } from '../../../generated/graphql';
@@ -23,23 +23,23 @@ import { enGB } from 'date-fns/locale';
 
 gql`
   mutation insertPracticeToStudentGradeMetric(
-    $objects: [practice_to_student_grade_metric_insert_input!]!
+    $objects: [PracticeToStudentGradeMetricInsertInput!]!
   ) {
-    insert_practice_to_student_grade_metric(
+    insertPracticeToStudentGradeMetric(
       objects: $objects
       onConflict: {
         constraint: practice_to_student_grade_metric_practice_yield_grade_metric_id
-        updateColumns: [percent_grade, feedback]
+        updateColumns: [percentGrade, feedback]
       }
     ) {
-      affected_rows
+      affectedRows
       returning {
-        created_at
+        createdAt
         feedback
-        percent_grade
+        percentGrade
         id
-        practice_to_student_yield_id
-        practice_yield_grade_metric_id
+        practiceToStudentYieldId
+        practiceYieldGradeMetricId
       }
     }
   }
@@ -122,6 +122,9 @@ const withGitFileData = (Component: DisplayGitItem): DisplayItem => {
     if (data.getGitFileData.encoding !== 'base64') {
       return <div>Unknown encoding : {data.getGitFileData.encoding}</div>;
     }
+    if (!data.getGitFileData.content) {
+      return <div>No data</div>;
+    }
     const value = atob(data.getGitFileData.content);
     return <Component {...props} gitFileData={value} />;
   }
@@ -156,7 +159,7 @@ const GitLogFiles: DisplayItem = (props) => {
       <Button onClick={() => retry()}>Retry</Button>
       <ol className="overflow-scroll h-full space-y-4">
         {data.getGitLogData.map((item) => (
-          <li className="bg-white p-2 rounded-lg">
+          <li key={item.sha} className="bg-white p-2 rounded-lg">
             <div className="flex items-center mb-2">
               <img
                 src={item.author_profile_picture ?? ''}
@@ -201,7 +204,7 @@ const CompareGitCodeFile: DisplayGitItem = ({
 }) => (
   <DiffViewerLazy
     className="h-1/2"
-    lang={expected.expectedOutput.code_lang as any}
+    lang={expected.expectedOutput.codeLang as any}
     expected={expected.expectedOutput.expected ?? ''}
     got={gitFileData}
   />
@@ -210,7 +213,7 @@ const CompareGitCodeFile: DisplayGitItem = ({
 const CompareCodeFile: DisplayItem = ({ value, expected }) => (
   <DiffViewerLazy
     className="h-1/2"
-    lang={expected.expectedOutput.code_lang as any}
+    lang={expected.expectedOutput.codeLang as any}
     expected={expected.expectedOutput.expected ?? ''}
     got={value?.value}
   />
@@ -245,10 +248,7 @@ const UrlCompare: DisplayItem = ({ value, expected }) => (
   </div>
 );
 
-const mapToShow: Record<
-  Practice_Yield_Expected_Output_Types_Enum,
-  DisplayItem
-> = {
+const mapToShow: Record<PracticeYieldExpectedOutputTypesEnum, DisplayItem> = {
   COMPARE_CODE_FILE: CompareCodeFile,
   COMPARE_GIT_FILE: withGitFileData(CompareGitCodeFile),
   SHOW_GIT_LOG: GitLogFiles,
@@ -305,6 +305,10 @@ export const GradeItem: React.FC<{
     isFirstBlock,
     isLastBlock,
   });
+
+  if (!data.expectedOutput.method) {
+    return <div>Something went wrong.</div>;
+  }
 
   const ToCompare = mapToShow[data.expectedOutput.method];
   if (!item) {

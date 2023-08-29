@@ -31,20 +31,20 @@ import { useRouter } from 'next/router';
 
 gql`
   query getPracticeToStudentForGrading($courseId: uuid!, $practiceId: uuid!) {
-    practice_to_course(
+    practiceToCourse(
       where: {
-        course_id: { _eq: $courseId }
-        _and: { practice_id: { _eq: $practiceId } }
+        courseId: { _eq: $courseId }
+        _and: { practiceId: { _eq: $practiceId } }
       }
     ) {
-      practice_to_students {
+      practiceToStudents {
         grade
         student {
           full_name
         }
       }
       course {
-        student_to_courses_aggregate {
+        studentToCoursesAggregate {
           aggregate {
             count
           }
@@ -52,26 +52,26 @@ gql`
       }
     }
 
-    practice_yield(
+    practiceYield(
       where: {
         practice: {
-          practice_to_courses: {
-            course_id: { _eq: $courseId }
-            _and: { practice_id: { _eq: $practiceId } }
+          practiceToCourses: {
+            courseId: { _eq: $courseId }
+            _and: { practiceId: { _eq: $practiceId } }
           }
         }
       }
     ) {
       id
       name
-      practice_to_student_yields(
+      practiceToStudentYields(
         where: {
           submited: { _eq: true }
           _and: {
-            practice_to_student: {
-              practice_to_course: {
-                course_id: { _eq: $courseId }
-                _and: { practice_id: { _eq: $practiceId } }
+            practiceToStudent: {
+              practiceToCourse: {
+                courseId: { _eq: $courseId }
+                _and: { practiceId: { _eq: $practiceId } }
               }
             }
           }
@@ -79,26 +79,26 @@ gql`
       ) {
         ...PracticeToStudentYieldForGrading
       }
-      practice_yield_expected_outputs {
+      practiceYieldExpectedOutputs {
         id
-        code_lang
+        codeLang
         expected
-        git_path
+        gitPath
         method
-        practice_yield_id
-        practice_yield_grade_metrics(order_by: { created_at: desc }) {
+        practiceYieldId
+        practiceYieldGradeMetrics(orderBy: { createdAt: DESC }) {
           id
           name
           points
           feedbacks
-          created_at
-          practice_to_student_grade_metrics_aggregate(
+          createdAt
+          practiceToStudentGradeMetricsAggregate(
             where: {
-              practice_to_student_yield: {
-                practice_to_student: {
-                  practice_to_course: {
-                    course_id: { _eq: $courseId }
-                    _and: { practice_id: { _eq: $practiceId } }
+              practiceToStudentYield: {
+                practiceToStudent: {
+                  practiceToCourse: {
+                    courseId: { _eq: $courseId }
+                    _and: { practiceId: { _eq: $practiceId } }
                   }
                 }
               }
@@ -108,8 +108,8 @@ gql`
               count
             }
             nodes {
-              practice_to_student_yield_id
-              practice_yield_grade_metric_id
+              practiceYieldGradeMetricId
+              practiceToStudentYieldId
             }
           }
         }
@@ -117,22 +117,22 @@ gql`
     }
   }
 
-  fragment PracticeToStudentYieldForGrading on practice_to_student_yield {
+  fragment PracticeToStudentYieldForGrading on PracticeToStudentYield {
     practiceToStudentYieldId: id
-    gitea_org_and_repo
+    giteaOrgAndRepo
     value
-    practice_yield_id
-    practice_to_student_grade_metrics {
+    practiceYieldId
+    practiceToStudentGradeMetrics {
       ...PracticeToStudentGradeMetricForGrading
     }
   }
-  fragment PracticeToStudentGradeMetricForGrading on practice_to_student_grade_metric {
+  fragment PracticeToStudentGradeMetricForGrading on PracticeToStudentGradeMetric {
     id
     feedback
-    created_at
-    percent_grade
-    practice_yield_grade_metric_id
-    updated_at
+    createdAt
+    percentGrade
+    practiceYieldGradeMetricId
+    updatedAt
   }
 
   mutation triggerRefreshGrades($practice_id: uuid!, $course_id: uuid!) {
@@ -167,7 +167,7 @@ export const Grading = () => {
     if (!data) {
       return [];
     }
-    return mapIntoFrontInterpretation(data.practice_yield);
+    return mapIntoFrontInterpretation(data.practiceYield);
   }, [data]);
   const { item, goNext, isLast, isFirst, goPrev } =
     useArrayNavigator(mappedValuesForFront);
@@ -176,7 +176,7 @@ export const Grading = () => {
     if (!data) {
       return [];
     }
-    const practiceToStudents = data.practice_to_course[0].practice_to_students;
+    const practiceToStudents = data.practiceToCourse[0].practiceToStudents;
     const pre = practiceToStudents
       .map((item) => ({
         grade: Math.round(item.grade),
@@ -225,15 +225,15 @@ export const Grading = () => {
       return false;
     }
 
-    return data.practice_yield
+    return data.practiceYield
       .map((itm) => {
-        const studentYieldNumber = itm.practice_to_student_yields.length;
-        return itm.practice_yield_expected_outputs
+        const studentYieldNumber = itm.practiceToStudentYields.length;
+        return itm.practiceYieldExpectedOutputs
           .map((itm) =>
-            itm.practice_yield_grade_metrics
+            itm.practiceYieldGradeMetrics
               .map(
                 (dati) =>
-                  dati.practice_to_student_grade_metrics_aggregate.aggregate
+                  dati.practiceToStudentGradeMetricsAggregate.aggregate
                     ?.count === studentYieldNumber
               )
               .reduce((prev, curr) => prev && curr, true)
@@ -303,43 +303,38 @@ export const Grading = () => {
         </FullScreen.Body>
       </FullScreen>
       <div className="grid grid-cols-2 gap-4">
-        {data?.practice_yield.map((itm) => {
-          const studentYieldNumber = itm.practice_to_student_yields.length;
+        {data?.practiceYield.map((itm) => {
+          const studentYieldNumber = itm.practiceToStudentYields.length;
           return (
             <CardBox key={itm.name}>
               <div className="font-semibold text-xl pb-2">{itm.name}</div>
               <div className="space-y-2">
-                {itm.practice_yield_expected_outputs.map((yieldMetric) => {
+                {itm.practiceYieldExpectedOutputs.map((yieldMetric) => {
                   // const ammountStudentOutpout = yieldMetric;
                   return (
                     <>
-                      {yieldMetric.practice_yield_grade_metrics.map(
-                        (metric) => {
-                          const yieldGradeMetricAmount =
-                            metric.practice_to_student_grade_metrics_aggregate
-                              .aggregate?.count ?? 0;
-                          const isFilled =
-                            studentYieldNumber === yieldGradeMetricAmount;
-                          return (
-                            <div className="flex" key={metric.name}>
-                              <div className="w-1/2">{metric.name}</div>
-                              <div className="w-1/2 flex">
-                                <div className="w-1/2">
-                                  {yieldGradeMetricAmount} /{' '}
-                                  {studentYieldNumber}
-                                </div>
-                                <div className="w-1/2">
-                                  <Chip
-                                    variant={isFilled ? 'success' : 'error'}
-                                  >
-                                    {isFilled ? 'Done' : 'Todo'}
-                                  </Chip>
-                                </div>
+                      {yieldMetric.practiceYieldGradeMetrics.map((metric) => {
+                        const yieldGradeMetricAmount =
+                          metric.practiceToStudentGradeMetricsAggregate
+                            .aggregate?.count ?? 0;
+                        const isFilled =
+                          studentYieldNumber === yieldGradeMetricAmount;
+                        return (
+                          <div className="flex" key={metric.name}>
+                            <div className="w-1/2">{metric.name}</div>
+                            <div className="w-1/2 flex">
+                              <div className="w-1/2">
+                                {yieldGradeMetricAmount} / {studentYieldNumber}
+                              </div>
+                              <div className="w-1/2">
+                                <Chip variant={isFilled ? 'success' : 'error'}>
+                                  {isFilled ? 'Done' : 'Todo'}
+                                </Chip>
                               </div>
                             </div>
-                          );
-                        }
-                      )}
+                          </div>
+                        );
+                      })}
                     </>
                   );
                 })}

@@ -29,4 +29,4 @@ select_permissions:
                 course:
                   can_student_see_grade:
                     _eq: true
-    comment: ""
+    comment: ''

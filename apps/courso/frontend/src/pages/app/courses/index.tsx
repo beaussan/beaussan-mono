@@ -12,11 +12,11 @@ import { useRouter } from 'next/router';
 import { routes } from '../../../routGetters';
 
 gql`
-  fragment CourseCard on course {
+  fragment CourseCard on Course {
     id
     name
     years
-    student_to_courses_aggregate {
+    studentToCoursesAggregate {
       aggregate {
         count
       }
@@ -41,7 +41,7 @@ const PromoCard: React.FC<{ data: CourseCardFragment }> = ({ data }) => {
         <span>{data.years}</span>
       </div>
       <div className="text-gray-600">
-        {data.student_to_courses_aggregate.aggregate?.count} students
+        {data.studentToCoursesAggregate.aggregate?.count} students
       </div>
     </CardBox>
   );

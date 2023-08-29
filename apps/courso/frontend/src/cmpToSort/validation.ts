@@ -1,15 +1,15 @@
 import {
-  Roles_Enum,
-  Student_Constraint,
-  Student_Insert_Input,
-  Student_To_Course_Insert_Input,
-  Student_Update_Column,
+  RolesEnum,
+  StudentConstraint,
+  StudentInsertInput,
+  StudentToCourseInsertInput,
+  StudentUpdateColumn,
 } from '../generated/graphql';
 import { parse } from 'papaparse';
 import * as yup from 'yup';
 
 type PartialStudent = Required<
-  Pick<Student_Insert_Input, 'first_name' | 'last_name' | 'email' | 'user'>
+  Pick<StudentInsertInput, 'firstName' | 'lastName' | 'email' | 'user'>
 >;
 
 export const parseCsv = (data: string): PartialStudent[] => {
@@ -17,20 +17,20 @@ export const parseCsv = (data: string): PartialStudent[] => {
     .data.filter((value) => value.length >= 3)
     .map(
       ([first_name, last_name, email]): PartialStudent => ({
-        first_name,
-        last_name,
+        firstName: first_name,
+        lastName: last_name,
         email,
         user: {
           data: {
             email,
-            allowed_roles: {
+            allowedRoles: {
               data: [
                 {
-                  role: Roles_Enum.Student,
+                  role: RolesEnum.Student,
                 },
               ],
             },
-            default_role: Roles_Enum.Student,
+            defaultRole: RolesEnum.Student,
           },
         },
       })
@@ -39,15 +39,15 @@ export const parseCsv = (data: string): PartialStudent[] => {
 
 export const mapToSave = (
   students: PartialStudent[]
-): Student_To_Course_Insert_Input[] =>
+): StudentToCourseInsertInput[] =>
   students.map((data) => ({
     student: {
       data,
       onConflict: {
-        constraint: Student_Constraint.StudentEmailKey,
+        constraint: StudentConstraint.StudentEmailKey,
         updateColumns: [
-          Student_Update_Column.FirstName,
-          Student_Update_Column.LastName,
+          StudentUpdateColumn.FirstName,
+          StudentUpdateColumn.LastName,
         ],
       },
     },

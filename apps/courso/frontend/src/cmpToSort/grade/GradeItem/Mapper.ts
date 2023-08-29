@@ -2,14 +2,14 @@
 
 import {
   GetPracticeToStudentForGradingQuery,
-  Practice_Yield_Expected_Output,
+  PracticeYieldExpectedOutput,
   PracticeToStudentYieldForGradingFragment,
 } from '../../../generated/graphql';
 import { isBefore } from 'date-fns';
 
 type expectedOutput = Pick<
-  Practice_Yield_Expected_Output,
-  'id' | 'code_lang' | 'expected' | 'git_path' | 'method'
+  PracticeYieldExpectedOutput,
+  'id' | 'codeLang' | 'expected' | 'gitPath' | 'method'
 >;
 export interface PracticeToStudentForGradingFrontEdit {
   yieldId: string;
@@ -26,17 +26,17 @@ export interface PracticeToStudentForGradingFrontEdit {
 }
 
 const mapIntoFrontInterpretationSingle = (
-  input: GetPracticeToStudentForGradingQuery['practice_yield'][0]
+  input: GetPracticeToStudentForGradingQuery['practiceYield'][0]
 ): Array<PracticeToStudentForGradingFrontEdit> => {
   const yieldId = input.id;
   const yieldName = input.name;
-  const studentYields = input.practice_to_student_yields;
-  return input.practice_yield_expected_outputs.map(
+  const studentYields = input.practiceToStudentYields;
+  return input.practiceYieldExpectedOutputs.map(
     (expected): PracticeToStudentForGradingFrontEdit => {
-      const gradeMetricsWithDate = expected.practice_yield_grade_metrics.map(
+      const gradeMetricsWithDate = expected.practiceYieldGradeMetrics.map(
         (data) => ({
           ...data,
-          created_at: new Date(data.created_at),
+          created_at: new Date(data.createdAt),
         })
       );
       const gradeMetrics = gradeMetricsWithDate.sort((a, b) =>
@@ -50,9 +50,9 @@ const mapIntoFrontInterpretationSingle = (
         gradeMetrics,
         expectedOutput: {
           id: expected.id,
-          code_lang: expected.code_lang,
+          codeLang: expected.codeLang,
           expected: expected.expected,
-          git_path: expected.expected,
+          gitPath: expected.expected,
           method: expected.method,
         },
       };
@@ -61,7 +61,7 @@ const mapIntoFrontInterpretationSingle = (
 };
 
 export const mapIntoFrontInterpretation = (
-  input: GetPracticeToStudentForGradingQuery['practice_yield']
+  input: GetPracticeToStudentForGradingQuery['practiceYield']
 ): Array<PracticeToStudentForGradingFrontEdit> => {
   return input
     .map(mapIntoFrontInterpretationSingle)

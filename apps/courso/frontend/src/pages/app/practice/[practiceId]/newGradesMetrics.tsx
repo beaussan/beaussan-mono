@@ -12,7 +12,7 @@ import { getLayoutRoleTeacher } from '../../../../layouts/WithRole';
 
 gql`
   query getPracticeForGradeMetric($id: uuid!) {
-    practice_by_pk(id: $id) {
+    practiceByPk(id: $id) {
       id
       title
     }
@@ -29,7 +29,7 @@ export const NewTpGradeMetrics = () => {
   if (fetching) {
     return <Loader />;
   }
-  if (!data?.practice_by_pk || error) {
+  if (!data?.practiceByPk || error) {
     router.push(routes.practice());
   }
 
@@ -37,7 +37,7 @@ export const NewTpGradeMetrics = () => {
     <>
       <PageHead className="mb-4">
         <div className="flex items-center">
-          <BackButton className="mr-2" /> {data?.practice_by_pk?.title ?? ''}
+          <BackButton className="mr-2" /> {data?.practiceByPk?.title ?? ''}
         </div>
       </PageHead>
       <NewGradeMetricInput

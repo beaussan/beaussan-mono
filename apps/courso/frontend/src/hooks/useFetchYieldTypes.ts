@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 
 gql`
   query listTpYieldTypes {
-    practice_yield_type {
+    practiceYieldType {
       name
     }
   }
@@ -12,9 +12,7 @@ gql`
 export const useFetchYieldTypes = () => {
   const [{ data: rawData, fetching, error }] = useListTpYieldTypesQuery();
 
-  const data = rawData
-    ? rawData.practice_yield_type.map(({ name }) => name)
-    : [];
+  const data = rawData ? rawData.practiceYieldType.map(({ name }) => name) : [];
 
   return { data, rawData, loading: fetching, error };
 };

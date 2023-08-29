@@ -325,7 +325,7 @@ export type AccountsUpdates = {
 /** columns and relationships of "allowed_roles" */
 export type AllowedRoles = {
   __typename?: 'AllowedRoles';
-  role: Scalars['String'];
+  role: RolesEnum;
   /** An object relationship */
   roleByRole: Roles;
   /** An object relationship */
@@ -377,7 +377,7 @@ export type AllowedRolesBoolExp = {
   _and?: InputMaybe<Array<AllowedRolesBoolExp>>;
   _not?: InputMaybe<AllowedRolesBoolExp>;
   _or?: InputMaybe<Array<AllowedRolesBoolExp>>;
-  role?: InputMaybe<StringComparisonExp>;
+  role?: InputMaybe<RolesEnumComparisonExp>;
   roleByRole?: InputMaybe<RolesBoolExp>;
   user?: InputMaybe<UserBoolExp>;
   userId?: InputMaybe<UuidComparisonExp>;
@@ -391,7 +391,7 @@ export enum AllowedRolesConstraint {
 
 /** input type for inserting data into table "allowed_roles" */
 export type AllowedRolesInsertInput = {
-  role?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<RolesEnum>;
   roleByRole?: InputMaybe<RolesObjRelInsertInput>;
   user?: InputMaybe<UserObjRelInsertInput>;
   userId?: InputMaybe<Scalars['uuid']>;
@@ -400,26 +400,22 @@ export type AllowedRolesInsertInput = {
 /** aggregate max on columns */
 export type AllowedRolesMaxFields = {
   __typename?: 'AllowedRolesMaxFields';
-  role?: Maybe<Scalars['String']>;
   userId?: Maybe<Scalars['uuid']>;
 };
 
 /** order by max() on columns of table "allowed_roles" */
 export type AllowedRolesMaxOrderBy = {
-  role?: InputMaybe<OrderBy>;
   userId?: InputMaybe<OrderBy>;
 };
 
 /** aggregate min on columns */
 export type AllowedRolesMinFields = {
   __typename?: 'AllowedRolesMinFields';
-  role?: Maybe<Scalars['String']>;
   userId?: Maybe<Scalars['uuid']>;
 };
 
 /** order by min() on columns of table "allowed_roles" */
 export type AllowedRolesMinOrderBy = {
-  role?: InputMaybe<OrderBy>;
   userId?: InputMaybe<OrderBy>;
 };
 
@@ -449,7 +445,7 @@ export type AllowedRolesOrderBy = {
 
 /** primary key columns input for table: allowed_roles */
 export type AllowedRolesPkColumnsInput = {
-  role: Scalars['String'];
+  role: RolesEnum;
   userId: Scalars['uuid'];
 };
 
@@ -463,7 +459,7 @@ export enum AllowedRolesSelectColumn {
 
 /** input type for updating data in table "allowed_roles" */
 export type AllowedRolesSetInput = {
-  role?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<RolesEnum>;
   userId?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -477,7 +473,7 @@ export type AllowedRolesStreamCursorInput = {
 
 /** Initial value of the column from where the streaming should start */
 export type AllowedRolesStreamCursorValueInput = {
-  role?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<RolesEnum>;
   userId?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -1417,6 +1413,10 @@ export type PracticeToStudent = {
   practiceToStudentYieldsAggregate: PracticeToStudentYieldAggregate;
   /** An object relationship */
   student: Student;
+  /** An object relationship */
+  studentFeedback?: Maybe<PracticeToStudentFeedback>;
+  /** An object relationship */
+  studentGrade?: Maybe<PracticeToStudentGrade>;
   studentId: Scalars['uuid'];
   submited: Scalars['Boolean'];
   updatedAt: Scalars['timestamptz'];
@@ -1548,6 +1548,8 @@ export type PracticeToStudentBoolExp = {
   practiceToStudentYields?: InputMaybe<PracticeToStudentYieldBoolExp>;
   practiceToStudentYieldsAggregate?: InputMaybe<PracticeToStudentYieldAggregateBoolExp>;
   student?: InputMaybe<StudentBoolExp>;
+  studentFeedback?: InputMaybe<PracticeToStudentFeedbackBoolExp>;
+  studentGrade?: InputMaybe<PracticeToStudentGradeBoolExp>;
   studentId?: InputMaybe<UuidComparisonExp>;
   submited?: InputMaybe<BooleanComparisonExp>;
   updatedAt?: InputMaybe<TimestamptzComparisonExp>;
@@ -1670,6 +1672,11 @@ export type PracticeToStudentFeedbackMutationResponse = {
   affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<PracticeToStudentFeedback>;
+};
+
+/** input type for inserting object relation for remote table "practice_to_student_feedback" */
+export type PracticeToStudentFeedbackObjRelInsertInput = {
+  data: PracticeToStudentFeedbackInsertInput;
 };
 
 /** Ordering options when selecting data from "practice_to_student_feedback". */
@@ -2238,6 +2245,11 @@ export type PracticeToStudentGradeMutationResponse = {
   returning: Array<PracticeToStudentGrade>;
 };
 
+/** input type for inserting object relation for remote table "practice_to_student_grade" */
+export type PracticeToStudentGradeObjRelInsertInput = {
+  data: PracticeToStudentGradeInsertInput;
+};
+
 /** Ordering options when selecting data from "practice_to_student_grade". */
 export type PracticeToStudentGradeOrderBy = {
   grade?: InputMaybe<OrderBy>;
@@ -2361,6 +2373,8 @@ export type PracticeToStudentInsertInput = {
   practiceToCourse?: InputMaybe<PracticeToCourseObjRelInsertInput>;
   practiceToStudentYields?: InputMaybe<PracticeToStudentYieldArrRelInsertInput>;
   student?: InputMaybe<StudentObjRelInsertInput>;
+  studentFeedback?: InputMaybe<PracticeToStudentFeedbackObjRelInsertInput>;
+  studentGrade?: InputMaybe<PracticeToStudentGradeObjRelInsertInput>;
   studentId?: InputMaybe<Scalars['uuid']>;
   submited?: InputMaybe<Scalars['Boolean']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
@@ -2443,6 +2457,8 @@ export type PracticeToStudentOrderBy = {
   practiceToCourse?: InputMaybe<PracticeToCourseOrderBy>;
   practiceToStudentYieldsAggregate?: InputMaybe<PracticeToStudentYieldAggregateOrderBy>;
   student?: InputMaybe<StudentOrderBy>;
+  studentFeedback?: InputMaybe<PracticeToStudentFeedbackOrderBy>;
+  studentGrade?: InputMaybe<PracticeToStudentGradeOrderBy>;
   studentId?: InputMaybe<OrderBy>;
   submited?: InputMaybe<OrderBy>;
   updatedAt?: InputMaybe<OrderBy>;
@@ -3033,7 +3049,7 @@ export type PracticeYield = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   meta?: Maybe<Scalars['jsonb']>;
-  method: Scalars['String'];
+  method: PracticeYieldTypeEnum;
   name: Scalars['String'];
   /** An object relationship */
   practice: Practice;
@@ -3145,7 +3161,7 @@ export type PracticeYieldBoolExp = {
   description?: InputMaybe<StringComparisonExp>;
   id?: InputMaybe<UuidComparisonExp>;
   meta?: InputMaybe<JsonbComparisonExp>;
-  method?: InputMaybe<StringComparisonExp>;
+  method?: InputMaybe<PracticeYieldTypeEnumComparisonExp>;
   name?: InputMaybe<StringComparisonExp>;
   practice?: InputMaybe<PracticeBoolExp>;
   practiceId?: InputMaybe<UuidComparisonExp>;
@@ -4066,7 +4082,7 @@ export type PracticeYieldInsertInput = {
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   meta?: InputMaybe<Scalars['jsonb']>;
-  method?: InputMaybe<Scalars['String']>;
+  method?: InputMaybe<PracticeYieldTypeEnum>;
   name?: InputMaybe<Scalars['String']>;
   practice?: InputMaybe<PracticeObjRelInsertInput>;
   practiceId?: InputMaybe<Scalars['uuid']>;
@@ -4082,7 +4098,6 @@ export type PracticeYieldMaxFields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
-  method?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   practiceId?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -4093,7 +4108,6 @@ export type PracticeYieldMaxOrderBy = {
   createdAt?: InputMaybe<OrderBy>;
   description?: InputMaybe<OrderBy>;
   id?: InputMaybe<OrderBy>;
-  method?: InputMaybe<OrderBy>;
   name?: InputMaybe<OrderBy>;
   practiceId?: InputMaybe<OrderBy>;
   updatedAt?: InputMaybe<OrderBy>;
@@ -4105,7 +4119,6 @@ export type PracticeYieldMinFields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
-  method?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   practiceId?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -4116,7 +4129,6 @@ export type PracticeYieldMinOrderBy = {
   createdAt?: InputMaybe<OrderBy>;
   description?: InputMaybe<OrderBy>;
   id?: InputMaybe<OrderBy>;
-  method?: InputMaybe<OrderBy>;
   name?: InputMaybe<OrderBy>;
   practiceId?: InputMaybe<OrderBy>;
   updatedAt?: InputMaybe<OrderBy>;
@@ -4197,7 +4209,7 @@ export type PracticeYieldSetInput = {
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   meta?: InputMaybe<Scalars['jsonb']>;
-  method?: InputMaybe<Scalars['String']>;
+  method?: InputMaybe<PracticeYieldTypeEnum>;
   name?: InputMaybe<Scalars['String']>;
   practiceId?: InputMaybe<Scalars['uuid']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
@@ -4217,7 +4229,7 @@ export type PracticeYieldStreamCursorValueInput = {
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   meta?: InputMaybe<Scalars['jsonb']>;
-  method?: InputMaybe<Scalars['String']>;
+  method?: InputMaybe<PracticeYieldTypeEnum>;
   name?: InputMaybe<Scalars['String']>;
   practiceId?: InputMaybe<Scalars['uuid']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
@@ -4287,6 +4299,22 @@ export enum PracticeYieldTypeConstraint {
   /** unique or primary key constraint on columns "name" */
   PracticeYieldTypePkey = 'practice_yield_type_pkey',
 }
+
+export enum PracticeYieldTypeEnum {
+  Blob = 'BLOB',
+  Code = 'CODE',
+  GitRepo = 'GIT_REPO',
+  Url = 'URL',
+}
+
+/** Boolean expression to compare columns of type "PracticeYieldTypeEnum". All fields are combined with logical 'AND'. */
+export type PracticeYieldTypeEnumComparisonExp = {
+  _eq?: InputMaybe<PracticeYieldTypeEnum>;
+  _in?: InputMaybe<Array<PracticeYieldTypeEnum>>;
+  _isNull?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<PracticeYieldTypeEnum>;
+  _nin?: InputMaybe<Array<PracticeYieldTypeEnum>>;
+};
 
 /** input type for inserting data into table "practice_yield_type" */
 export type PracticeYieldTypeInsertInput = {
@@ -4509,6 +4537,20 @@ export enum RolesConstraint {
   /** unique or primary key constraint on columns "value" */
   RolesPkey = 'roles_pkey',
 }
+
+export enum RolesEnum {
+  Student = 'STUDENT',
+  Teacher = 'TEACHER',
+}
+
+/** Boolean expression to compare columns of type "RolesEnum". All fields are combined with logical 'AND'. */
+export type RolesEnumComparisonExp = {
+  _eq?: InputMaybe<RolesEnum>;
+  _in?: InputMaybe<Array<RolesEnum>>;
+  _isNull?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<RolesEnum>;
+  _nin?: InputMaybe<Array<RolesEnum>>;
+};
 
 /** input type for inserting data into table "roles" */
 export type RolesInsertInput = {
@@ -5163,7 +5205,7 @@ export type User = {
   /** An aggregate relationship */
   allowedRolesAggregate: AllowedRolesAggregate;
   createdAt: Scalars['timestamptz'];
-  defaultRole: Scalars['String'];
+  defaultRole: RolesEnum;
   email: Scalars['String'];
   emailVerified?: Maybe<Scalars['timestamptz']>;
   id: Scalars['uuid'];
@@ -5261,7 +5303,7 @@ export type UserBoolExp = {
   allowedRoles?: InputMaybe<AllowedRolesBoolExp>;
   allowedRolesAggregate?: InputMaybe<AllowedRolesAggregateBoolExp>;
   createdAt?: InputMaybe<TimestamptzComparisonExp>;
-  defaultRole?: InputMaybe<StringComparisonExp>;
+  defaultRole?: InputMaybe<RolesEnumComparisonExp>;
   email?: InputMaybe<StringComparisonExp>;
   emailVerified?: InputMaybe<TimestamptzComparisonExp>;
   id?: InputMaybe<UuidComparisonExp>;
@@ -5285,7 +5327,7 @@ export type UserInsertInput = {
   accounts?: InputMaybe<AccountsArrRelInsertInput>;
   allowedRoles?: InputMaybe<AllowedRolesArrRelInsertInput>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
-  defaultRole?: InputMaybe<Scalars['String']>;
+  defaultRole?: InputMaybe<RolesEnum>;
   email?: InputMaybe<Scalars['String']>;
   emailVerified?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -5300,7 +5342,6 @@ export type UserInsertInput = {
 export type UserMaxFields = {
   __typename?: 'UserMaxFields';
   createdAt?: Maybe<Scalars['timestamptz']>;
-  defaultRole?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
@@ -5312,7 +5353,6 @@ export type UserMaxFields = {
 /** order by max() on columns of table "user" */
 export type UserMaxOrderBy = {
   createdAt?: InputMaybe<OrderBy>;
-  defaultRole?: InputMaybe<OrderBy>;
   email?: InputMaybe<OrderBy>;
   emailVerified?: InputMaybe<OrderBy>;
   id?: InputMaybe<OrderBy>;
@@ -5325,7 +5365,6 @@ export type UserMaxOrderBy = {
 export type UserMinFields = {
   __typename?: 'UserMinFields';
   createdAt?: Maybe<Scalars['timestamptz']>;
-  defaultRole?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
@@ -5337,7 +5376,6 @@ export type UserMinFields = {
 /** order by min() on columns of table "user" */
 export type UserMinOrderBy = {
   createdAt?: InputMaybe<OrderBy>;
-  defaultRole?: InputMaybe<OrderBy>;
   email?: InputMaybe<OrderBy>;
   emailVerified?: InputMaybe<OrderBy>;
   id?: InputMaybe<OrderBy>;
@@ -5413,7 +5451,7 @@ export enum UserSelectColumn {
 /** input type for updating data in table "user" */
 export type UserSetInput = {
   createdAt?: InputMaybe<Scalars['timestamptz']>;
-  defaultRole?: InputMaybe<Scalars['String']>;
+  defaultRole?: InputMaybe<RolesEnum>;
   email?: InputMaybe<Scalars['String']>;
   emailVerified?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -5433,7 +5471,7 @@ export type UserStreamCursorInput = {
 /** Initial value of the column from where the streaming should start */
 export type UserStreamCursorValueInput = {
   createdAt?: InputMaybe<Scalars['timestamptz']>;
-  defaultRole?: InputMaybe<Scalars['String']>;
+  defaultRole?: InputMaybe<RolesEnum>;
   email?: InputMaybe<Scalars['String']>;
   emailVerified?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -6024,7 +6062,7 @@ export type Mutation_RootDeleteAllowedRolesArgs = {
 
 /** mutation root */
 export type Mutation_RootDeleteAllowedRolesByPkArgs = {
-  role: Scalars['String'];
+  role: RolesEnum;
   userId: Scalars['uuid'];
 };
 
@@ -7150,7 +7188,7 @@ export type Query_RootAllowedRolesAggregateArgs = {
 };
 
 export type Query_RootAllowedRolesByPkArgs = {
-  role: Scalars['String'];
+  role: RolesEnum;
   userId: Scalars['uuid'];
 };
 
@@ -7727,7 +7765,7 @@ export type Subscription_RootAllowedRolesAggregateArgs = {
 };
 
 export type Subscription_RootAllowedRolesByPkArgs = {
-  role: Scalars['String'];
+  role: RolesEnum;
   userId: Scalars['uuid'];
 };
 
@@ -8595,7 +8633,7 @@ export type OnStudentYieldCreatedDataQuery = {
       __typename?: 'PracticeYield';
       id: any;
       name: string;
-      method: string;
+      method: PracticeYieldTypeEnum;
     };
   } | null;
 };

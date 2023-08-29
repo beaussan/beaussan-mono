@@ -8,16 +8,16 @@ import { getNavLayout } from '../../../layouts/NavBar';
 
 gql`
   query fetchDataForStudentDashboard {
-    practice_to_student {
+    practiceToStudent {
       submited
-      student_grade {
+      studentGrade {
         grade
-        grade_detail
+        gradeDetail
       }
-      student_feedback {
+      studentFeedback {
         feedback
       }
-      practice_to_course {
+      practiceToCourse {
         is_open
         course {
           name

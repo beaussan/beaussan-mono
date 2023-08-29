@@ -18,6 +18,18 @@ module.exports = {
     'apps/courso/frontend/graphql.schema.graphql': {
       plugins: ['schema-ast'],
     },
+    'apps/courso/frontend/src/generated/graphql.ts': {
+      documents: [
+        'apps/courso/frontend/src/**/*.tsx',
+        'apps/courso/frontend/src/**/*.ts',
+        'apps/courso/frontend/src/**/*.graphql',
+      ],
+      plugins: ['typescript', 'typescript-operations', 'typescript-urql'],
+      config: {
+        skipTypename: false,
+        withHooks: true,
+      },
+    },
     'apps/courso/frontend/lib/generated/graphql.ts': {
       documents: ['apps/courso/frontend/lib/**/*.graphql'],
       plugins: [

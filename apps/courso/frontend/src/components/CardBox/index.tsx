@@ -11,7 +11,7 @@ export const CardBox: React.FC<React.ComponentPropsWithoutRef<'div'>> = ({
     {
       'cursor-pointer hover:shadow-lg': !!rest.onClick,
     },
-    className,
+    className
   );
   return (
     <div className={classes} {...rest}>

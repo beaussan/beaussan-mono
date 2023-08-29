@@ -1,8 +1,6 @@
 import { useCallback, useState } from 'react';
 
-export function useArrayNavigator<T>(
-  data: Array<T> | undefined,
-): {
+export function useArrayNavigator<T>(data: Array<T> | undefined): {
   position: number;
   item: T | undefined;
   goNext: () => void;

@@ -4,8 +4,7 @@ const yieldTypes = {
   BLOB: 'Content as a string',
   GIT_REPO:
     'A git repo url that will be copied into another git. You will be able to read content of the git for the correction.',
-  CODE:
-    'An input form with syntax highlighting for code input, you can chose the lang.',
+  CODE: 'An input form with syntax highlighting for code input, you can chose the lang.',
   URL: 'A web url',
 };
 
@@ -19,7 +18,7 @@ export const YieldTypesDescription: React.FC = () => {
       </div>
       <ul className="list-disc pl-4">
         {data.map(([name, comment]) => (
-          <li>
+          <li key={name}>
             <span className="font-bold ">
               {name}
               {' : '}

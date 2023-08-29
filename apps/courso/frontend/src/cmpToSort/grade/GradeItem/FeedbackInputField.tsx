@@ -12,8 +12,8 @@ import { PlusIcon } from '@heroicons/react/outline';
 
 gql`
   mutation insertFeedbackForGradeMetric($id: uuid!, $feedback: jsonb!) {
-    update_practice_yield_grade_metric_by_pk(
-      pk_columns: { id: $id }
+    updatePracticeYieldGradeMetricByPk(
+      pkColumns: { id: $id }
       _append: { feedbacks: $feedback }
     ) {
       feedbacks

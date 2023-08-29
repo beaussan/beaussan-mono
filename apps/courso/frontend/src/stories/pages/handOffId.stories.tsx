@@ -6,7 +6,7 @@ import { HTTP_URL } from '../../services/urqlClient';
 import {
   HandOffByIdQuery,
   HandOffByIdQueryVariables,
-  Practice_Yield_Type_Enum,
+  PracticeYieldTypeEnum,
 } from '../../generated/graphql';
 import { add, formatRFC3339 } from 'date-fns';
 
@@ -35,22 +35,22 @@ FullExample.parameters = {
       (req, res, ctx) =>
         res(
           ctx.data({
-            practice_to_course_by_pk: {
+            practiceToCourseByPk: {
               id: 'a49bf50d-d336-4ba5-9a28-ef64192b953a',
               practice: {
                 id: 'd66592d8-5fe3-4cf9-a12f-1c8bc468a77a',
                 title: 'Practice title',
                 description: 'A description for the practice',
-                practice_yields: [
+                practiceYields: [
                   {
                     id: '1b6e04a2-f244-427a-bf46-5899932a70f4',
                     description: 'The url of the git repository',
                     name: 'Github repository',
-                    method: Practice_Yield_Type_Enum.GitRepo,
+                    method: PracticeYieldTypeEnum.GitRepo,
                   },
                   {
                     id: '424de02f-2e02-46ae-ae43-53656e6a4fc8',
-                    method: Practice_Yield_Type_Enum.Url,
+                    method: PracticeYieldTypeEnum.Url,
                     name: 'Circle CI link with all custom',
                     description: 'A description',
                     meta: {
@@ -59,12 +59,12 @@ FullExample.parameters = {
                   },
                   {
                     id: '34831c5c-971b-4cd5-8a1c-7439a4c95ea0',
-                    method: Practice_Yield_Type_Enum.Url,
+                    method: PracticeYieldTypeEnum.Url,
                     name: 'Circle CI link',
                   },
                   {
                     id: '07168a72-5e96-4038-b757-27804d154bb3',
-                    method: Practice_Yield_Type_Enum.Blob,
+                    method: PracticeYieldTypeEnum.Blob,
                     name: 'Blob full custom',
                     description: 'A description',
                     meta: {
@@ -73,12 +73,12 @@ FullExample.parameters = {
                   },
                   {
                     id: '2c5fd5c1-9cb3-4254-99d0-3008a1116487',
-                    method: Practice_Yield_Type_Enum.Blob,
+                    method: PracticeYieldTypeEnum.Blob,
                     name: 'Blob simple',
                   },
                   {
                     id: '5af56446-5c24-48dd-a39f-e23250d69b98',
-                    method: Practice_Yield_Type_Enum.Code,
+                    method: PracticeYieldTypeEnum.Code,
                     name: 'Js file',
                     description: 'A random js file',
                     meta: {
@@ -87,10 +87,10 @@ FullExample.parameters = {
                   },
                 ],
               },
-              practice_to_students: [],
-              open_date: aDayAgo,
+              practiceToStudents: [],
+              openDate: aDayAgo,
               is_open: true,
-              close_date: aDayLater,
+              closeDate: aDayLater,
             },
           })
         )

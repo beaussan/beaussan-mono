@@ -22,45 +22,45 @@ import { routes } from '../../../../routGetters';
 
 const fragments = {
   PracticeToPromoDetails: gql`
-    fragment PracticeToPromoDetails on practice_to_course {
+    fragment PracticeToPromoDetails on PracticeToCourse {
       course {
         name
         years
         id
-        student_to_courses {
-          course_id
-          student_id
+        studentToCourses {
+          courseId
+          studentId
           student {
             id
             full_name
             email
-            practice_to_students(
-              where: { practice_to_course: { practice_id: { _eq: $id } } }
+            practiceToStudents(
+              where: { practiceToCourse: { practiceId: { _eq: $id } } }
             ) {
-              created_at
+              createdAt
               grade
               submited
             }
           }
         }
       }
-      close_date
-      created_at
-      gitea_org_name
+      closeDate
+      createdAt
+      giteaOrgName
       is_open
       id
-      open_date
-      updated_at
+      openDate
+      updatedAt
     }
   `,
 };
 
 gql`
   query getPracticeDetail($id: uuid!) {
-    practice_by_pk(id: $id) {
+    practiceByPk(id: $id) {
       id
       title
-      practice_yields_aggregate(order_by: { created_at: asc }) {
+      practiceYieldsAggregate(orderBy: { createdAt: ASC }) {
         aggregate {
           count
         }
@@ -69,13 +69,13 @@ gql`
           name
           method
           meta
-          practice_yield_expected_outputs_aggregate {
+          practiceYieldExpectedOutputsAggregate {
             aggregate {
               count
             }
             nodes {
               id
-              practice_yield_grade_metrics_aggregate {
+              practiceYieldGradeMetricsAggregate {
                 aggregate {
                   count
                   sum {
@@ -87,7 +87,7 @@ gql`
           }
         }
       }
-      practice_to_courses_aggregate {
+      practiceToCoursesAggregate {
         aggregate {
           count
         }
@@ -102,7 +102,7 @@ gql`
 
 gql`
   query getPromotionForTpAdd {
-    course(order_by: { updated_at: asc }) {
+    course(orderBy: { updatedAt: ASC }) {
       id
       name
       years
@@ -115,10 +115,10 @@ const TpIdHandouts: React.FC<{ data: PracticeToPromoDetailsFragment }> = ({
 }) => {
   const router = useRouter();
   const { practiceId } = router.query;
-  const amountLeft = data.course.student_to_courses.filter(
+  const amountLeft = data.course.studentToCourses.filter(
     (itm) =>
-      itm.student?.practice_to_students.length === 0 ||
-      itm.student?.practice_to_students?.[0].submited === false
+      itm.student?.practiceToStudents.length === 0 ||
+      itm.student?.practiceToStudents?.[0].submited === false
   ).length;
   return (
     <CardBox key={data.id}>
@@ -147,21 +147,21 @@ const TpIdHandouts: React.FC<{ data: PracticeToPromoDetailsFragment }> = ({
       </div>
       <div>
         <FormatDates
-          open={new Date(data.open_date)}
-          close={new Date(data.close_date)}
+          open={new Date(data.openDate)}
+          close={new Date(data.closeDate)}
         />
       </div>
       <div>
-        Got {data.course.student_to_courses.length - amountLeft}/
-        {data.course.student_to_courses.length} handouts
+        Got {data.course.studentToCourses.length - amountLeft}/
+        {data.course.studentToCourses.length} handouts
       </div>
       <Table>
         <Table.TableHead items={['Name', 'Email', 'Has handout']} />
-        <Table.TBody items={data.course.student_to_courses}>
+        <Table.TBody items={data.course.studentToCourses}>
           {({ student }) => {
             const hasStudentHandout =
-              student.practice_to_students.length > 0 &&
-              student.practice_to_students[0].submited;
+              student.practiceToStudents.length > 0 &&
+              student.practiceToStudents[0].submited;
             return (
               <>
                 <Table.Td isMainInfo>{student?.full_name}</Table.Td>
@@ -224,12 +224,12 @@ export const TpId = () => {
   if (fetching) {
     return <Loader />;
   }
-  if (!data?.practice_by_pk || error) {
+  if (!data?.practiceByPk || error) {
     router.push(routes.practice());
   }
 
   const practiceUsedId = (
-    data?.practice_by_pk?.practice_to_courses_aggregate.nodes ?? []
+    data?.practiceByPk?.practiceToCoursesAggregate.nodes ?? []
   )
     .map((it) => it.course)
     .map(({ id }) => id);
@@ -242,7 +242,7 @@ export const TpId = () => {
     <>
       <PageHead className="mb-4">
         <div className="flex items-center">
-          <BackButton className="mr-2" /> {data?.practice_by_pk?.title ?? ''}
+          <BackButton className="mr-2" /> {data?.practiceByPk?.title ?? ''}
         </div>
       </PageHead>
       <CardBox className="mb-4">
@@ -262,49 +262,47 @@ export const TpId = () => {
       <CardBox>
         <div className="font-bold text-xl">
           {(data &&
-            data.practice_by_pk?.practice_yields_aggregate.aggregate?.count) ??
+            data.practiceByPk?.practiceYieldsAggregate.aggregate?.count) ??
             0}{' '}
           Yields
         </div>
         <ul className="list-disc pl-5 space-y-1">
           {data &&
-            data.practice_by_pk?.practice_yields_aggregate.nodes.map(
-              (value) => (
-                <li key={value.id}>
-                  <span className="font-bold">{value.name}</span>
-                  <span> using {value.method} as a way to handoff</span>
-                  <span>
-                    {' '}
-                    with{' '}
-                    {value.practice_yield_expected_outputs_aggregate.aggregate
-                      ?.count ?? 0}{' '}
-                    expected output with{' '}
-                    {value.practice_yield_expected_outputs_aggregate.nodes
-                      .map(
-                        (val) =>
-                          val.practice_yield_grade_metrics_aggregate.aggregate
-                            ?.count ?? 0
-                      )
-                      .reduce((prev, curr) => prev + curr, 0)}{' '}
-                    metrics, for a total of{' '}
-                    {value.practice_yield_expected_outputs_aggregate.nodes
-                      .map(
-                        (val) =>
-                          val.practice_yield_grade_metrics_aggregate.aggregate
-                            ?.sum?.points ?? 0
-                      )
-                      .reduce((prev, curr) => prev + curr, 0)}{' '}
-                    points
-                  </span>
-                </li>
-              )
-            )}
+            data.practiceByPk?.practiceYieldsAggregate.nodes.map((value) => (
+              <li key={value.id}>
+                <span className="font-bold">{value.name}</span>
+                <span> using {value.method} as a way to handoff</span>
+                <span>
+                  {' '}
+                  with{' '}
+                  {value.practiceYieldExpectedOutputsAggregate.aggregate
+                    ?.count ?? 0}{' '}
+                  expected output with{' '}
+                  {value.practiceYieldExpectedOutputsAggregate.nodes
+                    .map(
+                      (val) =>
+                        val.practiceYieldGradeMetricsAggregate.aggregate
+                          ?.count ?? 0
+                    )
+                    .reduce((prev, curr) => prev + curr, 0)}{' '}
+                  metrics, for a total of{' '}
+                  {value.practiceYieldExpectedOutputsAggregate.nodes
+                    .map(
+                      (val) =>
+                        val.practiceYieldGradeMetricsAggregate.aggregate?.sum
+                          ?.points ?? 0
+                    )
+                    .reduce((prev, curr) => prev + curr, 0)}{' '}
+                  points
+                </span>
+              </li>
+            ))}
         </ul>
       </CardBox>
 
       <div className="my-4 flex content-between justify-between items-baseline">
         <div className="text-xl font-bold">
-          {data?.practice_by_pk?.practice_to_courses_aggregate.aggregate?.count}{' '}
+          {data?.practiceByPk?.practiceToCoursesAggregate.aggregate?.count}{' '}
           course
         </div>
         <NewTpToPromo
@@ -313,11 +311,9 @@ export const TpId = () => {
         />
       </div>
       <div className="space-y-4">
-        {data?.practice_by_pk?.practice_to_courses_aggregate?.nodes.map(
-          (promo) => {
-            return <TpIdHandouts key={promo.id} data={promo} />;
-          }
-        )}
+        {data?.practiceByPk?.practiceToCoursesAggregate?.nodes.map((promo) => {
+          return <TpIdHandouts key={promo.id} data={promo} />;
+        })}
       </div>
 
       <Wip

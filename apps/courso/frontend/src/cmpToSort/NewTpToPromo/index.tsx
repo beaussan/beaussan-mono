@@ -34,12 +34,12 @@ gql`
     $practice_id: uuid!
     $courseId: uuid!
   ) {
-    insert_practice_to_course(
+    insertPracticeToCourse(
       objects: {
-        close_date: $close_date
-        open_date: $open_date
-        practice_id: $practice_id
-        course_id: $courseId
+        closeDate: $close_date
+        openDate: $open_date
+        practiceId: $practice_id
+        courseId: courseId
       }
     ) {
       returning {

@@ -14,15 +14,15 @@ import { Button } from '../../../components/Button';
 import { CardBox } from '../../../components/CardBox';
 import { enGB } from 'date-fns/locale';
 
-type PracticeHandoff = HandoffCourseFragment['practice_to_courses'][0];
+type PracticeHandoff = HandoffCourseFragment['practiceToCourses'][0];
 
 const usePracticeInfo = (practice: PracticeHandoff) => {
   const currDate = new Date();
-  const close = new Date(practice.close_date);
-  const open = new Date(practice.open_date);
+  const close = new Date(practice.closeDate);
+  const open = new Date(practice.openDate);
   const isBeforeStart = isBefore(currDate, open);
   const isStarted = isAfter(currDate, open) && isBefore(currDate, close);
-  const isSubmitted = practice.practice_to_students.length > 0;
+  const isSubmitted = practice.practiceToStudents.length > 0;
   const isOver = isAfter(currDate, close);
   return {
     currDate,
@@ -113,7 +113,7 @@ export const HandoffCourse = ({
         </h3>
       </div>
       <div className="mt-2 grid grid-cols-1  gap-4">
-        {course.practice_to_courses.map((practice) => (
+        {course.practiceToCourses.map((practice) => (
           <PracticeHandoff practice={practice} key={practice.id} />
         ))}
       </div>

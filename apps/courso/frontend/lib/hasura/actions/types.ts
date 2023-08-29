@@ -151,7 +151,7 @@ export type PayloadRequest<T> = {
 
 export type ActionFn<Input, Output> = (
   data: Input,
-  sessionVars: SessionVars,
+  sessionVars: SessionVars
 ) => Promise<Output>;
 
 type MutationCallMap = {

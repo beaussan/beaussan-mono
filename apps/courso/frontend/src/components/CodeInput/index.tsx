@@ -23,7 +23,7 @@ export const CodeInput: React.FC<CodeInputProps> = ({
       {...makeAceProps({
         value,
         onChange,
-        mode: (lang as unknown) as string,
+        mode: lang as unknown as string,
         setOptions: {
           readOnly: isReadonly,
         },

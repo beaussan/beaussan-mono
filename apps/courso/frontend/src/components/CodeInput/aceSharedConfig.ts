@@ -69,7 +69,7 @@ const splitSharedProps: Partial<ISplitEditorProps> = {
 };
 
 export const makeAceProps: (props: IAceEditorProps) => IAceEditorProps = (
-  props,
+  props
 ) => {
   return {
     ...aceSharedProps,
@@ -82,7 +82,7 @@ export const makeAceProps: (props: IAceEditorProps) => IAceEditorProps = (
 };
 
 export const makeSplitProps: (props: ISplitEditorProps) => ISplitEditorProps = (
-  props,
+  props
 ) => {
   return {
     ...splitSharedProps,

@@ -18,16 +18,16 @@ import { routes } from '../../../routGetters';
 
 gql`
   query courseDetails($id: uuid!) {
-    course_by_pk(id: $id) {
+    courseByPk(id: $id) {
       name
       years
-      student_to_courses_aggregate {
+      studentToCoursesAggregate {
         nodes {
           student {
             id
             email
             full_name
-            user_id
+            userId
           }
         }
         aggregate {
@@ -61,20 +61,19 @@ export const CourseId = () => {
   if (fetching) {
     return <Loader />;
   }
-  if (!data?.course_by_pk || error) {
+  if (!data?.courseByPk || error) {
     router.push(routes.courseList());
     return <Loader />;
   }
 
   const onSendStudent = async () => {
     try {
-      if (!data?.course_by_pk?.student_to_courses_aggregate?.nodes) {
+      if (!data?.courseByPk?.studentToCoursesAggregate?.nodes) {
         return;
       }
-      const studentsIds =
-        data.course_by_pk.student_to_courses_aggregate.nodes.map(
-          ({ student }) => student.id
-        );
+      const studentsIds = data.courseByPk.studentToCoursesAggregate.nodes.map(
+        ({ student }) => student.id
+      );
       const { data: dataMutation, error } = await sendStudentMail({
         studentsIds,
       });
@@ -100,9 +99,9 @@ export const CourseId = () => {
       <PageHead className="">
         <div className="flex items-center">
           <BackButton className="mr-2" />{' '}
-          {data?.course_by_pk?.name ?? 'Promo name'}
+          {data?.courseByPk?.name ?? 'Promo name'}
           {' - '}
-          {data?.course_by_pk?.years}
+          {data?.courseByPk?.years}
         </div>
       </PageHead>
       <div className="bg-white mt-4 p-4 rounded-lg shadow-md">
@@ -118,14 +117,14 @@ export const CourseId = () => {
         <Table>
           <Table.TableHead items={['Name', 'Email', 'Is linked']} />
           <Table.TBody
-            items={data?.course_by_pk?.student_to_courses_aggregate.nodes ?? []}
+            items={data?.courseByPk?.studentToCoursesAggregate.nodes ?? []}
           >
             {({ student }) => (
               <>
                 <Table.Td isMainInfo>{student?.full_name}</Table.Td>
                 <Table.Td>{student?.email}</Table.Td>
                 <Table.Td>
-                  <LinkIndicator isLinked={!!student.user_id} />
+                  <LinkIndicator isLinked={!!student.userId} />
                 </Table.Td>
               </>
             )}

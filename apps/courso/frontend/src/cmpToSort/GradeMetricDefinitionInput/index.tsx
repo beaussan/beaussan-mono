@@ -4,8 +4,8 @@ import { Input, TextArea } from '../../components/Input';
 import gql from 'graphql-tag';
 import {
   GradeMetricInputYieldFragment,
-  Practice_Yield_Expected_Output_Types_Enum,
-  Practice_Yield_Type_Enum,
+  PracticeYieldExpectedOutputTypesEnum,
+  PracticeYieldTypeEnum,
 } from '../../generated/graphql';
 import { DropList } from '../../components/DropList';
 import { useGradeMetricTypes } from './useGradeMetricTypes';
@@ -53,7 +53,7 @@ const makeFormName = (name: string) => {
 
 const fragments = {
   GradeMetricInputYield: gql`
-    fragment GradeMetricInputYield on practice_yield {
+    fragment GradeMetricInputYield on PracticeYield {
       id
       meta
       method
@@ -70,7 +70,7 @@ export type GradeMetricInputProps = {
 };
 
 const gradeMetricTypeToString: (
-  data: Practice_Yield_Expected_Output_Types_Enum
+  data: PracticeYieldExpectedOutputTypesEnum
 ) => string = (method) => {
   return {
     COMPARE_CODE_FILE: 'Compare code file',
@@ -145,10 +145,7 @@ const ExpectedGitDiffInput: FnExtraInput = ({ name, yieldLinked }) => {
 
 const Noop = () => null;
 
-const extraInput: Record<
-  Practice_Yield_Expected_Output_Types_Enum,
-  FnExtraInput
-> = {
+const extraInput: Record<PracticeYieldExpectedOutputTypesEnum, FnExtraInput> = {
   COMPARE_CODE_FILE: CompareCodeInput,
   MANUAL: TextareaInput,
   LINK_OPEN: TextareaInput,
@@ -160,26 +157,24 @@ const extraInput: Record<
 
 const hasLangInput: (
   yieldLinked: GradeMetricInputYieldFragment,
-  methodValue: Practice_Yield_Expected_Output_Types_Enum
+  methodValue: PracticeYieldExpectedOutputTypesEnum
 ) => boolean = ({ method }, methodValue) => {
-  const mapPracticeTypesToBool: Record<Practice_Yield_Type_Enum, boolean> = {
+  const mapPracticeTypesToBool: Record<PracticeYieldTypeEnum, boolean> = {
     BLOB: true,
     CODE: false,
     GIT_REPO: true,
     URL: true,
   };
-  const mapMethodToBool: Record<
-    Practice_Yield_Expected_Output_Types_Enum,
-    boolean
-  > = {
-    COMPARE_CODE_FILE: true,
-    MANUAL: false,
-    LINK_OPEN: false,
-    SHOW_GIT_FILE: true,
-    SHOW_GIT_LOG: false,
-    COMPARE_GIT_FILE: true,
-    MANUAL_GIT_FILE_REVIEW: true,
-  };
+  const mapMethodToBool: Record<PracticeYieldExpectedOutputTypesEnum, boolean> =
+    {
+      COMPARE_CODE_FILE: true,
+      MANUAL: false,
+      LINK_OPEN: false,
+      SHOW_GIT_FILE: true,
+      SHOW_GIT_LOG: false,
+      COMPARE_GIT_FILE: true,
+      MANUAL_GIT_FILE_REVIEW: true,
+    };
   return mapPracticeTypesToBool[method] && mapMethodToBool[methodValue];
 };
 
@@ -241,9 +236,7 @@ export const GradeMetricDefinitionInput = ({
 }: GradeMetricInputProps) => {
   const { methodFormName, langFormName } = makeFormName(name);
   const methodValue =
-    useFormikFieldValue<Practice_Yield_Expected_Output_Types_Enum>(
-      methodFormName
-    );
+    useFormikFieldValue<PracticeYieldExpectedOutputTypesEnum>(methodFormName);
   const possibleMethods = useGradeMetricTypes(yieldLinked, name);
   const shouldInputLang = hasLangInput(yieldLinked, methodValue);
   const Extra = extraInput[methodValue];
