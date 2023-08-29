@@ -1,0 +1,17 @@
+query getGitInfoForStudentYield(
+  $practice_to_student_yield_id: uuid!
+  $practice_yield_expected_output_id: uuid!
+) {
+  studentYield: practiceToStudentYieldByPk(id: $practice_to_student_yield_id) {
+    giteaOrgAndRepo
+    id
+    practiceYieldId
+  }
+  expectedOutput: practiceYieldExpectedOutputByPk(
+    id: $practice_yield_expected_output_id
+  ) {
+    gitPath
+    practiceYieldId
+    method
+  }
+}

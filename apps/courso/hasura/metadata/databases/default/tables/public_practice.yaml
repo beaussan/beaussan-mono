@@ -26,23 +26,23 @@ insert_permissions:
         - id
         - title
         - updated_at
-      backend_only: false
 select_permissions:
   - role: student
     permission:
       columns:
-        - created_at
         - description
-        - id
         - title
+        - created_at
         - updated_at
+        - id
       filter:
-        studentToCourses:
+        practiceToCourses:
           course:
             studentToCourses:
               student:
                 user_id:
                   _eq: X-Hasura-User-Id
+    comment: ""
   - role: teacher
     permission:
       columns:

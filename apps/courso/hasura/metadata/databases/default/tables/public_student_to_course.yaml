@@ -8,7 +8,6 @@ object_relationships:
   - name: student
     using:
       foreign_key_constraint_on: student_id
-
 insert_permissions:
   - role: teacher
     permission:
@@ -18,7 +17,6 @@ insert_permissions:
         - created_at
         - student_id
         - updated_at
-      backend_only: false
 select_permissions:
   - role: student
     permission:

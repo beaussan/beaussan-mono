@@ -1,0 +1,25 @@
+query handoffList {
+  course(order_by: { created_at: desc }) {
+    ...HandoffCourse
+  }
+}
+
+fragment HandoffCourse on course {
+  name
+  years
+  id
+  practice_to_courses(order_by: { close_date: desc }) {
+    practice {
+      title
+      id
+    }
+    practice_to_students {
+      id
+      student_id
+    }
+    is_open
+    open_date
+    close_date
+    id
+  }
+}

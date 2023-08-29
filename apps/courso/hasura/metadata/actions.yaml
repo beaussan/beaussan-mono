@@ -1,6 +1,77 @@
-actions: []
+actions:
+  - name: fillEmptyYields
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_MASTER_URL}}'
+      headers:
+        - name: token
+          value_from_env: ACTION_MASTER_TOKEN
+  - name: getGitFileData
+    definition:
+      kind: ''
+      handler: '{{ACTION_MASTER_URL}}'
+      headers:
+        - name: token
+          value_from_env: ACTION_MASTER_TOKEN
+    permissions:
+      - role: teacher
+  - name: getGitLogData
+    definition:
+      kind: ''
+      handler: '{{ACTION_MASTER_URL}}'
+      headers:
+        - name: token
+          value_from_env: ACTION_MASTER_TOKEN
+    permissions:
+      - role: teacher
+  - name: linkStudentToUser
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_MASTER_URL}}'
+      headers:
+        - name: token
+          value_from_env: ACTION_MASTER_TOKEN
+    permissions:
+      - role: student
+  - name: refreshGrades
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_MASTER_URL}}'
+      headers:
+        - name: token
+          value_from_env: ACTION_MASTER_TOKEN
+    permissions:
+      - role: teacher
+  - name: sendStudentClaimMail
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_MASTER_URL}}'
+      headers:
+        - name: token
+          value_from_env: ACTION_MASTER_TOKEN
+    permissions:
+      - role: teacher
+  - name: submitHandoff
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_MASTER_URL}}'
+      headers:
+        - name: TOKEN
+          value_from_env: ACTION_MASTER_TOKEN
+    permissions:
+      - role: student
 custom_types:
   enums: []
-  input_objects: []
-  objects: []
+  input_objects:
+    - name: YieldForHandoff
+    - name: GitFileInput
+  objects:
+    - name: InsertStudentAnswerOutput
+    - name: SendStudentClaimMailOutput
+    - name: linkStudentToUserOutput
+    - name: SubmitHandoffOutput
+    - name: FillEmptyYieldsOutput
+    - name: RefreshGradesOutput
+    - name: GetGitFileDataOutput
+    - name: CommitItem
   scalars: []

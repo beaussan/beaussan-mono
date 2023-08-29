@@ -1,0 +1,22 @@
+query dataForUpdateToStudentLink($tokenId: uuid!, $userId: uuid!) {
+  studentToSet: student(where: { claimToken: { _eq: $tokenId } }) {
+    claimToken
+    userId
+    id
+  }
+
+  maybeStudentWithUser: student(where: { userId: { _eq: $userId } }) {
+    claimToken
+    userId
+    id
+  }
+}
+
+mutation linkStudentToUser($id: uuid!, $user_id: uuid!) {
+  updateStudentByPk(
+    pkColumns: { id: $id }
+    _set: { userId: $user_id, claimToken: null }
+  ) {
+    id
+  }
+}

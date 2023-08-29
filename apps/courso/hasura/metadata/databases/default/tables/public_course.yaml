@@ -26,7 +26,6 @@ insert_permissions:
         - years
         - created_at
         - updated_at
-      backend_only: false
 select_permissions:
   - role: student
     permission:

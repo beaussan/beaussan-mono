@@ -8,7 +8,6 @@ object_relationships:
   - name: practiceYieldGradeMetric
     using:
       foreign_key_constraint_on: practice_yield_grade_metric_id
-
 insert_permissions:
   - role: teacher
     permission:
@@ -18,7 +17,6 @@ insert_permissions:
         - percent_grade
         - practice_to_student_yield_id
         - practice_yield_grade_metric_id
-      backend_only: false
 select_permissions:
   - role: teacher
     permission:

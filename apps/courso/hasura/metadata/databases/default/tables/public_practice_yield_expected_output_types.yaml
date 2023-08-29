@@ -10,7 +10,6 @@ array_relationships:
         table:
           name: practice_yield_expected_output
           schema: public
-
 select_permissions:
   - role: teacher
     permission:

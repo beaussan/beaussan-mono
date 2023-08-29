@@ -1,0 +1,20 @@
+mutation updateGiteaOrgName($id: uuid!, $gitea_org_name: String!) {
+  updatePracticeToCourseByPk(
+    pkColumns: { id: $id }
+    _set: { giteaOrgName: $gitea_org_name }
+  ) {
+    id
+  }
+}
+
+query getPracticeToPromotionMeta($id: uuid!) {
+  practiceToCourseByPk(id: $id) {
+    practice {
+      title
+    }
+    course {
+      name
+      years
+    }
+  }
+}

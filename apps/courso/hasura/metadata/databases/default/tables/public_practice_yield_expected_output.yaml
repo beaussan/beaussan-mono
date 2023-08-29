@@ -16,7 +16,6 @@ array_relationships:
         table:
           name: practice_yield_grade_metric
           schema: public
-
 insert_permissions:
   - role: teacher
     permission:
@@ -30,7 +29,6 @@ insert_permissions:
         - code_lang
         - method
         - expected
-      backend_only: false
 select_permissions:
   - role: teacher
     permission:

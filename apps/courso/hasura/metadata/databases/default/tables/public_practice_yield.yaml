@@ -23,7 +23,6 @@ array_relationships:
         table:
           name: practice_yield_expected_output
           schema: public
-
 insert_permissions:
   - role: teacher
     permission:
@@ -37,27 +36,27 @@ insert_permissions:
         - name
         - practice_id
         - updated_at
-      backend_only: false
 select_permissions:
   - role: student
     permission:
       columns:
-        - created_at
-        - description
-        - id
         - meta
+        - description
         - method
         - name
-        - practice_id
+        - created_at
         - updated_at
+        - id
+        - practice_id
       filter:
         practice:
-          studentToCourses:
+          practiceToCourses:
             course:
               studentToCourses:
                 student:
-                  user_id:
+                  id:
                     _eq: X-Hasura-User-Id
+    comment: ""
   - role: teacher
     permission:
       columns:

@@ -20,9 +20,9 @@ computed_fields:
   - name: is_open
     definition:
       function:
-        schema: public
         name: is_open_practice_to_course_fn
-    comment: ''
+        schema: public
+    comment: ""
 insert_permissions:
   - role: teacher
     permission:
@@ -33,7 +33,6 @@ insert_permissions:
         - id
         - open_date
         - practice_id
-      backend_only: false
 select_permissions:
   - role: student
     permission:
@@ -90,8 +89,8 @@ event_triggers:
       insert:
         columns: '*'
     retry_conf:
-      num_retries: 3
       interval_sec: 20
+      num_retries: 3
       timeout_sec: 120
     webhook_from_env: WEBHOOK_MASTER_URL
     headers:
@@ -99,12 +98,12 @@ event_triggers:
         value_from_env: WEBHOOK_MASTER_TOKEN
   - name: on_practice_to_promo_deleted
     definition:
-      enable_manual: false
       delete:
         columns: '*'
+      enable_manual: false
     retry_conf:
-      num_retries: 3
       interval_sec: 10
+      num_retries: 3
       timeout_sec: 60
     webhook_from_env: WEBHOOK_MASTER_URL
     headers:

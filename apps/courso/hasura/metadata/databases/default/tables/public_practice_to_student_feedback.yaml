@@ -5,11 +5,12 @@ object_relationships:
   - name: practice_to_student
     using:
       manual_configuration:
-        remote_table:
-          schema: public
-          name: practice_to_student
         column_mapping:
           practice_to_student_id: id
+        insertion_order: null
+        remote_table:
+          name: practice_to_student
+          schema: public
 select_permissions:
   - role: student
     permission:

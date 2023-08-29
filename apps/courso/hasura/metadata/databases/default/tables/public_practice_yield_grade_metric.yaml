@@ -13,7 +13,6 @@ array_relationships:
         table:
           name: practice_to_student_grade_metric
           schema: public
-
 insert_permissions:
   - role: teacher
     permission:
@@ -26,7 +25,6 @@ insert_permissions:
         - expected_yield_id
         - feedbacks
         - points
-      backend_only: false
 select_permissions:
   - role: teacher
     permission:
