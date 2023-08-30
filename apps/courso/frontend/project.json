@@ -24,6 +24,12 @@
         "command": "yarn graphql-codegen --config apps/courso/frontend/codegen.js"
       }
     },
+    "codegen-swagger": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx swagger-typescript-api -p http://localhost:3030/swagger.v1.json -o ./apps/courso/frontend/lib/generated --axios --single-http-client --name GiteaApi.ts --type-prefix Gitea"
+      }
+    },
     "serve": {
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
