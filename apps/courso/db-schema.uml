@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.accounts</OriginalElement>
+  <nodes>
+    <node x="-181.0" y="361.0">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.allowed_roles</node>
+    <node x="650.3833333333334" y="910.0">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_student_yield</node>
+    <node x="1224.5" y="921.5">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_grade_metric</node>
+    <node x="790.6333333333334" y="1176.0">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_student_grade_metric</node>
+    <node x="-3.849999999999909" y="665.0">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.student_to_course</node>
+    <node x="999.4000000000001" y="366.75">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_expected_output_types</node>
+    <node x="692.0" y="-1.5">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.course</node>
+    <node x="1380.4" y="291.5">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield</node>
+    <node x="1418.9" y="68.0">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_type</node>
+    <node x="60.90000000000009" y="-13.0">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.user</node>
+    <node x="1208.5" y="619.0">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_expected_output</node>
+    <node x="356.4000000000001" y="257.0">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.accounts</node>
+    <node x="389.9000000000001" y="-128.2371740958788">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.verification_requests</node>
+    <node x="2.400000000000091" y="-143.0">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.roles</node>
+    <node x="68.40000000000009" y="291.5">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.student</node>
+    <node x="711.4000000000001" y="291.5">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_course</node>
+    <node x="1049.2541666666666" y="21.5">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice</node>
+    <node x="454.88333333333344" y="596.0">822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_student</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.student_to_course" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.student" relationship="REFERENCES">
+      <point x="67.0" y="-62.0" />
+      <point x="197.1500000000001" y="574.0" />
+      <point x="202.4000000000001" y="574.0" />
+      <point x="0.0" y="108.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_student_grade_metric" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_grade_metric" relationship="REFERENCES">
+      <point x="80.75" y="-96.5" />
+      <point x="1032.8833333333334" y="1151.0" />
+      <point x="1361.5" y="1151.0" />
+      <point x="0.0" y="96.5" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.accounts" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.user" relationship="REFERENCES">
+      <point x="0.0" y="-142.5" />
+      <point x="523.9000000000001" y="235.0" />
+      <point x="202.4000000000001" y="235.0" />
+      <point x="0.0" y="108.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.user" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.roles" relationship="REFERENCES">
+      <point x="0.0" y="-108.0" />
+      <point x="202.4000000000001" y="-39.0" />
+      <point x="100.65000000000009" y="-39.0" />
+      <point x="32.75" y="39.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.student_to_course" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.course" relationship="REFERENCES">
+      <point x="-67.0" y="-62.0" />
+      <point x="63.15000000000009" y="574.0" />
+      <point x="57.90000000000009" y="574.0" />
+      <point x="57.90000000000009" y="225.0" />
+      <point x="826.0" y="225.0" />
+      <point x="0.0" y="96.5" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.allowed_roles" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.user" relationship="REFERENCES">
+      <point x="38.0" y="-38.5" />
+      <point x="-67.0" y="235.0" />
+      <point x="202.4000000000001" y="235.0" />
+      <point x="0.0" y="108.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.allowed_roles" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.roles" relationship="REFERENCES">
+      <point x="-38.0" y="-38.5" />
+      <point x="-143.0" y="235.0" />
+      <point x="-77.0" y="235.0" />
+      <point x="-77.0" y="-39.0" />
+      <point x="35.15000000000009" y="-39.0" />
+      <point x="-32.75" y="39.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_grade_metric" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_expected_output" relationship="REFERENCES">
+      <point x="0.0" y="-96.5" />
+      <point x="0.0" y="108.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_expected_output" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield" relationship="REFERENCES">
+      <point x="76.5" y="-108.0" />
+      <point x="1438.0" y="574.0" />
+      <point x="1514.4" y="574.0" />
+      <point x="0.0" y="108.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_student_yield" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield" relationship="REFERENCES">
+      <point x="67.0" y="-108.0" />
+      <point x="851.3833333333334" y="884.0" />
+      <point x="1093.0" y="884.0" />
+      <point x="1093.0" y="574.0" />
+      <point x="1514.4" y="574.0" />
+      <point x="0.0" y="108.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_student" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_course" relationship="REFERENCES">
+      <point x="67.0" y="-131.0" />
+      <point x="655.8833333333334" y="574.0" />
+      <point x="845.4000000000001" y="574.0" />
+      <point x="0.0" y="108.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_course" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice" relationship="REFERENCES">
+      <point x="67.0" y="-108.0" />
+      <point x="912.4000000000001" y="235.0" />
+      <point x="1183.2541666666666" y="235.0" />
+      <point x="0.0" y="73.5" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_type" relationship="REFERENCES">
+      <point x="67.0" y="-108.0" />
+      <point x="1581.4" y="235.0" />
+      <point x="1519.4" y="235.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.student" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.user" relationship="REFERENCES">
+      <point x="0.0" y="-108.0" />
+      <point x="0.0" y="108.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_course" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.course" relationship="REFERENCES">
+      <point x="-67.0" y="-108.0" />
+      <point x="778.4000000000001" y="225.0" />
+      <point x="826.0" y="225.0" />
+      <point x="0.0" y="96.5" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_student_yield" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_student" relationship="REFERENCES">
+      <point x="-67.0" y="-108.0" />
+      <point x="717.3833333333334" y="884.0" />
+      <point x="588.8833333333334" y="884.0" />
+      <point x="0.0" y="131.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_expected_output" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_expected_output_types" relationship="REFERENCES">
+      <point x="-8.599999999999909" y="-108.0" />
+      <point x="173.0" y="27.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_student" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.student" relationship="REFERENCES">
+      <point x="-67.0" y="-131.0" />
+      <point x="521.8833333333334" y="574.0" />
+      <point x="202.4000000000001" y="574.0" />
+      <point x="0.0" y="108.0" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice" relationship="REFERENCES">
+      <point x="-67.0" y="-108.0" />
+      <point x="1447.4" y="235.0" />
+      <point x="1183.2541666666666" y="235.0" />
+      <point x="0.0" y="73.5" />
+    </edge>
+    <edge source="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_student_grade_metric" target="822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_to_student_yield" relationship="REFERENCES">
+      <point x="-80.75" y="-96.5" />
+      <point x="871.3833333333334" y="1151.0" />
+      <point x="784.3833333333334" y="1151.0" />
+      <point x="0.0" y="108.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.7761096605744126" showDependencies="false" x="734.0" y="613.0" />
+  <SelectedNodes>
+    <node>822c6c25-bb0f-4efb-9820-5b83a268752c.TABLE:postgres.public.practice_yield_expected_output_types</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Comments</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+

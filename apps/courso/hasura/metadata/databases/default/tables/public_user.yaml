@@ -18,7 +18,7 @@ array_relationships:
       foreign_key_constraint_on:
         column: user_id
         table:
-          name: accounts
+          name: account
           schema: public
   - name: allowedRoles
     using:
@@ -26,6 +26,13 @@ array_relationships:
         column: user_id
         table:
           name: allowed_roles
+          schema: public
+  - name: sessions
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: session
           schema: public
 insert_permissions:
   - role: teacher

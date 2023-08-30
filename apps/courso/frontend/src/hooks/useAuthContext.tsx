@@ -12,14 +12,10 @@ function useAuthContextValue() {
   return {
     authStatus,
     user: data?.user,
-    // @ts-ignore
-    userId: data?.id,
-    // @ts-ignore
-    token: data?.token ?? null,
-    // @ts-ignore
-    userRole: data?.role ?? null,
-    // @ts-ignore
-    allowedRoles: data?.allowedRoles ?? [],
+    userId: data?.user?.id,
+    token: data?.token,
+    userRole: data?.user?.defaultRole ?? null,
+    allowedRoles: data?.user?.allowedRoles ?? [],
   };
 }
 

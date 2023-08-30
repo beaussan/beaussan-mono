@@ -56,7 +56,7 @@ select_permissions:
                 student:
                   id:
                     _eq: X-Hasura-User-Id
-    comment: ''
+    comment: ""
   - role: teacher
     permission:
       columns:

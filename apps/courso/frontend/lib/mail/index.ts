@@ -1,17 +1,17 @@
 import { ServerClient } from 'postmark';
-import { getEnvVariable } from '../common/getEnv';
+import { serverEnv } from '../env';
 
-const client = new ServerClient(getEnvVariable('POSTMARK_KEY'));
+const client = new ServerClient(serverEnv.POSTMARK_API_TOKEN);
 
 const baseTemplateParams = {
-  product_url: getEnvVariable('POSTMARK_APP_URL'),
-  support_mail: getEnvVariable('POSTMARK_SUPPORT_EMAIL'),
+  product_url: serverEnv.NEXTAUTH_URL,
+  support_mail: serverEnv.POSTMARK_SUPPORT_EMAIL,
 };
 
-const From = getEnvVariable('POSTMARK_FROM_EMAIL');
+const From = serverEnv.POSTMARK_FROM_EMAIL;
 
 const aliasNames = {
-  emailLogin: getEnvVariable('POSTMARK_MAIL_LOGIN_ALIAS'),
+  emailLogin: serverEnv.POSTMARK_MAIL_LOGIN_ALIAS,
 };
 
 const sendEmail = (to: string, templateName: string, templateParams: any) => {

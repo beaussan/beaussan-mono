@@ -60,13 +60,17 @@ const PracticeHandoffRightSide = ({
   return (
     <div className="flex justify-center items-center flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4 items-stretch	md:items-center">
       <FormatTimeLeft close={close} open={open} />
-      <Link href={routes.handoffId({ handoffId: practice.id })} passHref>
+      <Link href={routes.handoffId({ handoffId: practice.id })} legacyBehavior>
         {
           // FIXME use a proper link here
-        }
+          /*
+
         <Button disabled={!isStarted} as="a">
           Submit
         </Button>
+           */
+        }
+        <a>Submit</a>
       </Link>
     </div>
   );

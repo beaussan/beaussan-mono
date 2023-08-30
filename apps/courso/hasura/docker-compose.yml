@@ -7,10 +7,29 @@ services:
     image: postgres:12
     restart: unless-stopped
     container_name: courso-hasura-graphql-engine-postgres
+    ports:
+      - 2255:5432
     volumes:
       - db_courso-hasura:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
+
+  gitea:
+    image: gitea/gitea:1.20.3
+    container_name: courso_gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - DISABLE_REGISTRATION=true
+      - SHOW_REGISTRATION_BUTTON=false
+    restart: unless-stopped
+    volumes:
+      - ./gitea-data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - '3030:3000'
+
   graphql-engine:
     image: hasura/graphql-engine:v2.32.1
     ports:
@@ -20,6 +39,7 @@ services:
     restart: unless-stopped
     container_name: courso-hasura-graphql-engine
     environment:
+      ## local access using port 2255 postgres://postgres:postgrespassword@postgres:2255/postgres
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
       ## enable the console served by server
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'false' # set to "false" to disable console
@@ -33,6 +53,7 @@ services:
       ACTION_MASTER_URL: '${HASURA_ACTION_MASTER_URL}'
       ACTION_MASTER_TOKEN: '${HASURA_ACTION_MASTER_TOKEN}'
       HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: 'naming_convention'
+      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${JWT_SECRET}" }'
 
 volumes:
   db_courso-hasura: {}

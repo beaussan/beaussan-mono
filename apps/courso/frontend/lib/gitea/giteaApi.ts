@@ -5,14 +5,14 @@ import {
   GiteaContentsResponse,
   HttpClient,
 } from '../generated/GiteaApi';
-import { getEnvVariable } from '../common/getEnv';
+import { serverEnv } from '../env';
 export type Maybe<T> = T | null;
 
 export const giteaApi = new Api(
   new HttpClient({
-    baseURL: `${getEnvVariable('GITEA_URL')}/api/v1`,
+    baseURL: `${serverEnv.GITEA_URL}/api/v1`,
     headers: {
-      Authorization: `token ${getEnvVariable('GITEA_TOKEN')}`,
+      Authorization: `token ${serverEnv.GITEA_TOKEN}`,
     },
   })
 );

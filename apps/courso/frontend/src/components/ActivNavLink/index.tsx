@@ -52,7 +52,7 @@ export const NavLink = ({
   const style = { ...styleProp, ...(isActive ? activeStyle : inactiveStyle) };
 
   return (
-    <Link href={href} as={as} {...props}>
+    <Link href={href} as={as} {...props} legacyBehavior>
       <a className={className} style={style}>
         {children}
       </a>

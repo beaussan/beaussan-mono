@@ -11,18 +11,14 @@ import {
   webHookModel,
   WebhookPayload,
 } from '../../../../lib/hasura/webhooks/types';
+import { serverEnv } from '../../../../lib/env';
 
 const logger = createLogger({ component: 'hasura/webhook-handler' });
 
 export default nc<NextApiRequest, NextApiResponse>({
   onError: getOnError(logger),
 })
-  .use(
-    getTokenVerificationMiddleware(
-      logger,
-      process.env.HASURA_WEBHOOK_MASTER_TOKEN as string
-    )
-  )
+  .use(getTokenVerificationMiddleware(logger, serverEnv.HASURA_EVENT_TOKEN))
   .use((req, res, next) => {
     try {
       webHookModel.validateSync(req.body, { abortEarly: false });

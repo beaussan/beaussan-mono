@@ -1,12 +1,13 @@
 import React from 'react';
 import { Loader } from '../components/Loader';
+import { clientEnvs } from '@beaussan/courso/data/env-config';
 
 const isDebugMode = false;
 
 export const LoadingFullScreen: React.FC<{ debugName: string }> = ({
   debugName,
 }) => {
-  if (process.env.NODE_ENV === 'development') {
+  if (clientEnvs.NODE_ENV === 'development') {
     console.log(`[LOADING FULL SCREEN] ${debugName}`);
   }
   if (isDebugMode) {

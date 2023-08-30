@@ -1,14 +1,12 @@
 import { GraphQLClient } from 'graphql-request';
 import { getSdk } from './generated/graphql';
-import { getEnvVariable } from './common/getEnv';
+import { serverEnv } from './env';
 
-const HTTP_BASE_URL = getEnvVariable('HASURA_URL');
-const ENDPOINT = '/v1/graphql';
-
-const HTTP_URL = `${HTTP_BASE_URL}${ENDPOINT}`;
-
-const gqlClient = new GraphQLClient(HTTP_URL, {
-  headers: { 'x-hasura-admin-secret': getEnvVariable('HASURA_ADMIN') },
-});
+const gqlClient = new GraphQLClient(
+  serverEnv.NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL,
+  {
+    headers: { 'x-hasura-admin-secret': serverEnv.HASURA_ADMIN_SECRET },
+  }
+);
 
 export const gqlSdk = getSdk(gqlClient);

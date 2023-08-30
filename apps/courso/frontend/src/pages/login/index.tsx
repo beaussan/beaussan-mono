@@ -20,8 +20,7 @@ export const getServerSideProps = async (
   const { res } = context;
   const session = await getSession();
 
-  // @ts-ignore fix me
-  if (session && res && session.accessToken) {
+  if (session && res && session.token) {
     res.writeHead(302, {
       Location: '/',
     });

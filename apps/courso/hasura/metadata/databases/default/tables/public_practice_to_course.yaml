@@ -22,7 +22,7 @@ computed_fields:
       function:
         name: is_open_practice_to_course_fn
         schema: public
-    comment: ''
+    comment: ""
 insert_permissions:
   - role: teacher
     permission:

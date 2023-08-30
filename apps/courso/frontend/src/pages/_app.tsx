@@ -1,44 +1,19 @@
 import { AppProps } from 'next/app';
-import React, { ReactNode, useEffect, useState } from 'react';
-import {
-  createAnonymousClient,
-  createAuthClient,
-} from '../services/urqlClient';
-import { Provider as UrqlProvider } from 'urql';
+import React, { ReactNode } from 'react';
+
 import { SessionProvider } from 'next-auth/react';
 import { CurrentUserProvider } from '../hooks/useCurrentUser';
 import '../tailwind.css';
 import Head from 'next/head';
 import '../fonts/monoid/monoid.css';
-import { AuthContextProvider, useAuthContext } from '../hooks/useAuthContext';
+import { AuthContextProvider } from '../hooks/useAuthContext';
 import { ToastProvider } from 'react-toast-notifications';
+import { UrqlNextAuthProvider } from '@beaussan/shared/data/next-auth-urql-hasura';
+import { clientEnvs } from '@beaussan/courso/data/env-config';
 
 type getLayoutFn = (input: ReactNode) => ReactNode;
 
-function ClientProvider(props: React.PropsWithChildren) {
-  const { token } = useAuthContext();
-
-  const [urqlClient, setUrqlClient] = useState(createAnonymousClient());
-  const [isAnonymousClient, setIsAnonymousClient] = useState(true);
-
-  console.log('ClientProvider', { token });
-
-  useEffect(() => {
-    const hasNoToken = token === undefined || token === null;
-    if (!hasNoToken && isAnonymousClient) {
-      console.log('Creating auth token');
-      setUrqlClient(createAuthClient());
-      setIsAnonymousClient(false);
-    }
-    if (hasNoToken && !isAnonymousClient) {
-      console.log('Creating anonymous token');
-      setUrqlClient(createAnonymousClient());
-      setIsAnonymousClient(true);
-    }
-  }, [isAnonymousClient, token]);
-
-  return <UrqlProvider value={urqlClient}>{props.children}</UrqlProvider>;
-}
+const HTTP_URL = clientEnvs.NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL;
 
 function MyApp({ Component, pageProps }: AppProps) {
   const getLayout =
@@ -51,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <SessionProvider session={pageProps.session}>
         <AuthContextProvider>
-          <ClientProvider>
+          <UrqlNextAuthProvider graphqlEndpoint={HTTP_URL}>
             <CurrentUserProvider>
               <>
                 <ToastProvider autoDismiss>
@@ -59,7 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </ToastProvider>
               </>
             </CurrentUserProvider>
-          </ClientProvider>
+          </UrqlNextAuthProvider>
         </AuthContextProvider>
       </SessionProvider>
     </>

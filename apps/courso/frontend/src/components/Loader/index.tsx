@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './loader.module.css';
+import { clientEnvs } from '@beaussan/courso/data/env-config';
 
 // Inspired from react-loader-spinner triangle spinner
 interface LoaderPropsCustom {
@@ -44,7 +45,7 @@ export const Loader: React.FC<React.PropsWithChildren<LoaderPropsCustom>> = ({
   ...props
 }) => {
   if (!visible && children) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (clientEnvs.NODE_ENV !== 'production') {
       console.warn(
         'DEPRECATION NOTICE : Loader visible flag will be removed soon as for children support.'
       );

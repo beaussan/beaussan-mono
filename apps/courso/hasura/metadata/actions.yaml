@@ -8,7 +8,7 @@ actions:
           value_from_env: ACTION_MASTER_TOKEN
   - name: getGitFileData
     definition:
-      kind: ''
+      kind: ""
       handler: '{{ACTION_MASTER_URL}}'
       headers:
         - name: token
@@ -17,7 +17,7 @@ actions:
       - role: teacher
   - name: getGitLogData
     definition:
-      kind: ''
+      kind: ""
       handler: '{{ACTION_MASTER_URL}}'
       headers:
         - name: token

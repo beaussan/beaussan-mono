@@ -1,10 +1,11 @@
 import React from 'react';
+import { clientEnvs } from '@beaussan/courso/data/env-config';
 
 export const DebugJson: React.FC<{ json: any; title?: string }> = ({
   json,
   title,
 }) => {
-  if (process.env.PROD) {
+  if (clientEnvs.NODE_ENV !== 'development') {
     return null;
   }
   return (
