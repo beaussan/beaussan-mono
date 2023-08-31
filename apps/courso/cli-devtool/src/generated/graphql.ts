@@ -9110,6 +9110,16 @@ export type ClearCoursesMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type ClearCoursesMutation = { __typename?: 'mutation_root', deleteCourse?: { __typename?: 'CourseMutationResponse', affectedRows: number } | null };
 
+export type ClearPracticesToCoursesMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ClearPracticesToCoursesMutation = { __typename?: 'mutation_root', deletePracticeToCourse?: { __typename?: 'PracticeToCourseMutationResponse', affectedRows: number } | null };
+
+export type ClearPracticesMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ClearPracticesMutation = { __typename?: 'mutation_root', deletePractice?: { __typename?: 'PracticeMutationResponse', affectedRows: number } | null };
+
 export type InsertCourseMutationVariables = Exact<{
   object?: InputMaybe<CourseInsertInput>;
 }>;
@@ -9130,6 +9140,19 @@ export type WatchForGiteaOrgDoneQueryVariables = Exact<{
 
 
 export type WatchForGiteaOrgDoneQuery = { __typename?: 'query_root', practiceToCourse: Array<{ __typename?: 'PracticeToCourse', giteaOrgName?: string | null }> };
+
+export type SubmitHandoffMutationVariables = Exact<{
+  practiceToPromotionId?: InputMaybe<Scalars['uuid']>;
+  yields: Array<YieldForHandoff> | YieldForHandoff;
+}>;
+
+
+export type SubmitHandoffMutation = { __typename?: 'mutation_root', submitHandoff?: { __typename?: 'SubmitHandoffOutput', status: string } | null };
+
+export type ClearPracticeToStudentMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ClearPracticeToStudentMutation = { __typename?: 'mutation_root', deletePracticeToStudent?: { __typename?: 'PracticeToStudentMutationResponse', affectedRows: number } | null };
 
 
 export const ClearAllUsersDocument = gql`
@@ -9160,6 +9183,20 @@ export const ClearCoursesDocument = gql`
   }
 }
     `;
+export const ClearPracticesToCoursesDocument = gql`
+    mutation clearPracticesToCourses {
+  deletePracticeToCourse(where: {}) {
+    affectedRows
+  }
+}
+    `;
+export const ClearPracticesDocument = gql`
+    mutation clearPractices {
+  deletePractice(where: {}) {
+    affectedRows
+  }
+}
+    `;
 export const InsertCourseDocument = gql`
     mutation insertCourse($object: CourseInsertInput = {}) {
   insertCourseOne(object: $object) {
@@ -9178,6 +9215,20 @@ export const WatchForGiteaOrgDoneDocument = gql`
     query watchForGiteaOrgDone($_eq: uuid!) {
   practiceToCourse(where: {id: {_eq: $_eq}}) {
     giteaOrgName
+  }
+}
+    `;
+export const SubmitHandoffDocument = gql`
+    mutation submitHandoff($practiceToPromotionId: uuid = "", $yields: [YieldForHandoff!]!) {
+  submitHandoff(practiceToPromotionId: $practiceToPromotionId, yields: $yields) {
+    status
+  }
+}
+    `;
+export const ClearPracticeToStudentDocument = gql`
+    mutation clearPracticeToStudent {
+  deletePracticeToStudent(where: {}) {
+    affectedRows
   }
 }
     `;
@@ -9201,6 +9252,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     clearCourses(variables?: ClearCoursesMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ClearCoursesMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ClearCoursesMutation>(ClearCoursesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'clearCourses', 'mutation');
     },
+    clearPracticesToCourses(variables?: ClearPracticesToCoursesMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ClearPracticesToCoursesMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ClearPracticesToCoursesMutation>(ClearPracticesToCoursesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'clearPracticesToCourses', 'mutation');
+    },
+    clearPractices(variables?: ClearPracticesMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ClearPracticesMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ClearPracticesMutation>(ClearPracticesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'clearPractices', 'mutation');
+    },
     insertCourse(variables?: InsertCourseMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<InsertCourseMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<InsertCourseMutation>(InsertCourseDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'insertCourse', 'mutation');
     },
@@ -9209,6 +9266,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     watchForGiteaOrgDone(variables: WatchForGiteaOrgDoneQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<WatchForGiteaOrgDoneQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<WatchForGiteaOrgDoneQuery>(WatchForGiteaOrgDoneDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'watchForGiteaOrgDone', 'query');
+    },
+    submitHandoff(variables: SubmitHandoffMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SubmitHandoffMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SubmitHandoffMutation>(SubmitHandoffDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'submitHandoff', 'mutation');
+    },
+    clearPracticeToStudent(variables?: ClearPracticeToStudentMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ClearPracticeToStudentMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ClearPracticeToStudentMutation>(ClearPracticeToStudentDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'clearPracticeToStudent', 'mutation');
     }
   };
 }

@@ -4,6 +4,8 @@ import {
   AllowedRolesUpdateColumn,
   CourseInsertInput,
   PracticeInsertInput,
+  PracticeToStudentYield,
+  PracticeToStudentYieldInsertInput,
   PracticeYieldExpectedOutputTypesEnum,
   PracticeYieldTypeEnum,
   RolesEnum,
@@ -98,6 +100,7 @@ const createPracticeTypescript = (courseId: string): PracticeInsertInput => {
     practiceYields: {
       data: [
         {
+          id: faker.string.uuid(),
           description: 'The git repo url where you completed the project in',
           name: 'git repo',
           method: PracticeYieldTypeEnum.GitRepo,
@@ -113,32 +116,15 @@ type Todo = {
 }
 
 const generateFakeTodoItem = (): Todo => ({
-  label: faker.hacker.phrase(),
-  status: faker.random.arrayElement(['open', 'done', 'archived']),
-  id: faker.string.uuid(),
+...
 });
 
 const generateNTodo = (size): Todo[] => {
-  return Array.from(Array(size).keys()).map(generateFakeTodoItem);
+...
 };
 
 const initialList: Todo[] = [
-  {
-    label: 'This is my first todo item',
-    status: 'open',
-    id: faker.string.uuid(),
-  },
-  {
-    label: 'This is some done todo',
-    status: 'done',
-    id: faker.string.uuid(),
-  },
-  {
-    label: 'This is a really old todo',
-    status: 'archived',
-    id: faker.string.uuid(),
-  },
-  ...generateNTodo(10),
+  ...
 ];
 
 type TodoItemProps = Pick<Todo, 'status' | 'label'> & {
@@ -147,24 +133,7 @@ type TodoItemProps = Pick<Todo, 'status' | 'label'> & {
 
 const TodoItem = ({ status, label, onChecked }: TodoItemProps) => {
   return (
-    <div
-      className={clsx('p-4 flex items-center', {
-        'bg-gray-200': status === 'archived',
-      })}
-    >
-      <span
-        className={clsx('w-full block', { 'line-through': status !== 'open' })}
-      >
-        {label}
-      </span>
-      <input
-        checked={status !== 'open'}
-        disabled={status === 'archived'}
-        type="checkbox"
-        className="rounded text-pink-500 ml-8 cursor-pointer disabled:cursor-not-allowed disabled:bg-black disabled:hover:bg-black"
-        onChange={() => onChecked(status === 'open' ? 'done' : 'open')}
-      />
-    </div>
+    ...
   );
 };
 
@@ -173,17 +142,7 @@ function App() {
   const [todoList, setTodoList] = useState<Todo[]>(initialList);
 
   const updater = (id: string, newStatus: Todo['status']) => {
-    setTodoList((oldList) =>
-      oldList.map((it) => {
-        if (it.id !== id) {
-          return it;
-        }
-        return {
-          ...it,
-          status: newStatus,
-        };
-      }),
-    );
+    ...
   };
 
   return (
@@ -201,9 +160,8 @@ function App() {
     </div>
   );
 }
-
-export default App;`,
-                codeLang: 'ts',
+`,
+                codeLang: 'typescript',
                 gitPath: 'src/App.tsx',
                 practiceYieldGradeMetrics: {
                   data: [
@@ -267,12 +225,12 @@ function waitForGiteaOrgNameToShowUp(
         result.practiceToCourse[0].giteaOrgName
       )
         return resolve();
-      if (attempt >= 33)
+      if (attempt >= 20)
         return reject(
           new Error('Timeout: Foo could not be set within one second.')
         );
       console.log('.');
-      setTimeout(() => waitForFoo(attempt + 1), 30);
+      setTimeout(() => waitForFoo(attempt + 1), 200);
     })();
   });
 }
@@ -305,7 +263,58 @@ async function seedDatabase() {
 
   await gqlSdk.insertPractice({ object: practice });
 
-  await waitForGiteaOrgNameToShowUp(practice.practiceToCourses.data[0].id);
+  const practiceToCourseId = practice.practiceToCourses.data[0].id;
+  const yieldId = practice.practiceYields.data[0].id;
+
+  await waitForGiteaOrgNameToShowUp(practiceToCourseId);
+
+  await gqlSdk.submitHandoff(
+    {
+      yields: [
+        {
+          yieldId,
+          value: 'https://github.com/demo-courso/student-2-ts-react',
+        },
+      ],
+      practiceToPromotionId: practiceToCourseId,
+    },
+    {
+      'x-hasura-user-id': fourStudents[1].id,
+      'x-hasura-role': 'student',
+    }
+  );
+
+  await gqlSdk.submitHandoff(
+    {
+      yields: [
+        {
+          yieldId,
+          value: 'https://github.com/demo-courso/student-3-ts-react',
+        },
+      ],
+      practiceToPromotionId: practiceToCourseId,
+    },
+    {
+      'x-hasura-user-id': fourStudents[2].id,
+      'x-hasura-role': 'student',
+    }
+  );
+
+  await gqlSdk.submitHandoff(
+    {
+      yields: [
+        {
+          yieldId,
+          value: 'https://github.com/demo-courso/student-4-ts-react',
+        },
+      ],
+      practiceToPromotionId: practiceToCourseId,
+    },
+    {
+      'x-hasura-user-id': fourStudents[3].id,
+      'x-hasura-role': 'student',
+    }
+  );
 
   console.log('Done !');
   console.log(`
@@ -317,6 +326,11 @@ Student 1 email: student1@test.com
 }
 
 async function clean() {
+  console.log('Clearing student output');
+  await gqlSdk.clearPracticeToStudent();
+  console.log('Deleting all practices');
+  await gqlSdk.clearPracticesToCourses();
+  await gqlSdk.clearPractices();
   console.log('Deleting all courses');
   await gqlSdk.clearCourses();
   console.log('Clearing all students...');

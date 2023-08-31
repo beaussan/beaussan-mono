@@ -2,6 +2,7 @@ import { gqlSdk } from '../../gql';
 import * as yup from 'yup';
 import { ActionMap } from './types';
 import { HttpsError } from '../../common/HttpsError';
+import { PracticeToStudentYieldInsertInput } from '../../generated/graphql';
 
 const argValidation = yup.object().shape({
   practiceToPromotionId: yup.string().uuid().required(),
@@ -57,10 +58,12 @@ export const submitHandoff: ActionMap['submitHandoff'] = async (
   await gqlSdk.mutationSubmitHandoff({
     student_id: practice_to_course_by_pk.course.studentToCourses[0].studentId,
     promotion_practice_id: args.practiceToPromotionId,
-    studentYields: args.yields.map(({ yieldId, value }) => ({
-      value,
-      practice_yield_id: yieldId,
-    })),
+    studentYields: args.yields.map(
+      ({ yieldId, value }): PracticeToStudentYieldInsertInput => ({
+        value,
+        practiceYieldId: yieldId,
+      })
+    ),
   });
 
   return {
