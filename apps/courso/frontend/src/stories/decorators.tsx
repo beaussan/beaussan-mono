@@ -109,6 +109,7 @@ const buildCurrentUserMock = (body: CurrentUserQuery): AuthDecoratorFn => {
 };
 
 const buildAuthStateDecorator = (context: AuthContext): DecoratorFn => {
+  // eslint-disable-next-line react/display-name
   return (fn) => (
     <MockAuthContextProvider params={context}>
       <CurrentUserProvider>{fn()}</CurrentUserProvider>

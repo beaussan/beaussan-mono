@@ -80,7 +80,7 @@ export function useFormikMutationSubmitWithNavigate<
 }: UseFormikMutationSubmitWithNavigateType<TFormData, TData, TVariables>) {
   const router = useRouter();
   const onSuccess = () => {
-    if (!!navigateDestination) {
+    if (navigateDestination) {
       router.push(navigateDestination);
     }
   };

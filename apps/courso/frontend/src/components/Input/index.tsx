@@ -69,9 +69,9 @@ export const RawInput = ({ label, disabled, error, ...rest }: RawInput) => {
   );
 };
 
-// eslint-disable-next-line react/display-name
 const generateInput =
   (component: string): React.FC<InputProps> =>
+  // eslint-disable-next-line react/display-name
   ({ label, className, ...rest }) => {
     const [field, meta] = useField(rest);
     const { disabled } = rest;

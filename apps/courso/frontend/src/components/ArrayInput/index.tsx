@@ -19,6 +19,7 @@ interface TArrayInput<T> {
   defaultNewItem: () => T;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
 export const ArrayInput = <T extends unknown>({
   children,
   name,
