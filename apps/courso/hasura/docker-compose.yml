@@ -24,7 +24,7 @@ services:
       - SHOW_REGISTRATION_BUTTON=false
     restart: unless-stopped
     volumes:
-      - ./gitea-data:/data
+      - ../../../../gitea-data:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
