@@ -2,9 +2,15 @@ import gql from 'graphql-tag';
 import * as Urql from 'urql';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -72,7 +78,6 @@ export type AccountAggregateFields = {
   varSamp?: Maybe<AccountVarSampFields>;
   variance?: Maybe<AccountVarianceFields>;
 };
-
 
 /** aggregate fields of "account" */
 export type AccountAggregateFieldsCountArgs = {
@@ -144,7 +149,7 @@ export enum AccountConstraint {
   /** unique or primary key constraint on columns "compound_id" */
   AccountsCompoundIdKey = 'accounts_compound_id_key',
   /** unique or primary key constraint on columns "id" */
-  AccountsPkey = 'accounts_pkey'
+  AccountsPkey = 'accounts_pkey',
 }
 
 /** input type for incrementing numeric columns in table "account" */
@@ -346,7 +351,7 @@ export enum AccountSelectColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 /** input type for updating data in table "account" */
@@ -482,7 +487,7 @@ export enum AccountUpdateColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 export type AccountUpdates = {
@@ -557,7 +562,6 @@ export type AllowedRolesAggregateFields = {
   min?: Maybe<AllowedRolesMinFields>;
 };
 
-
 /** aggregate fields of "allowed_roles" */
 export type AllowedRolesAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<AllowedRolesSelectColumn>>;
@@ -592,7 +596,7 @@ export type AllowedRolesBoolExp = {
 /** unique or primary key constraints on table "allowed_roles" */
 export enum AllowedRolesConstraint {
   /** unique or primary key constraint on columns "user_id", "role" */
-  AllowedRolesPkey = 'allowed_roles_pkey'
+  AllowedRolesPkey = 'allowed_roles_pkey',
 }
 
 /** input type for inserting data into table "allowed_roles" */
@@ -660,7 +664,7 @@ export enum AllowedRolesSelectColumn {
   /** column name */
   Role = 'role',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 /** input type for updating data in table "allowed_roles" */
@@ -688,7 +692,7 @@ export enum AllowedRolesUpdateColumn {
   /** column name */
   Role = 'role',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 export type AllowedRolesUpdates = {
@@ -756,7 +760,6 @@ export type CalculatedGradesAggregateFields = {
   variance?: Maybe<CalculatedGradesVarianceFields>;
 };
 
-
 /** aggregate fields of "calculated_grades" */
 export type CalculatedGradesAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<CalculatedGradesSelectColumn>>;
@@ -817,7 +820,7 @@ export enum CalculatedGradesSelectColumn {
   /** column name */
   CalculatedGrade = 'calculatedGrade',
   /** column name */
-  PracticeToStudentId = 'practiceToStudentId'
+  PracticeToStudentId = 'practiceToStudentId',
 }
 
 /** aggregate stddev on columns */
@@ -917,7 +920,6 @@ export type Course = {
   years: Scalars['String'];
 };
 
-
 /** columns and relationships of "course" */
 export type CoursePracticeToCoursesArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
@@ -926,7 +928,6 @@ export type CoursePracticeToCoursesArgs = {
   orderBy?: InputMaybe<Array<PracticeToCourseOrderBy>>;
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
-
 
 /** columns and relationships of "course" */
 export type CoursePracticeToCoursesAggregateArgs = {
@@ -937,7 +938,6 @@ export type CoursePracticeToCoursesAggregateArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
-
 /** columns and relationships of "course" */
 export type CourseStudentToCoursesArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
@@ -946,7 +946,6 @@ export type CourseStudentToCoursesArgs = {
   orderBy?: InputMaybe<Array<StudentToCourseOrderBy>>;
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
-
 
 /** columns and relationships of "course" */
 export type CourseStudentToCoursesAggregateArgs = {
@@ -971,7 +970,6 @@ export type CourseAggregateFields = {
   max?: Maybe<CourseMaxFields>;
   min?: Maybe<CourseMinFields>;
 };
-
 
 /** aggregate fields of "course" */
 export type CourseAggregateFieldsCountArgs = {
@@ -1002,7 +1000,7 @@ export enum CourseConstraint {
   /** unique or primary key constraint on columns "years", "name" */
   PromotionNameYearsKey = 'promotion_name_years_key',
   /** unique or primary key constraint on columns "id" */
-  PromotionPkey = 'promotion_pkey'
+  PromotionPkey = 'promotion_pkey',
 }
 
 /** input type for inserting data into table "course" */
@@ -1094,7 +1092,7 @@ export enum CourseSelectColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Years = 'years'
+  Years = 'years',
 }
 
 /** input type for updating data in table "course" */
@@ -1142,7 +1140,7 @@ export enum CourseUpdateColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Years = 'years'
+  Years = 'years',
 }
 
 export type CourseUpdates = {
@@ -1157,7 +1155,7 @@ export enum CursorOrdering {
   /** ascending ordering of the cursor */
   Asc = 'ASC',
   /** descending ordering of the cursor */
-  Desc = 'DESC'
+  Desc = 'DESC',
 }
 
 export type FillEmptyYieldsOutput = {
@@ -1264,7 +1262,7 @@ export enum OrderBy {
   /** in descending order, nulls first */
   DescNullsFirst = 'DESC_NULLS_FIRST',
   /** in descending order, nulls last */
-  DescNullsLast = 'DESC_NULLS_LAST'
+  DescNullsLast = 'DESC_NULLS_LAST',
 }
 
 /** columns and relationships of "practice" */
@@ -1285,7 +1283,6 @@ export type Practice = {
   updatedAt: Scalars['timestamptz'];
 };
 
-
 /** columns and relationships of "practice" */
 export type PracticePracticeToCoursesArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
@@ -1294,7 +1291,6 @@ export type PracticePracticeToCoursesArgs = {
   orderBy?: InputMaybe<Array<PracticeToCourseOrderBy>>;
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
-
 
 /** columns and relationships of "practice" */
 export type PracticePracticeToCoursesAggregateArgs = {
@@ -1305,7 +1301,6 @@ export type PracticePracticeToCoursesAggregateArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
-
 /** columns and relationships of "practice" */
 export type PracticePracticeYieldsArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
@@ -1314,7 +1309,6 @@ export type PracticePracticeYieldsArgs = {
   orderBy?: InputMaybe<Array<PracticeYieldOrderBy>>;
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
-
 
 /** columns and relationships of "practice" */
 export type PracticePracticeYieldsAggregateArgs = {
@@ -1339,7 +1333,6 @@ export type PracticeAggregateFields = {
   max?: Maybe<PracticeMaxFields>;
   min?: Maybe<PracticeMinFields>;
 };
-
 
 /** aggregate fields of "practice" */
 export type PracticeAggregateFieldsCountArgs = {
@@ -1368,7 +1361,7 @@ export enum PracticeConstraint {
   /** unique or primary key constraint on columns "id" */
   PracticePkey = 'practice_pkey',
   /** unique or primary key constraint on columns "title" */
-  PracticeTitleKey = 'practice_title_key'
+  PracticeTitleKey = 'practice_title_key',
 }
 
 /** input type for inserting data into table "practice" */
@@ -1452,7 +1445,7 @@ export enum PracticeSelectColumn {
   /** column name */
   Title = 'title',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** input type for updating data in table "practice" */
@@ -1503,7 +1496,6 @@ export type PracticeToCourse = {
   updatedAt: Scalars['timestamptz'];
 };
 
-
 /** columns and relationships of "practice_to_course" */
 export type PracticeToCoursePracticeToStudentsArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
@@ -1512,7 +1504,6 @@ export type PracticeToCoursePracticeToStudentsArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentOrderBy>>;
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
-
 
 /** columns and relationships of "practice_to_course" */
 export type PracticeToCoursePracticeToStudentsAggregateArgs = {
@@ -1541,7 +1532,6 @@ export type PracticeToCourseAggregateFields = {
   max?: Maybe<PracticeToCourseMaxFields>;
   min?: Maybe<PracticeToCourseMinFields>;
 };
-
 
 /** aggregate fields of "practice_to_course" */
 export type PracticeToCourseAggregateFieldsCountArgs = {
@@ -1588,7 +1578,7 @@ export enum PracticeToCourseConstraint {
   /** unique or primary key constraint on columns "id" */
   PracticeToPromotionPkey = 'practice_to_promotion_pkey',
   /** unique or primary key constraint on columns "course_id", "practice_id" */
-  PracticeToPromotionPromotionIdPracticeIdKey = 'practice_to_promotion_promotion_id_practice_id_key'
+  PracticeToPromotionPromotionIdPracticeIdKey = 'practice_to_promotion_promotion_id_practice_id_key',
 }
 
 /** input type for inserting data into table "practice_to_course" */
@@ -1717,7 +1707,7 @@ export enum PracticeToCourseSelectColumn {
   /** column name */
   PracticeId = 'practiceId',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** input type for updating data in table "practice_to_course" */
@@ -1769,7 +1759,7 @@ export enum PracticeToCourseUpdateColumn {
   /** column name */
   PracticeId = 'practiceId',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 export type PracticeToCourseUpdates = {
@@ -1808,18 +1798,15 @@ export type PracticeToStudent = {
   updatedAt: Scalars['timestamptz'];
 };
 
-
 /** columns and relationships of "practice_to_student" */
 export type PracticeToStudentFeedbackArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
 
-
 /** columns and relationships of "practice_to_student" */
 export type PracticeToStudentGradeDetailArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
-
 
 /** columns and relationships of "practice_to_student" */
 export type PracticeToStudentPracticeToStudentYieldsArgs = {
@@ -1829,7 +1816,6 @@ export type PracticeToStudentPracticeToStudentYieldsArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentYieldOrderBy>>;
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
-
 
 /** columns and relationships of "practice_to_student" */
 export type PracticeToStudentPracticeToStudentYieldsAggregateArgs = {
@@ -1876,7 +1862,6 @@ export type PracticeToStudentAggregateFields = {
   varSamp?: Maybe<PracticeToStudentVarSampFields>;
   variance?: Maybe<PracticeToStudentVarianceFields>;
 };
-
 
 /** aggregate fields of "practice_to_student" */
 export type PracticeToStudentAggregateFieldsCountArgs = {
@@ -1952,7 +1937,7 @@ export enum PracticeToStudentConstraint {
   /** unique or primary key constraint on columns "id" */
   PracticeToStudentPkey = 'practice_to_student_pkey',
   /** unique or primary key constraint on columns "student_id", "course_practice_id" */
-  PracticeToStudentStudentIdPromotionPracticeIdKey = 'practice_to_student_student_id_promotion_practice_id_key'
+  PracticeToStudentStudentIdPromotionPracticeIdKey = 'practice_to_student_student_id_promotion_practice_id_key',
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -1982,7 +1967,6 @@ export type PracticeToStudentFeedback = {
   practice_to_student?: Maybe<PracticeToStudent>;
 };
 
-
 /** columns and relationships of "practice_to_student_feedback" */
 export type PracticeToStudentFeedbackFeedbackArgs = {
   path?: InputMaybe<Scalars['String']>;
@@ -2002,7 +1986,6 @@ export type PracticeToStudentFeedbackAggregateFields = {
   max?: Maybe<PracticeToStudentFeedbackMaxFields>;
   min?: Maybe<PracticeToStudentFeedbackMinFields>;
 };
-
 
 /** aggregate fields of "practice_to_student_feedback" */
 export type PracticeToStudentFeedbackAggregateFieldsCountArgs = {
@@ -2090,7 +2073,7 @@ export enum PracticeToStudentFeedbackSelectColumn {
   /** column name */
   Feedback = 'feedback',
   /** column name */
-  PracticeToStudentId = 'practiceToStudentId'
+  PracticeToStudentId = 'practiceToStudentId',
 }
 
 /** input type for updating data in table "practice_to_student_feedback" */
@@ -2140,7 +2123,6 @@ export type PracticeToStudentGrade = {
   practiceToStudentId?: Maybe<Scalars['uuid']>;
 };
 
-
 /** columns and relationships of "practice_to_student_grade" */
 export type PracticeToStudentGradeGradeDetailArgs = {
   path?: InputMaybe<Scalars['String']>;
@@ -2168,7 +2150,6 @@ export type PracticeToStudentGradeAggregateFields = {
   varSamp?: Maybe<PracticeToStudentGradeVarSampFields>;
   variance?: Maybe<PracticeToStudentGradeVarianceFields>;
 };
-
 
 /** aggregate fields of "practice_to_student_grade" */
 export type PracticeToStudentGradeAggregateFieldsCountArgs = {
@@ -2249,7 +2230,6 @@ export type PracticeToStudentGradeMetric = {
   updatedAt: Scalars['timestamptz'];
 };
 
-
 /** columns and relationships of "practice_to_student_grade_metric" */
 export type PracticeToStudentGradeMetricFeedbackArgs = {
   path?: InputMaybe<Scalars['String']>;
@@ -2281,7 +2261,6 @@ export type PracticeToStudentGradeMetricAggregateFields = {
   varSamp?: Maybe<PracticeToStudentGradeMetricVarSampFields>;
   variance?: Maybe<PracticeToStudentGradeMetricVarianceFields>;
 };
-
 
 /** aggregate fields of "practice_to_student_grade_metric" */
 export type PracticeToStudentGradeMetricAggregateFieldsCountArgs = {
@@ -2348,7 +2327,7 @@ export enum PracticeToStudentGradeMetricConstraint {
   /** unique or primary key constraint on columns "id" */
   PracticeToStudentGradeMetricPkey = 'practice_to_student_grade_metric_pkey',
   /** unique or primary key constraint on columns "practice_to_student_yield_id", "practice_yield_grade_metric_id" */
-  PracticeToStudentGradeMetricPracticeYieldGradeMetricId = 'practice_to_student_grade_metric_practice_yield_grade_metric_id'
+  PracticeToStudentGradeMetricPracticeYieldGradeMetricId = 'practice_to_student_grade_metric_practice_yield_grade_metric_id',
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -2480,7 +2459,7 @@ export enum PracticeToStudentGradeMetricSelectColumn {
   /** column name */
   PracticeYieldGradeMetricId = 'practiceYieldGradeMetricId',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** input type for updating data in table "practice_to_student_grade_metric" */
@@ -2572,7 +2551,7 @@ export enum PracticeToStudentGradeMetricUpdateColumn {
   /** column name */
   PracticeYieldGradeMetricId = 'practiceYieldGradeMetricId',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 export type PracticeToStudentGradeMetricUpdates = {
@@ -2668,7 +2647,7 @@ export enum PracticeToStudentGradeSelectColumn {
   /** column name */
   GradeDetail = 'gradeDetail',
   /** column name */
-  PracticeToStudentId = 'practiceToStudentId'
+  PracticeToStudentId = 'practiceToStudentId',
 }
 
 /** input type for updating data in table "practice_to_student_grade" */
@@ -2896,13 +2875,13 @@ export enum PracticeToStudentSelectColumn {
   /** column name */
   Submited = 'submited',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** select "practiceToStudentAggregateBoolExpAvgArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpAvgArgumentsColumns {
   /** column name */
-  Grade = 'grade'
+  Grade = 'grade',
 }
 
 /** select "practiceToStudentAggregateBoolExpBool_andArgumentsColumns" columns of table "practice_to_student" */
@@ -2910,7 +2889,7 @@ export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpBool_A
   /** column name */
   Graded = 'graded',
   /** column name */
-  Submited = 'submited'
+  Submited = 'submited',
 }
 
 /** select "practiceToStudentAggregateBoolExpBool_orArgumentsColumns" columns of table "practice_to_student" */
@@ -2918,49 +2897,49 @@ export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpBool_O
   /** column name */
   Graded = 'graded',
   /** column name */
-  Submited = 'submited'
+  Submited = 'submited',
 }
 
 /** select "practiceToStudentAggregateBoolExpCorrArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpCorrArgumentsColumns {
   /** column name */
-  Grade = 'grade'
+  Grade = 'grade',
 }
 
 /** select "practiceToStudentAggregateBoolExpCovar_sampArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpCovar_SampArgumentsColumns {
   /** column name */
-  Grade = 'grade'
+  Grade = 'grade',
 }
 
 /** select "practiceToStudentAggregateBoolExpMaxArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpMaxArgumentsColumns {
   /** column name */
-  Grade = 'grade'
+  Grade = 'grade',
 }
 
 /** select "practiceToStudentAggregateBoolExpMinArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpMinArgumentsColumns {
   /** column name */
-  Grade = 'grade'
+  Grade = 'grade',
 }
 
 /** select "practiceToStudentAggregateBoolExpStddev_sampArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpStddev_SampArgumentsColumns {
   /** column name */
-  Grade = 'grade'
+  Grade = 'grade',
 }
 
 /** select "practiceToStudentAggregateBoolExpSumArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpSumArgumentsColumns {
   /** column name */
-  Grade = 'grade'
+  Grade = 'grade',
 }
 
 /** select "practiceToStudentAggregateBoolExpVar_sampArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpVar_SampArgumentsColumns {
   /** column name */
-  Grade = 'grade'
+  Grade = 'grade',
 }
 
 /** input type for updating data in table "practice_to_student" */
@@ -3064,7 +3043,7 @@ export enum PracticeToStudentUpdateColumn {
   /** column name */
   Submited = 'submited',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 export type PracticeToStudentUpdates = {
@@ -3140,7 +3119,6 @@ export type PracticeToStudentYield = {
   value: Scalars['String'];
 };
 
-
 /** columns and relationships of "practice_to_student_yield" */
 export type PracticeToStudentYieldPracticeToStudentGradeMetricsArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
@@ -3149,7 +3127,6 @@ export type PracticeToStudentYieldPracticeToStudentGradeMetricsArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentGradeMetricOrderBy>>;
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
-
 
 /** columns and relationships of "practice_to_student_yield" */
 export type PracticeToStudentYieldPracticeToStudentGradeMetricsAggregateArgs = {
@@ -3180,7 +3157,6 @@ export type PracticeToStudentYieldAggregateFields = {
   max?: Maybe<PracticeToStudentYieldMaxFields>;
   min?: Maybe<PracticeToStudentYieldMinFields>;
 };
-
 
 /** aggregate fields of "practice_to_student_yield" */
 export type PracticeToStudentYieldAggregateFieldsCountArgs = {
@@ -3226,7 +3202,7 @@ export enum PracticeToStudentYieldConstraint {
   /** unique or primary key constraint on columns "id" */
   StudentPracticeYieldPkey = 'student_practice_yield_pkey',
   /** unique or primary key constraint on columns "practice_yield_id", "practice_to_student_id" */
-  StudentPracticeYieldPracticeYieldIdPracticeToStudenKey = 'student_practice_yield_practice_yield_id_practice_to_studen_key'
+  StudentPracticeYieldPracticeYieldIdPracticeToStudenKey = 'student_practice_yield_practice_yield_id_practice_to_studen_key',
 }
 
 /** input type for inserting data into table "practice_to_student_yield" */
@@ -3350,19 +3326,19 @@ export enum PracticeToStudentYieldSelectColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Value = 'value'
+  Value = 'value',
 }
 
 /** select "practiceToStudentYieldAggregateBoolExpBool_andArgumentsColumns" columns of table "practice_to_student_yield" */
 export enum PracticeToStudentYieldSelectColumnPracticeToStudentYieldAggregateBoolExpBool_AndArgumentsColumns {
   /** column name */
-  Submited = 'submited'
+  Submited = 'submited',
 }
 
 /** select "practiceToStudentYieldAggregateBoolExpBool_orArgumentsColumns" columns of table "practice_to_student_yield" */
 export enum PracticeToStudentYieldSelectColumnPracticeToStudentYieldAggregateBoolExpBool_OrArgumentsColumns {
   /** column name */
-  Submited = 'submited'
+  Submited = 'submited',
 }
 
 /** input type for updating data in table "practice_to_student_yield" */
@@ -3414,7 +3390,7 @@ export enum PracticeToStudentYieldUpdateColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Value = 'value'
+  Value = 'value',
 }
 
 export type PracticeToStudentYieldUpdates = {
@@ -3435,7 +3411,7 @@ export enum PracticeUpdateColumn {
   /** column name */
   Title = 'title',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 export type PracticeUpdates = {
@@ -3470,12 +3446,10 @@ export type PracticeYield = {
   updatedAt: Scalars['timestamptz'];
 };
 
-
 /** columns and relationships of "practice_yield" */
 export type PracticeYieldMetaArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
-
 
 /** columns and relationships of "practice_yield" */
 export type PracticeYieldPracticeToStudentYieldsArgs = {
@@ -3486,7 +3460,6 @@ export type PracticeYieldPracticeToStudentYieldsArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
-
 /** columns and relationships of "practice_yield" */
 export type PracticeYieldPracticeToStudentYieldsAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentYieldSelectColumn>>;
@@ -3496,7 +3469,6 @@ export type PracticeYieldPracticeToStudentYieldsAggregateArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
-
 /** columns and relationships of "practice_yield" */
 export type PracticeYieldPracticeYieldExpectedOutputsArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
@@ -3505,7 +3477,6 @@ export type PracticeYieldPracticeYieldExpectedOutputsArgs = {
   orderBy?: InputMaybe<Array<PracticeYieldExpectedOutputOrderBy>>;
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
-
 
 /** columns and relationships of "practice_yield" */
 export type PracticeYieldPracticeYieldExpectedOutputsAggregateArgs = {
@@ -3534,7 +3505,6 @@ export type PracticeYieldAggregateFields = {
   max?: Maybe<PracticeYieldMaxFields>;
   min?: Maybe<PracticeYieldMinFields>;
 };
-
 
 /** aggregate fields of "practice_yield" */
 export type PracticeYieldAggregateFieldsCountArgs = {
@@ -3585,7 +3555,7 @@ export type PracticeYieldBoolExp = {
 /** unique or primary key constraints on table "practice_yield" */
 export enum PracticeYieldConstraint {
   /** unique or primary key constraint on columns "id" */
-  PracticeYieldPkey = 'practice_yield_pkey'
+  PracticeYieldPkey = 'practice_yield_pkey',
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -3624,7 +3594,6 @@ export type PracticeYieldExpectedOutput = {
   updatedAt: Scalars['timestamptz'];
 };
 
-
 /** columns and relationships of "practice_yield_expected_output" */
 export type PracticeYieldExpectedOutputPracticeYieldGradeMetricsArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
@@ -3634,15 +3603,15 @@ export type PracticeYieldExpectedOutputPracticeYieldGradeMetricsArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
-
 /** columns and relationships of "practice_yield_expected_output" */
-export type PracticeYieldExpectedOutputPracticeYieldGradeMetricsAggregateArgs = {
-  distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<PracticeYieldGradeMetricOrderBy>>;
-  where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
-};
+export type PracticeYieldExpectedOutputPracticeYieldGradeMetricsAggregateArgs =
+  {
+    distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
+    limit?: InputMaybe<Scalars['Int']>;
+    offset?: InputMaybe<Scalars['Int']>;
+    orderBy?: InputMaybe<Array<PracticeYieldGradeMetricOrderBy>>;
+    where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
+  };
 
 /** aggregated selection of "practice_yield_expected_output" */
 export type PracticeYieldExpectedOutputAggregate = {
@@ -3662,7 +3631,6 @@ export type PracticeYieldExpectedOutputAggregateFields = {
   max?: Maybe<PracticeYieldExpectedOutputMaxFields>;
   min?: Maybe<PracticeYieldExpectedOutputMinFields>;
 };
-
 
 /** aggregate fields of "practice_yield_expected_output" */
 export type PracticeYieldExpectedOutputAggregateFieldsCountArgs = {
@@ -3708,7 +3676,7 @@ export enum PracticeYieldExpectedOutputConstraint {
   /** unique or primary key constraint on columns "id" */
   PracticeYieldExpectedOutputPkey = 'practice_yield_expected_output_pkey',
   /** unique or primary key constraint on columns "practice_yield_id", "git_path", "method" */
-  PracticeYieldExpectedOutputPracticeYieldIdGitPathMetho = 'practice_yield_expected_output_practice_yield_id_git_path_metho'
+  PracticeYieldExpectedOutputPracticeYieldIdGitPathMetho = 'practice_yield_expected_output_practice_yield_id_git_path_metho',
 }
 
 /** input type for inserting data into table "practice_yield_expected_output" */
@@ -3832,7 +3800,7 @@ export enum PracticeYieldExpectedOutputSelectColumn {
   /** column name */
   PracticeYieldId = 'practiceYieldId',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** input type for updating data in table "practice_yield_expected_output" */
@@ -3877,7 +3845,6 @@ export type PracticeYieldExpectedOutputTypes = {
   practiceYieldExpectedOutputsAggregate: PracticeYieldExpectedOutputAggregate;
 };
 
-
 /** columns and relationships of "practice_yield_expected_output_types" */
 export type PracticeYieldExpectedOutputTypesPracticeYieldExpectedOutputsArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
@@ -3887,15 +3854,15 @@ export type PracticeYieldExpectedOutputTypesPracticeYieldExpectedOutputsArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
 
-
 /** columns and relationships of "practice_yield_expected_output_types" */
-export type PracticeYieldExpectedOutputTypesPracticeYieldExpectedOutputsAggregateArgs = {
-  distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<PracticeYieldExpectedOutputOrderBy>>;
-  where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
-};
+export type PracticeYieldExpectedOutputTypesPracticeYieldExpectedOutputsAggregateArgs =
+  {
+    distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
+    limit?: InputMaybe<Scalars['Int']>;
+    offset?: InputMaybe<Scalars['Int']>;
+    orderBy?: InputMaybe<Array<PracticeYieldExpectedOutputOrderBy>>;
+    where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
+  };
 
 /** aggregated selection of "practice_yield_expected_output_types" */
 export type PracticeYieldExpectedOutputTypesAggregate = {
@@ -3911,7 +3878,6 @@ export type PracticeYieldExpectedOutputTypesAggregateFields = {
   max?: Maybe<PracticeYieldExpectedOutputTypesMaxFields>;
   min?: Maybe<PracticeYieldExpectedOutputTypesMinFields>;
 };
-
 
 /** aggregate fields of "practice_yield_expected_output_types" */
 export type PracticeYieldExpectedOutputTypesAggregateFieldsCountArgs = {
@@ -3932,7 +3898,7 @@ export type PracticeYieldExpectedOutputTypesBoolExp = {
 /** unique or primary key constraints on table "practice_yield_expected_output_types" */
 export enum PracticeYieldExpectedOutputTypesConstraint {
   /** unique or primary key constraint on columns "name" */
-  PracticeGradeMetricTypePkey = 'practice_grade_metric_type_pkey'
+  PracticeGradeMetricTypePkey = 'practice_grade_metric_type_pkey',
 }
 
 export enum PracticeYieldExpectedOutputTypesEnum {
@@ -3942,7 +3908,7 @@ export enum PracticeYieldExpectedOutputTypesEnum {
   Manual = 'MANUAL',
   ManualGitFileReview = 'MANUAL_GIT_FILE_REVIEW',
   ShowGitFile = 'SHOW_GIT_FILE',
-  ShowGitLog = 'SHOW_GIT_LOG'
+  ShowGitLog = 'SHOW_GIT_LOG',
 }
 
 /** Boolean expression to compare columns of type "PracticeYieldExpectedOutputTypesEnum". All fields are combined with logical 'AND'. */
@@ -4009,7 +3975,7 @@ export type PracticeYieldExpectedOutputTypesPkColumnsInput = {
 /** select columns of table "practice_yield_expected_output_types" */
 export enum PracticeYieldExpectedOutputTypesSelectColumn {
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 /** input type for updating data in table "practice_yield_expected_output_types" */
@@ -4033,7 +3999,7 @@ export type PracticeYieldExpectedOutputTypesStreamCursorValueInput = {
 /** update columns of table "practice_yield_expected_output_types" */
 export enum PracticeYieldExpectedOutputTypesUpdateColumn {
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 export type PracticeYieldExpectedOutputTypesUpdates = {
@@ -4060,7 +4026,7 @@ export enum PracticeYieldExpectedOutputUpdateColumn {
   /** column name */
   PracticeYieldId = 'practiceYieldId',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 export type PracticeYieldExpectedOutputUpdates = {
@@ -4088,12 +4054,10 @@ export type PracticeYieldGradeMetric = {
   updatedAt: Scalars['timestamptz'];
 };
 
-
 /** columns and relationships of "practice_yield_grade_metric" */
 export type PracticeYieldGradeMetricFeedbacksArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
-
 
 /** columns and relationships of "practice_yield_grade_metric" */
 export type PracticeYieldGradeMetricPracticeToStudentGradeMetricsArgs = {
@@ -4104,15 +4068,15 @@ export type PracticeYieldGradeMetricPracticeToStudentGradeMetricsArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
-
 /** columns and relationships of "practice_yield_grade_metric" */
-export type PracticeYieldGradeMetricPracticeToStudentGradeMetricsAggregateArgs = {
-  distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<PracticeToStudentGradeMetricOrderBy>>;
-  where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
-};
+export type PracticeYieldGradeMetricPracticeToStudentGradeMetricsAggregateArgs =
+  {
+    distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
+    limit?: InputMaybe<Scalars['Int']>;
+    offset?: InputMaybe<Scalars['Int']>;
+    orderBy?: InputMaybe<Array<PracticeToStudentGradeMetricOrderBy>>;
+    where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
+  };
 
 /** aggregated selection of "practice_yield_grade_metric" */
 export type PracticeYieldGradeMetricAggregate = {
@@ -4140,7 +4104,6 @@ export type PracticeYieldGradeMetricAggregateFields = {
   varSamp?: Maybe<PracticeYieldGradeMetricVarSampFields>;
   variance?: Maybe<PracticeYieldGradeMetricVarianceFields>;
 };
-
 
 /** aggregate fields of "practice_yield_grade_metric" */
 export type PracticeYieldGradeMetricAggregateFieldsCountArgs = {
@@ -4206,7 +4169,7 @@ export type PracticeYieldGradeMetricBoolExp = {
 /** unique or primary key constraints on table "practice_yield_grade_metric" */
 export enum PracticeYieldGradeMetricConstraint {
   /** unique or primary key constraint on columns "id" */
-  PracticeGradeMetricPkey = 'practice_grade_metric_pkey'
+  PracticeGradeMetricPkey = 'practice_grade_metric_pkey',
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -4345,7 +4308,7 @@ export enum PracticeYieldGradeMetricSelectColumn {
   /** column name */
   Points = 'points',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** input type for updating data in table "practice_yield_grade_metric" */
@@ -4437,7 +4400,7 @@ export enum PracticeYieldGradeMetricUpdateColumn {
   /** column name */
   Points = 'points',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 export type PracticeYieldGradeMetricUpdates = {
@@ -4616,7 +4579,7 @@ export enum PracticeYieldSelectColumn {
   /** column name */
   PracticeId = 'practiceId',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** input type for updating data in table "practice_yield" */
@@ -4661,7 +4624,6 @@ export type PracticeYieldType = {
   practiceYieldsAggregate: PracticeYieldAggregate;
 };
 
-
 /** columns and relationships of "practice_yield_type" */
 export type PracticeYieldTypePracticeYieldsArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
@@ -4670,7 +4632,6 @@ export type PracticeYieldTypePracticeYieldsArgs = {
   orderBy?: InputMaybe<Array<PracticeYieldOrderBy>>;
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
-
 
 /** columns and relationships of "practice_yield_type" */
 export type PracticeYieldTypePracticeYieldsAggregateArgs = {
@@ -4696,7 +4657,6 @@ export type PracticeYieldTypeAggregateFields = {
   min?: Maybe<PracticeYieldTypeMinFields>;
 };
 
-
 /** aggregate fields of "practice_yield_type" */
 export type PracticeYieldTypeAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<PracticeYieldTypeSelectColumn>>;
@@ -4716,14 +4676,14 @@ export type PracticeYieldTypeBoolExp = {
 /** unique or primary key constraints on table "practice_yield_type" */
 export enum PracticeYieldTypeConstraint {
   /** unique or primary key constraint on columns "name" */
-  PracticeYieldTypePkey = 'practice_yield_type_pkey'
+  PracticeYieldTypePkey = 'practice_yield_type_pkey',
 }
 
 export enum PracticeYieldTypeEnum {
   Blob = 'BLOB',
   Code = 'CODE',
   GitRepo = 'GIT_REPO',
-  Url = 'URL'
+  Url = 'URL',
 }
 
 /** Boolean expression to compare columns of type "PracticeYieldTypeEnum". All fields are combined with logical 'AND'. */
@@ -4790,7 +4750,7 @@ export type PracticeYieldTypePkColumnsInput = {
 /** select columns of table "practice_yield_type" */
 export enum PracticeYieldTypeSelectColumn {
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 /** input type for updating data in table "practice_yield_type" */
@@ -4814,7 +4774,7 @@ export type PracticeYieldTypeStreamCursorValueInput = {
 /** update columns of table "practice_yield_type" */
 export enum PracticeYieldTypeUpdateColumn {
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 export type PracticeYieldTypeUpdates = {
@@ -4841,7 +4801,7 @@ export enum PracticeYieldUpdateColumn {
   /** column name */
   PracticeId = 'practiceId',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 export type PracticeYieldUpdates = {
@@ -4881,7 +4841,6 @@ export type Roles = {
   value: Scalars['String'];
 };
 
-
 /** columns and relationships of "roles" */
 export type RolesAllowedRolesArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
@@ -4890,7 +4849,6 @@ export type RolesAllowedRolesArgs = {
   orderBy?: InputMaybe<Array<AllowedRolesOrderBy>>;
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
-
 
 /** columns and relationships of "roles" */
 export type RolesAllowedRolesAggregateArgs = {
@@ -4901,7 +4859,6 @@ export type RolesAllowedRolesAggregateArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
-
 /** columns and relationships of "roles" */
 export type RolesUsersArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
@@ -4910,7 +4867,6 @@ export type RolesUsersArgs = {
   orderBy?: InputMaybe<Array<UserOrderBy>>;
   where?: InputMaybe<UserBoolExp>;
 };
-
 
 /** columns and relationships of "roles" */
 export type RolesUsersAggregateArgs = {
@@ -4936,7 +4892,6 @@ export type RolesAggregateFields = {
   min?: Maybe<RolesMinFields>;
 };
 
-
 /** aggregate fields of "roles" */
 export type RolesAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<RolesSelectColumn>>;
@@ -4959,12 +4914,12 @@ export type RolesBoolExp = {
 /** unique or primary key constraints on table "roles" */
 export enum RolesConstraint {
   /** unique or primary key constraint on columns "value" */
-  RolesPkey = 'roles_pkey'
+  RolesPkey = 'roles_pkey',
 }
 
 export enum RolesEnum {
   Student = 'STUDENT',
-  Teacher = 'TEACHER'
+  Teacher = 'TEACHER',
 }
 
 /** Boolean expression to compare columns of type "RolesEnum". All fields are combined with logical 'AND'. */
@@ -5039,7 +4994,7 @@ export enum RolesSelectColumn {
   /** column name */
   Description = 'description',
   /** column name */
-  Value = 'value'
+  Value = 'value',
 }
 
 /** input type for updating data in table "roles" */
@@ -5067,7 +5022,7 @@ export enum RolesUpdateColumn {
   /** column name */
   Description = 'description',
   /** column name */
-  Value = 'value'
+  Value = 'value',
 }
 
 export type RolesUpdates = {
@@ -5112,7 +5067,6 @@ export type SessionAggregateFields = {
   min?: Maybe<SessionMinFields>;
 };
 
-
 /** aggregate fields of "session" */
 export type SessionAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<SessionSelectColumn>>;
@@ -5148,7 +5102,7 @@ export type SessionBoolExp = {
 /** unique or primary key constraints on table "session" */
 export enum SessionConstraint {
   /** unique or primary key constraint on columns "id" */
-  SessionPkey = 'session_pkey'
+  SessionPkey = 'session_pkey',
 }
 
 /** input type for inserting data into table "session" */
@@ -5233,7 +5187,7 @@ export enum SessionSelectColumn {
   /** column name */
   SessionToken = 'sessionToken',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 /** input type for updating data in table "session" */
@@ -5269,7 +5223,7 @@ export enum SessionUpdateColumn {
   /** column name */
   SessionToken = 'sessionToken',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 export type SessionUpdates = {
@@ -5336,7 +5290,6 @@ export type Student = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
-
 /** columns and relationships of "student" */
 export type StudentPracticeToStudentsArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
@@ -5345,7 +5298,6 @@ export type StudentPracticeToStudentsArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentOrderBy>>;
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
-
 
 /** columns and relationships of "student" */
 export type StudentPracticeToStudentsAggregateArgs = {
@@ -5356,7 +5308,6 @@ export type StudentPracticeToStudentsAggregateArgs = {
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
 
-
 /** columns and relationships of "student" */
 export type StudentStudentToCoursesArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
@@ -5365,7 +5316,6 @@ export type StudentStudentToCoursesArgs = {
   orderBy?: InputMaybe<Array<StudentToCourseOrderBy>>;
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
-
 
 /** columns and relationships of "student" */
 export type StudentStudentToCoursesAggregateArgs = {
@@ -5390,7 +5340,6 @@ export type StudentAggregateFields = {
   max?: Maybe<StudentMaxFields>;
   min?: Maybe<StudentMinFields>;
 };
-
 
 /** aggregate fields of "student" */
 export type StudentAggregateFieldsCountArgs = {
@@ -5428,7 +5377,7 @@ export enum StudentConstraint {
   /** unique or primary key constraint on columns "id" */
   StudentPkey = 'student_pkey',
   /** unique or primary key constraint on columns "user_id" */
-  StudentUserIdKey = 'student_user_id_key'
+  StudentUserIdKey = 'student_user_id_key',
 }
 
 /** input type for inserting data into table "student" */
@@ -5535,7 +5484,7 @@ export enum StudentSelectColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 /** input type for updating data in table "student" */
@@ -5602,7 +5551,6 @@ export type StudentToCourseAggregateFields = {
   min?: Maybe<StudentToCourseMinFields>;
 };
 
-
 /** aggregate fields of "student_to_course" */
 export type StudentToCourseAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<StudentToCourseSelectColumn>>;
@@ -5641,7 +5589,7 @@ export enum StudentToCourseConstraint {
   /** unique or primary key constraint on columns "course_id", "student_id" */
   StudentToPromotionPkey = 'student_to_promotion_pkey',
   /** unique or primary key constraint on columns "course_id", "student_id" */
-  StudentToPromotionPromotionIdStudentIdKey = 'student_to_promotion_promotion_id_student_id_key'
+  StudentToPromotionPromotionIdStudentIdKey = 'student_to_promotion_promotion_id_student_id_key',
 }
 
 /** input type for inserting data into table "student_to_course" */
@@ -5729,7 +5677,7 @@ export enum StudentToCourseSelectColumn {
   /** column name */
   StudentId = 'studentId',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** input type for updating data in table "student_to_course" */
@@ -5765,7 +5713,7 @@ export enum StudentToCourseUpdateColumn {
   /** column name */
   StudentId = 'studentId',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 export type StudentToCourseUpdates = {
@@ -5792,7 +5740,7 @@ export enum StudentUpdateColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
 }
 
 export type StudentUpdates = {
@@ -5849,7 +5797,6 @@ export type User = {
   updatedAt: Scalars['timestamptz'];
 };
 
-
 /** columns and relationships of "user" */
 export type UserAccountsArgs = {
   distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
@@ -5858,7 +5805,6 @@ export type UserAccountsArgs = {
   orderBy?: InputMaybe<Array<AccountOrderBy>>;
   where?: InputMaybe<AccountBoolExp>;
 };
-
 
 /** columns and relationships of "user" */
 export type UserAccountsAggregateArgs = {
@@ -5869,7 +5815,6 @@ export type UserAccountsAggregateArgs = {
   where?: InputMaybe<AccountBoolExp>;
 };
 
-
 /** columns and relationships of "user" */
 export type UserAllowedRolesArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
@@ -5878,7 +5823,6 @@ export type UserAllowedRolesArgs = {
   orderBy?: InputMaybe<Array<AllowedRolesOrderBy>>;
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
-
 
 /** columns and relationships of "user" */
 export type UserAllowedRolesAggregateArgs = {
@@ -5889,7 +5833,6 @@ export type UserAllowedRolesAggregateArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
-
 /** columns and relationships of "user" */
 export type UserSessionsArgs = {
   distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
@@ -5898,7 +5841,6 @@ export type UserSessionsArgs = {
   orderBy?: InputMaybe<Array<SessionOrderBy>>;
   where?: InputMaybe<SessionBoolExp>;
 };
-
 
 /** columns and relationships of "user" */
 export type UserSessionsAggregateArgs = {
@@ -5927,7 +5869,6 @@ export type UserAggregateFields = {
   max?: Maybe<UserMaxFields>;
   min?: Maybe<UserMinFields>;
 };
-
 
 /** aggregate fields of "user" */
 export type UserAggregateFieldsCountArgs = {
@@ -5977,7 +5918,7 @@ export enum UserConstraint {
   /** unique or primary key constraint on columns "email" */
   UserEmailKey = 'user_email_key',
   /** unique or primary key constraint on columns "id" */
-  UserPkey = 'user_pkey'
+  UserPkey = 'user_pkey',
 }
 
 /** input type for inserting data into table "user" */
@@ -6105,7 +6046,7 @@ export enum UserSelectColumn {
   /** column name */
   Name = 'name',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 /** input type for updating data in table "user" */
@@ -6157,7 +6098,7 @@ export enum UserUpdateColumn {
   /** column name */
   Name = 'name',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
 }
 
 export type UserUpdates = {
@@ -6203,7 +6144,6 @@ export type VerificationTokenAggregateFields = {
   min?: Maybe<VerificationTokenMinFields>;
 };
 
-
 /** aggregate fields of "verification_token" */
 export type VerificationTokenAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<VerificationTokenSelectColumn>>;
@@ -6223,7 +6163,7 @@ export type VerificationTokenBoolExp = {
 /** unique or primary key constraints on table "verification_token" */
 export enum VerificationTokenConstraint {
   /** unique or primary key constraint on columns "token" */
-  VerificationTokenPkey = 'verification_token_pkey'
+  VerificationTokenPkey = 'verification_token_pkey',
 }
 
 /** input type for inserting data into table "verification_token" */
@@ -6284,7 +6224,7 @@ export enum VerificationTokenSelectColumn {
   /** column name */
   Identifier = 'identifier',
   /** column name */
-  Token = 'token'
+  Token = 'token',
 }
 
 /** input type for updating data in table "verification_token" */
@@ -6316,7 +6256,7 @@ export enum VerificationTokenUpdateColumn {
   /** column name */
   Identifier = 'identifier',
   /** column name */
-  Token = 'token'
+  Token = 'token',
 }
 
 export type VerificationTokenUpdates = {
@@ -6551,7 +6491,9 @@ export type Mutation_Root = {
   /** update single row of the table: "practice_to_course" */
   updatePracticeToCourseByPk?: Maybe<PracticeToCourse>;
   /** update multiples rows of table: "practice_to_course" */
-  updatePracticeToCourseMany?: Maybe<Array<Maybe<PracticeToCourseMutationResponse>>>;
+  updatePracticeToCourseMany?: Maybe<
+    Array<Maybe<PracticeToCourseMutationResponse>>
+  >;
   /** update data of the table: "practice_to_student" */
   updatePracticeToStudent?: Maybe<PracticeToStudentMutationResponse>;
   /** update single row of the table: "practice_to_student" */
@@ -6559,25 +6501,35 @@ export type Mutation_Root = {
   /** update data of the table: "practice_to_student_feedback" */
   updatePracticeToStudentFeedback?: Maybe<PracticeToStudentFeedbackMutationResponse>;
   /** update multiples rows of table: "practice_to_student_feedback" */
-  updatePracticeToStudentFeedbackMany?: Maybe<Array<Maybe<PracticeToStudentFeedbackMutationResponse>>>;
+  updatePracticeToStudentFeedbackMany?: Maybe<
+    Array<Maybe<PracticeToStudentFeedbackMutationResponse>>
+  >;
   /** update data of the table: "practice_to_student_grade" */
   updatePracticeToStudentGrade?: Maybe<PracticeToStudentGradeMutationResponse>;
   /** update multiples rows of table: "practice_to_student_grade" */
-  updatePracticeToStudentGradeMany?: Maybe<Array<Maybe<PracticeToStudentGradeMutationResponse>>>;
+  updatePracticeToStudentGradeMany?: Maybe<
+    Array<Maybe<PracticeToStudentGradeMutationResponse>>
+  >;
   /** update data of the table: "practice_to_student_grade_metric" */
   updatePracticeToStudentGradeMetric?: Maybe<PracticeToStudentGradeMetricMutationResponse>;
   /** update single row of the table: "practice_to_student_grade_metric" */
   updatePracticeToStudentGradeMetricByPk?: Maybe<PracticeToStudentGradeMetric>;
   /** update multiples rows of table: "practice_to_student_grade_metric" */
-  updatePracticeToStudentGradeMetricMany?: Maybe<Array<Maybe<PracticeToStudentGradeMetricMutationResponse>>>;
+  updatePracticeToStudentGradeMetricMany?: Maybe<
+    Array<Maybe<PracticeToStudentGradeMetricMutationResponse>>
+  >;
   /** update multiples rows of table: "practice_to_student" */
-  updatePracticeToStudentMany?: Maybe<Array<Maybe<PracticeToStudentMutationResponse>>>;
+  updatePracticeToStudentMany?: Maybe<
+    Array<Maybe<PracticeToStudentMutationResponse>>
+  >;
   /** update data of the table: "practice_to_student_yield" */
   updatePracticeToStudentYield?: Maybe<PracticeToStudentYieldMutationResponse>;
   /** update single row of the table: "practice_to_student_yield" */
   updatePracticeToStudentYieldByPk?: Maybe<PracticeToStudentYield>;
   /** update multiples rows of table: "practice_to_student_yield" */
-  updatePracticeToStudentYieldMany?: Maybe<Array<Maybe<PracticeToStudentYieldMutationResponse>>>;
+  updatePracticeToStudentYieldMany?: Maybe<
+    Array<Maybe<PracticeToStudentYieldMutationResponse>>
+  >;
   /** update data of the table: "practice_yield" */
   updatePracticeYield?: Maybe<PracticeYieldMutationResponse>;
   /** update single row of the table: "practice_yield" */
@@ -6587,19 +6539,25 @@ export type Mutation_Root = {
   /** update single row of the table: "practice_yield_expected_output" */
   updatePracticeYieldExpectedOutputByPk?: Maybe<PracticeYieldExpectedOutput>;
   /** update multiples rows of table: "practice_yield_expected_output" */
-  updatePracticeYieldExpectedOutputMany?: Maybe<Array<Maybe<PracticeYieldExpectedOutputMutationResponse>>>;
+  updatePracticeYieldExpectedOutputMany?: Maybe<
+    Array<Maybe<PracticeYieldExpectedOutputMutationResponse>>
+  >;
   /** update data of the table: "practice_yield_expected_output_types" */
   updatePracticeYieldExpectedOutputTypes?: Maybe<PracticeYieldExpectedOutputTypesMutationResponse>;
   /** update single row of the table: "practice_yield_expected_output_types" */
   updatePracticeYieldExpectedOutputTypesByPk?: Maybe<PracticeYieldExpectedOutputTypes>;
   /** update multiples rows of table: "practice_yield_expected_output_types" */
-  updatePracticeYieldExpectedOutputTypesMany?: Maybe<Array<Maybe<PracticeYieldExpectedOutputTypesMutationResponse>>>;
+  updatePracticeYieldExpectedOutputTypesMany?: Maybe<
+    Array<Maybe<PracticeYieldExpectedOutputTypesMutationResponse>>
+  >;
   /** update data of the table: "practice_yield_grade_metric" */
   updatePracticeYieldGradeMetric?: Maybe<PracticeYieldGradeMetricMutationResponse>;
   /** update single row of the table: "practice_yield_grade_metric" */
   updatePracticeYieldGradeMetricByPk?: Maybe<PracticeYieldGradeMetric>;
   /** update multiples rows of table: "practice_yield_grade_metric" */
-  updatePracticeYieldGradeMetricMany?: Maybe<Array<Maybe<PracticeYieldGradeMetricMutationResponse>>>;
+  updatePracticeYieldGradeMetricMany?: Maybe<
+    Array<Maybe<PracticeYieldGradeMetricMutationResponse>>
+  >;
   /** update multiples rows of table: "practice_yield" */
   updatePracticeYieldMany?: Maybe<Array<Maybe<PracticeYieldMutationResponse>>>;
   /** update data of the table: "practice_yield_type" */
@@ -6607,7 +6565,9 @@ export type Mutation_Root = {
   /** update single row of the table: "practice_yield_type" */
   updatePracticeYieldTypeByPk?: Maybe<PracticeYieldType>;
   /** update multiples rows of table: "practice_yield_type" */
-  updatePracticeYieldTypeMany?: Maybe<Array<Maybe<PracticeYieldTypeMutationResponse>>>;
+  updatePracticeYieldTypeMany?: Maybe<
+    Array<Maybe<PracticeYieldTypeMutationResponse>>
+  >;
   /** update data of the table: "roles" */
   updateRoles?: Maybe<RolesMutationResponse>;
   /** update single row of the table: "roles" */
@@ -6631,7 +6591,9 @@ export type Mutation_Root = {
   /** update single row of the table: "student_to_course" */
   updateStudentToCourseByPk?: Maybe<StudentToCourse>;
   /** update multiples rows of table: "student_to_course" */
-  updateStudentToCourseMany?: Maybe<Array<Maybe<StudentToCourseMutationResponse>>>;
+  updateStudentToCourseMany?: Maybe<
+    Array<Maybe<StudentToCourseMutationResponse>>
+  >;
   /** update data of the table: "user" */
   updateUser?: Maybe<UserMutationResponse>;
   /** update single row of the table: "user" */
@@ -6643,27 +6605,25 @@ export type Mutation_Root = {
   /** update single row of the table: "verification_token" */
   updateVerificationTokenByPk?: Maybe<VerificationToken>;
   /** update multiples rows of table: "verification_token" */
-  updateVerificationTokenMany?: Maybe<Array<Maybe<VerificationTokenMutationResponse>>>;
+  updateVerificationTokenMany?: Maybe<
+    Array<Maybe<VerificationTokenMutationResponse>>
+  >;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteAccountArgs = {
   where: AccountBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteAccountByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteAllowedRolesArgs = {
   where: AllowedRolesBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteAllowedRolesByPkArgs = {
@@ -6671,192 +6631,160 @@ export type Mutation_RootDeleteAllowedRolesByPkArgs = {
   userId: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteCourseArgs = {
   where: CourseBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteCourseByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePracticeArgs = {
   where: PracticeBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePracticeByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePracticeToCourseArgs = {
   where: PracticeToCourseBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePracticeToCourseByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentArgs = {
   where: PracticeToStudentBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentFeedbackArgs = {
   where: PracticeToStudentFeedbackBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentGradeArgs = {
   where: PracticeToStudentGradeBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentGradeMetricArgs = {
   where: PracticeToStudentGradeMetricBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentYieldArgs = {
   where: PracticeToStudentYieldBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentYieldByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldArgs = {
   where: PracticeYieldBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldExpectedOutputArgs = {
   where: PracticeYieldExpectedOutputBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldExpectedOutputByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldExpectedOutputTypesArgs = {
   where: PracticeYieldExpectedOutputTypesBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldExpectedOutputTypesByPkArgs = {
   name: Scalars['String'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldGradeMetricArgs = {
   where: PracticeYieldGradeMetricBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldTypeArgs = {
   where: PracticeYieldTypeBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldTypeByPkArgs = {
   name: Scalars['String'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteRolesArgs = {
   where: RolesBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteRolesByPkArgs = {
   value: Scalars['String'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteSessionArgs = {
   where: SessionBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteSessionByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteStudentArgs = {
   where: StudentBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteStudentByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteStudentToCourseArgs = {
   where: StudentToCourseBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteStudentToCourseByPkArgs = {
@@ -6864,30 +6792,25 @@ export type Mutation_RootDeleteStudentToCourseByPkArgs = {
   studentId: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteUserArgs = {
   where: UserBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteUserByPkArgs = {
   id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteVerificationTokenArgs = {
   where: VerificationTokenBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteVerificationTokenByPkArgs = {
   token: Scalars['String'];
 };
-
 
 /** mutation root */
 export type Mutation_RootFillEmptyYieldsArgs = {
@@ -6895,13 +6818,11 @@ export type Mutation_RootFillEmptyYieldsArgs = {
   practice_id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertAccountArgs = {
   objects: Array<AccountInsertInput>;
   onConflict?: InputMaybe<AccountOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertAccountOneArgs = {
@@ -6909,13 +6830,11 @@ export type Mutation_RootInsertAccountOneArgs = {
   onConflict?: InputMaybe<AccountOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertAllowedRolesArgs = {
   objects: Array<AllowedRolesInsertInput>;
   onConflict?: InputMaybe<AllowedRolesOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertAllowedRolesOneArgs = {
@@ -6923,13 +6842,11 @@ export type Mutation_RootInsertAllowedRolesOneArgs = {
   onConflict?: InputMaybe<AllowedRolesOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertCourseArgs = {
   objects: Array<CourseInsertInput>;
   onConflict?: InputMaybe<CourseOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertCourseOneArgs = {
@@ -6937,13 +6854,11 @@ export type Mutation_RootInsertCourseOneArgs = {
   onConflict?: InputMaybe<CourseOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeArgs = {
   objects: Array<PracticeInsertInput>;
   onConflict?: InputMaybe<PracticeOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertPracticeOneArgs = {
@@ -6951,13 +6866,11 @@ export type Mutation_RootInsertPracticeOneArgs = {
   onConflict?: InputMaybe<PracticeOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeToCourseArgs = {
   objects: Array<PracticeToCourseInsertInput>;
   onConflict?: InputMaybe<PracticeToCourseOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertPracticeToCourseOneArgs = {
@@ -6965,31 +6878,26 @@ export type Mutation_RootInsertPracticeToCourseOneArgs = {
   onConflict?: InputMaybe<PracticeToCourseOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentArgs = {
   objects: Array<PracticeToStudentInsertInput>;
   onConflict?: InputMaybe<PracticeToStudentOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentFeedbackArgs = {
   objects: Array<PracticeToStudentFeedbackInsertInput>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentFeedbackOneArgs = {
   object: PracticeToStudentFeedbackInsertInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentGradeArgs = {
   objects: Array<PracticeToStudentGradeInsertInput>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentGradeMetricArgs = {
@@ -6997,19 +6905,16 @@ export type Mutation_RootInsertPracticeToStudentGradeMetricArgs = {
   onConflict?: InputMaybe<PracticeToStudentGradeMetricOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentGradeMetricOneArgs = {
   object: PracticeToStudentGradeMetricInsertInput;
   onConflict?: InputMaybe<PracticeToStudentGradeMetricOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentGradeOneArgs = {
   object: PracticeToStudentGradeInsertInput;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentOneArgs = {
@@ -7017,13 +6922,11 @@ export type Mutation_RootInsertPracticeToStudentOneArgs = {
   onConflict?: InputMaybe<PracticeToStudentOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentYieldArgs = {
   objects: Array<PracticeToStudentYieldInsertInput>;
   onConflict?: InputMaybe<PracticeToStudentYieldOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentYieldOneArgs = {
@@ -7031,13 +6934,11 @@ export type Mutation_RootInsertPracticeToStudentYieldOneArgs = {
   onConflict?: InputMaybe<PracticeToStudentYieldOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldArgs = {
   objects: Array<PracticeYieldInsertInput>;
   onConflict?: InputMaybe<PracticeYieldOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldExpectedOutputArgs = {
@@ -7045,13 +6946,11 @@ export type Mutation_RootInsertPracticeYieldExpectedOutputArgs = {
   onConflict?: InputMaybe<PracticeYieldExpectedOutputOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldExpectedOutputOneArgs = {
   object: PracticeYieldExpectedOutputInsertInput;
   onConflict?: InputMaybe<PracticeYieldExpectedOutputOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldExpectedOutputTypesArgs = {
@@ -7059,13 +6958,11 @@ export type Mutation_RootInsertPracticeYieldExpectedOutputTypesArgs = {
   onConflict?: InputMaybe<PracticeYieldExpectedOutputTypesOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldExpectedOutputTypesOneArgs = {
   object: PracticeYieldExpectedOutputTypesInsertInput;
   onConflict?: InputMaybe<PracticeYieldExpectedOutputTypesOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldGradeMetricArgs = {
@@ -7073,13 +6970,11 @@ export type Mutation_RootInsertPracticeYieldGradeMetricArgs = {
   onConflict?: InputMaybe<PracticeYieldGradeMetricOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldGradeMetricOneArgs = {
   object: PracticeYieldGradeMetricInsertInput;
   onConflict?: InputMaybe<PracticeYieldGradeMetricOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldOneArgs = {
@@ -7087,13 +6982,11 @@ export type Mutation_RootInsertPracticeYieldOneArgs = {
   onConflict?: InputMaybe<PracticeYieldOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldTypeArgs = {
   objects: Array<PracticeYieldTypeInsertInput>;
   onConflict?: InputMaybe<PracticeYieldTypeOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldTypeOneArgs = {
@@ -7101,13 +6994,11 @@ export type Mutation_RootInsertPracticeYieldTypeOneArgs = {
   onConflict?: InputMaybe<PracticeYieldTypeOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertRolesArgs = {
   objects: Array<RolesInsertInput>;
   onConflict?: InputMaybe<RolesOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertRolesOneArgs = {
@@ -7115,13 +7006,11 @@ export type Mutation_RootInsertRolesOneArgs = {
   onConflict?: InputMaybe<RolesOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertSessionArgs = {
   objects: Array<SessionInsertInput>;
   onConflict?: InputMaybe<SessionOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertSessionOneArgs = {
@@ -7129,13 +7018,11 @@ export type Mutation_RootInsertSessionOneArgs = {
   onConflict?: InputMaybe<SessionOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertStudentArgs = {
   objects: Array<StudentInsertInput>;
   onConflict?: InputMaybe<StudentOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertStudentOneArgs = {
@@ -7143,13 +7030,11 @@ export type Mutation_RootInsertStudentOneArgs = {
   onConflict?: InputMaybe<StudentOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertStudentToCourseArgs = {
   objects: Array<StudentToCourseInsertInput>;
   onConflict?: InputMaybe<StudentToCourseOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertStudentToCourseOneArgs = {
@@ -7157,13 +7042,11 @@ export type Mutation_RootInsertStudentToCourseOneArgs = {
   onConflict?: InputMaybe<StudentToCourseOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertUserArgs = {
   objects: Array<UserInsertInput>;
   onConflict?: InputMaybe<UserOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertUserOneArgs = {
@@ -7171,13 +7054,11 @@ export type Mutation_RootInsertUserOneArgs = {
   onConflict?: InputMaybe<UserOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertVerificationTokenArgs = {
   objects: Array<VerificationTokenInsertInput>;
   onConflict?: InputMaybe<VerificationTokenOnConflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertVerificationTokenOneArgs = {
@@ -7185,12 +7066,10 @@ export type Mutation_RootInsertVerificationTokenOneArgs = {
   onConflict?: InputMaybe<VerificationTokenOnConflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootLinkStudentToUserArgs = {
   linkId: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootRefreshGradesArgs = {
@@ -7198,19 +7077,16 @@ export type Mutation_RootRefreshGradesArgs = {
   practice_id: Scalars['uuid'];
 };
 
-
 /** mutation root */
 export type Mutation_RootSendStudentClaimMailArgs = {
   studentsIds: Array<InputMaybe<Scalars['uuid']>>;
 };
-
 
 /** mutation root */
 export type Mutation_RootSubmitHandoffArgs = {
   practiceToPromotionId: Scalars['uuid'];
   yields: Array<YieldForHandoff>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateAccountArgs = {
@@ -7219,7 +7095,6 @@ export type Mutation_RootUpdateAccountArgs = {
   where: AccountBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateAccountByPkArgs = {
   _inc?: InputMaybe<AccountIncInput>;
@@ -7227,12 +7102,10 @@ export type Mutation_RootUpdateAccountByPkArgs = {
   pkColumns: AccountPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateAccountManyArgs = {
   updates: Array<AccountUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateAllowedRolesArgs = {
@@ -7240,19 +7113,16 @@ export type Mutation_RootUpdateAllowedRolesArgs = {
   where: AllowedRolesBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateAllowedRolesByPkArgs = {
   _set?: InputMaybe<AllowedRolesSetInput>;
   pkColumns: AllowedRolesPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateAllowedRolesManyArgs = {
   updates: Array<AllowedRolesUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateCourseArgs = {
@@ -7260,19 +7130,16 @@ export type Mutation_RootUpdateCourseArgs = {
   where: CourseBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateCourseByPkArgs = {
   _set?: InputMaybe<CourseSetInput>;
   pkColumns: CoursePkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateCourseManyArgs = {
   updates: Array<CourseUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeArgs = {
@@ -7280,19 +7147,16 @@ export type Mutation_RootUpdatePracticeArgs = {
   where: PracticeBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeByPkArgs = {
   _set?: InputMaybe<PracticeSetInput>;
   pkColumns: PracticePkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeManyArgs = {
   updates: Array<PracticeUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeToCourseArgs = {
@@ -7300,19 +7164,16 @@ export type Mutation_RootUpdatePracticeToCourseArgs = {
   where: PracticeToCourseBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeToCourseByPkArgs = {
   _set?: InputMaybe<PracticeToCourseSetInput>;
   pkColumns: PracticeToCoursePkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeToCourseManyArgs = {
   updates: Array<PracticeToCourseUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentArgs = {
@@ -7326,7 +7187,6 @@ export type Mutation_RootUpdatePracticeToStudentArgs = {
   where: PracticeToStudentBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentByPkArgs = {
   _append?: InputMaybe<PracticeToStudentAppendInput>;
@@ -7339,7 +7199,6 @@ export type Mutation_RootUpdatePracticeToStudentByPkArgs = {
   pkColumns: PracticeToStudentPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentFeedbackArgs = {
   _append?: InputMaybe<PracticeToStudentFeedbackAppendInput>;
@@ -7351,12 +7210,10 @@ export type Mutation_RootUpdatePracticeToStudentFeedbackArgs = {
   where: PracticeToStudentFeedbackBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentFeedbackManyArgs = {
   updates: Array<PracticeToStudentFeedbackUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentGradeArgs = {
@@ -7370,12 +7227,10 @@ export type Mutation_RootUpdatePracticeToStudentGradeArgs = {
   where: PracticeToStudentGradeBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentGradeManyArgs = {
   updates: Array<PracticeToStudentGradeUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentGradeMetricArgs = {
@@ -7389,7 +7244,6 @@ export type Mutation_RootUpdatePracticeToStudentGradeMetricArgs = {
   where: PracticeToStudentGradeMetricBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentGradeMetricByPkArgs = {
   _append?: InputMaybe<PracticeToStudentGradeMetricAppendInput>;
@@ -7402,18 +7256,15 @@ export type Mutation_RootUpdatePracticeToStudentGradeMetricByPkArgs = {
   pkColumns: PracticeToStudentGradeMetricPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentGradeMetricManyArgs = {
   updates: Array<PracticeToStudentGradeMetricUpdates>;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentManyArgs = {
   updates: Array<PracticeToStudentUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentYieldArgs = {
@@ -7421,19 +7272,16 @@ export type Mutation_RootUpdatePracticeToStudentYieldArgs = {
   where: PracticeToStudentYieldBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentYieldByPkArgs = {
   _set?: InputMaybe<PracticeToStudentYieldSetInput>;
   pkColumns: PracticeToStudentYieldPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentYieldManyArgs = {
   updates: Array<PracticeToStudentYieldUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldArgs = {
@@ -7446,7 +7294,6 @@ export type Mutation_RootUpdatePracticeYieldArgs = {
   where: PracticeYieldBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldByPkArgs = {
   _append?: InputMaybe<PracticeYieldAppendInput>;
@@ -7458,13 +7305,11 @@ export type Mutation_RootUpdatePracticeYieldByPkArgs = {
   pkColumns: PracticeYieldPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputArgs = {
   _set?: InputMaybe<PracticeYieldExpectedOutputSetInput>;
   where: PracticeYieldExpectedOutputBoolExp;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputByPkArgs = {
@@ -7472,12 +7317,10 @@ export type Mutation_RootUpdatePracticeYieldExpectedOutputByPkArgs = {
   pkColumns: PracticeYieldExpectedOutputPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputManyArgs = {
   updates: Array<PracticeYieldExpectedOutputUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputTypesArgs = {
@@ -7485,19 +7328,16 @@ export type Mutation_RootUpdatePracticeYieldExpectedOutputTypesArgs = {
   where: PracticeYieldExpectedOutputTypesBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputTypesByPkArgs = {
   _set?: InputMaybe<PracticeYieldExpectedOutputTypesSetInput>;
   pkColumns: PracticeYieldExpectedOutputTypesPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputTypesManyArgs = {
   updates: Array<PracticeYieldExpectedOutputTypesUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldGradeMetricArgs = {
@@ -7511,7 +7351,6 @@ export type Mutation_RootUpdatePracticeYieldGradeMetricArgs = {
   where: PracticeYieldGradeMetricBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldGradeMetricByPkArgs = {
   _append?: InputMaybe<PracticeYieldGradeMetricAppendInput>;
@@ -7524,18 +7363,15 @@ export type Mutation_RootUpdatePracticeYieldGradeMetricByPkArgs = {
   pkColumns: PracticeYieldGradeMetricPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldGradeMetricManyArgs = {
   updates: Array<PracticeYieldGradeMetricUpdates>;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldManyArgs = {
   updates: Array<PracticeYieldUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldTypeArgs = {
@@ -7543,19 +7379,16 @@ export type Mutation_RootUpdatePracticeYieldTypeArgs = {
   where: PracticeYieldTypeBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldTypeByPkArgs = {
   _set?: InputMaybe<PracticeYieldTypeSetInput>;
   pkColumns: PracticeYieldTypePkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldTypeManyArgs = {
   updates: Array<PracticeYieldTypeUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateRolesArgs = {
@@ -7563,19 +7396,16 @@ export type Mutation_RootUpdateRolesArgs = {
   where: RolesBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateRolesByPkArgs = {
   _set?: InputMaybe<RolesSetInput>;
   pkColumns: RolesPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateRolesManyArgs = {
   updates: Array<RolesUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateSessionArgs = {
@@ -7583,19 +7413,16 @@ export type Mutation_RootUpdateSessionArgs = {
   where: SessionBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateSessionByPkArgs = {
   _set?: InputMaybe<SessionSetInput>;
   pkColumns: SessionPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateSessionManyArgs = {
   updates: Array<SessionUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateStudentArgs = {
@@ -7603,19 +7430,16 @@ export type Mutation_RootUpdateStudentArgs = {
   where: StudentBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateStudentByPkArgs = {
   _set?: InputMaybe<StudentSetInput>;
   pkColumns: StudentPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateStudentManyArgs = {
   updates: Array<StudentUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateStudentToCourseArgs = {
@@ -7623,19 +7447,16 @@ export type Mutation_RootUpdateStudentToCourseArgs = {
   where: StudentToCourseBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateStudentToCourseByPkArgs = {
   _set?: InputMaybe<StudentToCourseSetInput>;
   pkColumns: StudentToCoursePkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateStudentToCourseManyArgs = {
   updates: Array<StudentToCourseUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateUserArgs = {
@@ -7643,19 +7464,16 @@ export type Mutation_RootUpdateUserArgs = {
   where: UserBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateUserByPkArgs = {
   _set?: InputMaybe<UserSetInput>;
   pkColumns: UserPkColumnsInput;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateUserManyArgs = {
   updates: Array<UserUpdates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateVerificationTokenArgs = {
@@ -7663,13 +7481,11 @@ export type Mutation_RootUpdateVerificationTokenArgs = {
   where: VerificationTokenBoolExp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateVerificationTokenByPkArgs = {
   _set?: InputMaybe<VerificationTokenSetInput>;
   pkColumns: VerificationTokenPkColumnsInput;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateVerificationTokenManyArgs = {
@@ -7951,7 +7767,6 @@ export type Query_Root = {
   verificationTokenByPk?: Maybe<VerificationToken>;
 };
 
-
 export type Query_RootAccountArgs = {
   distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7959,7 +7774,6 @@ export type Query_RootAccountArgs = {
   orderBy?: InputMaybe<Array<AccountOrderBy>>;
   where?: InputMaybe<AccountBoolExp>;
 };
-
 
 export type Query_RootAccountAggregateArgs = {
   distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
@@ -7969,11 +7783,9 @@ export type Query_RootAccountAggregateArgs = {
   where?: InputMaybe<AccountBoolExp>;
 };
 
-
 export type Query_RootAccountByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootAllowedRolesArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
@@ -7983,7 +7795,6 @@ export type Query_RootAllowedRolesArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
-
 export type Query_RootAllowedRolesAggregateArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7992,12 +7803,10 @@ export type Query_RootAllowedRolesAggregateArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
-
 export type Query_RootAllowedRolesByPkArgs = {
   role: RolesEnum;
   userId: Scalars['uuid'];
 };
-
 
 export type Query_RootCalculatedGradesArgs = {
   distinctOn?: InputMaybe<Array<CalculatedGradesSelectColumn>>;
@@ -8007,7 +7816,6 @@ export type Query_RootCalculatedGradesArgs = {
   where?: InputMaybe<CalculatedGradesBoolExp>;
 };
 
-
 export type Query_RootCalculatedGradesAggregateArgs = {
   distinctOn?: InputMaybe<Array<CalculatedGradesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8015,7 +7823,6 @@ export type Query_RootCalculatedGradesAggregateArgs = {
   orderBy?: InputMaybe<Array<CalculatedGradesOrderBy>>;
   where?: InputMaybe<CalculatedGradesBoolExp>;
 };
-
 
 export type Query_RootCourseArgs = {
   distinctOn?: InputMaybe<Array<CourseSelectColumn>>;
@@ -8025,7 +7832,6 @@ export type Query_RootCourseArgs = {
   where?: InputMaybe<CourseBoolExp>;
 };
 
-
 export type Query_RootCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<CourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8034,23 +7840,19 @@ export type Query_RootCourseAggregateArgs = {
   where?: InputMaybe<CourseBoolExp>;
 };
 
-
 export type Query_RootCourseByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootGetGitFileDataArgs = {
   practice_to_student_yield_id: Scalars['uuid'];
   practice_yield_expected_output_id: Scalars['uuid'];
 };
 
-
 export type Query_RootGetGitLogDataArgs = {
   practice_to_student_yield_id: Scalars['uuid'];
   practice_yield_expected_output_id: Scalars['uuid'];
 };
-
 
 export type Query_RootPracticeArgs = {
   distinctOn?: InputMaybe<Array<PracticeSelectColumn>>;
@@ -8060,7 +7862,6 @@ export type Query_RootPracticeArgs = {
   where?: InputMaybe<PracticeBoolExp>;
 };
 
-
 export type Query_RootPracticeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8069,11 +7870,9 @@ export type Query_RootPracticeAggregateArgs = {
   where?: InputMaybe<PracticeBoolExp>;
 };
 
-
 export type Query_RootPracticeByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootPracticeToCourseArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
@@ -8083,7 +7882,6 @@ export type Query_RootPracticeToCourseArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
-
 export type Query_RootPracticeToCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8092,11 +7890,9 @@ export type Query_RootPracticeToCourseAggregateArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
-
 export type Query_RootPracticeToCourseByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootPracticeToStudentArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
@@ -8106,7 +7902,6 @@ export type Query_RootPracticeToStudentArgs = {
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
 
-
 export type Query_RootPracticeToStudentAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8115,11 +7910,9 @@ export type Query_RootPracticeToStudentAggregateArgs = {
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
 
-
 export type Query_RootPracticeToStudentByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootPracticeToStudentFeedbackArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentFeedbackSelectColumn>>;
@@ -8129,7 +7922,6 @@ export type Query_RootPracticeToStudentFeedbackArgs = {
   where?: InputMaybe<PracticeToStudentFeedbackBoolExp>;
 };
 
-
 export type Query_RootPracticeToStudentFeedbackAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentFeedbackSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8137,7 +7929,6 @@ export type Query_RootPracticeToStudentFeedbackAggregateArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentFeedbackOrderBy>>;
   where?: InputMaybe<PracticeToStudentFeedbackBoolExp>;
 };
-
 
 export type Query_RootPracticeToStudentGradeArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeSelectColumn>>;
@@ -8147,7 +7938,6 @@ export type Query_RootPracticeToStudentGradeArgs = {
   where?: InputMaybe<PracticeToStudentGradeBoolExp>;
 };
 
-
 export type Query_RootPracticeToStudentGradeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8155,7 +7945,6 @@ export type Query_RootPracticeToStudentGradeAggregateArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentGradeOrderBy>>;
   where?: InputMaybe<PracticeToStudentGradeBoolExp>;
 };
-
 
 export type Query_RootPracticeToStudentGradeMetricArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
@@ -8165,7 +7954,6 @@ export type Query_RootPracticeToStudentGradeMetricArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
-
 export type Query_RootPracticeToStudentGradeMetricAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8174,11 +7962,9 @@ export type Query_RootPracticeToStudentGradeMetricAggregateArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
-
 export type Query_RootPracticeToStudentGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootPracticeToStudentYieldArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentYieldSelectColumn>>;
@@ -8188,7 +7974,6 @@ export type Query_RootPracticeToStudentYieldArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
-
 export type Query_RootPracticeToStudentYieldAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentYieldSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8197,11 +7982,9 @@ export type Query_RootPracticeToStudentYieldAggregateArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
-
 export type Query_RootPracticeToStudentYieldByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootPracticeYieldArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
@@ -8211,7 +7994,6 @@ export type Query_RootPracticeYieldArgs = {
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
 
-
 export type Query_RootPracticeYieldAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8220,11 +8002,9 @@ export type Query_RootPracticeYieldAggregateArgs = {
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
 
-
 export type Query_RootPracticeYieldByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootPracticeYieldExpectedOutputArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
@@ -8234,7 +8014,6 @@ export type Query_RootPracticeYieldExpectedOutputArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
 
-
 export type Query_RootPracticeYieldExpectedOutputAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8243,11 +8022,9 @@ export type Query_RootPracticeYieldExpectedOutputAggregateArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
 
-
 export type Query_RootPracticeYieldExpectedOutputByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootPracticeYieldExpectedOutputTypesArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputTypesSelectColumn>>;
@@ -8257,7 +8034,6 @@ export type Query_RootPracticeYieldExpectedOutputTypesArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputTypesBoolExp>;
 };
 
-
 export type Query_RootPracticeYieldExpectedOutputTypesAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputTypesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8266,11 +8042,9 @@ export type Query_RootPracticeYieldExpectedOutputTypesAggregateArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputTypesBoolExp>;
 };
 
-
 export type Query_RootPracticeYieldExpectedOutputTypesByPkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Query_RootPracticeYieldGradeMetricArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
@@ -8280,7 +8054,6 @@ export type Query_RootPracticeYieldGradeMetricArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
-
 export type Query_RootPracticeYieldGradeMetricAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8289,11 +8062,9 @@ export type Query_RootPracticeYieldGradeMetricAggregateArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
-
 export type Query_RootPracticeYieldGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootPracticeYieldTypeArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldTypeSelectColumn>>;
@@ -8303,7 +8074,6 @@ export type Query_RootPracticeYieldTypeArgs = {
   where?: InputMaybe<PracticeYieldTypeBoolExp>;
 };
 
-
 export type Query_RootPracticeYieldTypeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldTypeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8312,11 +8082,9 @@ export type Query_RootPracticeYieldTypeAggregateArgs = {
   where?: InputMaybe<PracticeYieldTypeBoolExp>;
 };
 
-
 export type Query_RootPracticeYieldTypeByPkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Query_RootRolesArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
@@ -8326,7 +8094,6 @@ export type Query_RootRolesArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
-
 export type Query_RootRolesAggregateArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8335,11 +8102,9 @@ export type Query_RootRolesAggregateArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
-
 export type Query_RootRolesByPkArgs = {
   value: Scalars['String'];
 };
-
 
 export type Query_RootSessionArgs = {
   distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
@@ -8349,7 +8114,6 @@ export type Query_RootSessionArgs = {
   where?: InputMaybe<SessionBoolExp>;
 };
 
-
 export type Query_RootSessionAggregateArgs = {
   distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8358,11 +8122,9 @@ export type Query_RootSessionAggregateArgs = {
   where?: InputMaybe<SessionBoolExp>;
 };
 
-
 export type Query_RootSessionByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootStudentArgs = {
   distinctOn?: InputMaybe<Array<StudentSelectColumn>>;
@@ -8372,7 +8134,6 @@ export type Query_RootStudentArgs = {
   where?: InputMaybe<StudentBoolExp>;
 };
 
-
 export type Query_RootStudentAggregateArgs = {
   distinctOn?: InputMaybe<Array<StudentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8381,11 +8142,9 @@ export type Query_RootStudentAggregateArgs = {
   where?: InputMaybe<StudentBoolExp>;
 };
 
-
 export type Query_RootStudentByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootStudentToCourseArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
@@ -8395,7 +8154,6 @@ export type Query_RootStudentToCourseArgs = {
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
 
-
 export type Query_RootStudentToCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8404,12 +8162,10 @@ export type Query_RootStudentToCourseAggregateArgs = {
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
 
-
 export type Query_RootStudentToCourseByPkArgs = {
   courseId: Scalars['uuid'];
   studentId: Scalars['uuid'];
 };
-
 
 export type Query_RootUserArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
@@ -8419,7 +8175,6 @@ export type Query_RootUserArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
-
 export type Query_RootUserAggregateArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8428,11 +8183,9 @@ export type Query_RootUserAggregateArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
-
 export type Query_RootUserByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootVerificationTokenArgs = {
   distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
@@ -8442,7 +8195,6 @@ export type Query_RootVerificationTokenArgs = {
   where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
-
 export type Query_RootVerificationTokenAggregateArgs = {
   distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8450,7 +8202,6 @@ export type Query_RootVerificationTokenAggregateArgs = {
   orderBy?: InputMaybe<Array<VerificationTokenOrderBy>>;
   where?: InputMaybe<VerificationTokenBoolExp>;
 };
-
 
 export type Query_RootVerificationTokenByPkArgs = {
   token: Scalars['String'];
@@ -8644,7 +8395,6 @@ export type Subscription_Root = {
   verificationTokenStream: Array<VerificationToken>;
 };
 
-
 export type Subscription_RootAccountArgs = {
   distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8652,7 +8402,6 @@ export type Subscription_RootAccountArgs = {
   orderBy?: InputMaybe<Array<AccountOrderBy>>;
   where?: InputMaybe<AccountBoolExp>;
 };
-
 
 export type Subscription_RootAccountAggregateArgs = {
   distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
@@ -8662,18 +8411,15 @@ export type Subscription_RootAccountAggregateArgs = {
   where?: InputMaybe<AccountBoolExp>;
 };
 
-
 export type Subscription_RootAccountByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootAccountStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<AccountStreamCursorInput>>;
   where?: InputMaybe<AccountBoolExp>;
 };
-
 
 export type Subscription_RootAllowedRolesArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
@@ -8683,7 +8429,6 @@ export type Subscription_RootAllowedRolesArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
-
 export type Subscription_RootAllowedRolesAggregateArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8692,19 +8437,16 @@ export type Subscription_RootAllowedRolesAggregateArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
-
 export type Subscription_RootAllowedRolesByPkArgs = {
   role: RolesEnum;
   userId: Scalars['uuid'];
 };
-
 
 export type Subscription_RootAllowedRolesStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<AllowedRolesStreamCursorInput>>;
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
-
 
 export type Subscription_RootCalculatedGradesArgs = {
   distinctOn?: InputMaybe<Array<CalculatedGradesSelectColumn>>;
@@ -8714,7 +8456,6 @@ export type Subscription_RootCalculatedGradesArgs = {
   where?: InputMaybe<CalculatedGradesBoolExp>;
 };
 
-
 export type Subscription_RootCalculatedGradesAggregateArgs = {
   distinctOn?: InputMaybe<Array<CalculatedGradesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8723,13 +8464,11 @@ export type Subscription_RootCalculatedGradesAggregateArgs = {
   where?: InputMaybe<CalculatedGradesBoolExp>;
 };
 
-
 export type Subscription_RootCalculatedGradesStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<CalculatedGradesStreamCursorInput>>;
   where?: InputMaybe<CalculatedGradesBoolExp>;
 };
-
 
 export type Subscription_RootCourseArgs = {
   distinctOn?: InputMaybe<Array<CourseSelectColumn>>;
@@ -8739,7 +8478,6 @@ export type Subscription_RootCourseArgs = {
   where?: InputMaybe<CourseBoolExp>;
 };
 
-
 export type Subscription_RootCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<CourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8748,18 +8486,15 @@ export type Subscription_RootCourseAggregateArgs = {
   where?: InputMaybe<CourseBoolExp>;
 };
 
-
 export type Subscription_RootCourseByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootCourseStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<CourseStreamCursorInput>>;
   where?: InputMaybe<CourseBoolExp>;
 };
-
 
 export type Subscription_RootPracticeArgs = {
   distinctOn?: InputMaybe<Array<PracticeSelectColumn>>;
@@ -8769,7 +8504,6 @@ export type Subscription_RootPracticeArgs = {
   where?: InputMaybe<PracticeBoolExp>;
 };
 
-
 export type Subscription_RootPracticeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8778,18 +8512,15 @@ export type Subscription_RootPracticeAggregateArgs = {
   where?: InputMaybe<PracticeBoolExp>;
 };
 
-
 export type Subscription_RootPracticeByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootPracticeStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeStreamCursorInput>>;
   where?: InputMaybe<PracticeBoolExp>;
 };
-
 
 export type Subscription_RootPracticeToCourseArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
@@ -8799,7 +8530,6 @@ export type Subscription_RootPracticeToCourseArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8808,18 +8538,15 @@ export type Subscription_RootPracticeToCourseAggregateArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToCourseByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootPracticeToCourseStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeToCourseStreamCursorInput>>;
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
-
 
 export type Subscription_RootPracticeToStudentArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
@@ -8829,7 +8556,6 @@ export type Subscription_RootPracticeToStudentArgs = {
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToStudentAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8838,11 +8564,9 @@ export type Subscription_RootPracticeToStudentAggregateArgs = {
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToStudentByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootPracticeToStudentFeedbackArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentFeedbackSelectColumn>>;
@@ -8852,7 +8576,6 @@ export type Subscription_RootPracticeToStudentFeedbackArgs = {
   where?: InputMaybe<PracticeToStudentFeedbackBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToStudentFeedbackAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentFeedbackSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8861,13 +8584,11 @@ export type Subscription_RootPracticeToStudentFeedbackAggregateArgs = {
   where?: InputMaybe<PracticeToStudentFeedbackBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToStudentFeedbackStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeToStudentFeedbackStreamCursorInput>>;
   where?: InputMaybe<PracticeToStudentFeedbackBoolExp>;
 };
-
 
 export type Subscription_RootPracticeToStudentGradeArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeSelectColumn>>;
@@ -8877,7 +8598,6 @@ export type Subscription_RootPracticeToStudentGradeArgs = {
   where?: InputMaybe<PracticeToStudentGradeBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToStudentGradeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8885,7 +8605,6 @@ export type Subscription_RootPracticeToStudentGradeAggregateArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentGradeOrderBy>>;
   where?: InputMaybe<PracticeToStudentGradeBoolExp>;
 };
-
 
 export type Subscription_RootPracticeToStudentGradeMetricArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
@@ -8895,7 +8614,6 @@ export type Subscription_RootPracticeToStudentGradeMetricArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToStudentGradeMetricAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8904,11 +8622,9 @@ export type Subscription_RootPracticeToStudentGradeMetricAggregateArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToStudentGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootPracticeToStudentGradeMetricStreamArgs = {
   batchSize: Scalars['Int'];
@@ -8916,20 +8632,17 @@ export type Subscription_RootPracticeToStudentGradeMetricStreamArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToStudentGradeStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeToStudentGradeStreamCursorInput>>;
   where?: InputMaybe<PracticeToStudentGradeBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToStudentStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeToStudentStreamCursorInput>>;
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
-
 
 export type Subscription_RootPracticeToStudentYieldArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentYieldSelectColumn>>;
@@ -8939,7 +8652,6 @@ export type Subscription_RootPracticeToStudentYieldArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToStudentYieldAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentYieldSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8948,18 +8660,15 @@ export type Subscription_RootPracticeToStudentYieldAggregateArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
-
 export type Subscription_RootPracticeToStudentYieldByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootPracticeToStudentYieldStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeToStudentYieldStreamCursorInput>>;
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
-
 
 export type Subscription_RootPracticeYieldArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
@@ -8969,7 +8678,6 @@ export type Subscription_RootPracticeYieldArgs = {
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
 
-
 export type Subscription_RootPracticeYieldAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8978,11 +8686,9 @@ export type Subscription_RootPracticeYieldAggregateArgs = {
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
 
-
 export type Subscription_RootPracticeYieldByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootPracticeYieldExpectedOutputArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
@@ -8992,7 +8698,6 @@ export type Subscription_RootPracticeYieldExpectedOutputArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
 
-
 export type Subscription_RootPracticeYieldExpectedOutputAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9001,18 +8706,15 @@ export type Subscription_RootPracticeYieldExpectedOutputAggregateArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
 
-
 export type Subscription_RootPracticeYieldExpectedOutputByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootPracticeYieldExpectedOutputStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeYieldExpectedOutputStreamCursorInput>>;
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
-
 
 export type Subscription_RootPracticeYieldExpectedOutputTypesArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputTypesSelectColumn>>;
@@ -9022,7 +8724,6 @@ export type Subscription_RootPracticeYieldExpectedOutputTypesArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputTypesBoolExp>;
 };
 
-
 export type Subscription_RootPracticeYieldExpectedOutputTypesAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputTypesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9031,18 +8732,15 @@ export type Subscription_RootPracticeYieldExpectedOutputTypesAggregateArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputTypesBoolExp>;
 };
 
-
 export type Subscription_RootPracticeYieldExpectedOutputTypesByPkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Subscription_RootPracticeYieldExpectedOutputTypesStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeYieldExpectedOutputTypesStreamCursorInput>>;
   where?: InputMaybe<PracticeYieldExpectedOutputTypesBoolExp>;
 };
-
 
 export type Subscription_RootPracticeYieldGradeMetricArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
@@ -9052,7 +8750,6 @@ export type Subscription_RootPracticeYieldGradeMetricArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
-
 export type Subscription_RootPracticeYieldGradeMetricAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9061,11 +8758,9 @@ export type Subscription_RootPracticeYieldGradeMetricAggregateArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
-
 export type Subscription_RootPracticeYieldGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootPracticeYieldGradeMetricStreamArgs = {
   batchSize: Scalars['Int'];
@@ -9073,13 +8768,11 @@ export type Subscription_RootPracticeYieldGradeMetricStreamArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
-
 export type Subscription_RootPracticeYieldStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeYieldStreamCursorInput>>;
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
-
 
 export type Subscription_RootPracticeYieldTypeArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldTypeSelectColumn>>;
@@ -9089,7 +8782,6 @@ export type Subscription_RootPracticeYieldTypeArgs = {
   where?: InputMaybe<PracticeYieldTypeBoolExp>;
 };
 
-
 export type Subscription_RootPracticeYieldTypeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldTypeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9098,18 +8790,15 @@ export type Subscription_RootPracticeYieldTypeAggregateArgs = {
   where?: InputMaybe<PracticeYieldTypeBoolExp>;
 };
 
-
 export type Subscription_RootPracticeYieldTypeByPkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Subscription_RootPracticeYieldTypeStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeYieldTypeStreamCursorInput>>;
   where?: InputMaybe<PracticeYieldTypeBoolExp>;
 };
-
 
 export type Subscription_RootRolesArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
@@ -9119,7 +8808,6 @@ export type Subscription_RootRolesArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
-
 export type Subscription_RootRolesAggregateArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9128,18 +8816,15 @@ export type Subscription_RootRolesAggregateArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
-
 export type Subscription_RootRolesByPkArgs = {
   value: Scalars['String'];
 };
-
 
 export type Subscription_RootRolesStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<RolesStreamCursorInput>>;
   where?: InputMaybe<RolesBoolExp>;
 };
-
 
 export type Subscription_RootSessionArgs = {
   distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
@@ -9149,7 +8834,6 @@ export type Subscription_RootSessionArgs = {
   where?: InputMaybe<SessionBoolExp>;
 };
 
-
 export type Subscription_RootSessionAggregateArgs = {
   distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9158,18 +8842,15 @@ export type Subscription_RootSessionAggregateArgs = {
   where?: InputMaybe<SessionBoolExp>;
 };
 
-
 export type Subscription_RootSessionByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootSessionStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<SessionStreamCursorInput>>;
   where?: InputMaybe<SessionBoolExp>;
 };
-
 
 export type Subscription_RootStudentArgs = {
   distinctOn?: InputMaybe<Array<StudentSelectColumn>>;
@@ -9179,7 +8860,6 @@ export type Subscription_RootStudentArgs = {
   where?: InputMaybe<StudentBoolExp>;
 };
 
-
 export type Subscription_RootStudentAggregateArgs = {
   distinctOn?: InputMaybe<Array<StudentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9188,18 +8868,15 @@ export type Subscription_RootStudentAggregateArgs = {
   where?: InputMaybe<StudentBoolExp>;
 };
 
-
 export type Subscription_RootStudentByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootStudentStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<StudentStreamCursorInput>>;
   where?: InputMaybe<StudentBoolExp>;
 };
-
 
 export type Subscription_RootStudentToCourseArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
@@ -9209,7 +8886,6 @@ export type Subscription_RootStudentToCourseArgs = {
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
 
-
 export type Subscription_RootStudentToCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9218,19 +8894,16 @@ export type Subscription_RootStudentToCourseAggregateArgs = {
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
 
-
 export type Subscription_RootStudentToCourseByPkArgs = {
   courseId: Scalars['uuid'];
   studentId: Scalars['uuid'];
 };
-
 
 export type Subscription_RootStudentToCourseStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<StudentToCourseStreamCursorInput>>;
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
-
 
 export type Subscription_RootUserArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
@@ -9240,7 +8913,6 @@ export type Subscription_RootUserArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
-
 export type Subscription_RootUserAggregateArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9249,18 +8921,15 @@ export type Subscription_RootUserAggregateArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
-
 export type Subscription_RootUserByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootUserStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<UserStreamCursorInput>>;
   where?: InputMaybe<UserBoolExp>;
 };
-
 
 export type Subscription_RootVerificationTokenArgs = {
   distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
@@ -9270,7 +8939,6 @@ export type Subscription_RootVerificationTokenArgs = {
   where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
-
 export type Subscription_RootVerificationTokenAggregateArgs = {
   distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9279,11 +8947,9 @@ export type Subscription_RootVerificationTokenAggregateArgs = {
   where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
-
 export type Subscription_RootVerificationTokenByPkArgs = {
   token: Scalars['String'];
 };
-
 
 export type Subscription_RootVerificationTokenStreamArgs = {
   batchSize: Scalars['Int'];
@@ -9298,21 +8964,50 @@ export type UserAggregateBoolExpCount = {
   predicate: IntComparisonExp;
 };
 
-export type GradeMetricInputYieldFragment = { __typename?: 'PracticeYield', id: any, meta?: any | null, method: PracticeYieldTypeEnum, name: string, description?: string | null };
+export type GradeMetricInputYieldFragment = {
+  __typename?: 'PracticeYield';
+  id: any;
+  meta?: any | null;
+  method: PracticeYieldTypeEnum;
+  name: string;
+  description?: string | null;
+};
 
 export type GetYieldsForNewGradeTpQueryVariables = Exact<{
   tpId: Scalars['uuid'];
 }>;
 
-
-export type GetYieldsForNewGradeTpQuery = { __typename?: 'query_root', practiceByPk?: { __typename?: 'Practice', id: any, title: string, practiceYields: Array<{ __typename?: 'PracticeYield', id: any, meta?: any | null, method: PracticeYieldTypeEnum, name: string, description?: string | null }> } | null };
+export type GetYieldsForNewGradeTpQuery = {
+  __typename?: 'query_root';
+  practiceByPk?: {
+    __typename?: 'Practice';
+    id: any;
+    title: string;
+    practiceYields: Array<{
+      __typename?: 'PracticeYield';
+      id: any;
+      meta?: any | null;
+      method: PracticeYieldTypeEnum;
+      name: string;
+      description?: string | null;
+    }>;
+  } | null;
+};
 
 export type InsertYieldGradeMetricNewDataMutationVariables = Exact<{
-  data: Array<PracticeYieldExpectedOutputInsertInput> | PracticeYieldExpectedOutputInsertInput;
+  data:
+    | Array<PracticeYieldExpectedOutputInsertInput>
+    | PracticeYieldExpectedOutputInsertInput;
 }>;
 
-
-export type InsertYieldGradeMetricNewDataMutation = { __typename?: 'mutation_root', insertPracticeYieldExpectedOutput?: { __typename?: 'PracticeYieldExpectedOutputMutationResponse', affectedRows: number, returning: Array<{ __typename?: 'PracticeYieldExpectedOutput', id: any }> } | null };
+export type InsertYieldGradeMetricNewDataMutation = {
+  __typename?: 'mutation_root';
+  insertPracticeYieldExpectedOutput?: {
+    __typename?: 'PracticeYieldExpectedOutputMutationResponse';
+    affectedRows: number;
+    returning: Array<{ __typename?: 'PracticeYieldExpectedOutput'; id: any }>;
+  } | null;
+};
 
 export type InsertNewPracticeToCourseMutationVariables = Exact<{
   close_date: Scalars['timestamptz'];
@@ -9321,94 +9016,288 @@ export type InsertNewPracticeToCourseMutationVariables = Exact<{
   courseId: Scalars['uuid'];
 }>;
 
-
-export type InsertNewPracticeToCourseMutation = { __typename?: 'mutation_root', insertPracticeToCourse?: { __typename?: 'PracticeToCourseMutationResponse', returning: Array<{ __typename?: 'PracticeToCourse', id: any }> } | null };
+export type InsertNewPracticeToCourseMutation = {
+  __typename?: 'mutation_root';
+  insertPracticeToCourse?: {
+    __typename?: 'PracticeToCourseMutationResponse';
+    returning: Array<{ __typename?: 'PracticeToCourse'; id: any }>;
+  } | null;
+};
 
 export type InsertFeedbackForGradeMetricMutationVariables = Exact<{
   id: Scalars['uuid'];
   feedback: Scalars['jsonb'];
 }>;
 
-
-export type InsertFeedbackForGradeMetricMutation = { __typename?: 'mutation_root', updatePracticeYieldGradeMetricByPk?: { __typename?: 'PracticeYieldGradeMetric', feedbacks: any, id: any, name: string, points: number } | null };
+export type InsertFeedbackForGradeMetricMutation = {
+  __typename?: 'mutation_root';
+  updatePracticeYieldGradeMetricByPk?: {
+    __typename?: 'PracticeYieldGradeMetric';
+    feedbacks: any;
+    id: any;
+    name: string;
+    points: number;
+  } | null;
+};
 
 export type InsertPracticeToStudentGradeMetricMutationVariables = Exact<{
-  objects: Array<PracticeToStudentGradeMetricInsertInput> | PracticeToStudentGradeMetricInsertInput;
+  objects:
+    | Array<PracticeToStudentGradeMetricInsertInput>
+    | PracticeToStudentGradeMetricInsertInput;
 }>;
 
-
-export type InsertPracticeToStudentGradeMetricMutation = { __typename?: 'mutation_root', insertPracticeToStudentGradeMetric?: { __typename?: 'PracticeToStudentGradeMetricMutationResponse', affectedRows: number, returning: Array<{ __typename?: 'PracticeToStudentGradeMetric', createdAt: any, feedback: any, percentGrade: any, id: any, practiceToStudentYieldId: any, practiceYieldGradeMetricId: any }> } | null };
+export type InsertPracticeToStudentGradeMetricMutation = {
+  __typename?: 'mutation_root';
+  insertPracticeToStudentGradeMetric?: {
+    __typename?: 'PracticeToStudentGradeMetricMutationResponse';
+    affectedRows: number;
+    returning: Array<{
+      __typename?: 'PracticeToStudentGradeMetric';
+      createdAt: any;
+      feedback: any;
+      percentGrade: any;
+      id: any;
+      practiceToStudentYieldId: any;
+      practiceYieldGradeMetricId: any;
+    }>;
+  } | null;
+};
 
 export type GetFileDataFromServerQueryVariables = Exact<{
   practice_to_student_yield_id: Scalars['uuid'];
   practice_yield_expected_output_id: Scalars['uuid'];
 }>;
 
-
-export type GetFileDataFromServerQuery = { __typename?: 'query_root', getGitFileData?: { __typename?: 'GetGitFileDataOutput', content?: string | null, encoding?: string | null } | null };
+export type GetFileDataFromServerQuery = {
+  __typename?: 'query_root';
+  getGitFileData?: {
+    __typename?: 'GetGitFileDataOutput';
+    content?: string | null;
+    encoding?: string | null;
+  } | null;
+};
 
 export type GetLogDataFromServerQueryVariables = Exact<{
   practice_to_student_yield_id: Scalars['uuid'];
   practice_yield_expected_output_id: Scalars['uuid'];
 }>;
 
+export type GetLogDataFromServerQuery = {
+  __typename?: 'query_root';
+  getGitLogData: Array<{
+    __typename?: 'CommitItem';
+    author_profile_picture?: string | null;
+    commit_message?: string | null;
+    commit_author_date?: string | null;
+    commit_author_email?: string | null;
+    commit_author_name?: string | null;
+    commit_committer_date?: string | null;
+    commit_committer_email?: string | null;
+    commit_committer_name?: string | null;
+    commit_tree_created?: string | null;
+    commit_tree_sha?: string | null;
+    commit_tree_url?: string | null;
+    commit_url?: string | null;
+    created?: string | null;
+    html_url?: string | null;
+    sha?: string | null;
+    url?: string | null;
+    parents?: any | null;
+  }>;
+};
 
-export type GetLogDataFromServerQuery = { __typename?: 'query_root', getGitLogData: Array<{ __typename?: 'CommitItem', author_profile_picture?: string | null, commit_message?: string | null, commit_author_date?: string | null, commit_author_email?: string | null, commit_author_name?: string | null, commit_committer_date?: string | null, commit_committer_email?: string | null, commit_committer_name?: string | null, commit_tree_created?: string | null, commit_tree_sha?: string | null, commit_tree_url?: string | null, commit_url?: string | null, created?: string | null, html_url?: string | null, sha?: string | null, url?: string | null, parents?: any | null }> };
-
-export type YieldPracticeInputFragment = { __typename?: 'PracticeYield', id: any, meta?: any | null, method: PracticeYieldTypeEnum, name: string, description?: string | null };
+export type YieldPracticeInputFragment = {
+  __typename?: 'PracticeYield';
+  id: any;
+  meta?: any | null;
+  method: PracticeYieldTypeEnum;
+  name: string;
+  description?: string | null;
+};
 
 export type HandOffByIdQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
-
-export type HandOffByIdQuery = { __typename?: 'query_root', practiceToCourseByPk?: { __typename?: 'PracticeToCourse', is_open?: boolean | null, openDate?: any | null, closeDate?: any | null, id: any, practice: { __typename?: 'Practice', title: string, description?: string | null, id: any, practiceYields: Array<{ __typename?: 'PracticeYield', id: any, meta?: any | null, method: PracticeYieldTypeEnum, name: string, description?: string | null }> }, practiceToStudents: Array<{ __typename?: 'PracticeToStudent', id: any, studentId: any }> } | null };
+export type HandOffByIdQuery = {
+  __typename?: 'query_root';
+  practiceToCourseByPk?: {
+    __typename?: 'PracticeToCourse';
+    is_open?: boolean | null;
+    openDate?: any | null;
+    closeDate?: any | null;
+    id: any;
+    practice: {
+      __typename?: 'Practice';
+      title: string;
+      description?: string | null;
+      id: any;
+      practiceYields: Array<{
+        __typename?: 'PracticeYield';
+        id: any;
+        meta?: any | null;
+        method: PracticeYieldTypeEnum;
+        name: string;
+        description?: string | null;
+      }>;
+    };
+    practiceToStudents: Array<{
+      __typename?: 'PracticeToStudent';
+      id: any;
+      studentId: any;
+    }>;
+  } | null;
+};
 
 export type SubmitHandoffMutationVariables = Exact<{
   practiceToPromotionId: Scalars['uuid'];
   yields: Array<YieldForHandoff> | YieldForHandoff;
 }>;
 
+export type SubmitHandoffMutation = {
+  __typename?: 'mutation_root';
+  submitHandoff?: { __typename?: 'SubmitHandoffOutput'; status: string } | null;
+};
 
-export type SubmitHandoffMutation = { __typename?: 'mutation_root', submitHandoff?: { __typename?: 'SubmitHandoffOutput', status: string } | null };
+export type HandoffListQueryVariables = Exact<{ [key: string]: never }>;
 
-export type HandoffListQueryVariables = Exact<{ [key: string]: never; }>;
+export type HandoffListQuery = {
+  __typename?: 'query_root';
+  course: Array<{
+    __typename?: 'Course';
+    name: string;
+    years: string;
+    id: any;
+    practiceToCourses: Array<{
+      __typename?: 'PracticeToCourse';
+      is_open?: boolean | null;
+      openDate?: any | null;
+      closeDate?: any | null;
+      id: any;
+      practice: { __typename?: 'Practice'; title: string; id: any };
+      practiceToStudents: Array<{
+        __typename?: 'PracticeToStudent';
+        id: any;
+        studentId: any;
+      }>;
+    }>;
+  }>;
+};
 
+export type HandoffCourseFragment = {
+  __typename?: 'Course';
+  name: string;
+  years: string;
+  id: any;
+  practiceToCourses: Array<{
+    __typename?: 'PracticeToCourse';
+    is_open?: boolean | null;
+    openDate?: any | null;
+    closeDate?: any | null;
+    id: any;
+    practice: { __typename?: 'Practice'; title: string; id: any };
+    practiceToStudents: Array<{
+      __typename?: 'PracticeToStudent';
+      id: any;
+      studentId: any;
+    }>;
+  }>;
+};
 
-export type HandoffListQuery = { __typename?: 'query_root', course: Array<{ __typename?: 'Course', name: string, years: string, id: any, practiceToCourses: Array<{ __typename?: 'PracticeToCourse', is_open?: boolean | null, openDate?: any | null, closeDate?: any | null, id: any, practice: { __typename?: 'Practice', title: string, id: any }, practiceToStudents: Array<{ __typename?: 'PracticeToStudent', id: any, studentId: any }> }> }> };
+export type CurrentUserQueryVariables = Exact<{ [key: string]: never }>;
 
-export type HandoffCourseFragment = { __typename?: 'Course', name: string, years: string, id: any, practiceToCourses: Array<{ __typename?: 'PracticeToCourse', is_open?: boolean | null, openDate?: any | null, closeDate?: any | null, id: any, practice: { __typename?: 'Practice', title: string, id: any }, practiceToStudents: Array<{ __typename?: 'PracticeToStudent', id: any, studentId: any }> }> };
+export type CurrentUserQuery = {
+  __typename?: 'query_root';
+  user: Array<{
+    __typename?: 'User';
+    createdAt: any;
+    email: string;
+    updatedAt: any;
+    id: any;
+  }>;
+};
 
-export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
+export type ListTpYieldTypesQueryVariables = Exact<{ [key: string]: never }>;
 
-
-export type CurrentUserQuery = { __typename?: 'query_root', user: Array<{ __typename?: 'User', createdAt: any, email: string, updatedAt: any, id: any }> };
-
-export type ListTpYieldTypesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ListTpYieldTypesQuery = { __typename?: 'query_root', practiceYieldType: Array<{ __typename?: 'PracticeYieldType', name: string }> };
+export type ListTpYieldTypesQuery = {
+  __typename?: 'query_root';
+  practiceYieldType: Array<{ __typename?: 'PracticeYieldType'; name: string }>;
+};
 
 export type CourseDetailsQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
-
-export type CourseDetailsQuery = { __typename?: 'query_root', courseByPk?: { __typename?: 'Course', name: string, years: string, studentToCoursesAggregate: { __typename?: 'StudentToCourseAggregate', nodes: Array<{ __typename?: 'StudentToCourse', student: { __typename?: 'Student', id: any, email?: string | null, full_name?: string | null, userId?: any | null } }>, aggregate?: { __typename?: 'StudentToCourseAggregateFields', count: number } | null } } | null };
+export type CourseDetailsQuery = {
+  __typename?: 'query_root';
+  courseByPk?: {
+    __typename?: 'Course';
+    name: string;
+    years: string;
+    studentToCoursesAggregate: {
+      __typename?: 'StudentToCourseAggregate';
+      nodes: Array<{
+        __typename?: 'StudentToCourse';
+        student: {
+          __typename?: 'Student';
+          id: any;
+          email?: string | null;
+          full_name?: string | null;
+          userId?: any | null;
+        };
+      }>;
+      aggregate?: {
+        __typename?: 'StudentToCourseAggregateFields';
+        count: number;
+      } | null;
+    };
+  } | null;
+};
 
 export type SendStudentClaimMailMutationVariables = Exact<{
   studentsIds: Array<InputMaybe<Scalars['uuid']>> | InputMaybe<Scalars['uuid']>;
 }>;
 
+export type SendStudentClaimMailMutation = {
+  __typename?: 'mutation_root';
+  sendStudentClaimMail?: {
+    __typename?: 'SendStudentClaimMailOutput';
+    nmbMailSent: number;
+  } | null;
+};
 
-export type SendStudentClaimMailMutation = { __typename?: 'mutation_root', sendStudentClaimMail?: { __typename?: 'SendStudentClaimMailOutput', nmbMailSent: number } | null };
+export type CourseCardFragment = {
+  __typename?: 'Course';
+  id: any;
+  name: string;
+  years: string;
+  studentToCoursesAggregate: {
+    __typename?: 'StudentToCourseAggregate';
+    aggregate?: {
+      __typename?: 'StudentToCourseAggregateFields';
+      count: number;
+    } | null;
+  };
+};
 
-export type CourseCardFragment = { __typename?: 'Course', id: any, name: string, years: string, studentToCoursesAggregate: { __typename?: 'StudentToCourseAggregate', aggregate?: { __typename?: 'StudentToCourseAggregateFields', count: number } | null } };
+export type ListCoursesQueryVariables = Exact<{ [key: string]: never }>;
 
-export type ListCoursesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ListCoursesQuery = { __typename?: 'query_root', course: Array<{ __typename?: 'Course', id: any, name: string, years: string, studentToCoursesAggregate: { __typename?: 'StudentToCourseAggregate', aggregate?: { __typename?: 'StudentToCourseAggregateFields', count: number } | null } }> };
+export type ListCoursesQuery = {
+  __typename?: 'query_root';
+  course: Array<{
+    __typename?: 'Course';
+    id: any;
+    name: string;
+    years: string;
+    studentToCoursesAggregate: {
+      __typename?: 'StudentToCourseAggregate';
+      aggregate?: {
+        __typename?: 'StudentToCourseAggregateFields';
+        count: number;
+      } | null;
+    };
+  }>;
+};
 
 export type CreateCourseMutationVariables = Exact<{
   name: Scalars['String'];
@@ -9416,61 +9305,334 @@ export type CreateCourseMutationVariables = Exact<{
   students: Array<StudentToCourseInsertInput> | StudentToCourseInsertInput;
 }>;
 
+export type CreateCourseMutation = {
+  __typename?: 'mutation_root';
+  insertCourseOne?: { __typename?: 'Course'; createdAt: any; id: any } | null;
+};
 
-export type CreateCourseMutation = { __typename?: 'mutation_root', insertCourseOne?: { __typename?: 'Course', createdAt: any, id: any } | null };
+export type FetchDataForStudentDashboardQueryVariables = Exact<{
+  [key: string]: never;
+}>;
 
-export type FetchDataForStudentDashboardQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FetchDataForStudentDashboardQuery = { __typename?: 'query_root', practiceToStudent: Array<{ __typename?: 'PracticeToStudent', submited: boolean, studentGrade?: { __typename?: 'PracticeToStudentGrade', grade?: any | null, gradeDetail?: any | null } | null, studentFeedback?: { __typename?: 'PracticeToStudentFeedback', feedback?: any | null } | null, practiceToCourse: { __typename?: 'PracticeToCourse', is_open?: boolean | null, course: { __typename?: 'Course', name: string }, practice: { __typename?: 'Practice', title: string } } }> };
+export type FetchDataForStudentDashboardQuery = {
+  __typename?: 'query_root';
+  practiceToStudent: Array<{
+    __typename?: 'PracticeToStudent';
+    submited: boolean;
+    studentGrade?: {
+      __typename?: 'PracticeToStudentGrade';
+      grade?: any | null;
+      gradeDetail?: any | null;
+    } | null;
+    studentFeedback?: {
+      __typename?: 'PracticeToStudentFeedback';
+      feedback?: any | null;
+    } | null;
+    practiceToCourse: {
+      __typename?: 'PracticeToCourse';
+      is_open?: boolean | null;
+      course: { __typename?: 'Course'; name: string };
+      practice: { __typename?: 'Practice'; title: string };
+    };
+  }>;
+};
 
 export type GetPracticeToStudentForGradingQueryVariables = Exact<{
   courseId: Scalars['uuid'];
   practiceId: Scalars['uuid'];
 }>;
 
+export type GetPracticeToStudentForGradingQuery = {
+  __typename?: 'query_root';
+  practiceToCourse: Array<{
+    __typename?: 'PracticeToCourse';
+    practiceToStudents: Array<{
+      __typename?: 'PracticeToStudent';
+      calculatedGrades?: {
+        __typename?: 'CalculatedGrades';
+        calculatedGrade?: any | null;
+      } | null;
+      student: { __typename?: 'Student'; full_name?: string | null };
+    }>;
+    course: {
+      __typename?: 'Course';
+      studentToCoursesAggregate: {
+        __typename?: 'StudentToCourseAggregate';
+        aggregate?: {
+          __typename?: 'StudentToCourseAggregateFields';
+          count: number;
+        } | null;
+      };
+    };
+  }>;
+  practiceYield: Array<{
+    __typename?: 'PracticeYield';
+    id: any;
+    name: string;
+    practiceToStudentYields: Array<{
+      __typename?: 'PracticeToStudentYield';
+      giteaOrgAndRepo?: string | null;
+      value: string;
+      practiceYieldId: any;
+      practiceToStudentYieldId: any;
+      practiceToStudentGradeMetrics: Array<{
+        __typename?: 'PracticeToStudentGradeMetric';
+        id: any;
+        feedback: any;
+        createdAt: any;
+        percentGrade: any;
+        practiceYieldGradeMetricId: any;
+        updatedAt: any;
+      }>;
+    }>;
+    practiceYieldExpectedOutputs: Array<{
+      __typename?: 'PracticeYieldExpectedOutput';
+      id: any;
+      codeLang?: string | null;
+      expected?: string | null;
+      gitPath?: string | null;
+      method: PracticeYieldExpectedOutputTypesEnum;
+      practiceYieldId: any;
+      practiceYieldGradeMetrics: Array<{
+        __typename?: 'PracticeYieldGradeMetric';
+        id: any;
+        name: string;
+        points: number;
+        feedbacks: any;
+        createdAt: any;
+        practiceToStudentGradeMetricsAggregate: {
+          __typename?: 'PracticeToStudentGradeMetricAggregate';
+          aggregate?: {
+            __typename?: 'PracticeToStudentGradeMetricAggregateFields';
+            count: number;
+          } | null;
+          nodes: Array<{
+            __typename?: 'PracticeToStudentGradeMetric';
+            practiceYieldGradeMetricId: any;
+            practiceToStudentYieldId: any;
+          }>;
+        };
+      }>;
+    }>;
+  }>;
+};
 
-export type GetPracticeToStudentForGradingQuery = { __typename?: 'query_root', practiceToCourse: Array<{ __typename?: 'PracticeToCourse', practiceToStudents: Array<{ __typename?: 'PracticeToStudent', calculatedGrades?: { __typename?: 'CalculatedGrades', calculatedGrade?: any | null } | null, student: { __typename?: 'Student', full_name?: string | null } }>, course: { __typename?: 'Course', studentToCoursesAggregate: { __typename?: 'StudentToCourseAggregate', aggregate?: { __typename?: 'StudentToCourseAggregateFields', count: number } | null } } }>, practiceYield: Array<{ __typename?: 'PracticeYield', id: any, name: string, practiceToStudentYields: Array<{ __typename?: 'PracticeToStudentYield', giteaOrgAndRepo?: string | null, value: string, practiceYieldId: any, practiceToStudentYieldId: any, practiceToStudentGradeMetrics: Array<{ __typename?: 'PracticeToStudentGradeMetric', id: any, feedback: any, createdAt: any, percentGrade: any, practiceYieldGradeMetricId: any, updatedAt: any }> }>, practiceYieldExpectedOutputs: Array<{ __typename?: 'PracticeYieldExpectedOutput', id: any, codeLang?: string | null, expected?: string | null, gitPath?: string | null, method: PracticeYieldExpectedOutputTypesEnum, practiceYieldId: any, practiceYieldGradeMetrics: Array<{ __typename?: 'PracticeYieldGradeMetric', id: any, name: string, points: number, feedbacks: any, createdAt: any, practiceToStudentGradeMetricsAggregate: { __typename?: 'PracticeToStudentGradeMetricAggregate', aggregate?: { __typename?: 'PracticeToStudentGradeMetricAggregateFields', count: number } | null, nodes: Array<{ __typename?: 'PracticeToStudentGradeMetric', practiceYieldGradeMetricId: any, practiceToStudentYieldId: any }> } }> }> }> };
+export type PracticeToStudentYieldForGradingFragment = {
+  __typename?: 'PracticeToStudentYield';
+  giteaOrgAndRepo?: string | null;
+  value: string;
+  practiceYieldId: any;
+  practiceToStudentYieldId: any;
+  practiceToStudentGradeMetrics: Array<{
+    __typename?: 'PracticeToStudentGradeMetric';
+    id: any;
+    feedback: any;
+    createdAt: any;
+    percentGrade: any;
+    practiceYieldGradeMetricId: any;
+    updatedAt: any;
+  }>;
+};
 
-export type PracticeToStudentYieldForGradingFragment = { __typename?: 'PracticeToStudentYield', giteaOrgAndRepo?: string | null, value: string, practiceYieldId: any, practiceToStudentYieldId: any, practiceToStudentGradeMetrics: Array<{ __typename?: 'PracticeToStudentGradeMetric', id: any, feedback: any, createdAt: any, percentGrade: any, practiceYieldGradeMetricId: any, updatedAt: any }> };
-
-export type PracticeToStudentGradeMetricForGradingFragment = { __typename?: 'PracticeToStudentGradeMetric', id: any, feedback: any, createdAt: any, percentGrade: any, practiceYieldGradeMetricId: any, updatedAt: any };
+export type PracticeToStudentGradeMetricForGradingFragment = {
+  __typename?: 'PracticeToStudentGradeMetric';
+  id: any;
+  feedback: any;
+  createdAt: any;
+  percentGrade: any;
+  practiceYieldGradeMetricId: any;
+  updatedAt: any;
+};
 
 export type TriggerRefreshGradesMutationVariables = Exact<{
   practice_id: Scalars['uuid'];
   course_id: Scalars['uuid'];
 }>;
 
+export type TriggerRefreshGradesMutation = {
+  __typename?: 'mutation_root';
+  refreshGrades?: {
+    __typename?: 'RefreshGradesOutput';
+    affected_rows: number;
+  } | null;
+};
 
-export type TriggerRefreshGradesMutation = { __typename?: 'mutation_root', refreshGrades?: { __typename?: 'RefreshGradesOutput', affected_rows: number } | null };
-
-export type PracticeToPromoDetailsFragment = { __typename?: 'PracticeToCourse', closeDate?: any | null, createdAt: any, giteaOrgName?: string | null, is_open?: boolean | null, id: any, openDate?: any | null, updatedAt: any, course: { __typename?: 'Course', name: string, years: string, id: any, studentToCourses: Array<{ __typename?: 'StudentToCourse', courseId: any, studentId: any, student: { __typename?: 'Student', id: any, full_name?: string | null, email?: string | null, practiceToStudents: Array<{ __typename?: 'PracticeToStudent', createdAt: any, grade?: any | null, submited: boolean }> } }> } };
+export type PracticeToPromoDetailsFragment = {
+  __typename?: 'PracticeToCourse';
+  closeDate?: any | null;
+  createdAt: any;
+  giteaOrgName?: string | null;
+  is_open?: boolean | null;
+  id: any;
+  openDate?: any | null;
+  updatedAt: any;
+  course: {
+    __typename?: 'Course';
+    name: string;
+    years: string;
+    id: any;
+    studentToCourses: Array<{
+      __typename?: 'StudentToCourse';
+      courseId: any;
+      studentId: any;
+      student: {
+        __typename?: 'Student';
+        id: any;
+        full_name?: string | null;
+        email?: string | null;
+        practiceToStudents: Array<{
+          __typename?: 'PracticeToStudent';
+          createdAt: any;
+          grade?: any | null;
+          submited: boolean;
+        }>;
+      };
+    }>;
+  };
+};
 
 export type GetPracticeDetailQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
+export type GetPracticeDetailQuery = {
+  __typename?: 'query_root';
+  practiceByPk?: {
+    __typename?: 'Practice';
+    id: any;
+    title: string;
+    practiceYieldsAggregate: {
+      __typename?: 'PracticeYieldAggregate';
+      aggregate?: {
+        __typename?: 'PracticeYieldAggregateFields';
+        count: number;
+      } | null;
+      nodes: Array<{
+        __typename?: 'PracticeYield';
+        id: any;
+        name: string;
+        method: PracticeYieldTypeEnum;
+        meta?: any | null;
+        practiceYieldExpectedOutputsAggregate: {
+          __typename?: 'PracticeYieldExpectedOutputAggregate';
+          aggregate?: {
+            __typename?: 'PracticeYieldExpectedOutputAggregateFields';
+            count: number;
+          } | null;
+          nodes: Array<{
+            __typename?: 'PracticeYieldExpectedOutput';
+            id: any;
+            practiceYieldGradeMetricsAggregate: {
+              __typename?: 'PracticeYieldGradeMetricAggregate';
+              aggregate?: {
+                __typename?: 'PracticeYieldGradeMetricAggregateFields';
+                count: number;
+                sum?: {
+                  __typename?: 'PracticeYieldGradeMetricSumFields';
+                  points?: number | null;
+                } | null;
+              } | null;
+            };
+          }>;
+        };
+      }>;
+    };
+    practiceToCoursesAggregate: {
+      __typename?: 'PracticeToCourseAggregate';
+      aggregate?: {
+        __typename?: 'PracticeToCourseAggregateFields';
+        count: number;
+      } | null;
+      nodes: Array<{
+        __typename?: 'PracticeToCourse';
+        closeDate?: any | null;
+        createdAt: any;
+        giteaOrgName?: string | null;
+        is_open?: boolean | null;
+        id: any;
+        openDate?: any | null;
+        updatedAt: any;
+        course: {
+          __typename?: 'Course';
+          name: string;
+          years: string;
+          id: any;
+          studentToCourses: Array<{
+            __typename?: 'StudentToCourse';
+            courseId: any;
+            studentId: any;
+            student: {
+              __typename?: 'Student';
+              id: any;
+              full_name?: string | null;
+              email?: string | null;
+              practiceToStudents: Array<{
+                __typename?: 'PracticeToStudent';
+                createdAt: any;
+                grade?: any | null;
+                submited: boolean;
+              }>;
+            };
+          }>;
+        };
+      }>;
+    };
+  } | null;
+};
 
-export type GetPracticeDetailQuery = { __typename?: 'query_root', practiceByPk?: { __typename?: 'Practice', id: any, title: string, practiceYieldsAggregate: { __typename?: 'PracticeYieldAggregate', aggregate?: { __typename?: 'PracticeYieldAggregateFields', count: number } | null, nodes: Array<{ __typename?: 'PracticeYield', id: any, name: string, method: PracticeYieldTypeEnum, meta?: any | null, practiceYieldExpectedOutputsAggregate: { __typename?: 'PracticeYieldExpectedOutputAggregate', aggregate?: { __typename?: 'PracticeYieldExpectedOutputAggregateFields', count: number } | null, nodes: Array<{ __typename?: 'PracticeYieldExpectedOutput', id: any, practiceYieldGradeMetricsAggregate: { __typename?: 'PracticeYieldGradeMetricAggregate', aggregate?: { __typename?: 'PracticeYieldGradeMetricAggregateFields', count: number, sum?: { __typename?: 'PracticeYieldGradeMetricSumFields', points?: number | null } | null } | null } }> } }> }, practiceToCoursesAggregate: { __typename?: 'PracticeToCourseAggregate', aggregate?: { __typename?: 'PracticeToCourseAggregateFields', count: number } | null, nodes: Array<{ __typename?: 'PracticeToCourse', closeDate?: any | null, createdAt: any, giteaOrgName?: string | null, is_open?: boolean | null, id: any, openDate?: any | null, updatedAt: any, course: { __typename?: 'Course', name: string, years: string, id: any, studentToCourses: Array<{ __typename?: 'StudentToCourse', courseId: any, studentId: any, student: { __typename?: 'Student', id: any, full_name?: string | null, email?: string | null, practiceToStudents: Array<{ __typename?: 'PracticeToStudent', createdAt: any, grade?: any | null, submited: boolean }> } }> } }> } } | null };
+export type GetPromotionForTpAddQueryVariables = Exact<{
+  [key: string]: never;
+}>;
 
-export type GetPromotionForTpAddQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPromotionForTpAddQuery = { __typename?: 'query_root', course: Array<{ __typename?: 'Course', id: any, name: string, years: string }> };
+export type GetPromotionForTpAddQuery = {
+  __typename?: 'query_root';
+  course: Array<{
+    __typename?: 'Course';
+    id: any;
+    name: string;
+    years: string;
+  }>;
+};
 
 export type GetPracticeForGradeMetricQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
+export type GetPracticeForGradeMetricQuery = {
+  __typename?: 'query_root';
+  practiceByPk?: { __typename?: 'Practice'; id: any; title: string } | null;
+};
 
-export type GetPracticeForGradeMetricQuery = { __typename?: 'query_root', practiceByPk?: { __typename?: 'Practice', id: any, title: string } | null };
+export type PracticeListItemFragment = {
+  __typename?: 'Practice';
+  id: any;
+  title: string;
+  practiceToCourses: Array<{
+    __typename?: 'PracticeToCourse';
+    id: any;
+    closeDate?: any | null;
+    openDate?: any | null;
+    course: { __typename?: 'Course'; name: string; years: string };
+  }>;
+};
 
-export type PracticeListItemFragment = { __typename?: 'Practice', id: any, title: string, practiceToCourses: Array<{ __typename?: 'PracticeToCourse', id: any, closeDate?: any | null, openDate?: any | null, course: { __typename?: 'Course', name: string, years: string } }> };
+export type ListPracticeQueryVariables = Exact<{ [key: string]: never }>;
 
-export type ListPracticeQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ListPracticeQuery = { __typename?: 'query_root', practice: Array<{ __typename?: 'Practice', id: any, title: string, practiceToCourses: Array<{ __typename?: 'PracticeToCourse', id: any, closeDate?: any | null, openDate?: any | null, course: { __typename?: 'Course', name: string, years: string } }> }> };
+export type ListPracticeQuery = {
+  __typename?: 'query_root';
+  practice: Array<{
+    __typename?: 'Practice';
+    id: any;
+    title: string;
+    practiceToCourses: Array<{
+      __typename?: 'PracticeToCourse';
+      id: any;
+      closeDate?: any | null;
+      openDate?: any | null;
+      course: { __typename?: 'Course'; name: string; years: string };
+    }>;
+  }>;
+};
 
 export type CreateNewPracticeMutationVariables = Exact<{
   title: Scalars['String'];
@@ -9478,586 +9640,790 @@ export type CreateNewPracticeMutationVariables = Exact<{
   data: Array<PracticeYieldInsertInput> | PracticeYieldInsertInput;
 }>;
 
-
-export type CreateNewPracticeMutation = { __typename?: 'mutation_root', insertPracticeOne?: { __typename?: 'Practice', createdAt: any, id: any, title: string, updatedAt: any } | null };
+export type CreateNewPracticeMutation = {
+  __typename?: 'mutation_root';
+  insertPracticeOne?: {
+    __typename?: 'Practice';
+    createdAt: any;
+    id: any;
+    title: string;
+    updatedAt: any;
+  } | null;
+};
 
 export const GradeMetricInputYieldFragmentDoc = gql`
-    fragment GradeMetricInputYield on PracticeYield {
-  id
-  meta
-  method
-  name
-  description
-}
-    `;
-export const YieldPracticeInputFragmentDoc = gql`
-    fragment YieldPracticeInput on PracticeYield {
-  id
-  meta
-  method
-  name
-  description
-}
-    `;
-export const HandoffCourseFragmentDoc = gql`
-    fragment HandoffCourse on Course {
-  name
-  years
-  id
-  practiceToCourses(orderBy: {closeDate: DESC}) {
-    practice {
-      title
-      id
-    }
-    practiceToStudents {
-      id
-      studentId
-    }
-    is_open
-    openDate
-    closeDate
+  fragment GradeMetricInputYield on PracticeYield {
     id
+    meta
+    method
+    name
+    description
   }
-}
-    `;
-export const CourseCardFragmentDoc = gql`
-    fragment CourseCard on Course {
-  id
-  name
-  years
-  studentToCoursesAggregate {
-    aggregate {
-      count
-    }
+`;
+export const YieldPracticeInputFragmentDoc = gql`
+  fragment YieldPracticeInput on PracticeYield {
+    id
+    meta
+    method
+    name
+    description
   }
-}
-    `;
-export const PracticeToStudentGradeMetricForGradingFragmentDoc = gql`
-    fragment PracticeToStudentGradeMetricForGrading on PracticeToStudentGradeMetric {
-  id
-  feedback
-  createdAt
-  percentGrade
-  practiceYieldGradeMetricId
-  updatedAt
-}
-    `;
-export const PracticeToStudentYieldForGradingFragmentDoc = gql`
-    fragment PracticeToStudentYieldForGrading on PracticeToStudentYield {
-  practiceToStudentYieldId: id
-  giteaOrgAndRepo
-  value
-  practiceYieldId
-  practiceToStudentGradeMetrics {
-    ...PracticeToStudentGradeMetricForGrading
-  }
-}
-    ${PracticeToStudentGradeMetricForGradingFragmentDoc}`;
-export const PracticeToPromoDetailsFragmentDoc = gql`
-    fragment PracticeToPromoDetails on PracticeToCourse {
-  course {
+`;
+export const HandoffCourseFragmentDoc = gql`
+  fragment HandoffCourse on Course {
     name
     years
     id
-    studentToCourses {
-      courseId
-      studentId
-      student {
+    practiceToCourses(orderBy: { closeDate: DESC }) {
+      practice {
+        title
         id
-        full_name
-        email
-        practiceToStudents(where: {practiceToCourse: {practiceId: {_eq: $id}}}) {
-          createdAt
-          grade
-          submited
-        }
       }
-    }
-  }
-  closeDate
-  createdAt
-  giteaOrgName
-  is_open
-  id
-  openDate
-  updatedAt
-}
-    `;
-export const PracticeListItemFragmentDoc = gql`
-    fragment PracticeListItem on Practice {
-  id
-  title
-  practiceToCourses {
-    id
-    closeDate
-    openDate
-    course {
-      name
-      years
-    }
-  }
-}
-    `;
-export const GetYieldsForNewGradeTpDocument = gql`
-    query getYieldsForNewGradeTp($tpId: uuid!) {
-  practiceByPk(id: $tpId) {
-    id
-    title
-    practiceYields(orderBy: {method: ASC}) {
-      ...GradeMetricInputYield
-    }
-  }
-}
-    ${GradeMetricInputYieldFragmentDoc}`;
-
-export function useGetYieldsForNewGradeTpQuery(options: Omit<Urql.UseQueryArgs<GetYieldsForNewGradeTpQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetYieldsForNewGradeTpQuery, GetYieldsForNewGradeTpQueryVariables>({ query: GetYieldsForNewGradeTpDocument, ...options });
-};
-export const InsertYieldGradeMetricNewDataDocument = gql`
-    mutation insertYieldGradeMetricNewData($data: [PracticeYieldExpectedOutputInsertInput!]!) {
-  insertPracticeYieldExpectedOutput(objects: $data) {
-    affectedRows
-    returning {
-      id
-    }
-  }
-}
-    `;
-
-export function useInsertYieldGradeMetricNewDataMutation() {
-  return Urql.useMutation<InsertYieldGradeMetricNewDataMutation, InsertYieldGradeMetricNewDataMutationVariables>(InsertYieldGradeMetricNewDataDocument);
-};
-export const InsertNewPracticeToCourseDocument = gql`
-    mutation insertNewPracticeToCourse($close_date: timestamptz!, $open_date: timestamptz!, $practice_id: uuid!, $courseId: uuid!) {
-  insertPracticeToCourse(
-    objects: {closeDate: $close_date, openDate: $open_date, practiceId: $practice_id, courseId: courseId}
-  ) {
-    returning {
-      id
-    }
-  }
-}
-    `;
-
-export function useInsertNewPracticeToCourseMutation() {
-  return Urql.useMutation<InsertNewPracticeToCourseMutation, InsertNewPracticeToCourseMutationVariables>(InsertNewPracticeToCourseDocument);
-};
-export const InsertFeedbackForGradeMetricDocument = gql`
-    mutation insertFeedbackForGradeMetric($id: uuid!, $feedback: jsonb!) {
-  updatePracticeYieldGradeMetricByPk(
-    pkColumns: {id: $id}
-    _append: {feedbacks: $feedback}
-  ) {
-    feedbacks
-    id
-    name
-    points
-  }
-}
-    `;
-
-export function useInsertFeedbackForGradeMetricMutation() {
-  return Urql.useMutation<InsertFeedbackForGradeMetricMutation, InsertFeedbackForGradeMetricMutationVariables>(InsertFeedbackForGradeMetricDocument);
-};
-export const InsertPracticeToStudentGradeMetricDocument = gql`
-    mutation insertPracticeToStudentGradeMetric($objects: [PracticeToStudentGradeMetricInsertInput!]!) {
-  insertPracticeToStudentGradeMetric(
-    objects: $objects
-    onConflict: {constraint: practice_to_student_grade_metric_practice_yield_grade_metric_id, updateColumns: [percentGrade, feedback]}
-  ) {
-    affectedRows
-    returning {
-      createdAt
-      feedback
-      percentGrade
-      id
-      practiceToStudentYieldId
-      practiceYieldGradeMetricId
-    }
-  }
-}
-    `;
-
-export function useInsertPracticeToStudentGradeMetricMutation() {
-  return Urql.useMutation<InsertPracticeToStudentGradeMetricMutation, InsertPracticeToStudentGradeMetricMutationVariables>(InsertPracticeToStudentGradeMetricDocument);
-};
-export const GetFileDataFromServerDocument = gql`
-    query getFileDataFromServer($practice_to_student_yield_id: uuid!, $practice_yield_expected_output_id: uuid!) {
-  getGitFileData(
-    practice_to_student_yield_id: $practice_to_student_yield_id
-    practice_yield_expected_output_id: $practice_yield_expected_output_id
-  ) {
-    content
-    encoding
-  }
-}
-    `;
-
-export function useGetFileDataFromServerQuery(options: Omit<Urql.UseQueryArgs<GetFileDataFromServerQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetFileDataFromServerQuery, GetFileDataFromServerQueryVariables>({ query: GetFileDataFromServerDocument, ...options });
-};
-export const GetLogDataFromServerDocument = gql`
-    query getLogDataFromServer($practice_to_student_yield_id: uuid!, $practice_yield_expected_output_id: uuid!) {
-  getGitLogData(
-    practice_to_student_yield_id: $practice_to_student_yield_id
-    practice_yield_expected_output_id: $practice_yield_expected_output_id
-  ) {
-    author_profile_picture
-    commit_message
-    commit_author_date
-    commit_author_email
-    commit_author_name
-    commit_committer_date
-    commit_committer_email
-    commit_committer_name
-    commit_tree_created
-    commit_tree_sha
-    commit_tree_url
-    commit_url
-    created
-    html_url
-    sha
-    url
-    parents
-  }
-}
-    `;
-
-export function useGetLogDataFromServerQuery(options: Omit<Urql.UseQueryArgs<GetLogDataFromServerQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetLogDataFromServerQuery, GetLogDataFromServerQueryVariables>({ query: GetLogDataFromServerDocument, ...options });
-};
-export const HandOffByIdDocument = gql`
-    query HandOffById($id: uuid!) {
-  practiceToCourseByPk(id: $id) {
-    practice {
-      title
-      description
-      id
-      practiceYields {
-        ...YieldPracticeInput
+      practiceToStudents {
+        id
+        studentId
       }
-    }
-    practiceToStudents {
+      is_open
+      openDate
+      closeDate
       id
-      studentId
     }
-    is_open
-    openDate
-    closeDate
+  }
+`;
+export const CourseCardFragmentDoc = gql`
+  fragment CourseCard on Course {
     id
-  }
-}
-    ${YieldPracticeInputFragmentDoc}`;
-
-export function useHandOffByIdQuery(options: Omit<Urql.UseQueryArgs<HandOffByIdQueryVariables>, 'query'>) {
-  return Urql.useQuery<HandOffByIdQuery, HandOffByIdQueryVariables>({ query: HandOffByIdDocument, ...options });
-};
-export const SubmitHandoffDocument = gql`
-    mutation submitHandoff($practiceToPromotionId: uuid!, $yields: [YieldForHandoff!]!) {
-  submitHandoff(practiceToPromotionId: $practiceToPromotionId, yields: $yields) {
-    status
-  }
-}
-    `;
-
-export function useSubmitHandoffMutation() {
-  return Urql.useMutation<SubmitHandoffMutation, SubmitHandoffMutationVariables>(SubmitHandoffDocument);
-};
-export const HandoffListDocument = gql`
-    query handoffList {
-  course(orderBy: {createdAt: DESC}) {
-    ...HandoffCourse
-  }
-}
-    ${HandoffCourseFragmentDoc}`;
-
-export function useHandoffListQuery(options?: Omit<Urql.UseQueryArgs<HandoffListQueryVariables>, 'query'>) {
-  return Urql.useQuery<HandoffListQuery, HandoffListQueryVariables>({ query: HandoffListDocument, ...options });
-};
-export const CurrentUserDocument = gql`
-    query currentUser {
-  user {
-    createdAt
-    email
-    updatedAt
-    id
-  }
-}
-    `;
-
-export function useCurrentUserQuery(options?: Omit<Urql.UseQueryArgs<CurrentUserQueryVariables>, 'query'>) {
-  return Urql.useQuery<CurrentUserQuery, CurrentUserQueryVariables>({ query: CurrentUserDocument, ...options });
-};
-export const ListTpYieldTypesDocument = gql`
-    query listTpYieldTypes {
-  practiceYieldType {
-    name
-  }
-}
-    `;
-
-export function useListTpYieldTypesQuery(options?: Omit<Urql.UseQueryArgs<ListTpYieldTypesQueryVariables>, 'query'>) {
-  return Urql.useQuery<ListTpYieldTypesQuery, ListTpYieldTypesQueryVariables>({ query: ListTpYieldTypesDocument, ...options });
-};
-export const CourseDetailsDocument = gql`
-    query courseDetails($id: uuid!) {
-  courseByPk(id: $id) {
     name
     years
     studentToCoursesAggregate {
-      nodes {
-        student {
-          id
-          email
-          full_name
-          userId
-        }
-      }
       aggregate {
         count
       }
     }
   }
-}
-    `;
-
-export function useCourseDetailsQuery(options: Omit<Urql.UseQueryArgs<CourseDetailsQueryVariables>, 'query'>) {
-  return Urql.useQuery<CourseDetailsQuery, CourseDetailsQueryVariables>({ query: CourseDetailsDocument, ...options });
-};
-export const SendStudentClaimMailDocument = gql`
-    mutation sendStudentClaimMail($studentsIds: [uuid]!) {
-  sendStudentClaimMail(studentsIds: $studentsIds) {
-    nmbMailSent
-  }
-}
-    `;
-
-export function useSendStudentClaimMailMutation() {
-  return Urql.useMutation<SendStudentClaimMailMutation, SendStudentClaimMailMutationVariables>(SendStudentClaimMailDocument);
-};
-export const ListCoursesDocument = gql`
-    query ListCourses {
-  course {
-    ...CourseCard
-  }
-}
-    ${CourseCardFragmentDoc}`;
-
-export function useListCoursesQuery(options?: Omit<Urql.UseQueryArgs<ListCoursesQueryVariables>, 'query'>) {
-  return Urql.useQuery<ListCoursesQuery, ListCoursesQueryVariables>({ query: ListCoursesDocument, ...options });
-};
-export const CreateCourseDocument = gql`
-    mutation CreateCourse($name: String!, $years: String!, $students: [StudentToCourseInsertInput!]!) {
-  insertCourseOne(
-    object: {name: $name, years: $years, studentToCourses: {data: $students}}
-  ) {
-    createdAt
+`;
+export const PracticeToStudentGradeMetricForGradingFragmentDoc = gql`
+  fragment PracticeToStudentGradeMetricForGrading on PracticeToStudentGradeMetric {
     id
+    feedback
+    createdAt
+    percentGrade
+    practiceYieldGradeMetricId
+    updatedAt
   }
-}
-    `;
-
-export function useCreateCourseMutation() {
-  return Urql.useMutation<CreateCourseMutation, CreateCourseMutationVariables>(CreateCourseDocument);
-};
-export const FetchDataForStudentDashboardDocument = gql`
-    query fetchDataForStudentDashboard {
-  practiceToStudent {
-    submited
-    studentGrade {
-      grade
-      gradeDetail
+`;
+export const PracticeToStudentYieldForGradingFragmentDoc = gql`
+  fragment PracticeToStudentYieldForGrading on PracticeToStudentYield {
+    practiceToStudentYieldId: id
+    giteaOrgAndRepo
+    value
+    practiceYieldId
+    practiceToStudentGradeMetrics {
+      ...PracticeToStudentGradeMetricForGrading
     }
-    studentFeedback {
-      feedback
+  }
+  ${PracticeToStudentGradeMetricForGradingFragmentDoc}
+`;
+export const PracticeToPromoDetailsFragmentDoc = gql`
+  fragment PracticeToPromoDetails on PracticeToCourse {
+    course {
+      name
+      years
+      id
+      studentToCourses {
+        courseId
+        studentId
+        student {
+          id
+          full_name
+          email
+          practiceToStudents(
+            where: { practiceToCourse: { practiceId: { _eq: $id } } }
+          ) {
+            createdAt
+            grade
+            submited
+          }
+        }
+      }
     }
-    practiceToCourse {
-      is_open
+    closeDate
+    createdAt
+    giteaOrgName
+    is_open
+    id
+    openDate
+    updatedAt
+  }
+`;
+export const PracticeListItemFragmentDoc = gql`
+  fragment PracticeListItem on Practice {
+    id
+    title
+    practiceToCourses {
+      id
+      closeDate
+      openDate
       course {
         name
-      }
-      practice {
-        title
+        years
       }
     }
   }
-}
-    `;
-
-export function useFetchDataForStudentDashboardQuery(options?: Omit<Urql.UseQueryArgs<FetchDataForStudentDashboardQueryVariables>, 'query'>) {
-  return Urql.useQuery<FetchDataForStudentDashboardQuery, FetchDataForStudentDashboardQueryVariables>({ query: FetchDataForStudentDashboardDocument, ...options });
-};
-export const GetPracticeToStudentForGradingDocument = gql`
-    query getPracticeToStudentForGrading($courseId: uuid!, $practiceId: uuid!) {
-  practiceToCourse(
-    where: {courseId: {_eq: $courseId}, _and: {practiceId: {_eq: $practiceId}}}
-  ) {
-    practiceToStudents {
-      calculatedGrades {
-        calculatedGrade
-      }
-      student {
-        full_name
+`;
+export const GetYieldsForNewGradeTpDocument = gql`
+  query getYieldsForNewGradeTp($tpId: uuid!) {
+    practiceByPk(id: $tpId) {
+      id
+      title
+      practiceYields(orderBy: { method: ASC }) {
+        ...GradeMetricInputYield
       }
     }
-    course {
+  }
+  ${GradeMetricInputYieldFragmentDoc}
+`;
+
+export function useGetYieldsForNewGradeTpQuery(
+  options: Omit<
+    Urql.UseQueryArgs<GetYieldsForNewGradeTpQueryVariables>,
+    'query'
+  >
+) {
+  return Urql.useQuery<
+    GetYieldsForNewGradeTpQuery,
+    GetYieldsForNewGradeTpQueryVariables
+  >({ query: GetYieldsForNewGradeTpDocument, ...options });
+}
+export const InsertYieldGradeMetricNewDataDocument = gql`
+  mutation insertYieldGradeMetricNewData(
+    $data: [PracticeYieldExpectedOutputInsertInput!]!
+  ) {
+    insertPracticeYieldExpectedOutput(objects: $data) {
+      affectedRows
+      returning {
+        id
+      }
+    }
+  }
+`;
+
+export function useInsertYieldGradeMetricNewDataMutation() {
+  return Urql.useMutation<
+    InsertYieldGradeMetricNewDataMutation,
+    InsertYieldGradeMetricNewDataMutationVariables
+  >(InsertYieldGradeMetricNewDataDocument);
+}
+export const InsertNewPracticeToCourseDocument = gql`
+  mutation insertNewPracticeToCourse(
+    $close_date: timestamptz!
+    $open_date: timestamptz!
+    $practice_id: uuid!
+    $courseId: uuid!
+  ) {
+    insertPracticeToCourse(
+      objects: {
+        closeDate: $close_date
+        openDate: $open_date
+        practiceId: $practice_id
+        courseId: courseId
+      }
+    ) {
+      returning {
+        id
+      }
+    }
+  }
+`;
+
+export function useInsertNewPracticeToCourseMutation() {
+  return Urql.useMutation<
+    InsertNewPracticeToCourseMutation,
+    InsertNewPracticeToCourseMutationVariables
+  >(InsertNewPracticeToCourseDocument);
+}
+export const InsertFeedbackForGradeMetricDocument = gql`
+  mutation insertFeedbackForGradeMetric($id: uuid!, $feedback: jsonb!) {
+    updatePracticeYieldGradeMetricByPk(
+      pkColumns: { id: $id }
+      _append: { feedbacks: $feedback }
+    ) {
+      feedbacks
+      id
+      name
+      points
+    }
+  }
+`;
+
+export function useInsertFeedbackForGradeMetricMutation() {
+  return Urql.useMutation<
+    InsertFeedbackForGradeMetricMutation,
+    InsertFeedbackForGradeMetricMutationVariables
+  >(InsertFeedbackForGradeMetricDocument);
+}
+export const InsertPracticeToStudentGradeMetricDocument = gql`
+  mutation insertPracticeToStudentGradeMetric(
+    $objects: [PracticeToStudentGradeMetricInsertInput!]!
+  ) {
+    insertPracticeToStudentGradeMetric(
+      objects: $objects
+      onConflict: {
+        constraint: practice_to_student_grade_metric_practice_yield_grade_metric_id
+        updateColumns: [percentGrade, feedback]
+      }
+    ) {
+      affectedRows
+      returning {
+        createdAt
+        feedback
+        percentGrade
+        id
+        practiceToStudentYieldId
+        practiceYieldGradeMetricId
+      }
+    }
+  }
+`;
+
+export function useInsertPracticeToStudentGradeMetricMutation() {
+  return Urql.useMutation<
+    InsertPracticeToStudentGradeMetricMutation,
+    InsertPracticeToStudentGradeMetricMutationVariables
+  >(InsertPracticeToStudentGradeMetricDocument);
+}
+export const GetFileDataFromServerDocument = gql`
+  query getFileDataFromServer(
+    $practice_to_student_yield_id: uuid!
+    $practice_yield_expected_output_id: uuid!
+  ) {
+    getGitFileData(
+      practice_to_student_yield_id: $practice_to_student_yield_id
+      practice_yield_expected_output_id: $practice_yield_expected_output_id
+    ) {
+      content
+      encoding
+    }
+  }
+`;
+
+export function useGetFileDataFromServerQuery(
+  options: Omit<Urql.UseQueryArgs<GetFileDataFromServerQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<
+    GetFileDataFromServerQuery,
+    GetFileDataFromServerQueryVariables
+  >({ query: GetFileDataFromServerDocument, ...options });
+}
+export const GetLogDataFromServerDocument = gql`
+  query getLogDataFromServer(
+    $practice_to_student_yield_id: uuid!
+    $practice_yield_expected_output_id: uuid!
+  ) {
+    getGitLogData(
+      practice_to_student_yield_id: $practice_to_student_yield_id
+      practice_yield_expected_output_id: $practice_yield_expected_output_id
+    ) {
+      author_profile_picture
+      commit_message
+      commit_author_date
+      commit_author_email
+      commit_author_name
+      commit_committer_date
+      commit_committer_email
+      commit_committer_name
+      commit_tree_created
+      commit_tree_sha
+      commit_tree_url
+      commit_url
+      created
+      html_url
+      sha
+      url
+      parents
+    }
+  }
+`;
+
+export function useGetLogDataFromServerQuery(
+  options: Omit<Urql.UseQueryArgs<GetLogDataFromServerQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<
+    GetLogDataFromServerQuery,
+    GetLogDataFromServerQueryVariables
+  >({ query: GetLogDataFromServerDocument, ...options });
+}
+export const HandOffByIdDocument = gql`
+  query HandOffById($id: uuid!) {
+    practiceToCourseByPk(id: $id) {
+      practice {
+        title
+        description
+        id
+        practiceYields {
+          ...YieldPracticeInput
+        }
+      }
+      practiceToStudents {
+        id
+        studentId
+      }
+      is_open
+      openDate
+      closeDate
+      id
+    }
+  }
+  ${YieldPracticeInputFragmentDoc}
+`;
+
+export function useHandOffByIdQuery(
+  options: Omit<Urql.UseQueryArgs<HandOffByIdQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<HandOffByIdQuery, HandOffByIdQueryVariables>({
+    query: HandOffByIdDocument,
+    ...options,
+  });
+}
+export const SubmitHandoffDocument = gql`
+  mutation submitHandoff(
+    $practiceToPromotionId: uuid!
+    $yields: [YieldForHandoff!]!
+  ) {
+    submitHandoff(
+      practiceToPromotionId: $practiceToPromotionId
+      yields: $yields
+    ) {
+      status
+    }
+  }
+`;
+
+export function useSubmitHandoffMutation() {
+  return Urql.useMutation<
+    SubmitHandoffMutation,
+    SubmitHandoffMutationVariables
+  >(SubmitHandoffDocument);
+}
+export const HandoffListDocument = gql`
+  query handoffList {
+    course(orderBy: { createdAt: DESC }) {
+      ...HandoffCourse
+    }
+  }
+  ${HandoffCourseFragmentDoc}
+`;
+
+export function useHandoffListQuery(
+  options?: Omit<Urql.UseQueryArgs<HandoffListQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<HandoffListQuery, HandoffListQueryVariables>({
+    query: HandoffListDocument,
+    ...options,
+  });
+}
+export const CurrentUserDocument = gql`
+  query currentUser {
+    user {
+      createdAt
+      email
+      updatedAt
+      id
+    }
+  }
+`;
+
+export function useCurrentUserQuery(
+  options?: Omit<Urql.UseQueryArgs<CurrentUserQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<CurrentUserQuery, CurrentUserQueryVariables>({
+    query: CurrentUserDocument,
+    ...options,
+  });
+}
+export const ListTpYieldTypesDocument = gql`
+  query listTpYieldTypes {
+    practiceYieldType {
+      name
+    }
+  }
+`;
+
+export function useListTpYieldTypesQuery(
+  options?: Omit<Urql.UseQueryArgs<ListTpYieldTypesQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<ListTpYieldTypesQuery, ListTpYieldTypesQueryVariables>({
+    query: ListTpYieldTypesDocument,
+    ...options,
+  });
+}
+export const CourseDetailsDocument = gql`
+  query courseDetails($id: uuid!) {
+    courseByPk(id: $id) {
+      name
+      years
       studentToCoursesAggregate {
+        nodes {
+          student {
+            id
+            email
+            full_name
+            userId
+          }
+        }
         aggregate {
           count
         }
       }
     }
   }
-  practiceYield(
-    where: {practice: {practiceToCourses: {courseId: {_eq: $courseId}, _and: {practiceId: {_eq: $practiceId}}}}}
-  ) {
-    id
-    name
-    practiceToStudentYields(
-      where: {submited: {_eq: true}, _and: {practiceToStudent: {practiceToCourse: {courseId: {_eq: $courseId}, _and: {practiceId: {_eq: $practiceId}}}}}}
-    ) {
-      ...PracticeToStudentYieldForGrading
+`;
+
+export function useCourseDetailsQuery(
+  options: Omit<Urql.UseQueryArgs<CourseDetailsQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<CourseDetailsQuery, CourseDetailsQueryVariables>({
+    query: CourseDetailsDocument,
+    ...options,
+  });
+}
+export const SendStudentClaimMailDocument = gql`
+  mutation sendStudentClaimMail($studentsIds: [uuid]!) {
+    sendStudentClaimMail(studentsIds: $studentsIds) {
+      nmbMailSent
     }
-    practiceYieldExpectedOutputs {
+  }
+`;
+
+export function useSendStudentClaimMailMutation() {
+  return Urql.useMutation<
+    SendStudentClaimMailMutation,
+    SendStudentClaimMailMutationVariables
+  >(SendStudentClaimMailDocument);
+}
+export const ListCoursesDocument = gql`
+  query ListCourses {
+    course {
+      ...CourseCard
+    }
+  }
+  ${CourseCardFragmentDoc}
+`;
+
+export function useListCoursesQuery(
+  options?: Omit<Urql.UseQueryArgs<ListCoursesQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<ListCoursesQuery, ListCoursesQueryVariables>({
+    query: ListCoursesDocument,
+    ...options,
+  });
+}
+export const CreateCourseDocument = gql`
+  mutation CreateCourse(
+    $name: String!
+    $years: String!
+    $students: [StudentToCourseInsertInput!]!
+  ) {
+    insertCourseOne(
+      object: {
+        name: $name
+        years: $years
+        studentToCourses: { data: $students }
+      }
+    ) {
+      createdAt
       id
-      codeLang
-      expected
-      gitPath
-      method
-      practiceYieldId
-      practiceYieldGradeMetrics(orderBy: {createdAt: DESC}) {
-        id
-        name
-        points
-        feedbacks
-        createdAt
-        practiceToStudentGradeMetricsAggregate(
-          where: {practiceToStudentYield: {practiceToStudent: {practiceToCourse: {courseId: {_eq: $courseId}, _and: {practiceId: {_eq: $practiceId}}}}}}
-        ) {
+    }
+  }
+`;
+
+export function useCreateCourseMutation() {
+  return Urql.useMutation<CreateCourseMutation, CreateCourseMutationVariables>(
+    CreateCourseDocument
+  );
+}
+export const FetchDataForStudentDashboardDocument = gql`
+  query fetchDataForStudentDashboard {
+    practiceToStudent {
+      submited
+      studentGrade {
+        grade
+        gradeDetail
+      }
+      studentFeedback {
+        feedback
+      }
+      practiceToCourse {
+        is_open
+        course {
+          name
+        }
+        practice {
+          title
+        }
+      }
+    }
+  }
+`;
+
+export function useFetchDataForStudentDashboardQuery(
+  options?: Omit<
+    Urql.UseQueryArgs<FetchDataForStudentDashboardQueryVariables>,
+    'query'
+  >
+) {
+  return Urql.useQuery<
+    FetchDataForStudentDashboardQuery,
+    FetchDataForStudentDashboardQueryVariables
+  >({ query: FetchDataForStudentDashboardDocument, ...options });
+}
+export const GetPracticeToStudentForGradingDocument = gql`
+  query getPracticeToStudentForGrading($courseId: uuid!, $practiceId: uuid!) {
+    practiceToCourse(
+      where: {
+        courseId: { _eq: $courseId }
+        _and: { practiceId: { _eq: $practiceId } }
+      }
+    ) {
+      practiceToStudents {
+        calculatedGrades {
+          calculatedGrade
+        }
+        student {
+          full_name
+        }
+      }
+      course {
+        studentToCoursesAggregate {
           aggregate {
             count
           }
-          nodes {
-            practiceYieldGradeMetricId
-            practiceToStudentYieldId
+        }
+      }
+    }
+    practiceYield(
+      where: {
+        practice: {
+          practiceToCourses: {
+            courseId: { _eq: $courseId }
+            _and: { practiceId: { _eq: $practiceId } }
+          }
+        }
+      }
+    ) {
+      id
+      name
+      practiceToStudentYields(
+        where: {
+          submited: { _eq: true }
+          _and: {
+            practiceToStudent: {
+              practiceToCourse: {
+                courseId: { _eq: $courseId }
+                _and: { practiceId: { _eq: $practiceId } }
+              }
+            }
+          }
+        }
+      ) {
+        ...PracticeToStudentYieldForGrading
+      }
+      practiceYieldExpectedOutputs {
+        id
+        codeLang
+        expected
+        gitPath
+        method
+        practiceYieldId
+        practiceYieldGradeMetrics(orderBy: { createdAt: DESC }) {
+          id
+          name
+          points
+          feedbacks
+          createdAt
+          practiceToStudentGradeMetricsAggregate(
+            where: {
+              practiceToStudentYield: {
+                practiceToStudent: {
+                  practiceToCourse: {
+                    courseId: { _eq: $courseId }
+                    _and: { practiceId: { _eq: $practiceId } }
+                  }
+                }
+              }
+            }
+          ) {
+            aggregate {
+              count
+            }
+            nodes {
+              practiceYieldGradeMetricId
+              practiceToStudentYieldId
+            }
           }
         }
       }
     }
   }
-}
-    ${PracticeToStudentYieldForGradingFragmentDoc}`;
+  ${PracticeToStudentYieldForGradingFragmentDoc}
+`;
 
-export function useGetPracticeToStudentForGradingQuery(options: Omit<Urql.UseQueryArgs<GetPracticeToStudentForGradingQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetPracticeToStudentForGradingQuery, GetPracticeToStudentForGradingQueryVariables>({ query: GetPracticeToStudentForGradingDocument, ...options });
-};
-export const TriggerRefreshGradesDocument = gql`
-    mutation triggerRefreshGrades($practice_id: uuid!, $course_id: uuid!) {
-  refreshGrades(course_id: $course_id, practice_id: $practice_id) {
-    affected_rows
-  }
+export function useGetPracticeToStudentForGradingQuery(
+  options: Omit<
+    Urql.UseQueryArgs<GetPracticeToStudentForGradingQueryVariables>,
+    'query'
+  >
+) {
+  return Urql.useQuery<
+    GetPracticeToStudentForGradingQuery,
+    GetPracticeToStudentForGradingQueryVariables
+  >({ query: GetPracticeToStudentForGradingDocument, ...options });
 }
-    `;
+export const TriggerRefreshGradesDocument = gql`
+  mutation triggerRefreshGrades($practice_id: uuid!, $course_id: uuid!) {
+    refreshGrades(course_id: $course_id, practice_id: $practice_id) {
+      affected_rows
+    }
+  }
+`;
 
 export function useTriggerRefreshGradesMutation() {
-  return Urql.useMutation<TriggerRefreshGradesMutation, TriggerRefreshGradesMutationVariables>(TriggerRefreshGradesDocument);
-};
+  return Urql.useMutation<
+    TriggerRefreshGradesMutation,
+    TriggerRefreshGradesMutationVariables
+  >(TriggerRefreshGradesDocument);
+}
 export const GetPracticeDetailDocument = gql`
-    query getPracticeDetail($id: uuid!) {
-  practiceByPk(id: $id) {
-    id
-    title
-    practiceYieldsAggregate(orderBy: {createdAt: ASC}) {
-      aggregate {
-        count
-      }
-      nodes {
-        id
-        name
-        method
-        meta
-        practiceYieldExpectedOutputsAggregate {
-          aggregate {
-            count
-          }
-          nodes {
-            id
-            practiceYieldGradeMetricsAggregate {
-              aggregate {
-                count
-                sum {
-                  points
+  query getPracticeDetail($id: uuid!) {
+    practiceByPk(id: $id) {
+      id
+      title
+      practiceYieldsAggregate(orderBy: { createdAt: ASC }) {
+        aggregate {
+          count
+        }
+        nodes {
+          id
+          name
+          method
+          meta
+          practiceYieldExpectedOutputsAggregate {
+            aggregate {
+              count
+            }
+            nodes {
+              id
+              practiceYieldGradeMetricsAggregate {
+                aggregate {
+                  count
+                  sum {
+                    points
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-    practiceToCoursesAggregate {
-      aggregate {
-        count
-      }
-      nodes {
-        ...PracticeToPromoDetails
+      practiceToCoursesAggregate {
+        aggregate {
+          count
+        }
+        nodes {
+          ...PracticeToPromoDetails
+        }
       }
     }
   }
-}
-    ${PracticeToPromoDetailsFragmentDoc}`;
+  ${PracticeToPromoDetailsFragmentDoc}
+`;
 
-export function useGetPracticeDetailQuery(options: Omit<Urql.UseQueryArgs<GetPracticeDetailQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetPracticeDetailQuery, GetPracticeDetailQueryVariables>({ query: GetPracticeDetailDocument, ...options });
-};
+export function useGetPracticeDetailQuery(
+  options: Omit<Urql.UseQueryArgs<GetPracticeDetailQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<GetPracticeDetailQuery, GetPracticeDetailQueryVariables>(
+    { query: GetPracticeDetailDocument, ...options }
+  );
+}
 export const GetPromotionForTpAddDocument = gql`
-    query getPromotionForTpAdd {
-  course(orderBy: {updatedAt: ASC}) {
-    id
-    name
-    years
+  query getPromotionForTpAdd {
+    course(orderBy: { updatedAt: ASC }) {
+      id
+      name
+      years
+    }
   }
-}
-    `;
+`;
 
-export function useGetPromotionForTpAddQuery(options?: Omit<Urql.UseQueryArgs<GetPromotionForTpAddQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetPromotionForTpAddQuery, GetPromotionForTpAddQueryVariables>({ query: GetPromotionForTpAddDocument, ...options });
-};
+export function useGetPromotionForTpAddQuery(
+  options?: Omit<Urql.UseQueryArgs<GetPromotionForTpAddQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<
+    GetPromotionForTpAddQuery,
+    GetPromotionForTpAddQueryVariables
+  >({ query: GetPromotionForTpAddDocument, ...options });
+}
 export const GetPracticeForGradeMetricDocument = gql`
-    query getPracticeForGradeMetric($id: uuid!) {
-  practiceByPk(id: $id) {
-    id
-    title
+  query getPracticeForGradeMetric($id: uuid!) {
+    practiceByPk(id: $id) {
+      id
+      title
+    }
   }
-}
-    `;
+`;
 
-export function useGetPracticeForGradeMetricQuery(options: Omit<Urql.UseQueryArgs<GetPracticeForGradeMetricQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetPracticeForGradeMetricQuery, GetPracticeForGradeMetricQueryVariables>({ query: GetPracticeForGradeMetricDocument, ...options });
-};
+export function useGetPracticeForGradeMetricQuery(
+  options: Omit<
+    Urql.UseQueryArgs<GetPracticeForGradeMetricQueryVariables>,
+    'query'
+  >
+) {
+  return Urql.useQuery<
+    GetPracticeForGradeMetricQuery,
+    GetPracticeForGradeMetricQueryVariables
+  >({ query: GetPracticeForGradeMetricDocument, ...options });
+}
 export const ListPracticeDocument = gql`
-    query ListPractice {
-  practice(orderBy: {createdAt: DESC}) {
-    ...PracticeListItem
+  query ListPractice {
+    practice(orderBy: { createdAt: DESC }) {
+      ...PracticeListItem
+    }
   }
-}
-    ${PracticeListItemFragmentDoc}`;
+  ${PracticeListItemFragmentDoc}
+`;
 
-export function useListPracticeQuery(options?: Omit<Urql.UseQueryArgs<ListPracticeQueryVariables>, 'query'>) {
-  return Urql.useQuery<ListPracticeQuery, ListPracticeQueryVariables>({ query: ListPracticeDocument, ...options });
-};
-export const CreateNewPracticeDocument = gql`
-    mutation createNewPractice($title: String!, $description: String!, $data: [PracticeYieldInsertInput!]!) {
-  insertPracticeOne(
-    object: {title: $title, description: $description, practiceYields: {data: $data}}
-  ) {
-    createdAt
-    id
-    title
-    updatedAt
-  }
+export function useListPracticeQuery(
+  options?: Omit<Urql.UseQueryArgs<ListPracticeQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<ListPracticeQuery, ListPracticeQueryVariables>({
+    query: ListPracticeDocument,
+    ...options,
+  });
 }
-    `;
+export const CreateNewPracticeDocument = gql`
+  mutation createNewPractice(
+    $title: String!
+    $description: String!
+    $data: [PracticeYieldInsertInput!]!
+  ) {
+    insertPracticeOne(
+      object: {
+        title: $title
+        description: $description
+        practiceYields: { data: $data }
+      }
+    ) {
+      createdAt
+      id
+      title
+      updatedAt
+    }
+  }
+`;
 
 export function useCreateNewPracticeMutation() {
-  return Urql.useMutation<CreateNewPracticeMutation, CreateNewPracticeMutationVariables>(CreateNewPracticeDocument);
-};
+  return Urql.useMutation<
+    CreateNewPracticeMutation,
+    CreateNewPracticeMutationVariables
+  >(CreateNewPracticeDocument);
+}

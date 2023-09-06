@@ -1,8 +1,5 @@
 type Mutation {
-  fillEmptyYields(
-    course_id: uuid!
-    practice_id: uuid!
-  ): FillEmptyYieldsOutput
+  fillEmptyYields(course_id: uuid!, practice_id: uuid!): FillEmptyYieldsOutput
 }
 
 type Query {
@@ -20,22 +17,15 @@ type Query {
 }
 
 type Mutation {
-  linkStudentToUser(
-    linkId: uuid!
-  ): linkStudentToUserOutput
+  linkStudentToUser(linkId: uuid!): linkStudentToUserOutput
 }
 
 type Mutation {
-  refreshGrades(
-    course_id: uuid!
-    practice_id: uuid!
-  ): RefreshGradesOutput
+  refreshGrades(course_id: uuid!, practice_id: uuid!): RefreshGradesOutput
 }
 
 type Mutation {
-  sendStudentClaimMail(
-    studentsIds: [uuid]!
-  ): SendStudentClaimMailOutput
+  sendStudentClaimMail(studentsIds: [uuid]!): SendStudentClaimMailOutput
 }
 
 type Mutation {
@@ -117,4 +107,3 @@ type CommitItem {
   url: String
   parents: jsonb
 }
-

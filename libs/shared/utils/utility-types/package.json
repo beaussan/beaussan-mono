@@ -10,7 +10,7 @@
     }
   },
   "dependencies": {
-    "vite": "4.1.4",
+    "vite": "4.3.9",
     "@vitejs/plugin-react": "4.0.4",
     "@nx/vite": "16.7.4",
     "vite-plugin-dts": "2.3.0"

@@ -28,11 +28,11 @@ select_permissions:
                 course:
                   can_student_see_grade:
                     _eq: true
-    comment: ""
+    comment: ''
   - role: teacher
     permission:
       columns:
         - calculated_grade
         - practice_to_student_id
       filter: {}
-    comment: ""
+    comment: ''

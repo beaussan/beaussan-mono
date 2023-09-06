@@ -10,10 +10,7 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -30,12 +27,8 @@
       "@beaussan/dash/data/hasura-codegen-types": [
         "libs/dash/data/hasura-codegen-types/src/index.ts"
       ],
-      "@beaussan/dash/data/todoist": [
-        "libs/dash/data/todoist/src/index.ts"
-      ],
-      "@beaussan/dash/data/user": [
-        "libs/dash/data/user/src/index.ts"
-      ],
+      "@beaussan/dash/data/todoist": ["libs/dash/data/todoist/src/index.ts"],
+      "@beaussan/dash/data/user": ["libs/dash/data/user/src/index.ts"],
       "@beaussan/dash/feature/bookmark-list": [
         "libs/dash/feature/bookmark-list/src/index.ts"
       ],
@@ -54,9 +47,7 @@
       "@beaussan/internal-generator": [
         "libs/nx-plugins/internal-generator/src/index.ts"
       ],
-      "@beaussan/nx-hasura": [
-        "libs/nx-plugins/nx-hasura/src/index.ts"
-      ],
+      "@beaussan/nx-hasura": ["libs/nx-plugins/nx-hasura/src/index.ts"],
       "@beaussan/shared/data/next-auth-urql-hasura": [
         "libs/shared/data/next-auth-urql-hasura/src/index.ts"
       ],
@@ -69,9 +60,7 @@
       "@beaussan/shared/storybook-host": [
         "libs/shared/storybook-host/src/index.ts"
       ],
-      "@beaussan/shared/ui/ui-kit": [
-        "libs/shared/ui/ui-kit/src/index.ts"
-      ],
+      "@beaussan/shared/ui/ui-kit": ["libs/shared/ui/ui-kit/src/index.ts"],
       "@beaussan/shared/utils/fuzy-search": [
         "libs/shared/utils/fuzy-search/src/index.ts"
       ],
@@ -93,13 +82,8 @@
       "@beaussan/shared/utils/utility-types": [
         "libs/shared/utils/utility-types/src/index.ts"
       ],
-      "@beaussan/shared/utils/zod": [
-        "libs/shared/utils/zod/src/index.ts"
-      ]
+      "@beaussan/shared/utils/zod": ["libs/shared/utils/zod/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }
