@@ -1,5 +1,6 @@
 - "!include public_account.yaml"
 - "!include public_allowed_roles.yaml"
+- "!include public_calculated_grades.yaml"
 - "!include public_course.yaml"
 - "!include public_practice.yaml"
 - "!include public_practice_to_course.yaml"

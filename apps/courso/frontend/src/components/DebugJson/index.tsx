@@ -5,7 +5,10 @@ export const DebugJson: React.FC<{ json: any; title?: string }> = ({
   json,
   title,
 }) => {
-  if (clientEnvs.NODE_ENV !== 'development') {
+  if (
+    clientEnvs.NODE_ENV !== 'development' ||
+    !clientEnvs.NEXT_PUBLIC_DEBUG_MODE
+  ) {
     return null;
   }
   return (

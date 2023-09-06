@@ -20,6 +20,7 @@ import gfm from 'remark-gfm';
 import remarkEmoji from 'remark-emoji';
 import { format } from 'date-fns';
 import { enGB } from 'date-fns/locale';
+import gravatar from 'gravatar';
 
 gql`
   mutation insertPracticeToStudentGradeMetric(
@@ -156,7 +157,7 @@ const GitLogFiles: DisplayItem = (props) => {
 
   return (
     <>
-      <Button onClick={() => retry()}>Retry</Button>
+      {/*<Button onClick={() => retry()}>Retry</Button>*/}
       <ol className="overflow-scroll h-full space-y-4">
         {data.getGitLogData.map((item) => (
           <li key={item.sha} className="bg-white p-2 rounded-lg">
@@ -165,6 +166,14 @@ const GitLogFiles: DisplayItem = (props) => {
                 src={item.author_profile_picture ?? ''}
                 className="w-10 h-10 mr-2 rounded-lg"
                 alt="committer"
+                onError={(event) => {
+                  if (!event.target) {
+                    return;
+                  }
+                  (event.target as HTMLImageElement).src = gravatar.url(
+                    item.author_profile_picture ?? 'RANDOM'
+                  );
+                }}
               />
               <div>
                 {item.commit_author_email} - {item.commit_author_name} at{' '}
@@ -203,7 +212,7 @@ const CompareGitCodeFile: DisplayGitItem = ({
   gitFileData,
 }) => (
   <DiffViewerLazy
-    className="h-1/2"
+    className="!h-[90vh]"
     lang={expected.expectedOutput.codeLang as any}
     expected={expected.expectedOutput.expected ?? ''}
     got={gitFileData}
@@ -212,7 +221,7 @@ const CompareGitCodeFile: DisplayGitItem = ({
 
 const CompareCodeFile: DisplayItem = ({ value, expected }) => (
   <DiffViewerLazy
-    className="h-1/2"
+    className="!h-[90vh]"
     lang={expected.expectedOutput.codeLang as any}
     expected={expected.expectedOutput.expected ?? ''}
     got={value?.value}

@@ -16,6 +16,7 @@ export const clientEnvSchema = z.object({
   NX_APP_URL: z.string().optional(),
   NEXT_PUBLIC_HASURA_URL: z.string(),
   NEXT_PUBLIC_HASURA_IS_HTTPS: booleanSchemaEnv,
+  NEXT_PUBLIC_DEBUG_MODE: booleanSchemaEnv.default('no'),
   NODE_ENV: nodeEnvSchema,
 });
 
@@ -38,6 +39,7 @@ function generateTestEnv<T extends z.Schema>(schema: T): z.infer<T> {
 
 export const testClientEnv: ClientEnv = {
   NODE_ENV: 'test',
+  NEXT_PUBLIC_DEBUG_MODE: false,
   NEXT_PUBLIC_HASURA_URL: '',
   NEXT_PUBLIC_HASURA_IS_HTTPS: false,
   NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL: '',

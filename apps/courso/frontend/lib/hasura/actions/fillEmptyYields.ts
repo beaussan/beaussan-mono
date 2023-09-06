@@ -3,7 +3,9 @@ import { isBefore } from 'date-fns';
 import { gqlSdk } from '../../gql';
 import {
   PracticeToStudentInsertInput,
+  PracticeToStudentYieldArrRelInsertInput,
   PracticeToStudentYieldConstraint,
+  PracticeToStudentYieldInsertInput,
   PracticeToStudentYieldUpdateColumn,
 } from '../../generated/graphql';
 import { HttpsError } from '../../common/HttpsError';
@@ -21,6 +23,7 @@ export const fillEmptyYields: ActionMap['fillEmptyYields'] = async ({
     throw new HttpsError('not-found', 'Not found');
   }
   const practiceToCourse = practiceToCourseRaw[0];
+  /*
   if (practiceToCourse.is_open) {
     throw new HttpsError('invalid-argument', 'Practice is still open');
   }
@@ -29,6 +32,8 @@ export const fillEmptyYields: ActionMap['fillEmptyYields'] = async ({
   if (isBefore(new Date(), openDate) || practiceToCourse.is_open) {
     throw new HttpsError('invalid-argument', 'Practice is not over yet');
   }
+
+   */
 
   const yieldsId: string[] = practiceToCourse.practice.practiceYields.map(
     (value) => value.id
@@ -42,11 +47,13 @@ export const fillEmptyYields: ActionMap['fillEmptyYields'] = async ({
         submited: false,
         studentId: data.student.id,
         practiceToStudentYields: {
-          data: yieldsId.map((id) => ({
-            practice_yield_id: id,
-            value: '',
-            submited: false,
-          })),
+          data: yieldsId.map(
+            (id): PracticeToStudentYieldInsertInput => ({
+              practiceYieldId: id,
+              value: '',
+              submited: false,
+            })
+          ),
           onConflict: {
             constraint:
               PracticeToStudentYieldConstraint.StudentPracticeYieldPracticeYieldIdPracticeToStudenKey,
@@ -56,6 +63,8 @@ export const fillEmptyYields: ActionMap['fillEmptyYields'] = async ({
       };
     }
   );
+
+  console.log('DATA TO SAVE :', dataToSave);
 
   const { insertPracticeToStudent } = await gqlSdk.updateFillEmptyHandouts({
     data: dataToSave,

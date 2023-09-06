@@ -2,6 +2,15 @@ table:
   name: practice_to_student
   schema: public
 object_relationships:
+  - name: calculatedGrades
+    using:
+      manual_configuration:
+        column_mapping:
+          id: practice_to_student_id
+        insertion_order: null
+        remote_table:
+          name: calculated_grades
+          schema: public
   - name: practiceToCourse
     using:
       foreign_key_constraint_on: course_practice_id

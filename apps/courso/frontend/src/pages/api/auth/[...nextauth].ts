@@ -5,7 +5,6 @@ import { CreateHasuraNextAuth } from '@beaussan/shared/utils/next-auth/hasura-ad
 import 'nodemailer';
 import { serverEnv } from '../../../../lib/env';
 
-console.log(serverEnv);
 export const authOptions: NextAuthOptions = CreateHasuraNextAuth({
   providers: [
     EmailProvider({

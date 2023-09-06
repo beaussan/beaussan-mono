@@ -235,7 +235,7 @@ function waitForGiteaOrgNameToShowUp(
   });
 }
 
-async function seedDatabase() {
+async function seedDatabase(includeAllHandoff: boolean) {
   console.log('Creating DevOps 101 course');
   const devopsCourse = generateCourseInput('DevOps 101');
   await gqlSdk.insertCourse({ object: devopsCourse });
@@ -267,6 +267,24 @@ async function seedDatabase() {
   const yieldId = practice.practiceYields.data[0].id;
 
   await waitForGiteaOrgNameToShowUp(practiceToCourseId);
+
+  if (includeAllHandoff) {
+    await gqlSdk.submitHandoff(
+      {
+        yields: [
+          {
+            yieldId,
+            value: 'https://github.com/demo-courso/student-1-ts-react',
+          },
+        ],
+        practiceToPromotionId: practiceToCourseId,
+      },
+      {
+        'x-hasura-user-id': fourStudents[0].id,
+        'x-hasura-role': 'student',
+      }
+    );
+  }
 
   await gqlSdk.submitHandoff(
     {
@@ -341,12 +359,15 @@ async function clean() {
 }
 
 async function run() {
-  const { what } = await prompt<{ what: 'seed' | 'clean' | 'stop' }>({
+  const { what } = await prompt<{
+    what: 'seed' | 'clean' | 'stop' | 'all-seed';
+  }>({
     type: 'select',
     message: 'What do you want to do ?',
     name: 'what',
     choices: [
-      { name: 'seed', message: 'Seed database' },
+      { name: 'seed', message: 'Partial seed database' },
+      { name: 'all-seed', message: 'Full seed database' },
       { name: 'clean', message: 'Clean database' },
       { name: 'stop', message: 'Stop the cli' },
     ],
@@ -356,9 +377,9 @@ async function run() {
     return;
   }
 
-  if (what === 'seed') {
+  if (what === 'seed' || what === 'all-seed') {
     try {
-      await seedDatabase();
+      await seedDatabase(what === 'all-seed');
     } catch (e) {
       console.log('There was an issue while seeding.');
       console.error(e);

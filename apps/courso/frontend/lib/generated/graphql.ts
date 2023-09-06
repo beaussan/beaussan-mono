@@ -3,15 +3,9 @@ import * as Dom from 'graphql-request/dist/types.dom';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -19,6 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  bigint: any;
   float8: any;
   jsonb: any;
   numeric: any;
@@ -26,207 +21,296 @@ export type Scalars = {
   uuid: any;
 };
 
-/** columns and relationships of "accounts" */
-export type Accounts = {
-  __typename?: 'Accounts';
+/** columns and relationships of "account" */
+export type Account = {
+  __typename?: 'Account';
   accessToken?: Maybe<Scalars['String']>;
   accessTokenExpires?: Maybe<Scalars['timestamptz']>;
   compoundId: Scalars['String'];
   createdAt: Scalars['timestamptz'];
+  expiresAt?: Maybe<Scalars['bigint']>;
   id: Scalars['uuid'];
+  idToken?: Maybe<Scalars['String']>;
+  oauthToken?: Maybe<Scalars['String']>;
+  oauthTokenSecret?: Maybe<Scalars['String']>;
+  provider: Scalars['String'];
   providerAccountId: Scalars['String'];
-  providerId: Scalars['String'];
-  providerType: Scalars['String'];
   refreshToken?: Maybe<Scalars['String']>;
+  scope?: Maybe<Scalars['String']>;
+  sessionState?: Maybe<Scalars['String']>;
+  tokenType?: Maybe<Scalars['String']>;
+  type: Scalars['String'];
   updatedAt: Scalars['timestamptz'];
   /** An object relationship */
   user: User;
   userId: Scalars['uuid'];
 };
 
-/** aggregated selection of "accounts" */
-export type AccountsAggregate = {
-  __typename?: 'AccountsAggregate';
-  aggregate?: Maybe<AccountsAggregateFields>;
-  nodes: Array<Accounts>;
+/** aggregated selection of "account" */
+export type AccountAggregate = {
+  __typename?: 'AccountAggregate';
+  aggregate?: Maybe<AccountAggregateFields>;
+  nodes: Array<Account>;
 };
 
-export type AccountsAggregateBoolExp = {
-  count?: InputMaybe<AccountsAggregateBoolExpCount>;
+export type AccountAggregateBoolExp = {
+  count?: InputMaybe<AccountAggregateBoolExpCount>;
 };
 
-/** aggregate fields of "accounts" */
-export type AccountsAggregateFields = {
-  __typename?: 'AccountsAggregateFields';
+/** aggregate fields of "account" */
+export type AccountAggregateFields = {
+  __typename?: 'AccountAggregateFields';
+  avg?: Maybe<AccountAvgFields>;
   count: Scalars['Int'];
-  max?: Maybe<AccountsMaxFields>;
-  min?: Maybe<AccountsMinFields>;
+  max?: Maybe<AccountMaxFields>;
+  min?: Maybe<AccountMinFields>;
+  stddev?: Maybe<AccountStddevFields>;
+  stddevPop?: Maybe<AccountStddevPopFields>;
+  stddevSamp?: Maybe<AccountStddevSampFields>;
+  sum?: Maybe<AccountSumFields>;
+  varPop?: Maybe<AccountVarPopFields>;
+  varSamp?: Maybe<AccountVarSampFields>;
+  variance?: Maybe<AccountVarianceFields>;
 };
 
-/** aggregate fields of "accounts" */
-export type AccountsAggregateFieldsCountArgs = {
-  columns?: InputMaybe<Array<AccountsSelectColumn>>;
+
+/** aggregate fields of "account" */
+export type AccountAggregateFieldsCountArgs = {
+  columns?: InputMaybe<Array<AccountSelectColumn>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "accounts" */
-export type AccountsAggregateOrderBy = {
+/** order by aggregate values of table "account" */
+export type AccountAggregateOrderBy = {
+  avg?: InputMaybe<AccountAvgOrderBy>;
   count?: InputMaybe<OrderBy>;
-  max?: InputMaybe<AccountsMaxOrderBy>;
-  min?: InputMaybe<AccountsMinOrderBy>;
+  max?: InputMaybe<AccountMaxOrderBy>;
+  min?: InputMaybe<AccountMinOrderBy>;
+  stddev?: InputMaybe<AccountStddevOrderBy>;
+  stddevPop?: InputMaybe<AccountStddevPopOrderBy>;
+  stddevSamp?: InputMaybe<AccountStddevSampOrderBy>;
+  sum?: InputMaybe<AccountSumOrderBy>;
+  varPop?: InputMaybe<AccountVarPopOrderBy>;
+  varSamp?: InputMaybe<AccountVarSampOrderBy>;
+  variance?: InputMaybe<AccountVarianceOrderBy>;
 };
 
-/** input type for inserting array relation for remote table "accounts" */
-export type AccountsArrRelInsertInput = {
-  data: Array<AccountsInsertInput>;
+/** input type for inserting array relation for remote table "account" */
+export type AccountArrRelInsertInput = {
+  data: Array<AccountInsertInput>;
   /** upsert condition */
-  onConflict?: InputMaybe<AccountsOnConflict>;
+  onConflict?: InputMaybe<AccountOnConflict>;
 };
 
-/** Boolean expression to filter rows from the table "accounts". All fields are combined with a logical 'AND'. */
-export type AccountsBoolExp = {
-  _and?: InputMaybe<Array<AccountsBoolExp>>;
-  _not?: InputMaybe<AccountsBoolExp>;
-  _or?: InputMaybe<Array<AccountsBoolExp>>;
+/** aggregate avg on columns */
+export type AccountAvgFields = {
+  __typename?: 'AccountAvgFields';
+  expiresAt?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "account" */
+export type AccountAvgOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+};
+
+/** Boolean expression to filter rows from the table "account". All fields are combined with a logical 'AND'. */
+export type AccountBoolExp = {
+  _and?: InputMaybe<Array<AccountBoolExp>>;
+  _not?: InputMaybe<AccountBoolExp>;
+  _or?: InputMaybe<Array<AccountBoolExp>>;
   accessToken?: InputMaybe<StringComparisonExp>;
   accessTokenExpires?: InputMaybe<TimestamptzComparisonExp>;
   compoundId?: InputMaybe<StringComparisonExp>;
   createdAt?: InputMaybe<TimestamptzComparisonExp>;
+  expiresAt?: InputMaybe<BigintComparisonExp>;
   id?: InputMaybe<UuidComparisonExp>;
+  idToken?: InputMaybe<StringComparisonExp>;
+  oauthToken?: InputMaybe<StringComparisonExp>;
+  oauthTokenSecret?: InputMaybe<StringComparisonExp>;
+  provider?: InputMaybe<StringComparisonExp>;
   providerAccountId?: InputMaybe<StringComparisonExp>;
-  providerId?: InputMaybe<StringComparisonExp>;
-  providerType?: InputMaybe<StringComparisonExp>;
   refreshToken?: InputMaybe<StringComparisonExp>;
+  scope?: InputMaybe<StringComparisonExp>;
+  sessionState?: InputMaybe<StringComparisonExp>;
+  tokenType?: InputMaybe<StringComparisonExp>;
+  type?: InputMaybe<StringComparisonExp>;
   updatedAt?: InputMaybe<TimestamptzComparisonExp>;
   user?: InputMaybe<UserBoolExp>;
   userId?: InputMaybe<UuidComparisonExp>;
 };
 
-/** unique or primary key constraints on table "accounts" */
-export enum AccountsConstraint {
+/** unique or primary key constraints on table "account" */
+export enum AccountConstraint {
   /** unique or primary key constraint on columns "compound_id" */
   AccountsCompoundIdKey = 'accounts_compound_id_key',
   /** unique or primary key constraint on columns "id" */
-  AccountsPkey = 'accounts_pkey',
+  AccountsPkey = 'accounts_pkey'
 }
 
-/** input type for inserting data into table "accounts" */
-export type AccountsInsertInput = {
+/** input type for incrementing numeric columns in table "account" */
+export type AccountIncInput = {
+  expiresAt?: InputMaybe<Scalars['bigint']>;
+};
+
+/** input type for inserting data into table "account" */
+export type AccountInsertInput = {
   accessToken?: InputMaybe<Scalars['String']>;
   accessTokenExpires?: InputMaybe<Scalars['timestamptz']>;
   compoundId?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
+  expiresAt?: InputMaybe<Scalars['bigint']>;
   id?: InputMaybe<Scalars['uuid']>;
+  idToken?: InputMaybe<Scalars['String']>;
+  oauthToken?: InputMaybe<Scalars['String']>;
+  oauthTokenSecret?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
   providerAccountId?: InputMaybe<Scalars['String']>;
-  providerId?: InputMaybe<Scalars['String']>;
-  providerType?: InputMaybe<Scalars['String']>;
   refreshToken?: InputMaybe<Scalars['String']>;
+  scope?: InputMaybe<Scalars['String']>;
+  sessionState?: InputMaybe<Scalars['String']>;
+  tokenType?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
   user?: InputMaybe<UserObjRelInsertInput>;
   userId?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate max on columns */
-export type AccountsMaxFields = {
-  __typename?: 'AccountsMaxFields';
+export type AccountMaxFields = {
+  __typename?: 'AccountMaxFields';
   accessToken?: Maybe<Scalars['String']>;
   accessTokenExpires?: Maybe<Scalars['timestamptz']>;
   compoundId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  expiresAt?: Maybe<Scalars['bigint']>;
   id?: Maybe<Scalars['uuid']>;
+  idToken?: Maybe<Scalars['String']>;
+  oauthToken?: Maybe<Scalars['String']>;
+  oauthTokenSecret?: Maybe<Scalars['String']>;
+  provider?: Maybe<Scalars['String']>;
   providerAccountId?: Maybe<Scalars['String']>;
-  providerId?: Maybe<Scalars['String']>;
-  providerType?: Maybe<Scalars['String']>;
   refreshToken?: Maybe<Scalars['String']>;
+  scope?: Maybe<Scalars['String']>;
+  sessionState?: Maybe<Scalars['String']>;
+  tokenType?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   userId?: Maybe<Scalars['uuid']>;
 };
 
-/** order by max() on columns of table "accounts" */
-export type AccountsMaxOrderBy = {
+/** order by max() on columns of table "account" */
+export type AccountMaxOrderBy = {
   accessToken?: InputMaybe<OrderBy>;
   accessTokenExpires?: InputMaybe<OrderBy>;
   compoundId?: InputMaybe<OrderBy>;
   createdAt?: InputMaybe<OrderBy>;
+  expiresAt?: InputMaybe<OrderBy>;
   id?: InputMaybe<OrderBy>;
+  idToken?: InputMaybe<OrderBy>;
+  oauthToken?: InputMaybe<OrderBy>;
+  oauthTokenSecret?: InputMaybe<OrderBy>;
+  provider?: InputMaybe<OrderBy>;
   providerAccountId?: InputMaybe<OrderBy>;
-  providerId?: InputMaybe<OrderBy>;
-  providerType?: InputMaybe<OrderBy>;
   refreshToken?: InputMaybe<OrderBy>;
+  scope?: InputMaybe<OrderBy>;
+  sessionState?: InputMaybe<OrderBy>;
+  tokenType?: InputMaybe<OrderBy>;
+  type?: InputMaybe<OrderBy>;
   updatedAt?: InputMaybe<OrderBy>;
   userId?: InputMaybe<OrderBy>;
 };
 
 /** aggregate min on columns */
-export type AccountsMinFields = {
-  __typename?: 'AccountsMinFields';
+export type AccountMinFields = {
+  __typename?: 'AccountMinFields';
   accessToken?: Maybe<Scalars['String']>;
   accessTokenExpires?: Maybe<Scalars['timestamptz']>;
   compoundId?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  expiresAt?: Maybe<Scalars['bigint']>;
   id?: Maybe<Scalars['uuid']>;
+  idToken?: Maybe<Scalars['String']>;
+  oauthToken?: Maybe<Scalars['String']>;
+  oauthTokenSecret?: Maybe<Scalars['String']>;
+  provider?: Maybe<Scalars['String']>;
   providerAccountId?: Maybe<Scalars['String']>;
-  providerId?: Maybe<Scalars['String']>;
-  providerType?: Maybe<Scalars['String']>;
   refreshToken?: Maybe<Scalars['String']>;
+  scope?: Maybe<Scalars['String']>;
+  sessionState?: Maybe<Scalars['String']>;
+  tokenType?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   userId?: Maybe<Scalars['uuid']>;
 };
 
-/** order by min() on columns of table "accounts" */
-export type AccountsMinOrderBy = {
+/** order by min() on columns of table "account" */
+export type AccountMinOrderBy = {
   accessToken?: InputMaybe<OrderBy>;
   accessTokenExpires?: InputMaybe<OrderBy>;
   compoundId?: InputMaybe<OrderBy>;
   createdAt?: InputMaybe<OrderBy>;
+  expiresAt?: InputMaybe<OrderBy>;
   id?: InputMaybe<OrderBy>;
+  idToken?: InputMaybe<OrderBy>;
+  oauthToken?: InputMaybe<OrderBy>;
+  oauthTokenSecret?: InputMaybe<OrderBy>;
+  provider?: InputMaybe<OrderBy>;
   providerAccountId?: InputMaybe<OrderBy>;
-  providerId?: InputMaybe<OrderBy>;
-  providerType?: InputMaybe<OrderBy>;
   refreshToken?: InputMaybe<OrderBy>;
+  scope?: InputMaybe<OrderBy>;
+  sessionState?: InputMaybe<OrderBy>;
+  tokenType?: InputMaybe<OrderBy>;
+  type?: InputMaybe<OrderBy>;
   updatedAt?: InputMaybe<OrderBy>;
   userId?: InputMaybe<OrderBy>;
 };
 
-/** response of any mutation on the table "accounts" */
-export type AccountsMutationResponse = {
-  __typename?: 'AccountsMutationResponse';
+/** response of any mutation on the table "account" */
+export type AccountMutationResponse = {
+  __typename?: 'AccountMutationResponse';
   /** number of rows affected by the mutation */
   affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<Accounts>;
+  returning: Array<Account>;
 };
 
-/** on_conflict condition type for table "accounts" */
-export type AccountsOnConflict = {
-  constraint: AccountsConstraint;
-  updateColumns?: Array<AccountsUpdateColumn>;
-  where?: InputMaybe<AccountsBoolExp>;
+/** on_conflict condition type for table "account" */
+export type AccountOnConflict = {
+  constraint: AccountConstraint;
+  updateColumns?: Array<AccountUpdateColumn>;
+  where?: InputMaybe<AccountBoolExp>;
 };
 
-/** Ordering options when selecting data from "accounts". */
-export type AccountsOrderBy = {
+/** Ordering options when selecting data from "account". */
+export type AccountOrderBy = {
   accessToken?: InputMaybe<OrderBy>;
   accessTokenExpires?: InputMaybe<OrderBy>;
   compoundId?: InputMaybe<OrderBy>;
   createdAt?: InputMaybe<OrderBy>;
+  expiresAt?: InputMaybe<OrderBy>;
   id?: InputMaybe<OrderBy>;
+  idToken?: InputMaybe<OrderBy>;
+  oauthToken?: InputMaybe<OrderBy>;
+  oauthTokenSecret?: InputMaybe<OrderBy>;
+  provider?: InputMaybe<OrderBy>;
   providerAccountId?: InputMaybe<OrderBy>;
-  providerId?: InputMaybe<OrderBy>;
-  providerType?: InputMaybe<OrderBy>;
   refreshToken?: InputMaybe<OrderBy>;
+  scope?: InputMaybe<OrderBy>;
+  sessionState?: InputMaybe<OrderBy>;
+  tokenType?: InputMaybe<OrderBy>;
+  type?: InputMaybe<OrderBy>;
   updatedAt?: InputMaybe<OrderBy>;
   user?: InputMaybe<UserOrderBy>;
   userId?: InputMaybe<OrderBy>;
 };
 
-/** primary key columns input for table: accounts */
-export type AccountsPkColumnsInput = {
+/** primary key columns input for table: account */
+export type AccountPkColumnsInput = {
   id: Scalars['uuid'];
 };
 
-/** select columns of table "accounts" */
-export enum AccountsSelectColumn {
+/** select columns of table "account" */
+export enum AccountSelectColumn {
   /** column name */
   AccessToken = 'accessToken',
   /** column name */
@@ -236,61 +320,133 @@ export enum AccountsSelectColumn {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
+  ExpiresAt = 'expiresAt',
+  /** column name */
   Id = 'id',
+  /** column name */
+  IdToken = 'idToken',
+  /** column name */
+  OauthToken = 'oauthToken',
+  /** column name */
+  OauthTokenSecret = 'oauthTokenSecret',
+  /** column name */
+  Provider = 'provider',
   /** column name */
   ProviderAccountId = 'providerAccountId',
   /** column name */
-  ProviderId = 'providerId',
-  /** column name */
-  ProviderType = 'providerType',
-  /** column name */
   RefreshToken = 'refreshToken',
+  /** column name */
+  Scope = 'scope',
+  /** column name */
+  SessionState = 'sessionState',
+  /** column name */
+  TokenType = 'tokenType',
+  /** column name */
+  Type = 'type',
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
-/** input type for updating data in table "accounts" */
-export type AccountsSetInput = {
+/** input type for updating data in table "account" */
+export type AccountSetInput = {
   accessToken?: InputMaybe<Scalars['String']>;
   accessTokenExpires?: InputMaybe<Scalars['timestamptz']>;
   compoundId?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
+  expiresAt?: InputMaybe<Scalars['bigint']>;
   id?: InputMaybe<Scalars['uuid']>;
+  idToken?: InputMaybe<Scalars['String']>;
+  oauthToken?: InputMaybe<Scalars['String']>;
+  oauthTokenSecret?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
   providerAccountId?: InputMaybe<Scalars['String']>;
-  providerId?: InputMaybe<Scalars['String']>;
-  providerType?: InputMaybe<Scalars['String']>;
   refreshToken?: InputMaybe<Scalars['String']>;
+  scope?: InputMaybe<Scalars['String']>;
+  sessionState?: InputMaybe<Scalars['String']>;
+  tokenType?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
   userId?: InputMaybe<Scalars['uuid']>;
 };
 
-/** Streaming cursor of the table "accounts" */
-export type AccountsStreamCursorInput = {
+/** aggregate stddev on columns */
+export type AccountStddevFields = {
+  __typename?: 'AccountStddevFields';
+  expiresAt?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "account" */
+export type AccountStddevOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+};
+
+/** aggregate stddevPop on columns */
+export type AccountStddevPopFields = {
+  __typename?: 'AccountStddevPopFields';
+  expiresAt?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddevPop() on columns of table "account" */
+export type AccountStddevPopOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+};
+
+/** aggregate stddevSamp on columns */
+export type AccountStddevSampFields = {
+  __typename?: 'AccountStddevSampFields';
+  expiresAt?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddevSamp() on columns of table "account" */
+export type AccountStddevSampOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+};
+
+/** Streaming cursor of the table "account" */
+export type AccountStreamCursorInput = {
   /** Stream column input with initial value */
-  initialValue: AccountsStreamCursorValueInput;
+  initialValue: AccountStreamCursorValueInput;
   /** cursor ordering */
   ordering?: InputMaybe<CursorOrdering>;
 };
 
 /** Initial value of the column from where the streaming should start */
-export type AccountsStreamCursorValueInput = {
+export type AccountStreamCursorValueInput = {
   accessToken?: InputMaybe<Scalars['String']>;
   accessTokenExpires?: InputMaybe<Scalars['timestamptz']>;
   compoundId?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
+  expiresAt?: InputMaybe<Scalars['bigint']>;
   id?: InputMaybe<Scalars['uuid']>;
+  idToken?: InputMaybe<Scalars['String']>;
+  oauthToken?: InputMaybe<Scalars['String']>;
+  oauthTokenSecret?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
   providerAccountId?: InputMaybe<Scalars['String']>;
-  providerId?: InputMaybe<Scalars['String']>;
-  providerType?: InputMaybe<Scalars['String']>;
   refreshToken?: InputMaybe<Scalars['String']>;
+  scope?: InputMaybe<Scalars['String']>;
+  sessionState?: InputMaybe<Scalars['String']>;
+  tokenType?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
   userId?: InputMaybe<Scalars['uuid']>;
 };
 
-/** update columns of table "accounts" */
-export enum AccountsUpdateColumn {
+/** aggregate sum on columns */
+export type AccountSumFields = {
+  __typename?: 'AccountSumFields';
+  expiresAt?: Maybe<Scalars['bigint']>;
+};
+
+/** order by sum() on columns of table "account" */
+export type AccountSumOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+};
+
+/** update columns of table "account" */
+export enum AccountUpdateColumn {
   /** column name */
   AccessToken = 'accessToken',
   /** column name */
@@ -300,26 +456,75 @@ export enum AccountsUpdateColumn {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
+  ExpiresAt = 'expiresAt',
+  /** column name */
   Id = 'id',
+  /** column name */
+  IdToken = 'idToken',
+  /** column name */
+  OauthToken = 'oauthToken',
+  /** column name */
+  OauthTokenSecret = 'oauthTokenSecret',
+  /** column name */
+  Provider = 'provider',
   /** column name */
   ProviderAccountId = 'providerAccountId',
   /** column name */
-  ProviderId = 'providerId',
-  /** column name */
-  ProviderType = 'providerType',
-  /** column name */
   RefreshToken = 'refreshToken',
+  /** column name */
+  Scope = 'scope',
+  /** column name */
+  SessionState = 'sessionState',
+  /** column name */
+  TokenType = 'tokenType',
+  /** column name */
+  Type = 'type',
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
-export type AccountsUpdates = {
+export type AccountUpdates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<AccountIncInput>;
   /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<AccountsSetInput>;
+  _set?: InputMaybe<AccountSetInput>;
   /** filter the rows which have to be updated */
-  where: AccountsBoolExp;
+  where: AccountBoolExp;
+};
+
+/** aggregate varPop on columns */
+export type AccountVarPopFields = {
+  __typename?: 'AccountVarPopFields';
+  expiresAt?: Maybe<Scalars['Float']>;
+};
+
+/** order by varPop() on columns of table "account" */
+export type AccountVarPopOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+};
+
+/** aggregate varSamp on columns */
+export type AccountVarSampFields = {
+  __typename?: 'AccountVarSampFields';
+  expiresAt?: Maybe<Scalars['Float']>;
+};
+
+/** order by varSamp() on columns of table "account" */
+export type AccountVarSampOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
+};
+
+/** aggregate variance on columns */
+export type AccountVarianceFields = {
+  __typename?: 'AccountVarianceFields';
+  expiresAt?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "account" */
+export type AccountVarianceOrderBy = {
+  expiresAt?: InputMaybe<OrderBy>;
 };
 
 /** columns and relationships of "allowed_roles" */
@@ -351,6 +556,7 @@ export type AllowedRolesAggregateFields = {
   max?: Maybe<AllowedRolesMaxFields>;
   min?: Maybe<AllowedRolesMinFields>;
 };
+
 
 /** aggregate fields of "allowed_roles" */
 export type AllowedRolesAggregateFieldsCountArgs = {
@@ -386,7 +592,7 @@ export type AllowedRolesBoolExp = {
 /** unique or primary key constraints on table "allowed_roles" */
 export enum AllowedRolesConstraint {
   /** unique or primary key constraint on columns "user_id", "role" */
-  AllowedRolesPkey = 'allowed_roles_pkey',
+  AllowedRolesPkey = 'allowed_roles_pkey'
 }
 
 /** input type for inserting data into table "allowed_roles" */
@@ -454,7 +660,7 @@ export enum AllowedRolesSelectColumn {
   /** column name */
   Role = 'role',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** input type for updating data in table "allowed_roles" */
@@ -482,7 +688,7 @@ export enum AllowedRolesUpdateColumn {
   /** column name */
   Role = 'role',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 export type AllowedRolesUpdates = {
@@ -490,6 +696,19 @@ export type AllowedRolesUpdates = {
   _set?: InputMaybe<AllowedRolesSetInput>;
   /** filter the rows which have to be updated */
   where: AllowedRolesBoolExp;
+};
+
+/** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
+export type BigintComparisonExp = {
+  _eq?: InputMaybe<Scalars['bigint']>;
+  _gt?: InputMaybe<Scalars['bigint']>;
+  _gte?: InputMaybe<Scalars['bigint']>;
+  _in?: InputMaybe<Array<Scalars['bigint']>>;
+  _isNull?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['bigint']>;
+  _lte?: InputMaybe<Scalars['bigint']>;
+  _neq?: InputMaybe<Scalars['bigint']>;
+  _nin?: InputMaybe<Array<Scalars['bigint']>>;
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -503,6 +722,158 @@ export type BooleanComparisonExp = {
   _lte?: InputMaybe<Scalars['Boolean']>;
   _neq?: InputMaybe<Scalars['Boolean']>;
   _nin?: InputMaybe<Array<Scalars['Boolean']>>;
+};
+
+/** columns and relationships of "calculated_grades" */
+export type CalculatedGrades = {
+  __typename?: 'CalculatedGrades';
+  calculatedGrade?: Maybe<Scalars['numeric']>;
+  /** An object relationship */
+  practiceToStudent?: Maybe<PracticeToStudent>;
+  practiceToStudentId?: Maybe<Scalars['uuid']>;
+};
+
+/** aggregated selection of "calculated_grades" */
+export type CalculatedGradesAggregate = {
+  __typename?: 'CalculatedGradesAggregate';
+  aggregate?: Maybe<CalculatedGradesAggregateFields>;
+  nodes: Array<CalculatedGrades>;
+};
+
+/** aggregate fields of "calculated_grades" */
+export type CalculatedGradesAggregateFields = {
+  __typename?: 'CalculatedGradesAggregateFields';
+  avg?: Maybe<CalculatedGradesAvgFields>;
+  count: Scalars['Int'];
+  max?: Maybe<CalculatedGradesMaxFields>;
+  min?: Maybe<CalculatedGradesMinFields>;
+  stddev?: Maybe<CalculatedGradesStddevFields>;
+  stddevPop?: Maybe<CalculatedGradesStddevPopFields>;
+  stddevSamp?: Maybe<CalculatedGradesStddevSampFields>;
+  sum?: Maybe<CalculatedGradesSumFields>;
+  varPop?: Maybe<CalculatedGradesVarPopFields>;
+  varSamp?: Maybe<CalculatedGradesVarSampFields>;
+  variance?: Maybe<CalculatedGradesVarianceFields>;
+};
+
+
+/** aggregate fields of "calculated_grades" */
+export type CalculatedGradesAggregateFieldsCountArgs = {
+  columns?: InputMaybe<Array<CalculatedGradesSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type CalculatedGradesAvgFields = {
+  __typename?: 'CalculatedGradesAvgFields';
+  calculatedGrade?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "calculated_grades". All fields are combined with a logical 'AND'. */
+export type CalculatedGradesBoolExp = {
+  _and?: InputMaybe<Array<CalculatedGradesBoolExp>>;
+  _not?: InputMaybe<CalculatedGradesBoolExp>;
+  _or?: InputMaybe<Array<CalculatedGradesBoolExp>>;
+  calculatedGrade?: InputMaybe<NumericComparisonExp>;
+  practiceToStudent?: InputMaybe<PracticeToStudentBoolExp>;
+  practiceToStudentId?: InputMaybe<UuidComparisonExp>;
+};
+
+/** input type for inserting data into table "calculated_grades" */
+export type CalculatedGradesInsertInput = {
+  calculatedGrade?: InputMaybe<Scalars['numeric']>;
+  practiceToStudent?: InputMaybe<PracticeToStudentObjRelInsertInput>;
+  practiceToStudentId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type CalculatedGradesMaxFields = {
+  __typename?: 'CalculatedGradesMaxFields';
+  calculatedGrade?: Maybe<Scalars['numeric']>;
+  practiceToStudentId?: Maybe<Scalars['uuid']>;
+};
+
+/** aggregate min on columns */
+export type CalculatedGradesMinFields = {
+  __typename?: 'CalculatedGradesMinFields';
+  calculatedGrade?: Maybe<Scalars['numeric']>;
+  practiceToStudentId?: Maybe<Scalars['uuid']>;
+};
+
+/** input type for inserting object relation for remote table "calculated_grades" */
+export type CalculatedGradesObjRelInsertInput = {
+  data: CalculatedGradesInsertInput;
+};
+
+/** Ordering options when selecting data from "calculated_grades". */
+export type CalculatedGradesOrderBy = {
+  calculatedGrade?: InputMaybe<OrderBy>;
+  practiceToStudent?: InputMaybe<PracticeToStudentOrderBy>;
+  practiceToStudentId?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "calculated_grades" */
+export enum CalculatedGradesSelectColumn {
+  /** column name */
+  CalculatedGrade = 'calculatedGrade',
+  /** column name */
+  PracticeToStudentId = 'practiceToStudentId'
+}
+
+/** aggregate stddev on columns */
+export type CalculatedGradesStddevFields = {
+  __typename?: 'CalculatedGradesStddevFields';
+  calculatedGrade?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddevPop on columns */
+export type CalculatedGradesStddevPopFields = {
+  __typename?: 'CalculatedGradesStddevPopFields';
+  calculatedGrade?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddevSamp on columns */
+export type CalculatedGradesStddevSampFields = {
+  __typename?: 'CalculatedGradesStddevSampFields';
+  calculatedGrade?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "calculated_grades" */
+export type CalculatedGradesStreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: CalculatedGradesStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type CalculatedGradesStreamCursorValueInput = {
+  calculatedGrade?: InputMaybe<Scalars['numeric']>;
+  practiceToStudentId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate sum on columns */
+export type CalculatedGradesSumFields = {
+  __typename?: 'CalculatedGradesSumFields';
+  calculatedGrade?: Maybe<Scalars['numeric']>;
+};
+
+/** aggregate varPop on columns */
+export type CalculatedGradesVarPopFields = {
+  __typename?: 'CalculatedGradesVarPopFields';
+  calculatedGrade?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate varSamp on columns */
+export type CalculatedGradesVarSampFields = {
+  __typename?: 'CalculatedGradesVarSampFields';
+  calculatedGrade?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type CalculatedGradesVarianceFields = {
+  __typename?: 'CalculatedGradesVarianceFields';
+  calculatedGrade?: Maybe<Scalars['Float']>;
 };
 
 export type CommitItem = {
@@ -546,6 +917,7 @@ export type Course = {
   years: Scalars['String'];
 };
 
+
 /** columns and relationships of "course" */
 export type CoursePracticeToCoursesArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
@@ -554,6 +926,7 @@ export type CoursePracticeToCoursesArgs = {
   orderBy?: InputMaybe<Array<PracticeToCourseOrderBy>>;
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
+
 
 /** columns and relationships of "course" */
 export type CoursePracticeToCoursesAggregateArgs = {
@@ -564,6 +937,7 @@ export type CoursePracticeToCoursesAggregateArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
+
 /** columns and relationships of "course" */
 export type CourseStudentToCoursesArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
@@ -572,6 +946,7 @@ export type CourseStudentToCoursesArgs = {
   orderBy?: InputMaybe<Array<StudentToCourseOrderBy>>;
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
+
 
 /** columns and relationships of "course" */
 export type CourseStudentToCoursesAggregateArgs = {
@@ -596,6 +971,7 @@ export type CourseAggregateFields = {
   max?: Maybe<CourseMaxFields>;
   min?: Maybe<CourseMinFields>;
 };
+
 
 /** aggregate fields of "course" */
 export type CourseAggregateFieldsCountArgs = {
@@ -626,7 +1002,7 @@ export enum CourseConstraint {
   /** unique or primary key constraint on columns "years", "name" */
   PromotionNameYearsKey = 'promotion_name_years_key',
   /** unique or primary key constraint on columns "id" */
-  PromotionPkey = 'promotion_pkey',
+  PromotionPkey = 'promotion_pkey'
 }
 
 /** input type for inserting data into table "course" */
@@ -718,7 +1094,7 @@ export enum CourseSelectColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Years = 'years',
+  Years = 'years'
 }
 
 /** input type for updating data in table "course" */
@@ -766,7 +1142,7 @@ export enum CourseUpdateColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Years = 'years',
+  Years = 'years'
 }
 
 export type CourseUpdates = {
@@ -781,7 +1157,7 @@ export enum CursorOrdering {
   /** ascending ordering of the cursor */
   Asc = 'ASC',
   /** descending ordering of the cursor */
-  Desc = 'DESC',
+  Desc = 'DESC'
 }
 
 export type FillEmptyYieldsOutput = {
@@ -888,7 +1264,7 @@ export enum OrderBy {
   /** in descending order, nulls first */
   DescNullsFirst = 'DESC_NULLS_FIRST',
   /** in descending order, nulls last */
-  DescNullsLast = 'DESC_NULLS_LAST',
+  DescNullsLast = 'DESC_NULLS_LAST'
 }
 
 /** columns and relationships of "practice" */
@@ -909,6 +1285,7 @@ export type Practice = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "practice" */
 export type PracticePracticeToCoursesArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
@@ -917,6 +1294,7 @@ export type PracticePracticeToCoursesArgs = {
   orderBy?: InputMaybe<Array<PracticeToCourseOrderBy>>;
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
+
 
 /** columns and relationships of "practice" */
 export type PracticePracticeToCoursesAggregateArgs = {
@@ -927,6 +1305,7 @@ export type PracticePracticeToCoursesAggregateArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
+
 /** columns and relationships of "practice" */
 export type PracticePracticeYieldsArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
@@ -935,6 +1314,7 @@ export type PracticePracticeYieldsArgs = {
   orderBy?: InputMaybe<Array<PracticeYieldOrderBy>>;
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
+
 
 /** columns and relationships of "practice" */
 export type PracticePracticeYieldsAggregateArgs = {
@@ -959,6 +1339,7 @@ export type PracticeAggregateFields = {
   max?: Maybe<PracticeMaxFields>;
   min?: Maybe<PracticeMinFields>;
 };
+
 
 /** aggregate fields of "practice" */
 export type PracticeAggregateFieldsCountArgs = {
@@ -987,7 +1368,7 @@ export enum PracticeConstraint {
   /** unique or primary key constraint on columns "id" */
   PracticePkey = 'practice_pkey',
   /** unique or primary key constraint on columns "title" */
-  PracticeTitleKey = 'practice_title_key',
+  PracticeTitleKey = 'practice_title_key'
 }
 
 /** input type for inserting data into table "practice" */
@@ -1071,7 +1452,7 @@ export enum PracticeSelectColumn {
   /** column name */
   Title = 'title',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "practice" */
@@ -1122,6 +1503,7 @@ export type PracticeToCourse = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "practice_to_course" */
 export type PracticeToCoursePracticeToStudentsArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
@@ -1130,6 +1512,7 @@ export type PracticeToCoursePracticeToStudentsArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentOrderBy>>;
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
+
 
 /** columns and relationships of "practice_to_course" */
 export type PracticeToCoursePracticeToStudentsAggregateArgs = {
@@ -1158,6 +1541,7 @@ export type PracticeToCourseAggregateFields = {
   max?: Maybe<PracticeToCourseMaxFields>;
   min?: Maybe<PracticeToCourseMinFields>;
 };
+
 
 /** aggregate fields of "practice_to_course" */
 export type PracticeToCourseAggregateFieldsCountArgs = {
@@ -1204,7 +1588,7 @@ export enum PracticeToCourseConstraint {
   /** unique or primary key constraint on columns "id" */
   PracticeToPromotionPkey = 'practice_to_promotion_pkey',
   /** unique or primary key constraint on columns "course_id", "practice_id" */
-  PracticeToPromotionPromotionIdPracticeIdKey = 'practice_to_promotion_promotion_id_practice_id_key',
+  PracticeToPromotionPromotionIdPracticeIdKey = 'practice_to_promotion_promotion_id_practice_id_key'
 }
 
 /** input type for inserting data into table "practice_to_course" */
@@ -1333,7 +1717,7 @@ export enum PracticeToCourseSelectColumn {
   /** column name */
   PracticeId = 'practiceId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "practice_to_course" */
@@ -1385,7 +1769,7 @@ export enum PracticeToCourseUpdateColumn {
   /** column name */
   PracticeId = 'practiceId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type PracticeToCourseUpdates = {
@@ -1398,6 +1782,8 @@ export type PracticeToCourseUpdates = {
 /** columns and relationships of "practice_to_student" */
 export type PracticeToStudent = {
   __typename?: 'PracticeToStudent';
+  /** An object relationship */
+  calculatedGrades?: Maybe<CalculatedGrades>;
   coursePracticeId: Scalars['uuid'];
   createdAt: Scalars['timestamptz'];
   feedback?: Maybe<Scalars['jsonb']>;
@@ -1422,15 +1808,18 @@ export type PracticeToStudent = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "practice_to_student" */
 export type PracticeToStudentFeedbackArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
 
+
 /** columns and relationships of "practice_to_student" */
 export type PracticeToStudentGradeDetailArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
+
 
 /** columns and relationships of "practice_to_student" */
 export type PracticeToStudentPracticeToStudentYieldsArgs = {
@@ -1440,6 +1829,7 @@ export type PracticeToStudentPracticeToStudentYieldsArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentYieldOrderBy>>;
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
+
 
 /** columns and relationships of "practice_to_student" */
 export type PracticeToStudentPracticeToStudentYieldsAggregateArgs = {
@@ -1486,6 +1876,7 @@ export type PracticeToStudentAggregateFields = {
   varSamp?: Maybe<PracticeToStudentVarSampFields>;
   variance?: Maybe<PracticeToStudentVarianceFields>;
 };
+
 
 /** aggregate fields of "practice_to_student" */
 export type PracticeToStudentAggregateFieldsCountArgs = {
@@ -1537,6 +1928,7 @@ export type PracticeToStudentBoolExp = {
   _and?: InputMaybe<Array<PracticeToStudentBoolExp>>;
   _not?: InputMaybe<PracticeToStudentBoolExp>;
   _or?: InputMaybe<Array<PracticeToStudentBoolExp>>;
+  calculatedGrades?: InputMaybe<CalculatedGradesBoolExp>;
   coursePracticeId?: InputMaybe<UuidComparisonExp>;
   createdAt?: InputMaybe<TimestamptzComparisonExp>;
   feedback?: InputMaybe<JsonbComparisonExp>;
@@ -1560,7 +1952,7 @@ export enum PracticeToStudentConstraint {
   /** unique or primary key constraint on columns "id" */
   PracticeToStudentPkey = 'practice_to_student_pkey',
   /** unique or primary key constraint on columns "student_id", "course_practice_id" */
-  PracticeToStudentStudentIdPromotionPracticeIdKey = 'practice_to_student_student_id_promotion_practice_id_key',
+  PracticeToStudentStudentIdPromotionPracticeIdKey = 'practice_to_student_student_id_promotion_practice_id_key'
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -1590,6 +1982,7 @@ export type PracticeToStudentFeedback = {
   practice_to_student?: Maybe<PracticeToStudent>;
 };
 
+
 /** columns and relationships of "practice_to_student_feedback" */
 export type PracticeToStudentFeedbackFeedbackArgs = {
   path?: InputMaybe<Scalars['String']>;
@@ -1609,6 +2002,7 @@ export type PracticeToStudentFeedbackAggregateFields = {
   max?: Maybe<PracticeToStudentFeedbackMaxFields>;
   min?: Maybe<PracticeToStudentFeedbackMinFields>;
 };
+
 
 /** aggregate fields of "practice_to_student_feedback" */
 export type PracticeToStudentFeedbackAggregateFieldsCountArgs = {
@@ -1696,7 +2090,7 @@ export enum PracticeToStudentFeedbackSelectColumn {
   /** column name */
   Feedback = 'feedback',
   /** column name */
-  PracticeToStudentId = 'practiceToStudentId',
+  PracticeToStudentId = 'practiceToStudentId'
 }
 
 /** input type for updating data in table "practice_to_student_feedback" */
@@ -1746,6 +2140,7 @@ export type PracticeToStudentGrade = {
   practiceToStudentId?: Maybe<Scalars['uuid']>;
 };
 
+
 /** columns and relationships of "practice_to_student_grade" */
 export type PracticeToStudentGradeGradeDetailArgs = {
   path?: InputMaybe<Scalars['String']>;
@@ -1773,6 +2168,7 @@ export type PracticeToStudentGradeAggregateFields = {
   varSamp?: Maybe<PracticeToStudentGradeVarSampFields>;
   variance?: Maybe<PracticeToStudentGradeVarianceFields>;
 };
+
 
 /** aggregate fields of "practice_to_student_grade" */
 export type PracticeToStudentGradeAggregateFieldsCountArgs = {
@@ -1853,6 +2249,7 @@ export type PracticeToStudentGradeMetric = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "practice_to_student_grade_metric" */
 export type PracticeToStudentGradeMetricFeedbackArgs = {
   path?: InputMaybe<Scalars['String']>;
@@ -1884,6 +2281,7 @@ export type PracticeToStudentGradeMetricAggregateFields = {
   varSamp?: Maybe<PracticeToStudentGradeMetricVarSampFields>;
   variance?: Maybe<PracticeToStudentGradeMetricVarianceFields>;
 };
+
 
 /** aggregate fields of "practice_to_student_grade_metric" */
 export type PracticeToStudentGradeMetricAggregateFieldsCountArgs = {
@@ -1950,7 +2348,7 @@ export enum PracticeToStudentGradeMetricConstraint {
   /** unique or primary key constraint on columns "id" */
   PracticeToStudentGradeMetricPkey = 'practice_to_student_grade_metric_pkey',
   /** unique or primary key constraint on columns "practice_to_student_yield_id", "practice_yield_grade_metric_id" */
-  PracticeToStudentGradeMetricPracticeYieldGradeMetricId = 'practice_to_student_grade_metric_practice_yield_grade_metric_id',
+  PracticeToStudentGradeMetricPracticeYieldGradeMetricId = 'practice_to_student_grade_metric_practice_yield_grade_metric_id'
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -2082,7 +2480,7 @@ export enum PracticeToStudentGradeMetricSelectColumn {
   /** column name */
   PracticeYieldGradeMetricId = 'practiceYieldGradeMetricId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "practice_to_student_grade_metric" */
@@ -2174,7 +2572,7 @@ export enum PracticeToStudentGradeMetricUpdateColumn {
   /** column name */
   PracticeYieldGradeMetricId = 'practiceYieldGradeMetricId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type PracticeToStudentGradeMetricUpdates = {
@@ -2270,7 +2668,7 @@ export enum PracticeToStudentGradeSelectColumn {
   /** column name */
   GradeDetail = 'gradeDetail',
   /** column name */
-  PracticeToStudentId = 'practiceToStudentId',
+  PracticeToStudentId = 'practiceToStudentId'
 }
 
 /** input type for updating data in table "practice_to_student_grade" */
@@ -2363,6 +2761,7 @@ export type PracticeToStudentIncInput = {
 
 /** input type for inserting data into table "practice_to_student" */
 export type PracticeToStudentInsertInput = {
+  calculatedGrades?: InputMaybe<CalculatedGradesObjRelInsertInput>;
   coursePracticeId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   feedback?: InputMaybe<Scalars['jsonb']>;
@@ -2447,6 +2846,7 @@ export type PracticeToStudentOnConflict = {
 
 /** Ordering options when selecting data from "practice_to_student". */
 export type PracticeToStudentOrderBy = {
+  calculatedGrades?: InputMaybe<CalculatedGradesOrderBy>;
   coursePracticeId?: InputMaybe<OrderBy>;
   createdAt?: InputMaybe<OrderBy>;
   feedback?: InputMaybe<OrderBy>;
@@ -2496,13 +2896,13 @@ export enum PracticeToStudentSelectColumn {
   /** column name */
   Submited = 'submited',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** select "practiceToStudentAggregateBoolExpAvgArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpAvgArgumentsColumns {
   /** column name */
-  Grade = 'grade',
+  Grade = 'grade'
 }
 
 /** select "practiceToStudentAggregateBoolExpBool_andArgumentsColumns" columns of table "practice_to_student" */
@@ -2510,7 +2910,7 @@ export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpBool_A
   /** column name */
   Graded = 'graded',
   /** column name */
-  Submited = 'submited',
+  Submited = 'submited'
 }
 
 /** select "practiceToStudentAggregateBoolExpBool_orArgumentsColumns" columns of table "practice_to_student" */
@@ -2518,49 +2918,49 @@ export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpBool_O
   /** column name */
   Graded = 'graded',
   /** column name */
-  Submited = 'submited',
+  Submited = 'submited'
 }
 
 /** select "practiceToStudentAggregateBoolExpCorrArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpCorrArgumentsColumns {
   /** column name */
-  Grade = 'grade',
+  Grade = 'grade'
 }
 
 /** select "practiceToStudentAggregateBoolExpCovar_sampArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpCovar_SampArgumentsColumns {
   /** column name */
-  Grade = 'grade',
+  Grade = 'grade'
 }
 
 /** select "practiceToStudentAggregateBoolExpMaxArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpMaxArgumentsColumns {
   /** column name */
-  Grade = 'grade',
+  Grade = 'grade'
 }
 
 /** select "practiceToStudentAggregateBoolExpMinArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpMinArgumentsColumns {
   /** column name */
-  Grade = 'grade',
+  Grade = 'grade'
 }
 
 /** select "practiceToStudentAggregateBoolExpStddev_sampArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpStddev_SampArgumentsColumns {
   /** column name */
-  Grade = 'grade',
+  Grade = 'grade'
 }
 
 /** select "practiceToStudentAggregateBoolExpSumArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpSumArgumentsColumns {
   /** column name */
-  Grade = 'grade',
+  Grade = 'grade'
 }
 
 /** select "practiceToStudentAggregateBoolExpVar_sampArgumentsColumns" columns of table "practice_to_student" */
 export enum PracticeToStudentSelectColumnPracticeToStudentAggregateBoolExpVar_SampArgumentsColumns {
   /** column name */
-  Grade = 'grade',
+  Grade = 'grade'
 }
 
 /** input type for updating data in table "practice_to_student" */
@@ -2664,7 +3064,7 @@ export enum PracticeToStudentUpdateColumn {
   /** column name */
   Submited = 'submited',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type PracticeToStudentUpdates = {
@@ -2740,6 +3140,7 @@ export type PracticeToStudentYield = {
   value: Scalars['String'];
 };
 
+
 /** columns and relationships of "practice_to_student_yield" */
 export type PracticeToStudentYieldPracticeToStudentGradeMetricsArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
@@ -2748,6 +3149,7 @@ export type PracticeToStudentYieldPracticeToStudentGradeMetricsArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentGradeMetricOrderBy>>;
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
+
 
 /** columns and relationships of "practice_to_student_yield" */
 export type PracticeToStudentYieldPracticeToStudentGradeMetricsAggregateArgs = {
@@ -2778,6 +3180,7 @@ export type PracticeToStudentYieldAggregateFields = {
   max?: Maybe<PracticeToStudentYieldMaxFields>;
   min?: Maybe<PracticeToStudentYieldMinFields>;
 };
+
 
 /** aggregate fields of "practice_to_student_yield" */
 export type PracticeToStudentYieldAggregateFieldsCountArgs = {
@@ -2823,7 +3226,7 @@ export enum PracticeToStudentYieldConstraint {
   /** unique or primary key constraint on columns "id" */
   StudentPracticeYieldPkey = 'student_practice_yield_pkey',
   /** unique or primary key constraint on columns "practice_yield_id", "practice_to_student_id" */
-  StudentPracticeYieldPracticeYieldIdPracticeToStudenKey = 'student_practice_yield_practice_yield_id_practice_to_studen_key',
+  StudentPracticeYieldPracticeYieldIdPracticeToStudenKey = 'student_practice_yield_practice_yield_id_practice_to_studen_key'
 }
 
 /** input type for inserting data into table "practice_to_student_yield" */
@@ -2947,19 +3350,19 @@ export enum PracticeToStudentYieldSelectColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** select "practiceToStudentYieldAggregateBoolExpBool_andArgumentsColumns" columns of table "practice_to_student_yield" */
 export enum PracticeToStudentYieldSelectColumnPracticeToStudentYieldAggregateBoolExpBool_AndArgumentsColumns {
   /** column name */
-  Submited = 'submited',
+  Submited = 'submited'
 }
 
 /** select "practiceToStudentYieldAggregateBoolExpBool_orArgumentsColumns" columns of table "practice_to_student_yield" */
 export enum PracticeToStudentYieldSelectColumnPracticeToStudentYieldAggregateBoolExpBool_OrArgumentsColumns {
   /** column name */
-  Submited = 'submited',
+  Submited = 'submited'
 }
 
 /** input type for updating data in table "practice_to_student_yield" */
@@ -3011,7 +3414,7 @@ export enum PracticeToStudentYieldUpdateColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 export type PracticeToStudentYieldUpdates = {
@@ -3032,7 +3435,7 @@ export enum PracticeUpdateColumn {
   /** column name */
   Title = 'title',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type PracticeUpdates = {
@@ -3067,10 +3470,12 @@ export type PracticeYield = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "practice_yield" */
 export type PracticeYieldMetaArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
+
 
 /** columns and relationships of "practice_yield" */
 export type PracticeYieldPracticeToStudentYieldsArgs = {
@@ -3081,6 +3486,7 @@ export type PracticeYieldPracticeToStudentYieldsArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
+
 /** columns and relationships of "practice_yield" */
 export type PracticeYieldPracticeToStudentYieldsAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentYieldSelectColumn>>;
@@ -3090,6 +3496,7 @@ export type PracticeYieldPracticeToStudentYieldsAggregateArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
+
 /** columns and relationships of "practice_yield" */
 export type PracticeYieldPracticeYieldExpectedOutputsArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
@@ -3098,6 +3505,7 @@ export type PracticeYieldPracticeYieldExpectedOutputsArgs = {
   orderBy?: InputMaybe<Array<PracticeYieldExpectedOutputOrderBy>>;
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
+
 
 /** columns and relationships of "practice_yield" */
 export type PracticeYieldPracticeYieldExpectedOutputsAggregateArgs = {
@@ -3126,6 +3534,7 @@ export type PracticeYieldAggregateFields = {
   max?: Maybe<PracticeYieldMaxFields>;
   min?: Maybe<PracticeYieldMinFields>;
 };
+
 
 /** aggregate fields of "practice_yield" */
 export type PracticeYieldAggregateFieldsCountArgs = {
@@ -3176,7 +3585,7 @@ export type PracticeYieldBoolExp = {
 /** unique or primary key constraints on table "practice_yield" */
 export enum PracticeYieldConstraint {
   /** unique or primary key constraint on columns "id" */
-  PracticeYieldPkey = 'practice_yield_pkey',
+  PracticeYieldPkey = 'practice_yield_pkey'
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -3215,6 +3624,7 @@ export type PracticeYieldExpectedOutput = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "practice_yield_expected_output" */
 export type PracticeYieldExpectedOutputPracticeYieldGradeMetricsArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
@@ -3224,15 +3634,15 @@ export type PracticeYieldExpectedOutputPracticeYieldGradeMetricsArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
+
 /** columns and relationships of "practice_yield_expected_output" */
-export type PracticeYieldExpectedOutputPracticeYieldGradeMetricsAggregateArgs =
-  {
-    distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
-    limit?: InputMaybe<Scalars['Int']>;
-    offset?: InputMaybe<Scalars['Int']>;
-    orderBy?: InputMaybe<Array<PracticeYieldGradeMetricOrderBy>>;
-    where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
-  };
+export type PracticeYieldExpectedOutputPracticeYieldGradeMetricsAggregateArgs = {
+  distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<PracticeYieldGradeMetricOrderBy>>;
+  where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
+};
 
 /** aggregated selection of "practice_yield_expected_output" */
 export type PracticeYieldExpectedOutputAggregate = {
@@ -3252,6 +3662,7 @@ export type PracticeYieldExpectedOutputAggregateFields = {
   max?: Maybe<PracticeYieldExpectedOutputMaxFields>;
   min?: Maybe<PracticeYieldExpectedOutputMinFields>;
 };
+
 
 /** aggregate fields of "practice_yield_expected_output" */
 export type PracticeYieldExpectedOutputAggregateFieldsCountArgs = {
@@ -3297,7 +3708,7 @@ export enum PracticeYieldExpectedOutputConstraint {
   /** unique or primary key constraint on columns "id" */
   PracticeYieldExpectedOutputPkey = 'practice_yield_expected_output_pkey',
   /** unique or primary key constraint on columns "practice_yield_id", "git_path", "method" */
-  PracticeYieldExpectedOutputPracticeYieldIdGitPathMetho = 'practice_yield_expected_output_practice_yield_id_git_path_metho',
+  PracticeYieldExpectedOutputPracticeYieldIdGitPathMetho = 'practice_yield_expected_output_practice_yield_id_git_path_metho'
 }
 
 /** input type for inserting data into table "practice_yield_expected_output" */
@@ -3421,7 +3832,7 @@ export enum PracticeYieldExpectedOutputSelectColumn {
   /** column name */
   PracticeYieldId = 'practiceYieldId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "practice_yield_expected_output" */
@@ -3466,6 +3877,7 @@ export type PracticeYieldExpectedOutputTypes = {
   practiceYieldExpectedOutputsAggregate: PracticeYieldExpectedOutputAggregate;
 };
 
+
 /** columns and relationships of "practice_yield_expected_output_types" */
 export type PracticeYieldExpectedOutputTypesPracticeYieldExpectedOutputsArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
@@ -3475,15 +3887,15 @@ export type PracticeYieldExpectedOutputTypesPracticeYieldExpectedOutputsArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
 
+
 /** columns and relationships of "practice_yield_expected_output_types" */
-export type PracticeYieldExpectedOutputTypesPracticeYieldExpectedOutputsAggregateArgs =
-  {
-    distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
-    limit?: InputMaybe<Scalars['Int']>;
-    offset?: InputMaybe<Scalars['Int']>;
-    orderBy?: InputMaybe<Array<PracticeYieldExpectedOutputOrderBy>>;
-    where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
-  };
+export type PracticeYieldExpectedOutputTypesPracticeYieldExpectedOutputsAggregateArgs = {
+  distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<PracticeYieldExpectedOutputOrderBy>>;
+  where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
+};
 
 /** aggregated selection of "practice_yield_expected_output_types" */
 export type PracticeYieldExpectedOutputTypesAggregate = {
@@ -3499,6 +3911,7 @@ export type PracticeYieldExpectedOutputTypesAggregateFields = {
   max?: Maybe<PracticeYieldExpectedOutputTypesMaxFields>;
   min?: Maybe<PracticeYieldExpectedOutputTypesMinFields>;
 };
+
 
 /** aggregate fields of "practice_yield_expected_output_types" */
 export type PracticeYieldExpectedOutputTypesAggregateFieldsCountArgs = {
@@ -3519,7 +3932,7 @@ export type PracticeYieldExpectedOutputTypesBoolExp = {
 /** unique or primary key constraints on table "practice_yield_expected_output_types" */
 export enum PracticeYieldExpectedOutputTypesConstraint {
   /** unique or primary key constraint on columns "name" */
-  PracticeGradeMetricTypePkey = 'practice_grade_metric_type_pkey',
+  PracticeGradeMetricTypePkey = 'practice_grade_metric_type_pkey'
 }
 
 export enum PracticeYieldExpectedOutputTypesEnum {
@@ -3529,7 +3942,7 @@ export enum PracticeYieldExpectedOutputTypesEnum {
   Manual = 'MANUAL',
   ManualGitFileReview = 'MANUAL_GIT_FILE_REVIEW',
   ShowGitFile = 'SHOW_GIT_FILE',
-  ShowGitLog = 'SHOW_GIT_LOG',
+  ShowGitLog = 'SHOW_GIT_LOG'
 }
 
 /** Boolean expression to compare columns of type "PracticeYieldExpectedOutputTypesEnum". All fields are combined with logical 'AND'. */
@@ -3596,7 +4009,7 @@ export type PracticeYieldExpectedOutputTypesPkColumnsInput = {
 /** select columns of table "practice_yield_expected_output_types" */
 export enum PracticeYieldExpectedOutputTypesSelectColumn {
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 /** input type for updating data in table "practice_yield_expected_output_types" */
@@ -3620,7 +4033,7 @@ export type PracticeYieldExpectedOutputTypesStreamCursorValueInput = {
 /** update columns of table "practice_yield_expected_output_types" */
 export enum PracticeYieldExpectedOutputTypesUpdateColumn {
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 export type PracticeYieldExpectedOutputTypesUpdates = {
@@ -3647,7 +4060,7 @@ export enum PracticeYieldExpectedOutputUpdateColumn {
   /** column name */
   PracticeYieldId = 'practiceYieldId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type PracticeYieldExpectedOutputUpdates = {
@@ -3675,10 +4088,12 @@ export type PracticeYieldGradeMetric = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "practice_yield_grade_metric" */
 export type PracticeYieldGradeMetricFeedbacksArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
+
 
 /** columns and relationships of "practice_yield_grade_metric" */
 export type PracticeYieldGradeMetricPracticeToStudentGradeMetricsArgs = {
@@ -3689,15 +4104,15 @@ export type PracticeYieldGradeMetricPracticeToStudentGradeMetricsArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
+
 /** columns and relationships of "practice_yield_grade_metric" */
-export type PracticeYieldGradeMetricPracticeToStudentGradeMetricsAggregateArgs =
-  {
-    distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
-    limit?: InputMaybe<Scalars['Int']>;
-    offset?: InputMaybe<Scalars['Int']>;
-    orderBy?: InputMaybe<Array<PracticeToStudentGradeMetricOrderBy>>;
-    where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
-  };
+export type PracticeYieldGradeMetricPracticeToStudentGradeMetricsAggregateArgs = {
+  distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<PracticeToStudentGradeMetricOrderBy>>;
+  where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
+};
 
 /** aggregated selection of "practice_yield_grade_metric" */
 export type PracticeYieldGradeMetricAggregate = {
@@ -3725,6 +4140,7 @@ export type PracticeYieldGradeMetricAggregateFields = {
   varSamp?: Maybe<PracticeYieldGradeMetricVarSampFields>;
   variance?: Maybe<PracticeYieldGradeMetricVarianceFields>;
 };
+
 
 /** aggregate fields of "practice_yield_grade_metric" */
 export type PracticeYieldGradeMetricAggregateFieldsCountArgs = {
@@ -3790,7 +4206,7 @@ export type PracticeYieldGradeMetricBoolExp = {
 /** unique or primary key constraints on table "practice_yield_grade_metric" */
 export enum PracticeYieldGradeMetricConstraint {
   /** unique or primary key constraint on columns "id" */
-  PracticeGradeMetricPkey = 'practice_grade_metric_pkey',
+  PracticeGradeMetricPkey = 'practice_grade_metric_pkey'
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -3929,7 +4345,7 @@ export enum PracticeYieldGradeMetricSelectColumn {
   /** column name */
   Points = 'points',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "practice_yield_grade_metric" */
@@ -4021,7 +4437,7 @@ export enum PracticeYieldGradeMetricUpdateColumn {
   /** column name */
   Points = 'points',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type PracticeYieldGradeMetricUpdates = {
@@ -4200,7 +4616,7 @@ export enum PracticeYieldSelectColumn {
   /** column name */
   PracticeId = 'practiceId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "practice_yield" */
@@ -4245,6 +4661,7 @@ export type PracticeYieldType = {
   practiceYieldsAggregate: PracticeYieldAggregate;
 };
 
+
 /** columns and relationships of "practice_yield_type" */
 export type PracticeYieldTypePracticeYieldsArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
@@ -4253,6 +4670,7 @@ export type PracticeYieldTypePracticeYieldsArgs = {
   orderBy?: InputMaybe<Array<PracticeYieldOrderBy>>;
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
+
 
 /** columns and relationships of "practice_yield_type" */
 export type PracticeYieldTypePracticeYieldsAggregateArgs = {
@@ -4278,6 +4696,7 @@ export type PracticeYieldTypeAggregateFields = {
   min?: Maybe<PracticeYieldTypeMinFields>;
 };
 
+
 /** aggregate fields of "practice_yield_type" */
 export type PracticeYieldTypeAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<PracticeYieldTypeSelectColumn>>;
@@ -4297,14 +4716,14 @@ export type PracticeYieldTypeBoolExp = {
 /** unique or primary key constraints on table "practice_yield_type" */
 export enum PracticeYieldTypeConstraint {
   /** unique or primary key constraint on columns "name" */
-  PracticeYieldTypePkey = 'practice_yield_type_pkey',
+  PracticeYieldTypePkey = 'practice_yield_type_pkey'
 }
 
 export enum PracticeYieldTypeEnum {
   Blob = 'BLOB',
   Code = 'CODE',
   GitRepo = 'GIT_REPO',
-  Url = 'URL',
+  Url = 'URL'
 }
 
 /** Boolean expression to compare columns of type "PracticeYieldTypeEnum". All fields are combined with logical 'AND'. */
@@ -4371,7 +4790,7 @@ export type PracticeYieldTypePkColumnsInput = {
 /** select columns of table "practice_yield_type" */
 export enum PracticeYieldTypeSelectColumn {
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 /** input type for updating data in table "practice_yield_type" */
@@ -4395,7 +4814,7 @@ export type PracticeYieldTypeStreamCursorValueInput = {
 /** update columns of table "practice_yield_type" */
 export enum PracticeYieldTypeUpdateColumn {
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 export type PracticeYieldTypeUpdates = {
@@ -4422,7 +4841,7 @@ export enum PracticeYieldUpdateColumn {
   /** column name */
   PracticeId = 'practiceId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type PracticeYieldUpdates = {
@@ -4462,6 +4881,7 @@ export type Roles = {
   value: Scalars['String'];
 };
 
+
 /** columns and relationships of "roles" */
 export type RolesAllowedRolesArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
@@ -4470,6 +4890,7 @@ export type RolesAllowedRolesArgs = {
   orderBy?: InputMaybe<Array<AllowedRolesOrderBy>>;
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
+
 
 /** columns and relationships of "roles" */
 export type RolesAllowedRolesAggregateArgs = {
@@ -4480,6 +4901,7 @@ export type RolesAllowedRolesAggregateArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
+
 /** columns and relationships of "roles" */
 export type RolesUsersArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
@@ -4488,6 +4910,7 @@ export type RolesUsersArgs = {
   orderBy?: InputMaybe<Array<UserOrderBy>>;
   where?: InputMaybe<UserBoolExp>;
 };
+
 
 /** columns and relationships of "roles" */
 export type RolesUsersAggregateArgs = {
@@ -4513,6 +4936,7 @@ export type RolesAggregateFields = {
   min?: Maybe<RolesMinFields>;
 };
 
+
 /** aggregate fields of "roles" */
 export type RolesAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<RolesSelectColumn>>;
@@ -4535,12 +4959,12 @@ export type RolesBoolExp = {
 /** unique or primary key constraints on table "roles" */
 export enum RolesConstraint {
   /** unique or primary key constraint on columns "value" */
-  RolesPkey = 'roles_pkey',
+  RolesPkey = 'roles_pkey'
 }
 
 export enum RolesEnum {
   Student = 'STUDENT',
-  Teacher = 'TEACHER',
+  Teacher = 'TEACHER'
 }
 
 /** Boolean expression to compare columns of type "RolesEnum". All fields are combined with logical 'AND'. */
@@ -4615,7 +5039,7 @@ export enum RolesSelectColumn {
   /** column name */
   Description = 'description',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** input type for updating data in table "roles" */
@@ -4643,7 +5067,7 @@ export enum RolesUpdateColumn {
   /** column name */
   Description = 'description',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 export type RolesUpdates = {
@@ -4656,6 +5080,203 @@ export type RolesUpdates = {
 export type SendStudentClaimMailOutput = {
   __typename?: 'SendStudentClaimMailOutput';
   nmbMailSent: Scalars['Int'];
+};
+
+/** columns and relationships of "session" */
+export type Session = {
+  __typename?: 'Session';
+  expires: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  sessionToken: Scalars['String'];
+  /** An object relationship */
+  user: User;
+  userId: Scalars['uuid'];
+};
+
+/** aggregated selection of "session" */
+export type SessionAggregate = {
+  __typename?: 'SessionAggregate';
+  aggregate?: Maybe<SessionAggregateFields>;
+  nodes: Array<Session>;
+};
+
+export type SessionAggregateBoolExp = {
+  count?: InputMaybe<SessionAggregateBoolExpCount>;
+};
+
+/** aggregate fields of "session" */
+export type SessionAggregateFields = {
+  __typename?: 'SessionAggregateFields';
+  count: Scalars['Int'];
+  max?: Maybe<SessionMaxFields>;
+  min?: Maybe<SessionMinFields>;
+};
+
+
+/** aggregate fields of "session" */
+export type SessionAggregateFieldsCountArgs = {
+  columns?: InputMaybe<Array<SessionSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "session" */
+export type SessionAggregateOrderBy = {
+  count?: InputMaybe<OrderBy>;
+  max?: InputMaybe<SessionMaxOrderBy>;
+  min?: InputMaybe<SessionMinOrderBy>;
+};
+
+/** input type for inserting array relation for remote table "session" */
+export type SessionArrRelInsertInput = {
+  data: Array<SessionInsertInput>;
+  /** upsert condition */
+  onConflict?: InputMaybe<SessionOnConflict>;
+};
+
+/** Boolean expression to filter rows from the table "session". All fields are combined with a logical 'AND'. */
+export type SessionBoolExp = {
+  _and?: InputMaybe<Array<SessionBoolExp>>;
+  _not?: InputMaybe<SessionBoolExp>;
+  _or?: InputMaybe<Array<SessionBoolExp>>;
+  expires?: InputMaybe<TimestamptzComparisonExp>;
+  id?: InputMaybe<UuidComparisonExp>;
+  sessionToken?: InputMaybe<StringComparisonExp>;
+  user?: InputMaybe<UserBoolExp>;
+  userId?: InputMaybe<UuidComparisonExp>;
+};
+
+/** unique or primary key constraints on table "session" */
+export enum SessionConstraint {
+  /** unique or primary key constraint on columns "id" */
+  SessionPkey = 'session_pkey'
+}
+
+/** input type for inserting data into table "session" */
+export type SessionInsertInput = {
+  expires?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  sessionToken?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<UserObjRelInsertInput>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type SessionMaxFields = {
+  __typename?: 'SessionMaxFields';
+  expires?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  sessionToken?: Maybe<Scalars['String']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "session" */
+export type SessionMaxOrderBy = {
+  expires?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  sessionToken?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
+/** aggregate min on columns */
+export type SessionMinFields = {
+  __typename?: 'SessionMinFields';
+  expires?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  sessionToken?: Maybe<Scalars['String']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "session" */
+export type SessionMinOrderBy = {
+  expires?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  sessionToken?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
+/** response of any mutation on the table "session" */
+export type SessionMutationResponse = {
+  __typename?: 'SessionMutationResponse';
+  /** number of rows affected by the mutation */
+  affectedRows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Session>;
+};
+
+/** on_conflict condition type for table "session" */
+export type SessionOnConflict = {
+  constraint: SessionConstraint;
+  updateColumns?: Array<SessionUpdateColumn>;
+  where?: InputMaybe<SessionBoolExp>;
+};
+
+/** Ordering options when selecting data from "session". */
+export type SessionOrderBy = {
+  expires?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  sessionToken?: InputMaybe<OrderBy>;
+  user?: InputMaybe<UserOrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
+/** primary key columns input for table: session */
+export type SessionPkColumnsInput = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "session" */
+export enum SessionSelectColumn {
+  /** column name */
+  Expires = 'expires',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  SessionToken = 'sessionToken',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** input type for updating data in table "session" */
+export type SessionSetInput = {
+  expires?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  sessionToken?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** Streaming cursor of the table "session" */
+export type SessionStreamCursorInput = {
+  /** Stream column input with initial value */
+  initialValue: SessionStreamCursorValueInput;
+  /** cursor ordering */
+  ordering?: InputMaybe<CursorOrdering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type SessionStreamCursorValueInput = {
+  expires?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  sessionToken?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** update columns of table "session" */
+export enum SessionUpdateColumn {
+  /** column name */
+  Expires = 'expires',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  SessionToken = 'sessionToken',
+  /** column name */
+  UserId = 'userId'
+}
+
+export type SessionUpdates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<SessionSetInput>;
+  /** filter the rows which have to be updated */
+  where: SessionBoolExp;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -4715,6 +5336,7 @@ export type Student = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
+
 /** columns and relationships of "student" */
 export type StudentPracticeToStudentsArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
@@ -4723,6 +5345,7 @@ export type StudentPracticeToStudentsArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentOrderBy>>;
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
+
 
 /** columns and relationships of "student" */
 export type StudentPracticeToStudentsAggregateArgs = {
@@ -4733,6 +5356,7 @@ export type StudentPracticeToStudentsAggregateArgs = {
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
 
+
 /** columns and relationships of "student" */
 export type StudentStudentToCoursesArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
@@ -4741,6 +5365,7 @@ export type StudentStudentToCoursesArgs = {
   orderBy?: InputMaybe<Array<StudentToCourseOrderBy>>;
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
+
 
 /** columns and relationships of "student" */
 export type StudentStudentToCoursesAggregateArgs = {
@@ -4765,6 +5390,7 @@ export type StudentAggregateFields = {
   max?: Maybe<StudentMaxFields>;
   min?: Maybe<StudentMinFields>;
 };
+
 
 /** aggregate fields of "student" */
 export type StudentAggregateFieldsCountArgs = {
@@ -4802,7 +5428,7 @@ export enum StudentConstraint {
   /** unique or primary key constraint on columns "id" */
   StudentPkey = 'student_pkey',
   /** unique or primary key constraint on columns "user_id" */
-  StudentUserIdKey = 'student_user_id_key',
+  StudentUserIdKey = 'student_user_id_key'
 }
 
 /** input type for inserting data into table "student" */
@@ -4909,7 +5535,7 @@ export enum StudentSelectColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** input type for updating data in table "student" */
@@ -4976,6 +5602,7 @@ export type StudentToCourseAggregateFields = {
   min?: Maybe<StudentToCourseMinFields>;
 };
 
+
 /** aggregate fields of "student_to_course" */
 export type StudentToCourseAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<StudentToCourseSelectColumn>>;
@@ -5014,7 +5641,7 @@ export enum StudentToCourseConstraint {
   /** unique or primary key constraint on columns "course_id", "student_id" */
   StudentToPromotionPkey = 'student_to_promotion_pkey',
   /** unique or primary key constraint on columns "course_id", "student_id" */
-  StudentToPromotionPromotionIdStudentIdKey = 'student_to_promotion_promotion_id_student_id_key',
+  StudentToPromotionPromotionIdStudentIdKey = 'student_to_promotion_promotion_id_student_id_key'
 }
 
 /** input type for inserting data into table "student_to_course" */
@@ -5102,7 +5729,7 @@ export enum StudentToCourseSelectColumn {
   /** column name */
   StudentId = 'studentId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "student_to_course" */
@@ -5138,7 +5765,7 @@ export enum StudentToCourseUpdateColumn {
   /** column name */
   StudentId = 'studentId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type StudentToCourseUpdates = {
@@ -5165,7 +5792,7 @@ export enum StudentUpdateColumn {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 export type StudentUpdates = {
@@ -5197,9 +5824,9 @@ export type TimestamptzComparisonExp = {
 export type User = {
   __typename?: 'User';
   /** An array relationship */
-  accounts: Array<Accounts>;
+  accounts: Array<Account>;
   /** An aggregate relationship */
-  accountsAggregate: AccountsAggregate;
+  accountsAggregate: AccountAggregate;
   /** An array relationship */
   allowedRoles: Array<AllowedRoles>;
   /** An aggregate relationship */
@@ -5213,28 +5840,35 @@ export type User = {
   name?: Maybe<Scalars['String']>;
   /** An object relationship */
   role: Roles;
+  /** An array relationship */
+  sessions: Array<Session>;
+  /** An aggregate relationship */
+  sessionsAggregate: SessionAggregate;
   /** An object relationship */
   student?: Maybe<Student>;
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "user" */
 export type UserAccountsArgs = {
-  distinctOn?: InputMaybe<Array<AccountsSelectColumn>>;
+  distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<AccountsOrderBy>>;
-  where?: InputMaybe<AccountsBoolExp>;
+  orderBy?: InputMaybe<Array<AccountOrderBy>>;
+  where?: InputMaybe<AccountBoolExp>;
 };
+
 
 /** columns and relationships of "user" */
 export type UserAccountsAggregateArgs = {
-  distinctOn?: InputMaybe<Array<AccountsSelectColumn>>;
+  distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<AccountsOrderBy>>;
-  where?: InputMaybe<AccountsBoolExp>;
+  orderBy?: InputMaybe<Array<AccountOrderBy>>;
+  where?: InputMaybe<AccountBoolExp>;
 };
+
 
 /** columns and relationships of "user" */
 export type UserAllowedRolesArgs = {
@@ -5245,6 +5879,7 @@ export type UserAllowedRolesArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
+
 /** columns and relationships of "user" */
 export type UserAllowedRolesAggregateArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
@@ -5252,6 +5887,26 @@ export type UserAllowedRolesAggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AllowedRolesOrderBy>>;
   where?: InputMaybe<AllowedRolesBoolExp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserSessionsArgs = {
+  distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<SessionOrderBy>>;
+  where?: InputMaybe<SessionBoolExp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserSessionsAggregateArgs = {
+  distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<SessionOrderBy>>;
+  where?: InputMaybe<SessionBoolExp>;
 };
 
 /** aggregated selection of "user" */
@@ -5272,6 +5927,7 @@ export type UserAggregateFields = {
   max?: Maybe<UserMaxFields>;
   min?: Maybe<UserMinFields>;
 };
+
 
 /** aggregate fields of "user" */
 export type UserAggregateFieldsCountArgs = {
@@ -5298,8 +5954,8 @@ export type UserBoolExp = {
   _and?: InputMaybe<Array<UserBoolExp>>;
   _not?: InputMaybe<UserBoolExp>;
   _or?: InputMaybe<Array<UserBoolExp>>;
-  accounts?: InputMaybe<AccountsBoolExp>;
-  accountsAggregate?: InputMaybe<AccountsAggregateBoolExp>;
+  accounts?: InputMaybe<AccountBoolExp>;
+  accountsAggregate?: InputMaybe<AccountAggregateBoolExp>;
   allowedRoles?: InputMaybe<AllowedRolesBoolExp>;
   allowedRolesAggregate?: InputMaybe<AllowedRolesAggregateBoolExp>;
   createdAt?: InputMaybe<TimestamptzComparisonExp>;
@@ -5310,6 +5966,8 @@ export type UserBoolExp = {
   image?: InputMaybe<StringComparisonExp>;
   name?: InputMaybe<StringComparisonExp>;
   role?: InputMaybe<RolesBoolExp>;
+  sessions?: InputMaybe<SessionBoolExp>;
+  sessionsAggregate?: InputMaybe<SessionAggregateBoolExp>;
   student?: InputMaybe<StudentBoolExp>;
   updatedAt?: InputMaybe<TimestamptzComparisonExp>;
 };
@@ -5319,12 +5977,12 @@ export enum UserConstraint {
   /** unique or primary key constraint on columns "email" */
   UserEmailKey = 'user_email_key',
   /** unique or primary key constraint on columns "id" */
-  UserPkey = 'user_pkey',
+  UserPkey = 'user_pkey'
 }
 
 /** input type for inserting data into table "user" */
 export type UserInsertInput = {
-  accounts?: InputMaybe<AccountsArrRelInsertInput>;
+  accounts?: InputMaybe<AccountArrRelInsertInput>;
   allowedRoles?: InputMaybe<AllowedRolesArrRelInsertInput>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   defaultRole?: InputMaybe<RolesEnum>;
@@ -5334,6 +5992,7 @@ export type UserInsertInput = {
   image?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<RolesObjRelInsertInput>;
+  sessions?: InputMaybe<SessionArrRelInsertInput>;
   student?: InputMaybe<StudentObjRelInsertInput>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
 };
@@ -5409,7 +6068,7 @@ export type UserOnConflict = {
 
 /** Ordering options when selecting data from "user". */
 export type UserOrderBy = {
-  accountsAggregate?: InputMaybe<AccountsAggregateOrderBy>;
+  accountsAggregate?: InputMaybe<AccountAggregateOrderBy>;
   allowedRolesAggregate?: InputMaybe<AllowedRolesAggregateOrderBy>;
   createdAt?: InputMaybe<OrderBy>;
   defaultRole?: InputMaybe<OrderBy>;
@@ -5419,6 +6078,7 @@ export type UserOrderBy = {
   image?: InputMaybe<OrderBy>;
   name?: InputMaybe<OrderBy>;
   role?: InputMaybe<RolesOrderBy>;
+  sessionsAggregate?: InputMaybe<SessionAggregateOrderBy>;
   student?: InputMaybe<StudentOrderBy>;
   updatedAt?: InputMaybe<OrderBy>;
 };
@@ -5445,7 +6105,7 @@ export enum UserSelectColumn {
   /** column name */
   Name = 'name',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "user" */
@@ -5497,7 +6157,7 @@ export enum UserUpdateColumn {
   /** column name */
   Name = 'name',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type UserUpdates = {
@@ -5520,199 +6180,150 @@ export type UuidComparisonExp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-/** columns and relationships of "verification_requests" */
-export type VerificationRequests = {
-  __typename?: 'VerificationRequests';
-  createdAt: Scalars['timestamptz'];
-  expires?: Maybe<Scalars['timestamptz']>;
-  id: Scalars['uuid'];
+/** columns and relationships of "verification_token" */
+export type VerificationToken = {
+  __typename?: 'VerificationToken';
+  expires: Scalars['timestamptz'];
   identifier: Scalars['String'];
   token: Scalars['String'];
-  updatedAt: Scalars['timestamptz'];
-  url?: Maybe<Scalars['String']>;
 };
 
-/** aggregated selection of "verification_requests" */
-export type VerificationRequestsAggregate = {
-  __typename?: 'VerificationRequestsAggregate';
-  aggregate?: Maybe<VerificationRequestsAggregateFields>;
-  nodes: Array<VerificationRequests>;
+/** aggregated selection of "verification_token" */
+export type VerificationTokenAggregate = {
+  __typename?: 'VerificationTokenAggregate';
+  aggregate?: Maybe<VerificationTokenAggregateFields>;
+  nodes: Array<VerificationToken>;
 };
 
-/** aggregate fields of "verification_requests" */
-export type VerificationRequestsAggregateFields = {
-  __typename?: 'VerificationRequestsAggregateFields';
+/** aggregate fields of "verification_token" */
+export type VerificationTokenAggregateFields = {
+  __typename?: 'VerificationTokenAggregateFields';
   count: Scalars['Int'];
-  max?: Maybe<VerificationRequestsMaxFields>;
-  min?: Maybe<VerificationRequestsMinFields>;
+  max?: Maybe<VerificationTokenMaxFields>;
+  min?: Maybe<VerificationTokenMinFields>;
 };
 
-/** aggregate fields of "verification_requests" */
-export type VerificationRequestsAggregateFieldsCountArgs = {
-  columns?: InputMaybe<Array<VerificationRequestsSelectColumn>>;
+
+/** aggregate fields of "verification_token" */
+export type VerificationTokenAggregateFieldsCountArgs = {
+  columns?: InputMaybe<Array<VerificationTokenSelectColumn>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
-/** Boolean expression to filter rows from the table "verification_requests". All fields are combined with a logical 'AND'. */
-export type VerificationRequestsBoolExp = {
-  _and?: InputMaybe<Array<VerificationRequestsBoolExp>>;
-  _not?: InputMaybe<VerificationRequestsBoolExp>;
-  _or?: InputMaybe<Array<VerificationRequestsBoolExp>>;
-  createdAt?: InputMaybe<TimestamptzComparisonExp>;
+/** Boolean expression to filter rows from the table "verification_token". All fields are combined with a logical 'AND'. */
+export type VerificationTokenBoolExp = {
+  _and?: InputMaybe<Array<VerificationTokenBoolExp>>;
+  _not?: InputMaybe<VerificationTokenBoolExp>;
+  _or?: InputMaybe<Array<VerificationTokenBoolExp>>;
   expires?: InputMaybe<TimestamptzComparisonExp>;
-  id?: InputMaybe<UuidComparisonExp>;
   identifier?: InputMaybe<StringComparisonExp>;
   token?: InputMaybe<StringComparisonExp>;
-  updatedAt?: InputMaybe<TimestamptzComparisonExp>;
-  url?: InputMaybe<StringComparisonExp>;
 };
 
-/** unique or primary key constraints on table "verification_requests" */
-export enum VerificationRequestsConstraint {
-  /** unique or primary key constraint on columns "id" */
-  VerificationRequestsPkey = 'verification_requests_pkey',
+/** unique or primary key constraints on table "verification_token" */
+export enum VerificationTokenConstraint {
   /** unique or primary key constraint on columns "token" */
-  VerificationRequestsTokenKey = 'verification_requests_token_key',
+  VerificationTokenPkey = 'verification_token_pkey'
 }
 
-/** input type for inserting data into table "verification_requests" */
-export type VerificationRequestsInsertInput = {
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
+/** input type for inserting data into table "verification_token" */
+export type VerificationTokenInsertInput = {
   expires?: InputMaybe<Scalars['timestamptz']>;
-  id?: InputMaybe<Scalars['uuid']>;
   identifier?: InputMaybe<Scalars['String']>;
   token?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
-  url?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
-export type VerificationRequestsMaxFields = {
-  __typename?: 'VerificationRequestsMaxFields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
+export type VerificationTokenMaxFields = {
+  __typename?: 'VerificationTokenMaxFields';
   expires?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['uuid']>;
   identifier?: Maybe<Scalars['String']>;
   token?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  url?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
-export type VerificationRequestsMinFields = {
-  __typename?: 'VerificationRequestsMinFields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
+export type VerificationTokenMinFields = {
+  __typename?: 'VerificationTokenMinFields';
   expires?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['uuid']>;
   identifier?: Maybe<Scalars['String']>;
   token?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  url?: Maybe<Scalars['String']>;
 };
 
-/** response of any mutation on the table "verification_requests" */
-export type VerificationRequestsMutationResponse = {
-  __typename?: 'VerificationRequestsMutationResponse';
+/** response of any mutation on the table "verification_token" */
+export type VerificationTokenMutationResponse = {
+  __typename?: 'VerificationTokenMutationResponse';
   /** number of rows affected by the mutation */
   affectedRows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<VerificationRequests>;
+  returning: Array<VerificationToken>;
 };
 
-/** on_conflict condition type for table "verification_requests" */
-export type VerificationRequestsOnConflict = {
-  constraint: VerificationRequestsConstraint;
-  updateColumns?: Array<VerificationRequestsUpdateColumn>;
-  where?: InputMaybe<VerificationRequestsBoolExp>;
+/** on_conflict condition type for table "verification_token" */
+export type VerificationTokenOnConflict = {
+  constraint: VerificationTokenConstraint;
+  updateColumns?: Array<VerificationTokenUpdateColumn>;
+  where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
-/** Ordering options when selecting data from "verification_requests". */
-export type VerificationRequestsOrderBy = {
-  createdAt?: InputMaybe<OrderBy>;
+/** Ordering options when selecting data from "verification_token". */
+export type VerificationTokenOrderBy = {
   expires?: InputMaybe<OrderBy>;
-  id?: InputMaybe<OrderBy>;
   identifier?: InputMaybe<OrderBy>;
   token?: InputMaybe<OrderBy>;
-  updatedAt?: InputMaybe<OrderBy>;
-  url?: InputMaybe<OrderBy>;
 };
 
-/** primary key columns input for table: verification_requests */
-export type VerificationRequestsPkColumnsInput = {
-  id: Scalars['uuid'];
+/** primary key columns input for table: verification_token */
+export type VerificationTokenPkColumnsInput = {
+  token: Scalars['String'];
 };
 
-/** select columns of table "verification_requests" */
-export enum VerificationRequestsSelectColumn {
-  /** column name */
-  CreatedAt = 'createdAt',
+/** select columns of table "verification_token" */
+export enum VerificationTokenSelectColumn {
   /** column name */
   Expires = 'expires',
   /** column name */
-  Id = 'id',
-  /** column name */
   Identifier = 'identifier',
   /** column name */
-  Token = 'token',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-  /** column name */
-  Url = 'url',
+  Token = 'token'
 }
 
-/** input type for updating data in table "verification_requests" */
-export type VerificationRequestsSetInput = {
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
+/** input type for updating data in table "verification_token" */
+export type VerificationTokenSetInput = {
   expires?: InputMaybe<Scalars['timestamptz']>;
-  id?: InputMaybe<Scalars['uuid']>;
   identifier?: InputMaybe<Scalars['String']>;
   token?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
-  url?: InputMaybe<Scalars['String']>;
 };
 
-/** Streaming cursor of the table "verification_requests" */
-export type VerificationRequestsStreamCursorInput = {
+/** Streaming cursor of the table "verification_token" */
+export type VerificationTokenStreamCursorInput = {
   /** Stream column input with initial value */
-  initialValue: VerificationRequestsStreamCursorValueInput;
+  initialValue: VerificationTokenStreamCursorValueInput;
   /** cursor ordering */
   ordering?: InputMaybe<CursorOrdering>;
 };
 
 /** Initial value of the column from where the streaming should start */
-export type VerificationRequestsStreamCursorValueInput = {
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
+export type VerificationTokenStreamCursorValueInput = {
   expires?: InputMaybe<Scalars['timestamptz']>;
-  id?: InputMaybe<Scalars['uuid']>;
   identifier?: InputMaybe<Scalars['String']>;
   token?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
-  url?: InputMaybe<Scalars['String']>;
 };
 
-/** update columns of table "verification_requests" */
-export enum VerificationRequestsUpdateColumn {
-  /** column name */
-  CreatedAt = 'createdAt',
+/** update columns of table "verification_token" */
+export enum VerificationTokenUpdateColumn {
   /** column name */
   Expires = 'expires',
   /** column name */
-  Id = 'id',
-  /** column name */
   Identifier = 'identifier',
   /** column name */
-  Token = 'token',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-  /** column name */
-  Url = 'url',
+  Token = 'token'
 }
 
-export type VerificationRequestsUpdates = {
+export type VerificationTokenUpdates = {
   /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<VerificationRequestsSetInput>;
+  _set?: InputMaybe<VerificationTokenSetInput>;
   /** filter the rows which have to be updated */
-  where: VerificationRequestsBoolExp;
+  where: VerificationTokenBoolExp;
 };
 
 export type YieldForHandoff = {
@@ -5720,10 +6331,10 @@ export type YieldForHandoff = {
   yieldId: Scalars['uuid'];
 };
 
-export type AccountsAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<AccountsSelectColumn>>;
+export type AccountAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<AccountSelectColumn>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
-  filter?: InputMaybe<AccountsBoolExp>;
+  filter?: InputMaybe<AccountBoolExp>;
   predicate: IntComparisonExp;
 };
 
@@ -5742,10 +6353,10 @@ export type LinkStudentToUserOutput = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
-  /** delete data from the table: "accounts" */
-  deleteAccounts?: Maybe<AccountsMutationResponse>;
-  /** delete single row from the table: "accounts" */
-  deleteAccountsByPk?: Maybe<Accounts>;
+  /** delete data from the table: "account" */
+  deleteAccount?: Maybe<AccountMutationResponse>;
+  /** delete single row from the table: "account" */
+  deleteAccountByPk?: Maybe<Account>;
   /** delete data from the table: "allowed_roles" */
   deleteAllowedRoles?: Maybe<AllowedRolesMutationResponse>;
   /** delete single row from the table: "allowed_roles" */
@@ -5802,6 +6413,10 @@ export type Mutation_Root = {
   deleteRoles?: Maybe<RolesMutationResponse>;
   /** delete single row from the table: "roles" */
   deleteRolesByPk?: Maybe<Roles>;
+  /** delete data from the table: "session" */
+  deleteSession?: Maybe<SessionMutationResponse>;
+  /** delete single row from the table: "session" */
+  deleteSessionByPk?: Maybe<Session>;
   /** delete data from the table: "student" */
   deleteStudent?: Maybe<StudentMutationResponse>;
   /** delete single row from the table: "student" */
@@ -5814,15 +6429,15 @@ export type Mutation_Root = {
   deleteUser?: Maybe<UserMutationResponse>;
   /** delete single row from the table: "user" */
   deleteUserByPk?: Maybe<User>;
-  /** delete data from the table: "verification_requests" */
-  deleteVerificationRequests?: Maybe<VerificationRequestsMutationResponse>;
-  /** delete single row from the table: "verification_requests" */
-  deleteVerificationRequestsByPk?: Maybe<VerificationRequests>;
+  /** delete data from the table: "verification_token" */
+  deleteVerificationToken?: Maybe<VerificationTokenMutationResponse>;
+  /** delete single row from the table: "verification_token" */
+  deleteVerificationTokenByPk?: Maybe<VerificationToken>;
   fillEmptyYields?: Maybe<FillEmptyYieldsOutput>;
-  /** insert data into the table: "accounts" */
-  insertAccounts?: Maybe<AccountsMutationResponse>;
-  /** insert a single row into the table: "accounts" */
-  insertAccountsOne?: Maybe<Accounts>;
+  /** insert data into the table: "account" */
+  insertAccount?: Maybe<AccountMutationResponse>;
+  /** insert a single row into the table: "account" */
+  insertAccountOne?: Maybe<Account>;
   /** insert data into the table: "allowed_roles" */
   insertAllowedRoles?: Maybe<AllowedRolesMutationResponse>;
   /** insert a single row into the table: "allowed_roles" */
@@ -5883,6 +6498,10 @@ export type Mutation_Root = {
   insertRoles?: Maybe<RolesMutationResponse>;
   /** insert a single row into the table: "roles" */
   insertRolesOne?: Maybe<Roles>;
+  /** insert data into the table: "session" */
+  insertSession?: Maybe<SessionMutationResponse>;
+  /** insert a single row into the table: "session" */
+  insertSessionOne?: Maybe<Session>;
   /** insert data into the table: "student" */
   insertStudent?: Maybe<StudentMutationResponse>;
   /** insert a single row into the table: "student" */
@@ -5895,20 +6514,20 @@ export type Mutation_Root = {
   insertUser?: Maybe<UserMutationResponse>;
   /** insert a single row into the table: "user" */
   insertUserOne?: Maybe<User>;
-  /** insert data into the table: "verification_requests" */
-  insertVerificationRequests?: Maybe<VerificationRequestsMutationResponse>;
-  /** insert a single row into the table: "verification_requests" */
-  insertVerificationRequestsOne?: Maybe<VerificationRequests>;
+  /** insert data into the table: "verification_token" */
+  insertVerificationToken?: Maybe<VerificationTokenMutationResponse>;
+  /** insert a single row into the table: "verification_token" */
+  insertVerificationTokenOne?: Maybe<VerificationToken>;
   linkStudentToUser?: Maybe<LinkStudentToUserOutput>;
   refreshGrades?: Maybe<RefreshGradesOutput>;
   sendStudentClaimMail?: Maybe<SendStudentClaimMailOutput>;
   submitHandoff?: Maybe<SubmitHandoffOutput>;
-  /** update data of the table: "accounts" */
-  updateAccounts?: Maybe<AccountsMutationResponse>;
-  /** update single row of the table: "accounts" */
-  updateAccountsByPk?: Maybe<Accounts>;
-  /** update multiples rows of table: "accounts" */
-  updateAccountsMany?: Maybe<Array<Maybe<AccountsMutationResponse>>>;
+  /** update data of the table: "account" */
+  updateAccount?: Maybe<AccountMutationResponse>;
+  /** update single row of the table: "account" */
+  updateAccountByPk?: Maybe<Account>;
+  /** update multiples rows of table: "account" */
+  updateAccountMany?: Maybe<Array<Maybe<AccountMutationResponse>>>;
   /** update data of the table: "allowed_roles" */
   updateAllowedRoles?: Maybe<AllowedRolesMutationResponse>;
   /** update single row of the table: "allowed_roles" */
@@ -5932,9 +6551,7 @@ export type Mutation_Root = {
   /** update single row of the table: "practice_to_course" */
   updatePracticeToCourseByPk?: Maybe<PracticeToCourse>;
   /** update multiples rows of table: "practice_to_course" */
-  updatePracticeToCourseMany?: Maybe<
-    Array<Maybe<PracticeToCourseMutationResponse>>
-  >;
+  updatePracticeToCourseMany?: Maybe<Array<Maybe<PracticeToCourseMutationResponse>>>;
   /** update data of the table: "practice_to_student" */
   updatePracticeToStudent?: Maybe<PracticeToStudentMutationResponse>;
   /** update single row of the table: "practice_to_student" */
@@ -5942,35 +6559,25 @@ export type Mutation_Root = {
   /** update data of the table: "practice_to_student_feedback" */
   updatePracticeToStudentFeedback?: Maybe<PracticeToStudentFeedbackMutationResponse>;
   /** update multiples rows of table: "practice_to_student_feedback" */
-  updatePracticeToStudentFeedbackMany?: Maybe<
-    Array<Maybe<PracticeToStudentFeedbackMutationResponse>>
-  >;
+  updatePracticeToStudentFeedbackMany?: Maybe<Array<Maybe<PracticeToStudentFeedbackMutationResponse>>>;
   /** update data of the table: "practice_to_student_grade" */
   updatePracticeToStudentGrade?: Maybe<PracticeToStudentGradeMutationResponse>;
   /** update multiples rows of table: "practice_to_student_grade" */
-  updatePracticeToStudentGradeMany?: Maybe<
-    Array<Maybe<PracticeToStudentGradeMutationResponse>>
-  >;
+  updatePracticeToStudentGradeMany?: Maybe<Array<Maybe<PracticeToStudentGradeMutationResponse>>>;
   /** update data of the table: "practice_to_student_grade_metric" */
   updatePracticeToStudentGradeMetric?: Maybe<PracticeToStudentGradeMetricMutationResponse>;
   /** update single row of the table: "practice_to_student_grade_metric" */
   updatePracticeToStudentGradeMetricByPk?: Maybe<PracticeToStudentGradeMetric>;
   /** update multiples rows of table: "practice_to_student_grade_metric" */
-  updatePracticeToStudentGradeMetricMany?: Maybe<
-    Array<Maybe<PracticeToStudentGradeMetricMutationResponse>>
-  >;
+  updatePracticeToStudentGradeMetricMany?: Maybe<Array<Maybe<PracticeToStudentGradeMetricMutationResponse>>>;
   /** update multiples rows of table: "practice_to_student" */
-  updatePracticeToStudentMany?: Maybe<
-    Array<Maybe<PracticeToStudentMutationResponse>>
-  >;
+  updatePracticeToStudentMany?: Maybe<Array<Maybe<PracticeToStudentMutationResponse>>>;
   /** update data of the table: "practice_to_student_yield" */
   updatePracticeToStudentYield?: Maybe<PracticeToStudentYieldMutationResponse>;
   /** update single row of the table: "practice_to_student_yield" */
   updatePracticeToStudentYieldByPk?: Maybe<PracticeToStudentYield>;
   /** update multiples rows of table: "practice_to_student_yield" */
-  updatePracticeToStudentYieldMany?: Maybe<
-    Array<Maybe<PracticeToStudentYieldMutationResponse>>
-  >;
+  updatePracticeToStudentYieldMany?: Maybe<Array<Maybe<PracticeToStudentYieldMutationResponse>>>;
   /** update data of the table: "practice_yield" */
   updatePracticeYield?: Maybe<PracticeYieldMutationResponse>;
   /** update single row of the table: "practice_yield" */
@@ -5980,25 +6587,19 @@ export type Mutation_Root = {
   /** update single row of the table: "practice_yield_expected_output" */
   updatePracticeYieldExpectedOutputByPk?: Maybe<PracticeYieldExpectedOutput>;
   /** update multiples rows of table: "practice_yield_expected_output" */
-  updatePracticeYieldExpectedOutputMany?: Maybe<
-    Array<Maybe<PracticeYieldExpectedOutputMutationResponse>>
-  >;
+  updatePracticeYieldExpectedOutputMany?: Maybe<Array<Maybe<PracticeYieldExpectedOutputMutationResponse>>>;
   /** update data of the table: "practice_yield_expected_output_types" */
   updatePracticeYieldExpectedOutputTypes?: Maybe<PracticeYieldExpectedOutputTypesMutationResponse>;
   /** update single row of the table: "practice_yield_expected_output_types" */
   updatePracticeYieldExpectedOutputTypesByPk?: Maybe<PracticeYieldExpectedOutputTypes>;
   /** update multiples rows of table: "practice_yield_expected_output_types" */
-  updatePracticeYieldExpectedOutputTypesMany?: Maybe<
-    Array<Maybe<PracticeYieldExpectedOutputTypesMutationResponse>>
-  >;
+  updatePracticeYieldExpectedOutputTypesMany?: Maybe<Array<Maybe<PracticeYieldExpectedOutputTypesMutationResponse>>>;
   /** update data of the table: "practice_yield_grade_metric" */
   updatePracticeYieldGradeMetric?: Maybe<PracticeYieldGradeMetricMutationResponse>;
   /** update single row of the table: "practice_yield_grade_metric" */
   updatePracticeYieldGradeMetricByPk?: Maybe<PracticeYieldGradeMetric>;
   /** update multiples rows of table: "practice_yield_grade_metric" */
-  updatePracticeYieldGradeMetricMany?: Maybe<
-    Array<Maybe<PracticeYieldGradeMetricMutationResponse>>
-  >;
+  updatePracticeYieldGradeMetricMany?: Maybe<Array<Maybe<PracticeYieldGradeMetricMutationResponse>>>;
   /** update multiples rows of table: "practice_yield" */
   updatePracticeYieldMany?: Maybe<Array<Maybe<PracticeYieldMutationResponse>>>;
   /** update data of the table: "practice_yield_type" */
@@ -6006,15 +6607,19 @@ export type Mutation_Root = {
   /** update single row of the table: "practice_yield_type" */
   updatePracticeYieldTypeByPk?: Maybe<PracticeYieldType>;
   /** update multiples rows of table: "practice_yield_type" */
-  updatePracticeYieldTypeMany?: Maybe<
-    Array<Maybe<PracticeYieldTypeMutationResponse>>
-  >;
+  updatePracticeYieldTypeMany?: Maybe<Array<Maybe<PracticeYieldTypeMutationResponse>>>;
   /** update data of the table: "roles" */
   updateRoles?: Maybe<RolesMutationResponse>;
   /** update single row of the table: "roles" */
   updateRolesByPk?: Maybe<Roles>;
   /** update multiples rows of table: "roles" */
   updateRolesMany?: Maybe<Array<Maybe<RolesMutationResponse>>>;
+  /** update data of the table: "session" */
+  updateSession?: Maybe<SessionMutationResponse>;
+  /** update single row of the table: "session" */
+  updateSessionByPk?: Maybe<Session>;
+  /** update multiples rows of table: "session" */
+  updateSessionMany?: Maybe<Array<Maybe<SessionMutationResponse>>>;
   /** update data of the table: "student" */
   updateStudent?: Maybe<StudentMutationResponse>;
   /** update single row of the table: "student" */
@@ -6026,39 +6631,39 @@ export type Mutation_Root = {
   /** update single row of the table: "student_to_course" */
   updateStudentToCourseByPk?: Maybe<StudentToCourse>;
   /** update multiples rows of table: "student_to_course" */
-  updateStudentToCourseMany?: Maybe<
-    Array<Maybe<StudentToCourseMutationResponse>>
-  >;
+  updateStudentToCourseMany?: Maybe<Array<Maybe<StudentToCourseMutationResponse>>>;
   /** update data of the table: "user" */
   updateUser?: Maybe<UserMutationResponse>;
   /** update single row of the table: "user" */
   updateUserByPk?: Maybe<User>;
   /** update multiples rows of table: "user" */
   updateUserMany?: Maybe<Array<Maybe<UserMutationResponse>>>;
-  /** update data of the table: "verification_requests" */
-  updateVerificationRequests?: Maybe<VerificationRequestsMutationResponse>;
-  /** update single row of the table: "verification_requests" */
-  updateVerificationRequestsByPk?: Maybe<VerificationRequests>;
-  /** update multiples rows of table: "verification_requests" */
-  updateVerificationRequestsMany?: Maybe<
-    Array<Maybe<VerificationRequestsMutationResponse>>
-  >;
+  /** update data of the table: "verification_token" */
+  updateVerificationToken?: Maybe<VerificationTokenMutationResponse>;
+  /** update single row of the table: "verification_token" */
+  updateVerificationTokenByPk?: Maybe<VerificationToken>;
+  /** update multiples rows of table: "verification_token" */
+  updateVerificationTokenMany?: Maybe<Array<Maybe<VerificationTokenMutationResponse>>>;
 };
 
-/** mutation root */
-export type Mutation_RootDeleteAccountsArgs = {
-  where: AccountsBoolExp;
-};
 
 /** mutation root */
-export type Mutation_RootDeleteAccountsByPkArgs = {
+export type Mutation_RootDeleteAccountArgs = {
+  where: AccountBoolExp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteAccountByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteAllowedRolesArgs = {
   where: AllowedRolesBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteAllowedRolesByPkArgs = {
@@ -6066,150 +6671,192 @@ export type Mutation_RootDeleteAllowedRolesByPkArgs = {
   userId: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteCourseArgs = {
   where: CourseBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteCourseByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePracticeArgs = {
   where: PracticeBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePracticeByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePracticeToCourseArgs = {
   where: PracticeToCourseBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePracticeToCourseByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentArgs = {
   where: PracticeToStudentBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentFeedbackArgs = {
   where: PracticeToStudentFeedbackBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentGradeArgs = {
   where: PracticeToStudentGradeBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentGradeMetricArgs = {
   where: PracticeToStudentGradeMetricBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentYieldArgs = {
   where: PracticeToStudentYieldBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePracticeToStudentYieldByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldArgs = {
   where: PracticeYieldBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldExpectedOutputArgs = {
   where: PracticeYieldExpectedOutputBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldExpectedOutputByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldExpectedOutputTypesArgs = {
   where: PracticeYieldExpectedOutputTypesBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldExpectedOutputTypesByPkArgs = {
   name: Scalars['String'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldGradeMetricArgs = {
   where: PracticeYieldGradeMetricBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldTypeArgs = {
   where: PracticeYieldTypeBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePracticeYieldTypeByPkArgs = {
   name: Scalars['String'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteRolesArgs = {
   where: RolesBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteRolesByPkArgs = {
   value: Scalars['String'];
 };
 
+
+/** mutation root */
+export type Mutation_RootDeleteSessionArgs = {
+  where: SessionBoolExp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteSessionByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+
 /** mutation root */
 export type Mutation_RootDeleteStudentArgs = {
   where: StudentBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteStudentByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteStudentToCourseArgs = {
   where: StudentToCourseBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteStudentToCourseByPkArgs = {
@@ -6217,25 +6864,30 @@ export type Mutation_RootDeleteStudentToCourseByPkArgs = {
   studentId: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteUserArgs = {
   where: UserBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteUserByPkArgs = {
   id: Scalars['uuid'];
 };
 
-/** mutation root */
-export type Mutation_RootDeleteVerificationRequestsArgs = {
-  where: VerificationRequestsBoolExp;
-};
 
 /** mutation root */
-export type Mutation_RootDeleteVerificationRequestsByPkArgs = {
-  id: Scalars['uuid'];
+export type Mutation_RootDeleteVerificationTokenArgs = {
+  where: VerificationTokenBoolExp;
 };
+
+
+/** mutation root */
+export type Mutation_RootDeleteVerificationTokenByPkArgs = {
+  token: Scalars['String'];
+};
+
 
 /** mutation root */
 export type Mutation_RootFillEmptyYieldsArgs = {
@@ -6243,17 +6895,20 @@ export type Mutation_RootFillEmptyYieldsArgs = {
   practice_id: Scalars['uuid'];
 };
 
-/** mutation root */
-export type Mutation_RootInsertAccountsArgs = {
-  objects: Array<AccountsInsertInput>;
-  onConflict?: InputMaybe<AccountsOnConflict>;
-};
 
 /** mutation root */
-export type Mutation_RootInsertAccountsOneArgs = {
-  object: AccountsInsertInput;
-  onConflict?: InputMaybe<AccountsOnConflict>;
+export type Mutation_RootInsertAccountArgs = {
+  objects: Array<AccountInsertInput>;
+  onConflict?: InputMaybe<AccountOnConflict>;
 };
+
+
+/** mutation root */
+export type Mutation_RootInsertAccountOneArgs = {
+  object: AccountInsertInput;
+  onConflict?: InputMaybe<AccountOnConflict>;
+};
+
 
 /** mutation root */
 export type Mutation_RootInsertAllowedRolesArgs = {
@@ -6261,11 +6916,13 @@ export type Mutation_RootInsertAllowedRolesArgs = {
   onConflict?: InputMaybe<AllowedRolesOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertAllowedRolesOneArgs = {
   object: AllowedRolesInsertInput;
   onConflict?: InputMaybe<AllowedRolesOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertCourseArgs = {
@@ -6273,11 +6930,13 @@ export type Mutation_RootInsertCourseArgs = {
   onConflict?: InputMaybe<CourseOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertCourseOneArgs = {
   object: CourseInsertInput;
   onConflict?: InputMaybe<CourseOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeArgs = {
@@ -6285,11 +6944,13 @@ export type Mutation_RootInsertPracticeArgs = {
   onConflict?: InputMaybe<PracticeOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeOneArgs = {
   object: PracticeInsertInput;
   onConflict?: InputMaybe<PracticeOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeToCourseArgs = {
@@ -6297,11 +6958,13 @@ export type Mutation_RootInsertPracticeToCourseArgs = {
   onConflict?: InputMaybe<PracticeToCourseOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeToCourseOneArgs = {
   object: PracticeToCourseInsertInput;
   onConflict?: InputMaybe<PracticeToCourseOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentArgs = {
@@ -6309,20 +6972,24 @@ export type Mutation_RootInsertPracticeToStudentArgs = {
   onConflict?: InputMaybe<PracticeToStudentOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentFeedbackArgs = {
   objects: Array<PracticeToStudentFeedbackInsertInput>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentFeedbackOneArgs = {
   object: PracticeToStudentFeedbackInsertInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentGradeArgs = {
   objects: Array<PracticeToStudentGradeInsertInput>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentGradeMetricArgs = {
@@ -6330,16 +6997,19 @@ export type Mutation_RootInsertPracticeToStudentGradeMetricArgs = {
   onConflict?: InputMaybe<PracticeToStudentGradeMetricOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentGradeMetricOneArgs = {
   object: PracticeToStudentGradeMetricInsertInput;
   onConflict?: InputMaybe<PracticeToStudentGradeMetricOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentGradeOneArgs = {
   object: PracticeToStudentGradeInsertInput;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentOneArgs = {
@@ -6347,11 +7017,13 @@ export type Mutation_RootInsertPracticeToStudentOneArgs = {
   onConflict?: InputMaybe<PracticeToStudentOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentYieldArgs = {
   objects: Array<PracticeToStudentYieldInsertInput>;
   onConflict?: InputMaybe<PracticeToStudentYieldOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeToStudentYieldOneArgs = {
@@ -6359,11 +7031,13 @@ export type Mutation_RootInsertPracticeToStudentYieldOneArgs = {
   onConflict?: InputMaybe<PracticeToStudentYieldOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldArgs = {
   objects: Array<PracticeYieldInsertInput>;
   onConflict?: InputMaybe<PracticeYieldOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldExpectedOutputArgs = {
@@ -6371,11 +7045,13 @@ export type Mutation_RootInsertPracticeYieldExpectedOutputArgs = {
   onConflict?: InputMaybe<PracticeYieldExpectedOutputOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldExpectedOutputOneArgs = {
   object: PracticeYieldExpectedOutputInsertInput;
   onConflict?: InputMaybe<PracticeYieldExpectedOutputOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldExpectedOutputTypesArgs = {
@@ -6383,11 +7059,13 @@ export type Mutation_RootInsertPracticeYieldExpectedOutputTypesArgs = {
   onConflict?: InputMaybe<PracticeYieldExpectedOutputTypesOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldExpectedOutputTypesOneArgs = {
   object: PracticeYieldExpectedOutputTypesInsertInput;
   onConflict?: InputMaybe<PracticeYieldExpectedOutputTypesOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldGradeMetricArgs = {
@@ -6395,11 +7073,13 @@ export type Mutation_RootInsertPracticeYieldGradeMetricArgs = {
   onConflict?: InputMaybe<PracticeYieldGradeMetricOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldGradeMetricOneArgs = {
   object: PracticeYieldGradeMetricInsertInput;
   onConflict?: InputMaybe<PracticeYieldGradeMetricOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldOneArgs = {
@@ -6407,11 +7087,13 @@ export type Mutation_RootInsertPracticeYieldOneArgs = {
   onConflict?: InputMaybe<PracticeYieldOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldTypeArgs = {
   objects: Array<PracticeYieldTypeInsertInput>;
   onConflict?: InputMaybe<PracticeYieldTypeOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPracticeYieldTypeOneArgs = {
@@ -6419,11 +7101,13 @@ export type Mutation_RootInsertPracticeYieldTypeOneArgs = {
   onConflict?: InputMaybe<PracticeYieldTypeOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertRolesArgs = {
   objects: Array<RolesInsertInput>;
   onConflict?: InputMaybe<RolesOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertRolesOneArgs = {
@@ -6431,11 +7115,27 @@ export type Mutation_RootInsertRolesOneArgs = {
   onConflict?: InputMaybe<RolesOnConflict>;
 };
 
+
+/** mutation root */
+export type Mutation_RootInsertSessionArgs = {
+  objects: Array<SessionInsertInput>;
+  onConflict?: InputMaybe<SessionOnConflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertSessionOneArgs = {
+  object: SessionInsertInput;
+  onConflict?: InputMaybe<SessionOnConflict>;
+};
+
+
 /** mutation root */
 export type Mutation_RootInsertStudentArgs = {
   objects: Array<StudentInsertInput>;
   onConflict?: InputMaybe<StudentOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertStudentOneArgs = {
@@ -6443,11 +7143,13 @@ export type Mutation_RootInsertStudentOneArgs = {
   onConflict?: InputMaybe<StudentOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertStudentToCourseArgs = {
   objects: Array<StudentToCourseInsertInput>;
   onConflict?: InputMaybe<StudentToCourseOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertStudentToCourseOneArgs = {
@@ -6455,11 +7157,13 @@ export type Mutation_RootInsertStudentToCourseOneArgs = {
   onConflict?: InputMaybe<StudentToCourseOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertUserArgs = {
   objects: Array<UserInsertInput>;
   onConflict?: InputMaybe<UserOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertUserOneArgs = {
@@ -6467,22 +7171,26 @@ export type Mutation_RootInsertUserOneArgs = {
   onConflict?: InputMaybe<UserOnConflict>;
 };
 
-/** mutation root */
-export type Mutation_RootInsertVerificationRequestsArgs = {
-  objects: Array<VerificationRequestsInsertInput>;
-  onConflict?: InputMaybe<VerificationRequestsOnConflict>;
-};
 
 /** mutation root */
-export type Mutation_RootInsertVerificationRequestsOneArgs = {
-  object: VerificationRequestsInsertInput;
-  onConflict?: InputMaybe<VerificationRequestsOnConflict>;
+export type Mutation_RootInsertVerificationTokenArgs = {
+  objects: Array<VerificationTokenInsertInput>;
+  onConflict?: InputMaybe<VerificationTokenOnConflict>;
 };
+
+
+/** mutation root */
+export type Mutation_RootInsertVerificationTokenOneArgs = {
+  object: VerificationTokenInsertInput;
+  onConflict?: InputMaybe<VerificationTokenOnConflict>;
+};
+
 
 /** mutation root */
 export type Mutation_RootLinkStudentToUserArgs = {
   linkId: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootRefreshGradesArgs = {
@@ -6490,10 +7198,12 @@ export type Mutation_RootRefreshGradesArgs = {
   practice_id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootSendStudentClaimMailArgs = {
   studentsIds: Array<InputMaybe<Scalars['uuid']>>;
 };
+
 
 /** mutation root */
 export type Mutation_RootSubmitHandoffArgs = {
@@ -6501,22 +7211,28 @@ export type Mutation_RootSubmitHandoffArgs = {
   yields: Array<YieldForHandoff>;
 };
 
-/** mutation root */
-export type Mutation_RootUpdateAccountsArgs = {
-  _set?: InputMaybe<AccountsSetInput>;
-  where: AccountsBoolExp;
-};
 
 /** mutation root */
-export type Mutation_RootUpdateAccountsByPkArgs = {
-  _set?: InputMaybe<AccountsSetInput>;
-  pkColumns: AccountsPkColumnsInput;
+export type Mutation_RootUpdateAccountArgs = {
+  _inc?: InputMaybe<AccountIncInput>;
+  _set?: InputMaybe<AccountSetInput>;
+  where: AccountBoolExp;
 };
 
+
 /** mutation root */
-export type Mutation_RootUpdateAccountsManyArgs = {
-  updates: Array<AccountsUpdates>;
+export type Mutation_RootUpdateAccountByPkArgs = {
+  _inc?: InputMaybe<AccountIncInput>;
+  _set?: InputMaybe<AccountSetInput>;
+  pkColumns: AccountPkColumnsInput;
 };
+
+
+/** mutation root */
+export type Mutation_RootUpdateAccountManyArgs = {
+  updates: Array<AccountUpdates>;
+};
+
 
 /** mutation root */
 export type Mutation_RootUpdateAllowedRolesArgs = {
@@ -6524,16 +7240,19 @@ export type Mutation_RootUpdateAllowedRolesArgs = {
   where: AllowedRolesBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateAllowedRolesByPkArgs = {
   _set?: InputMaybe<AllowedRolesSetInput>;
   pkColumns: AllowedRolesPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateAllowedRolesManyArgs = {
   updates: Array<AllowedRolesUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateCourseArgs = {
@@ -6541,16 +7260,19 @@ export type Mutation_RootUpdateCourseArgs = {
   where: CourseBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateCourseByPkArgs = {
   _set?: InputMaybe<CourseSetInput>;
   pkColumns: CoursePkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateCourseManyArgs = {
   updates: Array<CourseUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeArgs = {
@@ -6558,16 +7280,19 @@ export type Mutation_RootUpdatePracticeArgs = {
   where: PracticeBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeByPkArgs = {
   _set?: InputMaybe<PracticeSetInput>;
   pkColumns: PracticePkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeManyArgs = {
   updates: Array<PracticeUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeToCourseArgs = {
@@ -6575,16 +7300,19 @@ export type Mutation_RootUpdatePracticeToCourseArgs = {
   where: PracticeToCourseBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeToCourseByPkArgs = {
   _set?: InputMaybe<PracticeToCourseSetInput>;
   pkColumns: PracticeToCoursePkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeToCourseManyArgs = {
   updates: Array<PracticeToCourseUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentArgs = {
@@ -6598,6 +7326,7 @@ export type Mutation_RootUpdatePracticeToStudentArgs = {
   where: PracticeToStudentBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentByPkArgs = {
   _append?: InputMaybe<PracticeToStudentAppendInput>;
@@ -6610,6 +7339,7 @@ export type Mutation_RootUpdatePracticeToStudentByPkArgs = {
   pkColumns: PracticeToStudentPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentFeedbackArgs = {
   _append?: InputMaybe<PracticeToStudentFeedbackAppendInput>;
@@ -6621,10 +7351,12 @@ export type Mutation_RootUpdatePracticeToStudentFeedbackArgs = {
   where: PracticeToStudentFeedbackBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentFeedbackManyArgs = {
   updates: Array<PracticeToStudentFeedbackUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentGradeArgs = {
@@ -6638,10 +7370,12 @@ export type Mutation_RootUpdatePracticeToStudentGradeArgs = {
   where: PracticeToStudentGradeBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentGradeManyArgs = {
   updates: Array<PracticeToStudentGradeUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentGradeMetricArgs = {
@@ -6655,6 +7389,7 @@ export type Mutation_RootUpdatePracticeToStudentGradeMetricArgs = {
   where: PracticeToStudentGradeMetricBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentGradeMetricByPkArgs = {
   _append?: InputMaybe<PracticeToStudentGradeMetricAppendInput>;
@@ -6667,15 +7402,18 @@ export type Mutation_RootUpdatePracticeToStudentGradeMetricByPkArgs = {
   pkColumns: PracticeToStudentGradeMetricPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentGradeMetricManyArgs = {
   updates: Array<PracticeToStudentGradeMetricUpdates>;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentManyArgs = {
   updates: Array<PracticeToStudentUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentYieldArgs = {
@@ -6683,16 +7421,19 @@ export type Mutation_RootUpdatePracticeToStudentYieldArgs = {
   where: PracticeToStudentYieldBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentYieldByPkArgs = {
   _set?: InputMaybe<PracticeToStudentYieldSetInput>;
   pkColumns: PracticeToStudentYieldPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeToStudentYieldManyArgs = {
   updates: Array<PracticeToStudentYieldUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldArgs = {
@@ -6705,6 +7446,7 @@ export type Mutation_RootUpdatePracticeYieldArgs = {
   where: PracticeYieldBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldByPkArgs = {
   _append?: InputMaybe<PracticeYieldAppendInput>;
@@ -6716,11 +7458,13 @@ export type Mutation_RootUpdatePracticeYieldByPkArgs = {
   pkColumns: PracticeYieldPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputArgs = {
   _set?: InputMaybe<PracticeYieldExpectedOutputSetInput>;
   where: PracticeYieldExpectedOutputBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputByPkArgs = {
@@ -6728,10 +7472,12 @@ export type Mutation_RootUpdatePracticeYieldExpectedOutputByPkArgs = {
   pkColumns: PracticeYieldExpectedOutputPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputManyArgs = {
   updates: Array<PracticeYieldExpectedOutputUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputTypesArgs = {
@@ -6739,16 +7485,19 @@ export type Mutation_RootUpdatePracticeYieldExpectedOutputTypesArgs = {
   where: PracticeYieldExpectedOutputTypesBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputTypesByPkArgs = {
   _set?: InputMaybe<PracticeYieldExpectedOutputTypesSetInput>;
   pkColumns: PracticeYieldExpectedOutputTypesPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldExpectedOutputTypesManyArgs = {
   updates: Array<PracticeYieldExpectedOutputTypesUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldGradeMetricArgs = {
@@ -6762,6 +7511,7 @@ export type Mutation_RootUpdatePracticeYieldGradeMetricArgs = {
   where: PracticeYieldGradeMetricBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldGradeMetricByPkArgs = {
   _append?: InputMaybe<PracticeYieldGradeMetricAppendInput>;
@@ -6774,15 +7524,18 @@ export type Mutation_RootUpdatePracticeYieldGradeMetricByPkArgs = {
   pkColumns: PracticeYieldGradeMetricPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldGradeMetricManyArgs = {
   updates: Array<PracticeYieldGradeMetricUpdates>;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldManyArgs = {
   updates: Array<PracticeYieldUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldTypeArgs = {
@@ -6790,16 +7543,19 @@ export type Mutation_RootUpdatePracticeYieldTypeArgs = {
   where: PracticeYieldTypeBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldTypeByPkArgs = {
   _set?: InputMaybe<PracticeYieldTypeSetInput>;
   pkColumns: PracticeYieldTypePkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePracticeYieldTypeManyArgs = {
   updates: Array<PracticeYieldTypeUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateRolesArgs = {
@@ -6807,16 +7563,39 @@ export type Mutation_RootUpdateRolesArgs = {
   where: RolesBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateRolesByPkArgs = {
   _set?: InputMaybe<RolesSetInput>;
   pkColumns: RolesPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateRolesManyArgs = {
   updates: Array<RolesUpdates>;
 };
+
+
+/** mutation root */
+export type Mutation_RootUpdateSessionArgs = {
+  _set?: InputMaybe<SessionSetInput>;
+  where: SessionBoolExp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateSessionByPkArgs = {
+  _set?: InputMaybe<SessionSetInput>;
+  pkColumns: SessionPkColumnsInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateSessionManyArgs = {
+  updates: Array<SessionUpdates>;
+};
+
 
 /** mutation root */
 export type Mutation_RootUpdateStudentArgs = {
@@ -6824,16 +7603,19 @@ export type Mutation_RootUpdateStudentArgs = {
   where: StudentBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateStudentByPkArgs = {
   _set?: InputMaybe<StudentSetInput>;
   pkColumns: StudentPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateStudentManyArgs = {
   updates: Array<StudentUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateStudentToCourseArgs = {
@@ -6841,16 +7623,19 @@ export type Mutation_RootUpdateStudentToCourseArgs = {
   where: StudentToCourseBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateStudentToCourseByPkArgs = {
   _set?: InputMaybe<StudentToCourseSetInput>;
   pkColumns: StudentToCoursePkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateStudentToCourseManyArgs = {
   updates: Array<StudentToCourseUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateUserArgs = {
@@ -6858,32 +7643,37 @@ export type Mutation_RootUpdateUserArgs = {
   where: UserBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateUserByPkArgs = {
   _set?: InputMaybe<UserSetInput>;
   pkColumns: UserPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateUserManyArgs = {
   updates: Array<UserUpdates>;
 };
 
-/** mutation root */
-export type Mutation_RootUpdateVerificationRequestsArgs = {
-  _set?: InputMaybe<VerificationRequestsSetInput>;
-  where: VerificationRequestsBoolExp;
-};
 
 /** mutation root */
-export type Mutation_RootUpdateVerificationRequestsByPkArgs = {
-  _set?: InputMaybe<VerificationRequestsSetInput>;
-  pkColumns: VerificationRequestsPkColumnsInput;
+export type Mutation_RootUpdateVerificationTokenArgs = {
+  _set?: InputMaybe<VerificationTokenSetInput>;
+  where: VerificationTokenBoolExp;
 };
 
+
 /** mutation root */
-export type Mutation_RootUpdateVerificationRequestsManyArgs = {
-  updates: Array<VerificationRequestsUpdates>;
+export type Mutation_RootUpdateVerificationTokenByPkArgs = {
+  _set?: InputMaybe<VerificationTokenSetInput>;
+  pkColumns: VerificationTokenPkColumnsInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateVerificationTokenManyArgs = {
+  updates: Array<VerificationTokenUpdates>;
 };
 
 export type PracticeToCourseAggregateBoolExpCount = {
@@ -7031,18 +7821,22 @@ export type PracticeYieldGradeMetricAggregateBoolExpCount = {
 
 export type Query_Root = {
   __typename?: 'query_root';
-  /** An array relationship */
-  accounts: Array<Accounts>;
-  /** An aggregate relationship */
-  accountsAggregate: AccountsAggregate;
-  /** fetch data from the table: "accounts" using primary key columns */
-  accountsByPk?: Maybe<Accounts>;
+  /** fetch data from the table: "account" */
+  account: Array<Account>;
+  /** fetch aggregated fields from the table: "account" */
+  accountAggregate: AccountAggregate;
+  /** fetch data from the table: "account" using primary key columns */
+  accountByPk?: Maybe<Account>;
   /** An array relationship */
   allowedRoles: Array<AllowedRoles>;
   /** An aggregate relationship */
   allowedRolesAggregate: AllowedRolesAggregate;
   /** fetch data from the table: "allowed_roles" using primary key columns */
   allowedRolesByPk?: Maybe<AllowedRoles>;
+  /** fetch data from the table: "calculated_grades" */
+  calculatedGrades: Array<CalculatedGrades>;
+  /** fetch aggregated fields from the table: "calculated_grades" */
+  calculatedGradesAggregate: CalculatedGradesAggregate;
   /** fetch data from the table: "course" */
   course: Array<Course>;
   /** fetch aggregated fields from the table: "course" */
@@ -7125,6 +7919,12 @@ export type Query_Root = {
   rolesAggregate: RolesAggregate;
   /** fetch data from the table: "roles" using primary key columns */
   rolesByPk?: Maybe<Roles>;
+  /** fetch data from the table: "session" */
+  session: Array<Session>;
+  /** fetch aggregated fields from the table: "session" */
+  sessionAggregate: SessionAggregate;
+  /** fetch data from the table: "session" using primary key columns */
+  sessionByPk?: Maybe<Session>;
   /** fetch data from the table: "student" */
   student: Array<Student>;
   /** fetch aggregated fields from the table: "student" */
@@ -7143,33 +7943,37 @@ export type Query_Root = {
   userAggregate: UserAggregate;
   /** fetch data from the table: "user" using primary key columns */
   userByPk?: Maybe<User>;
-  /** fetch data from the table: "verification_requests" */
-  verificationRequests: Array<VerificationRequests>;
-  /** fetch aggregated fields from the table: "verification_requests" */
-  verificationRequestsAggregate: VerificationRequestsAggregate;
-  /** fetch data from the table: "verification_requests" using primary key columns */
-  verificationRequestsByPk?: Maybe<VerificationRequests>;
+  /** fetch data from the table: "verification_token" */
+  verificationToken: Array<VerificationToken>;
+  /** fetch aggregated fields from the table: "verification_token" */
+  verificationTokenAggregate: VerificationTokenAggregate;
+  /** fetch data from the table: "verification_token" using primary key columns */
+  verificationTokenByPk?: Maybe<VerificationToken>;
 };
 
-export type Query_RootAccountsArgs = {
-  distinctOn?: InputMaybe<Array<AccountsSelectColumn>>;
+
+export type Query_RootAccountArgs = {
+  distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<AccountsOrderBy>>;
-  where?: InputMaybe<AccountsBoolExp>;
+  orderBy?: InputMaybe<Array<AccountOrderBy>>;
+  where?: InputMaybe<AccountBoolExp>;
 };
 
-export type Query_RootAccountsAggregateArgs = {
-  distinctOn?: InputMaybe<Array<AccountsSelectColumn>>;
+
+export type Query_RootAccountAggregateArgs = {
+  distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<AccountsOrderBy>>;
-  where?: InputMaybe<AccountsBoolExp>;
+  orderBy?: InputMaybe<Array<AccountOrderBy>>;
+  where?: InputMaybe<AccountBoolExp>;
 };
 
-export type Query_RootAccountsByPkArgs = {
+
+export type Query_RootAccountByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootAllowedRolesArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
@@ -7179,6 +7983,7 @@ export type Query_RootAllowedRolesArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
+
 export type Query_RootAllowedRolesAggregateArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7187,10 +7992,30 @@ export type Query_RootAllowedRolesAggregateArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
+
 export type Query_RootAllowedRolesByPkArgs = {
   role: RolesEnum;
   userId: Scalars['uuid'];
 };
+
+
+export type Query_RootCalculatedGradesArgs = {
+  distinctOn?: InputMaybe<Array<CalculatedGradesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<CalculatedGradesOrderBy>>;
+  where?: InputMaybe<CalculatedGradesBoolExp>;
+};
+
+
+export type Query_RootCalculatedGradesAggregateArgs = {
+  distinctOn?: InputMaybe<Array<CalculatedGradesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<CalculatedGradesOrderBy>>;
+  where?: InputMaybe<CalculatedGradesBoolExp>;
+};
+
 
 export type Query_RootCourseArgs = {
   distinctOn?: InputMaybe<Array<CourseSelectColumn>>;
@@ -7200,6 +8025,7 @@ export type Query_RootCourseArgs = {
   where?: InputMaybe<CourseBoolExp>;
 };
 
+
 export type Query_RootCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<CourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7208,19 +8034,23 @@ export type Query_RootCourseAggregateArgs = {
   where?: InputMaybe<CourseBoolExp>;
 };
 
+
 export type Query_RootCourseByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootGetGitFileDataArgs = {
   practice_to_student_yield_id: Scalars['uuid'];
   practice_yield_expected_output_id: Scalars['uuid'];
 };
 
+
 export type Query_RootGetGitLogDataArgs = {
   practice_to_student_yield_id: Scalars['uuid'];
   practice_yield_expected_output_id: Scalars['uuid'];
 };
+
 
 export type Query_RootPracticeArgs = {
   distinctOn?: InputMaybe<Array<PracticeSelectColumn>>;
@@ -7230,6 +8060,7 @@ export type Query_RootPracticeArgs = {
   where?: InputMaybe<PracticeBoolExp>;
 };
 
+
 export type Query_RootPracticeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7238,9 +8069,11 @@ export type Query_RootPracticeAggregateArgs = {
   where?: InputMaybe<PracticeBoolExp>;
 };
 
+
 export type Query_RootPracticeByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootPracticeToCourseArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
@@ -7250,6 +8083,7 @@ export type Query_RootPracticeToCourseArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
+
 export type Query_RootPracticeToCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7258,9 +8092,11 @@ export type Query_RootPracticeToCourseAggregateArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
+
 export type Query_RootPracticeToCourseByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootPracticeToStudentArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
@@ -7270,6 +8106,7 @@ export type Query_RootPracticeToStudentArgs = {
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
 
+
 export type Query_RootPracticeToStudentAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7278,9 +8115,11 @@ export type Query_RootPracticeToStudentAggregateArgs = {
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
 
+
 export type Query_RootPracticeToStudentByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootPracticeToStudentFeedbackArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentFeedbackSelectColumn>>;
@@ -7290,6 +8129,7 @@ export type Query_RootPracticeToStudentFeedbackArgs = {
   where?: InputMaybe<PracticeToStudentFeedbackBoolExp>;
 };
 
+
 export type Query_RootPracticeToStudentFeedbackAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentFeedbackSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7297,6 +8137,7 @@ export type Query_RootPracticeToStudentFeedbackAggregateArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentFeedbackOrderBy>>;
   where?: InputMaybe<PracticeToStudentFeedbackBoolExp>;
 };
+
 
 export type Query_RootPracticeToStudentGradeArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeSelectColumn>>;
@@ -7306,6 +8147,7 @@ export type Query_RootPracticeToStudentGradeArgs = {
   where?: InputMaybe<PracticeToStudentGradeBoolExp>;
 };
 
+
 export type Query_RootPracticeToStudentGradeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7313,6 +8155,7 @@ export type Query_RootPracticeToStudentGradeAggregateArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentGradeOrderBy>>;
   where?: InputMaybe<PracticeToStudentGradeBoolExp>;
 };
+
 
 export type Query_RootPracticeToStudentGradeMetricArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
@@ -7322,6 +8165,7 @@ export type Query_RootPracticeToStudentGradeMetricArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
+
 export type Query_RootPracticeToStudentGradeMetricAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7330,9 +8174,11 @@ export type Query_RootPracticeToStudentGradeMetricAggregateArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
+
 export type Query_RootPracticeToStudentGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootPracticeToStudentYieldArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentYieldSelectColumn>>;
@@ -7342,6 +8188,7 @@ export type Query_RootPracticeToStudentYieldArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
+
 export type Query_RootPracticeToStudentYieldAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentYieldSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7350,9 +8197,11 @@ export type Query_RootPracticeToStudentYieldAggregateArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
+
 export type Query_RootPracticeToStudentYieldByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootPracticeYieldArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
@@ -7362,6 +8211,7 @@ export type Query_RootPracticeYieldArgs = {
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
 
+
 export type Query_RootPracticeYieldAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7370,9 +8220,11 @@ export type Query_RootPracticeYieldAggregateArgs = {
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
 
+
 export type Query_RootPracticeYieldByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootPracticeYieldExpectedOutputArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
@@ -7382,6 +8234,7 @@ export type Query_RootPracticeYieldExpectedOutputArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
 
+
 export type Query_RootPracticeYieldExpectedOutputAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7390,9 +8243,11 @@ export type Query_RootPracticeYieldExpectedOutputAggregateArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
 
+
 export type Query_RootPracticeYieldExpectedOutputByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootPracticeYieldExpectedOutputTypesArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputTypesSelectColumn>>;
@@ -7402,6 +8257,7 @@ export type Query_RootPracticeYieldExpectedOutputTypesArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputTypesBoolExp>;
 };
 
+
 export type Query_RootPracticeYieldExpectedOutputTypesAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputTypesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7410,9 +8266,11 @@ export type Query_RootPracticeYieldExpectedOutputTypesAggregateArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputTypesBoolExp>;
 };
 
+
 export type Query_RootPracticeYieldExpectedOutputTypesByPkArgs = {
   name: Scalars['String'];
 };
+
 
 export type Query_RootPracticeYieldGradeMetricArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
@@ -7422,6 +8280,7 @@ export type Query_RootPracticeYieldGradeMetricArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
+
 export type Query_RootPracticeYieldGradeMetricAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7430,9 +8289,11 @@ export type Query_RootPracticeYieldGradeMetricAggregateArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
+
 export type Query_RootPracticeYieldGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootPracticeYieldTypeArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldTypeSelectColumn>>;
@@ -7442,6 +8303,7 @@ export type Query_RootPracticeYieldTypeArgs = {
   where?: InputMaybe<PracticeYieldTypeBoolExp>;
 };
 
+
 export type Query_RootPracticeYieldTypeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldTypeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7450,9 +8312,11 @@ export type Query_RootPracticeYieldTypeAggregateArgs = {
   where?: InputMaybe<PracticeYieldTypeBoolExp>;
 };
 
+
 export type Query_RootPracticeYieldTypeByPkArgs = {
   name: Scalars['String'];
 };
+
 
 export type Query_RootRolesArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
@@ -7462,6 +8326,7 @@ export type Query_RootRolesArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
+
 export type Query_RootRolesAggregateArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7470,9 +8335,34 @@ export type Query_RootRolesAggregateArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
+
 export type Query_RootRolesByPkArgs = {
   value: Scalars['String'];
 };
+
+
+export type Query_RootSessionArgs = {
+  distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<SessionOrderBy>>;
+  where?: InputMaybe<SessionBoolExp>;
+};
+
+
+export type Query_RootSessionAggregateArgs = {
+  distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<SessionOrderBy>>;
+  where?: InputMaybe<SessionBoolExp>;
+};
+
+
+export type Query_RootSessionByPkArgs = {
+  id: Scalars['uuid'];
+};
+
 
 export type Query_RootStudentArgs = {
   distinctOn?: InputMaybe<Array<StudentSelectColumn>>;
@@ -7482,6 +8372,7 @@ export type Query_RootStudentArgs = {
   where?: InputMaybe<StudentBoolExp>;
 };
 
+
 export type Query_RootStudentAggregateArgs = {
   distinctOn?: InputMaybe<Array<StudentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7490,9 +8381,11 @@ export type Query_RootStudentAggregateArgs = {
   where?: InputMaybe<StudentBoolExp>;
 };
 
+
 export type Query_RootStudentByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootStudentToCourseArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
@@ -7502,6 +8395,7 @@ export type Query_RootStudentToCourseArgs = {
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
 
+
 export type Query_RootStudentToCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7510,10 +8404,12 @@ export type Query_RootStudentToCourseAggregateArgs = {
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
 
+
 export type Query_RootStudentToCourseByPkArgs = {
   courseId: Scalars['uuid'];
   studentId: Scalars['uuid'];
 };
+
 
 export type Query_RootUserArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
@@ -7523,6 +8419,7 @@ export type Query_RootUserArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
+
 export type Query_RootUserAggregateArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7531,28 +8428,39 @@ export type Query_RootUserAggregateArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
+
 export type Query_RootUserByPkArgs = {
   id: Scalars['uuid'];
 };
 
-export type Query_RootVerificationRequestsArgs = {
-  distinctOn?: InputMaybe<Array<VerificationRequestsSelectColumn>>;
+
+export type Query_RootVerificationTokenArgs = {
+  distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<VerificationRequestsOrderBy>>;
-  where?: InputMaybe<VerificationRequestsBoolExp>;
+  orderBy?: InputMaybe<Array<VerificationTokenOrderBy>>;
+  where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
-export type Query_RootVerificationRequestsAggregateArgs = {
-  distinctOn?: InputMaybe<Array<VerificationRequestsSelectColumn>>;
+
+export type Query_RootVerificationTokenAggregateArgs = {
+  distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<VerificationRequestsOrderBy>>;
-  where?: InputMaybe<VerificationRequestsBoolExp>;
+  orderBy?: InputMaybe<Array<VerificationTokenOrderBy>>;
+  where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
-export type Query_RootVerificationRequestsByPkArgs = {
-  id: Scalars['uuid'];
+
+export type Query_RootVerificationTokenByPkArgs = {
+  token: Scalars['String'];
+};
+
+export type SessionAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<SessionSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<SessionBoolExp>;
+  predicate: IntComparisonExp;
 };
 
 export type StudentToCourseAggregateBoolExpCount = {
@@ -7564,14 +8472,14 @@ export type StudentToCourseAggregateBoolExpCount = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
-  /** An array relationship */
-  accounts: Array<Accounts>;
-  /** An aggregate relationship */
-  accountsAggregate: AccountsAggregate;
-  /** fetch data from the table: "accounts" using primary key columns */
-  accountsByPk?: Maybe<Accounts>;
-  /** fetch data from the table in a streaming manner: "accounts" */
-  accountsStream: Array<Accounts>;
+  /** fetch data from the table: "account" */
+  account: Array<Account>;
+  /** fetch aggregated fields from the table: "account" */
+  accountAggregate: AccountAggregate;
+  /** fetch data from the table: "account" using primary key columns */
+  accountByPk?: Maybe<Account>;
+  /** fetch data from the table in a streaming manner: "account" */
+  accountStream: Array<Account>;
   /** An array relationship */
   allowedRoles: Array<AllowedRoles>;
   /** An aggregate relationship */
@@ -7580,6 +8488,12 @@ export type Subscription_Root = {
   allowedRolesByPk?: Maybe<AllowedRoles>;
   /** fetch data from the table in a streaming manner: "allowed_roles" */
   allowedRolesStream: Array<AllowedRoles>;
+  /** fetch data from the table: "calculated_grades" */
+  calculatedGrades: Array<CalculatedGrades>;
+  /** fetch aggregated fields from the table: "calculated_grades" */
+  calculatedGradesAggregate: CalculatedGradesAggregate;
+  /** fetch data from the table in a streaming manner: "calculated_grades" */
+  calculatedGradesStream: Array<CalculatedGrades>;
   /** fetch data from the table: "course" */
   course: Array<Course>;
   /** fetch aggregated fields from the table: "course" */
@@ -7688,6 +8602,14 @@ export type Subscription_Root = {
   rolesByPk?: Maybe<Roles>;
   /** fetch data from the table in a streaming manner: "roles" */
   rolesStream: Array<Roles>;
+  /** fetch data from the table: "session" */
+  session: Array<Session>;
+  /** fetch aggregated fields from the table: "session" */
+  sessionAggregate: SessionAggregate;
+  /** fetch data from the table: "session" using primary key columns */
+  sessionByPk?: Maybe<Session>;
+  /** fetch data from the table in a streaming manner: "session" */
+  sessionStream: Array<Session>;
   /** fetch data from the table: "student" */
   student: Array<Student>;
   /** fetch aggregated fields from the table: "student" */
@@ -7712,41 +8634,46 @@ export type Subscription_Root = {
   userByPk?: Maybe<User>;
   /** fetch data from the table in a streaming manner: "user" */
   userStream: Array<User>;
-  /** fetch data from the table: "verification_requests" */
-  verificationRequests: Array<VerificationRequests>;
-  /** fetch aggregated fields from the table: "verification_requests" */
-  verificationRequestsAggregate: VerificationRequestsAggregate;
-  /** fetch data from the table: "verification_requests" using primary key columns */
-  verificationRequestsByPk?: Maybe<VerificationRequests>;
-  /** fetch data from the table in a streaming manner: "verification_requests" */
-  verificationRequestsStream: Array<VerificationRequests>;
+  /** fetch data from the table: "verification_token" */
+  verificationToken: Array<VerificationToken>;
+  /** fetch aggregated fields from the table: "verification_token" */
+  verificationTokenAggregate: VerificationTokenAggregate;
+  /** fetch data from the table: "verification_token" using primary key columns */
+  verificationTokenByPk?: Maybe<VerificationToken>;
+  /** fetch data from the table in a streaming manner: "verification_token" */
+  verificationTokenStream: Array<VerificationToken>;
 };
 
-export type Subscription_RootAccountsArgs = {
-  distinctOn?: InputMaybe<Array<AccountsSelectColumn>>;
+
+export type Subscription_RootAccountArgs = {
+  distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<AccountsOrderBy>>;
-  where?: InputMaybe<AccountsBoolExp>;
+  orderBy?: InputMaybe<Array<AccountOrderBy>>;
+  where?: InputMaybe<AccountBoolExp>;
 };
 
-export type Subscription_RootAccountsAggregateArgs = {
-  distinctOn?: InputMaybe<Array<AccountsSelectColumn>>;
+
+export type Subscription_RootAccountAggregateArgs = {
+  distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<AccountsOrderBy>>;
-  where?: InputMaybe<AccountsBoolExp>;
+  orderBy?: InputMaybe<Array<AccountOrderBy>>;
+  where?: InputMaybe<AccountBoolExp>;
 };
 
-export type Subscription_RootAccountsByPkArgs = {
+
+export type Subscription_RootAccountByPkArgs = {
   id: Scalars['uuid'];
 };
 
-export type Subscription_RootAccountsStreamArgs = {
+
+export type Subscription_RootAccountStreamArgs = {
   batchSize: Scalars['Int'];
-  cursor: Array<InputMaybe<AccountsStreamCursorInput>>;
-  where?: InputMaybe<AccountsBoolExp>;
+  cursor: Array<InputMaybe<AccountStreamCursorInput>>;
+  where?: InputMaybe<AccountBoolExp>;
 };
+
 
 export type Subscription_RootAllowedRolesArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
@@ -7756,6 +8683,7 @@ export type Subscription_RootAllowedRolesArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
+
 export type Subscription_RootAllowedRolesAggregateArgs = {
   distinctOn?: InputMaybe<Array<AllowedRolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7764,16 +8692,44 @@ export type Subscription_RootAllowedRolesAggregateArgs = {
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
 
+
 export type Subscription_RootAllowedRolesByPkArgs = {
   role: RolesEnum;
   userId: Scalars['uuid'];
 };
+
 
 export type Subscription_RootAllowedRolesStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<AllowedRolesStreamCursorInput>>;
   where?: InputMaybe<AllowedRolesBoolExp>;
 };
+
+
+export type Subscription_RootCalculatedGradesArgs = {
+  distinctOn?: InputMaybe<Array<CalculatedGradesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<CalculatedGradesOrderBy>>;
+  where?: InputMaybe<CalculatedGradesBoolExp>;
+};
+
+
+export type Subscription_RootCalculatedGradesAggregateArgs = {
+  distinctOn?: InputMaybe<Array<CalculatedGradesSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<CalculatedGradesOrderBy>>;
+  where?: InputMaybe<CalculatedGradesBoolExp>;
+};
+
+
+export type Subscription_RootCalculatedGradesStreamArgs = {
+  batchSize: Scalars['Int'];
+  cursor: Array<InputMaybe<CalculatedGradesStreamCursorInput>>;
+  where?: InputMaybe<CalculatedGradesBoolExp>;
+};
+
 
 export type Subscription_RootCourseArgs = {
   distinctOn?: InputMaybe<Array<CourseSelectColumn>>;
@@ -7783,6 +8739,7 @@ export type Subscription_RootCourseArgs = {
   where?: InputMaybe<CourseBoolExp>;
 };
 
+
 export type Subscription_RootCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<CourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7791,15 +8748,18 @@ export type Subscription_RootCourseAggregateArgs = {
   where?: InputMaybe<CourseBoolExp>;
 };
 
+
 export type Subscription_RootCourseByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootCourseStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<CourseStreamCursorInput>>;
   where?: InputMaybe<CourseBoolExp>;
 };
+
 
 export type Subscription_RootPracticeArgs = {
   distinctOn?: InputMaybe<Array<PracticeSelectColumn>>;
@@ -7809,6 +8769,7 @@ export type Subscription_RootPracticeArgs = {
   where?: InputMaybe<PracticeBoolExp>;
 };
 
+
 export type Subscription_RootPracticeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7817,15 +8778,18 @@ export type Subscription_RootPracticeAggregateArgs = {
   where?: InputMaybe<PracticeBoolExp>;
 };
 
+
 export type Subscription_RootPracticeByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootPracticeStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeStreamCursorInput>>;
   where?: InputMaybe<PracticeBoolExp>;
 };
+
 
 export type Subscription_RootPracticeToCourseArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
@@ -7835,6 +8799,7 @@ export type Subscription_RootPracticeToCourseArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToCourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7843,15 +8808,18 @@ export type Subscription_RootPracticeToCourseAggregateArgs = {
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToCourseByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootPracticeToCourseStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeToCourseStreamCursorInput>>;
   where?: InputMaybe<PracticeToCourseBoolExp>;
 };
+
 
 export type Subscription_RootPracticeToStudentArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
@@ -7861,6 +8829,7 @@ export type Subscription_RootPracticeToStudentArgs = {
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToStudentAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7869,9 +8838,11 @@ export type Subscription_RootPracticeToStudentAggregateArgs = {
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToStudentByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootPracticeToStudentFeedbackArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentFeedbackSelectColumn>>;
@@ -7881,6 +8852,7 @@ export type Subscription_RootPracticeToStudentFeedbackArgs = {
   where?: InputMaybe<PracticeToStudentFeedbackBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToStudentFeedbackAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentFeedbackSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7889,11 +8861,13 @@ export type Subscription_RootPracticeToStudentFeedbackAggregateArgs = {
   where?: InputMaybe<PracticeToStudentFeedbackBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToStudentFeedbackStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeToStudentFeedbackStreamCursorInput>>;
   where?: InputMaybe<PracticeToStudentFeedbackBoolExp>;
 };
+
 
 export type Subscription_RootPracticeToStudentGradeArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeSelectColumn>>;
@@ -7903,6 +8877,7 @@ export type Subscription_RootPracticeToStudentGradeArgs = {
   where?: InputMaybe<PracticeToStudentGradeBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToStudentGradeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7910,6 +8885,7 @@ export type Subscription_RootPracticeToStudentGradeAggregateArgs = {
   orderBy?: InputMaybe<Array<PracticeToStudentGradeOrderBy>>;
   where?: InputMaybe<PracticeToStudentGradeBoolExp>;
 };
+
 
 export type Subscription_RootPracticeToStudentGradeMetricArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
@@ -7919,6 +8895,7 @@ export type Subscription_RootPracticeToStudentGradeMetricArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToStudentGradeMetricAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentGradeMetricSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7927,9 +8904,11 @@ export type Subscription_RootPracticeToStudentGradeMetricAggregateArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToStudentGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootPracticeToStudentGradeMetricStreamArgs = {
   batchSize: Scalars['Int'];
@@ -7937,17 +8916,20 @@ export type Subscription_RootPracticeToStudentGradeMetricStreamArgs = {
   where?: InputMaybe<PracticeToStudentGradeMetricBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToStudentGradeStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeToStudentGradeStreamCursorInput>>;
   where?: InputMaybe<PracticeToStudentGradeBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToStudentStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeToStudentStreamCursorInput>>;
   where?: InputMaybe<PracticeToStudentBoolExp>;
 };
+
 
 export type Subscription_RootPracticeToStudentYieldArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentYieldSelectColumn>>;
@@ -7957,6 +8939,7 @@ export type Subscription_RootPracticeToStudentYieldArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToStudentYieldAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeToStudentYieldSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7965,15 +8948,18 @@ export type Subscription_RootPracticeToStudentYieldAggregateArgs = {
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
 
+
 export type Subscription_RootPracticeToStudentYieldByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootPracticeToStudentYieldStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeToStudentYieldStreamCursorInput>>;
   where?: InputMaybe<PracticeToStudentYieldBoolExp>;
 };
+
 
 export type Subscription_RootPracticeYieldArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
@@ -7983,6 +8969,7 @@ export type Subscription_RootPracticeYieldArgs = {
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
 
+
 export type Subscription_RootPracticeYieldAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7991,9 +8978,11 @@ export type Subscription_RootPracticeYieldAggregateArgs = {
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
 
+
 export type Subscription_RootPracticeYieldByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootPracticeYieldExpectedOutputArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
@@ -8003,6 +8992,7 @@ export type Subscription_RootPracticeYieldExpectedOutputArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
 
+
 export type Subscription_RootPracticeYieldExpectedOutputAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8011,15 +9001,18 @@ export type Subscription_RootPracticeYieldExpectedOutputAggregateArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
 
+
 export type Subscription_RootPracticeYieldExpectedOutputByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootPracticeYieldExpectedOutputStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeYieldExpectedOutputStreamCursorInput>>;
   where?: InputMaybe<PracticeYieldExpectedOutputBoolExp>;
 };
+
 
 export type Subscription_RootPracticeYieldExpectedOutputTypesArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputTypesSelectColumn>>;
@@ -8029,6 +9022,7 @@ export type Subscription_RootPracticeYieldExpectedOutputTypesArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputTypesBoolExp>;
 };
 
+
 export type Subscription_RootPracticeYieldExpectedOutputTypesAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldExpectedOutputTypesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8037,15 +9031,18 @@ export type Subscription_RootPracticeYieldExpectedOutputTypesAggregateArgs = {
   where?: InputMaybe<PracticeYieldExpectedOutputTypesBoolExp>;
 };
 
+
 export type Subscription_RootPracticeYieldExpectedOutputTypesByPkArgs = {
   name: Scalars['String'];
 };
+
 
 export type Subscription_RootPracticeYieldExpectedOutputTypesStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeYieldExpectedOutputTypesStreamCursorInput>>;
   where?: InputMaybe<PracticeYieldExpectedOutputTypesBoolExp>;
 };
+
 
 export type Subscription_RootPracticeYieldGradeMetricArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
@@ -8055,6 +9052,7 @@ export type Subscription_RootPracticeYieldGradeMetricArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
+
 export type Subscription_RootPracticeYieldGradeMetricAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldGradeMetricSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8063,9 +9061,11 @@ export type Subscription_RootPracticeYieldGradeMetricAggregateArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
+
 export type Subscription_RootPracticeYieldGradeMetricByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootPracticeYieldGradeMetricStreamArgs = {
   batchSize: Scalars['Int'];
@@ -8073,11 +9073,13 @@ export type Subscription_RootPracticeYieldGradeMetricStreamArgs = {
   where?: InputMaybe<PracticeYieldGradeMetricBoolExp>;
 };
 
+
 export type Subscription_RootPracticeYieldStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeYieldStreamCursorInput>>;
   where?: InputMaybe<PracticeYieldBoolExp>;
 };
+
 
 export type Subscription_RootPracticeYieldTypeArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldTypeSelectColumn>>;
@@ -8087,6 +9089,7 @@ export type Subscription_RootPracticeYieldTypeArgs = {
   where?: InputMaybe<PracticeYieldTypeBoolExp>;
 };
 
+
 export type Subscription_RootPracticeYieldTypeAggregateArgs = {
   distinctOn?: InputMaybe<Array<PracticeYieldTypeSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8095,15 +9098,18 @@ export type Subscription_RootPracticeYieldTypeAggregateArgs = {
   where?: InputMaybe<PracticeYieldTypeBoolExp>;
 };
 
+
 export type Subscription_RootPracticeYieldTypeByPkArgs = {
   name: Scalars['String'];
 };
+
 
 export type Subscription_RootPracticeYieldTypeStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<PracticeYieldTypeStreamCursorInput>>;
   where?: InputMaybe<PracticeYieldTypeBoolExp>;
 };
+
 
 export type Subscription_RootRolesArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
@@ -8113,6 +9119,7 @@ export type Subscription_RootRolesArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
+
 export type Subscription_RootRolesAggregateArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8121,15 +9128,48 @@ export type Subscription_RootRolesAggregateArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
+
 export type Subscription_RootRolesByPkArgs = {
   value: Scalars['String'];
 };
+
 
 export type Subscription_RootRolesStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<RolesStreamCursorInput>>;
   where?: InputMaybe<RolesBoolExp>;
 };
+
+
+export type Subscription_RootSessionArgs = {
+  distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<SessionOrderBy>>;
+  where?: InputMaybe<SessionBoolExp>;
+};
+
+
+export type Subscription_RootSessionAggregateArgs = {
+  distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<SessionOrderBy>>;
+  where?: InputMaybe<SessionBoolExp>;
+};
+
+
+export type Subscription_RootSessionByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootSessionStreamArgs = {
+  batchSize: Scalars['Int'];
+  cursor: Array<InputMaybe<SessionStreamCursorInput>>;
+  where?: InputMaybe<SessionBoolExp>;
+};
+
 
 export type Subscription_RootStudentArgs = {
   distinctOn?: InputMaybe<Array<StudentSelectColumn>>;
@@ -8139,6 +9179,7 @@ export type Subscription_RootStudentArgs = {
   where?: InputMaybe<StudentBoolExp>;
 };
 
+
 export type Subscription_RootStudentAggregateArgs = {
   distinctOn?: InputMaybe<Array<StudentSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8147,15 +9188,18 @@ export type Subscription_RootStudentAggregateArgs = {
   where?: InputMaybe<StudentBoolExp>;
 };
 
+
 export type Subscription_RootStudentByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootStudentStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<StudentStreamCursorInput>>;
   where?: InputMaybe<StudentBoolExp>;
 };
+
 
 export type Subscription_RootStudentToCourseArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
@@ -8165,6 +9209,7 @@ export type Subscription_RootStudentToCourseArgs = {
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
 
+
 export type Subscription_RootStudentToCourseAggregateArgs = {
   distinctOn?: InputMaybe<Array<StudentToCourseSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8173,16 +9218,19 @@ export type Subscription_RootStudentToCourseAggregateArgs = {
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
 
+
 export type Subscription_RootStudentToCourseByPkArgs = {
   courseId: Scalars['uuid'];
   studentId: Scalars['uuid'];
 };
+
 
 export type Subscription_RootStudentToCourseStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<StudentToCourseStreamCursorInput>>;
   where?: InputMaybe<StudentToCourseBoolExp>;
 };
+
 
 export type Subscription_RootUserArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
@@ -8192,6 +9240,7 @@ export type Subscription_RootUserArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
+
 export type Subscription_RootUserAggregateArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8200,9 +9249,11 @@ export type Subscription_RootUserAggregateArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
+
 export type Subscription_RootUserByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootUserStreamArgs = {
   batchSize: Scalars['Int'];
@@ -8210,30 +9261,34 @@ export type Subscription_RootUserStreamArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
-export type Subscription_RootVerificationRequestsArgs = {
-  distinctOn?: InputMaybe<Array<VerificationRequestsSelectColumn>>;
+
+export type Subscription_RootVerificationTokenArgs = {
+  distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<VerificationRequestsOrderBy>>;
-  where?: InputMaybe<VerificationRequestsBoolExp>;
+  orderBy?: InputMaybe<Array<VerificationTokenOrderBy>>;
+  where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
-export type Subscription_RootVerificationRequestsAggregateArgs = {
-  distinctOn?: InputMaybe<Array<VerificationRequestsSelectColumn>>;
+
+export type Subscription_RootVerificationTokenAggregateArgs = {
+  distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Array<VerificationRequestsOrderBy>>;
-  where?: InputMaybe<VerificationRequestsBoolExp>;
+  orderBy?: InputMaybe<Array<VerificationTokenOrderBy>>;
+  where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
-export type Subscription_RootVerificationRequestsByPkArgs = {
-  id: Scalars['uuid'];
+
+export type Subscription_RootVerificationTokenByPkArgs = {
+  token: Scalars['String'];
 };
 
-export type Subscription_RootVerificationRequestsStreamArgs = {
+
+export type Subscription_RootVerificationTokenStreamArgs = {
   batchSize: Scalars['Int'];
-  cursor: Array<InputMaybe<VerificationRequestsStreamCursorInput>>;
-  where?: InputMaybe<VerificationRequestsBoolExp>;
+  cursor: Array<InputMaybe<VerificationTokenStreamCursorInput>>;
+  where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
 export type UserAggregateBoolExpCount = {
@@ -8248,1004 +9303,470 @@ export type DataForPracticeToGradeEmptyQueryVariables = Exact<{
   practice_id: Scalars['uuid'];
 }>;
 
-export type DataForPracticeToGradeEmptyQuery = {
-  __typename?: 'query_root';
-  practiceToCourse: Array<{
-    __typename?: 'PracticeToCourse';
-    id: any;
-    is_open?: boolean | null;
-    openDate?: any | null;
-    course: {
-      __typename?: 'Course';
-      id: any;
-      studentToCourses: Array<{
-        __typename?: 'StudentToCourse';
-        student: {
-          __typename?: 'Student';
-          id: any;
-          practiceToStudents: Array<{
-            __typename?: 'PracticeToStudent';
-            id: any;
-            studentId: any;
-            createdAt: any;
-            practiceToStudentYields: Array<{
-              __typename?: 'PracticeToStudentYield';
-              id: any;
-              value: string;
-              practiceYieldId: any;
-            }>;
-          }>;
-        };
-      }>;
-    };
-    practice: {
-      __typename?: 'Practice';
-      practiceYields: Array<{ __typename?: 'PracticeYield'; id: any }>;
-    };
-  }>;
-};
+
+export type DataForPracticeToGradeEmptyQuery = { __typename?: 'query_root', practiceToCourse: Array<{ __typename?: 'PracticeToCourse', id: any, is_open?: boolean | null, openDate?: any | null, course: { __typename?: 'Course', id: any, studentToCourses: Array<{ __typename?: 'StudentToCourse', student: { __typename?: 'Student', id: any, practiceToStudents: Array<{ __typename?: 'PracticeToStudent', id: any, studentId: any, createdAt: any, practiceToStudentYields: Array<{ __typename?: 'PracticeToStudentYield', id: any, value: string, practiceYieldId: any }> }> } }> }, practice: { __typename?: 'Practice', practiceYields: Array<{ __typename?: 'PracticeYield', id: any }> } }> };
 
 export type UpdateFillEmptyHandoutsMutationVariables = Exact<{
   data: Array<PracticeToStudentInsertInput> | PracticeToStudentInsertInput;
 }>;
 
-export type UpdateFillEmptyHandoutsMutation = {
-  __typename?: 'mutation_root';
-  insertPracticeToStudent?: {
-    __typename?: 'PracticeToStudentMutationResponse';
-    affectedRows: number;
-  } | null;
-};
+
+export type UpdateFillEmptyHandoutsMutation = { __typename?: 'mutation_root', insertPracticeToStudent?: { __typename?: 'PracticeToStudentMutationResponse', affectedRows: number } | null };
 
 export type GetGitInfoForStudentYieldQueryVariables = Exact<{
   practice_to_student_yield_id: Scalars['uuid'];
   practice_yield_expected_output_id: Scalars['uuid'];
 }>;
 
-export type GetGitInfoForStudentYieldQuery = {
-  __typename?: 'query_root';
-  studentYield?: {
-    __typename?: 'PracticeToStudentYield';
-    giteaOrgAndRepo?: string | null;
-    id: any;
-    practiceYieldId: any;
-  } | null;
-  expectedOutput?: {
-    __typename?: 'PracticeYieldExpectedOutput';
-    gitPath?: string | null;
-    practiceYieldId: any;
-    method: PracticeYieldExpectedOutputTypesEnum;
-  } | null;
-};
+
+export type GetGitInfoForStudentYieldQuery = { __typename?: 'query_root', studentYield?: { __typename?: 'PracticeToStudentYield', giteaOrgAndRepo?: string | null, id: any, practiceYieldId: any } | null, expectedOutput?: { __typename?: 'PracticeYieldExpectedOutput', gitPath?: string | null, practiceYieldId: any, method: PracticeYieldExpectedOutputTypesEnum } | null };
 
 export type DataForUpdateToStudentLinkQueryVariables = Exact<{
   tokenId: Scalars['uuid'];
   userId: Scalars['uuid'];
 }>;
 
-export type DataForUpdateToStudentLinkQuery = {
-  __typename?: 'query_root';
-  studentToSet: Array<{
-    __typename?: 'Student';
-    claimToken?: any | null;
-    userId?: any | null;
-    id: any;
-  }>;
-  maybeStudentWithUser: Array<{
-    __typename?: 'Student';
-    claimToken?: any | null;
-    userId?: any | null;
-    id: any;
-  }>;
-};
+
+export type DataForUpdateToStudentLinkQuery = { __typename?: 'query_root', studentToSet: Array<{ __typename?: 'Student', claimToken?: any | null, userId?: any | null, id: any }>, maybeStudentWithUser: Array<{ __typename?: 'Student', claimToken?: any | null, userId?: any | null, id: any }> };
 
 export type LinkStudentToUserMutationVariables = Exact<{
   id: Scalars['uuid'];
   user_id: Scalars['uuid'];
 }>;
 
-export type LinkStudentToUserMutation = {
-  __typename?: 'mutation_root';
-  updateStudentByPk?: { __typename?: 'Student'; id: any } | null;
-};
+
+export type LinkStudentToUserMutation = { __typename?: 'mutation_root', updateStudentByPk?: { __typename?: 'Student', id: any } | null };
 
 export type FillEmptyForGradeMutationVariables = Exact<{
   courseId: Scalars['uuid'];
   practiceId: Scalars['uuid'];
 }>;
 
-export type FillEmptyForGradeMutation = {
-  __typename?: 'mutation_root';
-  fillEmptyYields?: {
-    __typename?: 'FillEmptyYieldsOutput';
-    affected_rows: number;
-  } | null;
-};
+
+export type FillEmptyForGradeMutation = { __typename?: 'mutation_root', fillEmptyYields?: { __typename?: 'FillEmptyYieldsOutput', affected_rows: number } | null };
 
 export type GetPracticeToGradeByCourseIdAndPracticeIdQueryVariables = Exact<{
   course_id: Scalars['uuid'];
   practice_id: Scalars['uuid'];
 }>;
 
-export type GetPracticeToGradeByCourseIdAndPracticeIdQuery = {
-  __typename?: 'query_root';
-  practiceToCourse: Array<{
-    __typename?: 'PracticeToCourse';
-    is_open?: boolean | null;
-    openDate?: any | null;
-    practiceToCourseId: any;
-  }>;
-};
+
+export type GetPracticeToGradeByCourseIdAndPracticeIdQuery = { __typename?: 'query_root', practiceToCourse: Array<{ __typename?: 'PracticeToCourse', is_open?: boolean | null, openDate?: any | null, practiceToCourseId: any }> };
 
 export type InsertPracticeToStudentWithGradesMutationVariables = Exact<{
   objects: Array<PracticeToStudentInsertInput> | PracticeToStudentInsertInput;
 }>;
 
-export type InsertPracticeToStudentWithGradesMutation = {
-  __typename?: 'mutation_root';
-  insertPracticeToStudent?: {
-    __typename?: 'PracticeToStudentMutationResponse';
-    affectedRows: number;
-  } | null;
-};
 
-export type PracticeForGradingFragment = {
-  __typename?: 'Practice';
-  practiceYields: Array<{
-    __typename?: 'PracticeYield';
-    id: any;
-    name: string;
-    practiceYieldExpectedOutputs: Array<{
-      __typename?: 'PracticeYieldExpectedOutput';
-      id: any;
-      practiceYieldGradeMetrics: Array<{
-        __typename?: 'PracticeYieldGradeMetric';
-        id: any;
-        name: string;
-        points: number;
-      }>;
-    }>;
-  }>;
-};
+export type InsertPracticeToStudentWithGradesMutation = { __typename?: 'mutation_root', insertPracticeToStudent?: { __typename?: 'PracticeToStudentMutationResponse', affectedRows: number } | null };
 
-export type PracticeToStudentYieldForGradingFragment = {
-  __typename?: 'PracticeToStudentYield';
-  id: any;
-  submited: boolean;
-  practiceYieldId: any;
-  practiceToStudentGradeMetrics: Array<{
-    __typename?: 'PracticeToStudentGradeMetric';
-    id: any;
-    feedback: any;
-    percentGrade: any;
-    practiceYieldGradeMetricId: any;
-    practiceYieldGradeMetric: {
-      __typename?: 'PracticeYieldGradeMetric';
-      name: string;
-      points: number;
-    };
-  }>;
-};
+export type PracticeForGradingFragment = { __typename?: 'Practice', practiceYields: Array<{ __typename?: 'PracticeYield', id: any, name: string, practiceYieldExpectedOutputs: Array<{ __typename?: 'PracticeYieldExpectedOutput', id: any, practiceYieldGradeMetrics: Array<{ __typename?: 'PracticeYieldGradeMetric', id: any, name: string, points: number }> }> }> };
 
-export type PracticeToStudentForGradingFragment = {
-  __typename?: 'PracticeToStudent';
-  id: any;
-  coursePracticeId: any;
-  graded: boolean;
-  grade?: any | null;
-  studentId: any;
-  practiceToStudentYields: Array<{
-    __typename?: 'PracticeToStudentYield';
-    id: any;
-    submited: boolean;
-    practiceYieldId: any;
-    practiceToStudentGradeMetrics: Array<{
-      __typename?: 'PracticeToStudentGradeMetric';
-      id: any;
-      feedback: any;
-      percentGrade: any;
-      practiceYieldGradeMetricId: any;
-      practiceYieldGradeMetric: {
-        __typename?: 'PracticeYieldGradeMetric';
-        name: string;
-        points: number;
-      };
-    }>;
-  }>;
-};
+export type PracticeToStudentYieldForGradingFragment = { __typename?: 'PracticeToStudentYield', id: any, submited: boolean, practiceYieldId: any, practiceToStudentGradeMetrics: Array<{ __typename?: 'PracticeToStudentGradeMetric', id: any, feedback: any, percentGrade: any, practiceYieldGradeMetricId: any, practiceYieldGradeMetric: { __typename?: 'PracticeYieldGradeMetric', name: string, points: number } }> };
+
+export type PracticeToStudentForGradingFragment = { __typename?: 'PracticeToStudent', id: any, coursePracticeId: any, graded: boolean, grade?: any | null, studentId: any, practiceToStudentYields: Array<{ __typename?: 'PracticeToStudentYield', id: any, submited: boolean, practiceYieldId: any, practiceToStudentGradeMetrics: Array<{ __typename?: 'PracticeToStudentGradeMetric', id: any, feedback: any, percentGrade: any, practiceYieldGradeMetricId: any, practiceYieldGradeMetric: { __typename?: 'PracticeYieldGradeMetric', name: string, points: number } }> }> };
 
 export type DataForPracticeToGradeByPracticeToCoursePkQueryVariables = Exact<{
   practice_to_grade_id: Scalars['uuid'];
 }>;
 
-export type DataForPracticeToGradeByPracticeToCoursePkQuery = {
-  __typename?: 'query_root';
-  practiceToCourseByPk?: {
-    __typename?: 'PracticeToCourse';
-    id: any;
-    practice: {
-      __typename?: 'Practice';
-      practiceYields: Array<{
-        __typename?: 'PracticeYield';
-        id: any;
-        name: string;
-        practiceYieldExpectedOutputs: Array<{
-          __typename?: 'PracticeYieldExpectedOutput';
-          id: any;
-          practiceYieldGradeMetrics: Array<{
-            __typename?: 'PracticeYieldGradeMetric';
-            id: any;
-            name: string;
-            points: number;
-          }>;
-        }>;
-      }>;
-    };
-    practiceToStudents: Array<{
-      __typename?: 'PracticeToStudent';
-      id: any;
-      coursePracticeId: any;
-      graded: boolean;
-      grade?: any | null;
-      studentId: any;
-      practiceToStudentYields: Array<{
-        __typename?: 'PracticeToStudentYield';
-        id: any;
-        submited: boolean;
-        practiceYieldId: any;
-        practiceToStudentGradeMetrics: Array<{
-          __typename?: 'PracticeToStudentGradeMetric';
-          id: any;
-          feedback: any;
-          percentGrade: any;
-          practiceYieldGradeMetricId: any;
-          practiceYieldGradeMetric: {
-            __typename?: 'PracticeYieldGradeMetric';
-            name: string;
-            points: number;
-          };
-        }>;
-      }>;
-    }>;
-  } | null;
-};
+
+export type DataForPracticeToGradeByPracticeToCoursePkQuery = { __typename?: 'query_root', practiceToCourseByPk?: { __typename?: 'PracticeToCourse', id: any, practice: { __typename?: 'Practice', practiceYields: Array<{ __typename?: 'PracticeYield', id: any, name: string, practiceYieldExpectedOutputs: Array<{ __typename?: 'PracticeYieldExpectedOutput', id: any, practiceYieldGradeMetrics: Array<{ __typename?: 'PracticeYieldGradeMetric', id: any, name: string, points: number }> }> }> }, practiceToStudents: Array<{ __typename?: 'PracticeToStudent', id: any, coursePracticeId: any, graded: boolean, grade?: any | null, studentId: any, practiceToStudentYields: Array<{ __typename?: 'PracticeToStudentYield', id: any, submited: boolean, practiceYieldId: any, practiceToStudentGradeMetrics: Array<{ __typename?: 'PracticeToStudentGradeMetric', id: any, feedback: any, percentGrade: any, practiceYieldGradeMetricId: any, practiceYieldGradeMetric: { __typename?: 'PracticeYieldGradeMetric', name: string, points: number } }> }> }> } | null };
 
 export type GetStudentForMailSendQueryVariables = Exact<{
   studentIds?: InputMaybe<Array<Scalars['uuid']> | Scalars['uuid']>;
 }>;
 
-export type GetStudentForMailSendQuery = {
-  __typename?: 'query_root';
-  student: Array<{
-    __typename?: 'Student';
-    email?: string | null;
-    claimToken?: any | null;
-    full_name?: string | null;
-    id: any;
-  }>;
-};
+
+export type GetStudentForMailSendQuery = { __typename?: 'query_root', student: Array<{ __typename?: 'Student', email?: string | null, claimToken?: any | null, full_name?: string | null, id: any }> };
 
 export type DataForSubmitHandoffQueryVariables = Exact<{
   practiceToPromoId: Scalars['uuid'];
   userId: Scalars['uuid'];
 }>;
 
-export type DataForSubmitHandoffQuery = {
-  __typename?: 'query_root';
-  practiceToCourseByPk?: {
-    __typename?: 'PracticeToCourse';
-    is_open?: boolean | null;
-    practice: {
-      __typename?: 'Practice';
-      id: any;
-      practiceYields: Array<{
-        __typename?: 'PracticeYield';
-        id: any;
-        name: string;
-      }>;
-    };
-    practiceToStudents: Array<{
-      __typename?: 'PracticeToStudent';
-      submited: boolean;
-      id: any;
-    }>;
-    course: {
-      __typename?: 'Course';
-      studentToCourses: Array<{
-        __typename?: 'StudentToCourse';
-        studentId: any;
-      }>;
-    };
-  } | null;
-};
+
+export type DataForSubmitHandoffQuery = { __typename?: 'query_root', practiceToCourseByPk?: { __typename?: 'PracticeToCourse', is_open?: boolean | null, practice: { __typename?: 'Practice', id: any, practiceYields: Array<{ __typename?: 'PracticeYield', id: any, name: string }> }, practiceToStudents: Array<{ __typename?: 'PracticeToStudent', submited: boolean, id: any }>, course: { __typename?: 'Course', studentToCourses: Array<{ __typename?: 'StudentToCourse', studentId: any }> } } | null };
 
 export type MutationSubmitHandoffMutationVariables = Exact<{
-  studentYields:
-    | Array<PracticeToStudentYieldInsertInput>
-    | PracticeToStudentYieldInsertInput;
+  studentYields: Array<PracticeToStudentYieldInsertInput> | PracticeToStudentYieldInsertInput;
   student_id: Scalars['uuid'];
   promotion_practice_id: Scalars['uuid'];
 }>;
 
-export type MutationSubmitHandoffMutation = {
-  __typename?: 'mutation_root';
-  insertPracticeToStudent?: {
-    __typename?: 'PracticeToStudentMutationResponse';
-    affectedRows: number;
-  } | null;
-};
+
+export type MutationSubmitHandoffMutation = { __typename?: 'mutation_root', insertPracticeToStudent?: { __typename?: 'PracticeToStudentMutationResponse', affectedRows: number } | null };
 
 export type SetSubmitedFalseOnEmptyMutationVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
-export type SetSubmitedFalseOnEmptyMutation = {
-  __typename?: 'mutation_root';
-  updatePracticeToStudentYieldByPk?: {
-    __typename?: 'PracticeToStudentYield';
-    giteaOrgAndRepo?: string | null;
-  } | null;
-};
+
+export type SetSubmitedFalseOnEmptyMutation = { __typename?: 'mutation_root', updatePracticeToStudentYieldByPk?: { __typename?: 'PracticeToStudentYield', giteaOrgAndRepo?: string | null } | null };
 
 export type UpdateGiteaOrgNameMutationVariables = Exact<{
   id: Scalars['uuid'];
   gitea_org_name: Scalars['String'];
 }>;
 
-export type UpdateGiteaOrgNameMutation = {
-  __typename?: 'mutation_root';
-  updatePracticeToCourseByPk?: {
-    __typename?: 'PracticeToCourse';
-    id: any;
-  } | null;
-};
+
+export type UpdateGiteaOrgNameMutation = { __typename?: 'mutation_root', updatePracticeToCourseByPk?: { __typename?: 'PracticeToCourse', id: any } | null };
 
 export type GetPracticeToPromotionMetaQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
-export type GetPracticeToPromotionMetaQuery = {
-  __typename?: 'query_root';
-  practiceToCourseByPk?: {
-    __typename?: 'PracticeToCourse';
-    practice: { __typename?: 'Practice'; title: string };
-    course: { __typename?: 'Course'; name: string; years: string };
-  } | null;
-};
+
+export type GetPracticeToPromotionMetaQuery = { __typename?: 'query_root', practiceToCourseByPk?: { __typename?: 'PracticeToCourse', practice: { __typename?: 'Practice', title: string }, course: { __typename?: 'Course', name: string, years: string } } | null };
 
 export type OnStudentYieldCreatedDataQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
-export type OnStudentYieldCreatedDataQuery = {
-  __typename?: 'query_root';
-  practiceToStudentYieldByPk?: {
-    __typename?: 'PracticeToStudentYield';
-    practiceToStudent: {
-      __typename?: 'PracticeToStudent';
-      student: { __typename?: 'Student'; full_name?: string | null };
-      practiceToCourse: {
-        __typename?: 'PracticeToCourse';
-        giteaOrgName?: string | null;
-      };
-    };
-    practiceYield: {
-      __typename?: 'PracticeYield';
-      id: any;
-      name: string;
-      method: PracticeYieldTypeEnum;
-    };
-  } | null;
-};
+
+export type OnStudentYieldCreatedDataQuery = { __typename?: 'query_root', practiceToStudentYieldByPk?: { __typename?: 'PracticeToStudentYield', practiceToStudent: { __typename?: 'PracticeToStudent', student: { __typename?: 'Student', full_name?: string | null }, practiceToCourse: { __typename?: 'PracticeToCourse', giteaOrgName?: string | null } }, practiceYield: { __typename?: 'PracticeYield', id: any, name: string, method: PracticeYieldTypeEnum } } | null };
 
 export type OnStudentYieldMutationMutationVariables = Exact<{
   id: Scalars['uuid'];
   gitea_org_and_repo: Scalars['String'];
 }>;
 
-export type OnStudentYieldMutationMutation = {
-  __typename?: 'mutation_root';
-  updatePracticeToStudentYieldByPk?: {
-    __typename?: 'PracticeToStudentYield';
-    giteaOrgAndRepo?: string | null;
-  } | null;
-};
+
+export type OnStudentYieldMutationMutation = { __typename?: 'mutation_root', updatePracticeToStudentYieldByPk?: { __typename?: 'PracticeToStudentYield', giteaOrgAndRepo?: string | null } | null };
 
 export const PracticeForGradingFragmentDoc = gql`
-  fragment PracticeForGrading on Practice {
-    practiceYields {
-      id
-      name
-      practiceYieldExpectedOutputs {
-        id
-        practiceYieldGradeMetrics {
-          id
-          name
-          points
-        }
-      }
-    }
-  }
-`;
-export const PracticeToStudentYieldForGradingFragmentDoc = gql`
-  fragment PracticeToStudentYieldForGrading on PracticeToStudentYield {
+    fragment PracticeForGrading on Practice {
+  practiceYields {
     id
-    submited
-    practiceYieldId
-    practiceToStudentGradeMetrics {
+    name
+    practiceYieldExpectedOutputs {
       id
-      feedback
-      percentGrade
-      practiceYieldGradeMetricId
-      practiceYieldGradeMetric {
+      practiceYieldGradeMetrics {
+        id
         name
         points
       }
     }
   }
-`;
-export const PracticeToStudentForGradingFragmentDoc = gql`
-  fragment PracticeToStudentForGrading on PracticeToStudent {
+}
+    `;
+export const PracticeToStudentYieldForGradingFragmentDoc = gql`
+    fragment PracticeToStudentYieldForGrading on PracticeToStudentYield {
+  id
+  submited
+  practiceYieldId
+  practiceToStudentGradeMetrics {
     id
-    coursePracticeId
-    graded
-    grade
-    studentId
-    practiceToStudentYields {
-      ...PracticeToStudentYieldForGrading
+    feedback
+    percentGrade
+    practiceYieldGradeMetricId
+    practiceYieldGradeMetric {
+      name
+      points
     }
   }
-  ${PracticeToStudentYieldForGradingFragmentDoc}
-`;
+}
+    `;
+export const PracticeToStudentForGradingFragmentDoc = gql`
+    fragment PracticeToStudentForGrading on PracticeToStudent {
+  id
+  coursePracticeId
+  graded
+  grade
+  studentId
+  practiceToStudentYields {
+    ...PracticeToStudentYieldForGrading
+  }
+}
+    ${PracticeToStudentYieldForGradingFragmentDoc}`;
 export const DataForPracticeToGradeEmptyDocument = gql`
-  query dataForPracticeToGradeEmpty($course_id: uuid!, $practice_id: uuid!) {
-    practiceToCourse(
-      where: {
-        courseId: { _eq: $course_id }
-        practiceId: { _eq: $practice_id }
-      }
-    ) {
+    query dataForPracticeToGradeEmpty($course_id: uuid!, $practice_id: uuid!) {
+  practiceToCourse(
+    where: {courseId: {_eq: $course_id}, practiceId: {_eq: $practice_id}}
+  ) {
+    id
+    is_open
+    openDate
+    course {
       id
-      is_open
-      openDate
-      course {
-        id
-        studentToCourses {
-          student {
+      studentToCourses {
+        student {
+          id
+          practiceToStudents(
+            where: {practiceToCourse: {courseId: {_eq: $course_id}, practiceId: {_eq: $practice_id}}}
+          ) {
             id
-            practiceToStudents(
-              where: {
-                practiceToCourse: {
-                  courseId: { _eq: $course_id }
-                  practiceId: { _eq: $practice_id }
-                }
-              }
-            ) {
+            studentId
+            createdAt
+            practiceToStudentYields {
               id
-              studentId
-              createdAt
-              practiceToStudentYields {
-                id
-                value
-                practiceYieldId
-              }
+              value
+              practiceYieldId
             }
           }
         }
       }
-      practice {
-        practiceYields {
-          id
-        }
+    }
+    practice {
+      practiceYields {
+        id
       }
     }
   }
-`;
+}
+    `;
 export const UpdateFillEmptyHandoutsDocument = gql`
-  mutation updateFillEmptyHandouts($data: [PracticeToStudentInsertInput!]!) {
-    insertPracticeToStudent(
-      onConflict: {
-        constraint: practice_to_student_student_id_promotion_practice_id_key
-        updateColumns: coursePracticeId
-      }
-      objects: $data
-    ) {
-      affectedRows
+    mutation updateFillEmptyHandouts($data: [PracticeToStudentInsertInput!]!) {
+  insertPracticeToStudent(
+    onConflict: {constraint: practice_to_student_student_id_promotion_practice_id_key, updateColumns: coursePracticeId}
+    objects: $data
+  ) {
+    affectedRows
+  }
+}
+    `;
+export const GetGitInfoForStudentYieldDocument = gql`
+    query getGitInfoForStudentYield($practice_to_student_yield_id: uuid!, $practice_yield_expected_output_id: uuid!) {
+  studentYield: practiceToStudentYieldByPk(id: $practice_to_student_yield_id) {
+    giteaOrgAndRepo
+    id
+    practiceYieldId
+  }
+  expectedOutput: practiceYieldExpectedOutputByPk(
+    id: $practice_yield_expected_output_id
+  ) {
+    gitPath
+    practiceYieldId
+    method
+  }
+}
+    `;
+export const DataForUpdateToStudentLinkDocument = gql`
+    query dataForUpdateToStudentLink($tokenId: uuid!, $userId: uuid!) {
+  studentToSet: student(where: {claimToken: {_eq: $tokenId}}) {
+    claimToken
+    userId
+    id
+  }
+  maybeStudentWithUser: student(where: {userId: {_eq: $userId}}) {
+    claimToken
+    userId
+    id
+  }
+}
+    `;
+export const LinkStudentToUserDocument = gql`
+    mutation linkStudentToUser($id: uuid!, $user_id: uuid!) {
+  updateStudentByPk(
+    pkColumns: {id: $id}
+    _set: {userId: $user_id, claimToken: null}
+  ) {
+    id
+  }
+}
+    `;
+export const FillEmptyForGradeDocument = gql`
+    mutation fillEmptyForGrade($courseId: uuid!, $practiceId: uuid!) {
+  fillEmptyYields(course_id: $courseId, practice_id: $practiceId) {
+    affected_rows
+  }
+}
+    `;
+export const GetPracticeToGradeByCourseIdAndPracticeIdDocument = gql`
+    query getPracticeToGradeByCourseIdAndPracticeId($course_id: uuid!, $practice_id: uuid!) {
+  practiceToCourse(
+    where: {courseId: {_eq: $course_id}, practiceId: {_eq: $practice_id}}
+  ) {
+    practiceToCourseId: id
+    is_open
+    openDate
+  }
+}
+    `;
+export const InsertPracticeToStudentWithGradesDocument = gql`
+    mutation insertPracticeToStudentWithGrades($objects: [PracticeToStudentInsertInput!]!) {
+  insertPracticeToStudent(
+    objects: $objects
+    onConflict: {constraint: practice_to_student_pkey, updateColumns: [grade, gradeDetail, graded, feedback]}
+  ) {
+    affectedRows
+  }
+}
+    `;
+export const DataForPracticeToGradeByPracticeToCoursePkDocument = gql`
+    query dataForPracticeToGradeByPracticeToCoursePk($practice_to_grade_id: uuid!) {
+  practiceToCourseByPk(id: $practice_to_grade_id) {
+    id
+    practice {
+      ...PracticeForGrading
+    }
+    practiceToStudents {
+      ...PracticeToStudentForGrading
     }
   }
-`;
-export const GetGitInfoForStudentYieldDocument = gql`
-  query getGitInfoForStudentYield(
-    $practice_to_student_yield_id: uuid!
-    $practice_yield_expected_output_id: uuid!
-  ) {
-    studentYield: practiceToStudentYieldByPk(
-      id: $practice_to_student_yield_id
-    ) {
-      giteaOrgAndRepo
+}
+    ${PracticeForGradingFragmentDoc}
+${PracticeToStudentForGradingFragmentDoc}`;
+export const GetStudentForMailSendDocument = gql`
+    query getStudentForMailSend($studentIds: [uuid!]) {
+  student(where: {_and: {id: {_in: $studentIds}}, claimToken: {_isNull: false}}) {
+    email
+    claimToken
+    full_name
+    id
+  }
+}
+    `;
+export const DataForSubmitHandoffDocument = gql`
+    query dataForSubmitHandoff($practiceToPromoId: uuid!, $userId: uuid!) {
+  practiceToCourseByPk(id: $practiceToPromoId) {
+    is_open
+    practice {
+      practiceYields {
+        id
+        name
+      }
       id
-      practiceYieldId
     }
-    expectedOutput: practiceYieldExpectedOutputByPk(
-      id: $practice_yield_expected_output_id
-    ) {
-      gitPath
-      practiceYieldId
+    practiceToStudents(where: {student: {userId: {_eq: $userId}}}) {
+      submited
+      id
+    }
+    course {
+      studentToCourses(where: {student: {userId: {_eq: $userId}}}) {
+        studentId
+      }
+    }
+  }
+}
+    `;
+export const MutationSubmitHandoffDocument = gql`
+    mutation mutationSubmitHandoff($studentYields: [PracticeToStudentYieldInsertInput!]!, $student_id: uuid!, $promotion_practice_id: uuid!) {
+  insertPracticeToStudent(
+    objects: {submited: true, practiceToStudentYields: {data: $studentYields}, studentId: $student_id, coursePracticeId: $promotion_practice_id}
+  ) {
+    affectedRows
+  }
+}
+    `;
+export const SetSubmitedFalseOnEmptyDocument = gql`
+    mutation setSubmitedFalseOnEmpty($id: uuid!) {
+  updatePracticeToStudentYieldByPk(pkColumns: {id: $id}, _set: {submited: false}) {
+    giteaOrgAndRepo
+  }
+}
+    `;
+export const UpdateGiteaOrgNameDocument = gql`
+    mutation updateGiteaOrgName($id: uuid!, $gitea_org_name: String!) {
+  updatePracticeToCourseByPk(
+    pkColumns: {id: $id}
+    _set: {giteaOrgName: $gitea_org_name}
+  ) {
+    id
+  }
+}
+    `;
+export const GetPracticeToPromotionMetaDocument = gql`
+    query getPracticeToPromotionMeta($id: uuid!) {
+  practiceToCourseByPk(id: $id) {
+    practice {
+      title
+    }
+    course {
+      name
+      years
+    }
+  }
+}
+    `;
+export const OnStudentYieldCreatedDataDocument = gql`
+    query onStudentYieldCreatedData($id: uuid!) {
+  practiceToStudentYieldByPk(id: $id) {
+    practiceToStudent {
+      student {
+        full_name
+      }
+      practiceToCourse {
+        giteaOrgName
+      }
+    }
+    practiceYield {
+      id
+      name
       method
     }
   }
-`;
-export const DataForUpdateToStudentLinkDocument = gql`
-  query dataForUpdateToStudentLink($tokenId: uuid!, $userId: uuid!) {
-    studentToSet: student(where: { claimToken: { _eq: $tokenId } }) {
-      claimToken
-      userId
-      id
-    }
-    maybeStudentWithUser: student(where: { userId: { _eq: $userId } }) {
-      claimToken
-      userId
-      id
-    }
-  }
-`;
-export const LinkStudentToUserDocument = gql`
-  mutation linkStudentToUser($id: uuid!, $user_id: uuid!) {
-    updateStudentByPk(
-      pkColumns: { id: $id }
-      _set: { userId: $user_id, claimToken: null }
-    ) {
-      id
-    }
-  }
-`;
-export const FillEmptyForGradeDocument = gql`
-  mutation fillEmptyForGrade($courseId: uuid!, $practiceId: uuid!) {
-    fillEmptyYields(course_id: $courseId, practice_id: $practiceId) {
-      affected_rows
-    }
-  }
-`;
-export const GetPracticeToGradeByCourseIdAndPracticeIdDocument = gql`
-  query getPracticeToGradeByCourseIdAndPracticeId(
-    $course_id: uuid!
-    $practice_id: uuid!
-  ) {
-    practiceToCourse(
-      where: {
-        courseId: { _eq: $course_id }
-        practiceId: { _eq: $practice_id }
-      }
-    ) {
-      practiceToCourseId: id
-      is_open
-      openDate
-    }
-  }
-`;
-export const InsertPracticeToStudentWithGradesDocument = gql`
-  mutation insertPracticeToStudentWithGrades(
-    $objects: [PracticeToStudentInsertInput!]!
-  ) {
-    insertPracticeToStudent(
-      objects: $objects
-      onConflict: {
-        constraint: practice_to_student_pkey
-        updateColumns: [grade, gradeDetail, graded, feedback]
-      }
-    ) {
-      affectedRows
-    }
-  }
-`;
-export const DataForPracticeToGradeByPracticeToCoursePkDocument = gql`
-  query dataForPracticeToGradeByPracticeToCoursePk(
-    $practice_to_grade_id: uuid!
-  ) {
-    practiceToCourseByPk(id: $practice_to_grade_id) {
-      id
-      practice {
-        ...PracticeForGrading
-      }
-      practiceToStudents {
-        ...PracticeToStudentForGrading
-      }
-    }
-  }
-  ${PracticeForGradingFragmentDoc}
-  ${PracticeToStudentForGradingFragmentDoc}
-`;
-export const GetStudentForMailSendDocument = gql`
-  query getStudentForMailSend($studentIds: [uuid!]) {
-    student(
-      where: {
-        _and: { id: { _in: $studentIds } }
-        claimToken: { _isNull: false }
-      }
-    ) {
-      email
-      claimToken
-      full_name
-      id
-    }
-  }
-`;
-export const DataForSubmitHandoffDocument = gql`
-  query dataForSubmitHandoff($practiceToPromoId: uuid!, $userId: uuid!) {
-    practiceToCourseByPk(id: $practiceToPromoId) {
-      is_open
-      practice {
-        practiceYields {
-          id
-          name
-        }
-        id
-      }
-      practiceToStudents(where: { student: { userId: { _eq: $userId } } }) {
-        submited
-        id
-      }
-      course {
-        studentToCourses(where: { student: { userId: { _eq: $userId } } }) {
-          studentId
-        }
-      }
-    }
-  }
-`;
-export const MutationSubmitHandoffDocument = gql`
-  mutation mutationSubmitHandoff(
-    $studentYields: [PracticeToStudentYieldInsertInput!]!
-    $student_id: uuid!
-    $promotion_practice_id: uuid!
-  ) {
-    insertPracticeToStudent(
-      objects: {
-        submited: true
-        practiceToStudentYields: { data: $studentYields }
-        studentId: $student_id
-        coursePracticeId: $promotion_practice_id
-      }
-    ) {
-      affectedRows
-    }
-  }
-`;
-export const SetSubmitedFalseOnEmptyDocument = gql`
-  mutation setSubmitedFalseOnEmpty($id: uuid!) {
-    updatePracticeToStudentYieldByPk(
-      pkColumns: { id: $id }
-      _set: { submited: false }
-    ) {
-      giteaOrgAndRepo
-    }
-  }
-`;
-export const UpdateGiteaOrgNameDocument = gql`
-  mutation updateGiteaOrgName($id: uuid!, $gitea_org_name: String!) {
-    updatePracticeToCourseByPk(
-      pkColumns: { id: $id }
-      _set: { giteaOrgName: $gitea_org_name }
-    ) {
-      id
-    }
-  }
-`;
-export const GetPracticeToPromotionMetaDocument = gql`
-  query getPracticeToPromotionMeta($id: uuid!) {
-    practiceToCourseByPk(id: $id) {
-      practice {
-        title
-      }
-      course {
-        name
-        years
-      }
-    }
-  }
-`;
-export const OnStudentYieldCreatedDataDocument = gql`
-  query onStudentYieldCreatedData($id: uuid!) {
-    practiceToStudentYieldByPk(id: $id) {
-      practiceToStudent {
-        student {
-          full_name
-        }
-        practiceToCourse {
-          giteaOrgName
-        }
-      }
-      practiceYield {
-        id
-        name
-        method
-      }
-    }
-  }
-`;
+}
+    `;
 export const OnStudentYieldMutationDocument = gql`
-  mutation onStudentYieldMutation($id: uuid!, $gitea_org_and_repo: String!) {
-    updatePracticeToStudentYieldByPk(
-      pkColumns: { id: $id }
-      _set: { giteaOrgAndRepo: $gitea_org_and_repo }
-    ) {
-      giteaOrgAndRepo
-    }
+    mutation onStudentYieldMutation($id: uuid!, $gitea_org_and_repo: String!) {
+  updatePracticeToStudentYieldByPk(
+    pkColumns: {id: $id}
+    _set: {giteaOrgAndRepo: $gitea_org_and_repo}
+  ) {
+    giteaOrgAndRepo
   }
-`;
+}
+    `;
 
-export type SdkFunctionWrapper = <T>(
-  action: (requestHeaders?: Record<string, string>) => Promise<T>,
-  operationName: string,
-  operationType?: string
-) => Promise<T>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
-const defaultWrapper: SdkFunctionWrapper = (
-  action,
-  _operationName,
-  _operationType
-) => action();
 
-export function getSdk(
-  client: GraphQLClient,
-  withWrapper: SdkFunctionWrapper = defaultWrapper
-) {
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
+
+export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    dataForPracticeToGradeEmpty(
-      variables: DataForPracticeToGradeEmptyQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<DataForPracticeToGradeEmptyQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<DataForPracticeToGradeEmptyQuery>(
-            DataForPracticeToGradeEmptyDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'dataForPracticeToGradeEmpty',
-        'query'
-      );
+    dataForPracticeToGradeEmpty(variables: DataForPracticeToGradeEmptyQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DataForPracticeToGradeEmptyQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DataForPracticeToGradeEmptyQuery>(DataForPracticeToGradeEmptyDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'dataForPracticeToGradeEmpty', 'query');
     },
-    updateFillEmptyHandouts(
-      variables: UpdateFillEmptyHandoutsMutationVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<UpdateFillEmptyHandoutsMutation> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<UpdateFillEmptyHandoutsMutation>(
-            UpdateFillEmptyHandoutsDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'updateFillEmptyHandouts',
-        'mutation'
-      );
+    updateFillEmptyHandouts(variables: UpdateFillEmptyHandoutsMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateFillEmptyHandoutsMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateFillEmptyHandoutsMutation>(UpdateFillEmptyHandoutsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateFillEmptyHandouts', 'mutation');
     },
-    getGitInfoForStudentYield(
-      variables: GetGitInfoForStudentYieldQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<GetGitInfoForStudentYieldQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<GetGitInfoForStudentYieldQuery>(
-            GetGitInfoForStudentYieldDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'getGitInfoForStudentYield',
-        'query'
-      );
+    getGitInfoForStudentYield(variables: GetGitInfoForStudentYieldQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetGitInfoForStudentYieldQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetGitInfoForStudentYieldQuery>(GetGitInfoForStudentYieldDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getGitInfoForStudentYield', 'query');
     },
-    dataForUpdateToStudentLink(
-      variables: DataForUpdateToStudentLinkQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<DataForUpdateToStudentLinkQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<DataForUpdateToStudentLinkQuery>(
-            DataForUpdateToStudentLinkDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'dataForUpdateToStudentLink',
-        'query'
-      );
+    dataForUpdateToStudentLink(variables: DataForUpdateToStudentLinkQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DataForUpdateToStudentLinkQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DataForUpdateToStudentLinkQuery>(DataForUpdateToStudentLinkDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'dataForUpdateToStudentLink', 'query');
     },
-    linkStudentToUser(
-      variables: LinkStudentToUserMutationVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<LinkStudentToUserMutation> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<LinkStudentToUserMutation>(
-            LinkStudentToUserDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'linkStudentToUser',
-        'mutation'
-      );
+    linkStudentToUser(variables: LinkStudentToUserMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LinkStudentToUserMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LinkStudentToUserMutation>(LinkStudentToUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'linkStudentToUser', 'mutation');
     },
-    fillEmptyForGrade(
-      variables: FillEmptyForGradeMutationVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<FillEmptyForGradeMutation> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<FillEmptyForGradeMutation>(
-            FillEmptyForGradeDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'fillEmptyForGrade',
-        'mutation'
-      );
+    fillEmptyForGrade(variables: FillEmptyForGradeMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FillEmptyForGradeMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FillEmptyForGradeMutation>(FillEmptyForGradeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'fillEmptyForGrade', 'mutation');
     },
-    getPracticeToGradeByCourseIdAndPracticeId(
-      variables: GetPracticeToGradeByCourseIdAndPracticeIdQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<GetPracticeToGradeByCourseIdAndPracticeIdQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<GetPracticeToGradeByCourseIdAndPracticeIdQuery>(
-            GetPracticeToGradeByCourseIdAndPracticeIdDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'getPracticeToGradeByCourseIdAndPracticeId',
-        'query'
-      );
+    getPracticeToGradeByCourseIdAndPracticeId(variables: GetPracticeToGradeByCourseIdAndPracticeIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetPracticeToGradeByCourseIdAndPracticeIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPracticeToGradeByCourseIdAndPracticeIdQuery>(GetPracticeToGradeByCourseIdAndPracticeIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPracticeToGradeByCourseIdAndPracticeId', 'query');
     },
-    insertPracticeToStudentWithGrades(
-      variables: InsertPracticeToStudentWithGradesMutationVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<InsertPracticeToStudentWithGradesMutation> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<InsertPracticeToStudentWithGradesMutation>(
-            InsertPracticeToStudentWithGradesDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'insertPracticeToStudentWithGrades',
-        'mutation'
-      );
+    insertPracticeToStudentWithGrades(variables: InsertPracticeToStudentWithGradesMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<InsertPracticeToStudentWithGradesMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<InsertPracticeToStudentWithGradesMutation>(InsertPracticeToStudentWithGradesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'insertPracticeToStudentWithGrades', 'mutation');
     },
-    dataForPracticeToGradeByPracticeToCoursePk(
-      variables: DataForPracticeToGradeByPracticeToCoursePkQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<DataForPracticeToGradeByPracticeToCoursePkQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<DataForPracticeToGradeByPracticeToCoursePkQuery>(
-            DataForPracticeToGradeByPracticeToCoursePkDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'dataForPracticeToGradeByPracticeToCoursePk',
-        'query'
-      );
+    dataForPracticeToGradeByPracticeToCoursePk(variables: DataForPracticeToGradeByPracticeToCoursePkQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DataForPracticeToGradeByPracticeToCoursePkQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DataForPracticeToGradeByPracticeToCoursePkQuery>(DataForPracticeToGradeByPracticeToCoursePkDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'dataForPracticeToGradeByPracticeToCoursePk', 'query');
     },
-    getStudentForMailSend(
-      variables?: GetStudentForMailSendQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<GetStudentForMailSendQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<GetStudentForMailSendQuery>(
-            GetStudentForMailSendDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'getStudentForMailSend',
-        'query'
-      );
+    getStudentForMailSend(variables?: GetStudentForMailSendQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetStudentForMailSendQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetStudentForMailSendQuery>(GetStudentForMailSendDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getStudentForMailSend', 'query');
     },
-    dataForSubmitHandoff(
-      variables: DataForSubmitHandoffQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<DataForSubmitHandoffQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<DataForSubmitHandoffQuery>(
-            DataForSubmitHandoffDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'dataForSubmitHandoff',
-        'query'
-      );
+    dataForSubmitHandoff(variables: DataForSubmitHandoffQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DataForSubmitHandoffQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DataForSubmitHandoffQuery>(DataForSubmitHandoffDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'dataForSubmitHandoff', 'query');
     },
-    mutationSubmitHandoff(
-      variables: MutationSubmitHandoffMutationVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<MutationSubmitHandoffMutation> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<MutationSubmitHandoffMutation>(
-            MutationSubmitHandoffDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'mutationSubmitHandoff',
-        'mutation'
-      );
+    mutationSubmitHandoff(variables: MutationSubmitHandoffMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MutationSubmitHandoffMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<MutationSubmitHandoffMutation>(MutationSubmitHandoffDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'mutationSubmitHandoff', 'mutation');
     },
-    setSubmitedFalseOnEmpty(
-      variables: SetSubmitedFalseOnEmptyMutationVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<SetSubmitedFalseOnEmptyMutation> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<SetSubmitedFalseOnEmptyMutation>(
-            SetSubmitedFalseOnEmptyDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'setSubmitedFalseOnEmpty',
-        'mutation'
-      );
+    setSubmitedFalseOnEmpty(variables: SetSubmitedFalseOnEmptyMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SetSubmitedFalseOnEmptyMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SetSubmitedFalseOnEmptyMutation>(SetSubmitedFalseOnEmptyDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'setSubmitedFalseOnEmpty', 'mutation');
     },
-    updateGiteaOrgName(
-      variables: UpdateGiteaOrgNameMutationVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<UpdateGiteaOrgNameMutation> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<UpdateGiteaOrgNameMutation>(
-            UpdateGiteaOrgNameDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'updateGiteaOrgName',
-        'mutation'
-      );
+    updateGiteaOrgName(variables: UpdateGiteaOrgNameMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateGiteaOrgNameMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateGiteaOrgNameMutation>(UpdateGiteaOrgNameDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateGiteaOrgName', 'mutation');
     },
-    getPracticeToPromotionMeta(
-      variables: GetPracticeToPromotionMetaQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<GetPracticeToPromotionMetaQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<GetPracticeToPromotionMetaQuery>(
-            GetPracticeToPromotionMetaDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'getPracticeToPromotionMeta',
-        'query'
-      );
+    getPracticeToPromotionMeta(variables: GetPracticeToPromotionMetaQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetPracticeToPromotionMetaQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPracticeToPromotionMetaQuery>(GetPracticeToPromotionMetaDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPracticeToPromotionMeta', 'query');
     },
-    onStudentYieldCreatedData(
-      variables: OnStudentYieldCreatedDataQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<OnStudentYieldCreatedDataQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<OnStudentYieldCreatedDataQuery>(
-            OnStudentYieldCreatedDataDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'onStudentYieldCreatedData',
-        'query'
-      );
+    onStudentYieldCreatedData(variables: OnStudentYieldCreatedDataQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<OnStudentYieldCreatedDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<OnStudentYieldCreatedDataQuery>(OnStudentYieldCreatedDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'onStudentYieldCreatedData', 'query');
     },
-    onStudentYieldMutation(
-      variables: OnStudentYieldMutationMutationVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<OnStudentYieldMutationMutation> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<OnStudentYieldMutationMutation>(
-            OnStudentYieldMutationDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'onStudentYieldMutation',
-        'mutation'
-      );
-    },
+    onStudentYieldMutation(variables: OnStudentYieldMutationMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<OnStudentYieldMutationMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<OnStudentYieldMutationMutation>(OnStudentYieldMutationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'onStudentYieldMutation', 'mutation');
+    }
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;

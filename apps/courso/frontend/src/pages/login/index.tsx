@@ -1,11 +1,7 @@
 import React from 'react';
 import { getOutLayout } from '../../layouts/WithUserOut';
-import {
-  getCsrfToken,
-  getSession,
-  getProviders,
-  signIn,
-} from 'next-auth/react';
+import { getCsrfToken, getProviders, signIn } from 'next-auth/react';
+import { getServerSession } from 'next-auth/next';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { Logo } from '../../components/Logo';
 import { Input } from '../../components/Input';
@@ -13,12 +9,15 @@ import { Button } from '../../components/Button';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { Loader } from '../../components/Loader';
+import { authOptions } from '../api/auth/[...nextauth]';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const { res } = context;
-  const session = await getSession();
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  console.log('AUTH LOGIN PAGE :', session);
 
   if (session && res && session.token) {
     res.writeHead(302, {

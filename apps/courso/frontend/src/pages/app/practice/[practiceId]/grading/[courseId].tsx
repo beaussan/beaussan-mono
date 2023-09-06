@@ -38,7 +38,9 @@ gql`
       }
     ) {
       practiceToStudents {
-        grade
+        calculatedGrades {
+          calculatedGrade
+        }
         student {
           full_name
         }
@@ -158,6 +160,7 @@ export const Grading = () => {
         courseId: courseId,
       },
       // pollInterval: 30000,
+      requestPolicy: 'cache-and-network',
       // requestPolicy: 'network-only',
     });
   const [, refreshGrades] = useTriggerRefreshGradesMutation();
@@ -179,7 +182,7 @@ export const Grading = () => {
     const practiceToStudents = data.practiceToCourse[0].practiceToStudents;
     const pre = practiceToStudents
       .map((item) => ({
-        grade: Math.round(item.grade),
+        grade: Math.round(item.calculatedGrades?.calculatedGrade ?? 0),
         fullName: item.student.full_name ?? '',
       }))
       .reduce<{ [key: number]: string[] }>(
@@ -254,7 +257,8 @@ export const Grading = () => {
     <div>
       <FullScreen
         onStateChange={(newValue) => {
-          if (!newValue) {
+          console.log('ON STATE CHANGE MODAL : ', newValue);
+          if (newValue) {
             refresh();
           }
         }}
@@ -269,7 +273,7 @@ export const Grading = () => {
                   refreshGrades({
                     course_id: courseId,
                     practice_id: practiceId,
-                  })
+                  }).then(() => refresh())
                 }
                 className="ml-4"
               >

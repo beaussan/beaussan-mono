@@ -190,23 +190,27 @@ export const refreshGrades: ActionMap['refreshGrades'] = async ({
   course_id,
   practice_id,
 }) => {
+  console.log('INIT REFRESH GRADES');
   const { practiceToCourse: rawPractice } =
     await gqlSdk.getPracticeToGradeByCourseIdAndPracticeId({
       course_id,
       practice_id,
     });
   if (!rawPractice || rawPractice.length === 0) {
-    throw new HttpsError('not-found', 'Not found');
+    throw new HttpsError('not-found', 'Practice not found');
   }
   const rawPracticeToCourse = rawPractice[0];
+  /*
   if (rawPracticeToCourse.is_open) {
-    throw new HttpsError('not-found', 'Not found');
+    throw new HttpsError('not-found', 'Practice to course not found');
   }
+
 
   const openDate = new Date(rawPracticeToCourse.openDate);
   if (isBefore(new Date(), openDate) || rawPracticeToCourse.is_open) {
     throw new HttpsError('invalid-argument', 'Practice is not over yet');
   }
+   */
 
   await gqlSdk.fillEmptyForGrade({
     courseId: course_id,
