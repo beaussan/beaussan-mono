@@ -43,6 +43,12 @@ mutation InsertBookmark($object: BookmarksInsertInput!) {
   }
 }
 
+mutation UpdateBookmark($pk: uuid!, $object: BookmarksSetInput!) {
+  updateBookmarksByPk(pkColumns: { id: $pk }, _set: $object) {
+    ...BookmarkItem
+  }
+}
+
 mutation DeleteBookmarkById($id: uuid!) {
   deleteBookmarksByPk(id: $id) {
     id

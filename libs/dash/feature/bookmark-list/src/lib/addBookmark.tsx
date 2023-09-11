@@ -13,6 +13,7 @@ import {
   useInsertBookmarkMutation,
 } from './requests.generated';
 import React from 'react';
+import { CombinedError } from 'urql';
 
 type BookmarkApiSend = MarkSomeRequired<
   Omit<BookmarksInsertInput, 'user' | 'userId' | 'id' | 'position'>,
@@ -33,6 +34,51 @@ const fromFormDataToApi = (
     faviconUrl: data.faviconUrl,
     displayName: data.displayName,
   };
+};
+
+export const DialogModifyOrCreate = ({
+  error,
+  onSubmit,
+  defaultValues,
+}: {
+  error: CombinedError | undefined;
+  onSubmit: (data: z.infer<typeof validationSchema>) => Promise<void>;
+  defaultValues?: Partial<z.infer<typeof validationSchema>>;
+}) => {
+  const {
+    Form,
+    methods: { name },
+  } = useZodForm({
+    schema: validationSchema,
+    options: {
+      defaultValues,
+    },
+  });
+  return (
+    <Form
+      onSubmit={async (input) => {
+        await onSubmit(input);
+      }}
+    >
+      <Dialog.Title>
+        {defaultValues ? 'Update a bookmark' : 'Add a new bookmark'}
+      </Dialog.Title>
+      <div className="space-y-2">
+        <InputField {...name('link')} label="Link" />
+        <InputField {...name('displayName')} label="Display Name" />
+        <InputField {...name('faviconUrl')} label="FavIcon URL" />
+      </div>
+
+      {error ? <div>{error.message}</div> : null}
+
+      <Dialog.ActionGroup>
+        <Dialog.CloseButton intent="warn">Cancel</Dialog.CloseButton>
+        <Button intent="primary" type="submit">
+          Submit
+        </Button>
+      </Dialog.ActionGroup>
+    </Form>
+  );
 };
 
 const AddBookmarkForm = () => {
@@ -61,8 +107,10 @@ const AddBookmarkForm = () => {
         return a + b;
       })
       .pop() ?? 0) + 1;
+
   return (
-    <Form
+    <DialogModifyOrCreate
+      error={error}
       onSubmit={async (input) => {
         const { data } = await insertBookmark({
           object: {
@@ -74,24 +122,9 @@ const AddBookmarkForm = () => {
           return;
         }
         setIsOpen(false);
+        return;
       }}
-    >
-      <Dialog.Title>Add a new bookmark</Dialog.Title>
-      <div className="space-y-2">
-        <InputField {...name('link')} label="Link" />
-        <InputField {...name('displayName')} label="Display Name" />
-        <InputField {...name('faviconUrl')} label="FavIcon URL" />
-      </div>
-
-      {error ? <div>{error.message}</div> : null}
-
-      <Dialog.ActionGroup>
-        <Dialog.CloseButton intent="warn">Cancel</Dialog.CloseButton>
-        <Button intent="primary" type="submit">
-          Submit
-        </Button>
-      </Dialog.ActionGroup>
-    </Form>
+    />
   );
 };
 
