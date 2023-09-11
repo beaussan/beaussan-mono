@@ -5,10 +5,10 @@
   "dependencies": {
     "supertokens-node": "^13.0.0",
     "postmark": "^3.0.14",
-    "vite": "4.3.9",
     "@vitejs/plugin-react": "4.0.4",
     "@nx/vite": "16.7.4",
-    "vite-plugin-dts": "2.3.0"
+    "vite-plugin-dts": "2.3.0",
+    "vitest": "0.32.0"
   },
   "devDependencies": {}
 }
