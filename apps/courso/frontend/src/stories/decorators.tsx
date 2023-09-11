@@ -53,7 +53,7 @@ const signInTeacher: AuthContext = {
 
 const signOut: AuthContext = {
   authStatus: 'out',
-  token: null,
+  token: undefined,
   userRole: null,
   userId: undefined,
   allowedRoles: [],

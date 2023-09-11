@@ -2,13 +2,13 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import HandOffIndexPage from '../../pages/app/handoff/index';
 import { graphql } from 'msw';
-import { HTTP_URL } from '../../services/urqlClient';
 import {
   HandoffListQuery,
   HandoffListQueryVariables,
 } from '../../generated/graphql';
 import { formatRFC3339, add } from 'date-fns';
 import { fullScreenBody } from '../../stories/decorators';
+import { clientEnvs } from '@beaussan/courso/data/env-config';
 
 export default {
   component: HandOffIndexPage,
@@ -19,7 +19,9 @@ export default {
   },
 } as Meta;
 
-const gqlEndpoint = graphql.link(HTTP_URL);
+const gqlEndpoint = graphql.link(
+  clientEnvs.NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL
+);
 
 const Template: Story = () => <HandOffIndexPage />;
 

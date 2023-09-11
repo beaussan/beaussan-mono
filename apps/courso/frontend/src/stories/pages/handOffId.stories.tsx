@@ -2,13 +2,13 @@ import { Meta, Story } from '@storybook/react';
 import HandOffId from '../../pages/app/handoff/[handoffId]';
 import { fullScreenBody } from '../../stories/decorators';
 import { graphql } from 'msw';
-import { HTTP_URL } from '../../services/urqlClient';
 import {
   HandOffByIdQuery,
   HandOffByIdQueryVariables,
   PracticeYieldTypeEnum,
 } from '../../generated/graphql';
 import { add, formatRFC3339 } from 'date-fns';
+import { clientEnvs } from '@beaussan/courso/data/env-config';
 
 export default {
   component: HandOffId,
@@ -19,7 +19,9 @@ export default {
   },
 } as Meta;
 
-const gqlEndpoint = graphql.link(HTTP_URL);
+const gqlEndpoint = graphql.link(
+  clientEnvs.NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL
+);
 
 const Template: Story = () => <HandOffId />;
 
