@@ -65,6 +65,23 @@ export type InsertBookmarkMutation = {
   } | null;
 };
 
+export type UpdateBookmarkMutationVariables = Types.Exact<{
+  pk: Types.Scalars['uuid'];
+  object: Types.BookmarksSetInput;
+}>;
+
+export type UpdateBookmarkMutation = {
+  __typename?: 'mutation_root';
+  updateBookmarksByPk?: {
+    __typename?: 'Bookmarks';
+    id: string;
+    link: string;
+    faviconUrl?: string | null;
+    displayName: string;
+    position?: number | null;
+  } | null;
+};
+
 export type DeleteBookmarkByIdMutationVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
@@ -140,6 +157,21 @@ export function useInsertBookmarkMutation() {
     InsertBookmarkMutationVariables
   >(InsertBookmarkDocument);
 }
+export const UpdateBookmarkDocument = gql`
+  mutation UpdateBookmark($pk: uuid!, $object: BookmarksSetInput!) {
+    updateBookmarksByPk(pkColumns: { id: $pk }, _set: $object) {
+      ...BookmarkItem
+    }
+  }
+  ${BookmarkItemFragmentDoc}
+`;
+
+export function useUpdateBookmarkMutation() {
+  return Urql.useMutation<
+    UpdateBookmarkMutation,
+    UpdateBookmarkMutationVariables
+  >(UpdateBookmarkDocument);
+}
 export const DeleteBookmarkByIdDocument = gql`
   mutation DeleteBookmarkById($id: uuid!) {
     deleteBookmarksByPk(id: $id) {
@@ -197,6 +229,29 @@ export const mockInsertBookmarkMutation = (
 ) =>
   graphql.mutation<InsertBookmarkMutation, InsertBookmarkMutationVariables>(
     'InsertBookmark',
+    resolver
+  );
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockUpdateBookmarkMutation((req, res, ctx) => {
+ *   const { pk, object } = req.variables;
+ *   return res(
+ *     ctx.data({ updateBookmarksByPk })
+ *   )
+ * })
+ */
+export const mockUpdateBookmarkMutation = (
+  resolver: ResponseResolver<
+    GraphQLRequest<UpdateBookmarkMutationVariables>,
+    GraphQLContext<UpdateBookmarkMutation>,
+    any
+  >
+) =>
+  graphql.mutation<UpdateBookmarkMutation, UpdateBookmarkMutationVariables>(
+    'UpdateBookmark',
     resolver
   );
 

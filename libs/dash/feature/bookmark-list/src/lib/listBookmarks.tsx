@@ -1,10 +1,11 @@
 import { useFuse } from '@beaussan/shared/utils/fuzy-search';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   BookmarkItemFragment,
   TraefikRoutesFragment,
   useDeleteBookmarkByIdMutation,
   useGetListOfBookmarksQuery,
+  useUpdateBookmarkMutation,
 } from './requests.generated';
 import { ReturnDataFromQuery } from '@beaussan/shared/utils/urql-utils';
 import clsx from 'clsx';
@@ -14,73 +15,134 @@ import {
   TraefikDisplay,
   UnifiedDisplay,
 } from './types';
-import { Trash } from 'lucide-react';
-import { AddBookmark } from './addBookmark';
+import { Pencil, Trash } from 'lucide-react';
+import { AddBookmark, DialogModifyOrCreate } from './addBookmark';
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
+  Dialog,
+  useDialogContext,
 } from '@beaussan/shared/ui/ui-kit';
 import toast from 'react-hot-toast';
 
+const LinkEdit = ({ item }: { item: UnifiedDisplay }) => {
+  const { setIsOpen, isOpen } = useDialogContext();
+  const [{ error }, updateBookmark] = useUpdateBookmarkMutation();
+
+  if (item.type !== 'bookmark' && isOpen) {
+    setIsOpen(false);
+    return;
+  }
+
+  return (
+    <DialogModifyOrCreate
+      error={error}
+      onSubmit={async (data) => {
+        if (item.type !== 'bookmark') {
+          setIsOpen(false);
+          return;
+        }
+        await updateBookmark({
+          pk: item.id,
+          object: {
+            link: data.link,
+            displayName: data.displayName,
+            faviconUrl: data.faviconUrl,
+          },
+        });
+        setIsOpen(false);
+        return;
+      }}
+      defaultValues={{
+        link: item.link,
+        displayName: item.displayName,
+        faviconUrl: item.faviconUrl,
+      }}
+    />
+  );
+};
+
 export const Link = ({ item }: { item: UnifiedDisplay }) => {
+  const { setIsOpen, isOpen } = useDialogContext();
+  const [currentModalContent, setCurrentModalContent] = useState<
+    undefined | 'edit-link'
+  >();
   const url = new URL(item.link).hostname;
   const [, deleteBookmarkById] = useDeleteBookmarkByIdMutation();
+  if (!isOpen && currentModalContent) {
+    setCurrentModalContent(undefined);
+  }
   return (
-    <ContextMenu>
-      <ContextMenuTrigger>
-        <div className="focus:outline-zinc-700 ">
-          <a
-            href={item.link}
-            rel="nofollow noopener"
-            className="flex bg-opacity-90 bg-gray-700 text-white px-2 py-3 focus:bg-opacity-100  rounded-lg  "
+    <>
+      <Dialog.Content>
+        {currentModalContent === 'edit-link' ? <LinkEdit item={item} /> : null}
+      </Dialog.Content>
+      <ContextMenu>
+        <ContextMenuTrigger>
+          <div className="focus:outline-zinc-700 ">
+            <a
+              href={item.link}
+              rel="nofollow noopener"
+              className="flex bg-opacity-90 bg-gray-700 text-white px-2 py-3 focus:bg-opacity-100  rounded-lg  "
+            >
+              <img
+                className="w-6 h-6 mr-5"
+                src={
+                  item.faviconUrl
+                    ? item.faviconUrl
+                    : `https://www.google.com/s2/favicons?domain=${url}`
+                }
+                alt={`favicon`}
+              />
+              <div className="flex align-middle justify-between items-center w-full">
+                {item.displayName}
+                {item.type === 'traefik' ? (
+                  <div
+                    className={clsx(
+                      'w-4 h-4 rounded-full',
+                      item.isUp ? 'bg-green-500' : 'bg-red-500'
+                    )}
+                  />
+                ) : null}
+              </div>
+            </a>
+          </div>
+        </ContextMenuTrigger>
+        <ContextMenuContent>
+          <ContextMenuItem
+            onClick={() => {
+              setCurrentModalContent('edit-link');
+              setIsOpen(true);
+            }}
+            disabled={item.type !== 'bookmark'}
+            icon={<Pencil />}
           >
-            <img
-              className="w-6 h-6 mr-5"
-              src={
-                item.faviconUrl
-                  ? item.faviconUrl
-                  : `https://www.google.com/s2/favicons?domain=${url}`
+            Modify
+          </ContextMenuItem>
+          <ContextMenuItem
+            destructive
+            disabled={item.type !== 'bookmark'}
+            icon={<Trash />}
+            onClick={() => {
+              if (item.type !== 'bookmark') {
+                return;
               }
-              alt={`favicon`}
-            />
-            <div className="flex align-middle justify-between items-center w-full">
-              {item.displayName}
-              {item.type === 'traefik' ? (
-                <div
-                  className={clsx(
-                    'w-4 h-4 rounded-full',
-                    item.isUp ? 'bg-green-500' : 'bg-red-500'
-                  )}
-                />
-              ) : null}
-            </div>
-          </a>
-        </div>
-      </ContextMenuTrigger>
-      <ContextMenuContent>
-        <ContextMenuItem
-          destructive
-          disabled={item.type !== 'bookmark'}
-          icon={<Trash />}
-          onClick={() => {
-            if (item.type !== 'bookmark') {
-              return;
-            }
-            deleteBookmarkById({ id: item.id })
-              .then(() => {
-                toast.success('Bookmark deleted !');
-              })
-              .catch(() => {
-                toast.error('An error occurred while deleting the toast.');
-              });
-          }}
-        >
-          Delete
-        </ContextMenuItem>
-      </ContextMenuContent>
-    </ContextMenu>
+              deleteBookmarkById({ id: item.id })
+                .then(() => {
+                  toast.success('Bookmark deleted !');
+                })
+                .catch(() => {
+                  toast.error('An error occurred while deleting the toast.');
+                });
+            }}
+          >
+            Delete
+          </ContextMenuItem>
+        </ContextMenuContent>
+      </ContextMenu>
+    </>
   );
 };
 
@@ -181,7 +243,9 @@ function ListBookmarkWithData({
         <ul className="space-y-1">
           {dataWithSearch.map((link) => (
             <li key={link.link}>
-              <Link key={link.link} item={link} />
+              <Dialog.Root>
+                <Link key={link.link} item={link} />
+              </Dialog.Root>
             </li>
           ))}
         </ul>
