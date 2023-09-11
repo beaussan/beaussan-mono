@@ -1,0 +1,42 @@
+table:
+  name: practice_to_student_grade_metric
+  schema: public
+object_relationships:
+  - name: practiceToStudentYield
+    using:
+      foreign_key_constraint_on: practice_to_student_yield_id
+  - name: practiceYieldGradeMetric
+    using:
+      foreign_key_constraint_on: practice_yield_grade_metric_id
+insert_permissions:
+  - role: teacher
+    permission:
+      check: {}
+      columns:
+        - feedback
+        - percent_grade
+        - practice_to_student_yield_id
+        - practice_yield_grade_metric_id
+select_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - created_at
+        - feedback
+        - id
+        - percent_grade
+        - practice_to_student_yield_id
+        - practice_yield_grade_metric_id
+        - updated_at
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - feedback
+        - percent_grade
+        - practice_to_student_yield_id
+        - practice_yield_grade_metric_id
+      filter: {}
+      check: null

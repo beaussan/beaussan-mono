@@ -1,0 +1,19 @@
+table:
+  name: roles
+  schema: public
+is_enum: true
+array_relationships:
+  - name: allowedRoles
+    using:
+      foreign_key_constraint_on:
+        column: role
+        table:
+          name: allowed_roles
+          schema: public
+  - name: users
+    using:
+      foreign_key_constraint_on:
+        column: default_role
+        table:
+          name: user
+          schema: public

@@ -1,0 +1,8 @@
+mutation setSubmitedFalseOnEmpty($id: uuid!) {
+  updatePracticeToStudentYieldByPk(
+    pkColumns: { id: $id }
+    _set: { submited: false }
+  ) {
+    giteaOrgAndRepo
+  }
+}

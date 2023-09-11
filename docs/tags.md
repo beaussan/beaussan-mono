@@ -22,6 +22,10 @@ Dash application related libraries
 
 Nx plugins, internal or external
 
+#### `scope:courso`
+
+A student teacher handoff platform
+
 #### `scope:shared`
 
 Shared libraries, used across all other libraries
@@ -34,11 +38,12 @@ Shared libraries, used across all other libraries
 
 Here is the import rule matrix :
 
-| ![Can row import colum](./can-import-icon.png) | `scope:shared` | `scope:dash` | `scope:nx-plugins` |
-| ---------------------------------------------- | :------------: | :----------: | :----------------: |
-| `scope:shared`                                 |       ✅       |      ⛔      |         ⛔         |
-| `scope:dash`                                   |       ✅       |      ✅      |         ⛔         |
-| `scope:nx-plugins`                             |       ✅       |      ⛔      |         ✅         |
+| ![Can row import colum](./can-import-icon.png) | `scope:shared` | `scope:dash` | `scope:nx-plugins` | `scope:courso` |
+| ---------------------------------------------- | :------------: | :----------: | :----------------: | :------------: |
+| `scope:shared`                                 |       ✅       |      ⛔      |         ⛔         |       ⛔       |
+| `scope:dash`                                   |       ✅       |      ✅      |         ⛔         |       ⛔       |
+| `scope:nx-plugins`                             |       ✅       |      ⛔      |         ✅         |       ⛔       |
+| `scope:courso`                                 |       ✅       |      ⛔      |         ⛔         |       ✅       |
 
 ## `type` tag group
 

@@ -1,0 +1,70 @@
+mutation clearAllUsers {
+  deleteUser(where: {}) {
+    affectedRows
+  }
+}
+
+mutation insertUsers($objects: [UserInsertInput!]!) {
+  insertUser(objects: $objects) {
+    affectedRows
+  }
+}
+mutation clearStudents {
+  deleteStudent(where: {}) {
+    affectedRows
+  }
+}
+
+mutation clearCourses {
+  deleteCourse(where: {}) {
+    affectedRows
+  }
+}
+
+mutation clearPracticesToCourses {
+  deletePracticeToCourse(where: {}) {
+    affectedRows
+  }
+}
+
+mutation clearPractices {
+  deletePractice(where: {}) {
+    affectedRows
+  }
+}
+
+mutation insertCourse($object: CourseInsertInput = {}) {
+  insertCourseOne(object: $object) {
+    id
+  }
+}
+
+mutation insertPractice($object: PracticeInsertInput = {}) {
+  insertPracticeOne(object: $object) {
+    id
+  }
+}
+
+query watchForGiteaOrgDone($_eq: uuid!) {
+  practiceToCourse(where: { id: { _eq: $_eq } }) {
+    giteaOrgName
+  }
+}
+
+mutation submitHandoff(
+  $practiceToPromotionId: uuid = ""
+  $yields: [YieldForHandoff!]!
+) {
+  submitHandoff(
+    practiceToPromotionId: $practiceToPromotionId
+    yields: $yields
+  ) {
+    status
+  }
+}
+
+mutation clearPracticeToStudent {
+  deletePracticeToStudent(where: {}) {
+    affectedRows
+  }
+}

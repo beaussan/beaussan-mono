@@ -1,0 +1,80 @@
+{
+  "name": "courso-frontend",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/courso/frontend",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/courso/frontend"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/courso/frontend"
+        },
+        "production": {}
+      }
+    },
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn graphql-codegen --config apps/courso/frontend/codegen.js"
+      }
+    },
+    "codegen-swagger": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx swagger-typescript-api -p http://localhost:3030/swagger.v1.json -o ./apps/courso/frontend/lib/generated --axios --single-http-client --name GiteaApi.ts --type-prefix Gitea"
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "courso-frontend:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "courso-frontend:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "courso-frontend:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "courso-frontend:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/courso/frontend/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/courso/frontend/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": ["type:app", "scope:courso"]
+}

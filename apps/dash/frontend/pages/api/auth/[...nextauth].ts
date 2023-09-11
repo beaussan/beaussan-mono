@@ -18,6 +18,7 @@ export const authOptions: NextAuthOptions = CreateHasuraNextAuth({
           console.log(`Url: ${params.url}`);
           console.log('----------------------------------------------');
         }
+        // TODO add postmark mailing here
       },
     }),
     GithubProvider({

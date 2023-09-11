@@ -1,0 +1,55 @@
+table:
+  name: student_to_course
+  schema: public
+object_relationships:
+  - name: course
+    using:
+      foreign_key_constraint_on: course_id
+  - name: student
+    using:
+      foreign_key_constraint_on: student_id
+insert_permissions:
+  - role: teacher
+    permission:
+      check: {}
+      columns:
+        - course_id
+        - created_at
+        - student_id
+        - updated_at
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - created_at
+        - student_id
+        - updated_at
+      filter:
+        course:
+          studentToCourses:
+            student:
+              user_id:
+                _eq: X-Hasura-User-Id
+  - role: teacher
+    permission:
+      columns:
+        - course_id
+        - created_at
+        - student_id
+        - updated_at
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - course_id
+        - created_at
+        - student_id
+        - updated_at
+      filter: {}
+      check: {}
+delete_permissions:
+  - role: teacher
+    permission:
+      filter: {}

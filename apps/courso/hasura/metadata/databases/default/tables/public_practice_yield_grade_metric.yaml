@@ -1,0 +1,49 @@
+table:
+  name: practice_yield_grade_metric
+  schema: public
+object_relationships:
+  - name: practiceYieldExpectedOutput
+    using:
+      foreign_key_constraint_on: expected_yield_id
+array_relationships:
+  - name: practiceToStudentGradeMetrics
+    using:
+      foreign_key_constraint_on:
+        column: practice_yield_grade_metric_id
+        table:
+          name: practice_to_student_grade_metric
+          schema: public
+insert_permissions:
+  - role: teacher
+    permission:
+      check: {}
+      columns:
+        - id
+        - created_at
+        - updated_at
+        - name
+        - expected_yield_id
+        - feedbacks
+        - points
+select_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - points
+        - feedbacks
+        - name
+        - created_at
+        - updated_at
+        - expected_yield_id
+        - id
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - feedbacks
+        - name
+        - points
+      filter: {}
+      check: {}

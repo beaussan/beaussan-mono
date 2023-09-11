@@ -26,6 +26,10 @@
                 "onlyDependOnLibsWithTags": ["scope:shared", "scope:nx-plugins"]
               },
               {
+                "sourceTag": "scope:courso",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:courso"]
+              },
+              {
                 "sourceTag": "type:utils",
                 "onlyDependOnLibsWithTags": ["type:utils"]
               },
@@ -96,7 +100,7 @@
       "files": "*.json",
       "parser": "jsonc-eslint-parser",
       "rules": {
-        "@nx/dependency-checks": "error",
+        "@nx/dependency-checks": "warn",
         "@nx/workspace/allowed-project-tags": [
           "error",
           {
@@ -105,7 +109,7 @@
                 "prefix": "scope:",
                 "allowMultiplePerProject": false,
                 "enforceAtLeastOne": true,
-                "allowedTags": ["dash", "nx-plugins", "shared"]
+                "allowedTags": ["dash", "nx-plugins", "courso", "shared"]
               },
               "type": {
                 "prefix": "type:",

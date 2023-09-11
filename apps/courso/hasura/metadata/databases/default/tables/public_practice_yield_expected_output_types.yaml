@@ -1,0 +1,18 @@
+table:
+  name: practice_yield_expected_output_types
+  schema: public
+is_enum: true
+array_relationships:
+  - name: practiceYieldExpectedOutputs
+    using:
+      foreign_key_constraint_on:
+        column: method
+        table:
+          name: practice_yield_expected_output
+          schema: public
+select_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - name
+      filter: {}

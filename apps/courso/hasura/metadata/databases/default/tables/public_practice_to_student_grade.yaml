@@ -1,0 +1,32 @@
+table:
+  name: practice_to_student_grade
+  schema: public
+object_relationships:
+  - name: practiceToStudent
+    using:
+      manual_configuration:
+        column_mapping:
+          practice_to_student_id: id
+        insertion_order: null
+        remote_table:
+          name: practice_to_student
+          schema: public
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - grade
+        - grade_detail
+        - practice_to_student_id
+      filter:
+        _and:
+          - practiceToStudent:
+              student:
+                id:
+                  _eq: X-Hasura-User-Id
+          - practiceToStudent:
+              practiceToCourse:
+                course:
+                  can_student_see_grade:
+                    _eq: true
+    comment: ''

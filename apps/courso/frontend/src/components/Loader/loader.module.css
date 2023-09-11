@@ -1,0 +1,15 @@
+.triangle {
+  transform-origin: 50% 65%;
+}
+
+.triangle polygon {
+  animation: dash 2.5s cubic-bezier(0.35, 0.04, 0.63, 0.95) infinite;
+
+  stroke-dasharray: 17;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 136;
+  }
+}

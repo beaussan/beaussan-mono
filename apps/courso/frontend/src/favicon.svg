@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="166px" height="141px" viewBox="0 0 166 141" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Logo NB v2</title>
+    <g id="Logo-NB-v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-4" transform="translate(0.000000, -0.058676)">
+            <g id="Group" transform="translate(0.000000, 108.994174)">
+                <polygon id="Path" fill="#6976F5" transform="translate(51.500000, 16.032251) rotate(-0.000000) translate(-51.500000, -16.032251) " points="19.182863 1.52418814e-07 -1.42108547e-14 32.0645016 103 32.0645021"></polygon>
+                <polygon id="Path" fill="#5346CD" transform="translate(9.591431, 16.032251) rotate(-0.000000) translate(-9.591431, -16.032251) " points="19.182863 -6.7465754e-14 1.17115206e-11 32.0645018 19.1828628 32.0645019"></polygon>
+            </g>
+            <g id="Group-2" transform="translate(83.548740, 51.764994)">
+                <polygon id="Path-Copy" fill="#E74895" transform="translate(41.194590, 52.931548) rotate(-121.000000) translate(-41.194590, -52.931548) " points="8.44160615 36.8408012 -10.888825 68.8786904 93.2780058 69.0222942"></polygon>
+                <polygon id="Path-Copy-4" fill="#BF135D" transform="translate(61.738606, 87.261942) rotate(-121.000000) translate(-61.738606, -87.261942) " points="68.9934627 71.2429971 49.6630315 103.280886 73.8141798 103.255202"></polygon>
+            </g>
+            <g id="Group-3" transform="translate(27.829372, 0.000000)">
+                <polygon id="Path-Copy-2" fill="#0692A1" transform="translate(41.464982, 55.989668) rotate(-240.000000) translate(-41.464982, -55.989668) " points="6.4255751 39.4152734 -12.7572879 71.4797748 95.687252 72.5640633"></polygon>
+                <polygon id="Path-Copy-3" fill="#056672" transform="translate(63.872514, 18.109158) rotate(-240.000000) translate(-63.872514, -18.109158) " points="72.8423561 2 53.6594932 34.0645014 74.0855338 34.2183169"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

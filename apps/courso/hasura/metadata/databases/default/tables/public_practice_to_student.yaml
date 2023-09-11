@@ -1,0 +1,74 @@
+table:
+  name: practice_to_student
+  schema: public
+object_relationships:
+  - name: calculatedGrades
+    using:
+      manual_configuration:
+        column_mapping:
+          id: practice_to_student_id
+        insertion_order: null
+        remote_table:
+          name: calculated_grades
+          schema: public
+  - name: practiceToCourse
+    using:
+      foreign_key_constraint_on: course_practice_id
+  - name: student
+    using:
+      foreign_key_constraint_on: student_id
+  - name: studentFeedback
+    using:
+      manual_configuration:
+        column_mapping:
+          id: practice_to_student_id
+        insertion_order: null
+        remote_table:
+          name: practice_to_student_feedback
+          schema: public
+  - name: studentGrade
+    using:
+      manual_configuration:
+        column_mapping:
+          id: practice_to_student_id
+        insertion_order: null
+        remote_table:
+          name: practice_to_student_grade
+          schema: public
+array_relationships:
+  - name: practiceToStudentYields
+    using:
+      foreign_key_constraint_on:
+        column: practice_to_student_id
+        table:
+          name: practice_to_student_yield
+          schema: public
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - course_practice_id
+        - created_at
+        - id
+        - student_id
+        - submited
+        - updated_at
+      filter:
+        student:
+          user_id:
+            _eq: X-Hasura-User-Id
+  - role: teacher
+    permission:
+      columns:
+        - course_practice_id
+        - created_at
+        - feedback
+        - grade
+        - grade_detail
+        - graded
+        - id
+        - student_id
+        - submited
+        - updated_at
+      filter: {}
+      allow_aggregations: true

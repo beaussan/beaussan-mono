@@ -1,0 +1,111 @@
+table:
+  name: practice_to_course
+  schema: public
+object_relationships:
+  - name: course
+    using:
+      foreign_key_constraint_on: course_id
+  - name: practice
+    using:
+      foreign_key_constraint_on: practice_id
+array_relationships:
+  - name: practiceToStudents
+    using:
+      foreign_key_constraint_on:
+        column: course_practice_id
+        table:
+          name: practice_to_student
+          schema: public
+computed_fields:
+  - name: is_open
+    definition:
+      function:
+        name: is_open_practice_to_course_fn
+        schema: public
+    comment: ''
+insert_permissions:
+  - role: teacher
+    permission:
+      check: {}
+      columns:
+        - close_date
+        - course_id
+        - id
+        - open_date
+        - practice_id
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - close_date
+        - course_id
+        - created_at
+        - id
+        - open_date
+        - practice_id
+        - updated_at
+      computed_fields:
+        - is_open
+      filter:
+        course:
+          studentToCourses:
+            student:
+              user_id:
+                _eq: X-Hasura-User-Id
+  - role: teacher
+    permission:
+      columns:
+        - id
+        - course_id
+        - practice_id
+        - open_date
+        - close_date
+        - created_at
+        - updated_at
+        - gitea_org_name
+      computed_fields:
+        - is_open
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - close_date
+        - course_id
+        - id
+        - open_date
+        - practice_id
+      filter: {}
+      check: {}
+delete_permissions:
+  - role: teacher
+    permission:
+      filter: {}
+event_triggers:
+  - name: on_practice_to_promo_created
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 20
+      num_retries: 3
+      timeout_sec: 120
+    webhook_from_env: WEBHOOK_MASTER_URL
+    headers:
+      - name: token
+        value_from_env: WEBHOOK_MASTER_TOKEN
+  - name: on_practice_to_promo_deleted
+    definition:
+      delete:
+        columns: '*'
+      enable_manual: false
+    retry_conf:
+      interval_sec: 10
+      num_retries: 3
+      timeout_sec: 60
+    webhook_from_env: WEBHOOK_MASTER_URL
+    headers:
+      - name: token
+        value_from_env: WEBHOOK_MASTER_TOKEN

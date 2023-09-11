@@ -1,0 +1,109 @@
+type Mutation {
+  fillEmptyYields(course_id: uuid!, practice_id: uuid!): FillEmptyYieldsOutput
+}
+
+type Query {
+  getGitFileData(
+    practice_yield_expected_output_id: uuid!
+    practice_to_student_yield_id: uuid!
+  ): GetGitFileDataOutput
+}
+
+type Query {
+  getGitLogData(
+    practice_yield_expected_output_id: uuid!
+    practice_to_student_yield_id: uuid!
+  ): [CommitItem!]!
+}
+
+type Mutation {
+  linkStudentToUser(linkId: uuid!): linkStudentToUserOutput
+}
+
+type Mutation {
+  refreshGrades(course_id: uuid!, practice_id: uuid!): RefreshGradesOutput
+}
+
+type Mutation {
+  sendStudentClaimMail(studentsIds: [uuid]!): SendStudentClaimMailOutput
+}
+
+type Mutation {
+  submitHandoff(
+    practiceToPromotionId: uuid!
+    yields: [YieldForHandoff!]!
+  ): SubmitHandoffOutput
+}
+
+input YieldForHandoff {
+  yieldId: uuid!
+  value: String!
+}
+
+input GitFileInput {
+  practice_yield_expected_output_id: uuid!
+  practice_to_student_yield_id: uuid!
+}
+
+type InsertStudentAnswerOutput {
+  id: uuid!
+  student_output: jsonb
+}
+
+type SendStudentClaimMailOutput {
+  nmbMailSent: Int!
+}
+
+type linkStudentToUserOutput {
+  ok: Boolean!
+}
+
+type SubmitHandoffOutput {
+  status: String!
+}
+
+type FillEmptyYieldsOutput {
+  affected_rows: Int!
+}
+
+type RefreshGradesOutput {
+  affected_rows: Int!
+}
+
+type GetGitFileDataOutput {
+  practice_yield_expected_output_id: uuid!
+  practice_to_student_yield_id: uuid!
+  content: String
+  download_url: String
+  encoding: String
+  git_url: String
+  html_url: String
+  name: String
+  path: String
+  sha: String
+  size: Int
+  submodule_git_url: String
+  target: String
+  type: String
+  url: String
+}
+
+type CommitItem {
+  author_profile_picture: String
+  commit_message: String
+  commit_author_date: String
+  commit_author_email: String
+  commit_author_name: String
+  commit_committer_date: String
+  commit_committer_email: String
+  commit_committer_name: String
+  commit_tree_created: String
+  commit_tree_sha: String
+  commit_tree_url: String
+  commit_url: String
+  created: String
+  html_url: String
+  sha: String
+  url: String
+  parents: jsonb
+}

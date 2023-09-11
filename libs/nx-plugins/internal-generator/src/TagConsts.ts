@@ -30,7 +30,7 @@ export const tagGropus = {
     description:
       'A scope tag is used to add boundaries between modules of the monorepo.',
     prefix: 'scope:',
-    tags: ['dash', 'nx-plugins', 'shared'] as const,
+    tags: ['dash', 'nx-plugins', 'courso', 'shared'] as const,
     allowMultiplePerProject: false,
     shouldAlwaysBePresent: true,
     tagsMeta: z.object({
@@ -70,6 +70,7 @@ export const tagDefs = {
         shared: true,
         dash: false,
         'nx-plugins': false,
+        courso: false,
       },
       meta: {
         libraryGenerator: {
@@ -83,6 +84,7 @@ export const tagDefs = {
         dash: true,
         'nx-plugins': false,
         shared: true,
+        courso: false,
       },
       meta: {
         libraryGenerator: {
@@ -96,10 +98,25 @@ export const tagDefs = {
         shared: true,
         'nx-plugins': true,
         dash: false,
+        courso: false,
       },
       meta: {
         libraryGenerator: {
           canBeGenerated: false,
+        },
+      },
+    },
+    courso: {
+      description: 'A student teacher handoff platform',
+      canImport: {
+        shared: true,
+        'nx-plugins': false,
+        dash: false,
+        courso: true,
+      },
+      meta: {
+        libraryGenerator: {
+          canBeGenerated: true,
         },
       },
     },

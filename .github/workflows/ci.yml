@@ -21,8 +21,8 @@ jobs:
       install-commands: |
         sudo timedatectl set-timezone Europe/Paris
         yarn install --frozen-lockfile
-      init-commands: |
-        yarn nx-cloud start-ci-run --stop-agents-after="test-storybook" --agent-count=3
+      #init-commands: |
+      #  yarn nx-cloud start-ci-run --stop-agents-after="test-storybook" --agent-count=3
       parallel-commands: |
         yarn nx-cloud record -- yarn nx format:check
       parallel-commands-on-agents: |

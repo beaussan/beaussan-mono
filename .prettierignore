@@ -4,3 +4,4 @@
 /coverage
 .github/workflows
 renovate.json
+/apps/courso/hasura/gitea-data/

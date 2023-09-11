@@ -1,0 +1,90 @@
+table:
+  name: practice_yield
+  schema: public
+object_relationships:
+  - name: practice
+    using:
+      foreign_key_constraint_on: practice_id
+  - name: practiceYieldType
+    using:
+      foreign_key_constraint_on: method
+array_relationships:
+  - name: practiceToStudentYields
+    using:
+      foreign_key_constraint_on:
+        column: practice_yield_id
+        table:
+          name: practice_to_student_yield
+          schema: public
+  - name: practiceYieldExpectedOutputs
+    using:
+      foreign_key_constraint_on:
+        column: practice_yield_id
+        table:
+          name: practice_yield_expected_output
+          schema: public
+insert_permissions:
+  - role: teacher
+    permission:
+      check: {}
+      columns:
+        - created_at
+        - description
+        - id
+        - meta
+        - method
+        - name
+        - practice_id
+        - updated_at
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - meta
+        - description
+        - method
+        - name
+        - created_at
+        - updated_at
+        - id
+        - practice_id
+      filter:
+        practice:
+          practiceToCourses:
+            course:
+              studentToCourses:
+                student:
+                  id:
+                    _eq: X-Hasura-User-Id
+    comment: ''
+  - role: teacher
+    permission:
+      columns:
+        - created_at
+        - description
+        - id
+        - meta
+        - method
+        - name
+        - practice_id
+        - updated_at
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - created_at
+        - description
+        - id
+        - meta
+        - method
+        - name
+        - practice_id
+        - updated_at
+      filter: {}
+      check: {}
+delete_permissions:
+  - role: teacher
+    permission:
+      filter: {}

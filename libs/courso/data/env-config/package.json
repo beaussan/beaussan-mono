@@ -1,0 +1,20 @@
+{
+  "name": "@beaussan/courso/data/env-config",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "dependencies": {
+    "@beaussan/shared/utils/zod": "*",
+    "zod": "^3.20.2",
+    "vite": "4.1.4",
+    "@vitejs/plugin-react": "4.0.4",
+    "@nx/vite": "16.7.4",
+    "vite-plugin-dts": "2.3.0"
+  }
+}

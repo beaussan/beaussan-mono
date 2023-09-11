@@ -1,0 +1,30 @@
+table:
+  name: practice_to_student_feedback
+  schema: public
+object_relationships:
+  - name: practice_to_student
+    using:
+      manual_configuration:
+        column_mapping:
+          practice_to_student_id: id
+        insertion_order: null
+        remote_table:
+          name: practice_to_student
+          schema: public
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - practice_to_student_id
+        - feedback
+      filter:
+        _and:
+          - practice_to_student:
+              student:
+                user_id:
+                  _eq: X-Hasura-User-Id
+          - practice_to_student:
+              practiceToCourse:
+                course:
+                  can_student_see_feedback:
+                    _eq: true

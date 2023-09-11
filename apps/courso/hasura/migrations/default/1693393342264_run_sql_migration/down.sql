@@ -1,0 +1,8 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE TABLE public.verification_token
+-- (
+--   token      text NOT NULL PRIMARY KEY,
+--   identifier text NOT NULL,
+--   expires    timestamptz NOT NULL
+-- );

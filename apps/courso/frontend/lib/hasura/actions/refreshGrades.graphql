@@ -1,0 +1,83 @@
+mutation fillEmptyForGrade($courseId: uuid!, $practiceId: uuid!) {
+  fillEmptyYields(course_id: $courseId, practice_id: $practiceId) {
+    affected_rows
+  }
+}
+
+query getPracticeToGradeByCourseIdAndPracticeId(
+  $course_id: uuid!
+  $practice_id: uuid!
+) {
+  practiceToCourse(
+    where: { courseId: { _eq: $course_id }, practiceId: { _eq: $practice_id } }
+  ) {
+    practiceToCourseId: id
+    is_open
+    openDate
+  }
+}
+
+mutation insertPracticeToStudentWithGrades(
+  $objects: [PracticeToStudentInsertInput!]!
+) {
+  insertPracticeToStudent(
+    objects: $objects
+    onConflict: {
+      constraint: practice_to_student_pkey
+      updateColumns: [grade, gradeDetail, graded, feedback]
+    }
+  ) {
+    affectedRows
+  }
+}
+
+fragment PracticeForGrading on Practice {
+  practiceYields {
+    id
+    name
+    practiceYieldExpectedOutputs {
+      id
+      practiceYieldGradeMetrics {
+        id
+        name
+        points
+      }
+    }
+  }
+}
+fragment PracticeToStudentYieldForGrading on PracticeToStudentYield {
+  id
+  submited
+  practiceYieldId
+  practiceToStudentGradeMetrics {
+    id
+    feedback
+    percentGrade
+    practiceYieldGradeMetricId
+    practiceYieldGradeMetric {
+      name
+      points
+    }
+  }
+}
+fragment PracticeToStudentForGrading on PracticeToStudent {
+  id
+  coursePracticeId
+  graded
+  grade
+  studentId
+  practiceToStudentYields {
+    ...PracticeToStudentYieldForGrading
+  }
+}
+query dataForPracticeToGradeByPracticeToCoursePk($practice_to_grade_id: uuid!) {
+  practiceToCourseByPk(id: $practice_to_grade_id) {
+    id
+    practice {
+      ...PracticeForGrading
+    }
+    practiceToStudents {
+      ...PracticeToStudentForGrading
+    }
+  }
+}

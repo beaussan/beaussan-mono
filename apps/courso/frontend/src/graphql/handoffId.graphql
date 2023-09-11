@@ -1,0 +1,39 @@
+fragment YieldPracticeInput on PracticeYield {
+  id
+  meta
+  method
+  name
+  description
+}
+query HandOffById($id: uuid!) {
+  practiceToCourseByPk(id: $id) {
+    practice {
+      title
+      description
+      id
+      practiceYields {
+        ...YieldPracticeInput
+      }
+    }
+    practiceToStudents {
+      id
+      studentId
+    }
+    is_open
+    openDate
+    closeDate
+    id
+  }
+}
+
+mutation submitHandoff(
+  $practiceToPromotionId: uuid!
+  $yields: [YieldForHandoff!]!
+) {
+  submitHandoff(
+    practiceToPromotionId: $practiceToPromotionId
+    yields: $yields
+  ) {
+    status
+  }
+}

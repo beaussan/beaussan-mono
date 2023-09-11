@@ -35,8 +35,8 @@
               "label": "dash - Dash application related libraries"
             },
             {
-              "value": "baby-watch",
-              "label": "baby-watch - app"
+              "value": "courso",
+              "label": "courso - app"
             }
           ]
         ]
@@ -73,27 +73,7 @@
             }
           ]
         ]
-      },
-      "items": [
-        [
-          {
-            "value": "utils",
-            "label": "utils - Utilities library, ex : date-utils, zod-utils"
-          },
-          {
-            "value": "data",
-            "label": "data - Data library, with state management and network"
-          },
-          {
-            "value": "ui",
-            "label": "ui - Ui library, with only component getting data via props"
-          },
-          {
-            "value": "feature",
-            "label": "feature - Feature library, with connected ui & data to make a feature"
-          }
-        ]
-      ]
+      }
     }
   },
   "required": ["name", "scope", "type"]

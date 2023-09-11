@@ -1,0 +1,71 @@
+table:
+  name: course
+  schema: public
+array_relationships:
+  - name: practiceToCourses
+    using:
+      foreign_key_constraint_on:
+        column: course_id
+        table:
+          name: practice_to_course
+          schema: public
+  - name: studentToCourses
+    using:
+      foreign_key_constraint_on:
+        column: course_id
+        table:
+          name: student_to_course
+          schema: public
+insert_permissions:
+  - role: teacher
+    permission:
+      check: {}
+      columns:
+        - id
+        - name
+        - years
+        - created_at
+        - updated_at
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - can_student_see_feedback
+        - can_student_see_grade
+        - created_at
+        - id
+        - name
+        - updated_at
+        - years
+      filter:
+        studentToCourses:
+          student:
+            user_id:
+              _eq: X-Hasura-User-Id
+  - role: teacher
+    permission:
+      columns:
+        - can_student_see_feedback
+        - can_student_see_grade
+        - created_at
+        - id
+        - name
+        - updated_at
+        - years
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - name
+        - years
+        - created_at
+        - updated_at
+        - id
+      filter: {}
+      check: null
+delete_permissions:
+  - role: teacher
+    permission:
+      filter: {}

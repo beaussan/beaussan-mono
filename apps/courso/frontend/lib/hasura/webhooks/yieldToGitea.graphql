@@ -1,0 +1,26 @@
+query onStudentYieldCreatedData($id: uuid!) {
+  practiceToStudentYieldByPk(id: $id) {
+    practiceToStudent {
+      student {
+        full_name
+      }
+      practiceToCourse {
+        giteaOrgName
+      }
+    }
+    practiceYield {
+      id
+      name
+      method
+    }
+  }
+}
+
+mutation onStudentYieldMutation($id: uuid!, $gitea_org_and_repo: String!) {
+  updatePracticeToStudentYieldByPk(
+    pkColumns: { id: $id }
+    _set: { giteaOrgAndRepo: $gitea_org_and_repo }
+  ) {
+    giteaOrgAndRepo
+  }
+}
