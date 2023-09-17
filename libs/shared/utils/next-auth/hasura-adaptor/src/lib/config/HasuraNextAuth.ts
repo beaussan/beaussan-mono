@@ -2,6 +2,8 @@ import { NextAuthOptions, Session } from 'next-auth';
 import * as jsonwebtoken from 'jsonwebtoken';
 import { JWT } from 'next-auth/jwt';
 import { HasuraAdapter } from '../storage/storageAdaptor';
+import { GraphQLClient } from 'graphql-request';
+import { getSdk } from '../generated/graphql';
 
 const hs256TokenStrategy = (): Required<
   Pick<NonNullable<NextAuthOptions['jwt']>, 'encode' | 'decode'>
@@ -27,9 +29,17 @@ export type HasuraNextAuth = Omit<
   // Explicit secret key
   secret: string;
   hasuraConfig: Parameters<typeof HasuraAdapter>[0];
+  disableSelfSignOn?: boolean;
 };
 
 export function CreateHasuraNextAuth(config: HasuraNextAuth): NextAuthOptions {
+  const client = new GraphQLClient(config.hasuraConfig.endpoint, {
+    headers: {
+      'x-hasura-admin-secret': config.hasuraConfig.adminSecret,
+    },
+  });
+  const sdk = getSdk(client);
+
   return {
     ...config,
     // forced secret
@@ -104,6 +114,37 @@ export function CreateHasuraNextAuth(config: HasuraNextAuth): NextAuthOptions {
           };
         }
         return newSession;
+      },
+
+      signIn: async ({ user, email, profile, account, credentials }) => {
+        console.log('DATA SIGN IN STEP', {
+          user,
+          email,
+          profile,
+          account,
+          credentials,
+        });
+        if (!config.disableSelfSignOn) {
+          return true;
+        }
+        if (user.email) {
+          const { user: maybeUsers } = await sdk.GetUsers({
+            where: {
+              email: {
+                _eq: user.email,
+              },
+            },
+          });
+          console.log('maybeusers', maybeUsers);
+          if (maybeUsers && maybeUsers.length > 0) {
+            console.log('Someon found, let it !');
+            // User already exist, let him through
+            return true;
+          }
+          console.log('Nooop');
+          return false;
+        }
+        return false;
       },
     },
   };

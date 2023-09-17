@@ -28,6 +28,7 @@ export const authOptions: NextAuthOptions = CreateHasuraNextAuth({
     adminSecret: serverEnv.HASURA_ADMIN_SECRET,
     defaultRole: 'STUDENT',
   },
+  disableSelfSignOn: true,
 });
 
 export default NextAuth(authOptions);
