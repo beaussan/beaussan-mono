@@ -33,6 +33,7 @@ export const authOptions: NextAuthOptions = CreateHasuraNextAuth({
     adminSecret: process.env.HASURA_ADMIN_SECRET!,
     defaultRole: 'USER',
   },
+  disableSelfSignOn: false,
 });
 
 export default NextAuth(authOptions);
