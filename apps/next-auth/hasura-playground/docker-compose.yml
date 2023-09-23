@@ -17,6 +17,8 @@ services:
     restart: unless-stopped
     container_name: next-auth-hasura-playround-graphql-engine
     environment:
+      # Local assets first
+      HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
       HASURA_GRAPHQL_DEV_MODE: 'true'
