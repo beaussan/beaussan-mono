@@ -17,6 +17,7 @@
       }
     }
   },
+  "plugins": ["@beaussan/nx-plugins/nx-docker-compose"],
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
