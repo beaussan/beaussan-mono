@@ -4,26 +4,6 @@
   "projectType": "application",
   "sourceRoot": "apps/next-auth/hasura-playground/src",
   "targets": {
-    "docker-compose:up": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          "docker compose up -d",
-          "echo Waiting for Hasura to be up...",
-          "sleep 5"
-        ],
-        "cwd": "apps/next-auth/hasura-playground",
-        "parallel": false
-      }
-    },
-    "docker-compose:stop": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": ["docker compose stop"],
-        "cwd": "apps/next-auth/hasura-playground",
-        "parallel": false
-      }
-    },
     "serve": {
       "executor": "nx:run-script",
       "dependsOn": ["metadata-apply"],
