@@ -9,13 +9,25 @@ services:
       - db_dash-hasura:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready']
+      interval: 10s
+      timeout: 5s
+      retries: 5
   graphql-engine:
     image: hasura/graphql-engine:v2.32.1
     ports:
       - ${HASURA_PORT}:8080
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     container_name: dash-hasura-graphql-engine
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8080/healthz']
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 2s
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
