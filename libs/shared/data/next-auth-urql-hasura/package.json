@@ -17,9 +17,9 @@
     "next-auth": "^4.22.1",
     "react": "18.2.0",
     "@vitejs/plugin-react": "4.0.4",
-    "@nx/vite": "16.7.4",
+    "@nx/vite": "16.9.1",
     "vite-plugin-dts": "2.3.0",
-    "@nx/devkit": "16.7.4",
+    "@nx/devkit": "16.9.1",
     "vitest": "0.32.0"
   }
 }
