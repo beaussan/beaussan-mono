@@ -25,6 +25,7 @@ jobs:
       #  yarn nx-cloud start-ci-run --stop-agents-after="test-storybook" --agent-count=3
       parallel-commands: |
         yarn nx-cloud record -- yarn nx format:check
+        yarn nx-cloud record -- yarn nx run nx-plugins-internal-generator:workspace-lint
       parallel-commands-on-agents: |
         yarn nx affected --target=build --parallel=4
         yarn nx affected --target=lint --parallel=5
