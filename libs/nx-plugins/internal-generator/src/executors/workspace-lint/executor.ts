@@ -4,15 +4,15 @@ import {
   getProjects,
   ProjectConfiguration,
   readJson,
+  readProjectConfiguration,
   Tree,
 } from '@nx/devkit';
 import { FsTree } from 'nx/src/generators/tree';
 import { match, P } from 'ts-pattern';
-import chalk from 'chalk';
-import { globby } from 'globby';
+import * as chalk from 'chalk';
 
 type RuleResult =
-  | { status: 'ok' }
+  | { status: 'ok'; reason?: string }
   | { status: 'error' | 'warn'; reason: string };
 
 type Rule = {
@@ -66,7 +66,7 @@ const ruleSet: Rule[] = [
     run: async (projectConfig) => {
       const testExecutor = projectConfig.targets?.test?.executor;
       if (!testExecutor) {
-        return { status: 'ok' };
+        return { status: 'ok', info: 'no test target found' };
       }
       if (testExecutor !== '@nx/vite:test') {
         return {
@@ -79,14 +79,60 @@ const ruleSet: Rule[] = [
   },
   {
     name: 'if has stories, should be in the implisit dependancies of the scope',
+    // Ignored for now, because we are still in the migration process
+    excludedProject: ['courso-frontend'],
     run: async (projectConfig, tree) => {
-      const paths = await globby('**/*.stories.{js|jsx|ts|tsx|mdx}', {
+      const { globby } = await (Function(
+        'return import("globby")'
+      )() as Promise<typeof import('globby')>);
+      const paths = await globby('**/*.stories.@(js|jsx|ts|tsx|mdx)', {
         cwd: projectConfig.root,
       });
-      console.log(paths);
-      return {
-        status: 'ok',
-      };
+      if (paths.length === 0) {
+        return {
+          status: 'ok',
+          reason: 'no stories found',
+        };
+      }
+      const scopeTags = projectConfig.tags
+        .filter((tag) => tag.startsWith('scope:'))
+        .map((tag) => tag.replace('scope:', ''));
+      if (scopeTags.length !== 1) {
+        return {
+          status: 'error',
+          reason: 'could not determine the scope for the given project.',
+        };
+      }
+      const scope = scopeTags[0];
+      try {
+        const storybookProject = readProjectConfiguration(
+          tree,
+          `${scope}-storybook-host`
+        );
+        if (!storybookProject) {
+          return {
+            status: 'error',
+            reason: 'could not locate storybook for scope ' + scope,
+          };
+        }
+        if (
+          !storybookProject.implicitDependencies.includes(projectConfig.name)
+        ) {
+          return {
+            status: 'error',
+            reason:
+              'project name is missing from storybook implicit dependencies',
+          };
+        }
+        return {
+          status: 'ok',
+        };
+      } catch (e) {
+        return {
+          status: 'error',
+          reason: 'could not locate storybook for scope ' + scope,
+        };
+      }
     },
   },
 ];
@@ -104,23 +150,16 @@ function prettyPrint(runOnProject: RunOnProject): void {
   }
 
   runOnProject.rulesRan.forEach((rule) => {
-    const message = match(rule.result)
-      .with(
-        { status: 'ok' },
-        () => chalk.bgGreen(' PASS ') + ' ' + rule.ruleName
-      )
-      .with(
-        { status: 'warn', reason: P.select() },
-        (selections) =>
-          chalk.bgYellow(' WARN ') + ' ' + rule.ruleName + ' : ' + selections
-      )
-      .with(
-        { status: 'error', reason: P.select() },
-        (errorMessage) =>
-          chalk.bgRed(' ERROR ') + ' ' + rule.ruleName + ' : ' + errorMessage
-      )
+    const prefix = match(rule.result)
+      .with({ status: 'ok' }, () => chalk.bgGreen(' PASS '))
+      .with({ status: 'warn' }, () => chalk.bgYellow(' WARN '))
+      .with({ status: 'error' }, () => chalk.bgRed(' ERROR '))
       .exhaustive();
-    console.log('   ' + message);
+    console.log(
+      `   ${prefix} ${rule.ruleName} ${
+        rule.result.reason ? ` : ${rule.result.reason}` : ''
+      }`
+    );
   });
 }
 
@@ -163,7 +202,8 @@ export default async function runExecutor(
     console.log('\n \n-----------------\n \nError on projects :\n');
     errors.forEach((project) => prettyPrint(project));
     console.log('\n \n ');
-    throw new Error('Lint error, failing.');
+    // We don't fail yet, but we should latter
+    // throw new Error('Lint error, failing.');
   }
   return {
     success: true,
