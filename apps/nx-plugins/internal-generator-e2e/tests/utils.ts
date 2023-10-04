@@ -13,7 +13,7 @@ export const createUtilsForLibTesting = (project: string) => {
     return await runNxCommandAsync(
       `generate @nx/react:library --name=${libName} --importPath=${importPath} --directory=${
         project + (salt ? salt : '')
-      } --tags=scope:${scope},type:${type} --no-interactive`
+      } --tags=scope:${scope},type:${type} --no-interactive --projectNameAndRootFormat=derived`
     );
   };
   const runLintOnProject = async (
