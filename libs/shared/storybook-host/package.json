@@ -13,7 +13,8 @@
     "@tailwindcss/forms": "^0.5.3",
     "vite": "4.1.4",
     "@vitejs/plugin-react": "4.0.4",
-    "@nx/vite": "16.7.4",
-    "vite-plugin-dts": "2.3.0"
+    "@nx/vite": "16.9.1",
+    "vite-plugin-dts": "2.3.0",
+    "@nx/react": "16.9.1"
   }
 }

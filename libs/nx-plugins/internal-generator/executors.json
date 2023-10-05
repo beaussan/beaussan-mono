@@ -1,4 +1,10 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "executors": {}
+  "executors": {
+    "workspace-lint": {
+      "implementation": "./src/executors/workspace-lint/executor",
+      "schema": "./src/executors/workspace-lint/schema.json",
+      "description": "workspace-lin executor"
+    }
+  }
 }

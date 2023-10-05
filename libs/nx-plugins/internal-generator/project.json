@@ -4,6 +4,9 @@
   "sourceRoot": "libs/nx-plugins/internal-generator/src",
   "projectType": "library",
   "targets": {
+    "workspace-lint": {
+      "executor": "@beaussan/internal-generator:workspace-lint"
+    },
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
