@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nx/devkit": "16.7.4",
+    "@nx/devkit": "16.9.1",
     "js-yaml": "^4.1.0"
   },
   "type": "module",
