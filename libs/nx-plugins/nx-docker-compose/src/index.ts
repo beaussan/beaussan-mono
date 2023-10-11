@@ -2,6 +2,8 @@ import { dirname } from 'path';
 import { CreateNodes } from '@nx/devkit';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
+import * as path from 'path';
+import * as os from 'os';
 
 type DockerComposeService = {
   [serviceName: string]: {
@@ -18,11 +20,20 @@ type DockerCompose = {
 
 export const createNodes: CreateNodes = [
   '**/docker-compose.yml',
-  (dockerComposeFile) => {
+  (dockerComposeFile, ctx) => {
+    ctx.workspaceRoot;
     try {
+      console.log(process.cwd());
+      const toRead = path.resolve(ctx.workspaceRoot, dockerComposeFile);
       const projectRoot = dirname(dockerComposeFile);
-
-      const dockerComposeAsString = fs.readFileSync(dockerComposeFile, 'utf-8');
+      console.log('Trying to read ', toRead);
+      console.log('Esits ? ', fs.existsSync(toRead));
+      console.log('stats ?', fs.statSync(toRead));
+      console.log('whoami ?', os.userInfo());
+      fs.accessSync(toRead, fs.constants.R_OK);
+      fs.accessSync(projectRoot, fs.constants.R_OK);
+      console.log('Read ok !');
+      const dockerComposeAsString = fs.readFileSync(toRead, 'utf-8');
 
       const data = yaml.load(dockerComposeAsString) as DockerCompose;
 
@@ -85,6 +96,8 @@ export const createNodes: CreateNodes = [
       };
     } catch (e) {
       console.error(e);
+      throw e;
+    } finally {
       return {};
     }
   },

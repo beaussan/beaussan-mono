@@ -1,6 +1,8 @@
 FROM node:lts-alpine as builder
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
+#RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001 && chown nextjs:nodejs /app
+#USER nextjs
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 COPY . .
@@ -13,15 +15,17 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+# RUN addgroup -g 1001 -S nodejs
+# RUN adduser -S nextjs -u 1001
+
+USER nextjs
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 # COPY --from=builder /app/next.config.js ./
-COPY --from=builder --chown=nextjs:nodejs /app/dist/apps/dash/frontend .
+# COPY --from=builder --chown=nextjs:nodejs /app/dist/apps/dash/frontend .
+COPY --from=builder /app/dist/apps/dash/frontend .
 RUN yarn install
 
-USER nextjs
 
 EXPOSE 4238
 
