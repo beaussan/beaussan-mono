@@ -23,17 +23,9 @@ export const createNodes: CreateNodes = [
   (dockerComposeFile, ctx) => {
     ctx.workspaceRoot;
     try {
-      console.log('CWD: ', process.cwd());
-      console.log('WORKSPACE ROOT :', ctx.workspaceRoot);
       const toRead = path.join(ctx.workspaceRoot, dockerComposeFile);
       const projectRoot = dirname(dockerComposeFile);
-      console.log('Trying to read ', toRead);
-      console.log('Esits ? ', fs.existsSync(toRead));
-      console.log('stats ?', fs.statSync(toRead));
-      console.log('whoami ?', os.userInfo());
       fs.accessSync(toRead, fs.constants.R_OK);
-      // fs.accessSync(projectRoot, fs.constants.R_OK);
-      console.log('Read ok !');
       const dockerComposeAsString = fs.readFileSync(toRead, 'utf-8');
 
       const data = yaml.load(dockerComposeAsString) as DockerCompose;
@@ -96,8 +88,9 @@ export const createNodes: CreateNodes = [
         },
       };
     } catch (e) {
+      console.error('Docker compose plugin inference failed.');
       console.error(e);
-      throw e;
+      return {};
     }
   },
 ];
