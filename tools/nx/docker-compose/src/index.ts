@@ -32,7 +32,7 @@ export const createNodes: CreateNodes = [
       console.log('stats ?', fs.statSync(toRead));
       console.log('whoami ?', os.userInfo());
       fs.accessSync(toRead, fs.constants.R_OK);
-      fs.accessSync(projectRoot, fs.constants.R_OK);
+      // fs.accessSync(projectRoot, fs.constants.R_OK);
       console.log('Read ok !');
       const dockerComposeAsString = fs.readFileSync(toRead, 'utf-8');
 
