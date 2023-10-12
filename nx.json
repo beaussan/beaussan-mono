@@ -17,6 +17,7 @@
       }
     }
   },
+  "plugins": ["@beaussan/nx-docker-compose"],
   "workspaceLayout": {
     "projectNameAndRootFormat": "derived"
   },
@@ -61,7 +62,7 @@
     }
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": ["{projectRoot}/**/*", "sharedGlobals", "nxInternalPlugins"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -73,7 +74,8 @@
       "!{projectRoot}/src/test-setup.[jt]s",
       "!{projectRoot}/tsconfig.storybook.json"
     ],
-    "sharedGlobals": ["{workspaceRoot}/babel.config.json"]
+    "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
+    "nxInternalPlugins": ["{workspaceRoot}/tools/nx/**/*.ts"]
   },
   "generators": {
     "@nx/react": {

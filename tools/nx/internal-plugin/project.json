@@ -1,38 +1,38 @@
 {
   "name": "nx-plugins-internal-generator",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/nx-plugins/internal-generator/src",
+  "sourceRoot": "tools/nx/internal-plugin/src",
   "projectType": "library",
   "targets": {
     "workspace-lint": {
-      "executor": "@beaussan/internal-generator:workspace-lint"
+      "executor": "@beaussan/nx-internal-plugin:workspace-lint"
     },
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/nx-plugins/internal-generator",
-        "main": "libs/nx-plugins/internal-generator/src/index.ts",
-        "tsConfig": "libs/nx-plugins/internal-generator/tsconfig.lib.json",
+        "outputPath": "dist/tools/nx/internal-plugin",
+        "main": "tools/nx/internal-plugin/src/index.ts",
+        "tsConfig": "tools/nx/internal-plugin/tsconfig.lib.json",
         "assets": [
-          "libs/nx-plugins/internal-generator/*.md",
+          "tools/nx/internal-plugin/*.md",
           {
-            "input": "./libs/nx-plugins/internal-generator/src",
+            "input": "./tools/nx/internal-plugin/src",
             "glob": "**/!(*.ts)",
             "output": "./src"
           },
           {
-            "input": "./libs/nx-plugins/internal-generator/src",
+            "input": "./tools/nx/internal-plugin/src",
             "glob": "**/*.d.ts",
             "output": "./src"
           },
           {
-            "input": "./libs/nx-plugins/internal-generator",
+            "input": "./tools/nx/internal-plugin",
             "glob": "generators.json",
             "output": "."
           },
           {
-            "input": "./libs/nx-plugins/internal-generator",
+            "input": "./tools/nx/internal-plugin",
             "glob": "executors.json",
             "output": "."
           }
@@ -45,8 +45,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/nx-plugins/internal-generator/**/*.ts",
-          "libs/nx-plugins/internal-generator/*.json"
+          "tools/nx/internal-plugin/**/*.ts",
+          "tools/nx/internal-plugin/*.json"
         ]
       }
     },

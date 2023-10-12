@@ -1,0 +1,12 @@
+{
+  "name": "nx-docker-compose",
+  "version": "0.0.1",
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "@nx/devkit": "16.9.1",
+    "js-yaml": "^4.1.0"
+  },
+  "type": "module",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts"
+}

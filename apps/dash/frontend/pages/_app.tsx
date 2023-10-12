@@ -16,6 +16,7 @@ import { Toaster } from 'react-hot-toast';
 import { UrqlNextAuthProvider } from '@beaussan/shared/data/next-auth-urql-hasura';
 import { SessionProvider } from 'next-auth/react';
 
+// trigger cache
 export const HTTP_URL = clientEnvs.NEXT_PUBLIC_HASURA_GRAPHQL_HTTP_URL;
 
 function CustomApp({

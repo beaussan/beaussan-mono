@@ -13,6 +13,11 @@ services:
       - db_courso-hasura:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready']
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   gitea:
     image: gitea/gitea:1.20.3
@@ -35,7 +40,14 @@ services:
     ports:
       - '${HASURA_PORT}:8080'
     depends_on:
-      - 'postgres'
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8080/healthz']
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 2s
     restart: unless-stopped
     container_name: courso-hasura-graphql-engine
     environment:

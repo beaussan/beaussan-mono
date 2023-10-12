@@ -78,26 +78,6 @@ export default async function (tree: Tree, options: AppGeneratorSchema) {
     projectType: 'application',
     sourceRoot: `${normalizedOptions.projectRoot}/src`,
     targets: {
-      'docker-compose:up': {
-        executor: 'nx:run-commands',
-        options: {
-          commands: [
-            'docker compose up -d',
-            'echo Waiting for Hasura to be up...',
-            'sleep 5',
-          ],
-          cwd: normalizedOptions.projectRoot,
-          parallel: false,
-        },
-      },
-      'docker-compose:stop': {
-        executor: 'nx:run-commands',
-        options: {
-          commands: ['docker compose stop'],
-          cwd: normalizedOptions.projectRoot,
-          parallel: false,
-        },
-      },
       serve: {
         executor: 'nx:run-script',
         dependsOn: ['metadata-apply'],
@@ -107,7 +87,7 @@ export default async function (tree: Tree, options: AppGeneratorSchema) {
       },
       'migrate-db': {
         executor: 'nx:run-script',
-        dependsOn: ['docker-compose:up'],
+        dependsOn: ['docker-compose-up'],
         options: {
           script:
             baseHasuraCliCommand + ' migrate apply --database-name default',

@@ -16,8 +16,8 @@ describe('internal-generators e2e', () => {
   // are not dependant on one another.
   beforeAll(async () => {
     ensureNxProject(
-      '@beaussan/internal-generator',
-      'dist/libs/nx-plugins/internal-generator'
+      '@beaussan/nx-internal-plugin',
+      'dist/tools/nx/internal-plugin'
     );
     await runNxCommandAsync(
       `generate @nx/react:library --name=setup-lib --no-interactive --projectNameAndRootFormat=derived`
@@ -28,7 +28,7 @@ describe('internal-generators e2e', () => {
     it('should create a project in the right folder given a scope and type', async () => {
       const project = uniq('library');
       await runNxCommandAsync(
-        `generate @beaussan/internal-generator:library ${project} --scope=shared --type=utils  --projectNameAndRootFormat=derived`
+        `generate @beaussan/nx-internal-plugin:library ${project} --scope=shared --type=utils  --projectNameAndRootFormat=derived`
       );
       expect(() =>
         checkFilesExist(`libs/shared/utils/${project}/src/index.ts`)
@@ -39,7 +39,7 @@ describe('internal-generators e2e', () => {
   describe.skip('storybook', () => {
     it('should create a project in the right folder given a scope and type', async () => {
       await runNxCommandAsync(
-        `generate @beaussan/internal-generator:storybook --scope=shared  --projectNameAndRootFormat=derived`
+        `generate @beaussan/nx-internal-plugin:storybook --scope=shared  --projectNameAndRootFormat=derived`
       );
       expect(() =>
         checkFilesExist(`libs/shared/storybook-host/.storybook/main.ts`)
@@ -50,7 +50,7 @@ describe('internal-generators e2e', () => {
   describe('update-generators-scope-and-types', () => {
     it('should modify the lint files in a correct manner', async () => {
       await runNxCommandAsync(
-        `generate @beaussan/internal-generator:update-generators-scope-and-types`
+        `generate @beaussan/nx-internal-plugin:update-generators-scope-and-types`
       );
 
       expect(() => checkFilesExist(`docs/tags.md`)).not.toThrow();
@@ -69,7 +69,7 @@ describe('internal-generators e2e', () => {
     describe.skip('import checker', () => {
       beforeAll(async () => {
         const { stderr, stdout } = await runNxCommandAsync(
-          `generate @beaussan/internal-generator:update-generators-scope-and-types`,
+          `generate @beaussan/nx-internal-plugin:update-generators-scope-and-types`,
           { silenceError: true }
         );
         console.log(stdout);

@@ -4,6 +4,7 @@ import './styles.css';
 import { SessionProvider } from 'next-auth/react';
 import { UrqlNextAuthProvider } from '@beaussan/shared/data/next-auth-urql-hasura';
 
+// trigger cache
 function CustomApp({
   Component,
   pageProps: { session, ...pageProps },

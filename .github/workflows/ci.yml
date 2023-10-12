@@ -17,12 +17,15 @@ jobs:
     secrets:
       NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
     with:
+      main-branch-name: main
       number-of-agents: 3
       install-commands: |
         sudo timedatectl set-timezone Europe/Paris
         yarn install --frozen-lockfile
       #init-commands: |
       #  yarn nx-cloud start-ci-run --stop-agents-after="test-storybook" --agent-count=3
+      init-commands: |
+        yarn nx-cloud start-ci-run --stop-agents-after="build" --agent-count=3
       parallel-commands: |
         yarn nx-cloud record -- yarn nx format:check
         yarn nx-cloud record -- yarn nx run nx-plugins-internal-generator:workspace-lint

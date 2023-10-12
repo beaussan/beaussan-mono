@@ -8,13 +8,26 @@ services:
       - db_next-auth-hasura-playround:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   graphql-engine:
     image: hasura/graphql-engine:v2.32.1
     ports:
       - ${HASURA_PORT}:8080
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8080/healthz']
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 2s
     container_name: next-auth-hasura-playround-graphql-engine
     environment:
       # Local assets first
