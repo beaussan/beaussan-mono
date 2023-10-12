@@ -23,8 +23,9 @@ export const createNodes: CreateNodes = [
   (dockerComposeFile, ctx) => {
     ctx.workspaceRoot;
     try {
-      console.log(process.cwd());
-      const toRead = path.resolve(ctx.workspaceRoot, dockerComposeFile);
+      console.log('CWD: ', process.cwd());
+      console.log('WORKSPACE ROOT :', ctx.workspaceRoot);
+      const toRead = path.join(ctx.workspaceRoot, dockerComposeFile);
       const projectRoot = dirname(dockerComposeFile);
       console.log('Trying to read ', toRead);
       console.log('Esits ? ', fs.existsSync(toRead));
