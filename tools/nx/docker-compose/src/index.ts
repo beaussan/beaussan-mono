@@ -97,8 +97,6 @@ export const createNodes: CreateNodes = [
     } catch (e) {
       console.error(e);
       throw e;
-    } finally {
-      return {};
     }
   },
 ];
