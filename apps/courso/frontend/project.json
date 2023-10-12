@@ -72,7 +72,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/courso/frontend/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/courso/frontend/**/*.{ts,tsx,js,jsx,json}"]
       }
     }
   },

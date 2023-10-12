@@ -17,6 +17,9 @@
       }
     }
   },
+  "workspaceLayout": {
+    "projectNameAndRootFormat": "derived"
+  },
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
