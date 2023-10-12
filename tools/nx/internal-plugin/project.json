@@ -1,35 +1,38 @@
 {
-  "name": "nx-plugins-nx-hasura",
+  "name": "nx-plugins-internal-generator",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/nx-plugins/nx-hasura/src",
+  "sourceRoot": "tools/nx/internal-plugin/src",
   "projectType": "library",
   "targets": {
+    "workspace-lint": {
+      "executor": "@beaussan/internal-generator:workspace-lint"
+    },
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/nx-plugins/nx-hasura",
-        "main": "libs/nx-plugins/nx-hasura/src/index.ts",
-        "tsConfig": "libs/nx-plugins/nx-hasura/tsconfig.lib.json",
+        "outputPath": "dist/tools/nx/internal-plugin",
+        "main": "tools/nx/internal-plugin/src/index.ts",
+        "tsConfig": "tools/nx/internal-plugin/tsconfig.lib.json",
         "assets": [
-          "libs/nx-plugins/nx-hasura/*.md",
+          "tools/nx/internal-plugin/*.md",
           {
-            "input": "./libs/nx-plugins/nx-hasura/src",
+            "input": "./tools/nx/internal-plugin/src",
             "glob": "**/!(*.ts)",
             "output": "./src"
           },
           {
-            "input": "./libs/nx-plugins/nx-hasura/src",
+            "input": "./tools/nx/internal-plugin/src",
             "glob": "**/*.d.ts",
             "output": "./src"
           },
           {
-            "input": "./libs/nx-plugins/nx-hasura",
+            "input": "./tools/nx/internal-plugin",
             "glob": "generators.json",
             "output": "."
           },
           {
-            "input": "./libs/nx-plugins/nx-hasura",
+            "input": "./tools/nx/internal-plugin",
             "glob": "executors.json",
             "output": "."
           }
@@ -42,16 +45,15 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/nx-plugins/nx-hasura/**/*.ts",
-          "libs/nx-plugins/nx-hasura/*.json"
+          "tools/nx/internal-plugin/**/*.ts",
+          "tools/nx/internal-plugin/*.json"
         ]
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
+      "executor": "@nx/vite:test",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/nx-plugins/nx-hasura/jest.config.ts",
         "passWithNoTests": true
       }
     }

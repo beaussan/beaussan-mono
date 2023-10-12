@@ -1,39 +1,40 @@
 {
-  "name": "nx-plugins-nx-docker-compose",
+  "name": "nx-plugins-nx-hasura",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/nx-plugins/nx-docker-compose/src",
+  "sourceRoot": "tools/nx/hasura/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/nx-plugins/nx-docker-compose",
-        "main": "libs/nx-plugins/nx-docker-compose/src/index.ts",
-        "tsConfig": "libs/nx-plugins/nx-docker-compose/tsconfig.lib.json",
+        "outputPath": "dist/tools/nx/hasura",
+        "main": "tools/nx/hasura/src/index.ts",
+        "tsConfig": "tools/nx/hasura/tsconfig.lib.json",
         "assets": [
-          "libs/nx-plugins/nx-docker-compose/*.md",
+          "tools/nx/hasura/*.md",
           {
-            "input": "./libs/nx-plugins/nx-docker-compose/src",
+            "input": "./tools/nx/hasura/src",
             "glob": "**/!(*.ts)",
             "output": "./src"
           },
           {
-            "input": "./libs/nx-plugins/nx-docker-compose/src",
+            "input": "./tools/nx/hasura/src",
             "glob": "**/*.d.ts",
             "output": "./src"
           },
           {
-            "input": "./libs/nx-plugins/nx-docker-compose",
+            "input": "./tools/nx/hasura",
             "glob": "generators.json",
             "output": "."
           },
           {
-            "input": "./libs/nx-plugins/nx-docker-compose",
+            "input": "./tools/nx/hasura",
             "glob": "executors.json",
             "output": "."
           }
-        ]
+        ],
+        "updateBuildableProjectDepsInPackageJson": true
       }
     },
     "lint": {
@@ -41,8 +42,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/nx-plugins/nx-docker-compose/**/*.ts",
-          "libs/nx-plugins/nx-docker-compose/package.json"
+          "tools/nx/hasura/**/*.ts",
+          "tools/nx/hasura/*.json"
         ]
       }
     },
@@ -50,16 +51,10 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/nx-plugins/nx-docker-compose/jest.config.ts",
+        "jestConfig": "tools/nx/hasura/jest.config.ts",
         "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
       }
     }
   },
-  "tags": []
+  "tags": ["scope:nx-plugins", "type:app"]
 }

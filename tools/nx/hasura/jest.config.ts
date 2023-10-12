@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'nx-plugins-internal-generator',
+  displayName: 'nx-plugins-nx-hasura',
   preset: '../../../jest.preset.js',
   globals: {},
   transform: {
@@ -12,5 +12,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../coverage/libs/nx-plugins/internal-generator',
+  coverageDirectory: '../../../coverage/tools/nx/hasura',
 };

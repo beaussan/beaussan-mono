@@ -1,5 +1,5 @@
 {
-  "name": "@beaussan/nx-plugins/nx-docker-compose",
+  "name": "nx-docker-compose",
   "version": "0.0.1",
   "dependencies": {
     "tslib": "^2.3.0",
