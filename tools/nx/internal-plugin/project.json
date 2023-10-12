@@ -5,7 +5,7 @@
   "projectType": "library",
   "targets": {
     "workspace-lint": {
-      "executor": "@beaussan/internal-generator:workspace-lint"
+      "executor": "@beaussan/nx-internal-plugin:workspace-lint"
     },
     "build": {
       "executor": "@nx/js:tsc",
