@@ -5,6 +5,8 @@ import { createProjectGraphAsync } from '@nx/devkit';
 import { log, mergeKnipConfigs } from './utils';
 import { TargetConfiguration } from 'nx/src/config/workspace-json-project-json';
 
+const DEBUG = false;
+
 type KnipConfigPluginOptions = {
   projects: ProjectGraphProjectNode[];
 };
@@ -127,9 +129,11 @@ export async function combineNxKnipPlugins(
 
   const finalConfig = mergeKnipConfigs(...pluginOutputs);
 
-  console.log('---------');
-  log(finalConfig);
-  console.log('---------');
+  if (DEBUG) {
+    console.log('---------');
+    log(finalConfig);
+    console.log('---------');
+  }
 
   return finalConfig;
 }
