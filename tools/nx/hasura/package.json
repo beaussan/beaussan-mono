@@ -6,7 +6,6 @@
   "executors": "./executors.json",
   "dependencies": {
     "uuid": "8.3.2",
-    "@nx/devkit": "16.9.1",
     "js-yaml": "^4.1.0",
     "tslib": "^2.3.0"
   }

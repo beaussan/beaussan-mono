@@ -4,10 +4,9 @@
   "type": "commonjs",
   "dependencies": {
     "urql": "^3.0.3",
-    "@vitejs/plugin-react": "4.0.4",
-    "@nx/vite": "16.9.1",
+    "@vitejs/plugin-react": "4.2.1",
     "vite-plugin-dts": "2.3.0",
-    "vitest": "0.32.0"
+    "vitest": "0.34.6"
   },
   "devDependencies": {}
 }
