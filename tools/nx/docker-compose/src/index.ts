@@ -3,7 +3,6 @@ import { CreateNodes } from '@nx/devkit';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as os from 'os';
 
 type DockerComposeService = {
   [serviceName: string]: {
@@ -20,7 +19,7 @@ type DockerCompose = {
 
 export const createNodes: CreateNodes = [
   '**/docker-compose.yml',
-  (dockerComposeFile, ctx) => {
+  (dockerComposeFile, _, ctx) => {
     ctx.workspaceRoot;
     try {
       const toRead = path.join(ctx.workspaceRoot, dockerComposeFile);

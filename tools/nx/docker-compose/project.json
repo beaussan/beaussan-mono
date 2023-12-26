@@ -37,29 +37,16 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "tools/nx/docker-compose/**/*.ts",
-          "tools/nx/docker-compose/package.json"
-        ]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "tools/nx/docker-compose/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "jestConfig": "tools/nx/docker-compose/jest.config.ts"
       }
     }
   },
-  "tags": []
+  "tags": ["scope:nx-plugins", "type:feature"]
 }

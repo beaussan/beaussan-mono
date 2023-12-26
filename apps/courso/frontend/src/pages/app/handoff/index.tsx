@@ -10,7 +10,6 @@ import { Chip } from '../../../components/Chip';
 import { FormatTimeLeft } from '../../../cmpToSort/FormatTimeLeft';
 import Link from 'next/link';
 import { routes } from '../../../routGetters';
-import { Button } from '../../../components/Button';
 import { CardBox } from '../../../components/CardBox';
 import { enGB } from 'date-fns/locale';
 
@@ -40,8 +39,7 @@ const PracticeHandoffRightSide = ({
 }: {
   practice: PracticeHandoff;
 }) => {
-  const { isSubmitted, isOver, isStarted, close, open } =
-    usePracticeInfo(practice);
+  const { isSubmitted, isOver, close, open } = usePracticeInfo(practice);
   if (isSubmitted) {
     return (
       <div className="flex justify-center items-center ">

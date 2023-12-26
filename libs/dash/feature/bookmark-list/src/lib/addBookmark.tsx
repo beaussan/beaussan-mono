@@ -82,12 +82,6 @@ export const DialogModifyOrCreate = ({
 };
 
 const AddBookmarkForm = () => {
-  const {
-    Form,
-    methods: { name },
-  } = useZodForm({
-    schema: validationSchema,
-  });
   const { setIsOpen } = useDialogContext();
   const [{ error }, insertBookmark] = useInsertBookmarkMutation();
   const [{ data: listOfBookmarks, fetching }] = useGetListOfBookmarksQuery();

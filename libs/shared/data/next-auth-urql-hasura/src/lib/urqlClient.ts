@@ -42,6 +42,8 @@ export const createAuthClient = ({ graphqlEndpoint }: CreateClientOptions) => {
       authExchange<{ token: string }>({
         getAuth: async (params) => {
           const session = await getSession();
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const maybeToken = (session as any)?.token;
           console.log('[getAuth] new token : ', { session, maybeToken });
           if (!maybeToken) {

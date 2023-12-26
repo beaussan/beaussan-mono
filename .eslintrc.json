@@ -97,6 +97,21 @@
       "rules": {}
     },
     {
+      "files": [
+        "*.spec.ts",
+        "*.spec.tsx",
+        "*.spec.js",
+        "*.spec.jsx",
+        "*.generated.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    },
+    {
+      "files": [""]
+    },
+    {
       "files": "*.json",
       "parser": "jsonc-eslint-parser",
       "rules": {

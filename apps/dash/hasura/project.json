@@ -5,11 +5,8 @@
   "sourceRoot": "apps/dash/hasura/src",
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/dash/hasura/**/*.json"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "serve": {
       "executor": "nx:run-script",

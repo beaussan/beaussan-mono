@@ -57,6 +57,8 @@ export function updateSchemaFile(
   filePath: string,
   tags: TypeTagsList[],
   scope: ScopeTagsList[],
+  // Disabled this since we don't have a full type for the config
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tagDefs: TagDefNew<any>
 ) {
   const schemaFile = readJson<SimplifiedSchemaJson>(tree, filePath);

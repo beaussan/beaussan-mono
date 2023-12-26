@@ -22,10 +22,9 @@ import {
   getDirectoryFromScopeAndType,
   getTagStringFromScopeAndType,
 } from '../../utils/tags';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 import * as path from 'path';
 import { tweakMainTsStorybookConfig } from './transforms/storybook';
-import { addEslintJsonCheck } from '../../utils/eslintUtils';
 import { reactLib, sharedModifications } from '../library/generator';
 
 export interface NormalizedSchema extends StorybookGeneratorSchema {
@@ -177,8 +176,7 @@ export default async function (tree: Tree, options: StorybookGeneratorSchema) {
     project: normalizedOptions.projectName,
   });
   await storybookConfigurationGenerator(tree, {
-    name: normalizedOptions.projectName,
-    configureCypress: false,
+    project: normalizedOptions.projectName,
     linter: Linter.EsLint,
     interactionTests: true,
     tsConfiguration: true,

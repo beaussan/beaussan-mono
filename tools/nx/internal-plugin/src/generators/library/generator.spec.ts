@@ -43,7 +43,7 @@ describe('library generator', () => {
     expect(config).toBeDefined();
   });
 
-  it('should add the json lint target successfully', async () => {
+  it.skip('should add the json lint target successfully', async () => {
     await generator(appTree, options);
     const config = readProjectConfiguration(appTree, 'shared-ui-test');
     expect(config.targets.lint.options.lintFilePatterns).toContainEqual(

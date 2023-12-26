@@ -1,8 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true
+    "module": "node16",
+    "esModuleInterop": true,
+    "moduleResolution": "node16"
   },
   "files": [],
   "include": [],

@@ -4,7 +4,6 @@ import { Tree, readProjectConfiguration } from '@nx/devkit';
 import generator from './generator';
 import { SetupGraphqlCodegenGeneratorSchema } from './schema';
 import libraryGenerator from '../library/generator';
-import { printChanges } from 'nx/src/generators/tree';
 
 describe('setup-graphql-codegen generator', () => {
   let appTree: Tree;

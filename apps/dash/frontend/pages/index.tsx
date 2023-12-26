@@ -45,7 +45,7 @@ function ProtectedPage() {
   );
 }
 export function Index() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   if (status === 'loading') {
     return <p>Loading...</p>;

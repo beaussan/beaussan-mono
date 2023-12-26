@@ -12,9 +12,11 @@ export function addEslintJsonCheck(tree: Tree, options: FullOptions) {
     throw new Error('No lint target found');
   }
 
-  projectDef.targets.lint.options.lintFilePatterns.push(
-    `${options.projectRoot}/**/*.json`
-  );
+  if (projectDef.targets.lint.options?.lintFilePatterns) {
+    projectDef.targets.lint.options.lintFilePatterns.push(
+      `${options.projectRoot}/**/*.json`
+    );
+  }
 
   updateProjectConfiguration(tree, options.projectName, projectDef);
 }
@@ -22,6 +24,8 @@ export function addEslintJsonCheck(tree: Tree, options: FullOptions) {
 export function modifyEslintRuleOptions(
   eslintRc: Linter.BaseConfig,
   ruleName: string,
+  // disabling this since we don't have a full type for the config from the eslint plugin
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   newOptions: (oldValue: Record<string, any>) => Record<string, any>
 ): Linter.BaseConfig {
   return {
