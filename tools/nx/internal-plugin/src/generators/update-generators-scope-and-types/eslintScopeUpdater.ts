@@ -10,6 +10,8 @@ import { Entries } from 'type-fest';
 import { Linter } from 'eslint';
 import { modifyEslintRuleOptions } from '../../utils/eslintUtils';
 export function generateDepConstraint(
+  // Disabled this since we don't have a full type for the config
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   typeDef: ImportMap<any>,
   prefix: string,
   sourceTag: string
@@ -17,12 +19,14 @@ export function generateDepConstraint(
   return {
     sourceTag: prefix + sourceTag,
     onlyDependOnLibsWithTags: Object.entries(typeDef)
-      .filter(([key, value]) => value)
+      .filter(([, value]) => value)
       .map(([key]) => prefix + key),
   };
 }
 
 export function generateDepConstraintForGroup(
+  // Disabled this since we don't have a full type for the config
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   group: TagDefNew<any>[string],
   prefix: string
 ) {

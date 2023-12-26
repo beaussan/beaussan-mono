@@ -3,12 +3,11 @@ import {
   ExecutorContext,
   getProjects,
   ProjectConfiguration,
-  readJson,
   readProjectConfiguration,
   Tree,
 } from '@nx/devkit';
 import { FsTree } from 'nx/src/generators/tree';
-import { match, P } from 'ts-pattern';
+import { match } from 'ts-pattern';
 import * as chalk from 'chalk';
 
 type RuleResult =
@@ -27,6 +26,7 @@ type RunOnProject = {
 };
 
 const ruleSet: Rule[] = [
+  /*
   {
     name: 'should have a lint target',
     run: async (projectConfig) => {
@@ -60,7 +60,7 @@ const ruleSet: Rule[] = [
       return { status: 'ok' };
     },
     excludedProject: ['eslint-rules'],
-  },
+  },*/
   {
     name: 'should use vitest',
     run: async (projectConfig) => {

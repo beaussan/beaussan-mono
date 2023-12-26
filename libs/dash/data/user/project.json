@@ -6,14 +6,8 @@
   "tags": ["scope:dash", "type:data"],
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/dash/data/user/**/*.{ts,tsx,js,jsx}",
-          "libs/dash/data/user/**/*.json"
-        ]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "build": {
       "executor": "@nx/vite:build",

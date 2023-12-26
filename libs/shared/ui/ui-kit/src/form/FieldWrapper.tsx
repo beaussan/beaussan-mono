@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FieldError, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import clsx from 'clsx';
 import { HiExclamationCircle } from 'react-icons/hi';
 

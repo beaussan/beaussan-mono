@@ -3,6 +3,8 @@ import { Tree } from '@nx/devkit';
 
 const wrapWithPipes = (str: string) => `|${str}|`;
 export function generateDepConstrainMdTable(
+  // Disabled this since we don't have a full type for the config
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   group: TagDefNew<any>[string],
   prefix: string,
   importImageUrl: string
@@ -16,7 +18,7 @@ export function generateDepConstrainMdTable(
       orderItems.map((it) => ` \`${prefix}${it}\` `).join('|')
   );
   const dividerHeader = wrapWithPipes(
-    `---|` + orderItems.map((it) => `:---:`).join('|')
+    `---|` + orderItems.map(() => `:---:`).join('|')
   );
 
   const rows = Object.entries(group).map(([source, { canImport }]) => {

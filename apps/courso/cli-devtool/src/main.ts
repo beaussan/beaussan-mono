@@ -4,8 +4,6 @@ import {
   AllowedRolesUpdateColumn,
   CourseInsertInput,
   PracticeInsertInput,
-  PracticeToStudentYield,
-  PracticeToStudentYieldInsertInput,
   PracticeYieldExpectedOutputTypesEnum,
   PracticeYieldTypeEnum,
   RolesEnum,

@@ -1,11 +1,7 @@
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import { Tree, writeJson, readJson } from '@nx/devkit';
+import { Tree, writeJson } from '@nx/devkit';
 
-import {
-  getListOfSchemaFiles,
-  SimplifiedSchemaJson,
-  updateSchemaFile,
-} from './generator';
+import { getListOfSchemaFiles } from './generator';
 
 describe('update-generators-scope-and-types generator', () => {
   let appTree: Tree;

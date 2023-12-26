@@ -1,11 +1,8 @@
 import {
-  addProjectConfiguration,
   formatFiles,
   generateFiles,
   getProjects,
-  getWorkspaceLayout,
   names,
-  offsetFromRoot,
   Tree,
 } from '@nx/devkit';
 import * as path from 'path';

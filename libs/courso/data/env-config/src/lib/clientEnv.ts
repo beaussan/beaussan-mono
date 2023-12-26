@@ -32,11 +32,6 @@ const transformedSchema = clientEnvSchema.transform((arg, ctx) => {
 
 export type ClientEnv = z.infer<typeof transformedSchema>;
 
-function generateTestEnv<T extends z.Schema>(schema: T): z.infer<T> {
-  console.log(schema._def);
-  return null;
-}
-
 export const testClientEnv: ClientEnv = {
   NODE_ENV: 'test',
   NEXT_PUBLIC_DEBUG_MODE: false,

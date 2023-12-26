@@ -8,15 +8,11 @@ import {
 import * as path from 'path';
 import { LibraryGeneratorSchema } from './schema';
 import { libraryGenerator as reactLibraryGenerator } from '@nx/react';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 import * as ts from 'typescript';
 import { appendJestConfigOption } from '../../utils/ast';
 import { addEslintJsonCheck } from '../../utils/eslintUtils';
-import {
-  FullOptions,
-  NormalizedOptions,
-  normalizeOptions,
-} from '../../utils/normalizedOptions';
+import { FullOptions, normalizeOptions } from '../../utils/normalizedOptions';
 import { addProjectToStorybookDeps } from '../../utils/addProjectToStorybookDeps';
 import { libraryGenerator } from '@nx/js';
 import { tsquery } from '@phenomnomnominal/tsquery';

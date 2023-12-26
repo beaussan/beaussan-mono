@@ -26,6 +26,7 @@ export const Basic: ComponentStory<typeof SwitchField> = () => {
     options: {
       defaultValues: {
         boolDisabled: false,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         boolRequired: false as any,
         boolInputTwo: false,
         boolInput: false,

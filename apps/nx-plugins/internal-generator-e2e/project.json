@@ -5,19 +5,15 @@
   "sourceRoot": "apps/nx-plugins/internal-generator-e2e/src",
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "apps/nx-plugins/internal-generator-e2e/**/*.{ts,tsx,json}"
-        ]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "e2e": {
       "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/nx-plugins/internal-generator-e2e/jest.config.ts",
-        "runInBand": true
+        "runInBand": true,
+        "passWithNoTests": false
       },
       "dependsOn": ["nx-plugins-internal-generator:build"]
     }

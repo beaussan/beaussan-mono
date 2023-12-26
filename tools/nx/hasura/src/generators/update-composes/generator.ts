@@ -1,8 +1,6 @@
 import {
-  addProjectConfiguration,
   getProjects,
   formatFiles,
-  generateFiles,
   Tree,
   readProjectConfiguration,
   runTasksInSerial,
@@ -10,7 +8,6 @@ import {
 } from '@nx/devkit';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
-import { UpdateComposesGeneratorSchema } from './schema';
 import { HASURA_VERSION } from '../app/versions';
 
 type DockerComposeService = {
@@ -119,10 +116,7 @@ async function findAllHasuraProjects(tree: Tree) {
   return projects;
 }
 
-export async function updateComposesGenerator(
-  tree: Tree,
-  options: UpdateComposesGeneratorSchema
-) {
+export async function updateComposesGenerator(tree: Tree) {
   const allProjects = await findAllHasuraProjects(tree);
   console.log(allProjects);
   allProjects.forEach((project) => {

@@ -1,14 +1,7 @@
 import clsx from 'clsx';
-import get from 'lodash.get';
 import React, { ReactElement } from 'react';
-import {
-  FieldError,
-  FieldPath,
-  useFormContext,
-  useWatch,
-} from 'react-hook-form';
+import { FieldPath, useFormContext, useWatch } from 'react-hook-form';
 import { BsXCircleFill } from 'react-icons/bs';
-import { z, ZodType, ZodTypeDef } from 'zod';
 import {
   FieldWrapper,
   FieldWrapperPassThroughProps,

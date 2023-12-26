@@ -10,6 +10,7 @@ import { FieldPath } from 'react-hook-form/dist/types/path';
 
 type ExtendedUseFormReturn<
   TFieldValues extends FieldValues = FieldValues,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TContext = any
 > = UseFormReturn<TFieldValues, TContext> & {
   name: <TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>(

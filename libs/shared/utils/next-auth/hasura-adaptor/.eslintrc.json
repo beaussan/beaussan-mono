@@ -1,6 +1,6 @@
 {
   "extends": ["plugin:@nx/react", "../../../../../.eslintrc.json"],
-  "ignorePatterns": ["!**/*"],
+  "ignorePatterns": ["!**/*", "gqlCodegen.ts", "generated/graphql.ts"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],

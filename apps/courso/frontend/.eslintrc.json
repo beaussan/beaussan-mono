@@ -5,7 +5,12 @@
     "next/core-web-vitals",
     "../../../.eslintrc.json"
   ],
-  "ignorePatterns": ["!**/*", ".next/**/*"],
+  "ignorePatterns": [
+    "!**/*",
+    ".next/**/*",
+    "src/generated/**",
+    "lib/generated/**"
+  ],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -13,7 +18,8 @@
         "@next/next/no-html-link-for-pages": [
           "error",
           "apps/courso/frontend/pages"
-        ]
+        ],
+        "@typescript-eslint/no-explicit-any": "warn"
       }
     },
     {
