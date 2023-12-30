@@ -1,6 +1,5 @@
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 import './tailwind.css';
-import type { DecoratorFunction } from '@storybook/types';
 import { urqlDecorator } from './urqlDecorator';
 import * as jest from '@storybook/jest';
 
@@ -12,4 +11,4 @@ window.jest = jest;
 initialize();
 
 // Provide the MSW addon decorator globally
-export const decorators: DecoratorFunction[] = [mswDecorator, urqlDecorator];
+export const decorators = [mswDecorator, urqlDecorator];
