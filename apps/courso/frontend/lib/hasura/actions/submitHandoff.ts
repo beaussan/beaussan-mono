@@ -1,15 +1,15 @@
 import { gqlSdk } from '../../gql';
-import * as yup from 'yup';
+import { z } from 'zod';
 import { ActionMap } from './types';
 import { HttpsError } from '../../common/HttpsError';
 import { PracticeToStudentYieldInsertInput } from '../../generated/graphql';
 
-const argValidation = yup.object().shape({
-  practiceToPromotionId: yup.string().uuid().required(),
-  yields: yup.array().of(
-    yup.object({
-      yieldId: yup.string().uuid().required(),
-      value: yup.string(),
+const argValidation = z.object({
+  practiceToPromotionId: z.string().uuid(),
+  yields: z.array(
+    z.object({
+      yieldId: z.string().uuid(),
+      value: z.string(),
     })
   ),
 });
@@ -18,7 +18,7 @@ export const submitHandoff: ActionMap['submitHandoff'] = async (
   args,
   sessionVars
 ) => {
-  await argValidation.validate(args);
+  argValidation.parse(args);
   const { practiceToCourseByPk: practice_to_course_by_pk } =
     await gqlSdk.dataForSubmitHandoff({
       practiceToPromoId: args.practiceToPromotionId,

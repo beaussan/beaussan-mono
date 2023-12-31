@@ -17,7 +17,8 @@ import {
   intervalToDuration,
   set,
 } from 'date-fns';
-import * as yup from 'yup';
+import { z } from 'zod';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { useFormikMutationSubmitWithNavigate } from '../../hooks/useFormikMutationSubmit';
 
 type promoItem = Pick<Course, 'id' | 'name' | 'years'>;
@@ -100,11 +101,13 @@ export const NewTpToPromo: React.FC<NewTpToPromoProps> = ({
             start: getInitDate(),
             course: promotions[0],
           }}
-          validationSchema={yup.object().shape({
-            course: yup.object().required(),
-            start: yup.date().required(),
-            end: yup.date().required(),
-          })}
+          validationSchema={toFormikValidationSchema(
+            z.object({
+              course: z.any(),
+              start: z.date(),
+              end: z.date(),
+            })
+          )}
           onSubmit={onSubmit}
         >
           {({ isValid, isSubmitting, isValidating, values }) => {

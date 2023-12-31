@@ -1,8 +1,9 @@
 import { ErrorHandler, RequestHandler } from 'next-connect';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Logger } from 'pino';
-import { ValidationError } from 'yup';
 import { HttpsError } from '../common/HttpsError';
+import { ZodError } from 'zod';
+import { fromZodError } from 'zod-validation-error';
 
 export const getTokenVerificationMiddleware = (
   logger: Logger,
@@ -33,10 +34,10 @@ export const getOnError =
         message: err.message,
         code: JSON.stringify(err.toJSON()),
       });
-    } else if (err instanceof ValidationError) {
-      logger.debug('Error ValidationError found', err);
+    } else if (err instanceof ZodError) {
+      console.log('Error ZodError found', err);
       res.status(400).json({
-        message: err.message,
+        message: fromZodError(err).message,
         code: JSON.stringify(err.errors),
       });
     } else {

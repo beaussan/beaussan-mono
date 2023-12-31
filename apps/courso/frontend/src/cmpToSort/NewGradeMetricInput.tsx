@@ -2,8 +2,10 @@ import React from 'react';
 import gql from 'graphql-tag';
 import {
   GradeMetricDefinitionInput,
-  yupGradeMetricDefSchema,
+  zodGradeMetricDefSchema,
 } from './GradeMetricDefinitionInput';
+import { z } from 'zod';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 import {
   PracticeYieldExpectedOutputInsertInput,
   PracticeYieldExpectedOutputTypesEnum,
@@ -17,7 +19,6 @@ import { Button } from '../components/Button';
 import { DebugJson } from '../components/DebugJson';
 import { CardBox } from '../components/CardBox';
 import { ArrayInput } from '../components/ArrayInput';
-import * as yup from 'yup';
 import { useFormikMutationSubmitWithNavigate } from '../hooks/useFormikMutationSubmit';
 
 gql`
@@ -147,22 +148,19 @@ export const NewGradeMetricInput: React.FC<NewGradeMetricInputProps> = ({
   }
   const yields = data.practiceByPk.practiceYields;
 
-  const yupSchema = yup
-    .object()
-    .shape(
-      yields
-        .map((it) => ({
-          [it.id]: yup.array().of(yupGradeMetricDefSchema).required(),
-        }))
-        .reduce(
-          (previousValue, currentValue) => ({
-            ...previousValue,
-            ...currentValue,
-          }),
-          {}
-        )
-    )
-    .required();
+  const zodSchema = z.object(
+    yields
+      .map((it) => ({
+        [it.id]: z.array(zodGradeMetricDefSchema),
+      }))
+      .reduce(
+        (previousValue, currentValue) => ({
+          ...previousValue,
+          ...currentValue,
+        }),
+        {}
+      )
+  );
 
   return (
     <div>
@@ -190,7 +188,7 @@ export const NewGradeMetricInput: React.FC<NewGradeMetricInputProps> = ({
             }),
             {}
           )}
-        validationSchema={yupSchema}
+        validationSchema={toFormikValidationSchema(zodSchema)}
         onSubmit={onSubmit}
       >
         {({ isValid, isSubmitting, isValidating, values }) => {

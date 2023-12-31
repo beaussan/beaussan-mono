@@ -1,4 +1,4 @@
-import * as yup from 'yup';
+import { z } from 'zod';
 
 export interface WebhookPayload<T> {
   created_at: string;
@@ -20,37 +20,22 @@ export interface WebhookPayload<T> {
   };
 }
 
-export const webHookModel = yup
-  .object()
-  .shape({
-    created_at: yup.string().required(),
-    id: yup.string().uuid().required(),
-    trigger: yup
-      .object()
-      .shape({
-        name: yup.string().required(),
-      })
-      .required(),
-    table: yup.object().required(),
-    event: yup
-      .object()
-      .shape({
-        session_variables: yup.object().required(),
-        op: yup
-          .string()
-          .oneOf(['INSERT', 'UPDATE', 'DELETE', 'MANUAL'])
-          .required(),
-        data: yup
-          .object()
-          .shape({
-            old: yup.object().optional().nullable(),
-            new: yup.object().optional().nullable(),
-          })
-          .required(),
-      })
-      .required(),
-  })
-  .required();
+export const webHookModel = z.object({
+  created_at: z.string(),
+  id: z.string().uuid(),
+  trigger: z.object({
+    name: z.string(),
+  }),
+  table: z.any(),
+  event: z.object({
+    session_variables: z.any(),
+    op: z.enum(['INSERT', 'UPDATE', 'DELETE', 'MANUAL']),
+    data: z.object({
+      old: z.any().optional().nullable(),
+      new: z.any().optional().nullable(),
+    }),
+  }),
+});
 
 export type handlerFn<F> = (data: WebhookPayload<F>) => Promise<any>;
 

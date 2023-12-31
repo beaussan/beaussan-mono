@@ -9,12 +9,12 @@ import React from 'react';
 import { CardBox } from '../../../components/CardBox';
 import { useFormikMutationSubmitWithNavigate } from '../../../hooks/useFormikMutationSubmit';
 import { getLayoutRoleTeacher } from '../../../layouts/WithRole';
-import { ValidationError } from 'yup';
 import {
   mapToSave,
   parseCsv,
   studentValidator,
 } from '../../../cmpToSort/validation';
+import { ZodError } from 'zod';
 
 gql`
   mutation CreateCourse(
@@ -54,10 +54,10 @@ const validateData = async (values: Partial<NewPromo>) => {
   } else {
     const parsedData = parseCsv(values.csv);
     try {
-      await studentValidator.validate(parsedData);
+      await studentValidator.parse(parsedData);
     } catch (e) {
       console.error(e);
-      if (e instanceof ValidationError) {
+      if (e instanceof ZodError) {
         errors.csv = e.message;
       }
     }

@@ -6,7 +6,7 @@ import {
   StudentUpdateColumn,
 } from '../generated/graphql';
 import { parse } from 'papaparse';
-import * as yup from 'yup';
+import { z } from 'zod';
 
 type PartialStudent = Required<
   Pick<StudentInsertInput, 'firstName' | 'lastName' | 'email' | 'user'>
@@ -53,16 +53,12 @@ export const mapToSave = (
     },
   }));
 
-export const studentValidator = yup
+export const studentValidator = z
   .array(
-    yup
-      .object()
-      .shape({
-        first_name: yup.string().required(),
-        last_name: yup.string().required(),
-        email: yup.string().email().required(),
-      })
-      .required()
+    z.object({
+      first_name: z.string().nonempty(),
+      last_name: z.string().nonempty(),
+      email: z.string().email(),
+    })
   )
-  .required('No student found')
   .min(1);

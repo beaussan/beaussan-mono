@@ -15,10 +15,9 @@ import { Input, TextArea } from '../../../components/Input';
 import { CardBox } from '../../../components/CardBox';
 import { Form, Formik } from 'formik';
 import { Alert } from '../../../components/Alert';
-import * as yup from 'yup';
+import { z, ZodSchema } from 'zod';
 import { Button } from '../../../components/Button';
 import { useFormikMutationSubmitWithNavigate } from '../../../hooks/useFormikMutationSubmit';
-import { ObjectSchema } from 'yup';
 import { DebugJson } from '../../../components/DebugJson';
 // TODO FIX THIS WAY OF IMPORTING THE COMPONENT
 // eslint-disable-next-line no-restricted-imports
@@ -27,6 +26,7 @@ import { useRouter } from 'next/router';
 import { getLayoutRoleStudent } from '../../../layouts/WithRole';
 import { routes } from '../../../routGetters';
 import { FormatTimeLeft } from '../../../cmpToSort/FormatTimeLeft';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 
 const InputBlock: React.FC<
   React.PropsWithChildren<{ label: string; description?: string | null }>
@@ -99,18 +99,18 @@ const FormElementsByMethod: Record<PracticeYieldTypeEnum, FormInputElem> = {
   URL: UrlInput,
 };
 
-const Validation: Record<PracticeYieldTypeEnum, ObjectSchema> = {
-  GIT_REPO: yup.object({
-    value: yup.string().url('Git url is not a valid url'),
+const Validation: Record<PracticeYieldTypeEnum, ZodSchema> = {
+  GIT_REPO: z.object({
+    value: z.string().url('Git url is not a valid url').optional(),
   }),
-  BLOB: yup.object({
-    value: yup.string(),
+  BLOB: z.object({
+    value: z.string().optional(),
   }),
-  CODE: yup.object({
-    value: yup.string(),
+  CODE: z.object({
+    value: z.string().optional(),
   }),
-  URL: yup.object({
-    value: yup.string().url('This is not a valid url'),
+  URL: z.object({
+    value: z.string().url('This is not a valid url').optional(),
   }),
 };
 
@@ -153,12 +153,14 @@ const HandOffBody: React.FC<{ data: HandOffByIdQuery }> = ({ data }) => {
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
-        validationSchema={yup.object(
-          yeilds
-            .map(({ id, method }) => ({
-              [id]: Validation[method],
-            }))
-            .reduce((prev, curr) => ({ ...prev, ...curr }), {})
+        validationSchema={toFormikValidationSchema(
+          z.object(
+            yeilds
+              .map(({ id, method }) => ({
+                [id]: Validation[method],
+              }))
+              .reduce((prev, curr) => ({ ...prev, ...curr }), {})
+          )
         )}
       >
         {({ isValid, isValidating, values }) => (

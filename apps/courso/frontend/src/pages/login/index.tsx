@@ -7,7 +7,8 @@ import { Logo } from '../../components/Logo';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { Form, Formik } from 'formik';
-import * as yup from 'yup';
+import { z } from 'zod';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { Loader } from '../../components/Loader';
 import { authOptions } from '../api/auth/[...nextauth]';
 
@@ -69,9 +70,11 @@ export const Login = (
             </div>
             <Formik<{ email: string }>
               initialValues={{ email: '' }}
-              validationSchema={yup.object({
-                email: yup.string().email().required(),
-              })}
+              validationSchema={toFormikValidationSchema(
+                z.object({
+                  email: z.string().email(),
+                })
+              )}
               onSubmit={async ({ email }) => {
                 console.log(email);
                 await signIn('email', { email });

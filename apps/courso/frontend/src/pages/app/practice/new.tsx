@@ -11,7 +11,8 @@ import { useFetchYieldTypes } from '../../../hooks/useFetchYieldTypes';
 import { FieldArray, Form, Formik } from 'formik';
 import { Input, TextArea } from '../../../components/Input';
 import { Button } from '../../../components/Button';
-import * as yup from 'yup';
+import { z } from 'zod';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { CardBox } from '../../../components/CardBox';
 import { useFormikMutationSubmitWithNavigate } from '../../../hooks/useFormikMutationSubmit';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -87,27 +88,20 @@ export const TpNew = () => {
                 },
               ],
             }}
-            validationSchema={yup
-              .object()
-              .shape({
-                title: yup.string().required('Title is required'),
-                description: yup.string().notRequired(),
-                yields: yup
-                  .array()
-                  .of(
-                    yup.object().shape({
-                      name: yup.string().required('Name is required'),
-                      description: yup.string().notRequired(),
-                      method: yup
-                        .string()
-                        .oneOf(yieldTypes)
-                        .required('Method is required'),
-                    })
-                  )
-                  .required()
-                  .min(1),
+            validationSchema={toFormikValidationSchema(
+              z.object({
+                title: z.string().nonempty('Title is required'),
+                description: z.string().optional(),
+                yields: z.array(
+                  z.object({
+                    name: z.string().nonempty('Name is required'),
+                    method: z.enum(yieldTypes as any, {
+                      required_error: 'Method is required',
+                    }),
+                  })
+                ),
               })
-              .required()}
+            )}
             onSubmit={onSubmit}
           >
             {({ isValid, isValidating, values }) => (
