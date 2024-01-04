@@ -2486,10 +2486,10 @@
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
-"@commonalityco/studio@^0.2.31":
-  version "0.2.31"
-  resolved "https://registry.yarnpkg.com/@commonalityco/studio/-/studio-0.2.31.tgz#afd99ab9aeff049a3bb8f804279acc4537466fbd"
-  integrity sha512-GzcITDyhqOoCMe1c5RNVGLM3UgGEO1/UUkwsvTN3qcgrb7DTWDgF05P5ESzMNNNQPCXFYiYlGOsoPFWTZWTakQ==
+"@commonalityco/studio@0.2.32":
+  version "0.2.32"
+  resolved "https://registry.yarnpkg.com/@commonalityco/studio/-/studio-0.2.32.tgz#7750781a53c0bb614ac30619f41ff79ad35a3934"
+  integrity sha512-mvks0FuCAU2Rvni/DWn2O8fi5AlPtBMF3DW1sNjlei2J52vp2cr8C2IPyk+6n46i+a94VCFI6NiEsxjWhJgCSw==
   dependencies:
     chokidar "^3.5.3"
     execa "^7.2.0"
@@ -10927,19 +10927,19 @@ common-tags@1.8.2, common-tags@^1.8.0:
   resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.8.2.tgz#94ebb3c076d26032745fd54face7f688ef5ac9c6"
   integrity sha512-gk/Z852D2Wtb//0I+kRFNKKE9dIIVirjoqPoA1wJU+XePVXZfGeBpk45+A1rKO4Q43prqWBNY/MiIeRLbPWUaA==
 
-commonality-checks-recommended@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/commonality-checks-recommended/-/commonality-checks-recommended-0.0.10.tgz#30f249df2961a7e68b8a81ad497ac8a193cd65d1"
-  integrity sha512-BmQIjDJjo1G+xStdG42mxGI1xQltlj9Gv0nOhA2/WFUre/MkZsF+Z72NRmPDNrrwJe9OAP8IwRrP38j7Jfb/uA==
+commonality-checks-recommended@0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/commonality-checks-recommended/-/commonality-checks-recommended-0.0.11.tgz#6b55a54703823c8e8aa912a5609d71053f680909"
+  integrity sha512-a1KGQQccD/x6iLs+kwd2EFORFayh+zjAOC6sl6vBJCiZoMbPZidv0YgdINKameelvYWY2Ngo5v/vz5H+NL9BdA==
   dependencies:
     lodash "^4.17.21"
     semver "^7.5.4"
     validate-npm-package-name "^5.0.0"
 
-commonality@^0.2.30:
-  version "0.2.30"
-  resolved "https://registry.yarnpkg.com/commonality/-/commonality-0.2.30.tgz#de183afe168ef03f53358db992b803492947cc76"
-  integrity sha512-jeGtxxDN0ByNEwDEtCODcfKyrOc2iIJKeyl87+rW/oKMqZXaHVy7kl0fV8bZ5IE4HIjH1iDZJpR+jHxpM83YHg==
+commonality@0.2.31:
+  version "0.2.31"
+  resolved "https://registry.yarnpkg.com/commonality/-/commonality-0.2.31.tgz#35e3d20fcdf481a1636b8cae76c2710b5d9fd5ec"
+  integrity sha512-zypoBIrYPBddeJMXpxuj8rWjJg3aJDi5rw+f/7iPRWVdajBSmcMlZeBbzxv94l5Df2oOIfShriRdYgje7FjprA==
   dependencies:
     "@antfu/install-pkg" "^0.3.1"
     "@sindresorhus/slugify" "^2.2.1"
