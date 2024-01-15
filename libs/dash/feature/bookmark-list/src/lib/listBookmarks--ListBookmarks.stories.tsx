@@ -91,28 +91,30 @@ OneOfEach.play = async ({ canvasElement }) => {
 };
 export const ALotOfBookmarks = Template.bind({});
 
+const manyBookmarksHandler = mockGetListOfBookmarksQuery((req, res, ctx) => {
+    return res(
+      ctx.data({
+        bookmarks: Array.from({ length: 20 }, (x, i) => ({
+          link: `https://example.com/${i}`,
+          displayName: `Example ${i}`,
+          position: i,
+          id: `id-${i}`,
+        })),
+        traefikRoutes: Array.from({ length: 20 }, (x, i) => ({
+          link: `https://example.com/traefik/${i}`,
+          name: 'something@docker',
+          friendlyName: `Example Traefik ${i}`,
+          lastSeenAlive: formatHasuraDate(new Date()),
+          isUp: true,
+        })),
+      })
+    );
+  })
+
 ALotOfBookmarks.parameters = {
   msw: {
     handlers: [
-      mockGetListOfBookmarksQuery((req, res, ctx) => {
-        return res(
-          ctx.data({
-            bookmarks: Array.from({ length: 20 }, (x, i) => ({
-              link: `https://example.com/${i}`,
-              displayName: `Example ${i}`,
-              position: i,
-              id: `id-${i}`,
-            })),
-            traefikRoutes: Array.from({ length: 20 }, (x, i) => ({
-              link: `https://example.com/traefik/${i}`,
-              name: 'something@docker',
-              friendlyName: `Example Traefik ${i}`,
-              lastSeenAlive: formatHasuraDate(new Date()),
-              isUp: true,
-            })),
-          })
-        );
-      }),
+      manyBookmarksHandler
     ],
   },
 };
@@ -145,6 +147,17 @@ ALotOfBookmarks.play = async ({ canvasElement }) => {
   await expect(canvas.getAllByRole('link')).toHaveLength(1);
 
   await userEvent.clear(canvas.getByRole('textbox'));
+};
+
+export const Playground = Template.bind({});
+
+
+Playground.parameters = {
+  msw: {
+    handlers: [
+      manyBookmarksHandler
+    ],
+  },
 };
 export const Errored = Template.bind({});
 

@@ -4,18 +4,12 @@ schema {
   subscription: subscription_root
 }
 
-"""
-whether this query should be cached (Hasura Cloud only)
-"""
+"""whether this query should be cached (Hasura Cloud only)"""
 directive @cached(
-  """
-  refresh the cache entry
-  """
+  """refresh the cache entry"""
   refresh: Boolean! = false
 
-  """
-  measured in seconds
-  """
+  """measured in seconds"""
   ttl: Int! = 60
 ) on QUERY
 
@@ -38,9 +32,7 @@ type Account {
   tokenType: String
   type: String!
 
-  """
-  An object relationship
-  """
+  """An object relationship"""
   user: User!
   userId: uuid!
 }
@@ -97,15 +89,11 @@ input type for inserting array relation for remote table "account"
 input AccountArrRelInsertInput {
   data: [AccountInsertInput!]!
 
-  """
-  upsert condition
-  """
+  """upsert condition"""
   onConflict: AccountOnConflict
 }
 
-"""
-aggregate avg on columns
-"""
+"""aggregate avg on columns"""
 type AccountAvgFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
@@ -184,9 +172,7 @@ input AccountInsertInput {
   userId: uuid
 }
 
-"""
-aggregate max on columns
-"""
+"""aggregate max on columns"""
 type AccountMaxFields {
   accessToken: String
   expiresAt: bigint
@@ -226,9 +212,7 @@ input AccountMaxOrderBy {
   userId: OrderBy
 }
 
-"""
-aggregate min on columns
-"""
+"""aggregate min on columns"""
 type AccountMinFields {
   accessToken: String
   expiresAt: bigint
@@ -272,14 +256,10 @@ input AccountMinOrderBy {
 response of any mutation on the table "account"
 """
 type AccountMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
+  """number of rows affected by the mutation"""
   affectedRows: Int!
 
-  """
-  data from the rows affected by the mutation
-  """
+  """data from the rows affected by the mutation"""
   returning: [Account!]!
 }
 
@@ -292,9 +272,7 @@ input AccountOnConflict {
   where: AccountBoolExp
 }
 
-"""
-Ordering options when selecting data from "account".
-"""
+"""Ordering options when selecting data from "account"."""
 input AccountOrderBy {
   accessToken: OrderBy
   expiresAt: OrderBy
@@ -314,9 +292,7 @@ input AccountOrderBy {
   userId: OrderBy
 }
 
-"""
-primary key columns input for table: account
-"""
+"""primary key columns input for table: account"""
 input AccountPkColumnsInput {
   id: uuid!
 }
@@ -325,79 +301,49 @@ input AccountPkColumnsInput {
 select columns of table "account"
 """
 enum AccountSelectColumn {
-  """
-  column name
-  """
+  """column name"""
   accessToken
 
-  """
-  column name
-  """
+  """column name"""
   expiresAt
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   idToken
 
-  """
-  column name
-  """
+  """column name"""
   oauthToken
 
-  """
-  column name
-  """
+  """column name"""
   oauthTokenSecret
 
-  """
-  column name
-  """
+  """column name"""
   provider
 
-  """
-  column name
-  """
+  """column name"""
   providerAccountId
 
-  """
-  column name
-  """
+  """column name"""
   refreshToken
 
-  """
-  column name
-  """
+  """column name"""
   refreshTokenExpiresIn
 
-  """
-  column name
-  """
+  """column name"""
   scope
 
-  """
-  column name
-  """
+  """column name"""
   sessionState
 
-  """
-  column name
-  """
+  """column name"""
   tokenType
 
-  """
-  column name
-  """
+  """column name"""
   type
 
-  """
-  column name
-  """
+  """column name"""
   userId
 }
 
@@ -422,9 +368,7 @@ input AccountSetInput {
   userId: uuid
 }
 
-"""
-aggregate stddev on columns
-"""
+"""aggregate stddev on columns"""
 type AccountStddevFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
@@ -438,9 +382,7 @@ input AccountStddevOrderBy {
   refreshTokenExpiresIn: OrderBy
 }
 
-"""
-aggregate stddevPop on columns
-"""
+"""aggregate stddevPop on columns"""
 type AccountStddevPopFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
@@ -454,9 +396,7 @@ input AccountStddevPopOrderBy {
   refreshTokenExpiresIn: OrderBy
 }
 
-"""
-aggregate stddevSamp on columns
-"""
+"""aggregate stddevSamp on columns"""
 type AccountStddevSampFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
@@ -474,20 +414,14 @@ input AccountStddevSampOrderBy {
 Streaming cursor of the table "account"
 """
 input AccountStreamCursorInput {
-  """
-  Stream column input with initial value
-  """
+  """Stream column input with initial value"""
   initialValue: AccountStreamCursorValueInput!
 
-  """
-  cursor ordering
-  """
+  """cursor ordering"""
   ordering: CursorOrdering
 }
 
-"""
-Initial value of the column from where the streaming should start
-"""
+"""Initial value of the column from where the streaming should start"""
 input AccountStreamCursorValueInput {
   accessToken: String
   expiresAt: bigint
@@ -506,9 +440,7 @@ input AccountStreamCursorValueInput {
   userId: uuid
 }
 
-"""
-aggregate sum on columns
-"""
+"""aggregate sum on columns"""
 type AccountSumFields {
   expiresAt: bigint
   refreshTokenExpiresIn: bigint
@@ -526,102 +458,64 @@ input AccountSumOrderBy {
 update columns of table "account"
 """
 enum AccountUpdateColumn {
-  """
-  column name
-  """
+  """column name"""
   accessToken
 
-  """
-  column name
-  """
+  """column name"""
   expiresAt
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   idToken
 
-  """
-  column name
-  """
+  """column name"""
   oauthToken
 
-  """
-  column name
-  """
+  """column name"""
   oauthTokenSecret
 
-  """
-  column name
-  """
+  """column name"""
   provider
 
-  """
-  column name
-  """
+  """column name"""
   providerAccountId
 
-  """
-  column name
-  """
+  """column name"""
   refreshToken
 
-  """
-  column name
-  """
+  """column name"""
   refreshTokenExpiresIn
 
-  """
-  column name
-  """
+  """column name"""
   scope
 
-  """
-  column name
-  """
+  """column name"""
   sessionState
 
-  """
-  column name
-  """
+  """column name"""
   tokenType
 
-  """
-  column name
-  """
+  """column name"""
   type
 
-  """
-  column name
-  """
+  """column name"""
   userId
 }
 
 input AccountUpdates {
-  """
-  increments the numeric columns with given value of the filtered values
-  """
+  """increments the numeric columns with given value of the filtered values"""
   _inc: AccountIncInput
 
-  """
-  sets the columns of the filtered rows to the given values
-  """
+  """sets the columns of the filtered rows to the given values"""
   _set: AccountSetInput
 
-  """
-  filter the rows which have to be updated
-  """
+  """filter the rows which have to be updated"""
   where: AccountBoolExp!
 }
 
-"""
-aggregate varPop on columns
-"""
+"""aggregate varPop on columns"""
 type AccountVarPopFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
@@ -635,9 +529,7 @@ input AccountVarPopOrderBy {
   refreshTokenExpiresIn: OrderBy
 }
 
-"""
-aggregate varSamp on columns
-"""
+"""aggregate varSamp on columns"""
 type AccountVarSampFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
@@ -651,9 +543,7 @@ input AccountVarSampOrderBy {
   refreshTokenExpiresIn: OrderBy
 }
 
-"""
-aggregate variance on columns
-"""
+"""aggregate variance on columns"""
 type AccountVarianceFields {
   expiresAt: Float
   refreshTokenExpiresIn: Float
@@ -673,14 +563,10 @@ columns and relationships of "allowed_role"
 type AllowedRole {
   role: RolesEnum!
 
-  """
-  An object relationship
-  """
+  """An object relationship"""
   roleByRole: Roles!
 
-  """
-  An object relationship
-  """
+  """An object relationship"""
   user: User!
   userId: uuid!
 }
@@ -721,9 +607,7 @@ input type for inserting array relation for remote table "allowed_role"
 input AllowedRoleArrRelInsertInput {
   data: [AllowedRoleInsertInput!]!
 
-  """
-  upsert condition
-  """
+  """upsert condition"""
   onConflict: AllowedRoleOnConflict
 }
 
@@ -760,9 +644,7 @@ input AllowedRoleInsertInput {
   userId: uuid
 }
 
-"""
-aggregate max on columns
-"""
+"""aggregate max on columns"""
 type AllowedRoleMaxFields {
   userId: uuid
 }
@@ -774,9 +656,7 @@ input AllowedRoleMaxOrderBy {
   userId: OrderBy
 }
 
-"""
-aggregate min on columns
-"""
+"""aggregate min on columns"""
 type AllowedRoleMinFields {
   userId: uuid
 }
@@ -792,14 +672,10 @@ input AllowedRoleMinOrderBy {
 response of any mutation on the table "allowed_role"
 """
 type AllowedRoleMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
+  """number of rows affected by the mutation"""
   affectedRows: Int!
 
-  """
-  data from the rows affected by the mutation
-  """
+  """data from the rows affected by the mutation"""
   returning: [AllowedRole!]!
 }
 
@@ -812,9 +688,7 @@ input AllowedRoleOnConflict {
   where: AllowedRoleBoolExp
 }
 
-"""
-Ordering options when selecting data from "allowed_role".
-"""
+"""Ordering options when selecting data from "allowed_role"."""
 input AllowedRoleOrderBy {
   role: OrderBy
   roleByRole: RolesOrderBy
@@ -822,9 +696,7 @@ input AllowedRoleOrderBy {
   userId: OrderBy
 }
 
-"""
-primary key columns input for table: allowed_role
-"""
+"""primary key columns input for table: allowed_role"""
 input AllowedRolePkColumnsInput {
   role: RolesEnum!
   userId: uuid!
@@ -834,14 +706,10 @@ input AllowedRolePkColumnsInput {
 select columns of table "allowed_role"
 """
 enum AllowedRoleSelectColumn {
-  """
-  column name
-  """
+  """column name"""
   role
 
-  """
-  column name
-  """
+  """column name"""
   userId
 }
 
@@ -857,20 +725,14 @@ input AllowedRoleSetInput {
 Streaming cursor of the table "allowed_role"
 """
 input AllowedRoleStreamCursorInput {
-  """
-  Stream column input with initial value
-  """
+  """Stream column input with initial value"""
   initialValue: AllowedRoleStreamCursorValueInput!
 
-  """
-  cursor ordering
-  """
+  """cursor ordering"""
   ordering: CursorOrdering
 }
 
-"""
-Initial value of the column from where the streaming should start
-"""
+"""Initial value of the column from where the streaming should start"""
 input AllowedRoleStreamCursorValueInput {
   role: RolesEnum
   userId: uuid
@@ -880,26 +742,18 @@ input AllowedRoleStreamCursorValueInput {
 update columns of table "allowed_role"
 """
 enum AllowedRoleUpdateColumn {
-  """
-  column name
-  """
+  """column name"""
   role
 
-  """
-  column name
-  """
+  """column name"""
   userId
 }
 
 input AllowedRoleUpdates {
-  """
-  sets the columns of the filtered rows to the given values
-  """
+  """sets the columns of the filtered rows to the given values"""
   _set: AllowedRoleSetInput
 
-  """
-  filter the rows which have to be updated
-  """
+  """filter the rows which have to be updated"""
   where: AllowedRoleBoolExp!
 }
 
@@ -928,9 +782,7 @@ type Bookmarks {
   link: String!
   position: Int
 
-  """
-  An object relationship
-  """
+  """An object relationship"""
   user: User!
   userId: uuid!
 }
@@ -987,15 +839,11 @@ input type for inserting array relation for remote table "bookmarks"
 input BookmarksArrRelInsertInput {
   data: [BookmarksInsertInput!]!
 
-  """
-  upsert condition
-  """
+  """upsert condition"""
   onConflict: BookmarksOnConflict
 }
 
-"""
-aggregate avg on columns
-"""
+"""aggregate avg on columns"""
 type BookmarksAvgFields {
   position: Float
 }
@@ -1058,9 +906,7 @@ input BookmarksInsertInput {
   userId: uuid
 }
 
-"""
-aggregate max on columns
-"""
+"""aggregate max on columns"""
 type BookmarksMaxFields {
   displayName: String
   faviconUrl: String
@@ -1082,9 +928,7 @@ input BookmarksMaxOrderBy {
   userId: OrderBy
 }
 
-"""
-aggregate min on columns
-"""
+"""aggregate min on columns"""
 type BookmarksMinFields {
   displayName: String
   faviconUrl: String
@@ -1110,14 +954,10 @@ input BookmarksMinOrderBy {
 response of any mutation on the table "bookmarks"
 """
 type BookmarksMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
+  """number of rows affected by the mutation"""
   affectedRows: Int!
 
-  """
-  data from the rows affected by the mutation
-  """
+  """data from the rows affected by the mutation"""
   returning: [Bookmarks!]!
 }
 
@@ -1130,9 +970,7 @@ input BookmarksOnConflict {
   where: BookmarksBoolExp
 }
 
-"""
-Ordering options when selecting data from "bookmarks".
-"""
+"""Ordering options when selecting data from "bookmarks"."""
 input BookmarksOrderBy {
   displayName: OrderBy
   faviconUrl: OrderBy
@@ -1143,9 +981,7 @@ input BookmarksOrderBy {
   userId: OrderBy
 }
 
-"""
-primary key columns input for table: bookmarks
-"""
+"""primary key columns input for table: bookmarks"""
 input BookmarksPkColumnsInput {
   id: uuid!
 }
@@ -1154,34 +990,22 @@ input BookmarksPkColumnsInput {
 select columns of table "bookmarks"
 """
 enum BookmarksSelectColumn {
-  """
-  column name
-  """
+  """column name"""
   displayName
 
-  """
-  column name
-  """
+  """column name"""
   faviconUrl
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   link
 
-  """
-  column name
-  """
+  """column name"""
   position
 
-  """
-  column name
-  """
+  """column name"""
   userId
 }
 
@@ -1197,9 +1021,7 @@ input BookmarksSetInput {
   userId: uuid
 }
 
-"""
-aggregate stddev on columns
-"""
+"""aggregate stddev on columns"""
 type BookmarksStddevFields {
   position: Float
 }
@@ -1211,9 +1033,7 @@ input BookmarksStddevOrderBy {
   position: OrderBy
 }
 
-"""
-aggregate stddevPop on columns
-"""
+"""aggregate stddevPop on columns"""
 type BookmarksStddevPopFields {
   position: Float
 }
@@ -1225,9 +1045,7 @@ input BookmarksStddevPopOrderBy {
   position: OrderBy
 }
 
-"""
-aggregate stddevSamp on columns
-"""
+"""aggregate stddevSamp on columns"""
 type BookmarksStddevSampFields {
   position: Float
 }
@@ -1243,20 +1061,14 @@ input BookmarksStddevSampOrderBy {
 Streaming cursor of the table "bookmarks"
 """
 input BookmarksStreamCursorInput {
-  """
-  Stream column input with initial value
-  """
+  """Stream column input with initial value"""
   initialValue: BookmarksStreamCursorValueInput!
 
-  """
-  cursor ordering
-  """
+  """cursor ordering"""
   ordering: CursorOrdering
 }
 
-"""
-Initial value of the column from where the streaming should start
-"""
+"""Initial value of the column from where the streaming should start"""
 input BookmarksStreamCursorValueInput {
   displayName: String
   faviconUrl: String
@@ -1266,9 +1078,7 @@ input BookmarksStreamCursorValueInput {
   userId: uuid
 }
 
-"""
-aggregate sum on columns
-"""
+"""aggregate sum on columns"""
 type BookmarksSumFields {
   position: Int
 }
@@ -1284,57 +1094,37 @@ input BookmarksSumOrderBy {
 update columns of table "bookmarks"
 """
 enum BookmarksUpdateColumn {
-  """
-  column name
-  """
+  """column name"""
   displayName
 
-  """
-  column name
-  """
+  """column name"""
   faviconUrl
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   link
 
-  """
-  column name
-  """
+  """column name"""
   position
 
-  """
-  column name
-  """
+  """column name"""
   userId
 }
 
 input BookmarksUpdates {
-  """
-  increments the numeric columns with given value of the filtered values
-  """
+  """increments the numeric columns with given value of the filtered values"""
   _inc: BookmarksIncInput
 
-  """
-  sets the columns of the filtered rows to the given values
-  """
+  """sets the columns of the filtered rows to the given values"""
   _set: BookmarksSetInput
 
-  """
-  filter the rows which have to be updated
-  """
+  """filter the rows which have to be updated"""
   where: BookmarksBoolExp!
 }
 
-"""
-aggregate varPop on columns
-"""
+"""aggregate varPop on columns"""
 type BookmarksVarPopFields {
   position: Float
 }
@@ -1346,9 +1136,7 @@ input BookmarksVarPopOrderBy {
   position: OrderBy
 }
 
-"""
-aggregate varSamp on columns
-"""
+"""aggregate varSamp on columns"""
 type BookmarksVarSampFields {
   position: Float
 }
@@ -1360,9 +1148,7 @@ input BookmarksVarSampOrderBy {
   position: OrderBy
 }
 
-"""
-aggregate variance on columns
-"""
+"""aggregate variance on columns"""
 type BookmarksVarianceFields {
   position: Float
 }
@@ -1389,18 +1175,12 @@ input BooleanComparisonExp {
   _nin: [Boolean!]
 }
 
-"""
-ordering argument of a cursor
-"""
+"""ordering argument of a cursor"""
 enum CursorOrdering {
-  """
-  ascending ordering of the cursor
-  """
+  """ascending ordering of the cursor"""
   ASC
 
-  """
-  descending ordering of the cursor
-  """
+  """descending ordering of the cursor"""
   DESC
 }
 
@@ -1419,38 +1199,24 @@ input IntComparisonExp {
   _nin: [Int!]
 }
 
-"""
-column ordering options
-"""
+"""column ordering options"""
 enum OrderBy {
-  """
-  in ascending order, nulls last
-  """
+  """in ascending order, nulls last"""
   ASC
 
-  """
-  in ascending order, nulls first
-  """
+  """in ascending order, nulls first"""
   ASC_NULLS_FIRST
 
-  """
-  in ascending order, nulls last
-  """
+  """in ascending order, nulls last"""
   ASC_NULLS_LAST
 
-  """
-  in descending order, nulls first
-  """
+  """in descending order, nulls first"""
   DESC
 
-  """
-  in descending order, nulls first
-  """
+  """in descending order, nulls first"""
   DESC_NULLS_FIRST
 
-  """
-  in descending order, nulls last
-  """
+  """in descending order, nulls last"""
   DESC_NULLS_LAST
 }
 
@@ -1458,124 +1224,76 @@ enum OrderBy {
 columns and relationships of "roles"
 """
 type Roles {
-  """
-  An array relationship
-  """
+  """An array relationship"""
   allowedRoles(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AllowedRoleSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AllowedRoleOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AllowedRoleBoolExp
   ): [AllowedRole!]!
 
-  """
-  An aggregate relationship
-  """
+  """An aggregate relationship"""
   allowedRolesAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AllowedRoleSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AllowedRoleOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AllowedRoleBoolExp
   ): AllowedRoleAggregate!
   description: String
 
-  """
-  An array relationship
-  """
+  """An array relationship"""
   users(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [UserSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [UserOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UserBoolExp
   ): [User!]!
 
-  """
-  An aggregate relationship
-  """
+  """An aggregate relationship"""
   usersAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [UserSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [UserOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UserBoolExp
   ): UserAggregate!
   value: String!
@@ -1648,17 +1366,13 @@ input RolesInsertInput {
   value: String
 }
 
-"""
-aggregate max on columns
-"""
+"""aggregate max on columns"""
 type RolesMaxFields {
   description: String
   value: String
 }
 
-"""
-aggregate min on columns
-"""
+"""aggregate min on columns"""
 type RolesMinFields {
   description: String
   value: String
@@ -1668,14 +1382,10 @@ type RolesMinFields {
 response of any mutation on the table "roles"
 """
 type RolesMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
+  """number of rows affected by the mutation"""
   affectedRows: Int!
 
-  """
-  data from the rows affected by the mutation
-  """
+  """data from the rows affected by the mutation"""
   returning: [Roles!]!
 }
 
@@ -1685,9 +1395,7 @@ input type for inserting object relation for remote table "roles"
 input RolesObjRelInsertInput {
   data: RolesInsertInput!
 
-  """
-  upsert condition
-  """
+  """upsert condition"""
   onConflict: RolesOnConflict
 }
 
@@ -1700,9 +1408,7 @@ input RolesOnConflict {
   where: RolesBoolExp
 }
 
-"""
-Ordering options when selecting data from "roles".
-"""
+"""Ordering options when selecting data from "roles"."""
 input RolesOrderBy {
   allowedRolesAggregate: AllowedRoleAggregateOrderBy
   description: OrderBy
@@ -1710,9 +1416,7 @@ input RolesOrderBy {
   value: OrderBy
 }
 
-"""
-primary key columns input for table: roles
-"""
+"""primary key columns input for table: roles"""
 input RolesPkColumnsInput {
   value: String!
 }
@@ -1721,14 +1425,10 @@ input RolesPkColumnsInput {
 select columns of table "roles"
 """
 enum RolesSelectColumn {
-  """
-  column name
-  """
+  """column name"""
   description
 
-  """
-  column name
-  """
+  """column name"""
   value
 }
 
@@ -1744,20 +1444,14 @@ input RolesSetInput {
 Streaming cursor of the table "roles"
 """
 input RolesStreamCursorInput {
-  """
-  Stream column input with initial value
-  """
+  """Stream column input with initial value"""
   initialValue: RolesStreamCursorValueInput!
 
-  """
-  cursor ordering
-  """
+  """cursor ordering"""
   ordering: CursorOrdering
 }
 
-"""
-Initial value of the column from where the streaming should start
-"""
+"""Initial value of the column from where the streaming should start"""
 input RolesStreamCursorValueInput {
   description: String
   value: String
@@ -1767,26 +1461,18 @@ input RolesStreamCursorValueInput {
 update columns of table "roles"
 """
 enum RolesUpdateColumn {
-  """
-  column name
-  """
+  """column name"""
   description
 
-  """
-  column name
-  """
+  """column name"""
   value
 }
 
 input RolesUpdates {
-  """
-  sets the columns of the filtered rows to the given values
-  """
+  """sets the columns of the filtered rows to the given values"""
   _set: RolesSetInput
 
-  """
-  filter the rows which have to be updated
-  """
+  """filter the rows which have to be updated"""
   where: RolesBoolExp!
 }
 
@@ -1798,9 +1484,7 @@ type Session {
   id: uuid!
   sessionToken: String!
 
-  """
-  An object relationship
-  """
+  """An object relationship"""
   user: User!
   userId: uuid!
 }
@@ -1841,9 +1525,7 @@ input type for inserting array relation for remote table "session"
 input SessionArrRelInsertInput {
   data: [SessionInsertInput!]!
 
-  """
-  upsert condition
-  """
+  """upsert condition"""
   onConflict: SessionOnConflict
 }
 
@@ -1882,9 +1564,7 @@ input SessionInsertInput {
   userId: uuid
 }
 
-"""
-aggregate max on columns
-"""
+"""aggregate max on columns"""
 type SessionMaxFields {
   expires: timestamptz
   id: uuid
@@ -1902,9 +1582,7 @@ input SessionMaxOrderBy {
   userId: OrderBy
 }
 
-"""
-aggregate min on columns
-"""
+"""aggregate min on columns"""
 type SessionMinFields {
   expires: timestamptz
   id: uuid
@@ -1926,14 +1604,10 @@ input SessionMinOrderBy {
 response of any mutation on the table "session"
 """
 type SessionMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
+  """number of rows affected by the mutation"""
   affectedRows: Int!
 
-  """
-  data from the rows affected by the mutation
-  """
+  """data from the rows affected by the mutation"""
   returning: [Session!]!
 }
 
@@ -1946,9 +1620,7 @@ input SessionOnConflict {
   where: SessionBoolExp
 }
 
-"""
-Ordering options when selecting data from "session".
-"""
+"""Ordering options when selecting data from "session"."""
 input SessionOrderBy {
   expires: OrderBy
   id: OrderBy
@@ -1957,9 +1629,7 @@ input SessionOrderBy {
   userId: OrderBy
 }
 
-"""
-primary key columns input for table: session
-"""
+"""primary key columns input for table: session"""
 input SessionPkColumnsInput {
   id: uuid!
 }
@@ -1968,24 +1638,16 @@ input SessionPkColumnsInput {
 select columns of table "session"
 """
 enum SessionSelectColumn {
-  """
-  column name
-  """
+  """column name"""
   expires
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   sessionToken
 
-  """
-  column name
-  """
+  """column name"""
   userId
 }
 
@@ -2003,20 +1665,14 @@ input SessionSetInput {
 Streaming cursor of the table "session"
 """
 input SessionStreamCursorInput {
-  """
-  Stream column input with initial value
-  """
+  """Stream column input with initial value"""
   initialValue: SessionStreamCursorValueInput!
 
-  """
-  cursor ordering
-  """
+  """cursor ordering"""
   ordering: CursorOrdering
 }
 
-"""
-Initial value of the column from where the streaming should start
-"""
+"""Initial value of the column from where the streaming should start"""
 input SessionStreamCursorValueInput {
   expires: timestamptz
   id: uuid
@@ -2028,36 +1684,24 @@ input SessionStreamCursorValueInput {
 update columns of table "session"
 """
 enum SessionUpdateColumn {
-  """
-  column name
-  """
+  """column name"""
   expires
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   sessionToken
 
-  """
-  column name
-  """
+  """column name"""
   userId
 }
 
 input SessionUpdates {
-  """
-  sets the columns of the filtered rows to the given values
-  """
+  """sets the columns of the filtered rows to the given values"""
   _set: SessionSetInput
 
-  """
-  filter the rows which have to be updated
-  """
+  """filter the rows which have to be updated"""
   where: SessionBoolExp!
 }
 
@@ -2069,9 +1713,7 @@ input StringComparisonExp {
   _gt: String
   _gte: String
 
-  """
-  does the column match the given case-insensitive pattern
-  """
+  """does the column match the given case-insensitive pattern"""
   _ilike: String
   _in: [String!]
 
@@ -2081,17 +1723,13 @@ input StringComparisonExp {
   _iregex: String
   _isNull: Boolean
 
-  """
-  does the column match the given pattern
-  """
+  """does the column match the given pattern"""
   _like: String
   _lt: String
   _lte: String
   _neq: String
 
-  """
-  does the column NOT match the given case-insensitive pattern
-  """
+  """does the column NOT match the given case-insensitive pattern"""
   _nilike: String
   _nin: [String!]
 
@@ -2100,9 +1738,7 @@ input StringComparisonExp {
   """
   _niregex: String
 
-  """
-  does the column NOT match the given pattern
-  """
+  """does the column NOT match the given pattern"""
   _nlike: String
 
   """
@@ -2110,9 +1746,7 @@ input StringComparisonExp {
   """
   _nregex: String
 
-  """
-  does the column NOT match the given SQL regular expression
-  """
+  """does the column NOT match the given SQL regular expression"""
   _nsimilar: String
 
   """
@@ -2120,9 +1754,7 @@ input StringComparisonExp {
   """
   _regex: String
 
-  """
-  does the column match the given SQL regular expression
-  """
+  """does the column match the given SQL regular expression"""
   _similar: String
 }
 
@@ -2222,9 +1854,7 @@ input TraefikRoutesInsertInput {
   service: String
 }
 
-"""
-aggregate max on columns
-"""
+"""aggregate max on columns"""
 type TraefikRoutesMaxFields {
   calculatedUrl: String
   createdAt: timestamptz
@@ -2237,9 +1867,7 @@ type TraefikRoutesMaxFields {
   service: String
 }
 
-"""
-aggregate min on columns
-"""
+"""aggregate min on columns"""
 type TraefikRoutesMinFields {
   calculatedUrl: String
   createdAt: timestamptz
@@ -2256,14 +1884,10 @@ type TraefikRoutesMinFields {
 response of any mutation on the table "traefikRoutes"
 """
 type TraefikRoutesMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
+  """number of rows affected by the mutation"""
   affectedRows: Int!
 
-  """
-  data from the rows affected by the mutation
-  """
+  """data from the rows affected by the mutation"""
   returning: [TraefikRoutes!]!
 }
 
@@ -2276,9 +1900,7 @@ input TraefikRoutesOnConflict {
   where: TraefikRoutesBoolExp
 }
 
-"""
-Ordering options when selecting data from "traefikRoutes".
-"""
+"""Ordering options when selecting data from "traefikRoutes"."""
 input TraefikRoutesOrderBy {
   calculatedUrl: OrderBy
   createdAt: OrderBy
@@ -2293,9 +1915,7 @@ input TraefikRoutesOrderBy {
   service: OrderBy
 }
 
-"""
-primary key columns input for table: traefikRoutes
-"""
+"""primary key columns input for table: traefikRoutes"""
 input TraefikRoutesPkColumnsInput {
   name: String!
 }
@@ -2304,59 +1924,37 @@ input TraefikRoutesPkColumnsInput {
 select columns of table "traefikRoutes"
 """
 enum TraefikRoutesSelectColumn {
-  """
-  column name
-  """
+  """column name"""
   calculatedUrl
 
-  """
-  column name
-  """
+  """column name"""
   createdAt
 
-  """
-  column name
-  """
+  """column name"""
   faviconUrl
 
-  """
-  column name
-  """
+  """column name"""
   friendlyName
 
-  """
-  column name
-  """
+  """column name"""
   isSown
 
-  """
-  column name
-  """
+  """column name"""
   isUp
 
-  """
-  column name
-  """
+  """column name"""
   lastSeenAlive
 
-  """
-  column name
-  """
+  """column name"""
   name
 
-  """
-  column name
-  """
+  """column name"""
   provider
 
-  """
-  column name
-  """
+  """column name"""
   rule
 
-  """
-  column name
-  """
+  """column name"""
   service
 }
 
@@ -2381,20 +1979,14 @@ input TraefikRoutesSetInput {
 Streaming cursor of the table "traefikRoutes"
 """
 input TraefikRoutesStreamCursorInput {
-  """
-  Stream column input with initial value
-  """
+  """Stream column input with initial value"""
   initialValue: TraefikRoutesStreamCursorValueInput!
 
-  """
-  cursor ordering
-  """
+  """cursor ordering"""
   ordering: CursorOrdering
 }
 
-"""
-Initial value of the column from where the streaming should start
-"""
+"""Initial value of the column from where the streaming should start"""
 input TraefikRoutesStreamCursorValueInput {
   calculatedUrl: String
   createdAt: timestamptz
@@ -2413,71 +2005,45 @@ input TraefikRoutesStreamCursorValueInput {
 update columns of table "traefikRoutes"
 """
 enum TraefikRoutesUpdateColumn {
-  """
-  column name
-  """
+  """column name"""
   calculatedUrl
 
-  """
-  column name
-  """
+  """column name"""
   createdAt
 
-  """
-  column name
-  """
+  """column name"""
   faviconUrl
 
-  """
-  column name
-  """
+  """column name"""
   friendlyName
 
-  """
-  column name
-  """
+  """column name"""
   isSown
 
-  """
-  column name
-  """
+  """column name"""
   isUp
 
-  """
-  column name
-  """
+  """column name"""
   lastSeenAlive
 
-  """
-  column name
-  """
+  """column name"""
   name
 
-  """
-  column name
-  """
+  """column name"""
   provider
 
-  """
-  column name
-  """
+  """column name"""
   rule
 
-  """
-  column name
-  """
+  """column name"""
   service
 }
 
 input TraefikRoutesUpdates {
-  """
-  sets the columns of the filtered rows to the given values
-  """
+  """sets the columns of the filtered rows to the given values"""
   _set: TraefikRoutesSetInput
 
-  """
-  filter the rows which have to be updated
-  """
+  """filter the rows which have to be updated"""
   where: TraefikRoutesBoolExp!
 }
 
@@ -2485,183 +2051,111 @@ input TraefikRoutesUpdates {
 columns and relationships of "user"
 """
 type User {
-  """
-  An array relationship
-  """
+  """An array relationship"""
   accounts(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AccountSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AccountOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AccountBoolExp
   ): [Account!]!
 
-  """
-  An aggregate relationship
-  """
+  """An aggregate relationship"""
   accountsAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AccountSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AccountOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AccountBoolExp
   ): AccountAggregate!
 
-  """
-  An array relationship
-  """
+  """An array relationship"""
   allowedRoles(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AllowedRoleSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AllowedRoleOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AllowedRoleBoolExp
   ): [AllowedRole!]!
 
-  """
-  An aggregate relationship
-  """
+  """An aggregate relationship"""
   allowedRolesAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AllowedRoleSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AllowedRoleOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AllowedRoleBoolExp
   ): AllowedRoleAggregate!
 
-  """
-  An array relationship
-  """
+  """An array relationship"""
   bookmarks(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): [Bookmarks!]!
 
-  """
-  An aggregate relationship
-  """
+  """An aggregate relationship"""
   bookmarksAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): BookmarksAggregate!
   canSeeTraefikContent: Boolean!
@@ -2673,68 +2167,42 @@ type User {
   image: String
   name: String
 
-  """
-  An object relationship
-  """
+  """An object relationship"""
   role: Roles
 
-  """
-  An array relationship
-  """
+  """An array relationship"""
   sessions(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [SessionSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [SessionOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: SessionBoolExp
   ): [Session!]!
 
-  """
-  An aggregate relationship
-  """
+  """An aggregate relationship"""
   sessionsAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [SessionSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [SessionOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: SessionBoolExp
   ): SessionAggregate!
   todoistApiToken: String
@@ -2779,9 +2247,7 @@ input type for inserting array relation for remote table "user"
 input UserArrRelInsertInput {
   data: [UserInsertInput!]!
 
-  """
-  upsert condition
-  """
+  """upsert condition"""
   onConflict: UserOnConflict
 }
 
@@ -2849,9 +2315,7 @@ input UserInsertInput {
   updatedAt: timestamptz
 }
 
-"""
-aggregate max on columns
-"""
+"""aggregate max on columns"""
 type UserMaxFields {
   createdAt: timestamptz
   email: String
@@ -2877,9 +2341,7 @@ input UserMaxOrderBy {
   updatedAt: OrderBy
 }
 
-"""
-aggregate min on columns
-"""
+"""aggregate min on columns"""
 type UserMinFields {
   createdAt: timestamptz
   email: String
@@ -2909,14 +2371,10 @@ input UserMinOrderBy {
 response of any mutation on the table "user"
 """
 type UserMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
+  """number of rows affected by the mutation"""
   affectedRows: Int!
 
-  """
-  data from the rows affected by the mutation
-  """
+  """data from the rows affected by the mutation"""
   returning: [User!]!
 }
 
@@ -2926,9 +2384,7 @@ input type for inserting object relation for remote table "user"
 input UserObjRelInsertInput {
   data: UserInsertInput!
 
-  """
-  upsert condition
-  """
+  """upsert condition"""
   onConflict: UserOnConflict
 }
 
@@ -2941,9 +2397,7 @@ input UserOnConflict {
   where: UserBoolExp
 }
 
-"""
-Ordering options when selecting data from "user".
-"""
+"""Ordering options when selecting data from "user"."""
 input UserOrderBy {
   accountsAggregate: AccountAggregateOrderBy
   allowedRolesAggregate: AllowedRoleAggregateOrderBy
@@ -2962,9 +2416,7 @@ input UserOrderBy {
   updatedAt: OrderBy
 }
 
-"""
-primary key columns input for table: user
-"""
+"""primary key columns input for table: user"""
 input UserPkColumnsInput {
   id: uuid!
 }
@@ -2973,54 +2425,34 @@ input UserPkColumnsInput {
 select columns of table "user"
 """
 enum UserSelectColumn {
-  """
-  column name
-  """
+  """column name"""
   canSeeTraefikContent
 
-  """
-  column name
-  """
+  """column name"""
   createdAt
 
-  """
-  column name
-  """
+  """column name"""
   defaultRole
 
-  """
-  column name
-  """
+  """column name"""
   email
 
-  """
-  column name
-  """
+  """column name"""
   emailVerified
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   image
 
-  """
-  column name
-  """
+  """column name"""
   name
 
-  """
-  column name
-  """
+  """column name"""
   todoistApiToken
 
-  """
-  column name
-  """
+  """column name"""
   updatedAt
 }
 
@@ -3028,9 +2460,7 @@ enum UserSelectColumn {
 select "userAggregateBoolExpBool_andArgumentsColumns" columns of table "user"
 """
 enum UserSelectColumnUserAggregateBoolExpBool_andArgumentsColumns {
-  """
-  column name
-  """
+  """column name"""
   canSeeTraefikContent
 }
 
@@ -3038,9 +2468,7 @@ enum UserSelectColumnUserAggregateBoolExpBool_andArgumentsColumns {
 select "userAggregateBoolExpBool_orArgumentsColumns" columns of table "user"
 """
 enum UserSelectColumnUserAggregateBoolExpBool_orArgumentsColumns {
-  """
-  column name
-  """
+  """column name"""
   canSeeTraefikContent
 }
 
@@ -3064,20 +2492,14 @@ input UserSetInput {
 Streaming cursor of the table "user"
 """
 input UserStreamCursorInput {
-  """
-  Stream column input with initial value
-  """
+  """Stream column input with initial value"""
   initialValue: UserStreamCursorValueInput!
 
-  """
-  cursor ordering
-  """
+  """cursor ordering"""
   ordering: CursorOrdering
 }
 
-"""
-Initial value of the column from where the streaming should start
-"""
+"""Initial value of the column from where the streaming should start"""
 input UserStreamCursorValueInput {
   canSeeTraefikContent: Boolean
   createdAt: timestamptz
@@ -3095,66 +2517,42 @@ input UserStreamCursorValueInput {
 update columns of table "user"
 """
 enum UserUpdateColumn {
-  """
-  column name
-  """
+  """column name"""
   canSeeTraefikContent
 
-  """
-  column name
-  """
+  """column name"""
   createdAt
 
-  """
-  column name
-  """
+  """column name"""
   defaultRole
 
-  """
-  column name
-  """
+  """column name"""
   email
 
-  """
-  column name
-  """
+  """column name"""
   emailVerified
 
-  """
-  column name
-  """
+  """column name"""
   id
 
-  """
-  column name
-  """
+  """column name"""
   image
 
-  """
-  column name
-  """
+  """column name"""
   name
 
-  """
-  column name
-  """
+  """column name"""
   todoistApiToken
 
-  """
-  column name
-  """
+  """column name"""
   updatedAt
 }
 
 input UserUpdates {
-  """
-  sets the columns of the filtered rows to the given values
-  """
+  """sets the columns of the filtered rows to the given values"""
   _set: UserSetInput
 
-  """
-  filter the rows which have to be updated
-  """
+  """filter the rows which have to be updated"""
   where: UserBoolExp!
 }
 
@@ -3230,18 +2628,14 @@ input VerificationTokenInsertInput {
   token: String
 }
 
-"""
-aggregate max on columns
-"""
+"""aggregate max on columns"""
 type VerificationTokenMaxFields {
   expires: timestamptz
   identifier: String
   token: String
 }
 
-"""
-aggregate min on columns
-"""
+"""aggregate min on columns"""
 type VerificationTokenMinFields {
   expires: timestamptz
   identifier: String
@@ -3252,14 +2646,10 @@ type VerificationTokenMinFields {
 response of any mutation on the table "verification_token"
 """
 type VerificationTokenMutationResponse {
-  """
-  number of rows affected by the mutation
-  """
+  """number of rows affected by the mutation"""
   affectedRows: Int!
 
-  """
-  data from the rows affected by the mutation
-  """
+  """data from the rows affected by the mutation"""
   returning: [VerificationToken!]!
 }
 
@@ -3272,18 +2662,14 @@ input VerificationTokenOnConflict {
   where: VerificationTokenBoolExp
 }
 
-"""
-Ordering options when selecting data from "verification_token".
-"""
+"""Ordering options when selecting data from "verification_token"."""
 input VerificationTokenOrderBy {
   expires: OrderBy
   identifier: OrderBy
   token: OrderBy
 }
 
-"""
-primary key columns input for table: verification_token
-"""
+"""primary key columns input for table: verification_token"""
 input VerificationTokenPkColumnsInput {
   token: String!
 }
@@ -3292,19 +2678,13 @@ input VerificationTokenPkColumnsInput {
 select columns of table "verification_token"
 """
 enum VerificationTokenSelectColumn {
-  """
-  column name
-  """
+  """column name"""
   expires
 
-  """
-  column name
-  """
+  """column name"""
   identifier
 
-  """
-  column name
-  """
+  """column name"""
   token
 }
 
@@ -3321,20 +2701,14 @@ input VerificationTokenSetInput {
 Streaming cursor of the table "verification_token"
 """
 input VerificationTokenStreamCursorInput {
-  """
-  Stream column input with initial value
-  """
+  """Stream column input with initial value"""
   initialValue: VerificationTokenStreamCursorValueInput!
 
-  """
-  cursor ordering
-  """
+  """cursor ordering"""
   ordering: CursorOrdering
 }
 
-"""
-Initial value of the column from where the streaming should start
-"""
+"""Initial value of the column from where the streaming should start"""
 input VerificationTokenStreamCursorValueInput {
   expires: timestamptz
   identifier: String
@@ -3345,31 +2719,21 @@ input VerificationTokenStreamCursorValueInput {
 update columns of table "verification_token"
 """
 enum VerificationTokenUpdateColumn {
-  """
-  column name
-  """
+  """column name"""
   expires
 
-  """
-  column name
-  """
+  """column name"""
   identifier
 
-  """
-  column name
-  """
+  """column name"""
   token
 }
 
 input VerificationTokenUpdates {
-  """
-  sets the columns of the filtered rows to the given values
-  """
+  """sets the columns of the filtered rows to the given values"""
   _set: VerificationTokenSetInput
 
-  """
-  filter the rows which have to be updated
-  """
+  """filter the rows which have to be updated"""
   where: VerificationTokenBoolExp!
 }
 
@@ -3396,17 +2760,13 @@ input bookmarksAggregateBoolExpCount {
   predicate: IntComparisonExp!
 }
 
-"""
-mutation root
-"""
+"""mutation root"""
 type mutation_root {
   """
   delete data from the table: "account"
   """
   deleteAccount(
-    """
-    filter the rows which have to be deleted
-    """
+    """filter the rows which have to be deleted"""
     where: AccountBoolExp!
   ): AccountMutationResponse
 
@@ -3419,9 +2779,7 @@ type mutation_root {
   delete data from the table: "allowed_role"
   """
   deleteAllowedRole(
-    """
-    filter the rows which have to be deleted
-    """
+    """filter the rows which have to be deleted"""
     where: AllowedRoleBoolExp!
   ): AllowedRoleMutationResponse
 
@@ -3434,9 +2792,7 @@ type mutation_root {
   delete data from the table: "bookmarks"
   """
   deleteBookmarks(
-    """
-    filter the rows which have to be deleted
-    """
+    """filter the rows which have to be deleted"""
     where: BookmarksBoolExp!
   ): BookmarksMutationResponse
 
@@ -3449,9 +2805,7 @@ type mutation_root {
   delete data from the table: "roles"
   """
   deleteRoles(
-    """
-    filter the rows which have to be deleted
-    """
+    """filter the rows which have to be deleted"""
     where: RolesBoolExp!
   ): RolesMutationResponse
 
@@ -3464,9 +2818,7 @@ type mutation_root {
   delete data from the table: "session"
   """
   deleteSession(
-    """
-    filter the rows which have to be deleted
-    """
+    """filter the rows which have to be deleted"""
     where: SessionBoolExp!
   ): SessionMutationResponse
 
@@ -3479,9 +2831,7 @@ type mutation_root {
   delete data from the table: "traefikRoutes"
   """
   deleteTraefikRoutes(
-    """
-    filter the rows which have to be deleted
-    """
+    """filter the rows which have to be deleted"""
     where: TraefikRoutesBoolExp!
   ): TraefikRoutesMutationResponse
 
@@ -3494,9 +2844,7 @@ type mutation_root {
   delete data from the table: "user"
   """
   deleteUser(
-    """
-    filter the rows which have to be deleted
-    """
+    """filter the rows which have to be deleted"""
     where: UserBoolExp!
   ): UserMutationResponse
 
@@ -3509,9 +2857,7 @@ type mutation_root {
   delete data from the table: "verification_token"
   """
   deleteVerificationToken(
-    """
-    filter the rows which have to be deleted
-    """
+    """filter the rows which have to be deleted"""
     where: VerificationTokenBoolExp!
   ): VerificationTokenMutationResponse
 
@@ -3524,14 +2870,10 @@ type mutation_root {
   insert data into the table: "account"
   """
   insertAccount(
-    """
-    the rows to be inserted
-    """
+    """the rows to be inserted"""
     objects: [AccountInsertInput!]!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: AccountOnConflict
   ): AccountMutationResponse
 
@@ -3539,14 +2881,10 @@ type mutation_root {
   insert a single row into the table: "account"
   """
   insertAccountOne(
-    """
-    the row to be inserted
-    """
+    """the row to be inserted"""
     object: AccountInsertInput!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: AccountOnConflict
   ): Account
 
@@ -3554,14 +2892,10 @@ type mutation_root {
   insert data into the table: "allowed_role"
   """
   insertAllowedRole(
-    """
-    the rows to be inserted
-    """
+    """the rows to be inserted"""
     objects: [AllowedRoleInsertInput!]!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: AllowedRoleOnConflict
   ): AllowedRoleMutationResponse
 
@@ -3569,14 +2903,10 @@ type mutation_root {
   insert a single row into the table: "allowed_role"
   """
   insertAllowedRoleOne(
-    """
-    the row to be inserted
-    """
+    """the row to be inserted"""
     object: AllowedRoleInsertInput!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: AllowedRoleOnConflict
   ): AllowedRole
 
@@ -3584,14 +2914,10 @@ type mutation_root {
   insert data into the table: "bookmarks"
   """
   insertBookmarks(
-    """
-    the rows to be inserted
-    """
+    """the rows to be inserted"""
     objects: [BookmarksInsertInput!]!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: BookmarksOnConflict
   ): BookmarksMutationResponse
 
@@ -3599,14 +2925,10 @@ type mutation_root {
   insert a single row into the table: "bookmarks"
   """
   insertBookmarksOne(
-    """
-    the row to be inserted
-    """
+    """the row to be inserted"""
     object: BookmarksInsertInput!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: BookmarksOnConflict
   ): Bookmarks
 
@@ -3614,14 +2936,10 @@ type mutation_root {
   insert data into the table: "roles"
   """
   insertRoles(
-    """
-    the rows to be inserted
-    """
+    """the rows to be inserted"""
     objects: [RolesInsertInput!]!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: RolesOnConflict
   ): RolesMutationResponse
 
@@ -3629,14 +2947,10 @@ type mutation_root {
   insert a single row into the table: "roles"
   """
   insertRolesOne(
-    """
-    the row to be inserted
-    """
+    """the row to be inserted"""
     object: RolesInsertInput!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: RolesOnConflict
   ): Roles
 
@@ -3644,14 +2958,10 @@ type mutation_root {
   insert data into the table: "session"
   """
   insertSession(
-    """
-    the rows to be inserted
-    """
+    """the rows to be inserted"""
     objects: [SessionInsertInput!]!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: SessionOnConflict
   ): SessionMutationResponse
 
@@ -3659,14 +2969,10 @@ type mutation_root {
   insert a single row into the table: "session"
   """
   insertSessionOne(
-    """
-    the row to be inserted
-    """
+    """the row to be inserted"""
     object: SessionInsertInput!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: SessionOnConflict
   ): Session
 
@@ -3674,14 +2980,10 @@ type mutation_root {
   insert data into the table: "traefikRoutes"
   """
   insertTraefikRoutes(
-    """
-    the rows to be inserted
-    """
+    """the rows to be inserted"""
     objects: [TraefikRoutesInsertInput!]!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: TraefikRoutesOnConflict
   ): TraefikRoutesMutationResponse
 
@@ -3689,14 +2991,10 @@ type mutation_root {
   insert a single row into the table: "traefikRoutes"
   """
   insertTraefikRoutesOne(
-    """
-    the row to be inserted
-    """
+    """the row to be inserted"""
     object: TraefikRoutesInsertInput!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: TraefikRoutesOnConflict
   ): TraefikRoutes
 
@@ -3704,14 +3002,10 @@ type mutation_root {
   insert data into the table: "user"
   """
   insertUser(
-    """
-    the rows to be inserted
-    """
+    """the rows to be inserted"""
     objects: [UserInsertInput!]!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: UserOnConflict
   ): UserMutationResponse
 
@@ -3719,14 +3013,10 @@ type mutation_root {
   insert a single row into the table: "user"
   """
   insertUserOne(
-    """
-    the row to be inserted
-    """
+    """the row to be inserted"""
     object: UserInsertInput!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: UserOnConflict
   ): User
 
@@ -3734,14 +3024,10 @@ type mutation_root {
   insert data into the table: "verification_token"
   """
   insertVerificationToken(
-    """
-    the rows to be inserted
-    """
+    """the rows to be inserted"""
     objects: [VerificationTokenInsertInput!]!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: VerificationTokenOnConflict
   ): VerificationTokenMutationResponse
 
@@ -3749,14 +3035,10 @@ type mutation_root {
   insert a single row into the table: "verification_token"
   """
   insertVerificationTokenOne(
-    """
-    the row to be inserted
-    """
+    """the row to be inserted"""
     object: VerificationTokenInsertInput!
 
-    """
-    upsert condition
-    """
+    """upsert condition"""
     onConflict: VerificationTokenOnConflict
   ): VerificationToken
 
@@ -3764,19 +3046,13 @@ type mutation_root {
   update data of the table: "account"
   """
   updateAccount(
-    """
-    increments the numeric columns with given value of the filtered values
-    """
+    """increments the numeric columns with given value of the filtered values"""
     _inc: AccountIncInput
 
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: AccountSetInput
 
-    """
-    filter the rows which have to be updated
-    """
+    """filter the rows which have to be updated"""
     where: AccountBoolExp!
   ): AccountMutationResponse
 
@@ -3784,14 +3060,10 @@ type mutation_root {
   update single row of the table: "account"
   """
   updateAccountByPk(
-    """
-    increments the numeric columns with given value of the filtered values
-    """
+    """increments the numeric columns with given value of the filtered values"""
     _inc: AccountIncInput
 
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: AccountSetInput
     pkColumns: AccountPkColumnsInput!
   ): Account
@@ -3800,9 +3072,7 @@ type mutation_root {
   update multiples rows of table: "account"
   """
   updateAccountMany(
-    """
-    updates to execute, in order
-    """
+    """updates to execute, in order"""
     updates: [AccountUpdates!]!
   ): [AccountMutationResponse]
 
@@ -3810,14 +3080,10 @@ type mutation_root {
   update data of the table: "allowed_role"
   """
   updateAllowedRole(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: AllowedRoleSetInput
 
-    """
-    filter the rows which have to be updated
-    """
+    """filter the rows which have to be updated"""
     where: AllowedRoleBoolExp!
   ): AllowedRoleMutationResponse
 
@@ -3825,9 +3091,7 @@ type mutation_root {
   update single row of the table: "allowed_role"
   """
   updateAllowedRoleByPk(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: AllowedRoleSetInput
     pkColumns: AllowedRolePkColumnsInput!
   ): AllowedRole
@@ -3836,9 +3100,7 @@ type mutation_root {
   update multiples rows of table: "allowed_role"
   """
   updateAllowedRoleMany(
-    """
-    updates to execute, in order
-    """
+    """updates to execute, in order"""
     updates: [AllowedRoleUpdates!]!
   ): [AllowedRoleMutationResponse]
 
@@ -3846,19 +3108,13 @@ type mutation_root {
   update data of the table: "bookmarks"
   """
   updateBookmarks(
-    """
-    increments the numeric columns with given value of the filtered values
-    """
+    """increments the numeric columns with given value of the filtered values"""
     _inc: BookmarksIncInput
 
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: BookmarksSetInput
 
-    """
-    filter the rows which have to be updated
-    """
+    """filter the rows which have to be updated"""
     where: BookmarksBoolExp!
   ): BookmarksMutationResponse
 
@@ -3866,14 +3122,10 @@ type mutation_root {
   update single row of the table: "bookmarks"
   """
   updateBookmarksByPk(
-    """
-    increments the numeric columns with given value of the filtered values
-    """
+    """increments the numeric columns with given value of the filtered values"""
     _inc: BookmarksIncInput
 
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: BookmarksSetInput
     pkColumns: BookmarksPkColumnsInput!
   ): Bookmarks
@@ -3882,9 +3134,7 @@ type mutation_root {
   update multiples rows of table: "bookmarks"
   """
   updateBookmarksMany(
-    """
-    updates to execute, in order
-    """
+    """updates to execute, in order"""
     updates: [BookmarksUpdates!]!
   ): [BookmarksMutationResponse]
 
@@ -3892,14 +3142,10 @@ type mutation_root {
   update data of the table: "roles"
   """
   updateRoles(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: RolesSetInput
 
-    """
-    filter the rows which have to be updated
-    """
+    """filter the rows which have to be updated"""
     where: RolesBoolExp!
   ): RolesMutationResponse
 
@@ -3907,9 +3153,7 @@ type mutation_root {
   update single row of the table: "roles"
   """
   updateRolesByPk(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: RolesSetInput
     pkColumns: RolesPkColumnsInput!
   ): Roles
@@ -3918,9 +3162,7 @@ type mutation_root {
   update multiples rows of table: "roles"
   """
   updateRolesMany(
-    """
-    updates to execute, in order
-    """
+    """updates to execute, in order"""
     updates: [RolesUpdates!]!
   ): [RolesMutationResponse]
 
@@ -3928,14 +3170,10 @@ type mutation_root {
   update data of the table: "session"
   """
   updateSession(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: SessionSetInput
 
-    """
-    filter the rows which have to be updated
-    """
+    """filter the rows which have to be updated"""
     where: SessionBoolExp!
   ): SessionMutationResponse
 
@@ -3943,9 +3181,7 @@ type mutation_root {
   update single row of the table: "session"
   """
   updateSessionByPk(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: SessionSetInput
     pkColumns: SessionPkColumnsInput!
   ): Session
@@ -3954,9 +3190,7 @@ type mutation_root {
   update multiples rows of table: "session"
   """
   updateSessionMany(
-    """
-    updates to execute, in order
-    """
+    """updates to execute, in order"""
     updates: [SessionUpdates!]!
   ): [SessionMutationResponse]
 
@@ -3964,14 +3198,10 @@ type mutation_root {
   update data of the table: "traefikRoutes"
   """
   updateTraefikRoutes(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: TraefikRoutesSetInput
 
-    """
-    filter the rows which have to be updated
-    """
+    """filter the rows which have to be updated"""
     where: TraefikRoutesBoolExp!
   ): TraefikRoutesMutationResponse
 
@@ -3979,9 +3209,7 @@ type mutation_root {
   update single row of the table: "traefikRoutes"
   """
   updateTraefikRoutesByPk(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: TraefikRoutesSetInput
     pkColumns: TraefikRoutesPkColumnsInput!
   ): TraefikRoutes
@@ -3990,9 +3218,7 @@ type mutation_root {
   update multiples rows of table: "traefikRoutes"
   """
   updateTraefikRoutesMany(
-    """
-    updates to execute, in order
-    """
+    """updates to execute, in order"""
     updates: [TraefikRoutesUpdates!]!
   ): [TraefikRoutesMutationResponse]
 
@@ -4000,14 +3226,10 @@ type mutation_root {
   update data of the table: "user"
   """
   updateUser(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: UserSetInput
 
-    """
-    filter the rows which have to be updated
-    """
+    """filter the rows which have to be updated"""
     where: UserBoolExp!
   ): UserMutationResponse
 
@@ -4015,9 +3237,7 @@ type mutation_root {
   update single row of the table: "user"
   """
   updateUserByPk(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: UserSetInput
     pkColumns: UserPkColumnsInput!
   ): User
@@ -4026,9 +3246,7 @@ type mutation_root {
   update multiples rows of table: "user"
   """
   updateUserMany(
-    """
-    updates to execute, in order
-    """
+    """updates to execute, in order"""
     updates: [UserUpdates!]!
   ): [UserMutationResponse]
 
@@ -4036,14 +3254,10 @@ type mutation_root {
   update data of the table: "verification_token"
   """
   updateVerificationToken(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: VerificationTokenSetInput
 
-    """
-    filter the rows which have to be updated
-    """
+    """filter the rows which have to be updated"""
     where: VerificationTokenBoolExp!
   ): VerificationTokenMutationResponse
 
@@ -4051,9 +3265,7 @@ type mutation_root {
   update single row of the table: "verification_token"
   """
   updateVerificationTokenByPk(
-    """
-    sets the columns of the filtered rows to the given values
-    """
+    """sets the columns of the filtered rows to the given values"""
     _set: VerificationTokenSetInput
     pkColumns: VerificationTokenPkColumnsInput!
   ): VerificationToken
@@ -4062,9 +3274,7 @@ type mutation_root {
   update multiples rows of table: "verification_token"
   """
   updateVerificationTokenMany(
-    """
-    updates to execute, in order
-    """
+    """updates to execute, in order"""
     updates: [VerificationTokenUpdates!]!
   ): [VerificationTokenMutationResponse]
 }
@@ -4074,29 +3284,19 @@ type query_root {
   fetch data from the table: "account"
   """
   account(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AccountSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AccountOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AccountBoolExp
   ): [Account!]!
 
@@ -4104,64 +3304,42 @@ type query_root {
   fetch aggregated fields from the table: "account"
   """
   accountAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AccountSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AccountOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AccountBoolExp
   ): AccountAggregate!
 
-  """
-  fetch data from the table: "account" using primary key columns
-  """
+  """fetch data from the table: "account" using primary key columns"""
   accountByPk(id: uuid!): Account
 
   """
   fetch data from the table: "allowed_role"
   """
   allowedRole(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AllowedRoleSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AllowedRoleOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AllowedRoleBoolExp
   ): [AllowedRole!]!
 
@@ -4169,129 +3347,81 @@ type query_root {
   fetch aggregated fields from the table: "allowed_role"
   """
   allowedRoleAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AllowedRoleSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AllowedRoleOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AllowedRoleBoolExp
   ): AllowedRoleAggregate!
 
-  """
-  fetch data from the table: "allowed_role" using primary key columns
-  """
+  """fetch data from the table: "allowed_role" using primary key columns"""
   allowedRoleByPk(role: RolesEnum!, userId: uuid!): AllowedRole
 
-  """
-  An array relationship
-  """
+  """An array relationship"""
   bookmarks(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): [Bookmarks!]!
 
-  """
-  An aggregate relationship
-  """
+  """An aggregate relationship"""
   bookmarksAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): BookmarksAggregate!
 
-  """
-  fetch data from the table: "bookmarks" using primary key columns
-  """
+  """fetch data from the table: "bookmarks" using primary key columns"""
   bookmarksByPk(id: uuid!): Bookmarks
 
   """
   fetch data from the table: "roles"
   """
   roles(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [RolesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [RolesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: RolesBoolExp
   ): [Roles!]!
 
@@ -4299,64 +3429,42 @@ type query_root {
   fetch aggregated fields from the table: "roles"
   """
   rolesAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [RolesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [RolesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: RolesBoolExp
   ): RolesAggregate!
 
-  """
-  fetch data from the table: "roles" using primary key columns
-  """
+  """fetch data from the table: "roles" using primary key columns"""
   rolesByPk(value: String!): Roles
 
   """
   fetch data from the table: "session"
   """
   session(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [SessionSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [SessionOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: SessionBoolExp
   ): [Session!]!
 
@@ -4364,64 +3472,42 @@ type query_root {
   fetch aggregated fields from the table: "session"
   """
   sessionAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [SessionSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [SessionOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: SessionBoolExp
   ): SessionAggregate!
 
-  """
-  fetch data from the table: "session" using primary key columns
-  """
+  """fetch data from the table: "session" using primary key columns"""
   sessionByPk(id: uuid!): Session
 
   """
   fetch data from the table: "traefikRoutes"
   """
   traefikRoutes(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [TraefikRoutesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [TraefikRoutesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: TraefikRoutesBoolExp
   ): [TraefikRoutes!]!
 
@@ -4429,64 +3515,42 @@ type query_root {
   fetch aggregated fields from the table: "traefikRoutes"
   """
   traefikRoutesAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [TraefikRoutesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [TraefikRoutesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: TraefikRoutesBoolExp
   ): TraefikRoutesAggregate!
 
-  """
-  fetch data from the table: "traefikRoutes" using primary key columns
-  """
+  """fetch data from the table: "traefikRoutes" using primary key columns"""
   traefikRoutesByPk(name: String!): TraefikRoutes
 
   """
   fetch data from the table: "user"
   """
   user(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [UserSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [UserOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UserBoolExp
   ): [User!]!
 
@@ -4494,64 +3558,42 @@ type query_root {
   fetch aggregated fields from the table: "user"
   """
   userAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [UserSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [UserOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UserBoolExp
   ): UserAggregate!
 
-  """
-  fetch data from the table: "user" using primary key columns
-  """
+  """fetch data from the table: "user" using primary key columns"""
   userByPk(id: uuid!): User
 
   """
   fetch data from the table: "verification_token"
   """
   verificationToken(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [VerificationTokenSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [VerificationTokenOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: VerificationTokenBoolExp
   ): [VerificationToken!]!
 
@@ -4559,29 +3601,19 @@ type query_root {
   fetch aggregated fields from the table: "verification_token"
   """
   verificationTokenAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [VerificationTokenSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [VerificationTokenOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: VerificationTokenBoolExp
   ): VerificationTokenAggregate!
 
@@ -4603,29 +3635,19 @@ type subscription_root {
   fetch data from the table: "account"
   """
   account(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AccountSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AccountOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AccountBoolExp
   ): [Account!]!
 
@@ -4633,54 +3655,36 @@ type subscription_root {
   fetch aggregated fields from the table: "account"
   """
   accountAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AccountSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AccountOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AccountBoolExp
   ): AccountAggregate!
 
-  """
-  fetch data from the table: "account" using primary key columns
-  """
+  """fetch data from the table: "account" using primary key columns"""
   accountByPk(id: uuid!): Account
 
   """
   fetch data from the table in a streaming manner: "account"
   """
   accountStream(
-    """
-    maximum number of rows returned in a single batch
-    """
+    """maximum number of rows returned in a single batch"""
     batchSize: Int!
 
-    """
-    cursor to stream the results returned by the query
-    """
+    """cursor to stream the results returned by the query"""
     cursor: [AccountStreamCursorInput]!
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AccountBoolExp
   ): [Account!]!
 
@@ -4688,29 +3692,19 @@ type subscription_root {
   fetch data from the table: "allowed_role"
   """
   allowedRole(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AllowedRoleSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AllowedRoleOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AllowedRoleBoolExp
   ): [AllowedRole!]!
 
@@ -4718,139 +3712,89 @@ type subscription_root {
   fetch aggregated fields from the table: "allowed_role"
   """
   allowedRoleAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [AllowedRoleSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [AllowedRoleOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AllowedRoleBoolExp
   ): AllowedRoleAggregate!
 
-  """
-  fetch data from the table: "allowed_role" using primary key columns
-  """
+  """fetch data from the table: "allowed_role" using primary key columns"""
   allowedRoleByPk(role: RolesEnum!, userId: uuid!): AllowedRole
 
   """
   fetch data from the table in a streaming manner: "allowed_role"
   """
   allowedRoleStream(
-    """
-    maximum number of rows returned in a single batch
-    """
+    """maximum number of rows returned in a single batch"""
     batchSize: Int!
 
-    """
-    cursor to stream the results returned by the query
-    """
+    """cursor to stream the results returned by the query"""
     cursor: [AllowedRoleStreamCursorInput]!
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: AllowedRoleBoolExp
   ): [AllowedRole!]!
 
-  """
-  An array relationship
-  """
+  """An array relationship"""
   bookmarks(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): [Bookmarks!]!
 
-  """
-  An aggregate relationship
-  """
+  """An aggregate relationship"""
   bookmarksAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [BookmarksSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [BookmarksOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): BookmarksAggregate!
 
-  """
-  fetch data from the table: "bookmarks" using primary key columns
-  """
+  """fetch data from the table: "bookmarks" using primary key columns"""
   bookmarksByPk(id: uuid!): Bookmarks
 
   """
   fetch data from the table in a streaming manner: "bookmarks"
   """
   bookmarksStream(
-    """
-    maximum number of rows returned in a single batch
-    """
+    """maximum number of rows returned in a single batch"""
     batchSize: Int!
 
-    """
-    cursor to stream the results returned by the query
-    """
+    """cursor to stream the results returned by the query"""
     cursor: [BookmarksStreamCursorInput]!
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: BookmarksBoolExp
   ): [Bookmarks!]!
 
@@ -4858,29 +3802,19 @@ type subscription_root {
   fetch data from the table: "roles"
   """
   roles(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [RolesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [RolesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: RolesBoolExp
   ): [Roles!]!
 
@@ -4888,54 +3822,36 @@ type subscription_root {
   fetch aggregated fields from the table: "roles"
   """
   rolesAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [RolesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [RolesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: RolesBoolExp
   ): RolesAggregate!
 
-  """
-  fetch data from the table: "roles" using primary key columns
-  """
+  """fetch data from the table: "roles" using primary key columns"""
   rolesByPk(value: String!): Roles
 
   """
   fetch data from the table in a streaming manner: "roles"
   """
   rolesStream(
-    """
-    maximum number of rows returned in a single batch
-    """
+    """maximum number of rows returned in a single batch"""
     batchSize: Int!
 
-    """
-    cursor to stream the results returned by the query
-    """
+    """cursor to stream the results returned by the query"""
     cursor: [RolesStreamCursorInput]!
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: RolesBoolExp
   ): [Roles!]!
 
@@ -4943,29 +3859,19 @@ type subscription_root {
   fetch data from the table: "session"
   """
   session(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [SessionSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [SessionOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: SessionBoolExp
   ): [Session!]!
 
@@ -4973,54 +3879,36 @@ type subscription_root {
   fetch aggregated fields from the table: "session"
   """
   sessionAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [SessionSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [SessionOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: SessionBoolExp
   ): SessionAggregate!
 
-  """
-  fetch data from the table: "session" using primary key columns
-  """
+  """fetch data from the table: "session" using primary key columns"""
   sessionByPk(id: uuid!): Session
 
   """
   fetch data from the table in a streaming manner: "session"
   """
   sessionStream(
-    """
-    maximum number of rows returned in a single batch
-    """
+    """maximum number of rows returned in a single batch"""
     batchSize: Int!
 
-    """
-    cursor to stream the results returned by the query
-    """
+    """cursor to stream the results returned by the query"""
     cursor: [SessionStreamCursorInput]!
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: SessionBoolExp
   ): [Session!]!
 
@@ -5028,29 +3916,19 @@ type subscription_root {
   fetch data from the table: "traefikRoutes"
   """
   traefikRoutes(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [TraefikRoutesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [TraefikRoutesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: TraefikRoutesBoolExp
   ): [TraefikRoutes!]!
 
@@ -5058,54 +3936,36 @@ type subscription_root {
   fetch aggregated fields from the table: "traefikRoutes"
   """
   traefikRoutesAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [TraefikRoutesSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [TraefikRoutesOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: TraefikRoutesBoolExp
   ): TraefikRoutesAggregate!
 
-  """
-  fetch data from the table: "traefikRoutes" using primary key columns
-  """
+  """fetch data from the table: "traefikRoutes" using primary key columns"""
   traefikRoutesByPk(name: String!): TraefikRoutes
 
   """
   fetch data from the table in a streaming manner: "traefikRoutes"
   """
   traefikRoutesStream(
-    """
-    maximum number of rows returned in a single batch
-    """
+    """maximum number of rows returned in a single batch"""
     batchSize: Int!
 
-    """
-    cursor to stream the results returned by the query
-    """
+    """cursor to stream the results returned by the query"""
     cursor: [TraefikRoutesStreamCursorInput]!
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: TraefikRoutesBoolExp
   ): [TraefikRoutes!]!
 
@@ -5113,29 +3973,19 @@ type subscription_root {
   fetch data from the table: "user"
   """
   user(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [UserSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [UserOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UserBoolExp
   ): [User!]!
 
@@ -5143,54 +3993,36 @@ type subscription_root {
   fetch aggregated fields from the table: "user"
   """
   userAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [UserSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [UserOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UserBoolExp
   ): UserAggregate!
 
-  """
-  fetch data from the table: "user" using primary key columns
-  """
+  """fetch data from the table: "user" using primary key columns"""
   userByPk(id: uuid!): User
 
   """
   fetch data from the table in a streaming manner: "user"
   """
   userStream(
-    """
-    maximum number of rows returned in a single batch
-    """
+    """maximum number of rows returned in a single batch"""
     batchSize: Int!
 
-    """
-    cursor to stream the results returned by the query
-    """
+    """cursor to stream the results returned by the query"""
     cursor: [UserStreamCursorInput]!
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: UserBoolExp
   ): [User!]!
 
@@ -5198,29 +4030,19 @@ type subscription_root {
   fetch data from the table: "verification_token"
   """
   verificationToken(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [VerificationTokenSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [VerificationTokenOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: VerificationTokenBoolExp
   ): [VerificationToken!]!
 
@@ -5228,29 +4050,19 @@ type subscription_root {
   fetch aggregated fields from the table: "verification_token"
   """
   verificationTokenAggregate(
-    """
-    distinct select on columns
-    """
+    """distinct select on columns"""
     distinctOn: [VerificationTokenSelectColumn!]
 
-    """
-    limit the number of rows returned
-    """
+    """limit the number of rows returned"""
     limit: Int
 
-    """
-    skip the first n rows. Use only with order_by
-    """
+    """skip the first n rows. Use only with order_by"""
     offset: Int
 
-    """
-    sort the rows by one or more columns
-    """
+    """sort the rows by one or more columns"""
     orderBy: [VerificationTokenOrderBy!]
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: VerificationTokenBoolExp
   ): VerificationTokenAggregate!
 
@@ -5263,19 +4075,13 @@ type subscription_root {
   fetch data from the table in a streaming manner: "verification_token"
   """
   verificationTokenStream(
-    """
-    maximum number of rows returned in a single batch
-    """
+    """maximum number of rows returned in a single batch"""
     batchSize: Int!
 
-    """
-    cursor to stream the results returned by the query
-    """
+    """cursor to stream the results returned by the query"""
     cursor: [VerificationTokenStreamCursorInput]!
 
-    """
-    filter the rows returned
-    """
+    """filter the rows returned"""
     where: VerificationTokenBoolExp
   ): [VerificationToken!]!
 }

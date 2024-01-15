@@ -1,14 +1,8 @@
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -69,6 +63,7 @@ export type AccountAggregateFields = {
   varSamp?: Maybe<AccountVarSampFields>;
   variance?: Maybe<AccountVarianceFields>;
 };
+
 
 /** aggregate fields of "account" */
 export type AccountAggregateFieldsCountArgs = {
@@ -137,7 +132,7 @@ export type AccountBoolExp = {
 /** unique or primary key constraints on table "account" */
 export enum AccountConstraint {
   /** unique or primary key constraint on columns "id" */
-  AccountPkey = 'account_pkey',
+  AccountPkey = 'account_pkey'
 }
 
 /** input type for incrementing numeric columns in table "account" */
@@ -316,7 +311,7 @@ export enum AccountSelectColumn {
   /** column name */
   Type = 'type',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** input type for updating data in table "account" */
@@ -448,7 +443,7 @@ export enum AccountUpdateColumn {
   /** column name */
   Type = 'type',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 export type AccountUpdates = {
@@ -529,6 +524,7 @@ export type AllowedRoleAggregateFields = {
   min?: Maybe<AllowedRoleMinFields>;
 };
 
+
 /** aggregate fields of "allowed_role" */
 export type AllowedRoleAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<AllowedRoleSelectColumn>>;
@@ -563,7 +559,7 @@ export type AllowedRoleBoolExp = {
 /** unique or primary key constraints on table "allowed_role" */
 export enum AllowedRoleConstraint {
   /** unique or primary key constraint on columns "user_id", "role" */
-  AllowedRolePkey = 'allowed_role_pkey',
+  AllowedRolePkey = 'allowed_role_pkey'
 }
 
 /** input type for inserting data into table "allowed_role" */
@@ -631,7 +627,7 @@ export enum AllowedRoleSelectColumn {
   /** column name */
   Role = 'role',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** input type for updating data in table "allowed_role" */
@@ -659,7 +655,7 @@ export enum AllowedRoleUpdateColumn {
   /** column name */
   Role = 'role',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 export type AllowedRoleUpdates = {
@@ -722,6 +718,7 @@ export type BookmarksAggregateFields = {
   variance?: Maybe<BookmarksVarianceFields>;
 };
 
+
 /** aggregate fields of "bookmarks" */
 export type BookmarksAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<BookmarksSelectColumn>>;
@@ -780,7 +777,7 @@ export enum BookmarksConstraint {
   /** unique or primary key constraint on columns "id" */
   BookmarksPkey = 'bookmarks_pkey',
   /** unique or primary key constraint on columns "userId", "position" */
-  BookmarksUserIdPositionKey = 'bookmarks_userId_position_key',
+  BookmarksUserIdPositionKey = 'bookmarks_userId_position_key'
 }
 
 /** input type for incrementing numeric columns in table "bookmarks" */
@@ -886,7 +883,7 @@ export enum BookmarksSelectColumn {
   /** column name */
   Position = 'position',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** input type for updating data in table "bookmarks" */
@@ -974,7 +971,7 @@ export enum BookmarksUpdateColumn {
   /** column name */
   Position = 'position',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 export type BookmarksUpdates = {
@@ -1037,7 +1034,7 @@ export enum CursorOrdering {
   /** ascending ordering of the cursor */
   Asc = 'ASC',
   /** descending ordering of the cursor */
-  Desc = 'DESC',
+  Desc = 'DESC'
 }
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -1066,7 +1063,7 @@ export enum OrderBy {
   /** in descending order, nulls first */
   DescNullsFirst = 'DESC_NULLS_FIRST',
   /** in descending order, nulls last */
-  DescNullsLast = 'DESC_NULLS_LAST',
+  DescNullsLast = 'DESC_NULLS_LAST'
 }
 
 /** columns and relationships of "roles" */
@@ -1084,6 +1081,7 @@ export type Roles = {
   value: Scalars['String'];
 };
 
+
 /** columns and relationships of "roles" */
 export type RolesAllowedRolesArgs = {
   distinctOn?: InputMaybe<Array<AllowedRoleSelectColumn>>;
@@ -1092,6 +1090,7 @@ export type RolesAllowedRolesArgs = {
   orderBy?: InputMaybe<Array<AllowedRoleOrderBy>>;
   where?: InputMaybe<AllowedRoleBoolExp>;
 };
+
 
 /** columns and relationships of "roles" */
 export type RolesAllowedRolesAggregateArgs = {
@@ -1102,6 +1101,7 @@ export type RolesAllowedRolesAggregateArgs = {
   where?: InputMaybe<AllowedRoleBoolExp>;
 };
 
+
 /** columns and relationships of "roles" */
 export type RolesUsersArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
@@ -1110,6 +1110,7 @@ export type RolesUsersArgs = {
   orderBy?: InputMaybe<Array<UserOrderBy>>;
   where?: InputMaybe<UserBoolExp>;
 };
+
 
 /** columns and relationships of "roles" */
 export type RolesUsersAggregateArgs = {
@@ -1135,6 +1136,7 @@ export type RolesAggregateFields = {
   min?: Maybe<RolesMinFields>;
 };
 
+
 /** aggregate fields of "roles" */
 export type RolesAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<RolesSelectColumn>>;
@@ -1157,11 +1159,11 @@ export type RolesBoolExp = {
 /** unique or primary key constraints on table "roles" */
 export enum RolesConstraint {
   /** unique or primary key constraint on columns "value" */
-  RolesPkey = 'roles_pkey',
+  RolesPkey = 'roles_pkey'
 }
 
 export enum RolesEnum {
-  User = 'USER',
+  User = 'USER'
 }
 
 /** Boolean expression to compare columns of type "RolesEnum". All fields are combined with logical 'AND'. */
@@ -1236,7 +1238,7 @@ export enum RolesSelectColumn {
   /** column name */
   Description = 'description',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** input type for updating data in table "roles" */
@@ -1264,7 +1266,7 @@ export enum RolesUpdateColumn {
   /** column name */
   Description = 'description',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 export type RolesUpdates = {
@@ -1304,6 +1306,7 @@ export type SessionAggregateFields = {
   min?: Maybe<SessionMinFields>;
 };
 
+
 /** aggregate fields of "session" */
 export type SessionAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<SessionSelectColumn>>;
@@ -1339,7 +1342,7 @@ export type SessionBoolExp = {
 /** unique or primary key constraints on table "session" */
 export enum SessionConstraint {
   /** unique or primary key constraint on columns "id" */
-  SessionPkey = 'session_pkey',
+  SessionPkey = 'session_pkey'
 }
 
 /** input type for inserting data into table "session" */
@@ -1424,7 +1427,7 @@ export enum SessionSelectColumn {
   /** column name */
   SessionToken = 'sessionToken',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** input type for updating data in table "session" */
@@ -1460,7 +1463,7 @@ export enum SessionUpdateColumn {
   /** column name */
   SessionToken = 'sessionToken',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 export type SessionUpdates = {
@@ -1547,6 +1550,7 @@ export type TraefikRoutesAggregateFields = {
   min?: Maybe<TraefikRoutesMinFields>;
 };
 
+
 /** aggregate fields of "traefikRoutes" */
 export type TraefikRoutesAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
@@ -1574,7 +1578,7 @@ export type TraefikRoutesBoolExp = {
 /** unique or primary key constraints on table "traefikRoutes" */
 export enum TraefikRoutesConstraint {
   /** unique or primary key constraint on columns "name" */
-  TraefikRoutesPkey = 'traefikRoutes_pkey',
+  TraefikRoutesPkey = 'traefikRoutes_pkey'
 }
 
 /** input type for inserting data into table "traefikRoutes" */
@@ -1679,7 +1683,7 @@ export enum TraefikRoutesSelectColumn {
   /** column name */
   Rule = 'rule',
   /** column name */
-  Service = 'service',
+  Service = 'service'
 }
 
 /** input type for updating data in table "traefikRoutes" */
@@ -1743,7 +1747,7 @@ export enum TraefikRoutesUpdateColumn {
   /** column name */
   Rule = 'rule',
   /** column name */
-  Service = 'service',
+  Service = 'service'
 }
 
 export type TraefikRoutesUpdates = {
@@ -1786,6 +1790,7 @@ export type User = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "user" */
 export type UserAccountsArgs = {
   distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
@@ -1794,6 +1799,7 @@ export type UserAccountsArgs = {
   orderBy?: InputMaybe<Array<AccountOrderBy>>;
   where?: InputMaybe<AccountBoolExp>;
 };
+
 
 /** columns and relationships of "user" */
 export type UserAccountsAggregateArgs = {
@@ -1804,6 +1810,7 @@ export type UserAccountsAggregateArgs = {
   where?: InputMaybe<AccountBoolExp>;
 };
 
+
 /** columns and relationships of "user" */
 export type UserAllowedRolesArgs = {
   distinctOn?: InputMaybe<Array<AllowedRoleSelectColumn>>;
@@ -1812,6 +1819,7 @@ export type UserAllowedRolesArgs = {
   orderBy?: InputMaybe<Array<AllowedRoleOrderBy>>;
   where?: InputMaybe<AllowedRoleBoolExp>;
 };
+
 
 /** columns and relationships of "user" */
 export type UserAllowedRolesAggregateArgs = {
@@ -1822,6 +1830,7 @@ export type UserAllowedRolesAggregateArgs = {
   where?: InputMaybe<AllowedRoleBoolExp>;
 };
 
+
 /** columns and relationships of "user" */
 export type UserBookmarksArgs = {
   distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
@@ -1830,6 +1839,7 @@ export type UserBookmarksArgs = {
   orderBy?: InputMaybe<Array<BookmarksOrderBy>>;
   where?: InputMaybe<BookmarksBoolExp>;
 };
+
 
 /** columns and relationships of "user" */
 export type UserBookmarksAggregateArgs = {
@@ -1840,6 +1850,7 @@ export type UserBookmarksAggregateArgs = {
   where?: InputMaybe<BookmarksBoolExp>;
 };
 
+
 /** columns and relationships of "user" */
 export type UserSessionsArgs = {
   distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
@@ -1848,6 +1859,7 @@ export type UserSessionsArgs = {
   orderBy?: InputMaybe<Array<SessionOrderBy>>;
   where?: InputMaybe<SessionBoolExp>;
 };
+
 
 /** columns and relationships of "user" */
 export type UserSessionsAggregateArgs = {
@@ -1878,6 +1890,7 @@ export type UserAggregateFields = {
   max?: Maybe<UserMaxFields>;
   min?: Maybe<UserMinFields>;
 };
+
 
 /** aggregate fields of "user" */
 export type UserAggregateFieldsCountArgs = {
@@ -1930,7 +1943,7 @@ export enum UserConstraint {
   /** unique or primary key constraint on columns "email" */
   UserEmailKey = 'user_email_key',
   /** unique or primary key constraint on columns "id" */
-  UsersPkey = 'users_pkey',
+  UsersPkey = 'users_pkey'
 }
 
 /** input type for inserting data into table "user" */
@@ -2070,19 +2083,19 @@ export enum UserSelectColumn {
   /** column name */
   TodoistApiToken = 'todoistApiToken',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** select "userAggregateBoolExpBool_andArgumentsColumns" columns of table "user" */
 export enum UserSelectColumnUserAggregateBoolExpBool_AndArgumentsColumns {
   /** column name */
-  CanSeeTraefikContent = 'canSeeTraefikContent',
+  CanSeeTraefikContent = 'canSeeTraefikContent'
 }
 
 /** select "userAggregateBoolExpBool_orArgumentsColumns" columns of table "user" */
 export enum UserSelectColumnUserAggregateBoolExpBool_OrArgumentsColumns {
   /** column name */
-  CanSeeTraefikContent = 'canSeeTraefikContent',
+  CanSeeTraefikContent = 'canSeeTraefikContent'
 }
 
 /** input type for updating data in table "user" */
@@ -2142,7 +2155,7 @@ export enum UserUpdateColumn {
   /** column name */
   TodoistApiToken = 'todoistApiToken',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type UserUpdates = {
@@ -2188,6 +2201,7 @@ export type VerificationTokenAggregateFields = {
   min?: Maybe<VerificationTokenMinFields>;
 };
 
+
 /** aggregate fields of "verification_token" */
 export type VerificationTokenAggregateFieldsCountArgs = {
   columns?: InputMaybe<Array<VerificationTokenSelectColumn>>;
@@ -2207,7 +2221,7 @@ export type VerificationTokenBoolExp = {
 /** unique or primary key constraints on table "verification_token" */
 export enum VerificationTokenConstraint {
   /** unique or primary key constraint on columns "token" */
-  VerificationTokenPkey = 'verification_token_pkey',
+  VerificationTokenPkey = 'verification_token_pkey'
 }
 
 /** input type for inserting data into table "verification_token" */
@@ -2268,7 +2282,7 @@ export enum VerificationTokenSelectColumn {
   /** column name */
   Identifier = 'identifier',
   /** column name */
-  Token = 'token',
+  Token = 'token'
 }
 
 /** input type for updating data in table "verification_token" */
@@ -2300,7 +2314,7 @@ export enum VerificationTokenUpdateColumn {
   /** column name */
   Identifier = 'identifier',
   /** column name */
-  Token = 'token',
+  Token = 'token'
 }
 
 export type VerificationTokenUpdates = {
@@ -2445,25 +2459,27 @@ export type Mutation_Root = {
   /** update single row of the table: "verification_token" */
   updateVerificationTokenByPk?: Maybe<VerificationToken>;
   /** update multiples rows of table: "verification_token" */
-  updateVerificationTokenMany?: Maybe<
-    Array<Maybe<VerificationTokenMutationResponse>>
-  >;
+  updateVerificationTokenMany?: Maybe<Array<Maybe<VerificationTokenMutationResponse>>>;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteAccountArgs = {
   where: AccountBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteAccountByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteAllowedRoleArgs = {
   where: AllowedRoleBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteAllowedRoleByPkArgs = {
@@ -2471,65 +2487,78 @@ export type Mutation_RootDeleteAllowedRoleByPkArgs = {
   userId: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteBookmarksArgs = {
   where: BookmarksBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteBookmarksByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteRolesArgs = {
   where: RolesBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteRolesByPkArgs = {
   value: Scalars['String'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteSessionArgs = {
   where: SessionBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteSessionByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteTraefikRoutesArgs = {
   where: TraefikRoutesBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteTraefikRoutesByPkArgs = {
   name: Scalars['String'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteUserArgs = {
   where: UserBoolExp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteUserByPkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteVerificationTokenArgs = {
   where: VerificationTokenBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteVerificationTokenByPkArgs = {
   token: Scalars['String'];
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertAccountArgs = {
@@ -2537,11 +2566,13 @@ export type Mutation_RootInsertAccountArgs = {
   onConflict?: InputMaybe<AccountOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertAccountOneArgs = {
   object: AccountInsertInput;
   onConflict?: InputMaybe<AccountOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertAllowedRoleArgs = {
@@ -2549,11 +2580,13 @@ export type Mutation_RootInsertAllowedRoleArgs = {
   onConflict?: InputMaybe<AllowedRoleOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertAllowedRoleOneArgs = {
   object: AllowedRoleInsertInput;
   onConflict?: InputMaybe<AllowedRoleOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertBookmarksArgs = {
@@ -2561,11 +2594,13 @@ export type Mutation_RootInsertBookmarksArgs = {
   onConflict?: InputMaybe<BookmarksOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertBookmarksOneArgs = {
   object: BookmarksInsertInput;
   onConflict?: InputMaybe<BookmarksOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertRolesArgs = {
@@ -2573,11 +2608,13 @@ export type Mutation_RootInsertRolesArgs = {
   onConflict?: InputMaybe<RolesOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertRolesOneArgs = {
   object: RolesInsertInput;
   onConflict?: InputMaybe<RolesOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertSessionArgs = {
@@ -2585,11 +2622,13 @@ export type Mutation_RootInsertSessionArgs = {
   onConflict?: InputMaybe<SessionOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertSessionOneArgs = {
   object: SessionInsertInput;
   onConflict?: InputMaybe<SessionOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertTraefikRoutesArgs = {
@@ -2597,11 +2636,13 @@ export type Mutation_RootInsertTraefikRoutesArgs = {
   onConflict?: InputMaybe<TraefikRoutesOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertTraefikRoutesOneArgs = {
   object: TraefikRoutesInsertInput;
   onConflict?: InputMaybe<TraefikRoutesOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertUserArgs = {
@@ -2609,11 +2650,13 @@ export type Mutation_RootInsertUserArgs = {
   onConflict?: InputMaybe<UserOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertUserOneArgs = {
   object: UserInsertInput;
   onConflict?: InputMaybe<UserOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertVerificationTokenArgs = {
@@ -2621,11 +2664,13 @@ export type Mutation_RootInsertVerificationTokenArgs = {
   onConflict?: InputMaybe<VerificationTokenOnConflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertVerificationTokenOneArgs = {
   object: VerificationTokenInsertInput;
   onConflict?: InputMaybe<VerificationTokenOnConflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateAccountArgs = {
@@ -2634,6 +2679,7 @@ export type Mutation_RootUpdateAccountArgs = {
   where: AccountBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateAccountByPkArgs = {
   _inc?: InputMaybe<AccountIncInput>;
@@ -2641,10 +2687,12 @@ export type Mutation_RootUpdateAccountByPkArgs = {
   pkColumns: AccountPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateAccountManyArgs = {
   updates: Array<AccountUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateAllowedRoleArgs = {
@@ -2652,16 +2700,19 @@ export type Mutation_RootUpdateAllowedRoleArgs = {
   where: AllowedRoleBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateAllowedRoleByPkArgs = {
   _set?: InputMaybe<AllowedRoleSetInput>;
   pkColumns: AllowedRolePkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateAllowedRoleManyArgs = {
   updates: Array<AllowedRoleUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateBookmarksArgs = {
@@ -2670,6 +2721,7 @@ export type Mutation_RootUpdateBookmarksArgs = {
   where: BookmarksBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateBookmarksByPkArgs = {
   _inc?: InputMaybe<BookmarksIncInput>;
@@ -2677,10 +2729,12 @@ export type Mutation_RootUpdateBookmarksByPkArgs = {
   pkColumns: BookmarksPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateBookmarksManyArgs = {
   updates: Array<BookmarksUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateRolesArgs = {
@@ -2688,16 +2742,19 @@ export type Mutation_RootUpdateRolesArgs = {
   where: RolesBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateRolesByPkArgs = {
   _set?: InputMaybe<RolesSetInput>;
   pkColumns: RolesPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateRolesManyArgs = {
   updates: Array<RolesUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateSessionArgs = {
@@ -2705,16 +2762,19 @@ export type Mutation_RootUpdateSessionArgs = {
   where: SessionBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateSessionByPkArgs = {
   _set?: InputMaybe<SessionSetInput>;
   pkColumns: SessionPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateSessionManyArgs = {
   updates: Array<SessionUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateTraefikRoutesArgs = {
@@ -2722,16 +2782,19 @@ export type Mutation_RootUpdateTraefikRoutesArgs = {
   where: TraefikRoutesBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateTraefikRoutesByPkArgs = {
   _set?: InputMaybe<TraefikRoutesSetInput>;
   pkColumns: TraefikRoutesPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateTraefikRoutesManyArgs = {
   updates: Array<TraefikRoutesUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateUserArgs = {
@@ -2739,16 +2802,19 @@ export type Mutation_RootUpdateUserArgs = {
   where: UserBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateUserByPkArgs = {
   _set?: InputMaybe<UserSetInput>;
   pkColumns: UserPkColumnsInput;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateUserManyArgs = {
   updates: Array<UserUpdates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateVerificationTokenArgs = {
@@ -2756,11 +2822,13 @@ export type Mutation_RootUpdateVerificationTokenArgs = {
   where: VerificationTokenBoolExp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateVerificationTokenByPkArgs = {
   _set?: InputMaybe<VerificationTokenSetInput>;
   pkColumns: VerificationTokenPkColumnsInput;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateVerificationTokenManyArgs = {
@@ -2819,6 +2887,7 @@ export type Query_Root = {
   verificationTokenByPk?: Maybe<VerificationToken>;
 };
 
+
 export type Query_RootAccountArgs = {
   distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2826,6 +2895,7 @@ export type Query_RootAccountArgs = {
   orderBy?: InputMaybe<Array<AccountOrderBy>>;
   where?: InputMaybe<AccountBoolExp>;
 };
+
 
 export type Query_RootAccountAggregateArgs = {
   distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
@@ -2835,9 +2905,11 @@ export type Query_RootAccountAggregateArgs = {
   where?: InputMaybe<AccountBoolExp>;
 };
 
+
 export type Query_RootAccountByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootAllowedRoleArgs = {
   distinctOn?: InputMaybe<Array<AllowedRoleSelectColumn>>;
@@ -2847,6 +2919,7 @@ export type Query_RootAllowedRoleArgs = {
   where?: InputMaybe<AllowedRoleBoolExp>;
 };
 
+
 export type Query_RootAllowedRoleAggregateArgs = {
   distinctOn?: InputMaybe<Array<AllowedRoleSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2855,10 +2928,12 @@ export type Query_RootAllowedRoleAggregateArgs = {
   where?: InputMaybe<AllowedRoleBoolExp>;
 };
 
+
 export type Query_RootAllowedRoleByPkArgs = {
   role: RolesEnum;
   userId: Scalars['uuid'];
 };
+
 
 export type Query_RootBookmarksArgs = {
   distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
@@ -2868,6 +2943,7 @@ export type Query_RootBookmarksArgs = {
   where?: InputMaybe<BookmarksBoolExp>;
 };
 
+
 export type Query_RootBookmarksAggregateArgs = {
   distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2876,9 +2952,11 @@ export type Query_RootBookmarksAggregateArgs = {
   where?: InputMaybe<BookmarksBoolExp>;
 };
 
+
 export type Query_RootBookmarksByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootRolesArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
@@ -2888,6 +2966,7 @@ export type Query_RootRolesArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
+
 export type Query_RootRolesAggregateArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2896,9 +2975,11 @@ export type Query_RootRolesAggregateArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
+
 export type Query_RootRolesByPkArgs = {
   value: Scalars['String'];
 };
+
 
 export type Query_RootSessionArgs = {
   distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
@@ -2908,6 +2989,7 @@ export type Query_RootSessionArgs = {
   where?: InputMaybe<SessionBoolExp>;
 };
 
+
 export type Query_RootSessionAggregateArgs = {
   distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2916,9 +2998,11 @@ export type Query_RootSessionAggregateArgs = {
   where?: InputMaybe<SessionBoolExp>;
 };
 
+
 export type Query_RootSessionByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootTraefikRoutesArgs = {
   distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
@@ -2928,6 +3012,7 @@ export type Query_RootTraefikRoutesArgs = {
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
 
+
 export type Query_RootTraefikRoutesAggregateArgs = {
   distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2936,9 +3021,11 @@ export type Query_RootTraefikRoutesAggregateArgs = {
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
 
+
 export type Query_RootTraefikRoutesByPkArgs = {
   name: Scalars['String'];
 };
+
 
 export type Query_RootUserArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
@@ -2948,6 +3035,7 @@ export type Query_RootUserArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
+
 export type Query_RootUserAggregateArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2956,9 +3044,11 @@ export type Query_RootUserAggregateArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
+
 export type Query_RootUserByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootVerificationTokenArgs = {
   distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
@@ -2968,6 +3058,7 @@ export type Query_RootVerificationTokenArgs = {
   where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
+
 export type Query_RootVerificationTokenAggregateArgs = {
   distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2975,6 +3066,7 @@ export type Query_RootVerificationTokenAggregateArgs = {
   orderBy?: InputMaybe<Array<VerificationTokenOrderBy>>;
   where?: InputMaybe<VerificationTokenBoolExp>;
 };
+
 
 export type Query_RootVerificationTokenByPkArgs = {
   token: Scalars['String'];
@@ -3055,6 +3147,7 @@ export type Subscription_Root = {
   verificationTokenStream: Array<VerificationToken>;
 };
 
+
 export type Subscription_RootAccountArgs = {
   distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3062,6 +3155,7 @@ export type Subscription_RootAccountArgs = {
   orderBy?: InputMaybe<Array<AccountOrderBy>>;
   where?: InputMaybe<AccountBoolExp>;
 };
+
 
 export type Subscription_RootAccountAggregateArgs = {
   distinctOn?: InputMaybe<Array<AccountSelectColumn>>;
@@ -3071,15 +3165,18 @@ export type Subscription_RootAccountAggregateArgs = {
   where?: InputMaybe<AccountBoolExp>;
 };
 
+
 export type Subscription_RootAccountByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootAccountStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<AccountStreamCursorInput>>;
   where?: InputMaybe<AccountBoolExp>;
 };
+
 
 export type Subscription_RootAllowedRoleArgs = {
   distinctOn?: InputMaybe<Array<AllowedRoleSelectColumn>>;
@@ -3089,6 +3186,7 @@ export type Subscription_RootAllowedRoleArgs = {
   where?: InputMaybe<AllowedRoleBoolExp>;
 };
 
+
 export type Subscription_RootAllowedRoleAggregateArgs = {
   distinctOn?: InputMaybe<Array<AllowedRoleSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3097,16 +3195,19 @@ export type Subscription_RootAllowedRoleAggregateArgs = {
   where?: InputMaybe<AllowedRoleBoolExp>;
 };
 
+
 export type Subscription_RootAllowedRoleByPkArgs = {
   role: RolesEnum;
   userId: Scalars['uuid'];
 };
+
 
 export type Subscription_RootAllowedRoleStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<AllowedRoleStreamCursorInput>>;
   where?: InputMaybe<AllowedRoleBoolExp>;
 };
+
 
 export type Subscription_RootBookmarksArgs = {
   distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
@@ -3116,6 +3217,7 @@ export type Subscription_RootBookmarksArgs = {
   where?: InputMaybe<BookmarksBoolExp>;
 };
 
+
 export type Subscription_RootBookmarksAggregateArgs = {
   distinctOn?: InputMaybe<Array<BookmarksSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3124,15 +3226,18 @@ export type Subscription_RootBookmarksAggregateArgs = {
   where?: InputMaybe<BookmarksBoolExp>;
 };
 
+
 export type Subscription_RootBookmarksByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootBookmarksStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<BookmarksStreamCursorInput>>;
   where?: InputMaybe<BookmarksBoolExp>;
 };
+
 
 export type Subscription_RootRolesArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
@@ -3142,6 +3247,7 @@ export type Subscription_RootRolesArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
+
 export type Subscription_RootRolesAggregateArgs = {
   distinctOn?: InputMaybe<Array<RolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3150,15 +3256,18 @@ export type Subscription_RootRolesAggregateArgs = {
   where?: InputMaybe<RolesBoolExp>;
 };
 
+
 export type Subscription_RootRolesByPkArgs = {
   value: Scalars['String'];
 };
+
 
 export type Subscription_RootRolesStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<RolesStreamCursorInput>>;
   where?: InputMaybe<RolesBoolExp>;
 };
+
 
 export type Subscription_RootSessionArgs = {
   distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
@@ -3168,6 +3277,7 @@ export type Subscription_RootSessionArgs = {
   where?: InputMaybe<SessionBoolExp>;
 };
 
+
 export type Subscription_RootSessionAggregateArgs = {
   distinctOn?: InputMaybe<Array<SessionSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3176,15 +3286,18 @@ export type Subscription_RootSessionAggregateArgs = {
   where?: InputMaybe<SessionBoolExp>;
 };
 
+
 export type Subscription_RootSessionByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootSessionStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<SessionStreamCursorInput>>;
   where?: InputMaybe<SessionBoolExp>;
 };
+
 
 export type Subscription_RootTraefikRoutesArgs = {
   distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
@@ -3194,6 +3307,7 @@ export type Subscription_RootTraefikRoutesArgs = {
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
 
+
 export type Subscription_RootTraefikRoutesAggregateArgs = {
   distinctOn?: InputMaybe<Array<TraefikRoutesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3202,15 +3316,18 @@ export type Subscription_RootTraefikRoutesAggregateArgs = {
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
 
+
 export type Subscription_RootTraefikRoutesByPkArgs = {
   name: Scalars['String'];
 };
+
 
 export type Subscription_RootTraefikRoutesStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<TraefikRoutesStreamCursorInput>>;
   where?: InputMaybe<TraefikRoutesBoolExp>;
 };
+
 
 export type Subscription_RootUserArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
@@ -3220,6 +3337,7 @@ export type Subscription_RootUserArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
+
 export type Subscription_RootUserAggregateArgs = {
   distinctOn?: InputMaybe<Array<UserSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3228,15 +3346,18 @@ export type Subscription_RootUserAggregateArgs = {
   where?: InputMaybe<UserBoolExp>;
 };
 
+
 export type Subscription_RootUserByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootUserStreamArgs = {
   batchSize: Scalars['Int'];
   cursor: Array<InputMaybe<UserStreamCursorInput>>;
   where?: InputMaybe<UserBoolExp>;
 };
+
 
 export type Subscription_RootVerificationTokenArgs = {
   distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
@@ -3246,6 +3367,7 @@ export type Subscription_RootVerificationTokenArgs = {
   where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
+
 export type Subscription_RootVerificationTokenAggregateArgs = {
   distinctOn?: InputMaybe<Array<VerificationTokenSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3254,9 +3376,11 @@ export type Subscription_RootVerificationTokenAggregateArgs = {
   where?: InputMaybe<VerificationTokenBoolExp>;
 };
 
+
 export type Subscription_RootVerificationTokenByPkArgs = {
   token: Scalars['String'];
 };
+
 
 export type Subscription_RootVerificationTokenStreamArgs = {
   batchSize: Scalars['Int'];

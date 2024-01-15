@@ -43,6 +43,17 @@ mutation InsertBookmark($object: BookmarksInsertInput!) {
   }
 }
 
+mutation UpdateBookmarks($objects: [BookmarksInsertInput!]!) {
+  insertBookmarks(
+    objects: $objects
+    onConflict: { constraint: bookmarks_pkey, updateColumns: displayName }
+  ) {
+    returning {
+      ...BookmarkItem
+    }
+  }
+}
+
 mutation UpdateBookmark($pk: uuid!, $object: BookmarksSetInput!) {
   updateBookmarksByPk(pkColumns: { id: $pk }, _set: $object) {
     ...BookmarkItem
