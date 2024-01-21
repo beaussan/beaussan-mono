@@ -1,10 +1,7 @@
-import defaultEslintPlugin from '@code-pushup/eslint-plugin';
+import eslintPlugin, {
+  eslintConfigFromNxProjects,
+} from '@code-pushup/eslint-plugin';
 import type { CoreConfig } from '@code-pushup/models';
-
-const eslintPlugin = defaultEslintPlugin.eslintPlugin;
-
-const eslintConfigFromNxProjects =
-  defaultEslintPlugin.eslintConfigFromNxProjects;
 
 const config: CoreConfig = {
   persist: {
@@ -13,7 +10,7 @@ const config: CoreConfig = {
     format: ['json', 'md'],
   },
 
-// See setup guide https://github.com/code-pushup/cli/wiki/Code-PushUp-integration-guide-for-Nx-monorepos
+  // See setup guide https://github.com/code-pushup/cli/wiki/Code-PushUp-integration-guide-for-Nx-monorepos
   plugins: [await eslintPlugin(await eslintConfigFromNxProjects())],
 
   categories: [
