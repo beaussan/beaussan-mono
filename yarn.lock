@@ -3391,7 +3391,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@code-pushup/cli@npm:^0.8.20":
+"@code-pushup/cli@npm:0.8.25":
   version: 0.8.25
   resolution: "@code-pushup/cli@npm:0.8.25"
   dependencies:
@@ -3418,7 +3418,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@code-pushup/eslint-plugin@npm:^0.8.20":
+"@code-pushup/eslint-plugin@npm:0.8.25":
   version: 0.8.25
   resolution: "@code-pushup/eslint-plugin@npm:0.8.25"
   dependencies:
@@ -13552,8 +13552,8 @@ __metadata:
     "@babel/preset-env": "npm:^7.20.2"
     "@babel/preset-react": "npm:^7.14.5"
     "@babel/preset-typescript": "npm:7.21.0"
-    "@code-pushup/cli": "npm:^0.8.20"
-    "@code-pushup/eslint-plugin": "npm:^0.8.20"
+    "@code-pushup/cli": "npm:0.8.25"
+    "@code-pushup/eslint-plugin": "npm:0.8.25"
     "@doist/todoist-api-typescript": "npm:^2.1.2"
     "@faker-js/faker": "npm:8.0.2"
     "@graphql-codegen/cli": "npm:^3.0.0"
