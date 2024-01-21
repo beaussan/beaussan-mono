@@ -13,6 +13,7 @@ const config: CoreConfig = {
     format: ['json', 'md'],
   },
 
+// See setup guide https://github.com/code-pushup/cli/wiki/Code-PushUp-integration-guide-for-Nx-monorepos
   plugins: [await eslintPlugin(await eslintConfigFromNxProjects())],
 
   categories: [
