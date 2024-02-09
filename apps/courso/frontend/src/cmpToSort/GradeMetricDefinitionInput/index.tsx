@@ -11,31 +11,24 @@ import { DropList } from '../../components/DropList';
 import { useGradeMetricTypes } from './useGradeMetricTypes';
 import { CodeInputFieldLazy } from '../../components/CodeInput/CodeInputFieldLazy';
 import { Button } from '../../components/Button';
-import * as yup from 'yup';
+
+import { z } from 'zod';
 import { useFormikFieldValue } from '../../hooks/useFormikFieldValue';
 import { SupportedLanguages } from '../../components/CodeInput/supportedLangs';
 import { ArrayInput } from '../../components/ArrayInput';
 
-export const yupGradeMetricDefSchema = yup.object().shape({
-  method: yup.string().required(),
-  expected: yup.string().notRequired(),
-  lang: yup.string().notRequired(),
-  gitPath: yup.string().notRequired(),
-  metrics: yup
-    .array()
-    .of(
-      yup
-        .object()
-        .shape({
-          name: yup.string().required(),
-          points: yup.number().required(),
-          feedbacks: yup.array().of(yup.string()).required(),
-        })
-        .required()
-    )
-    .min(1)
-    .required(),
-  /*  name: yup.string().required(), points: yup.number().required(), */
+export const zodGradeMetricDefSchema = z.object({
+  method: z.string(),
+  expected: z.string().optional(),
+  lang: z.string().optional(),
+  gitPath: z.string().optional(),
+  metrics: z.array(
+    z.object({
+      name: z.string(),
+      points: z.number(),
+      feedbacks: z.array(z.string()),
+    })
+  ),
 });
 
 const makeFormName = (name: string) => {

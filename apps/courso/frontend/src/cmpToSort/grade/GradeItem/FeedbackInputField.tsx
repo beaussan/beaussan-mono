@@ -6,7 +6,8 @@ import { useFormikMutationSubmit } from '../../../hooks/useFormikMutationSubmit'
 import { useInsertFeedbackForGradeMetricMutation } from '../../../generated/graphql';
 import { Button } from '../../../components/Button';
 import { Modal } from '../../../components/Modal';
-import * as yup from 'yup';
+import { z } from 'zod';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { Input } from '../../../components/Input';
 import { PlusIcon } from '@heroicons/react/outline';
 
@@ -113,9 +114,9 @@ export const FeedbackInputField: React.FC<{
           initialValues={{
             label: '',
           }}
-          validationSchema={yup.object().shape({
-            label: yup.string().required(),
-          })}
+          validationSchema={toFormikValidationSchema(
+            z.object({ label: z.string() })
+          )}
           onSubmit={onSubmit}
         >
           {({ isValid, isSubmitting, isValidating, values }) => {

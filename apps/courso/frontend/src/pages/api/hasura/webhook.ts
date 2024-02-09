@@ -21,7 +21,7 @@ export default nc<NextApiRequest, NextApiResponse>({
   .use(getTokenVerificationMiddleware(logger, serverEnv.HASURA_EVENT_TOKEN))
   .use((req, res, next) => {
     try {
-      webHookModel.validateSync(req.body, { abortEarly: false });
+      webHookModel.parse(req.body);
     } catch (e) {
       throw new HttpsError(
         'invalid-argument',

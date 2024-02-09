@@ -1,6 +1,6 @@
 import { ActionMap } from './types';
 import { gqlSdk } from '../../gql';
-import * as yup from 'yup';
+import { z } from 'zod';
 import { HttpsError } from '../../common/HttpsError';
 
 const LINK_ERRORS = {
@@ -8,18 +8,15 @@ const LINK_ERRORS = {
   linkNotFound: 'Link not found',
 };
 
-const argValidation = yup
-  .object()
-  .shape({
-    linkId: yup.string().uuid().required(),
-  })
-  .required();
+const argValidation = z.object({
+  linkId: z.string().uuid(),
+});
 
 export const linkStudentToUser: ActionMap['linkStudentToUser'] = async (
   args,
   env
 ) => {
-  await argValidation.validate(args);
+  argValidation.parse(args);
   const { maybeStudentWithUser, studentToSet } =
     await gqlSdk.dataForUpdateToStudentLink({
       userId: env['x-hasura-user-id'],
