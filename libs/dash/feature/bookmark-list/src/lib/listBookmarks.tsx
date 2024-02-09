@@ -26,6 +26,7 @@ import {
   useDialogContext,
 } from '@beaussan/shared/ui/ui-kit';
 import toast from 'react-hot-toast';
+import { ReorderList } from './ReorderList';
 
 const LinkEdit = ({ item }: { item: UnifiedDisplay }) => {
   const { setIsOpen, isOpen } = useDialogContext();
@@ -237,6 +238,7 @@ function ListBookmarkWithData({
         />
         <div className="ml-4">
           <AddBookmark />
+          <ReorderList />
         </div>
       </div>
       <main className="overflow-y-auto py-2 space-y-1">

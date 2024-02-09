@@ -24,7 +24,7 @@ export const codegen: Record<
   main: (basePath: string) => ({
     schema: [
       {
-        'http://localhost:8090/v1/graphql': {
+        'http://127.0.0.1:8090/v1/graphql': {
           headers: {
             'x-hasura-admin-secret': 'HASURA_ADMIN_SECRET_LOCAL_DEV',
           },

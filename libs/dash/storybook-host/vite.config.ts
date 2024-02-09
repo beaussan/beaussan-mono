@@ -8,6 +8,7 @@ import { join } from 'path';
 export default defineConfig({
   root: __dirname,
   cacheDir: '../../../node_modules/.vite/dash-storybook-host',
+  assetsInclude: ['/sb-preview/runtime.js'],
 
   plugins: [
     dts({
@@ -18,7 +19,9 @@ export default defineConfig({
     react(),
     nxViteTsPaths(),
   ],
-
+  define: {
+    "process.env": {},
+  },
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [

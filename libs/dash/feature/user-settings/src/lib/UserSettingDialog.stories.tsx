@@ -8,7 +8,7 @@ const Story: Meta<typeof UserSettingDialog> = {
 };
 export default Story;
 
-const Loading: StoryFn<typeof UserSettingDialog> = (args) => (
+export const Loading: StoryFn<typeof UserSettingDialog> = (args) => (
   <MockUserDataContextProvider
     params={{
       fetching: true,
