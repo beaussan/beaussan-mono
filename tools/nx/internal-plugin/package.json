@@ -6,16 +6,22 @@
   "executors": "./executors.json",
   "dependencies": {
     "zod": "^3.20.2",
-    "typescript": "5.2.2",
+    "typescript": "5.3.3",
     "@phenomnomnominal/tsquery": "^5.0.0",
     "type-fest": "^3.6.1",
     "eslint": "8.48.0",
     "zod-validation-error": "^1.0.0",
     "vite-tsconfig-paths": "4.2.0",
     "tslib": "^2.3.0",
-    "vitest": "0.34.6",
+    "vitest": "1.2.2",
     "ts-pattern": "^5.0.5",
     "chalk": "4.1.2",
-    "globby": "^13.2.2"
+    "globby": "^13.2.2",
+    "@nx/devkit": "18.0.4",
+    "nx": "18.0.4",
+    "@nx/react": "18.0.4",
+    "@nx/eslint": "18.0.4",
+    "@nx/js": "18.0.4",
+    "@nx/storybook": "18.0.4"
   }
 }

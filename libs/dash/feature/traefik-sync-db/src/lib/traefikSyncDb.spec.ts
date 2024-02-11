@@ -96,7 +96,7 @@ describe('traefikSyncDb', () => {
       await expect(traefikSyncDb(sdk, traefikBaseUrl)).resolves
         .toMatchInlineSnapshot(`
         {
-          "error": "Validation error: Required at \\"[0].name\\"",
+          "error": "Validation error: Required at "[0].name"",
           "status": "error",
         }
       `);
