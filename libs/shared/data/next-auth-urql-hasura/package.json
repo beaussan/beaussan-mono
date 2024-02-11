@@ -18,6 +18,8 @@
     "react": "18.2.0",
     "@vitejs/plugin-react": "4.2.1",
     "vite-plugin-dts": "2.3.0",
-    "vitest": "0.34.6"
+    "vitest": "1.2.2",
+    "@nx/vite": "18.0.4",
+    "@nx/devkit": "18.0.4"
   }
 }

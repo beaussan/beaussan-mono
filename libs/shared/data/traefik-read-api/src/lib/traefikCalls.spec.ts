@@ -55,78 +55,78 @@ describe('getTraefikRouters', () => {
 
     await expect(getTraefikRouters(basePath)).rejects
       .toThrowErrorMatchingInlineSnapshot(`
-      "[
+      [ZodError: [
         {
-          \\"code\\": \\"invalid_type\\",
-          \\"expected\\": \\"array\\",
-          \\"received\\": \\"undefined\\",
-          \\"path\\": [
+          "code": "invalid_type",
+          "expected": "array",
+          "received": "undefined",
+          "path": [
             0,
-            \\"entryPoints\\"
+            "entryPoints"
           ],
-          \\"message\\": \\"Required\\"
+          "message": "Required"
         },
         {
-          \\"code\\": \\"invalid_type\\",
-          \\"expected\\": \\"string\\",
-          \\"received\\": \\"undefined\\",
-          \\"path\\": [
+          "code": "invalid_type",
+          "expected": "string",
+          "received": "undefined",
+          "path": [
             0,
-            \\"service\\"
+            "service"
           ],
-          \\"message\\": \\"Required\\"
+          "message": "Required"
         },
         {
-          \\"code\\": \\"invalid_type\\",
-          \\"expected\\": \\"string\\",
-          \\"received\\": \\"undefined\\",
-          \\"path\\": [
+          "code": "invalid_type",
+          "expected": "string",
+          "received": "undefined",
+          "path": [
             0,
-            \\"rule\\"
+            "rule"
           ],
-          \\"message\\": \\"Required\\"
+          "message": "Required"
         },
         {
-          \\"code\\": \\"invalid_type\\",
-          \\"expected\\": \\"string\\",
-          \\"received\\": \\"undefined\\",
-          \\"path\\": [
+          "code": "invalid_type",
+          "expected": "string",
+          "received": "undefined",
+          "path": [
             0,
-            \\"status\\"
+            "status"
           ],
-          \\"message\\": \\"Required\\"
+          "message": "Required"
         },
         {
-          \\"code\\": \\"invalid_type\\",
-          \\"expected\\": \\"array\\",
-          \\"received\\": \\"undefined\\",
-          \\"path\\": [
+          "code": "invalid_type",
+          "expected": "array",
+          "received": "undefined",
+          "path": [
             0,
-            \\"using\\"
+            "using"
           ],
-          \\"message\\": \\"Required\\"
+          "message": "Required"
         },
         {
-          \\"code\\": \\"invalid_type\\",
-          \\"expected\\": \\"string\\",
-          \\"received\\": \\"undefined\\",
-          \\"path\\": [
+          "code": "invalid_type",
+          "expected": "string",
+          "received": "undefined",
+          "path": [
             0,
-            \\"name\\"
+            "name"
           ],
-          \\"message\\": \\"Required\\"
+          "message": "Required"
         },
         {
-          \\"code\\": \\"invalid_type\\",
-          \\"expected\\": \\"string\\",
-          \\"received\\": \\"undefined\\",
-          \\"path\\": [
+          "code": "invalid_type",
+          "expected": "string",
+          "received": "undefined",
+          "path": [
             0,
-            \\"provider\\"
+            "provider"
           ],
-          \\"message\\": \\"Required\\"
+          "message": "Required"
         }
-      ]"
+      ]]
     `);
   });
 });

@@ -47,6 +47,9 @@
       "@beaussan/nx-docker-compose": ["tools/nx/docker-compose/src/index.ts"],
       "@beaussan/nx-hasura": ["tools/nx/hasura/src/index.ts"],
       "@beaussan/nx-internal-plugin": ["tools/nx/internal-plugin/src/index.ts"],
+      "@beaussan/nx-internal-plugin/eslint": [
+        "tools/nx/internal-plugin/src/plugins/eslint.ts"
+      ],
       "@beaussan/shared/data/next-auth-urql-hasura": [
         "libs/shared/data/next-auth-urql-hasura/src/index.ts"
       ],

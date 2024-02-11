@@ -1,6 +1,14 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "plugins": ["@beaussan/nx-docker-compose"],
+  "plugins": [
+    "@beaussan/nx-docker-compose",
+    {
+      "plugin": "@beaussan/nx-internal-plugin/eslint",
+      "options": {
+        "targetName": "new-lint"
+      }
+    }
+  ],
   "workspaceLayout": {
     "projectNameAndRootFormat": "derived"
   },
@@ -16,14 +24,6 @@
     },
     "e2e": {
       "inputs": ["default", "^production"],
-      "cache": true
-    },
-    "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/tools/eslint-rules/**/*"
-      ],
       "cache": true
     },
     "build-storybook": {
@@ -60,6 +60,14 @@
     },
     "@nx/vite:test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "cache": true
+    },
+    "@nx/eslint:lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/tools/eslint-rules/**/*"
+      ],
       "cache": true
     }
   },
