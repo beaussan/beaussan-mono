@@ -24,9 +24,8 @@ export const createNodes: CreateNodes<EslintPluginOptions> = [
     ].inputs;
 
     // Look for a eslint config in the project root
-    const projectRoot = dirname(configFilePath) + '/.eslint';
     const includesProjectRoot = inputs.some(
-      (value) => typeof value === 'string' && value.includes(projectRoot)
+      (value) => typeof value === 'string' && value.startsWith('{projectRoot}/')
     );
 
     // No eslint config found in the root of the project, skipping
