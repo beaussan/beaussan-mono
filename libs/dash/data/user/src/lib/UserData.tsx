@@ -46,7 +46,7 @@ export const MockUserDataContextProvider = (
   return <UseUserData.Provider value={props.params} {...props} />;
 };
 
-export const useUserData = () => {
+export const useUserData = (): UserDataContextType => {
   const context = React.useContext(UseUserData);
   if (context === undefined) {
     throw new Error('useCount must be used within a UserDataProvider');
