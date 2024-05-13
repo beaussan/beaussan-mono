@@ -3,7 +3,9 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 #RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001 && chown nextjs:nodejs /app
 #USER nextjs
-COPY package.json yarn.lock ./
+
+# Install dependencies with yarn 4 from the workspace
+COPY package.json yarn.lock .yarnrc.yml .yarn ./
 RUN yarn install --frozen-lockfile
 COPY . .
 RUN yarn nx run dash-frontend:build:production
