@@ -41,6 +41,7 @@ export default defineConfig({
     },
   },
   test: {
+    passWithNoTests: true,
     reporters: ['default'],
     coverage: {
       reportsDirectory: '../../../../coverage/libs/courso/data/env-config',

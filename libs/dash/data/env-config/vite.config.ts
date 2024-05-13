@@ -50,6 +50,7 @@ export default defineConfig({
   },
 
   test: {
+    passWithNoTests: true,
     reporters: ['default'],
     coverage: {
       reportsDirectory: '../../../../coverage/libs/dash/data/env-config',

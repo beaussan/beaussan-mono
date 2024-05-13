@@ -22,6 +22,7 @@ export default defineConfig({
   // },
 
   test: {
+    passWithNoTests: true,
     reporters: ['default'],
     globals: true,
     cache: {
