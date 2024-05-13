@@ -11,7 +11,7 @@
   "private": true,
   "dependencies": {
     "@anatine/zod-mock": "^3.6.0",
-    "@doist/todoist-api-typescript": "2.2.0",
+    "@doist/todoist-api-typescript": "3.0.3",
     "@faker-js/faker": "8.0.2",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "1.0.1",

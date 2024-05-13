@@ -31,6 +31,49 @@ export default {
 
 type Story = StoryObj<typeof TaskPanel>;
 
+const createNewTask = rest.post(
+  'https://api.todoist.com/sync/v9/quick/add',
+  (req, res, ctx) => {
+    return res(
+      ctx.delay(),
+      ctx.json({
+        added_at: '2024-05-13T12:45:13.660395Z',
+        added_by_uid: '29488169',
+        assigned_by_uid: null,
+        checked: false,
+        child_order: 146,
+        collapsed: false,
+        completed_at: null,
+        content: 'test tasssk',
+        description: '',
+        due: {
+          date: '2024-05-13',
+          is_recurring: false,
+          lang: 'en',
+          string: '13 May',
+          timezone: null,
+        },
+        duration: null,
+        id: '7985642246',
+        is_deleted: false,
+        labels: [],
+        parent_id: null,
+        priority: 4,
+        project_id: '2242897017',
+        responsible_uid: null,
+        section_id: null,
+        sync_id: null,
+        updated_at: '2024-05-13T12:45:13Z',
+        user_id: '29488169',
+        v2_id: '6VG6wRm8vRRC8RRR',
+        v2_parent_id: null,
+        v2_project_id: '6Crg6h7c8Xq9QW32',
+        v2_section_id: null,
+      })
+    );
+  }
+);
+
 const getAllTasks = rest.get(
   'https://api.todoist.com/rest/v2/tasks',
   (req, res, ctx) => {
@@ -120,6 +163,6 @@ const getAllTasks = rest.get(
 export const Default = {
   render: () => <TaskPanel />,
   parameters: {
-    msw: [getAllTasks],
+    msw: [getAllTasks, createNewTask],
   },
 } satisfies Story;

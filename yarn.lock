@@ -2258,17 +2258,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@doist/todoist-api-typescript@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@doist/todoist-api-typescript@npm:2.2.0"
+"@doist/todoist-api-typescript@npm:3.0.3":
+  version: 3.0.3
+  resolution: "@doist/todoist-api-typescript@npm:3.0.3"
   dependencies:
-    axios: "npm:^0.27.0"
-    axios-case-converter: "npm:^0.11.0"
+    axios: "npm:^1.0.0"
+    axios-case-converter: "npm:^1.0.0"
     axios-retry: "npm:^3.1.9"
     runtypes: "npm:^6.5.0"
     ts-custom-error: "npm:^3.2.0"
     uuid: "npm:^9.0.0"
-  checksum: 10c0/5ed0159ade6e285f29939e4c71023ac258b11d1048de117fbb48e3ee52a3eca149c614f38ad2feacf9d41c5e96cdc7f56f6328084eef02c5b86cee30ec061e65
+  peerDependencies:
+    type-fest: ^4.12.0
+  checksum: 10c0/0dc04b90d9885bd6d8d7cf51cf30e0b91eac00a028c34f2496943e15c1870b7b5d3646943195e75a6015fd1e2c88af03918ce3c854396315e3d5ad7043045a96
   languageName: node
   linkType: hard
 
@@ -11945,17 +11947,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios-case-converter@npm:^0.11.0":
-  version: 0.11.1
-  resolution: "axios-case-converter@npm:0.11.1"
+"axios-case-converter@npm:^1.0.0":
+  version: 1.1.1
+  resolution: "axios-case-converter@npm:1.1.1"
   dependencies:
     camel-case: "npm:^4.1.1"
     header-case: "npm:^2.0.3"
     snake-case: "npm:^3.0.3"
     tslib: "npm:^2.3.0"
   peerDependencies:
-    axios: ">=0.23.0 <2.0.0"
-  checksum: 10c0/40029619e301417230e42ff0857784d3d3fd1edda19d96dd0dbdf06403c85abfa8613329a6b55f96c95d3845acc02637b9a106a8c025244ed88e0dd41f89afe1
+    axios: ">=1.0.0 <2.0.0"
+  checksum: 10c0/4a2743e837647f893da3e61e125110ed34645171ab23e7cf95e96289bab5f0ed3ba369084bbf1f3fde4919d035129f817811291fad10e24ca8f1f6d184117b7d
   languageName: node
   linkType: hard
 
@@ -12007,7 +12009,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.27.0, axios@npm:^0.27.2":
+"axios@npm:^0.27.2":
   version: 0.27.2
   resolution: "axios@npm:0.27.2"
   dependencies:
@@ -12017,7 +12019,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.6.1":
+"axios@npm:^1.0.0, axios@npm:^1.6.1":
   version: 1.6.8
   resolution: "axios@npm:1.6.8"
   dependencies:
@@ -12414,7 +12416,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.20.2"
     "@babel/preset-react": "npm:^7.14.5"
     "@babel/preset-typescript": "npm:7.21.0"
-    "@doist/todoist-api-typescript": "npm:^2.2.0"
+    "@doist/todoist-api-typescript": "npm:3.0.3"
     "@faker-js/faker": "npm:8.0.2"
     "@graphql-codegen/cli": "npm:^3.0.0"
     "@graphql-codegen/client-preset": "npm:^2.0.0"

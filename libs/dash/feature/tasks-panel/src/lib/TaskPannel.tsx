@@ -4,6 +4,7 @@ import {
   useTodoistSdk,
 } from '@beaussan/dash/data/todoist';
 import { TaskDisplay } from './Task';
+import { Button } from '@beaussan/shared/ui/ui-kit';
 
 export const TaskPanel = () => {
   const { todoistClient, loaded } = useTodoistSdk();
@@ -16,18 +17,20 @@ export const TaskPanel = () => {
 
   return (
     <div className="flex flex-col space-y-2">
-      <h2 className="text-xl font-bold">
-        Tasks{' '}
-        <button
-          onClick={() => {
-            createQuickTask.mutate({
-              text: prompt() ?? 'Unknown task tod',
-            });
-          }}
-        >
-          Add task
-        </button>
-      </h2>
+      <div className="flex items-center">
+        <h2 className="text-xl font-bold">Tasks</h2>
+        <div className="ml-auto">
+          <Button
+            onClick={() => {
+              createQuickTask.mutate({
+                text: prompt() ?? 'Unknown task tod',
+              });
+            }}
+          >
+            Add task
+          </Button>
+        </div>
+      </div>
       {tasks.data.map((item) => (
         <TaskDisplay task={item} key={item.id} />
       ))}

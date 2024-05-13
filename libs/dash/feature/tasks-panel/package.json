@@ -11,11 +11,12 @@
   },
   "dependencies": {
     "@beaussan/dash/data/todoist": "*",
-    "@doist/todoist-api-typescript": "^2.1.2",
+    "@doist/todoist-api-typescript": "3.0.3",
     "clsx": "^1.2.1",
     "vite": "5.2.8",
     "@vitejs/plugin-react": "4.2.1",
     "vite-plugin-dts": "2.3.0",
-    "@nx/vite": "18.2.4"
+    "@nx/vite": "18.2.4",
+    "@beaussan/shared/ui/ui-kit": "0.0.1"
   }
 }
