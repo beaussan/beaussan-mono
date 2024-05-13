@@ -56,6 +56,7 @@ export default defineConfig({
         '../../../../coverage/libs/dash/data/hasura-codegen-types',
       provider: 'v8',
     },
+    passWithNoTests: true,
     globals: true,
     cache: {
       dir: '../../../../node_modules/.vitest',
