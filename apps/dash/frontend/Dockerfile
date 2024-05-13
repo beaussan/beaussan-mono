@@ -5,9 +5,8 @@ WORKDIR /app
 #USER nextjs
 
 # Install dependencies with yarn 4 from the workspace
-COPY package.json yarn.lock .yarnrc.yml .yarn ./
-RUN yarn install --frozen-lockfile
 COPY . .
+RUN yarn install --frozen-lockfile
 RUN yarn nx run dash-frontend:build:production
 
 
