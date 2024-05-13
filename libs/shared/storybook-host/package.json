@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.3",
-    "vite": "5.1.1",
+    "vite": "5.2.8",
     "@vitejs/plugin-react": "4.2.1",
     "vite-plugin-dts": "2.3.0",
-    "@nx/react": "18.0.4",
-    "@nx/vite": "18.0.4"
+    "@nx/react": "18.2.4",
+    "@nx/vite": "18.2.4"
   }
 }

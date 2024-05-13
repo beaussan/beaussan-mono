@@ -1,4 +1,4 @@
-import type { StoryFn, Meta } from '@storybook/react';
+import type { StoryObj, StoryFn, Meta } from '@storybook/react';
 import { UserSettingDialog } from './UserSettingDialog';
 import { MockUserDataContextProvider } from '@beaussan/dash/data/user';
 
@@ -21,24 +21,29 @@ const Loading: StoryFn<typeof UserSettingDialog> = (args) => (
   </MockUserDataContextProvider>
 );
 
-export const Primary = Loading.bind({});
-Primary.args = {};
-export const WithNoApiTokenData: StoryFn<typeof UserSettingDialog> = (args) => (
-  <MockUserDataContextProvider
-    params={{
-      fetching: false,
-      userId: 'd0800c00-effe-4e66-b7c3-827dce5121ea',
-      user: {
-        id: 'd0800c00-effe-4e66-b7c3-827dce5121ea',
-        canSeeTraefikContent: true,
-        todoistApiToken: undefined,
-        email: '',
-        createdAt: '',
-        updatedAt: '',
-      },
-      error: undefined,
-    }}
-  >
-    <UserSettingDialog />
-  </MockUserDataContextProvider>
-);
+export const Primary = {
+  render: Loading,
+  args: {},
+};
+
+export const WithNoApiTokenData: StoryObj<typeof UserSettingDialog> = {
+  render: (args) => (
+    <MockUserDataContextProvider
+      params={{
+        fetching: false,
+        userId: 'd0800c00-effe-4e66-b7c3-827dce5121ea',
+        user: {
+          id: 'd0800c00-effe-4e66-b7c3-827dce5121ea',
+          canSeeTraefikContent: true,
+          todoistApiToken: undefined,
+          email: '',
+          createdAt: '',
+          updatedAt: '',
+        },
+        error: undefined,
+      }}
+    >
+      <UserSettingDialog />
+    </MockUserDataContextProvider>
+  ),
+};

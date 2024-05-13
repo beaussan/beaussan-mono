@@ -46,6 +46,7 @@ export default defineConfig({
     },
   },
   test: {
+    passWithNoTests: true,
     reporters: ['default'],
     coverage: {
       reportsDirectory:

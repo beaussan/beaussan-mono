@@ -1,9 +1,7 @@
 import { TodoistApi, Task } from '@doist/todoist-api-typescript';
 import { useQuery } from '@tanstack/react-query';
 
-export const getTodoistPendingTasks = async (
-  sdk: TodoistApi
-): Promise<Task[]> => {
+const getTodoistPendingTasks = async (sdk: TodoistApi): Promise<Task[]> => {
   return sdk.getTasks({ filter: 'today | overdue' });
 };
 

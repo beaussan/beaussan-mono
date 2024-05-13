@@ -9,24 +9,27 @@
       "outputs": ["{options.outputFile}"]
     },
     "serve": {
-      "executor": "nx:run-script",
+      "executor": "nx:run-commands",
       "dependsOn": ["metadata-apply"],
       "options": {
-        "script": "hasura --skip-update-check --project apps/dash/hasura  console"
+        "cwd": "apps/dash/hasura",
+        "command": "hasura --skip-update-check console"
       }
     },
     "migrate-db": {
-      "executor": "nx:run-script",
+      "executor": "nx:run-commands",
       "dependsOn": ["docker-compose-up"],
       "options": {
-        "script": "hasura --skip-update-check --project apps/dash/hasura  migrate apply --database-name default"
+        "cwd": "apps/dash/hasura",
+        "command": "hasura --skip-update-check migrate apply --database-name default"
       }
     },
     "metadata-apply": {
-      "executor": "nx:run-script",
+      "executor": "nx:run-commands",
       "dependsOn": ["migrate-db"],
       "options": {
-        "script": "hasura --skip-update-check --project apps/dash/hasura  metadata apply"
+        "cwd": "apps/dash/hasura",
+        "command": "hasura --skip-update-check  metadata apply"
       }
     }
   },

@@ -1,6 +1,6 @@
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 import './tailwind.css';
-import { urqlDecorator } from './urqlDecorator';
+import { queryClientProvider, urqlDecorator } from './urqlDecorator';
 import * as jest from '@storybook/jest';
 
 // Fix: fn() is not defined, see: https://github.com/storybookjs/storybook/issues/15391
@@ -8,7 +8,15 @@ import * as jest from '@storybook/jest';
 // @ts-ignore
 window.jest = jest;
 // Initialize MSW
-initialize();
+const ignoredBase = ['/@fs', '/.storybook', '/virtual:', '/index.json'];
+initialize({
+  onUnhandledRequest: (request, print) => {
+    if (ignoredBase.some((base) => request.url.pathname.startsWith(base))) {
+      return;
+    }
+    print.warning();
+  },
+});
 
 // Provide the MSW addon decorator globally
-export const decorators = [mswDecorator, urqlDecorator];
+export const decorators = [mswDecorator, urqlDecorator, queryClientProvider];

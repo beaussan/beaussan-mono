@@ -1,4 +1,4 @@
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { StoryFn, Meta, StoryObj } from '@storybook/react';
 import { AddBookmark } from './addBookmark';
 import {
   mockGetListOfBookmarksQuery,
@@ -6,7 +6,7 @@ import {
 } from './requests.generated';
 import { userEvent, within, screen } from '@storybook/testing-library';
 
-const Story: ComponentMeta<typeof AddBookmark> = {
+const Story: Meta<typeof AddBookmark> = {
   component: AddBookmark,
   title: 'AddBookmark',
 };
@@ -41,45 +41,51 @@ const successHandler = mockInsertBookmarkMutation((req, res, ctx) => {
   );
 });
 
-const Template: ComponentStory<typeof AddBookmark> = () => <AddBookmark />;
+const Template: StoryFn<typeof AddBookmark> = () => <AddBookmark />;
 
-export const OpenedModal = Template.bind({});
-OpenedModal.parameters = {
-  msw: {
-    handlers: [handlerWith5Links, successHandler],
+export const OpenedModal: StoryObj<typeof AddBookmark> = {
+  render: Template,
+
+  parameters: {
+    msw: {
+      handlers: [handlerWith5Links, successHandler],
+    },
+  },
+
+  play: async (context) => {
+    const canvas = within(context.canvasElement);
+
+    await userEvent.click(canvas.getByRole('button'));
   },
 };
 
-OpenedModal.play = async (context) => {
-  const canvas = within(context.canvasElement);
+export const FormError: StoryObj<typeof AddBookmark> = {
+  render: Template,
 
-  await userEvent.click(canvas.getByRole('button'));
-};
-
-export const FormError = Template.bind({});
-FormError.parameters = {
-  msw: {
-    handlers: [handlerWith5Links, successHandler],
+  parameters: {
+    msw: {
+      handlers: [handlerWith5Links, successHandler],
+    },
   },
-};
 
-FormError.play = async (context) => {
-  await OpenedModal.play?.(context);
+  play: async (context) => {
+    await OpenedModal.play?.(context);
 
-  await screen.findByRole('dialog');
+    await screen.findByRole('dialog');
 
-  const modal = within(screen.getByRole('dialog'));
+    const modal = within(screen.getByRole('dialog'));
 
-  await modal.findByRole('button', {
-    name: /submit/i,
-  });
+    await modal.findByRole('button', {
+      name: /submit/i,
+    });
 
-  await userEvent.click(modal.getByRole('button', { name: 'Submit' }));
+    await userEvent.click(modal.getByRole('button', { name: 'Submit' }));
 
-  await modal.findByRole('alert', {
-    name: /invalid url/i,
-  });
-  await modal.getByRole('alert', {
-    name: /display name is required/i,
-  });
+    await modal.findByRole('alert', {
+      name: /invalid url/i,
+    });
+    await modal.getByRole('alert', {
+      name: /display name is required/i,
+    });
+  },
 };
