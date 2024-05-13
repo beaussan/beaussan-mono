@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install dependencies with yarn 4 from the workspace
 COPY . .
-RUN yarn install --frozen-lockfile
+RUN yarn install --immutable
 RUN yarn nx run dash-frontend:build:production
 
 
@@ -19,7 +19,7 @@ ENV NODE_ENV production
 # RUN addgroup -g 1001 -S nodejs
 # RUN adduser -S nextjs -u 1001
 
-USER nextjs
+# USER nextjs
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 # COPY --from=builder /app/next.config.js ./
